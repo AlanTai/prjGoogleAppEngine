@@ -23,7 +23,7 @@ class ExWINE(webapp2.RequestHandler):
                            'url': url,
                            'url_linktxt': url_linktxt,}
         
-        template = jinja_environment.get_template('exwine_index_2.html')
+        template = jinja_environment.get_template('exwine_index.html')
         self.response.out.write(template.render( template_values))
         
 app = webapp2.WSGIApplication([('/exwine', ExWINE)], debug=True)

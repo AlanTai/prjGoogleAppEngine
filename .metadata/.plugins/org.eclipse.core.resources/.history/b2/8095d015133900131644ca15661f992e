@@ -104,7 +104,7 @@
 		padding-bottom: 10px;
 	}
 	.info_blocks_2 {
-		width: 300px;
+		width: 1230px;
 		text-align: center;
 		margin: 2px auto;
 		padding-top: 5px;

@@ -97,14 +97,7 @@
 		box-shadow: 0 0 1px 1px #121212;
 	}
 	.info_blocks {
-		width: 1230px;
-		text-align: center;
-		margin: 2px auto;
-		padding-top: 5px;
-		padding-bottom: 10px;
-	}
-	.info_blocks_2 {
-		width: 300px;
+		width: 200px;
 		text-align: center;
 		margin: 2px auto;
 		padding-top: 5px;

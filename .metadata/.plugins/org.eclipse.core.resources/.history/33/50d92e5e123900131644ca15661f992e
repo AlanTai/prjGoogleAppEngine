@@ -1,6 +1,4 @@
-{% extends "exwine_base.html"%}
-
-{% block main_content %}
+{% extends "exwine_base.html"%} {% block main_content %}
 
 <div id="logistics_process" class="logistics_process">
 	<div>
@@ -11,9 +9,11 @@
 		<div>
 			<span
 				style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px;">登入者
-				:  {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{ user_account }} {% endif %}</span><a
+				: {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{
+				user_account }} {% endif %}</span><a
 				style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px;"
-				href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else %}登出 {% endif %}</a>
+				href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else
+				%}登出 {% endif %}</a>
 		</div>
 	</div>
 
@@ -51,13 +51,23 @@
 
 		<!-- info_blocks -->
 		<div id="info_blocks" class="info_blocks">
-			<div
-				style="display: inline-block; width: 300px; height: 200px; background-image: url('/img/customer_service_block.png'); background-repeat: no-repeat; -moz-box-shadow: 0 0 1px 1px #545454; -webkit-box-shadow: 0 0 1px 1px #545454; box-shadow: 0 0 1px 1px #545454;">
-				<div class="info_block open_info">
-					<p
-						style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
-				</div>
-			</div>
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
+			<div class="parting_line_white"></div>
+			
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
+			<div class="parting_line_white"></div>
+			
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
+			<div class="parting_line_white"></div>
+			
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
+			<div class="parting_line_white"></div>
+			<!-- end -->
+
 			<div
 				style="display: inline-block; width: 300px; height: 200px; background-image: url('/img/shipping_block.png'); background-repeat: no-repeat; -moz-box-shadow: 0 0 1px 1px #545454; -webkit-box-shadow: 0 0 1px 1px #545454; box-shadow: 0 0 1px 1px #545454;">
 				<div class="info_block open_info">
