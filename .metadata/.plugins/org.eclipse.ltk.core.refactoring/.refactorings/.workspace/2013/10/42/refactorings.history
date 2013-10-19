@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 7 resources" deleteContents="false" description="Delete 7 resources" element1="/prjWINEVER/src/static/images/arrow_right_black.png" element2="/prjWINEVER/src/static/images/arrow_right_red.png" element3="/prjWINEVER/src/static/images/buy_wine.png" element4="/prjWINEVER/src/static/images/contact.png" element5="/prjWINEVER/src/static/images/customer_service_block.png" element6="/prjWINEVER/src/static/images/pick_up.png" element7="/prjWINEVER/src/static/images/plane_truck.png" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="7" stamp="1382222425459"/>
+</session>

@@ -1,0 +1,28 @@
+#-*- coding: utf-8 -*-
+import webapp2
+import jinja2
+import os
+from google.appengine.api import users
+
+jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates'))
+
+class ExWINE(webapp2.RequestHandler):
+    def get(self):
+        if users.get_current_user():
+            user_account = users.get_current_user()
+            url = users.create_logout_url(self.request.uri)
+            url_linktxt = 'Logout'
+        else:
+            user_account = 'Unknown_User'
+            url = users.create_login_url(self.request.uri)
+            url_linktxt = 'Login'
+            
+        template_values = {
+                           'user_account': user_account,
+                           'url': url,
+                           'url_linktxt': url_linktxt,}
+        
+        template = jinja_environment.get_template('exwine_index_page.html')
+        self.response.out.write(template.render(template_values))
+        
+app = webapp2.WSGIApplication([('/exwine', ExWINE)], debug=True)

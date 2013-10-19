@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+	name='viewport' />
+<title>ExWINE</title>
+<!-- CSS -->
+<link rel="shortcut icon" href="/img/favicon.ico"
+	type="image/vnd.microsoft.icon" />
+<link type="text/css" rel="stylesheet" href="/leaflet/leaflet.css" />
+<link type="text/css" rel="stylesheet" href="/css/exwine_draft_1.css" />
+
+<!-- Map -->
+<script type="text/javascript" src="/leaflet/leaflet.js"></script>
+<!-- JQuery -->
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/js/js_exwine.js"></script>
+</head>
+<body>
+	{% block main_content %}
+		<p>No Templates Found!</p>
+	{% endblock %}
+</body>
+</html>
