@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;prjWINEVER/src/static/templates/exwine_index.html&apos; to &apos;exwine_index_page.html&apos;" description="Rename resource &apos;exwine_index.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/static/templates/exwine_index.html" name="exwine_index_page.html" stamp="1382211913435" updateReferences="true"/>
+</session>
