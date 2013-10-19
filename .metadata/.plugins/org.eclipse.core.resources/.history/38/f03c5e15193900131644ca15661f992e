@@ -1,6 +1,4 @@
-{% extends "exwine_base.html"%}
-
-{% block main_content %}
+{% extends "exwine_base.html"%} {% block main_content %}
 
 <div id="logistics_process" class="logistics_process">
 	<div>

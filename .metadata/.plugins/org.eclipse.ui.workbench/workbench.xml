@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="58" version="2.0">
+<workbench progressCount="30" version="2.0">
 <workbenchAdvisor/>
-<window height="728" width="1024" x="75" y="0">
+<window height="345" maximized="true" width="1208" x="143" y="299">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -15,14 +15,19 @@
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="129" y="22"/>
 <coolItem id="org.eclipse.jst.j2ee.J2eeMainActionSet" itemType="typeToolBarContribution" x="91" y="22"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="61" y="22"/>
 <coolItem id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.ws.explorer.explorer" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="com.python.pydev.toolbars.evaluateActionSetterToolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="com.python.pydev.toolbars.evaluateActionSetterToolbar" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.wst.css.core.csssource.source" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.python.pydev.editor.PythonEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.html.core.htmlsource.source" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -31,10 +36,36 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_base.html" partName="exwine_base.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_base.html" title="exwine_base.html" tooltip="prjWINEVER/src/static/templates/exwine_base.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="496" selectionTopPixel="69"/>
+</editor>
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index.html" partName="exwine_index.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_index.html" title="exwine_index.html" tooltip="prjWINEVER/src/static/templates/exwine_index.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_index.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="55" selectionOffset="4153" selectionTopPixel="0"/>
+</editor>
+<editor id="org.python.pydev.editor.PythonEditor" name="views.py" partName="views" path="D:/prjGoogleAppEngine/prjWINEVER/src/views.py" title="views" tooltip="prjWINEVER/src/views.py" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/views.py"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="906" selectionTopPixel="114"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index_2.html" partName="exwine_index_2.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_index_2.html" title="exwine_index_2.html" tooltip="prjWINEVER/src/static/templates/exwine_index_2.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_index_2.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="35" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.wst.css.core.csssource.source" name="css_exwine_index.css" partName="css_exwine_index.css" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/css/css_exwine_index.css" title="css_exwine_index.css" tooltip="prjWINEVER/src/static/css/css_exwine_index.css" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4388" selectionTopPixel="1434"/>
+</editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
@@ -53,6 +84,9 @@
 <view id="org.eclipse.wst.common.snippets.internal.ui.SnippetsView" partName="Snippets"/>
 <view id="org.eclipse.ui.views.PropertySheet" partName="Properties"/>
 <view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" partName="Data Source Explorer"/>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
+</view>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks" partName="Task List"/>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
@@ -60,12 +94,18 @@
 <view id="org.python.pydev.navigator.view" partName="PyDev Package Explorer">
 <viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0">
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER"/>
-<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/css"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/images"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/javascript"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates"/>
+<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/app.yaml"/>
 </viewState>
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
 </views>
-<perspectives activePart="org.python.pydev.navigator.view" activePerspective="org.python.pydev.ui.PythonPerspective">
+<perspectives activePart="org.eclipse.wst.html.core.htmlsource.source" activePerspective="org.python.pydev.ui.PythonPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jst.j2ee.internal.perspective.J2EEPerspective" id="org.eclipse.jst.j2ee.J2EEPerspective" label="Java EE"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -139,31 +179,22 @@
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
 <fastViewBars/>
-<layout>
-<mainWindow>
-<info folder="true" part="topLeft">
-<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">
-<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="topLeft">&#x0A;<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.PackagesView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@181bb51" ratio="0.75" ratioLeft="750" ratioRight="250" relationship="2" relative="topLeft">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@181bb51" ratio="0.75" ratioLeft="750" ratioRight="250" relationship="2" relative="topLeft">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="250" ratioRight="750" relationship="2" relative="topLeft"/>
-<info folder="true" part="bottomRight" ratio="0.6985173" ratioLeft="424" ratioRight="183" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.AllMarkersView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.AllMarkersView" label="Markers"/>
+<info folder="true" part="bottomRight" ratio="0.6985173" ratioLeft="424" ratioRight="183" relationship="4" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.ui.views.AllMarkersView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.AllMarkersView" label="Markers"/>
 <page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
 <page content="org.eclipse.wst.server.ui.ServersView" label="Servers"/>
 <page content="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" label="Data Source Explorer"/>
@@ -174,8 +205,7 @@
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
@@ -183,12 +213,9 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="topRight" ratio="0.7" ratioLeft="525" ratioRight="225" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="topRight" ratio="0.7" ratioLeft="525" ratioRight="225" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="Task List"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
@@ -234,6 +261,7 @@
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.python.pydev.navigator.view"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -253,13 +281,15 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.26" ratioLeft="260" ratioRight="740" relationship="2" relative="topLeft"/>
-<info folder="true" part="bottom" ratio="0.74958813" ratioLeft="455" ratioRight="152" relationship="4" relative="org.eclipse.ui.editorss">
-<folder appearance="2" expanded="2">
+<info folder="true" part="bottom" ratio="0.59193546" ratioLeft="367" ratioRight="253" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
-<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
 </folder>
 </info>
 </mainWindow>
@@ -267,7 +297,166 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_index.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_index_page.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/views.py"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_index_2.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
+</editors>
+<item historyLabel="views" index="3">
+<position info="not_deleted" x="991" y="0"/>
+</item>
+<item historyLabel="exwine_index_page.html" index="2">
+<position/>
+</item>
+<item historyLabel="views" index="3">
+<position info="not_deleted" x="991" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position/>
+</item>
+<item historyLabel="views" index="3">
+<position info="not_deleted" x="891" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="4457" y="0"/>
+</item>
+<item historyLabel="exwine_base.html" index="0">
+<position info="not_deleted" x="478" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="4457" y="0"/>
+</item>
+<item historyLabel="exwine_base.html" index="0">
+<position info="not_deleted" x="502" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="4457" y="0"/>
+</item>
+<item historyLabel="exwine_base.html" index="0">
+<position info="not_deleted" x="478" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="1359" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="4048" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="0" y="5060"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="2685" y="0"/>
+</item>
+<item historyLabel="views" index="3">
+<position info="not_deleted" x="906" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="2685" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="2685" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3845" y="3"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="2685" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3963" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="1776" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3978" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="1776" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3978" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="1776" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3977" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="3610" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="4153" y="55"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="3098" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3977" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="3098" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3977" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="1452" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3977" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="1452" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="3977" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="1452" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="4388" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="1452" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="4388" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="3090" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="5">
+<position info="not_deleted" x="4388" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="3090" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="4153" y="55"/>
+</item>
+<item historyLabel="exwine_base.html" index="0">
+<position info="not_deleted" x="496" y="0"/>
+</item>
+<item historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="35" y="0"/>
+</item>
+<item historyLabel="exwine_index.html" index="1">
+<position info="not_deleted" x="4153" y="55"/>
+</item>
+<item active="true" historyLabel="exwine_index_2.html" index="4">
+<position info="not_deleted" x="35" y="0"/>
+</item>
+</navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
@@ -281,10 +470,46 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.intro.impl.presentations.IntroLaunchBar"/>
 <trimItem IMemento.internal.id="com.google.gdt.eclipse.login.status.trim"/>
 </trimArea>
 </trimLayout>
 </window>
-<mruList/>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="app.yaml" tooltip="prjWINEVER/src/app.yaml">
+<persistable path="/prjWINEVER/src/app.yaml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" name="css_exwine_index.css" tooltip="prjWINEVER/src/static/css/css_exwine_index.css">
+<persistable path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index_2.html" tooltip="prjWINEVER/src/static/templates/exwine_index_2.html">
+<persistable path="/prjWINEVER/src/static/templates/exwine_index_2.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="qa_block.png" tooltip="prjWINEVER/src/static/images/qa_block.png">
+<persistable path="/prjWINEVER/src/static/images/qa_block.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index.html" tooltip="prjWINEVER/src/static/templates/exwine_index.html">
+<persistable path="/prjWINEVER/src/static/templates/exwine_index.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="views.py" tooltip="prjWINEVER/src/views.py">
+<persistable path="/prjWINEVER/src/views.py"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index_page.html" tooltip="prjWINEVER/src/static/templates/exwine_index_page.html">
+<persistable path="/prjWINEVER/src/static/templates/exwine_index_page.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="view.py" tooltip="prjWINEVER/src/view.py">
+<persistable path="/prjWINEVER/src/view.py"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="view.py" tooltip="prjWINEVER/src/static/view.py">
+<persistable path="/prjWINEVER/src/static/view.py"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_contact_page.html" tooltip="prjWINEVER/src/static/templates/exwine_contact_page.html">
+<persistable path="/prjWINEVER/src/static/templates/exwine_contact_page.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_page.html" tooltip="prjWINEVER/src/static/templates/exwine_info_page.html">
+<persistable path="/prjWINEVER/src/static/templates/exwine_info_page.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_base.html" tooltip="prjWINEVER/src/static/templates/exwine_base.html">
+<persistable path="/prjWINEVER/src/static/templates/exwine_base.html"/>
+</file>
+</mruList>
 </workbench>
