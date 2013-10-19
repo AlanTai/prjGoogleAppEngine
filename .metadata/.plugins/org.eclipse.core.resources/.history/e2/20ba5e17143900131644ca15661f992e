@@ -54,15 +54,15 @@
 			<p
 				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
 			<div class="parting_line_white"></div>
-
+			
 			<p
 				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">酒類貨品配送流程</p>
 			<div class="parting_line_white"></div>
-
+			
 			<p
 				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">配送須知</p>
 			<div class="parting_line_white"></div>
-
+			
 			<p
 				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">常見問題</p>
 			<div class="parting_line_white"></div>
@@ -80,17 +80,16 @@
 			<p id="contact_title" class="title_block">連絡我們</p>
 		</div>
 
-
-		<div id="contact_blocks" style="padding-bottom: 15px; width: 300px">
-			<p
-				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">ExShipper</p>
-			<div class="parting_line_white"></div>
-
-			<p
-				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">WINEVER</p>
-			<div class="parting_line_white"></div>
+		<!-- contact blocks -->
+		<div id="contact_blocks" style="padding-bottom: 15px;">
+			<a class="contact_block"
+				style="background-image: url('/img/exshipper.png'); background-repeat: no-repeat; background-position: 5% 35%">
+				<span>物流配送相關諮詢服務</span>
+			</a> <a class="contact_block"
+				style="background-image: url('/img/winever_txt.png'); background-repeat: no-repeat; background-position: 5% 40%">
+				<span>葡萄酒選購及資訊相關諮詢服務</span>
+			</a>
 		</div>
-		<!-- end -->
 
 	</div>
 	<div style="margin-top: 30px; margin-bottom: 10px;">
