@@ -9,20 +9,13 @@ jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.
 
 class ExWINE(webapp2.RequestHandler):
     def get(self):
-        if users.get_current_user():
-            user_account = users.get_current_user()
-            url = users.create_logout_url(self.request.uri)
-            url_linktxt = 'Logout'
-        else:
-            user_account = 'Unknown_User'
-            url = users.create_login_url(self.request.uri)
-            url_linktxt = 'Login'
+        
+        user_info = get_users_info(self,users)
             
         template_values = {
                            'title' : 'ExWINE',
-                           'user_account': user_account,
-                           'url': url,
-                           'url_linktxt': url_linktxt}
+                           'page_tag': 'index'}
+        template_values.update(user_info)
         
         template = jinja_environment.get_template('exwine_index_2.html')
         self.response.out.write(template.render( template_values))
@@ -31,14 +24,7 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
     
     def get(self):
         
-        if users.get_current_user():
-            user_account = users.get_current_user()
-            url = users.create_logout_url(self.request.uri)
-            url_linktxt = 'Logout'
-        else:
-            user_account = 'Unknown_User'
-            url = users.create_login_url(self.request.uri)
-            url_linktxt = 'Login'
+        user_info = get_users_info(self,users)
         
         info_page = 'exwine_index_2.html'
         title_page = 'ExWINE'
@@ -61,12 +47,28 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
                 title_page = 'ExWINE Question & Answer'
             
         template_values = {'title': title_page,
-                           'user_account': user_account,
-                           'url': url,
-                           'url_linktxt': url_linktxt }
+                           'page_tag': 'link_page' }
+        template_values.update(user_info)
         
         template = jinja_environment.get_template(info_page)
         self.response.out.write(template.render(template_values))
         
+#get users info
+def get_users_info(self,users):
+    if users.get_current_user():
+            user_account = users.get_current_user()
+            url = users.create_logout_url(self.request.uri)
+            url_linktxt = 'Logout'
+    else:
+        user_account = 'Unknown_User'
+        url = users.create_login_url(self.request.uri)
+        url_linktxt = 'Login'
         
+    values = {
+              'user_account': user_account,
+              'url': url,
+              'url_linktxt': url_linktxt}
+    return values
+
+#set url
 app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher)], debug=True)

@@ -25,7 +25,7 @@ function toggle_height(){
 	contact_area_heigh = parseInt(contact_area_heigh);
 	
 	if(info_area_heigh>35 || contact_area_heigh>35){
-		$('#logistics_process').animate({paddingTop: '20px'},1000);
+		$('#logistics_process').animate({paddingTop: '10px'},1000);
 		$('#container').animate({top: '285px'},400);
 	}
 	else{
