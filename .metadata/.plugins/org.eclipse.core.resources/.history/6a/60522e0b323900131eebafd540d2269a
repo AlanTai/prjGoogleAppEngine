@@ -165,8 +165,8 @@
 	}
 	.link_title {
 		width: 100%;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		height: 40px;
+		vertical-align: middle;
 		margin: 0px 0px;
 		background-color: transparent;
 		font: 16px normal;
@@ -183,7 +183,7 @@
 	}
 	.link_title:hover{
 		font: 18px bold;
-		color: #ff0000;
+		color: #0000ff;
 		cursor: pointer;
 	}
 	.title_block {

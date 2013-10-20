@@ -165,8 +165,9 @@
 	}
 	.link_title {
 		width: 100%;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		height: 40px;
+		line-height: 40px;
+		padding: 0px 0px;
 		margin: 0px 0px;
 		background-color: transparent;
 		font: 16px normal;
@@ -183,8 +184,7 @@
 	}
 	.link_title:hover{
 		font: 18px bold;
-		color: #ff0000;
-		cursor: pointer;
+		color: #0000ff;
 	}
 	.title_block {
 		width: 200px;

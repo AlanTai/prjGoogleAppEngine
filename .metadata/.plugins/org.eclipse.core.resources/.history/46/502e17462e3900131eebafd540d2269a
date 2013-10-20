@@ -165,26 +165,15 @@
 	}
 	.link_title {
 		width: 100%;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		height: 40px;
+		line-height: 40px;
+		padding: 0px 0px;
 		margin: 0px 0px;
-		background-color: transparent;
-		font: 16px normal;
-		
-		transition: font .3s ease-in-out;
-		-moz-transition: font .3s ease-in-out;
-		-webkit-transition: font .3s ease-in-out;
-		
-		
+		background-color: #000;
 		color: #fff;
-		transition: color .5s ease-in-out;
-		-moz-transition: color .5s ease-in-out;
-		-webkit-transition: color .5s ease-in-out;
-	}
-	.link_title:hover{
-		font: 18px bold;
-		color: #ff0000;
-		cursor: pointer;
+		font: 16px;
+		
+		transition: font .5s ease-in-out;
 	}
 	.title_block {
 		width: 200px;

@@ -10,10 +10,10 @@
 
 		<div>
 			<span
-				style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px; color: #0000ff;">登入者
+				style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px;">登入者
 				: {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{
 				user_account }} {% endif %}</span><a
-				style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px; color: #ff0000;"
+				style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px;"
 				href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else
 				%}登出 {% endif %}</a>
 		</div>
@@ -30,8 +30,8 @@
 		<p
 			style="color: #393939; margin: 0px 0px; padding: 0px 0px; font-size: 14px;">
 			<span> 地址: 36 Avalon Drive, Daly City, CA 94015 ； </span> <span>快捷服務電話:</span><span
-				style="color: #ff0000">1-650-208-8292 (手機直播服務)</span> <a
-				href="callto://+1-650-208-8292" style="color: #ff0000;">Skype
+				style="color: #0000ff">1-650-208-8292 (手機直播服務)</span> <a
+				href="callto://+1-650-208-8292" style="color: #0000ff;">Skype
 				快捷服務</a>
 		</p>
 	</div>
@@ -53,22 +53,26 @@
 
 		<!-- info_blocks -->
 		<div id="info_blocks" class="info_blocks_2">
-			<p class="link_title">服務項目</p>
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
 			<div class="parting_line_white"></div>
 
-			<p class="link_title">酒類貨品配送流程</p>
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">酒類貨品配送流程</p>
 			<div class="parting_line_white"></div>
 
-			<p class="link_title">配送須知</p>
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">配送須知</p>
 			<div class="parting_line_white"></div>
 
-			<p class="link_title">常見問題</p>
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">常見問題</p>
 			<div class="parting_line_white"></div>
 			<!-- end -->
 		</div>
 	</div>
 
-	<div style="margin: 0px 0px; padding: 0px 0px; height: 3px;"></div>
+	<div style="margin: 0px 0px; padding: 0px 0px; height: 5px;"></div>
 
 	<div id="contact_area" class="contact_area">
 		<div>
@@ -80,10 +84,12 @@
 
 
 		<div id="contact_blocks" style="padding-bottom: 15px; width: 300px; text-align: center; margin: 2px auto;">
-			<p class="link_title">ExShipper</p>
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">ExShipper</p>
 			<div class="parting_line_white"></div>
 
-			<p class="link_title">WINEVER</p>
+			<p
+				style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">WINEVER</p>
 			<div class="parting_line_white"></div>
 		</div>
 		<!-- end -->
