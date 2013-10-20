@@ -101,8 +101,8 @@
 		var page_tag = '{{ page_tag }}';
 		
 		if(page_tag === 'link_page'){
-			$('#logistics_process').css({'position':'inherit','height':'200px','paddingTop':'25px'});
-			$('#container').css({'top':'auto','marginTop':'5px'});
+			$('#logistics_process').css({'position':'inherit','height':'200px','paddingTop':'10px'});
+			$('#container').css({'top':'auto','left':'0px','marginTop':'5px'});
 		}
 	</script>
 

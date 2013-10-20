@@ -10,8 +10,6 @@
 		padding-left:0px;
 		padding-right:0px;
 		margin:0px 0px;
-		top:0px;
-		left:0px;
 		overflow: auto;
 		font-family: 微軟宋體;
 	}

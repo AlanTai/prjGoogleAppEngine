@@ -17,22 +17,32 @@
 		</div>
 	</div>
 
-	<div style="margin-top: -2px; margin-bottom: 5px;">
-		<img alt="ExWINE" src="/img/exwine_logo.png"
-			style="height: 40px; margin-right: 5px;"> <span
-			style="color: #000; position: relative; top: -2px; font-size: 22px; font-weight: bold;">本公司提供客戶酒類國際配送從加州至台灣的最佳管道</span>
-	</div>
-
 	<div>
 		<p
-			style="color: #393939; margin: 0px 0px; padding: 0px 0px; font-size: 14px;">
+			style="color: #393939; margin: 0px 0px; padding: 0px 0px; font-size: 14px; margin-top: 5px;">
 			<span> 地址: 36 Avalon Drive, Daly City, CA 94015 ； </span> <span>快捷服務電話:</span><span
 				style="color: #ff0000">1-650-208-8292 (手機直播服務)</span> <a
 				href="callto://+1-650-208-8292" style="color: #ff0000;">Skype
 				快捷服務</a>
 		</p>
 	</div>
+</div>
 
+
+<div style="width:600px; background-color:#ffff5d; margin-top: 0px; margin-bottom: 0px; margin-left:auto; margin-right:auto; text-align: center; padding-top: 10px; padding-bottom: 10px; 
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-moz-box-shadow: 0 0 1px 1px #fff;
+	-webkit-box-shadow: 0 0 1px 1px #fff;
+	box-shadow: 0 0 1px 1px #fff;">
+	<span
+		style="color: #000; font-size: 22px; font-weight: bold; margin-bottom: 10px;">服務項目</span>
+
+	<div style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
+		<p>代客配送葡萄酒於灣區回台灣</p>
+		<p>代客尋找酒款</p>
+	</div>
 </div>
 
 {% endblock %}

@@ -1,4 +1,6 @@
-{% extends "exwine_base.html"%} {% block main_content %}
+{% extends "exwine_base.html"%}
+
+{% block main_content %}
 
 <div id="logistics_process" class="logistics_process">
 	<div>
@@ -23,6 +25,7 @@
 			style="color: #000; position: relative; top: -2px; font-size: 22px; font-weight: bold;">本公司提供客戶酒類國際配送從加州至台灣的最佳管道</span>
 	</div>
 
+	<!-- Copy right -->
 	<div>
 		<p
 			style="color: #393939; margin: 0px 0px; padding: 0px 0px; font-size: 14px;">
@@ -32,7 +35,7 @@
 				快捷服務</a>
 		</p>
 	</div>
-
+	<!-- end of Copy right -->
 </div>
 
 {% endblock %}
