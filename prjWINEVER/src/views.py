@@ -19,6 +19,7 @@ class ExWINE(webapp2.RequestHandler):
             url_linktxt = 'Login'
             
         template_values = {
+                           'title' : 'ExWINE',
                            'user_account': user_account,
                            'url': url,
                            'url_linktxt': url_linktxt,}
@@ -26,4 +27,23 @@ class ExWINE(webapp2.RequestHandler):
         template = jinja_environment.get_template('exwine_index_2.html')
         self.response.out.write(template.render( template_values))
         
-app = webapp2.WSGIApplication([('/exwine', ExWINE)], debug=True)
+class InfoPageDispatcher(webapp2.RedirectHandler):
+    
+    def get(self):
+        info_page = ''
+        title_page = 'ExWINE'
+        request_page = self.request.get('info_page_request')
+        if request_page:
+            info_page = 'exwine_info_services.html'
+            title_page = 'ExWINE Service'
+        else:
+            info_page = 'exwine_index_2.html'
+            title_page = 'ExWINE'
+            
+        template_values = {'title': title_page }
+        
+        template = jinja_environment.get_template(info_page)
+        self.response.out.write(template.render(template_values))
+        
+        
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher)], debug=True)

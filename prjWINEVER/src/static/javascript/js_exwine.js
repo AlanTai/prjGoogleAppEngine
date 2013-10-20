@@ -7,17 +7,17 @@ $(document).ready(function() {
 	/**/
 	$('#info_title').click(function() {
 		$('#info_blocks').slideToggle(300,function(){
-			toggle_heigh();
+			toggle_height();
 		});
 	});
 	$('#contact_title').click(function() {
 		$('#contact_blocks').slideToggle(300,function(){
-			toggle_heigh();
+			toggle_height();
 		});
 	});
 });
 
-function toggle_heigh(){
+function toggle_height(){
 	
 	var info_area_heigh = $('#info_area').css('height');
 	info_area_heigh = parseInt(info_area_heigh);

@@ -1,0 +1,124 @@
+{% extends "exwine_base.html"%}
+
+{% block main_content %}
+
+<div id="logistics_process" class="logistics_process">
+	<div>
+		<!-- Winever Logo -->
+		<img alt="winever_logo" src="/img/winever_logo.png"
+			style="height: 140px; margin: 0px auto;">
+
+		<div>
+			<span
+				style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px;">登入者
+				:  {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{ user_account }} {% endif %}</span><a
+				style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px;"
+				href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else %}登出 {% endif %}</a>
+		</div>
+	</div>
+
+	<div style="margin-top: -2px; margin-bottom: 5px;">
+		<img alt="ExWINE" src="/img/exwine_logo.png"
+			style="height: 40px; margin-right: 5px;"> <span
+			style="color: #000; position: relative; top: -2px; font-size: 22px; font-weight: bold;">本公司提供客戶酒類國際配送從加州至台灣的最佳管道</span>
+	</div>
+
+	<!-- Copy right -->
+	<div>
+		<p
+			style="color: #393939; margin: 0px 0px; padding: 0px 0px; font-size: 14px;">
+			<span> 地址: 36 Avalon Drive, Daly City, CA 94015 ； </span> <span>快捷服務電話:</span><span
+				style="color: #0000ff">1-650-208-8292 (手機直播服務)</span> <a
+				href="callto://+1-650-208-8292" style="color: #0000ff;">Skype
+				快捷服務</a>
+		</p>
+	</div>
+	<!-- end of Copy right -->
+</div>
+
+<div id="container" class="container">
+	<div id="info_area" class="info_area">
+		<!-- info. bar -->
+		<div id="info_bar">
+			<!-- Parting Line -->
+			<div class="parting_line_white"></div>
+			<!-- End -->
+			<p id="info_title" class="title_block">
+				<span>服務資訊</span>
+			</p>
+		</div>
+		<!-- end of info bar -->
+
+		<!-- info_blocks -->
+		<div id="info_blocks" class="info_blocks">
+			<div
+				style="display: inline-block; width: 300px; height: 200px; background-image: url('/img/customer_service_block.png'); background-repeat: no-repeat; -moz-box-shadow: 0 0 1px 1px #545454; -webkit-box-shadow: 0 0 1px 1px #545454; box-shadow: 0 0 1px 1px #545454;">
+				<div class="info_block open_info">
+					<p
+						style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">服務項目</p>
+				</div>
+			</div>
+			<div
+				style="display: inline-block; width: 300px; height: 200px; background-image: url('/img/shipping_block.png'); background-repeat: no-repeat; -moz-box-shadow: 0 0 1px 1px #545454; -webkit-box-shadow: 0 0 1px 1px #545454; box-shadow: 0 0 1px 1px #545454;">
+				<div class="info_block open_info">
+					<p
+						style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">酒類貨品配送流程</p>
+				</div>
+			</div>
+			<div
+				style="display: inline-block; width: 300px; height: 200px; background-image: url('/img/requirement_block.png'); background-repeat: no-repeat; -moz-box-shadow: 0 0 1px 1px #545454; -webkit-box-shadow: 0 0 1px 1px #545454; box-shadow: 0 0 1px 1px #545454;">
+				<div class="info_block open_info">
+					<p
+						style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">配送須知</p>
+				</div>
+			</div>
+			<div
+				style="display: inline-block; width: 300px; height: 200px; background-image: url('/img/qa_block.png'); background-repeat: no-repeat; -moz-box-shadow: 0 0 1px 1px #545454; -webkit-box-shadow: 0 0 1px 1px #545454; box-shadow: 0 0 1px 1px #545454;">
+				<div class="info_block open_info">
+					<p
+						style="width: 100%; height: 40px; line-height: 40px; font-size: 16px; padding: 0px 0px; margin: 0px 0px; background-color: #000; opacity: 0.9; color: #fff">常見問題</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="margin: 0px 0px; padding: 0px 0px; height: 5px;"></div>
+
+	<div id="contact_area" class="contact_area">
+		<div>
+			<!-- Parting Line -->
+			<div class="parting_line_white"></div>
+			<!-- End -->
+			<p id="contact_title" class="title_block">連絡我們</p>
+		</div>
+
+		<!-- contact blocks -->
+		<div id="contact_blocks" style="padding-bottom: 15px;">
+			<a class="contact_block"
+				style="background-image: url('/img/exshipper.png'); background-repeat: no-repeat; background-position: 5% 35%">
+				<span>物流配送相關諮詢服務</span>
+			</a> <a class="contact_block"
+				style="background-image: url('/img/winever_txt.png'); background-repeat: no-repeat; background-position: 5% 40%">
+				<span>葡萄酒選購及資訊相關諮詢服務</span>
+			</a>
+		</div>
+
+	</div>
+	<div style="margin-top: 30px; margin-bottom: 10px;">
+		<!-- Copy right -->
+		<div>
+			<p
+				style="color: #323232; margin: 0px 0px; padding: 0px 0px; font-size: 11px;">
+				&copy; <span>ExShipper & WINEVER.</span> <span>Ailin.Alan
+					Design Studio.</span> <span>2011-2013</span>
+			</p>
+		</div>
+		<!-- end of Copy right -->
+
+		<!-- Parting Line -->
+		<div class="parting_line_black"></div>
+		<!-- End -->
+	</div>
+</div>
+
+{% endblock %}
