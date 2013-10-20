@@ -1,0 +1,42 @@
+{% extends "exwine_base.html"%} {% block main_content %}
+
+<div id="logistics_process" class="logistics_process">
+	<div>
+		<!-- Winever Logo -->
+		<img alt="winever_logo" src="/img/winever_logo.png"
+			style="height: 140px; margin: 0px auto;">
+
+		<div>
+			<span
+				style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px; color: #0000ff;">登入者
+				: {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{
+				user_account }} {% endif %}</span><a
+				style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px; color: #ff0000;"
+				href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else
+				%}登出 {% endif %}</a>
+		</div>
+	</div>
+
+	<div>
+		<p
+			style="color: #393939; margin: 0px 0px; padding: 0px 0px; font-size: 14px;">
+			<span> 地址: 36 Avalon Drive, Daly City, CA 94015 ； </span> <span>快捷服務電話:</span><span
+				style="color: #ff0000">1-650-208-8292 (手機直播服務)</span> <a
+				href="callto://+1-650-208-8292" style="color: #ff0000;">Skype
+				快捷服務</a>
+		</p>
+	</div>
+</div>
+
+
+<div style="margin-top: 2px; margin-bottom: 0px;">
+	<span
+		style="color: #000; position: relative; font-size: 22px; font-weight: bold;">服務項目</span>
+
+	<ul style="width: 500px; color: #353535; font-size: 14px;">
+		<li>代客配送葡萄酒於灣區回台灣</li>
+		<li>代客尋找酒款</li>
+	</ul>
+</div>
+
+{% endblock %}

@@ -7,19 +7,21 @@ from google.appengine.api import users
 
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates'))
 
+#default index page
 class ExWINE(webapp2.RequestHandler):
     def get(self):
         
         user_info = get_users_info(self,users)
             
         template_values = {
-                           'title' : 'ExWINE',
+                           'title' : 'ExWINE Home',
                            'page_tag': 'index'}
         template_values.update(user_info)
         
         template = jinja_environment.get_template('exwine_index_2.html')
         self.response.out.write(template.render( template_values))
         
+#info. page dispatcher
 class InfoPageDispatcher(webapp2.RedirectHandler):
     
     def get(self):
@@ -30,6 +32,7 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
         title_page = 'ExWINE'
         request_page = self.request.get('info_page_request')
         if request_page:
+            
             if request_page == 'services':
                 info_page = 'exwine_info_services.html'
                 title_page = 'ExWINE Service'
@@ -56,9 +59,9 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
 #get users info
 def get_users_info(self,users):
     if users.get_current_user():
-            user_account = users.get_current_user()
-            url = users.create_logout_url(self.request.uri)
-            url_linktxt = 'Logout'
+        user_account = users.get_current_user()
+        url = users.create_logout_url(self.request.uri)
+        url_linktxt = 'Logout'
     else:
         user_account = 'Unknown_User'
         url = users.create_login_url(self.request.uri)

@@ -5,6 +5,7 @@
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
+<meta name="page_tag" content="{{page_tag}}"/>
 <title>{{ title }}</title>
 <!-- CSS -->
 <link rel="shortcut icon" href="/img/favicon.ico"
@@ -68,10 +69,10 @@
 
 			<div id="contact_blocks"
 				style="padding-bottom: 15px; width: 300px; text-align: center; margin: 2px auto;">
-				<p class="link_title">ExShipper</p>
+				<a class="link_title">ExShipper</a>
 				<div class="parting_line_white"></div>
 
-				<p class="link_title">WINEVER</p>
+				<a class="link_title">WINEVER</a>
 				<div class="parting_line_white"></div>
 			</div>
 			<!-- end -->
@@ -97,7 +98,12 @@
 	
 	<script type="text/javascript">
 		//reset layout arrtibutes
-		var page_tag = {{ page_tag }};
+		var page_tag = '{{ page_tag }}';
+		
+		if(page_tag === 'link_page'){
+			$('#logistics_process').css({'position':'inherit','height':'200px','paddingTop':'20px'});
+			$('#container').css({'top':'inherit','marginTop':'5px'});
+		}
 	</script>
 
 </body>

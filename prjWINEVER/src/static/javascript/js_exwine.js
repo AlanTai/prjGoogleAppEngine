@@ -24,12 +24,25 @@ function toggle_height(){
 	var contact_area_heigh = $('#contact_area').css('height');
 	contact_area_heigh = parseInt(contact_area_heigh);
 	
-	if(info_area_heigh>35 || contact_area_heigh>35){
-		$('#logistics_process').animate({paddingTop: '10px'},1000);
-		$('#container').animate({top: '285px'},400);
+	var meta_page_tag = $('meta[name=page_tag]');
+	var page_tag = meta_page_tag.attr('content');
+	
+	if(page_tag === 'link_page'){
+		/*if(info_area_heigh>35 || contact_area_heigh>35){
+			$('#logistics_process').animate({paddingTop: '10px'},100);
+		}
+		else{
+			$('#logistics_process').animate({paddingTop: '20px'},100);
+		}*/
 	}
 	else{
-		$('#logistics_process').animate({paddingTop: '75px'},1000);
-		$('#container').animate({top: '340px'},400);
+		if(info_area_heigh>35 || contact_area_heigh>35){
+			$('#logistics_process').animate({paddingTop: '10px'},1000);
+			$('#container').animate({top: '285px'},400);
+		}
+		else{
+			$('#logistics_process').animate({paddingTop: '75px'},1000);
+			$('#container').animate({top: '340px'},400);
+		}
 	}
 }
