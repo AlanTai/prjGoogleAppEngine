@@ -1,0 +1,24 @@
+$(document).ready(function() {
+	
+	/*hide elements*/
+	$('#info_blocks').hide();
+	$('#contact_blocks').hide();
+	
+	/**/
+	$('#info_title').click(function() {
+		$('#info_blocks').slideToggle(500,function(){
+			
+			var info_area_heigh = $('#info_area').css('height');
+			var contact_area_heigh = $('#contact_area').css('height');
+			
+			if(info_area_heigh>35 || contact_area_heigh>35){
+				$('#logistics_process').css('height',250+'px');
+			}
+		});
+	});
+	$('#contact_title').click(function() {
+		$('#contact_blocks').slideToggle(500,function(){
+			
+		});
+	});
+});

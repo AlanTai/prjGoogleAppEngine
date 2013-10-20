@@ -1,0 +1,16 @@
+$(document).ready(function() {
+	
+	/*hide elements*/
+	$('#info_blocks').hide();
+	$('#contact_blocks').hide();
+	
+	/**/
+	$('#info_title').click(function() {
+		$('#info_blocks').slideToggle(500,function(){
+			alert('test');
+		});
+	});
+	$('#contact_title').click(function() {
+		$('#contact_blocks').slideToggle(500);
+	});
+});

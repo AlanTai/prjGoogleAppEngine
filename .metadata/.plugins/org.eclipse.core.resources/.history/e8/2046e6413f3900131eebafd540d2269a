@@ -6,12 +6,12 @@ $(document).ready(function() {
 	
 	/**/
 	$('#info_title').click(function() {
-		$('#info_blocks').slideToggle(300,function(){
+		$('#info_blocks').slideToggle(500,function(){
 			toggle_heigh();
 		});
 	});
 	$('#contact_title').click(function() {
-		$('#contact_blocks').slideToggle(300,function(){
+		$('#contact_blocks').slideToggle(500,function(){
 			toggle_heigh();
 		});
 	});
@@ -25,11 +25,9 @@ function toggle_heigh(){
 	contact_area_heigh = parseInt(contact_area_heigh);
 	
 	if(info_area_heigh>35 || contact_area_heigh>35){
-		$('#logistics_process').animate({paddingTop: '20px'},1000);
-		$('#container').animate({top: '285px'},400);
+		$('#logistics_process').animate({paddingTop: '30px'},1000);
 	}
 	else{
 		$('#logistics_process').animate({paddingTop: '75px'},1000);
-		$('#container').animate({top: '340px'},400);
 	}
 }

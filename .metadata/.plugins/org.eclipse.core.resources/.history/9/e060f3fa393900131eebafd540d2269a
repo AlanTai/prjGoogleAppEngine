@@ -1,0 +1,31 @@
+$(document).ready(function() {
+	
+	/*hide elements*/
+	$('#info_blocks').hide();
+	$('#contact_blocks').hide();
+	
+	/**/
+	$('#info_title').click(function() {
+		$('#info_blocks').slideToggle(500,function(){
+			toggle_heigh();
+		});
+	});
+	$('#contact_title').click(function() {
+		$('#contact_blocks').slideToggle(500,function(){
+			toggle_heigh();
+		});
+	});
+});
+
+function toggle_heigh(){
+	
+	var info_area_heigh = $('#info_area').css('padding-top');
+	var contact_area_heigh = $('#contact_area').css('padding-top');
+	alert('test'+info_area_heigh+contact_area_heigh);
+	if(info_area_heigh>35 || contact_area_heigh>35){
+		$('#logistics_process').css('padding-top',35);
+	}
+	else{
+		$('#logistics_process').css('padding-top',75);
+	}
+}

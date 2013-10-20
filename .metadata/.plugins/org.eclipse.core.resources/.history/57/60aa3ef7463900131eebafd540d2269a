@@ -26,10 +26,10 @@ function toggle_heigh(){
 	
 	if(info_area_heigh>35 || contact_area_heigh>35){
 		$('#logistics_process').animate({paddingTop: '20px'},1000);
-		$('#container').animate({top: '285px'},400);
+		$('#container').animate({top: '285px'},600);
 	}
 	else{
 		$('#logistics_process').animate({paddingTop: '75px'},1000);
-		$('#container').animate({top: '340px'},400);
+		$('#container').animate({top: '340px'},600);
 	}
 }

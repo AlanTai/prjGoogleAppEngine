@@ -68,14 +68,14 @@
 		</div>
 	</div>
 
-	<div style="margin: 0px 0px; padding: 0px 0px; height: 2px;"></div>
+	<div style="margin: 0px 0px; padding: 0px 0px; height: 3px;"></div>
 
 	<div id="contact_area" class="contact_area">
 		<div>
 			<!-- Parting Line -->
 			<div class="parting_line_white"></div>
 			<!-- End -->
-			<div id="contact_title" class="title_block">連絡我們</div>
+			<p id="contact_title" class="title_block">連絡我們</p>
 		</div>
 
 
