@@ -165,9 +165,9 @@
 	}
 	.link_title {
 		width: 100%;
+		display:block;
 		padding-top: 10px;
 		padding-bottom: 10px;
-		margin: 0px 0px;
 		background-color: transparent;
 		
 		text-decoration: none;
