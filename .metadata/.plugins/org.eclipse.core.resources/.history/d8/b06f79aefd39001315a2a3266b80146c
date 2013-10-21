@@ -1,0 +1,71 @@
+{% extends "exwine_base.html"%} {% block main_content %}
+
+
+<!-- top bar -->
+<div id="top_info_bar">
+	<!-- contact block -->
+	<img alt="logo_winever" src="/img/exwine_logo.png"
+		style="display: inline-block; height: 25px; margin-top: 13px;">
+	<!-- end of contact block -->
+
+
+	<!-- search block -->
+	<div
+		style="display: inline-block; margin-top: 5px; margin-left: 20px; background-color: transparent;">
+		<form action='http://www.google.com/search' target="_blank"
+			id='search' method='get'>
+			<input id="s" name="q" type="text"
+				style="width: 300px; height: 18px; display: inline-block; vertical-align: middle; margin-top: 3px; margin-left: 2px; border-left: none; border-right: none; border-top: none; font-size: 15px; text-align: center; vertical-align: middle; padding: 2px;"
+				placeholder="Google it!"> <input id="r" type="submit"
+				value=""
+				style="background-image: url('/img/search.png'); background-color: transparent; background-repeat: no-repeat; border: none; display: inline-block; width: 26px; height: 32px; vertical-align: middle; margin-top: 6px;"
+				class="open_info" />
+
+		</form>
+	</div>
+	<!-- end of search block -->
+
+</div>
+<!-- End of top bar -->
+
+<div id="logistics_process" class="logistics_process">
+	<div>
+		<!-- Winever Logo -->
+		<img alt="winever_logo" src="/img/winever_logo.png"
+			style="height: 140px; margin: 0px auto;">
+
+		<div>
+			<span
+				style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px; color: #0000ff;">登入者
+				: {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{
+				user_account }} {% endif %}</span><a
+				style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px; color: #ff0000;"
+				href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else
+				%}登出 {% endif %}</a>
+		</div>
+	</div>
+
+	<div>
+		<p
+			style="color: #393939; margin: 0px 0px; padding: 0px 0px; font-size: 14px; margin-top: 5px;">
+			<span> 地址: 36 Avalon Drive, Daly City, CA 94015 ； </span> <span>快捷服務電話:</span><span
+				style="color: #ff0000">1-650-208-8292 (手機直播服務)</span> <a
+				href="callto://+1-650-208-8292" style="color: #ff0000;">Skype
+				快捷服務</a>
+		</p>
+	</div>
+</div>
+
+
+<div class="link_page_content_block">
+	<span
+		style="color: #000; font-size: 22px; font-weight: bold; margin-bottom: 10px;">常見問題</span>
+
+	<div
+		style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
+		<p>代客配送葡萄酒於灣區回台灣</p>
+		<p>代客尋找酒款</p>
+	</div>
+</div>
+
+{% endblock %}

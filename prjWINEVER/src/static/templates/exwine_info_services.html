@@ -1,5 +1,32 @@
 {% extends "exwine_base.html"%} {% block main_content %}
 
+
+<!-- top bar -->
+<div id="top_info_bar">
+	<!-- contact block --> <img alt="logo_winever"
+		src="/img/exwine_logo.png"
+		style="display: inline-block; height: 25px;">
+	<!-- end of contact block -->
+
+	<!-- search block -->
+	<div
+		style="display: inline-block; margin-top: 5px; margin-left: 20px; background-color: transparent;">
+		<form action='http://www.google.com/search' target="_blank"
+			id='search' method='get'>
+			<input id="s" name="q" type="text"
+				style="width: 300px; height: 18px; display: inline-block; vertical-align: middle; margin-top: 4px; margin-left: 2px; border-left: none; border-right: none; border-top: none; font-size: 15px; text-align: center; vertical-align: middle; padding: 2px;"
+				placeholder="Google it!"> <input id="r" type="submit"
+				value=""
+				style="background-image: url('/img/search.png'); background-color: transparent; background-repeat: no-repeat; border: none; display: inline-block; width: 26px; height: 32px; vertical-align: middle; margin-top: 6px;"
+				class="open_info" />
+
+		</form>
+	</div>
+	<!-- end of search block -->
+
+</div>
+<!-- End of top bar -->
+
 <div id="logistics_process" class="logistics_process">
 	<div>
 		<!-- Winever Logo -->
@@ -29,17 +56,12 @@
 </div>
 
 
-<div style="width:800px; background-color:#ffff5d; margin-top: 0px; margin-bottom: 10px; margin-left:auto; margin-right:auto; text-align: center; padding-top: 10px; padding-bottom: 10px; 
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	-moz-box-shadow: 0 0 1px 1px #fff;
-	-webkit-box-shadow: 0 0 1px 1px #fff;
-	box-shadow: 0 0 1px 1px #fff;">
+<div class="link_page_content_block">
 	<span
 		style="color: #000; font-size: 22px; font-weight: bold; margin-bottom: 10px;">服務項目</span>
 
-	<div style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
+	<div
+		style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
 		<p>代客配送葡萄酒於灣區回台灣</p>
 		<p>代客尋找酒款</p>
 	</div>

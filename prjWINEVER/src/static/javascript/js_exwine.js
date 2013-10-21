@@ -28,12 +28,12 @@ function toggle_height(){
 	var page_tag = meta_page_tag.attr('content');
 	
 	if(page_tag === 'link_page'){
-		if(info_area_heigh>35 || contact_area_heigh>35){
+		/*if(info_area_heigh>35 || contact_area_heigh>35){
 			$('#logistics_process').animate({paddingTop: '10px'},100);
 		}
 		else{
 			$('#logistics_process').animate({paddingTop: '20px'},100);
-		}
+		}*/
 	}
 	else{
 		if(info_area_heigh>35 || contact_area_heigh>35){
