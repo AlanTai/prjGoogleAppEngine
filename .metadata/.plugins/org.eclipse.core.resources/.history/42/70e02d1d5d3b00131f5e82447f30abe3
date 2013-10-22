@@ -28,6 +28,7 @@
 			%}登出 {% endif %}</a>
 	</div>
 
+
 	<form action='http://www.google.com/search' target="_blank" id='search'
 		method='get'
 		style="width: 400px; margin: 7px auto; display: inline-block; vertical-align: middle;">

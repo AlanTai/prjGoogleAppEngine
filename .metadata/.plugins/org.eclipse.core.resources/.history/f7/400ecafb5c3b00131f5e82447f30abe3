@@ -6,7 +6,15 @@
 	<!-- search block -->
 	<img alt="logo_winever" src="/img/exwine_logo.png"
 		style="height: 25px; display: inline-block; margin: 7px auto; vertical-align: middle;">
+	<form action='http://www.google.com/search' target="_blank" id='search'
+		method='get'
+		style="width: 400px; margin: 7px auto; display: inline-block; vertical-align: middle;">
+		<input id="s" name="q" type="text"
+			style="width: 300px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 2px; border-left: none; border-right: none; border-top: none; font-size: 15px; text-align: center; vertical-align: middle;"
+			placeholder="Google it!"> <input id="r" type="submit"
+			value="" class="search_btn" />
 
+	</form>
 
 	<p
 		style="color: #393939; display: inline-block; padding: 0px 10px; font-size: 13px; margin: 5px auto;">
@@ -28,15 +36,7 @@
 			%}登出 {% endif %}</a>
 	</div>
 
-	<form action='http://www.google.com/search' target="_blank" id='search'
-		method='get'
-		style="width: 400px; margin: 7px auto; display: inline-block; vertical-align: middle;">
-		<input id="s" name="q" type="text"
-			style="width: 300px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 2px; border-left: none; border-right: none; border-top: none; font-size: 15px; text-align: center; vertical-align: middle;"
-			placeholder="Google it!"> <input id="r" type="submit"
-			value="" class="search_btn" />
 
-	</form>
 </div>
 <!-- End of top bar -->
 
