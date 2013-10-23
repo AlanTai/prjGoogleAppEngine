@@ -1,0 +1,11 @@
+'''
+Created on Oct 1, 2013
+
+@author: Alan Tai
+'''
+key_value = {
+             'index_title':'ExWINE Home',
+             'page_tag_index':'index',
+             'index_page':'exwine_index_2.html',
+             'request_page_services':'services'
+             }

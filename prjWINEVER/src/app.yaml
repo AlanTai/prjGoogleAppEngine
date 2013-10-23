@@ -22,7 +22,7 @@ handlers:
   static_dir: static/images
 
 - url: /.*
-  script: views.app
+  script: ctrl_views.app
 
 libraries:
 - name: webapp2

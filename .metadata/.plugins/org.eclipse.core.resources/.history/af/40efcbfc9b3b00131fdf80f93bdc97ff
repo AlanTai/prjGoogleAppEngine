@@ -1,0 +1,33 @@
+'''
+Created on Oct 1, 2013
+
+@author: Alan Tai
+'''
+key_value = {
+             #page title
+             'index_title':'ExWINE Home',
+             'service_title':'ExWINE Service',
+             'logistics_title':'ExWINE Logistics',
+             'logistics_requirement_title':'ExWINE Logistics Requirement',
+             'question_answer_title':'ExWINE Question & Answer',
+             
+             #html name
+             'index_page':'exwine_index_2.html',
+             'service_page':'exwine_info_services.html',
+             'logistics_page':'exwine_info_logistics.html',
+             'logistics_requirement_page':'exwine_info_logistics_requirement.html',
+             'question_answer_page':'exwine_info_question_answer.html',
+             
+             #request page
+             'request_page_services':'services',
+             'request_page_logistics':'logistics',
+             'request_page_logistics_requirement':'logistics_requirement',
+             'request_page_question_answer':'question_answer',
+             
+             #page tag
+             'page_tag_index':'index',
+             'page_tag_link_page':'link_page',
+             
+             #google account info
+             'logout_txt':'Logout',
+             }

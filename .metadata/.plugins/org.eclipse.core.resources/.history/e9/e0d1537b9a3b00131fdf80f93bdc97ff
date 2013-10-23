@@ -1,0 +1,23 @@
+'''
+Created on Oct 1, 2013
+
+@author: Alan Tai
+'''
+key_value = {
+             #page title
+             'index_title':'ExWINE Home',
+             'service_title':'ExWINE Service',
+             'logistics_title':'ExWINE Logistics'
+             
+             #
+             'page_tag_index':'index',
+             
+             #html name
+             'index_page':'exwine_index_2.html',
+             'service_page':'exwine_info_services.html',
+             'logistics_page':'exwine_info_logistics.html',
+             
+             #request page
+             'request_page_services':'services',
+             'request_page_logistics':'logistics'
+             }
