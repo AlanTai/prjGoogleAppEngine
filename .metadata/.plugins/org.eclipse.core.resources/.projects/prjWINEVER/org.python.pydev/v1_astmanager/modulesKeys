@@ -30,6 +30,7 @@ apiclient.mimeparse|C:\Program Files (x86)\Google\google_appengine\lib\google-ap
 apiclient.model|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\apiclient\model.py
 apiclient.oauth|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\apiclient\oauth.py
 apiclient.schema|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\apiclient\schema.py
+app_dict|D:\prjGoogleAppEngine\prjWINEVER\src\app_dict.py
 appcfg|C:\Program Files (x86)\Google\google_appengine\appcfg.py
 bulkload_client|C:\Program Files (x86)\Google\google_appengine\bulkload_client.py
 bulkloader|C:\Program Files (x86)\Google\google_appengine\bulkloader.py
@@ -38,6 +39,7 @@ cpyamf.amf0|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\amf0
 cpyamf.amf3|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\amf3.pyx
 cpyamf.codec|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\codec.pyx
 cpyamf.util|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\util.pyx
+ctrl_views|D:\prjGoogleAppEngine\prjWINEVER\src\ctrl_views.py
 dev_appserver|C:\Program Files (x86)\Google\google_appengine\dev_appserver.py
 distribute_setup|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\distribute_setup.py
 django.__init__|C:\Program Files (x86)\Google\google_appengine\lib\django_1_4\django\__init__.py
@@ -1897,7 +1899,6 @@ tests.test_request_nose|C:\Program Files (x86)\Google\google_appengine\lib\webob
 tests.test_response|C:\Program Files (x86)\Google\google_appengine\lib\webob_1_1_1\tests\test_response.py
 tests.test_util|C:\Program Files (x86)\Google\google_appengine\lib\webob_1_1_1\tests\test_util.py
 uritemplate.__init__|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\uritemplate\__init__.py
-views|D:\prjGoogleAppEngine\prjWINEVER\src\views.py
 webapp2|C:\Program Files (x86)\Google\google_appengine\lib\webapp2\webapp2.py
 webapp2_extras.__init__|C:\Program Files (x86)\Google\google_appengine\lib\webapp2\webapp2_extras\__init__.py
 webapp2_extras.appengine.__init__|C:\Program Files (x86)\Google\google_appengine\lib\webapp2\webapp2_extras\appengine\__init__.py

@@ -9,20 +9,11 @@ $(document).ready(function() {
 		$('#info_blocks').slideToggle(300,function(){
 			toggle_height();
 		});
-		
-		$('html, body').animate({
-	        scrollTop: $("#info_title").offset().top
-	    }, 2000);
 	});
 	$('#contact_title').click(function() {
 		$('#contact_blocks').slideToggle(300,function(){
 			toggle_height();
 		});
-		
-
-		$('html, body').animate({
-	        scrollTop: $("#contact_title").offset().top
-	    }, 2000);
 	});
 });
 

@@ -6,7 +6,7 @@ $(document).ready(function() {
 	
 	/**/
 	$('#info_title').click(function() {
-		$('#info_blocks').slideToggle(300,function(){
+		$('#info_blocks').slideToggle(1000,function(){
 			toggle_height();
 		});
 		
@@ -15,7 +15,7 @@ $(document).ready(function() {
 	    }, 2000);
 	});
 	$('#contact_title').click(function() {
-		$('#contact_blocks').slideToggle(300,function(){
+		$('#contact_blocks').slideToggle(1000,function(){
 			toggle_height();
 		});
 		
