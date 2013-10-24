@@ -1,0 +1,149 @@
+{% extends "exwine_base.html"%} {% block main_content %}
+
+
+<!-- top bar -->
+<div id="top_info_bar">
+	<!-- search block -->
+	<img alt="logo_winever" src="/img/exwine_logo.png"
+		style="height: 25px; display: inline-block; margin: 10px auto; vertical-align: middle;">
+
+
+	<p
+		style="color: #393939; display: inline-block; padding: 0px 10px; font-size: 13px; margin: 10px auto;">
+		<span style="margin-left: 5px;">快捷服務電話:</span><span
+			style="color: #ff0000; margin-left: 5px;">1-650-208-8292 (手機)</span>
+		<a href="callto://+1-650-208-8292"
+			style="color: #ff0000; margin-left: 10px;">Skype </a>
+	</p>
+
+
+	<div style="display: inline-block; margin: 10px auto;">
+		<span
+			style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px; color: #393939;">登入者
+			: {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{
+			user_account }} {% endif %}</span><a
+			style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px; color: #ff0000;"
+			href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else
+			%}登出 {% endif %}</a>
+	</div>
+
+
+	<form action='http://www.google.com/search' target="_blank" id='search'
+		method='get'
+		style="width: 400px; margin: 10px auto; display: inline-block; vertical-align: middle;">
+		<input id="s" name="q" type="text"
+			style="width: 300px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 2px; border-left: none; border-right: none; border-top: none; font-size: 15px; text-align: center; vertical-align: middle;"
+			placeholder="Google it!"> <input id="r" type="submit"
+			value="" class="search_btn" />
+
+	</form>
+
+</div>
+<!-- End of top bar -->
+
+<p style="height: 45px;"></p>
+
+<div style="margin: 10px auto; text-align: center;">
+
+	<div style="display: inline-block; vertical-align: top;">
+		<div class="link_page_content link_page_content_minor">
+			<p class="link_page_content_title">推薦酒莊</p>
+			<div style="display: inline-block;">
+				<!-- Winever Logo -->
+				<img alt="winever_logo" src="/img/winever_logo.png"
+					style="height: 140px; margin: 0px auto;">
+			</div>
+			
+			<input type="button" id="get_it_btn" value="Sip It"/>
+		</div>
+
+		<div class="link_page_content link_page_content_minor">
+			<p class="link_page_content_title">推薦酒款</p>
+			<div style="display: inline-block;">
+				<!-- Winever Logo -->
+				<img alt="winever_logo" src="/img/winever_logo.png"
+					style="height: 140px; margin: 0px auto;">
+			</div>
+		</div>
+	</div>
+
+	<div class="link_page_content link_page_content_main">
+		<div style="display: block;">
+			<p class="link_page_content_title">常見問題</p>
+			<div
+				style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
+				<p>代客配送葡萄酒於灣區回台灣</p>
+				<p>代客尋找酒款</p>
+				<p>代客配送葡萄酒於灣區回台灣</p>
+				<p>代客尋找酒款</p>
+				<p>代客配送葡萄酒於灣區回台灣</p>
+				<p>代客尋找酒款</p>
+			</div>
+		</div>
+		
+		<div id="online_map" style="width: 90% ; height: 200px; margin: 10px auto; 
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		-moz-box-shadow: 0 0 1px 1px #fff;
+		-webkit-box-shadow: 0 0 1px 1px #fff;
+		box-shadow: 0 0 1px 1px #fff;"></div>
+
+	</div>
+
+</div>
+
+
+
+<script type="text/javascript">
+	var address = 'mendocino county, california';
+	var winever_icon = L.icon({
+		iconUrl : '/leaflet/images/winever_logo_map_marker_pin.png',
+		shadowUrl : '/leaflet/images/marker-shadow.png',
+
+		iconSize : [ 50, 50 ],
+		shadowSize : [ 40, 40 ],
+		iconAnchor : [ 25, 49 ],
+		shadowAnchor : [ 12, 37 ],
+		popupAnchor : [ -3, -40 ]
+	});
+
+	$
+			.getJSON(
+					'http://nominatim.openstreetmap.org/search?format=json&limit=1&q='
+							+ address,
+					function(data) {
+
+						$
+								.each(
+										data,
+										function(key, val) {
+											var map = L
+													.map('online_map')
+													.setView(
+															[ val.lat, val.lon ],
+															9);
+
+											// add an OpenStreetMap tile layer
+											L
+													.tileLayer(
+															'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+															{
+																attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+															}).addTo(map);
+
+											// add a marker in the given location, attach some popup content to it and open the popup
+											L.marker([ val.lat, val.lon ], {
+												icon : winever_icon
+											}).addTo(map).bindPopup(
+													'Mendocino County <br>'
+															+ '\(門多西諾郡\)');
+
+										});
+
+					});
+</script>
+
+
+
+{% endblock %}

@@ -1,5 +1,7 @@
+/*JS*/
+console.log('Loaded js_exwine.js')
+
 $(document).ready(function() {
-	
 	/*hide elements*/
 	$('#info_blocks').hide();
 	$('#contact_blocks').hide();
@@ -24,8 +26,30 @@ $(document).ready(function() {
 	        scrollTop: $("#contact_title").offset().top
 	    }, 2000);
 	});
+	
+	
+	//ajax test
+	$('.save_favorite_btn').on('click',handleClick);
 });
 
+//ajax text
+function handleClick(e){
+	$.ajax('/info_page_dispatcher',{
+		type: 'POST',
+		data: {
+			fmt: 'json'
+		},
+		success: showData
+	});
+}
+
+function showData(data){
+	alert('This winery was saved to your favorite!');
+}
+
+//end of ajax test
+
+//toggle elements' height
 function toggle_height(){
 	
 	var info_area_heigh = $('#info_area').css('height');

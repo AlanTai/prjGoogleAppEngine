@@ -8,6 +8,7 @@ import webapp2
 import jinja2
 import os
 from google.appengine.api import users
+import json
 
 from app_dict import key_value
 
@@ -29,9 +30,16 @@ class ExWINE(webapp2.RequestHandler):
         
 #info. page dispatcher
 class InfoPageDispatcher(webapp2.RedirectHandler):
+    def post(self):
+        if self.request.get('fmt') == 'json':
+            ajax_data = {'name':'Alan','age':32}
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
     
     def get(self):
         
+        #default info
         user_info = get_users_info(self,users)
         
         info_page = key_value.get('index_page')
@@ -63,6 +71,7 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
         template = jinja_environment.get_template(info_page)
         self.response.out.write(template.render(template_values))
         
+
 #get users info
 def get_users_info(self,users):
     if users.get_current_user():
