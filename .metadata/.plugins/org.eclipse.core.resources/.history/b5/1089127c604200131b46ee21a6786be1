@@ -28,7 +28,7 @@ $(document).ready(function() {
 	    }, 800);
 	});
 	
-	//toggle button
+	//
 	$('#container_toggle_btn').click(function() {
 		$('#container').slideToggle(800,function(){
 			var img_src = $('#container_toggle_btn').attr('src');
@@ -42,7 +42,7 @@ $(document).ready(function() {
 		
 
 		$('html, body').animate({
-	        scrollTop: $("#container_toggle_btn").offset().top
+	        scrollTop: $("#contact_title").offset().top
 	    }, 800);
 	});
 	

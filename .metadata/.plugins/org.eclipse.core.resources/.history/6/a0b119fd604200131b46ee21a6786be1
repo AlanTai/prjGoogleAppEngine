@@ -103,9 +103,6 @@
 	#container_toggle_btn:hover{
 		cursor: pointer;
 	}
-	#links_parting_line{
-		display: none;
-	}
 	.logistics_process {
 		position: fixed;
 		color: #ff0000;

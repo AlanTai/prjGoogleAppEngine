@@ -27,8 +27,6 @@ $(document).ready(function() {
 	        scrollTop: $("#contact_title").offset().top
 	    }, 800);
 	});
-	
-	//toggle button
 	$('#container_toggle_btn').click(function() {
 		$('#container').slideToggle(800,function(){
 			var img_src = $('#container_toggle_btn').attr('src');
@@ -39,11 +37,6 @@ $(document).ready(function() {
 				$('#container_toggle_btn').attr('src','/img/arrow_down_new.png');
 			}
 		});
-		
-
-		$('html, body').animate({
-	        scrollTop: $("#container_toggle_btn").offset().top
-	    }, 800);
 	});
 	
 	//main page link
