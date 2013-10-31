@@ -109,13 +109,23 @@
 	
 	/**/
 	@keyframes bling{
+		0%   {height: 30px}
+		50%  {height: 30px}
+		100% {height: 30px}
 	}
 
 	@-webkit-keyframes bling{
+		0%   {visibility: visible;}
+		50%  {visibility: hiden;}
+		100% {visibility: visible;}
 	}
 	
 	@-moz-keyframes bling{
+		0%   {visibility: visible;}
+		50%  {visibility: hiden;}
+		100% {visibility: visible;}
 	}
+	
 	/**/
 	
 	#container_toggle_btn:hover{

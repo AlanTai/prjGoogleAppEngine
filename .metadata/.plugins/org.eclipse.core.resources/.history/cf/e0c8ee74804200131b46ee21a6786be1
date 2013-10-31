@@ -105,17 +105,37 @@
 		animation: bling 3s infinite;
 		-webkit-animation: bling 3s infinite;
 		-moz-animation: bling 3s infinite;
+		-ms-animation: bling 3s infinite;
+		-o-animation: bling 3s infinite;
 	}
 	
 	/**/
-	@keyframes bling{
+	@-webkit-keyframes bling {
+	0%, 100% { 
+		-webkit-transform: perspective(400px) rotateY(-25deg);
 	}
+	50% {
+		-webkit-transform: perspective(400px) rotateY(-35deg);
+	}
+}
 
-	@-webkit-keyframes bling{
+@-moz-keyframes windows_animation {
+	0%, 100% { 
+		-moz-transform: perspective(400px) rotateY(-25deg);
 	}
+	50% {
+		-moz-transform: perspective(400px) rotateY(-35deg);
+	}
+}
+@-ms-keyframes windows_animation {
+	0%, 100% { 
+		-ms-transform: perspective(400px) rotateY(-25deg);
+	}
+	50% {
+		-ms-transform: perspective(400px) rotateY(-35deg);
+	}
+}
 	
-	@-moz-keyframes bling{
-	}
 	/**/
 	
 	#container_toggle_btn:hover{

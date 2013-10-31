@@ -100,25 +100,8 @@
 		z-index: 1;
 		text-align: center;
 	}
-	
-	#container_toggle_btn{
-		animation: bling 3s infinite;
-		-webkit-animation: bling 3s infinite;
-		-moz-animation: bling 3s infinite;
-	}
-	
-	/**/
-	@keyframes bling{
-	}
-
-	@-webkit-keyframes bling{
-	}
-	
-	@-moz-keyframes bling{
-	}
-	/**/
-	
 	#container_toggle_btn:hover{
+	background-image:none;
 		cursor: pointer;
 	}
 	#links_parting_line{

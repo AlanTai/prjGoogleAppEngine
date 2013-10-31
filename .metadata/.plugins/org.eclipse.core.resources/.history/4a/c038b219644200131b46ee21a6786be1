@@ -69,11 +69,11 @@
 	<!-- Links -->
 	<div id="main_container" style="position: absolute; top: 340px; width: 100%; text-align: center;">
 	
-	<div id="links_parting_line" class="parting_line_black"></div>
+	<div id="links_parting_line" class="parting_line_white"></div>
 	
 		<div style="text-align: center; width: 30px; margin: 10px auto; ">
 			<img id="container_toggle_btn" alt="conatiner_toggle_btn"
-				src="/img/arrow_down_new.png" style="height: 27px;">
+				src="/img/arrow_down_new.png" style="height: 20px;">
 		</div>
 
 		<div id="container" class="container">

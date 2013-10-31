@@ -102,23 +102,12 @@
 	}
 	
 	#container_toggle_btn{
-		animation: bling 3s infinite;
-		-webkit-animation: bling 3s infinite;
-		-moz-animation: bling 3s infinite;
+		transition: background-image .5s linear .8s;
+		-webkit-transition: background-image .5s linear .8s;
+		-moz-transition: background-image .5s linear .8s;
 	}
-	
-	/**/
-	@keyframes bling{
-	}
-
-	@-webkit-keyframes bling{
-	}
-	
-	@-moz-keyframes bling{
-	}
-	/**/
-	
 	#container_toggle_btn:hover{
+	background-image:none;
 		cursor: pointer;
 	}
 	#links_parting_line{
