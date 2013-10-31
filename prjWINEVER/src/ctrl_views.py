@@ -32,7 +32,7 @@ class ExWINE(webapp2.RequestHandler):
 class InfoPageDispatcher(webapp2.RedirectHandler):
     def post(self):
         if self.request.get('fmt') == 'json':
-            ajax_data = {'name':'Alan','age':32}
+            ajax_data = {'submission':'Done'}
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
             return

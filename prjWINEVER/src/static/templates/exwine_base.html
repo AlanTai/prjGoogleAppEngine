@@ -5,7 +5,7 @@
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
-<meta name="page_tag" content="{{page_tag}}"/>
+<meta name="page_tag" content="{{page_tag}}" />
 <title>{{ title }}</title>
 <!-- CSS -->
 <link rel="shortcut icon" href="/img/favicon.ico"
@@ -20,6 +20,47 @@
 <script type="text/javascript" src="/js/js_exwine.js"></script>
 </head>
 <body>
+	<!-- top bar -->
+	<div id="top_info_bar">
+		<!-- search block -->
+		<img id="main_page" alt="logo_winever" src="/img/exwine_logo.png"
+			style="height: 25px; display: inline-block; margin: 10px auto; vertical-align: middle;">
+
+
+		<p
+			style="color: #393939; display: inline-block; padding: 0px 10px; font-size: 13px; margin: 10px auto;">
+			<span style="margin-left: 5px;">快捷服務電話:</span><span
+				style="color: #ff0000; margin-left: 5px;">1-650-208-8292 (手機)</span>
+			<a href="callto://+1-650-208-8292"
+				style="color: #ff0000; margin-left: 10px; vertical-align: middle;">Skype
+			</a>
+		</p>
+
+
+		<div style="display: inline-block; margin: 10px auto;">
+			<span
+				style="display: inline-block; text-decoration: none; padding: 0px 0px; font-size: 13px; color: #393939;">登入者
+				: {% if user_account == 'Unknwon_User' %} 位知使用者 {% else %} {{
+				user_account }} {% endif %}</span><a
+				style="display: inline-block; margin-left: 15px; padding: 0px 0px; font-size: 13px; color: #ff0000;"
+				href="{{ url|safe }}">{% if url_linktxt == 'Login' %}登入 {% else
+				%}登出 {% endif %}</a>
+		</div>
+
+
+		<form action='http://www.google.com/search' target="_blank"
+			id='search' method='get'
+			style="width: 400px; margin: 10px auto; display: inline-block; vertical-align: middle;">
+			<input id="s" name="q" type="text"
+				style="width: 300px; height: 18px; display: inline-block; vertical-align: middle; margin-left: 2px; border-left: none; border-right: none; border-top: none; font-size: 15px; text-align: center; vertical-align: middle;"
+				placeholder="Google it!"> <input id="r" type="submit"
+				value="" class="search_btn" />
+
+		</form>
+
+	</div>
+	<!-- End of top bar -->
+
 	{% block main_content %}
 	<p>No Templates Found!</p>
 	{% endblock %}
@@ -33,24 +74,27 @@
 				<!-- Parting Line -->
 				<div class="parting_line_white"></div>
 				<!-- End -->
-				<p id="info_title" class="title_block">
-					<span>服務資訊</span>
-				</p>
+				<p id="info_title" class="title_block">服務資訊</p>
 			</div>
 			<!-- end of info bar -->
 
 			<!-- info_blocks -->
 			<div id="info_blocks" class="info_blocks_2">
-				<a href="/info_page_dispatcher?info_page_request=services" class="link_title">服務項目</a>
+				<a href="/info_page_dispatcher?info_page_request=services"
+					class="link_title">服務項目</a>
 				<div class="parting_line_white"></div>
 
-				<a href="/info_page_dispatcher?info_page_request=logistics" class="link_title">酒類貨品配送流程</a>
+				<a href="/info_page_dispatcher?info_page_request=logistics"
+					class="link_title">酒類貨品配送流程</a>
 				<div class="parting_line_white"></div>
 
-				<a href="/info_page_dispatcher?info_page_request=logistics_requirement" class="link_title">配送須知</a>
+				<a
+					href="/info_page_dispatcher?info_page_request=logistics_requirement"
+					class="link_title">配送須知</a>
 				<div class="parting_line_white"></div>
 
-				<a href="/info_page_dispatcher?info_page_request=question_answer" class="link_title">常見問題</a>
+				<a href="/info_page_dispatcher?info_page_request=question_answer"
+					class="link_title">常見問題</a>
 				<div class="parting_line_white"></div>
 				<!-- end -->
 			</div>
@@ -63,7 +107,7 @@
 				<!-- Parting Line -->
 				<div class="parting_line_white"></div>
 				<!-- End -->
-				<div id="contact_title" class="title_block">連絡我們</div>
+				<p id="contact_title" class="title_block">連絡我們</p>
 			</div>
 
 
@@ -95,14 +139,24 @@
 		</div>
 	</div>
 	<!-- End of Links -->
-	
+
 	<script type="text/javascript">
 		//reset layout arrtibutes
 		var page_tag = '{{ page_tag }}';
-		
-		if(page_tag === 'link_page'){
-			$('#logistics_process').css({'position':'inherit','height':'200px','paddingTop':'25px'});
-			$('#container').css({'top':'auto','marginTop':'5px'});
+
+		if (page_tag === 'link_page') {
+			$('#logistics_process').css({
+				'position' : 'inherit',
+				'height' : '200px',
+				'paddingTop' : '25px'
+			});
+			$('#container').css({
+				'top' : 'auto',
+				'marginTop' : '5px'
+			});
+			$('#top_info_bar').css({
+				'display':'inherit'
+			});
 		}
 	</script>
 

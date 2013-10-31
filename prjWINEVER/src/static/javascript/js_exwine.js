@@ -8,25 +8,27 @@ $(document).ready(function() {
 	
 	/**/
 	$('#info_title').click(function() {
-		$('#info_blocks').slideToggle(300,function(){
+		$('#info_blocks').slideToggle(800,function(){
 			toggle_height();
 		});
 		
 		$('html, body').animate({
 	        scrollTop: $("#info_title").offset().top
-	    }, 2000);
+	    }, 800);
 	});
 	$('#contact_title').click(function() {
-		$('#contact_blocks').slideToggle(300,function(){
+		$('#contact_blocks').slideToggle(800,function(){
 			toggle_height();
 		});
 		
 
 		$('html, body').animate({
 	        scrollTop: $("#contact_title").offset().top
-	    }, 2000);
+	    }, 800);
 	});
 	
+	//main page link
+	$('#main_page').on('click',go_to_main_page);
 	
 	//ajax test
 	$('.save_favorite_btn').on('click',handleClick);
@@ -44,10 +46,14 @@ function handleClick(e){
 }
 
 function showData(data){
-	alert('This winery was saved to your favorite!');
+	alert(data.submission+'!'+' This winery was saved to your favorite!');
 }
-
 //end of ajax test
+
+//go to main page
+function go_to_main_page(){
+	document.location.href='http://www.exwine-tw.appspot.com/exwine';
+}
 
 //toggle elements' height
 function toggle_height(){
@@ -71,11 +77,11 @@ function toggle_height(){
 	else{
 		if(info_area_heigh>35 || contact_area_heigh>35){
 			$('#logistics_process').animate({paddingTop: '10px'},1000);
-			$('#container').animate({top: '285px'},400);
+			$('#container').animate({top: '285px'},800);
 		}
 		else{
 			$('#logistics_process').animate({paddingTop: '75px'},1000);
-			$('#container').animate({top: '340px'},400);
+			$('#container').animate({top: '340px'},800);
 		}
 	}
 }
