@@ -90,11 +90,8 @@
 		cursor: pointer;
 	}
 	.container {
-		position: absolute;
-		top: 340px;
-		left: 0px;
 		width: 100%;
-		margin-top: 0px;
+		margin-top: 20px;
 		margin-bottom: 0px;
 		margin-left: 0px;
 		margin-right: 0px;
@@ -102,6 +99,9 @@
 		padding-right: 0px;
 		z-index: 1;
 		text-align: center;
+	}
+	#container_toggle_btn:hover{
+		cursor: pointer;
 	}
 	.logistics_process {
 		position: fixed;

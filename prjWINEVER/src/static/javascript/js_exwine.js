@@ -3,6 +3,7 @@ console.log('Loaded js_exwine.js')
 
 $(document).ready(function() {
 	/*hide elements*/
+	$('#container').hide();
 	$('#info_blocks').hide();
 	$('#contact_blocks').hide();
 	
@@ -25,6 +26,17 @@ $(document).ready(function() {
 		$('html, body').animate({
 	        scrollTop: $("#contact_title").offset().top
 	    }, 800);
+	});
+	$('#container_toggle_btn').click(function() {
+		$('#container').slideToggle(800,function(){
+			var img_src = $('#container_toggle_btn').attr('src');
+			if(img_src === '/img/arrow_down_new.png'){
+				$('#container_toggle_btn').attr('src','/img/arrow_up_new.png');
+			}
+			else{
+				$('#container_toggle_btn').attr('src','/img/arrow_down_new.png');
+			}
+		});
 	});
 	
 	//main page link
