@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
 <meta name="page_tag" content="{{page_tag}}" />
+<meta name="author" content="Alan Tai" />
+
 <title>{{ title }}</title>
+
 <!-- CSS -->
 <link rel="shortcut icon" href="/img/favicon.ico"
 	type="image/vnd.microsoft.icon" />
@@ -21,11 +24,14 @@
 </head>
 <body>
 	<!-- top bar -->
+	<div id="main_page_popup_txt"
+		style="position: absolute; display: none; background: #fff; color: #353535; border: none; padding: 3px 5px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 0 0 1px 1px #bbb; -webkit-box-shadow: 0 0 1px 1px #bbb; box-shadow: 0 0 1px 1px #bbb; z-index: 101;">Go
+		back to home page</div>
 	<div id="top_info_bar">
 		<!-- search block -->
-		<img id="main_page" alt="logo_winever" src="/img/exwine_logo.png"
+		<img id="main_page" data-tooltip="#main_page_popup_txt"
+			alt="logo_winever" src="/img/exwine_logo.png"
 			style="height: 25px; display: inline-block; margin: 10px auto; vertical-align: middle;">
-
 
 		<p
 			style="color: #393939; display: inline-block; padding: 0px 10px; font-size: 13px; margin: 10px auto;">
@@ -66,14 +72,21 @@
 	{% endblock %}
 
 
+	<div id="container_toggle_btn_popup_txt"
+		style="position: absolute; display: none; background: #fff; color: #353535; border: none; padding: 3px 5px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 0 0 1px 1px #bbb; -webkit-box-shadow: 0 0 1px 1px #bbb; box-shadow: 0 0 1px 1px #bbb; z-index: 100;">
+		Information Lists</div>
+
 	<!-- Links -->
-	<div id="main_container" style="position: absolute; top: 340px; width: 100%; text-align: center;">
-	
-	<div id="links_parting_line" class="parting_line_black"></div>
-	
-		<div style="text-align: center; width: 30px; margin: 10px auto; ">
-			<img id="container_toggle_btn" alt="conatiner_toggle_btn"
-				src="/img/arrow_down_new.png" style="height: 27px;">
+	<div id="main_container"
+		style="position: absolute; top: 340px; width: 100%; text-align: center;">
+
+		<div id="links_parting_line" class="parting_line_black"></div>
+
+		<div style="text-align: center; width: 30px; margin: 10px auto;">
+			<img id="container_toggle_btn"
+				data-tooltip="#container_toggle_btn_popup_txt"
+				alt="conatiner_toggle_btn" src="/img/arrow_down_new.png"
+				style="height: 27px;">
 		</div>
 
 		<div id="container" class="container">
@@ -134,10 +147,10 @@
 		</div>
 
 
-		<div style="margin-top: 30px; margin-bottom: 10px; text-align: center;">
+		<div id="copy_right"
+			style="margin-top: 30px; margin-bottom: 10px; text-align: center;">
 			<!-- Copy right -->
-			<p
-				style="color: #323232; margin: 0px auto; font-size: 11px;">
+			<p style="color: #323232; margin: 0px auto; font-size: 11px;">
 				&copy; <span>ExShipper and WINEVER.</span> <span>Ailin.Alan
 					Design Studio.</span> <span>2011-2013</span>
 			</p>
@@ -170,6 +183,9 @@
 			});
 			$('#links_parting_line').css({
 				'display' : 'inherit'
+			});
+			$('#copy_right').css({
+				'marginTop' : '5px'
 			});
 		}
 	</script>

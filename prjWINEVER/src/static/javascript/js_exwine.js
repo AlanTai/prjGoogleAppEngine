@@ -1,36 +1,45 @@
 /*JS*/
 console.log('Loaded js_exwine.js')
 
+/*initiation function*/
 $(document).ready(function() {
-	/*hide elements*/
+	//hide elements
 	$('#container').hide();
 	$('#info_blocks').hide();
 	$('#contact_blocks').hide();
 	
-	/**/
 	$('#info_title').click(function() {
-		$('#info_blocks').slideToggle(800,function(){
-			toggle_height();
-		});
+		$('#info_blocks').slideToggle(800);
 		
 		$('html, body').animate({
 	        scrollTop: $("#info_title").offset().top
 	    }, 800);
 	});
 	$('#contact_title').click(function() {
-		$('#contact_blocks').slideToggle(800,function(){
-			toggle_height();
-		});
+		$('#contact_blocks').slideToggle(800);
 		
 
 		$('html, body').animate({
 	        scrollTop: $("#contact_title").offset().top
 	    }, 800);
 	});
+	//end of "hide elements"
 	
-	//toggle button
+	//mousehover opoup txt
+	$("#main_page, #container_toggle_btn").hover(function(e) {
+		
+	    $($(this).data("tooltip")).css({
+	        left: e.pageX + 1,
+	        top: e.pageY + 1
+	    }).stop().show(100);
+	}, function() {
+	    $($(this).data("tooltip")).hide();
+	});
+	//end of mousehover opoup txt
+	
+	//toggle button for information content
 	$('#container_toggle_btn').click(function() {
-		$('#container').slideToggle(800,function(){
+		$('#container').slideToggle(400,function(){
 			var img_src = $('#container_toggle_btn').attr('src');
 			if(img_src === '/img/arrow_down_new.png'){
 				$('#container_toggle_btn').attr('src','/img/arrow_up_new.png');
@@ -45,8 +54,9 @@ $(document).ready(function() {
 
 		$('html, body').animate({
 	        scrollTop: $("#container_toggle_btn").offset().top
-	    }, 800);
+	    }, 500);
 	});
+	//end of "toggle button for information content"
 	
 	//main page link
 	$('#main_page').on('click',go_to_main_page);

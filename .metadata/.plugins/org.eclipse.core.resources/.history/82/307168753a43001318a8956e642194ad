@@ -1,0 +1,133 @@
+{% extends "exwine_base.html"%} {% block main_content %}
+
+<p style="height: 45px;"></p>
+
+<div style="margin: 10px auto; text-align: center;">
+
+	<div class="link_page_content link_page_content_main">
+		<div style="display: block;">
+			<p class="link_page_content_title">常見問題</p>
+			<div
+				style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
+				<p>代客配送葡萄酒於灣區回台灣</p>
+				<p>代客尋找酒款</p>
+				<p>代客配送葡萄酒於灣區回台灣</p>
+				<p>代客尋找酒款</p>
+				<p>代客配送葡萄酒於灣區回台灣</p>
+				<p>代客尋找酒款</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="link_page_content link_page_content_main">
+		<div style="height: 300px; display: inline-block ;">
+			<!--  -->
+			<div class="link_page_content link_page_content_minor">
+				<input type="button" id="sip_it_btn" value="Sip or Ship"
+					class="save_favorite_btn" />
+				<div style="display: inline-block; margin-top: 0px;">
+					<!-- Winever Logo -->
+					<img alt="winever_logo" src="/img/hawley.jpg"
+						style="width: 100%; margin: 0px auto;">
+				</div>
+
+				<div style="margin: 0px 5px;">
+					<p style="font-weight: bold; font-size: 14px">Hawley Winery</p>
+					<p style="font-size: 12px;">Hawley Winery is located on
+						Bradford Mountain, overlooking Dry Creek Valley. The winery sits
+						in the middle of the Hawley's 10 acre vineyard...</p>
+
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="link_page_content link_page_content_minor">
+				<input type="button" id="sip_it_btn" value="Sip or Ship"
+					class="save_favorite_btn" />
+				<div style="display: inline-block; margin-top: 0px;">
+					<!-- Winever Logo -->
+					<img alt="winever_logo" src="/img/hawley_wines.jpg"
+						style="width: 100%; margin: 0px auto;">
+				</div>
+
+				<div style="margin: 0px 5px;">
+					<p style="font-weight: bold; font-size: 14px;">Hawley Winery
+						Pinot Noir Oehlman Vineyard</p>
+					<p style="font-weight: normal; font-size: 12px;">The ripe fruit
+						was de-stemmed and crushed into small one-ton fermenters and
+						chilled using dry ice...</p>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div id="online_map"
+			style="display:inline-block; width: 500px; height: 300px; margin: 8px 2px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -moz-box-shadow: 0 0 1px 1px #fff; -webkit-box-shadow: 0 0 1px 1px #fff; box-shadow: 0 0 1px 1px #fff; z-index: 10;"></div>
+
+	</div>
+
+
+</div>
+
+
+
+<script type="text/javascript">
+	var address = 'hawley winery';
+	var winever_icon = L.icon({
+		iconUrl : '/leaflet/images/winever_logo_map_marker_pin.png',
+		shadowUrl : '/leaflet/images/marker-shadow.png',
+
+		iconSize : [ 50, 50 ],
+		shadowSize : [ 40, 40 ],
+		iconAnchor : [ 25, 49 ],
+		shadowAnchor : [ 12, 37 ],
+		popupAnchor : [ -3, -40 ]
+	});
+
+	$
+			.getJSON(
+					'http://nominatim.openstreetmap.org/search?format=json&limit=1&q='
+							+ address,
+					function(data) {
+
+						$
+								.each(
+										data,
+										function(key, val) {
+											var map = L
+													.map('online_map')
+													.setView(
+															[ val.lat, val.lon ],
+															17);
+
+											// add an OpenStreetMap tile layer
+											L
+													.tileLayer(
+															'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+															{
+																attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+															}).addTo(map);
+
+											// add a marker in the given location, attach some popup content to it and open the popup
+											L
+													.marker(
+															[ val.lat, val.lon ],
+															{
+																icon : winever_icon
+															})
+													.addTo(map)
+													.bindPopup(
+															'Hawley Winery Tasting Room, located in downtown Healdsburg <br>'
+																	+ 'Address:  36 North St Healdsburg, CA 95448 <br>'
+																	+ 'Phone: 707-431-2705');
+
+										});
+
+					});
+</script>
+
+
+
+{% endblock %}

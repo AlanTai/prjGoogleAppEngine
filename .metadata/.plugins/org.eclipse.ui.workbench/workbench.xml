@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="60" version="2.0">
+<workbench progressCount="51" version="2.0">
 <workbenchAdvisor/>
 <window height="467" maximized="true" width="1208" x="170" y="369">
 <fastViewData fastViewLocation="1024"/>
@@ -51,21 +51,21 @@
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_base.html" partName="exwine_base.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_base.html" title="exwine_base.html" tooltip="prjWINEVER/src/static/templates/exwine_base.html" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_base.html" partName="exwine_base.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_base.html" title="exwine_base.html" tooltip="prjWINEVER/src/static/templates/exwine_base.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2770" selectionTopPixel="820"/>
+<editorState selectionHorizontalPixel="1134" selectionLength="0" selectionOffset="1197" selectionTopPixel="240"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index_2.html" partName="exwine_index_2.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_index_2.html" title="exwine_index_2.html" tooltip="prjWINEVER/src/static/templates/exwine_index_2.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_index_2.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="250" selectionTopPixel="140"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="744" selectionTopPixel="35"/>
 </editor>
-<editor id="org.eclipse.wst.css.core.csssource.source" name="css_exwine_index.css" partName="css_exwine_index.css" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/css/css_exwine_index.css" title="css_exwine_index.css" tooltip="prjWINEVER/src/static/css/css_exwine_index.css" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.wst.css.core.csssource.source" name="css_exwine_index.css" partName="css_exwine_index.css" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/css/css_exwine_index.css" title="css_exwine_index.css" tooltip="prjWINEVER/src/static/css/css_exwine_index.css" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
-<editorState selectionHorizontalPixel="0" selectionLength="18" selectionOffset="22284" selectionTopPixel="7040"/>
+<editorState selectionHorizontalPixel="0" selectionLength="26" selectionOffset="9442" selectionTopPixel="375"/>
 </editor>
 <editor id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="js_exwine.js" partName="js_exwine.js" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/javascript/js_exwine.js" title="js_exwine.js" tooltip="prjWINEVER/src/static/javascript/js_exwine.js" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/javascript/js_exwine.js"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1113" selectionTopPixel="366"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1468" selectionTopPixel="560"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_services.html" partName="exwine_info_services.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_info_services.html" title="exwine_info_services.html" tooltip="prjWINEVER/src/static/templates/exwine_info_services.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_info_services.html"/>
@@ -81,7 +81,7 @@
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_question_answer.html" partName="exwine_info_question_answer.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_info_question_answer.html" title="exwine_info_question_answer.html" tooltip="prjWINEVER/src/static/templates/exwine_info_question_answer.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_info_question_answer.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="56" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2221" selectionTopPixel="600"/>
 </editor>
 <editor id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views" path="D:/prjGoogleAppEngine/prjWINEVER/src/ctrl_views.py" title="ctrl_views" tooltip="prjWINEVER/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/ctrl_views.py"/>
@@ -316,160 +316,160 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" path="/prjWINEVER/src/static/javascript/js_exwine.js"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_index_2.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_info_question_answer.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" path="/prjWINEVER/src/static/javascript/js_exwine.js"/>
 </editors>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="112" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position/>
-</item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="112" y="0"/>
-</item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="122" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
+<item historyLabel="js_exwine.js" index="3">
 <position/>
 </item>
 <item historyLabel="exwine_base.html" index="1">
+<position info="not_deleted" x="3416" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="9303" y="108"/>
+</item>
+<item historyLabel="js_exwine.js" index="3">
+<position info="not_deleted" x="698" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
 <position/>
 </item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="103" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
+<item historyLabel="css_exwine_index.css" index="0">
 <position/>
 </item>
-<item historyLabel="css_exwine_index.css" index="2">
+<item historyLabel="exwine_info_question_answer.html" index="2">
 <position/>
 </item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2756" y="0"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
-<position/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2849" y="0"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
+<item historyLabel="css_exwine_index.css" index="0">
 <position/>
 </item>
 <item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2849" y="0"/>
+<position info="not_deleted" x="3416" y="0"/>
 </item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="1149" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2865" y="20"/>
-</item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="1143" y="0"/>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="1122" y="0"/>
 </item>
 <item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2865" y="20"/>
+<position info="not_deleted" x="3389" y="0"/>
 </item>
-<item historyLabel="css_exwine_index.css" index="2">
+<item historyLabel="css_exwine_index.css" index="0">
+<position/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
 <position/>
 </item>
 <item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2865" y="20"/>
+<position info="not_deleted" x="5591" y="10"/>
 </item>
-<item historyLabel="exwine_index_2.html" index="3">
-<position info="not_deleted" x="379" y="0"/>
-</item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="1143" y="0"/>
+<item historyLabel="js_exwine.js" index="3">
+<position info="not_deleted" x="698" y="0"/>
 </item>
 <item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2840" y="0"/>
+<position info="not_deleted" x="6586" y="0"/>
 </item>
-<item historyLabel="js_exwine.js" index="0">
-<position/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
-<position/>
-</item>
-<item historyLabel="exwine_index_2.html" index="3">
-<position info="not_deleted" x="250" y="0"/>
-</item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="979" y="0"/>
-</item>
-<item historyLabel="exwine_index_2.html" index="3">
-<position info="not_deleted" x="250" y="0"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
-<position/>
-</item>
-<item historyLabel="exwine_index_2.html" index="3">
-<position info="not_deleted" x="250" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="5529" y="0"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
+<item historyLabel="css_exwine_index.css" index="0">
 <position/>
 </item>
 <item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2943" y="0"/>
+<position info="not_deleted" x="6586" y="0"/>
 </item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="835" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2943" y="0"/>
-</item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="1113" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2725" y="18"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
+<item historyLabel="css_exwine_index.css" index="0">
 <position/>
 </item>
-<item historyLabel="exwine_index_2.html" index="3">
-<position info="not_deleted" x="250" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2865" y="20"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
+<item historyLabel="exwine_info_question_answer.html" index="2">
 <position/>
 </item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2965" y="0"/>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11297" y="0"/>
 </item>
-<item historyLabel="css_exwine_index.css" index="2">
-<position info="not_deleted" x="3962" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2965" y="0"/>
-</item>
-<item historyLabel="exwine_index_2.html" index="3">
-<position info="not_deleted" x="250" y="0"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="2">
-<position info="not_deleted" x="22284" y="18"/>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="807" y="0"/>
 </item>
 <item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2965" y="0"/>
+<position info="not_deleted" x="3387" y="0"/>
 </item>
-<item historyLabel="js_exwine.js" index="0">
-<position info="not_deleted" x="1113" y="0"/>
+<item historyLabel="js_exwine.js" index="3">
+<position info="not_deleted" x="1468" y="0"/>
 </item>
-<item active="true" historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="2965" y="0"/>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="590" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11297" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11297" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="2124" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11177" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="1407" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="2211" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11251" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="2211" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11358" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="678" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11362" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="2221" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11362" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="2211" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11362" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="2211" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="11183" y="0"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position/>
+</item>
+<item historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="9442" y="26"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="2">
+<position info="not_deleted" x="2221" y="0"/>
+</item>
+<item historyLabel="exwine_base.html" index="1">
+<position info="not_deleted" x="1197" y="0"/>
+</item>
+<item active="true" historyLabel="css_exwine_index.css" index="0">
+<position info="not_deleted" x="9442" y="26"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -490,6 +490,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="hawley_wines.jpg" tooltip="prjWINEVER/src/static/images/hawley_wines.jpg">
+<persistable path="/prjWINEVER/src/static/images/hawley_wines.jpg"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="arrow_up_new.png" tooltip="prjWINEVER/src/static/images/arrow_up_new.png">
 <persistable path="/prjWINEVER/src/static/images/arrow_up_new.png"/>
 </file>
@@ -531,9 +534,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" name="css_exwine_index.css" tooltip="prjWINEVER/src/static/css/css_exwine_index.css">
 <persistable path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index_2.html" tooltip="prjWINEVER/src/static/templates/exwine_index_2.html">
-<persistable path="/prjWINEVER/src/static/templates/exwine_index_2.html"/>
 </file>
 </mruList>
 </workbench>
