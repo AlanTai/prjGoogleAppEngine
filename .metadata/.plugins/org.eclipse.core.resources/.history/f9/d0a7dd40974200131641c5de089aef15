@@ -38,8 +38,6 @@ $(document).ready(function() {
 			else{
 				$('#container_toggle_btn').attr('src','/img/arrow_down_new.png');
 			}
-			
-			toggle_height();
 		});
 		
 
@@ -83,8 +81,6 @@ function toggle_height(){
 	info_area_heigh = parseInt(info_area_heigh);
 	var contact_area_heigh = $('#contact_area').css('height');
 	contact_area_heigh = parseInt(contact_area_heigh);
-	var container_heigh = $('#container').css('height');
-	container_heigh = parseInt(container_heigh);
 	
 	var meta_page_tag = $('meta[name=page_tag]');
 	var page_tag = meta_page_tag.attr('content');
@@ -98,13 +94,13 @@ function toggle_height(){
 		}*/
 	}
 	else{
-		if((container_heigh<74) || (info_area_heigh>35 || contact_area_heigh>35)){
+		if(info_area_heigh>35 || contact_area_heigh>35){
 			$('#logistics_process').animate({paddingTop: '10px'},1000);
-			$('#main_container').animate({top: '285px'},800);
+			$('#container').animate({top: '285px'},800);
 		}
 		else{
-			$('#logistics_process').animate({paddingTop: '85px'},1000);
-			$('#main_container').animate({top: '350px'},800);
+			$('#logistics_process').animate({paddingTop: '75px'},1000);
+			$('#container').animate({top: '340px'},800);
 		}
 	}
 }
