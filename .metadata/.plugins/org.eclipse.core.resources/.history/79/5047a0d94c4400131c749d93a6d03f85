@@ -24,7 +24,8 @@
 </head>
 <body>
 	<!-- top bar -->
-	<div id="main_page_popup_txt" class="popup_txt">Go
+	<div id="main_page_popup_txt"
+		style="position: absolute; display: none; background: #fff; color: #353535; border: none; padding: 3px 5px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 0 0 1px 1px #bbb; -webkit-box-shadow: 0 0 1px 1px #bbb; box-shadow: 0 0 1px 1px #bbb; z-index: 101;">Go
 		back to home page</div>
 	<div id="top_info_bar">
 		<!-- search block -->
@@ -71,7 +72,8 @@
 	{% endblock %}
 
 
-	<div id="container_toggle_btn_popup_txt" class="popup_txt">
+	<div id="container_toggle_btn_popup_txt"
+		style="position: absolute; display: none; background: #fff; color: #353535; border: none; padding: 3px 5px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; -moz-box-shadow: 0 0 1px 1px #bbb; -webkit-box-shadow: 0 0 1px 1px #bbb; box-shadow: 0 0 1px 1px #bbb; z-index: 100;">
 		Information Lists</div>
 
 	<!-- Links -->
