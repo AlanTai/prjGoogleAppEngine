@@ -461,7 +461,7 @@
 	.title_block>span {
 		margin: auto;
 	}
-	.online_map {
+	.map {
 		display: inline-block;
 		vertical-align: top;
 		width: 550px;
