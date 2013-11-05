@@ -8,6 +8,7 @@ import webapp2
 import jinja2
 import os
 from google.appengine.api import users
+from google.appengine.api import mail
 import json
 
 from app_dict import key_value
@@ -70,6 +71,21 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
         
         template = jinja_environment.get_template(info_page)
         self.response.out.write(template.render(template_values))
+        
+#contact page dispatcher
+class ContactPageDispatcher(webapp2.RequestHandler):
+    def post(self):
+        receiver_address = self.request.get('receiver_address')
+        sender_address = ''
+        subject = ''
+        body = ''
+        
+        if not mail.is_email_valid(receiver_address):
+            #response invalid information back to webpage
+            return
+        else:
+            mail.send_mail(sender_address, receiver_address, subject, body)
+            return
         
 
 #get users info

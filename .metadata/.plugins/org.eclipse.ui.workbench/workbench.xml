@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="51" version="2.0">
+<workbench progressCount="80" version="2.0">
 <workbenchAdvisor/>
 <window height="467" maximized="true" width="1208" x="170" y="369">
 <fastViewData fastViewLocation="1024"/>
@@ -51,9 +51,9 @@
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_base.html" partName="exwine_base.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_base.html" title="exwine_base.html" tooltip="prjWINEVER/src/static/templates/exwine_base.html" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_base.html" partName="exwine_base.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_base.html" title="exwine_base.html" tooltip="prjWINEVER/src/static/templates/exwine_base.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2819" selectionTopPixel="960"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2819" selectionTopPixel="740"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_index_2.html" partName="exwine_index_2.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_index_2.html" title="exwine_index_2.html" tooltip="prjWINEVER/src/static/templates/exwine_index_2.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_index_2.html"/>
@@ -61,27 +61,27 @@
 </editor>
 <editor id="org.eclipse.wst.css.core.csssource.source" name="css_exwine_index.css" partName="css_exwine_index.css" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/css/css_exwine_index.css" title="css_exwine_index.css" tooltip="prjWINEVER/src/static/css/css_exwine_index.css" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
-<editorState selectionHorizontalPixel="0" selectionLength="9" selectionOffset="3312" selectionTopPixel="1110"/>
+<editorState selectionHorizontalPixel="0" selectionLength="10" selectionOffset="20412" selectionTopPixel="6660"/>
 </editor>
 <editor id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="js_exwine.js" partName="js_exwine.js" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/javascript/js_exwine.js" title="js_exwine.js" tooltip="prjWINEVER/src/static/javascript/js_exwine.js" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/javascript/js_exwine.js"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1468" selectionTopPixel="560"/>
 </editor>
-<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_services.html" partName="exwine_info_services.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_info_services.html" title="exwine_info_services.html" tooltip="prjWINEVER/src/static/templates/exwine_info_services.html" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_services.html" partName="exwine_info_services.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_info_services.html" title="exwine_info_services.html" tooltip="prjWINEVER/src/static/templates/exwine_info_services.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_info_services.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="58" selectionTopPixel="280"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3793" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_logistics.html" partName="exwine_info_logistics.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_info_logistics.html" title="exwine_info_logistics.html" tooltip="prjWINEVER/src/static/templates/exwine_info_logistics.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_info_logistics.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="58" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="3793" selectionOffset="0" selectionTopPixel="1575"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_logistics_requirement.html" partName="exwine_info_logistics_requirement.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_info_logistics_requirement.html" title="exwine_info_logistics_requirement.html" tooltip="prjWINEVER/src/static/templates/exwine_info_logistics_requirement.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_info_logistics_requirement.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="56" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3793" selectionTopPixel="1575"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_info_question_answer.html" partName="exwine_info_question_answer.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_info_question_answer.html" title="exwine_info_question_answer.html" tooltip="prjWINEVER/src/static/templates/exwine_info_question_answer.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_info_question_answer.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2221" selectionTopPixel="600"/>
+<editorState selectionHorizontalPixel="0" selectionLength="3793" selectionOffset="0" selectionTopPixel="750"/>
 </editor>
 <editor id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views" path="D:/prjGoogleAppEngine/prjWINEVER/src/ctrl_views.py" title="ctrl_views" tooltip="prjWINEVER/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/ctrl_views.py"/>
@@ -322,37 +322,12 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_info_services.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_info_logistics.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_info_question_answer.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_info_logistics_requirement.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_info_logistics.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_info_services.html"/>
 </editors>
-<item historyLabel="css_exwine_index.css" index="0">
-<position/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="3416" y="0"/>
-</item>
-<item historyLabel="exwine_info_question_answer.html" index="2">
-<position info="not_deleted" x="1122" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="3389" y="0"/>
-</item>
-<item historyLabel="css_exwine_index.css" index="0">
-<position/>
-</item>
-<item historyLabel="exwine_info_question_answer.html" index="2">
-<position/>
-</item>
-<item historyLabel="css_exwine_index.css" index="0">
-<position/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="5591" y="10"/>
-</item>
-<item historyLabel="js_exwine.js" index="3">
-<position info="not_deleted" x="698" y="0"/>
-</item>
-<item historyLabel="exwine_base.html" index="1">
-<position info="not_deleted" x="6586" y="0"/>
-</item>
 <item historyLabel="css_exwine_index.css" index="0">
 <position/>
 </item>
@@ -470,8 +445,38 @@
 <item historyLabel="css_exwine_index.css" index="0">
 <position info="not_deleted" x="3312" y="9"/>
 </item>
-<item active="true" historyLabel="exwine_base.html" index="6">
+<item historyLabel="exwine_base.html" index="6">
 <position/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="7">
+<position/>
+</item>
+<item historyLabel="css_exwine_index.css" index="8">
+<position/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="7">
+<position info="not_deleted" x="2170" y="0"/>
+</item>
+<item historyLabel="css_exwine_index.css" index="8">
+<position info="not_deleted" x="20412" y="10"/>
+</item>
+<item historyLabel="exwine_info_question_answer.html" index="7">
+<position/>
+</item>
+<item historyLabel="exwine_info_logistics_requirement.html" index="9">
+<position/>
+</item>
+<item historyLabel="exwine_info_logistics.html" index="10">
+<position/>
+</item>
+<item historyLabel="exwine_info_services.html" index="11">
+<position info="not_deleted" x="0" y="3793"/>
+</item>
+<item historyLabel="exwine_info_logistics.html" index="10">
+<position/>
+</item>
+<item active="true" historyLabel="exwine_info_services.html" index="11">
+<position info="not_deleted" x="0" y="3793"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
