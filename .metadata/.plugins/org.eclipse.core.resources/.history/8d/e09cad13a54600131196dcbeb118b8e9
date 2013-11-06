@@ -1,0 +1,91 @@
+{% extends "exwine_base.html"%} {% block main_content %}
+
+<p style="height: 45px;"></p>
+
+<div style="margin: 10px auto; text-align: center;">
+
+	<div class="link_page_content link_page_content_gradient link_page_content_main">
+		<div style="display: block;">
+			<p class="link_page_content_title">WINEver</p>
+			<div
+				style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
+				<span>Sender:</span> <input id="sender" type="text" />
+				<span>Receiver:</span> <input id="receiver" type="text">
+				<span>Subject:</span> <input id="subject" type="text">
+				<span>Body:</span> <input id="body" type="text" />
+			</div>
+			<button class="send_email">Send</button>
+		</div>
+	</div>
+
+
+	<div class="link_page_content link_page_content_main">
+		<div style="height: 300px; display: inline-block ; vertical-align: top;">
+			<p>Address:</p>
+		</div>
+		<div id="online_map" class="online_map"></div>
+	</div>
+
+
+</div>
+
+
+
+<script type="text/javascript">
+	var address = 'hawley winery';
+	var winever_icon = L.icon({
+		iconUrl : '/leaflet/images/winever_logo_map_marker_pin.png',
+		shadowUrl : '/leaflet/images/marker-shadow.png',
+
+		iconSize : [ 50, 50 ],
+		shadowSize : [ 40, 40 ],
+		iconAnchor : [ 25, 49 ],
+		shadowAnchor : [ 12, 37 ],
+		popupAnchor : [ -3, -40 ]
+	});
+
+	$
+			.getJSON(
+					'http://nominatim.openstreetmap.org/search?format=json&limit=1&q='
+							+ address,
+					function(data) {
+
+						$
+								.each(
+										data,
+										function(key, val) {
+											var map = L
+													.map('online_map')
+													.setView(
+															[ val.lat, val.lon ],
+															17);
+
+											// add an OpenStreetMap tile layer
+											L
+													.tileLayer(
+															'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+															{
+																attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+															}).addTo(map);
+
+											// add a marker in the given location, attach some popup content to it and open the popup
+											L
+													.marker(
+															[ val.lat, val.lon ],
+															{
+																icon : winever_icon
+															})
+													.addTo(map)
+													.bindPopup(
+															'Hawley Winery Tasting Room, located in downtown Healdsburg <br>'
+																	+ 'Address:  36 North St Healdsburg, CA 95448 <br>'
+																	+ 'Phone: 707-431-2705');
+
+										});
+
+					});
+</script>
+
+
+
+{% endblock %}

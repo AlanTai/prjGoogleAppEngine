@@ -75,21 +75,28 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
 #contact page dispatcher
 class ContactPageDispatcher(webapp2.RequestHandler):
     def post(self):
+        ajax_data = {'email_confirmation':'unknown'}
         if self.request.get('fmt') == 'json':
             receiver_address = self.request.get('receiver_address')
             sender_address = self.request.get('sender_address')
             subject = self.request.get('subject')
             body = self.request.get('body')
+            
+            #pass info. to email function
+            result = send_email(receiver_address, sender_address, subject, body)
+            
+            ajax_data['email_confirmation'] = result['email_status']
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
         else:
+            ajax_data['email_confirmation'] = 'wrong_data_format'
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
             return
         
-        if not mail.is_email_valid(receiver_address):
-            #response invalid information back to webpage
-            return
-        else:
-            mail.send_mail(sender_address, receiver_address, subject, body)
-            return
         
+    #dispatching request
     def get(self):
         
         #default info
@@ -113,6 +120,22 @@ class ContactPageDispatcher(webapp2.RequestHandler):
         
         template = jinja_environment.get_template(contact_page)
         self.response.out.write(template.render(template_values))
+
+#send email
+def send_email(receiver, sender, subject, body):
+    
+    result = {'email_status':'unknown'}
+    if not mail.is_email_valid(receiver):
+        #response invalid information back to webpage
+        result['email_status'] = 'invalid_email'
+    else:
+        try:
+            mail.send_mail(sender, receiver, subject, body)
+            result['email_status'] = 'success'
+        except:
+            result['email_status'] = 'fail'
+    
+    return result
 
 #get users info
 def get_users_info(self,users):

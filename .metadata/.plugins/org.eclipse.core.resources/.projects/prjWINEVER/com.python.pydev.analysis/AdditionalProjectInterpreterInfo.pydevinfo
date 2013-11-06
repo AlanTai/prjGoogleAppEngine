@@ -14,7 +14,7 @@ app_dict|0|D:\prjGoogleAppEngine\prjWINEVER\src\app_dict.py
 3=ContactPageDispatcher
 -- END DICTIONARY
 -- START TREE 1
-11
+12
 !<m|0|
 aja|0|
 app|1|app!11@
@@ -24,6 +24,7 @@ get|1|get_users_info!10@
 inf|1|InfoPageDispatcher!9@
 jin|1|jinja_environment!11@
 key|1|key_value!19@
+sen|1|send_email!10@
 url|0|
 use|0|
 -- END TREE

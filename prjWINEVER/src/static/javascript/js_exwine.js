@@ -61,11 +61,14 @@ $(document).ready(function() {
 	//main page link
 	$('#main_page').on('click',go_to_main_page);
 	
-	//ajax test
+	//send email
+	$('.send_email').on('click',send_email)
+	
+	//save like record
 	$('.save_favorite_btn').on('click',handleClick);
 });
 
-//ajax text
+/*save like record*/
 function handleClick(e){
 	$.ajax('/info_page_dispatcher',{
 		type: 'POST',
@@ -79,7 +82,28 @@ function handleClick(e){
 function showData(data){
 	alert(data.submission+'!'+' This winery was saved to your favorite!');
 }
-//end of ajax test
+/*end of save like record*/
+
+/*send email*/
+function send_email(e){
+	$.ajax('/contact_page_dispatcher',{
+		type: 'POST',
+		data: {
+			fmt: 'json',
+			receiver_address: 'invisible_alan@hotmail.com',
+			sender_address: 'rainman.tai@gmail.com',
+			subject: 'email test',
+			body: 'email function test'
+		},
+		success: show_message
+	});
+}
+
+function show_message(data){
+	alert(data.email_confirmation);
+}
+/*end of send email*/
+
 
 //go to main page
 function go_to_main_page(){

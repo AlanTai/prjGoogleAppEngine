@@ -1,0 +1,154 @@
+#-*- coding: utf-8 -*-
+'''
+Created on Oct 1, 2013
+
+@author: Alan Tai
+'''
+import webapp2
+import jinja2
+import os
+from google.appengine.api import users
+from google.appengine.api import mail
+import json
+
+from app_dict import key_value
+
+jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates'))
+
+#default index page
+class ExWINE(webapp2.RequestHandler):
+    def get(self):
+        
+        user_info = get_users_info(self,users)
+            
+        template_values = {
+                           'title' : key_value.get('index_title'),
+                           'page_tag': key_value.get('page_tag_index')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(key_value.get('index_page'))
+        self.response.out.write(template.render( template_values))
+        
+#info. page dispatcher
+class InfoPageDispatcher(webapp2.RedirectHandler):
+    def post(self):
+        if self.request.get('fmt') == 'json':
+            ajax_data = {'submission':'Done'}
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+    
+    def get(self):
+        
+        #default info
+        user_info = get_users_info(self,users)
+        
+        info_page = key_value.get('index_page')
+        title_page = key_value.get('index_title')
+        request_page = self.request.get('info_page_request')
+        
+        if request_page:
+            
+            if request_page == key_value.get('request_page_services'):
+                info_page = key_value.get('service_page')
+                title_page = key_value.get('service_title')
+                
+            elif request_page == key_value.get('request_page_logistics'):
+                info_page = key_value.get('logistics_page')
+                title_page = key_value.get('logistics_title')
+                
+            elif request_page == key_value.get('request_page_logistics_requirement'):
+                info_page = key_value.get('logistics_requirement_page')
+                title_page = key_value.get('logistics_requirement_title')
+                
+            elif request_page == key_value.get('request_page_question_answer'):
+                info_page = key_value.get('question_answer_page')
+                title_page = key_value.get('question_answer_title')
+            
+        template_values = {'title': title_page,
+                           'page_tag': key_value.get('page_tag_link_page') }
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(info_page)
+        self.response.out.write(template.render(template_values))
+        
+#contact page dispatcher
+class ContactPageDispatcher(webapp2.RequestHandler):
+    def post(self):
+        ajax_data = {'email_confirmation':'unknown'}
+        if self.request.get('fmt') == 'json':
+            receiver_address = self.request.get('receiver_address')
+            sender_address = self.request.get('sender_address')
+            subject = self.request.get('subject')
+            body = self.request.get('body')
+            
+            result = send_email(receiver_address, sender_address, subject, body)
+            
+            ajax_data['email_confirmation'] = 'success'
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+        else:
+            ajax_data['email_confirmation'] = 'wrong_data_format'
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+        
+        
+    #dispatching request
+    def get(self):
+        
+        #default info
+        user_info = get_users_info(self,users)
+        request_page = self.request.get('contact_info_request')
+        
+        contact_page = key_value.get('index_page')
+        title_page = key_value.get('index_title')
+        
+        if request_page:
+            if request_page == key_value.get('request_page_contact_exshipper'):
+                contact_page = key_value.get('contact_exshipper_page')
+                title_page = key_value.get('contact_exshipper_title')
+            elif request_page == key_value.get('request_page_contact_winever'):
+                contact_page = key_value.get('contact_winever_page')
+                title_page = key_value.get('contact_winever_title')
+        
+        template_values = {'title': title_page,
+                           'page_tag':key_value.get('page_tag_link_page')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(contact_page)
+        self.response.out.write(template.render(template_values))
+
+#send email
+def send_email(receiver, sender, subject, body):
+    
+    values = {}
+    if not mail.is_email_valid(receiver):
+        #response invalid information back to webpage
+        return
+    else:
+        mail.send_mail(sender, receiver, subject, body)
+        return
+    
+    return values
+
+#get users info
+def get_users_info(self,users):
+    if users.get_current_user():
+        user_account = users.get_current_user()
+        url = users.create_logout_url(self.request.uri)
+        url_linktxt = key_value.get('logout_txt')
+    else:
+        user_account = key_value.get('unknown_user_txt')
+        url = users.create_login_url(self.request.uri)
+        url_linktxt = key_value.get('login_txt')
+        
+    values = {
+              'user_account': user_account,
+              'url': url,
+              'url_linktxt': url_linktxt}
+    return values
+
+#set url
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher)], debug=True)
