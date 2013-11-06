@@ -8,10 +8,10 @@ app_dict|0|D:\prjGoogleAppEngine\prjWINEVER\src\app_dict.py
 -- START DICTIONARY
 5
 1=ctrl_views
-3=InfoPageDispatcher
-4=ExWINE
+4=InfoPageDispatcher
+5=ExWINE
 2=app_dict
-5=ContactPageDispatcher
+3=ContactPageDispatcher
 -- END DICTIONARY
 -- START TREE 1
 11
@@ -31,6 +31,6 @@ use|0|
 4
 !<m|0|
 app|0|
-get|2|get!3&10@get!4&10@
-pos|2|post!5&10@post!3&10@
+get|3|get!3&10@get!4&10@get!5&10@
+pos|2|post!3&10@post!4&10@
 -- END TREE

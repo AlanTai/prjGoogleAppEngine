@@ -75,10 +75,13 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
 #contact page dispatcher
 class ContactPageDispatcher(webapp2.RequestHandler):
     def post(self):
-        receiver_address = self.request.get('receiver_address')
-        sender_address = ''
-        subject = ''
-        body = ''
+        if self.request.get('fmt') == 'json':
+            receiver_address = self.request.get('receiver_address')
+            sender_address = self.request.get('sender_address')
+            subject = self.request.get('subject')
+            body = self.request.get('body')
+        else:
+            return
         
         if not mail.is_email_valid(receiver_address):
             #response invalid information back to webpage
@@ -87,6 +90,29 @@ class ContactPageDispatcher(webapp2.RequestHandler):
             mail.send_mail(sender_address, receiver_address, subject, body)
             return
         
+    def get(self):
+        
+        #default info
+        user_info = get_users_info(self,users)
+        request_page = self.request.get('contact_info_request')
+        
+        contact_page = key_value.get('index_page')
+        title_page = key_value.get('index_title')
+        
+        if request_page:
+            if request_page == key_value.get('request_page_contact_exshipper'):
+                contact_page = key_value.get('contact_exshipper_page')
+                title_page = key_value.get('contact_exshipper_title')
+            elif request_page == key_value.get('request_page_contact_winever'):
+                contact_page = key_value.get('contact_winever_page')
+                title_page = key_value.get('contact_winever_title')
+        
+        template_values = {'title': title_page,
+                           'page_tag':key_value.get('page_tag_link_page')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(contact_page)
+        self.response.out.write(template.render(template_values))
 
 #get users info
 def get_users_info(self,users):
@@ -106,4 +132,4 @@ def get_users_info(self,users):
     return values
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher)], debug=True)

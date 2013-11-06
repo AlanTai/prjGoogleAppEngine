@@ -11,18 +11,27 @@ key_value = {
              'logistics_requirement_title':'ExWINE Logistics Requirement',
              'question_answer_title':'ExWINE Question & Answer',
              
-             #html name
+             'contact_exshipper_title':'Contact ExShipper',
+             'contact_winever_title':'Contact WINEver',
+             
+             #page name (html file path)
              'index_page':'exwine_index_2.html',
              'service_page':'exwine_info_services.html',
              'logistics_page':'exwine_info_logistics.html',
              'logistics_requirement_page':'exwine_info_logistics_requirement.html',
              'question_answer_page':'exwine_info_question_answer.html',
              
+             'contact_exshipper_page':'exwine_contact_exshipper.html',
+             'contact_winever_page':'exwine_contact_winever.html',
+             
              #request page
              'request_page_services':'services',
              'request_page_logistics':'logistics',
              'request_page_logistics_requirement':'logistics_requirement',
              'request_page_question_answer':'question_answer',
+             
+             'request_page_contact_exshipper':'contact_exshipper',
+             'request_page_contact_winever':'contact_winever',
              
              #page tag
              'page_tag_index':'index',
