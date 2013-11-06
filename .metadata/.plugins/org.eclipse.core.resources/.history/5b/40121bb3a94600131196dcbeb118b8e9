@@ -477,7 +477,6 @@
 	}
 	.email_info>div>span{
 		width: 100px;
-		color: #686868;
 	}
 	.parting_line_white {
 		height: 1px;

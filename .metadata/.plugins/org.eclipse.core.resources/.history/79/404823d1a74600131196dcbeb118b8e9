@@ -475,9 +475,8 @@
 		box-shadow: 0 0 1px 1px #fff;
 		z-index: 10;
 	}
-	.email_info>div>span{
-		width: 100px;
-		color: #686868;
+	.email{
+		
 	}
 	.parting_line_white {
 		height: 1px;

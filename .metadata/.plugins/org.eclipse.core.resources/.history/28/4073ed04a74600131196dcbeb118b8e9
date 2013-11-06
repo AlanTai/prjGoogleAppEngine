@@ -7,13 +7,13 @@
 	<div class="link_page_content link_page_content_gradient link_page_content_main">
 		<div style="display: block;">
 			<p class="link_page_content_title">WINEver</p>
-			<div id="wiever_email_info" class="email_info"
+			<div id=""
 				style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
 				<div><span>Sender:</span> <input id="sender" type="text" /></div>
 				<div><span>Subject:</span> <input id="subject" type="text"></div>
 				<div><span>Body:</span> <input id="body" type="text" /></div>
 			</div>
-			<button id="winever_email_btn" class="send_email">Send</button>
+			<button id="winever_email" class="send_email">Send</button>
 		</div>
 	</div>
 
