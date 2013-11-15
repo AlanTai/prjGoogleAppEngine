@@ -62,7 +62,7 @@ $(document).ready(function() {
 	$('#main_page').on('click',go_to_main_page);
 	
 	//send email
-	$('.send_email').on('click',send_email)
+	$('#send_email').on('click',send_email);
 	
 	//save like record
 	$('.save_favorite_btn').on('click',handleClick);

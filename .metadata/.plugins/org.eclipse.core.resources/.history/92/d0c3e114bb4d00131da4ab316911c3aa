@@ -475,16 +475,10 @@
 		box-shadow: 0 0 1px 1px #fff;
 		z-index: 10;
 	}
-	.email_info span {
+	.email_info label {
 		color: #353535;
-		font-size: 14px;
+		font-size: 13px;
 		text-align: right;
-		width: 100px;
-	}
-	.email_info_row{
-		width: 300px;
-	}
-	.send_email_btn{
 		width: 100px;
 	}
 	.company_info {
