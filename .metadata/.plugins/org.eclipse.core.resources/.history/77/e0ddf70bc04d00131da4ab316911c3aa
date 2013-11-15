@@ -475,21 +475,15 @@
 		box-shadow: 0 0 1px 1px #fff;
 		z-index: 10;
 	}
-	.email_info {
-		width: 400px;
-		margin: 0px auto;
-	}
 	.email_info span {
 		color: #353535;
 		font-size: 14px;
 		text-align: right;
-		width: 80px;
-		display: inline-block;
-		margin: 2px 2px;
+		width: 30%;
 	}
-	.email_info input {
-		display: inline-block;
-		margin: 2px 2px;
+	.email_info_row {
+		padding: 2px auto;
+		width: 300px;
 	}
 	.send_email_btn {
 		width: 100px;

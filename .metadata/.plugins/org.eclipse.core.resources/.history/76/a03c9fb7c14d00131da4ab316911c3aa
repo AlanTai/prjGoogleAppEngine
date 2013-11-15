@@ -8,22 +8,22 @@
 		class="link_page_content link_page_content_gradient link_page_content_main">
 		<div style="display: block;">
 			<p class="link_page_content_title">Contact</p>
-			<div id="email_submission" class="email_info"
-				style="">
-				<div>
+			<fieldset id="email_submission" class="email_info"
+				style="width: 400px; margin: 0px auto;">
+				<div class="email_info_row">
 					<span>Sender:</span><input id="sender" type="text" />
 				</div>
 				<br />
-				<div>
+				<div class="email_info_row">
 					<span>Subject:</span><input id="subject" type="text">
 				</div>
 				<br />
-				<div>
+				<div class="email_info_row">
 					<span>Body:</span><input id="body" type="text" />
 				</div>
 				<br /> <input id="send_email" type="submit" name="submit"
 					value="Send" />
-			</div>
+			</fieldset>
 		</div>
 	</div>
 

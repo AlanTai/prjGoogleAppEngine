@@ -9,7 +9,7 @@
 		<div style="display: block;">
 			<p class="link_page_content_title">Contact</p>
 			<div id="email_submission" class="email_info"
-				style="">
+				style="width: 400px; margin: 0px auto;">
 				<div>
 					<span>Sender:</span><input id="sender" type="text" />
 				</div>
