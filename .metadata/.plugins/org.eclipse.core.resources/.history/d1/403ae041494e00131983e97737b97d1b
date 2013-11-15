@@ -11,15 +11,15 @@
 				Templates Found! {% endblock %}</p>
 			<div id="email_submission" class="email_info">
 				<div>
-					<span>Sender</span><input id="sender" class="email_info_input" type="text" />
+					<span>Sender:</span><input id="sender" type="text" />
 				</div>
 				<br />
 				<div>
-					<span>Subject</span><input id="subject" class="email_info_input" type="text">
+					<span>Subject:</span><input id="subject" type="text">
 				</div>
 				<br />
 				<div>
-					<span>Body</span>
+					<span>Body:</span>
 					<textarea id="body"></textarea>
 				</div>
 				<div>
