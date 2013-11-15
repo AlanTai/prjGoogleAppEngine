@@ -9,7 +9,7 @@
 		<div style="display: block;">
 			<p class="link_page_content_title">
 			{% block contact %}
-			No Templates Found!
+			<p>No Templates Found!</p>
 			{% endblock %}
 			</p>
 			<div id="email_submission" class="email_info" style="">

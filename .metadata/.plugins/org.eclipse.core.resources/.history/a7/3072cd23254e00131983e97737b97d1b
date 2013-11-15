@@ -483,10 +483,9 @@
 		color: #353535;
 		font-size: 14px;
 		text-align: right;
-		width: 60px;
+		width: 80px;
 		display: inline-block;
 		margin: 2px 2px;
-		vertical-align: top;
 	}
 	.email_info input {
 		display: inline-block;
@@ -496,7 +495,7 @@
 	.email_info textarea {
 		font-size:13px;
 		rows: 10;
-		width: 300px;
+		cols: 60;
 		
 	}
 	.send_email_btn {

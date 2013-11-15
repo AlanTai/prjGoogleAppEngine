@@ -7,11 +7,7 @@
 	<div
 		class="link_page_content link_page_content_gradient link_page_content_main">
 		<div style="display: block;">
-			<p class="link_page_content_title">
-			{% block contact %}
-			No Templates Found!
-			{% endblock %}
-			</p>
+			<p class="link_page_content_title">Contact</p>
 			<div id="email_submission" class="email_info" style="">
 				<div>
 					<span>Sender:</span><input id="sender" type="text" />
@@ -22,7 +18,7 @@
 				</div>
 				<br />
 				<div>
-					<span>Body:</span><textarea id="body" style="height: 200px;"></textarea>
+					<span>Body:</span><input id="body" type="text" style="height: 200px;" />
 				</div>
 			</div>
 

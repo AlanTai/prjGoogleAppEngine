@@ -483,7 +483,7 @@
 		color: #353535;
 		font-size: 14px;
 		text-align: right;
-		width: 60px;
+		width: 80px;
 		display: inline-block;
 		margin: 2px 2px;
 		vertical-align: top;
