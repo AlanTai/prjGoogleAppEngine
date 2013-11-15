@@ -490,7 +490,6 @@
 	.email_info input {
 		display: inline-block;
 		margin: 2px 2px;
-		width: 300px;
 	}
 	.send_email_btn {
 		width: 100px;

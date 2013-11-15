@@ -8,7 +8,8 @@
 		class="link_page_content link_page_content_gradient link_page_content_main">
 		<div style="display: block;">
 			<p class="link_page_content_title">Contact</p>
-			<div id="email_submission" class="email_info" style="">
+			<div id="email_submission" class="email_info"
+				style="">
 				<div>
 					<span>Sender:</span><input id="sender" type="text" />
 				</div>
@@ -20,10 +21,9 @@
 				<div>
 					<span>Body:</span><input id="body" type="text" />
 				</div>
+				<br /> <input id="send_email" type="submit" name="submit"
+					value="Send" />
 			</div>
-
-			<br /> <input id="send_email" type="submit" name="submit"
-				value="Send" />
 		</div>
 	</div>
 
