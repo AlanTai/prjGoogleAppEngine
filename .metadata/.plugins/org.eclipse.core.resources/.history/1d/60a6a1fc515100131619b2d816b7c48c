@@ -5,5 +5,5 @@ Contact ExShipper
 {% endblock %}
 
 {% block company_info %}
-<p style="font-size: 22px;">ExShipper</p>
+<p>WINEver</p>
 {% endblock %}

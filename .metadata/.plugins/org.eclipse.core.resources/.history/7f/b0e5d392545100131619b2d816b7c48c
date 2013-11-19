@@ -1,5 +1,3 @@
-{% extends "exwine_info_page.html"%}
-
 {% block info_content %}
 <div
 	class="link_page_content link_page_content_gradient link_page_content_main">

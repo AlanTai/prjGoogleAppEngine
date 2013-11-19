@@ -521,7 +521,7 @@
 		margin: 2px auto;
 		padding: 2px 0px;
 		display: block;
-		font-size: 15px;
+		font-size: 14px;
 		-webkit-border-radius: 2px;
 		-moz-border-radius: 2px;
 		border-radius: 2px;
@@ -538,7 +538,7 @@
 	}
 	.send_email_btn:hover{
 		cursor: pointer;
-		color: #333;
+		color: #aaa;
 	}
 	.company_info {
 		display: inline-block;
