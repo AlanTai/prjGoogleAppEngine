@@ -529,16 +529,15 @@
 		border: none;
 		vertical-align:middle;
 		
-		background-color: transparent;
-		
-		color: #f00;
+		background-color: #eee;
+			
 		transition: color .2s ease-in-out;
 		-moz-transition: color .2s ease-in-out;
 		-webkit-transition: color .2s ease-in-out;
 	}
 	.send_email_btn:hover{
 		cursor: pointer;
-		color: #555;
+		color: #f00;
 	}
 	.company_info {
 		display: inline-block;

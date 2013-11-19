@@ -538,7 +538,7 @@
 	}
 	.send_email_btn:hover{
 		cursor: pointer;
-		color: #555;
+		color: #aaa;
 	}
 	.company_info {
 		display: inline-block;
