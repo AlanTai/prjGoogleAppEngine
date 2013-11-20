@@ -1,9 +1,71 @@
-{% extends "exwine_contact_page.html"%}
+{% extends "exwine_contact_page.html"%} {% block contact %} Contact
+ExShipper {% endblock %} {% block company_info %}
+<img alt="exshipper_logo" src="/img/exshipper.png"
+	style="height: 30px; margin: 5px auto;" />
+<p>
+	地址: <span>36 Avalon Drive, Daly City, CA 94015</span>
+</p>
+<p>
+	聯絡電話: <span>1-650-208-8292</span>
+</p>
+<p>專業的代購、代寄服務，讓您可以坐享家中購買到美國廉價的商品. 我們超低的服務費僅$8美元起，快速的轉寄時間只需1天，
+	我們還可以免費幫您寄存商品14天。 安心、快捷、妥當是我們的服務宗旨，請今天就與我們的客服部聯繫</p>
+{% endblock %} {% block company_location%}
+<div id="online_map" class="online_map"></div>
 
-{% block contact %}
-Contact ExShipper
-{% endblock %}
 
-{% block company_info %}
-<p style="font-size: 22px;">ExShipper</p>
+<script type="text/javascript">
+	var address = '36 Avalon Drive, Daly City, CA 94015';
+	var winever_icon = L.icon({
+		iconUrl : '/leaflet/images/winever_logo_map_marker_pin.png',
+		shadowUrl : '/leaflet/images/marker-shadow.png',
+
+		iconSize : [ 50, 50 ],
+		shadowSize : [ 40, 40 ],
+		iconAnchor : [ 25, 49 ],
+		shadowAnchor : [ 12, 37 ],
+		popupAnchor : [ -3, -40 ]
+	});
+
+	$
+			.getJSON(
+					'http://nominatim.openstreetmap.org/search?format=json&limit=1&q='
+							+ address,
+					function(data) {
+
+						$
+								.each(
+										data,
+										function(key, val) {
+											var map = L
+													.map('online_map')
+													.setView(
+															[ val.lat, val.lon ],
+															17);
+
+											// add an OpenStreetMap tile layer
+											L
+													.tileLayer(
+															'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+															{
+																attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+															}).addTo(map);
+
+											// add a marker in the given location, attach some popup content to it and open the popup
+											L
+													.marker(
+															[ val.lat, val.lon ],
+															{
+																icon : winever_icon
+															})
+													.addTo(map)
+													.bindPopup(
+															'ExShipper<br>'
+																	+ 'Address:  36 North St Healdsburg, CA 95448 <br>'
+																	+ 'Phone: 707-431-2705');
+
+										});
+
+					});
+</script>
 {% endblock %}

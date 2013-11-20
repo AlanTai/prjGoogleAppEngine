@@ -1,0 +1,9 @@
+{% extends "exwine_contact_page.html"%}
+
+{% block contact %}
+Contact WINEver
+{% endblock %}
+
+{% block company_info %}
+<p style="font-size: 22px;">WINEver</p>
+{% endblock %}

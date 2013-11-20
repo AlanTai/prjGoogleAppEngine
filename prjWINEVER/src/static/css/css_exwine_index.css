@@ -501,7 +501,7 @@
 	.email_info_input {
 		display: block;
 		margin: 2px auto;
-		padding: 2px 0px;
+		padding: 2px 2px;
 		width: 100%;
 		border: none;
 	}
@@ -511,7 +511,7 @@
 		width: 100%;
 		height: 200px;
 		margin: 2px auto;
-		padding: 2px 0px;
+		padding: 2px 2px;
 		font-size: 13px;
 		border: none;
 	}
@@ -532,13 +532,14 @@
 		background-color: transparent;
 		
 		color: #f00;
-		transition: color .1s ease-in-out;
-		-moz-transition: color .1s ease-in-out;
-		-webkit-transition: color .1s ease-in-out;
+		font-weight:normal;
+		transition: font-weight .5s ease-in-out;
+		-moz-transition: font-weight .5s ease-in-out;
+		-webkit-transition: font-weight .5s ease-in-out;
 	}
 	.send_email_btn:hover{
 		cursor: pointer;
-		color: #333;
+		font-weight: bold;
 	}
 	.company_info {
 		display: inline-block;
@@ -547,12 +548,6 @@
 		height: 300px;
 		margin: 8px 2px;
 		padding: 5px auto;
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		border-radius: 4px;
-		-moz-box-shadow: 0 0 1px 1px #fff;
-		-webkit-box-shadow: 0 0 1px 1px #fff;
-		box-shadow: 0 0 1px 1px #fff;
 		z-index: 10;
 		-webkit-border-radius: 4px;
 	}

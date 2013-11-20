@@ -1,0 +1,9 @@
+{% extends "exwine_contact_page.html"%} {% block contact %} Contact
+ExShipper {% endblock %} {% block company_info %}
+<p style="font-size: 22px; margin: 5px auto;">ExShipper</p>
+<img />
+<p>地址: 36 Avalon Drive, Daly City, CA 94015</p>
+<p>聯絡電話: 1-650-208-8292</p>
+<p>專業的代購、代寄服務，讓您可以坐享家中購買到美國廉價的商品. 我們超低的服務費僅$8美元起，快速的轉寄時間只需1天，
+我們還可以免費幫您寄存商品14天。 安心、快捷、妥當是我們的服務宗旨，請今天就與我們的客服部聯繫</p>
+{% endblock %}

@@ -1,0 +1,6 @@
+#Wed Nov 20 09:50:18 PST 2013
+__DEFAULT__=false
+org.eclipse.sdk.Eclipse.master=true
+org.eclipse.sdk.Google.master=true
+org.eclipse.help.ui.localSearch.master=true
+expression=company_info
