@@ -313,6 +313,7 @@
 	.link_page_content_main {
 		width: 90%;
 		min-width: 1200px;
+		height: 100%;
 		display: block;
 		padding-top: 10px;
 		padding-bottom: 5px;
@@ -329,6 +330,7 @@
 		color: #353535;
 		font-size: 22px;
 		font-weight: bold;
+		margin-top: 10px;
 		margin-bottom: 10px;
 		display: inline-block;
 	}
@@ -465,11 +467,11 @@
 		margin: auto;
 	}
 	.online_map {
-		display: inline-block;
+		display: block;
 		vertical-align: top;
-		width: 550px;
-		height: 300px;
-		margin: 8px 2px;
+		width: 400px;
+		height: 230px;
+		margin: 10px auto;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
 		border-radius: 4px;
@@ -479,12 +481,12 @@
 		z-index: 10;
 	}
 	.email_info {
-		width: 300px;
+		width: 400px;
 		margin: 0px auto;
 		padding: 0px 0px;
 	}
 	.email_info div {
-		width: 300px;
+		width: 400px;
 		padding: 2px 0px;
 		margin: 2px auto;
 		display: block;
@@ -504,6 +506,7 @@
 		padding: 2px 2px;
 		width: 100%;
 		border: none;
+		text-align: center;
 	}
 	.email_info textarea {
 		display: block;
@@ -542,11 +545,11 @@
 		font-weight: bold;
 	}
 	.company_info {
-		display: inline-block;
+		display: block;
 		vertical-align: top;
-		width: 550px;
-		height: 300px;
-		margin: 8px 2px;
+		width: 400px;
+		height: 100%;
+		margin: 8px auto;
 		padding: 5px auto;
 		z-index: 10;
 		-webkit-border-radius: 4px;
@@ -554,7 +557,9 @@
 	.company_info>p {
 		font-size: 14px;
 		display: block;
-		margin: 5px auto;
+		margin: 8px auto;
+		letter-spacing: 1px;
+		line-height: 18px;
 	}
 	.parting_line_white {
 		height: 1px;
