@@ -115,6 +115,10 @@
 		padding-left: 0px;
 		padding-right: 0px;
 		text-align: center;
+		background-color: #ffff45;
+		-moz-box-shadow: 0 0 1px 1px #ffff36;
+		-webkit-box-shadow: 0 0 1px 1px #ffff36;
+		box-shadow: 0 0 1px 1px #ffff36;
 		z-index: 1;
 	}
 	#container_toggle_btn:hover {
@@ -185,6 +189,9 @@
 		cursor: pointer;
 	}
 	.info_area {
+		-moz-box-shadow: 0 0 1px 1px #ffff36;
+		-webkit-box-shadow: 0 0 1px 1px #ffff36;
+		box-shadow: 0 0 1px 1px #ffff36;
 	}
 	.info_blocks {
 		width: 1230px;
@@ -215,6 +222,9 @@
 		background-color: transparent;
 	}
 	.contact_area {
+		-moz-box-shadow: 0 0 1px 1px #ffff36;
+		-webkit-box-shadow: 0 0 1px 1px #ffff36;
+		box-shadow: 0 0 1px 1px #ffff36;
 	}
 	.contact_block {
 		display: block;

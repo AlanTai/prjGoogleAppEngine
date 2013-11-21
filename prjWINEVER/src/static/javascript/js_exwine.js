@@ -132,7 +132,7 @@ function toggle_height(){
 		}*/
 	}
 	else{
-		if((container_heigh<74) || (info_area_heigh>35 || contact_area_heigh>35)){
+		if((container_heigh<84) || (info_area_heigh>35 || contact_area_heigh>35)){
 			$('#logistics_process').animate({paddingTop: '10px'},1000);
 			$('#main_container').animate({top: '285px'},800);
 		}

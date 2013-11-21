@@ -2,6 +2,7 @@
 WINEver {% endblock %} {% block company_info %}
 <img alt="winever_txt_logo" src="/img/winever_txt.png"
 	style="height: 30px; margin: 5px auto;" />
+
 <p>
 	聯絡電話: <span>1-650-208-8292</span>
 </p>

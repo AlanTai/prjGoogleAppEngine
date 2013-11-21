@@ -24,8 +24,8 @@
 </head>
 <body>
 	<!-- top bar -->
-	<div id="main_page_popup_txt" class="popup_txt">Go back to home
-		page</div>
+	<div id="main_page_popup_txt" class="popup_txt">Go
+		back to home page</div>
 	<div id="top_info_bar">
 		<!-- search block -->
 		<img id="main_page" data-tooltip="#main_page_popup_txt"
@@ -90,7 +90,12 @@
 		<div id="container" class="container">
 			<div id="info_area" class="info_area">
 				<!-- info. bar -->
-				<p id="info_title" class="title_block">服務資訊</p>
+				<div id="info_bar">
+					<!-- Parting Line -->
+					<div class="parting_line_white"></div>
+					<!-- End -->
+					<p id="info_title" class="title_block">服務資訊</p>
+				</div>
 				<!-- end of info bar -->
 
 				<!-- info_blocks -->
@@ -118,18 +123,20 @@
 			<div style="margin: 0px 0px; padding: 0px 0px; height: 2px;"></div>
 
 			<div id="contact_area" class="contact_area">
-				<p id="contact_title" class="title_block">連絡我們</p>
+				<div>
+					<!-- Parting Line -->
+					<div class="parting_line_white"></div>
+					<!-- End -->
+					<p id="contact_title" class="title_block">連絡我們</p>
+				</div>
+
 
 				<div id="contact_blocks"
 					style="padding-bottom: 15px; width: 300px; text-align: center; margin: 2px auto;">
-					<a
-						href="/contact_page_dispatcher?contact_info_request=contact_exshipper"
-						class="link_title">ExShipper</a>
+					<a href="/contact_page_dispatcher?contact_info_request=contact_exshipper" class="link_title">ExShipper</a>
 					<div class="parting_line_white"></div>
 
-					<a
-						href="/contact_page_dispatcher?contact_info_request=contact_winever"
-						class="link_title">WINEVER</a>
+					<a href="/contact_page_dispatcher?contact_info_request=contact_winever" class="link_title">WINEVER</a>
 					<div class="parting_line_white"></div>
 				</div>
 				<!-- end -->

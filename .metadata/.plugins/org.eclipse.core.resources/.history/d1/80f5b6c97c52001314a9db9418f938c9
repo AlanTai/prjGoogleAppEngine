@@ -185,6 +185,9 @@
 		cursor: pointer;
 	}
 	.info_area {
+		-moz-box-shadow: 0 0 1px 1px #ffff36;
+		-webkit-box-shadow: 0 0 1px 1px #ffff36;
+		box-shadow: 0 0 1px 1px #ffff36;
 	}
 	.info_blocks {
 		width: 1230px;
