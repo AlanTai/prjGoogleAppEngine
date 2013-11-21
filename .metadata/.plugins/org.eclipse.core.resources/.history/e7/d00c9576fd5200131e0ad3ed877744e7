@@ -39,7 +39,7 @@ $(document).ready(function() {
 	
 	//toggle button for information content
 	$('#container_toggle_btn').click(function() {
-		$('#container').slideToggle(800,function(){
+		$('#container').slideToggle(400,function(){
 			var img_src = $('#container_toggle_btn').attr('src');
 			if(img_src === '/img/arrow_down_new.png'){
 				$('#container_toggle_btn').attr('src','/img/arrow_up_new.png');

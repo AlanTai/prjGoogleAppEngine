@@ -496,12 +496,10 @@
 	}
 	.save_btn {
 		position: relative;
-		top:5px;
-		right:-100px;
 		width : 50px;
 		height: 50px;
+		padding: 2px auto;
 		font-size: 13px;
-		text-align:center;
 		-webkit-border-radius: 25px;
 		-moz-border-radius: 25px;
 		border-radius: 25px;
@@ -513,7 +511,7 @@
 		transition: font-weight .5s ease-in-out;
 		-moz-transition: font-weight .5s ease-in-out;
 		-webkit-transition: font-weight .5s ease-in-out;
-		z-index: 100;
+		width: 50px;
 	}
 	.save_btn:hover {
 		font-weight: 300;

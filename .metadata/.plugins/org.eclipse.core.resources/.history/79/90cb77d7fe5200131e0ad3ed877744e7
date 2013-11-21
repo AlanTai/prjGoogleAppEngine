@@ -3,10 +3,58 @@
 <p style="height: 45px;"></p>
 
 <div style="margin: 10px auto; text-align: center;">
+
 	{% block info_content %} {% endblock %}
-	<div id="online_map_winery" class="link_page_content link_page_content_main_info online_map_winery">
-	<input id="save_btn" class="save_btn" value="Save" />
+
+
+	<div id="online_map_winery" class="online_map_winery"></div>
+
+
+	<div class="link_page_content link_page_content_main_info">
+		<div
+			style="height: 300px; display: inline-block; vertical-align: top;">
+			<!--  -->
+			<div class="link_page_content link_page_content_minor">
+				<input type="button" id="sip_it_btn" value="Sip or Ship"
+					class="save_favorite_btn" />
+				<div style="display: inline-block; margin-top: 0px;">
+					<!-- Winever Logo -->
+					<img alt="winever_logo" src="/img/hawley.jpg"
+						style="width: 100%; margin: 0px auto;">
+				</div>
+
+				<div style="margin: 0px 5px;">
+					<p style="font-weight: bold; font-size: 14px">Hawley Winery</p>
+					<p style="font-size: 12px;">Hawley Winery is located on
+						Bradford Mountain, overlooking Dry Creek Valley. The winery sits
+						in the middle of the Hawley's 10 acre vineyard...</p>
+
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="link_page_content link_page_content_minor">
+				<input type="button" id="sip_it_btn" value="Sip or Ship"
+					class="save_favorite_btn" />
+				<div style="display: inline-block; margin-top: 0px;">
+					<!-- Winever Logo -->
+					<img alt="winever_logo" src="/img/hawley_wines.jpg"
+						style="width: 100%; margin: 0px auto;">
+				</div>
+
+				<div style="margin: 0px 5px;">
+					<p style="font-weight: bold; font-size: 14px;">Hawley Winery
+						Pinot Noir Oehlman Vineyard</p>
+					<p style="font-weight: normal; font-size: 12px;">The ripe fruit
+						was de-stemmed and crushed into small one-ton fermenters and
+						chilled using dry ice...</p>
+				</div>
+			</div>
+
+		</div>
 	</div>
+
+
 </div>
 
 

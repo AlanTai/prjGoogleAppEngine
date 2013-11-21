@@ -497,11 +497,10 @@
 	.save_btn {
 		position: relative;
 		top:5px;
-		right:-100px;
+		right:10px;
 		width : 50px;
 		height: 50px;
 		font-size: 13px;
-		text-align:center;
 		-webkit-border-radius: 25px;
 		-moz-border-radius: 25px;
 		border-radius: 25px;

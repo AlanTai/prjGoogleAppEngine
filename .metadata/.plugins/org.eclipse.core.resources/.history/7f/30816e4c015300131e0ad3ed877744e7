@@ -4,9 +4,7 @@
 
 <div style="margin: 10px auto; text-align: center;">
 	{% block info_content %} {% endblock %}
-	<div id="online_map_winery" class="link_page_content link_page_content_main_info online_map_winery">
-	<input id="save_btn" class="save_btn" value="Save" />
-	</div>
+	<div id="online_map_winery" class="link_page_content link_page_content_main_info online_map_winery"></div>
 </div>
 
 

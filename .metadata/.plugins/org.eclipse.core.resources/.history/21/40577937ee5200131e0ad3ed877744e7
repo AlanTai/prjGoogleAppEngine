@@ -2,7 +2,7 @@
 
 {% block info_content %}
 <div
-	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	class="link_page_content link_page_content_gradient link_page_content_main">
 	<div style="display: block;">
 		<p class="link_page_content_title">配送須知</p>
 		<div
