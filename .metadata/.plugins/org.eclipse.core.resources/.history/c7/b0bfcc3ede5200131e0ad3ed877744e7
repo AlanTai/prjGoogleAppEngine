@@ -300,7 +300,8 @@
 			endColorstr='#ffff00', GradientType=0 ); /* IE6-8 */
 	}
 	.link_page_content_main {
-		width: 460px;
+		width: 90%;
+		min-width: 1200px;
 		height: 100%;
 		display: block;
 		padding-top: 10px;
@@ -385,7 +386,7 @@
 		height: 30px;
 		text-align: center;
 		margin: 10px auto;
-		padding-left:6px;
+		padding-left:4px;
 		border: none;
 		letter-spacing: 6px;
 		vertical-align: middle;
@@ -409,7 +410,7 @@
 		margin: auto;
 	}
 	.online_map_winery {
-		display: inline-block;
+		display: block;
 		vertical-align: top;
 		width: 400px;
 		height: 230px;
@@ -422,7 +423,7 @@
 		box-shadow: 0 0 1px 1px #fff;
 		z-index: 10;
 	}
-	.online_map_company {
+	.online_map_self {
 		display: block;
 		vertical-align: top;
 		width: 400px;
@@ -470,7 +471,7 @@
 		width: 100%;
 		height: 200px;
 		margin: 2px auto;
-		padding: 5px 5px;
+		padding: 2px 2px;
 		font-size: 13px;
 		border: none;
 	}
@@ -478,17 +479,17 @@
 		width: 50px;
 		height: 50px;
 		margin: 2px auto;
-		padding: 2px auto;
+		padding: 2px 0px;
 		display: block;
 		font-size: 13px;
 		-webkit-border-radius: 25px;
 		-moz-border-radius: 25px;
 		border-radius: 25px;
-		border: solid 1px #f00;
+		border: solid 2px #f00;
 		vertical-align: middle;
 		background-color: transparent;
 		color: #f00;
-		font-weight: 900;
+		font-weight: 800;
 		transition: font-weight .5s ease-in-out;
 		-moz-transition: font-weight .5s ease-in-out;
 		-webkit-transition: font-weight .5s ease-in-out;
@@ -512,15 +513,9 @@
 		-webkit-border-radius: 4px;
 	}
 	.company_info>p {
-		font-size: 13px;
+		font-size: 14px;
 		display: block;
 		margin: 8px auto;
-		letter-spacing: 1px;
-		line-height: 18px;
-	}
-	.company_info>p>span {
-		font-size: 12px;
-		color:#555;
 		letter-spacing: 1px;
 		line-height: 18px;
 	}

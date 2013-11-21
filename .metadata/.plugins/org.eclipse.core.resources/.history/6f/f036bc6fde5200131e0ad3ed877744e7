@@ -1,7 +1,7 @@
 {% extends "exwine_contact_page.html"%} {% block contact %} Contact
-ExShipper {% endblock %} {% block company_info %}
-<img alt="exshipper_logo" src="/img/exshipper.png"
-	style="height: 35px; margin: 5px auto;" />
+WINEver {% endblock %} {% block company_info %}
+<img alt="winever_txt_logo" src="/img/winever_txt.png"
+	style="height: 30px; margin: 5px auto;" />
 <p>
 	聯絡電話: <span>1-650-208-8292</span>
 </p>
@@ -9,11 +9,11 @@ ExShipper {% endblock %} {% block company_info %}
 	地址: <span>36 Avalon Drive, Daly City, CA 94015</span>
 </p>
 {% endblock %} {% block company_location%}
-<div id="online_map" class="online_map_company"></div>
+<div id="online_map" class="online_map"></div>
 
 
 <script type="text/javascript">
-	var address = '36 Avalon Drive, Daly City, CA 94015';
+	var address = 'Millbrae, CA';
 	var winever_icon = L.icon({
 		iconUrl : '/leaflet/images/winever_logo_map_marker_pin.png',
 		shadowUrl : '/leaflet/images/marker-shadow.png',

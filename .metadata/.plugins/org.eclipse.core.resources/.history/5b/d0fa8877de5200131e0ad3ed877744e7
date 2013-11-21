@@ -3,13 +3,10 @@ ExShipper {% endblock %} {% block company_info %}
 <img alt="exshipper_logo" src="/img/exshipper.png"
 	style="height: 35px; margin: 5px auto;" />
 <p>
-	聯絡電話: <span>1-650-208-8292</span>
-</p>
-<p>
 	地址: <span>36 Avalon Drive, Daly City, CA 94015</span>
 </p>
 {% endblock %} {% block company_location%}
-<div id="online_map" class="online_map_company"></div>
+<div id="online_map" class="online_map"></div>
 
 
 <script type="text/javascript">

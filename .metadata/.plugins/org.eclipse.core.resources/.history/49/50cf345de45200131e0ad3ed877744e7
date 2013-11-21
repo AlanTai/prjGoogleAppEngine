@@ -300,7 +300,8 @@
 			endColorstr='#ffff00', GradientType=0 ); /* IE6-8 */
 	}
 	.link_page_content_main {
-		width: 460px;
+		width: 90%;
+		min-width: 1200px;
 		height: 100%;
 		display: block;
 		padding-top: 10px;
@@ -488,7 +489,7 @@
 		vertical-align: middle;
 		background-color: transparent;
 		color: #f00;
-		font-weight: 900;
+		font-weight: 800;
 		transition: font-weight .5s ease-in-out;
 		-moz-transition: font-weight .5s ease-in-out;
 		-webkit-transition: font-weight .5s ease-in-out;

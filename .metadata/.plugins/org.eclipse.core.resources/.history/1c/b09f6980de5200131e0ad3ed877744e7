@@ -2,7 +2,7 @@
 ExShipper {% endblock %} {% block company_info %}
 <img alt="exshipper_logo" src="/img/exshipper.png"
 	style="height: 35px; margin: 5px auto;" />
-<p>
+	<p>
 	聯絡電話: <span>1-650-208-8292</span>
 </p>
 <p>
