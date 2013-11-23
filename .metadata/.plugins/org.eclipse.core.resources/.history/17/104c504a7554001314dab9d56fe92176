@@ -1,0 +1,48 @@
+{% extends "exwine_base.html"%} {% block main_content %}
+
+<p style="height: 45px;"></p>
+
+<div style="margin: 10px auto; text-align: center;">
+
+	<div
+		class="link_page_content link_page_content_gradient link_page_content_main_contact">
+
+
+		<div class="company_info">
+			{% block company_info %}
+			<p>No Templates Found!</p>
+			{% endblock %} {% block company_location%} {% endblock %}
+		</div>
+
+
+		<div style="display: block; margin: 0px auto;">
+			<p class="link_page_content_title">{% block contact %} No
+				Templates Found! {% endblock %}</p>
+			<div id="email_submission" class="email_info">
+				<div>
+					<span><span style="color: #f00;">*</span>Sender</span><input id="sender" class="email_info_input"
+						type="text" />
+				</div>
+				<div>
+					<span style="color: #f00;">*</span><span>Subject</span><input id="subject" class="email_info_input"
+						type="text">
+				</div>
+				<div>
+					<span style="color: #f00;">*</span><span>Body</span>
+					<textarea id="body"></textarea>
+				</div>
+				<div>
+					<input id="send_email_btn" class="send_email_btn" type="submit"
+						name="submit" value="Send" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="link_page_content link_page_content_main"
+		style="display: none;"></div>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "exwine_info_page.html"%}
+
+{% block info_content %}
+<div
+	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	<div style="display: block;">
+		<p class="link_page_content_title">常見問題</p>
+		<div
+			style="width: 400px; color: #353535; font-size: 13px; margin: 0px auto;">
+			<div>代客配送葡萄酒於灣區回台灣</div>
+			<div>代客尋找酒款</div>
+			<div>代客配送葡萄酒於灣區回台灣</div>
+			<div>代客尋找酒款</div>
+			<div>代客配送葡萄酒於灣區回台灣</div>
+			<div>代客尋找酒款</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

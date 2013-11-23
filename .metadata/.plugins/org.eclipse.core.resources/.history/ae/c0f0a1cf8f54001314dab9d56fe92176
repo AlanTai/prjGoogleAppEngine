@@ -1,0 +1,18 @@
+{% extends "exwine_info_page.html"%}
+
+{% block info_content %}
+<div
+	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	<div style="display: block;">
+		<p class="link_page_content_title">常見問題</p>
+		<div id="question_qnswer"
+			style="width:800px; color: #353535; font-size: 13px; margin: 0px auto; border-bottom: solid 1px #644901;">
+			<div>購物問題</div>
+			<div>貨物運送問題 </div>
+			<div>顧客服務問題 </div>
+			<div>填寫表格問題</div>
+			<div>付款方式問題</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
