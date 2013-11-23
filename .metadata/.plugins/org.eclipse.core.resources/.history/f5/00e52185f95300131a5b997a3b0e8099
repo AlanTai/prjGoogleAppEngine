@@ -176,7 +176,7 @@
 				'display' : 'inherit'
 			});
 			$('#copy_right').css({
-				'marginTop' : '20px'
+				'marginTop' : '15px'
 			});
 		}
 	</script>
