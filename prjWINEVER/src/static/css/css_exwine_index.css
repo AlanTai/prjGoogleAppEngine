@@ -13,7 +13,7 @@
 		top: 0px;
 		left: 0px;
 		overflow: auto;
-		font-family: 微軟宋體;
+		font-family: 微軟宋體, segoe ui;
 	}
 	::-webkit-scrollbar {
 		width: 11px;
@@ -393,9 +393,9 @@
 	.title_block {
 		display: block;
 		width: 100px;
-		height: 30px;
+		height: 25px;
 		text-align: center;
-		margin: 10px auto;
+		margin: 5px auto;
 		padding-left: 6px;
 		border: none;
 		letter-spacing: 6px;
@@ -493,31 +493,6 @@
 		transition: font-weight .5s ease-in-out;
 		-moz-transition: font-weight .5s ease-in-out;
 		-webkit-transition: font-weight .5s ease-in-out;
-	}
-	.save_btn {
-		position: relative;
-		top:5px;
-		right:-100px;
-		width : 50px;
-		height: 50px;
-		font-size: 13px;
-		text-align:center;
-		-webkit-border-radius: 25px;
-		-moz-border-radius: 25px;
-		border-radius: 25px;
-		border: solid 1px #f00;
-		vertical-align: middle;
-		background-color: #ff0;
-		color: #f00;
-		font-weight: 900;
-		transition: font-weight .5s ease-in-out;
-		-moz-transition: font-weight .5s ease-in-out;
-		-webkit-transition: font-weight .5s ease-in-out;
-		z-index: 100;
-	}
-	.save_btn:hover {
-		font-weight: 300;
-		cursor: pointer;
 	}
 	.send_email_btn:hover {
 		cursor: pointer;
