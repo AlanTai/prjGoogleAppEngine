@@ -62,7 +62,7 @@ $(document).ready(function() {
 	$('#main_page').on('click',go_to_main_page);
 	
 	//send email
-	$('#send_email').on('click',send_email);
+	$('#send_email_btn').on('click',send_email);
 	
 	//save like record
 	$('.save_favorite_btn').on('click',handleClick);
@@ -86,14 +86,39 @@ function showData(data){
 
 /*send email*/
 function send_email(e){
+	
+	//form validation
+	var email_receiver = $.trim($('#send_email_btn').val());
+	var email_sender = $.trim($('input#sender').val());
+	var email_subject = $.trim($('input#subject').val());
+	var email_body = $('textarea#body').val();
+	
+	if(email_sender === ''){
+		alert('Sender field is blank');
+		$('input#sender').focus();
+		return false;
+	}
+	if(email_subject === ''){
+		alert('Subject field is blank');
+		$('input#subject').focus();
+		return false;
+	}
+	if(email_body === ''){
+		alert('Body field is blank');
+		$('textarea#body').focus();
+		return false;
+	}
+	
+	//end of form validation
+	
 	$.ajax('/contact_page_dispatcher',{
 		type: 'POST',
 		data: {
 			fmt: 'json',
-			receiver_address: 'invisible_alan@hotmail.com',
-			sender_address: 'rainman.tai@gmail.com',
-			subject: 'email test',
-			body: 'email function test'
+			receiver_address: email_sender,
+			sender_address: email_receiver,
+			subject: email_subject,
+			body: email_body
 		},
 		success: show_message
 	});
@@ -101,6 +126,11 @@ function send_email(e){
 
 function show_message(data){
 	alert(data.email_confirmation);
+	
+	//clean fields
+	$('input#sender').val('');
+	$('input#subject').val('');
+	$('textarea#body').val('');
 }
 /*end of send email*/
 
