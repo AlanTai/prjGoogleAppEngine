@@ -457,7 +457,7 @@
 		outline: 0;
 		cursor: pointer;
 	}
-	#question_qnswer> div{
+	#question_answer> div{
 		position: relative;
 		display: inline-block;
 		top:1px;
@@ -468,19 +468,21 @@
 		font-size: 13px;
 		color: #644901;
 		font-weight: 100;
-		transition: font-weight .5 ease-in-out ;
-		-webkit-transition: font-weight .5 ease-in-out;
-		-moz-transition: font-weight .5 ease-in-out;
+		transition: color .5 ease-in-out ;
+		-webkit-transition: color .5 ease-in-out;
+		-moz-transition: color .5 ease-in-out;
 	}
-	#question_qnswer> div:hover{
-		font-weight:bolder;
+	#question_answer> div:hover{
+		color: #f00;
 		cursor: pointer;
 	}
-	#question_qnswer> div, #question_qnswer> div:active, #question_qnswer> div:focus {
+	#question_answer> div, #question_qnswer> div:active, #question_qnswer> div:focus {
 		outline: 0;
 		cursor: pointer;
 	}
-	
+	#question_answer_main>section{
+		display: none;
+	}
 	.email_info {
 		width: 340px;
 		margin: 0px auto;

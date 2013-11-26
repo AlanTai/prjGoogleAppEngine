@@ -64,7 +64,15 @@ $(document).ready(function() {
 	//send email
 	$('#send_email_btn').on('click',send_email);
 	
-	//save like record
+	//question&answer
+	$('#question_answer_main> section#1').css({
+		'display':'block'
+	});
+	$('#question_answer> div').on('click',show_question_answer);
+	//end of question&answer
+	
+	
+	//save like button
 	$('.save_favorite_btn').on('click',handleClick);
 });
 
@@ -134,11 +142,31 @@ function show_message(data){
 }
 /*end of send email*/
 
+//question & answer
+function show_question_answer(){
+	var section_id = $(this).attr('title');
+	$('#question_answer> div').css({
+		'color':'#644901',
+		'border-bottom':'solid 1px transparent'
+	});
+	$('#question_answer_main> section').css({
+		'display':'none'
+	});
+	$('#question_answer_main> section#'+section_id).css({
+		'display':'block'
+	});
+	$(this).css({
+		'color':'#f00',
+		'border-bottom':'solid 1px #f00'
+	});
+}
+//end of question & answer
 
 //go to main page
 function go_to_main_page(){
 	document.location.href='http://www.exwine-tw.appspot.com/exwine';
 }
+//end go to main page
 
 //toggle elements' height
 function toggle_height(){
