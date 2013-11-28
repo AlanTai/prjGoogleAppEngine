@@ -68,6 +68,10 @@ $(document).ready(function() {
 	$('#question_answer_main> section#1').css({
 		'display':'block'
 	});
+	$('#question_answer> div:first-child').css({
+		'color':'#f00',
+		'border-bottom':'solid 1px #f00'
+	});
 	$('#question_answer> div').on('click',show_question_answer);
 	//end of question&answer
 	

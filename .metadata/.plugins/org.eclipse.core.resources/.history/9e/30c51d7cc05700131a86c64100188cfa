@@ -1,0 +1,25 @@
+{% extends "exwine_info_page.html"%} {% block info_content %}
+<div
+	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	<div style="display: block;">
+		<p class="link_page_content_title">服務項目</p>
+		<div
+			style="width: 800px; color: #000; font-size: 13px; margin: 0px auto;">
+			<p style="color: #644901; font-size: 13px;">酒類宅配</p>
+			<p>
+				依據「郵包物品進口免稅辦法」第二條規定：「進口之郵包物品，其數量零星經海關核明屬實，且其完稅價格在新台幣三千元以內者，依關稅法第四十四條第一項第十六款之規定免徵進口稅。前項免徵進口稅之郵包物品<span
+					style="color: #f00;">不包括菸酒在內</span>。」有關進口郵包物品之徵免，均依此規定辦理。換言之，郵寄商品若被認定完稅價格低於新台幣三千元以下，現場免稅處理後直接寄到收件人。但商品完稅之價格若被認定超過免稅之規定，海關將課徵關稅及營業稅並直接向收件人收取稅費。
+			</p>
+
+			<div style="color: #f00;">
+			<a href="https://www.klwines.com/">K&L</a>
+				<a href="http://www.thewineclub.com/">The Wine Club</a>
+				<a href="http://www.totalwine.com/">Total Wine & More</a>
+				<a href="http://www.winebid.com/">WineBid</a>
+			</div>
+
+			<p style="margin: 50px auto; color: #333;">註:</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

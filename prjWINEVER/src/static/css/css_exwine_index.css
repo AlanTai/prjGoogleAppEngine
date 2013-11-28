@@ -445,15 +445,30 @@
 		border: 0px;
 		margin: 10px auto;
 		font-weight: 100;
-		transition: font-weight .5 ease-in-out ;
-		-webkit-transition: font-weight .5 ease-in-out;
-		-moz-transition: font-weight .5 ease-in-out;
+		transition: color .5 ease-in-out ;
+		-webkit-transition: color .5 ease-in-out;
+		-moz-transition: color .5 ease-in-out;
 	}
 	.winery_like_save>div:hover {
 		font-weight: 900;
+		color:#394b03;
 		cursor: pointer;
 	}
 	.winery_like_save,.winery_like_save:active,.winery_like_save:focus {
+		outline: 0;
+		cursor: pointer;
+	}
+	#wine_stores>a{
+		display: block;
+		margin: 5px auto;
+		width: 180px;
+		text-decoration: none;
+	}
+	#wine_stores>a:hover{
+		color: #f00;
+		cursor: pointer;
+	}
+	#wine_stores,#wine_stores:active,#wine_stores:focus {
 		outline: 0;
 		cursor: pointer;
 	}

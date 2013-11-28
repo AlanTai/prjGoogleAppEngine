@@ -114,7 +114,7 @@ class ContactPageDispatcher(webapp2.RequestHandler):
             elif request_page == key_value.get('request_page_contact_winever'):
                 contact_page = key_value.get('contact_winever_page')
                 title_page = key_value.get('contact_winever_title')
-                receiver_email = 'rainman.tai@gmail.com'
+                receiver_email = 'winever.tw@gmail.com'
         
         template_values = {'title': title_page,
                            'page_tag':key_value.get('page_tag_link_page'),
@@ -128,12 +128,17 @@ class ContactPageDispatcher(webapp2.RequestHandler):
 def send_email(receiver, sender, subject, body):
     
     result = {'email_status':'unknown'}
+    email_host = 'rainman.tai@gmail.com'
     if not mail.is_email_valid(receiver):
         #response invalid information back to webpage
         result['email_status'] = 'invalid_email'
     else:
         try:
-            mail.send_mail(sender, receiver, subject, body)
+            receiver_email = 'Thank you very much for contacting ExWINE.\n'+'Your Question or Comments:\n'+body
+            mail.send_mail(email_host, receiver, subject, receiver_email)
+            sender_email = 'Question or Comments from '+receiver+':\n'+body
+            mail.send_mail(email_host, sender, subject, sender_email)
+            
             result['email_status'] = 'success'
         except:
             result['email_status'] = 'fail'
