@@ -26,7 +26,7 @@ $(document).ready(function() {
 	//end of "hide elements"
 	
 	//mousehover opoup txt
-	$("#main_page, #container_toggle_btn").hover(function(e) {
+	/*$("#main_page, #container_toggle_btn").hover(function(e) {
 		
 	    $($(this).data("tooltip")).css({
 	        left: e.pageX + 1,
@@ -34,7 +34,7 @@ $(document).ready(function() {
 	    }).stop().show(100);
 	}, function() {
 	    $($(this).data("tooltip")).hide();
-	});
+	});*/
 	//end of mousehover opoup txt
 	
 	//toggle button for information content
@@ -65,7 +65,7 @@ $(document).ready(function() {
 	$('#send_email_btn').on('click',send_email);
 	
 	//question&answer
-	$('#question_answer_main> section#1').css({
+	$('#question_answer_main> section#購物問題').css({
 		'display':'block'
 	});
 	$('#question_answer> div:first-child').css({
@@ -181,6 +181,7 @@ function toggle_height(){
 	contact_area_heigh = parseInt(contact_area_heigh);
 	var container_heigh = $('#container').css('height');
 	container_heigh = parseInt(container_heigh);
+	var container_display = $('#container').css('display');
 	
 	var meta_page_tag = $('meta[name=page_tag]');
 	var page_tag = meta_page_tag.attr('content');
@@ -194,7 +195,7 @@ function toggle_height(){
 		}*/
 	}
 	else{
-		if((container_heigh<84) || (info_area_heigh>35 || contact_area_heigh>35)){
+		if((container_display === 'block') || (info_area_heigh>35 || contact_area_heigh>35)){
 			$('#logistics_process').animate({paddingTop: '10px'},1000);
 			$('#main_container').animate({top: '285px'},800);
 		}

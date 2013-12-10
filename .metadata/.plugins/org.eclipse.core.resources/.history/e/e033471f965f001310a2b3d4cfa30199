@@ -1,0 +1,53 @@
+{% extends "exwine_info_page.html"%} {% block info_content %}
+<div
+	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	<div id="question_answer_main" style="display: block;">
+		<p class="link_page_content_title">常見問題</p>
+		<div id="question_answer"
+			style="width: 900px; color: #353535; font-size: 13px; margin: 0px auto; border-bottom: solid 1px #fff;">
+			<div title="購物問題">購物問題</div>
+			<div title="貨物運送問題">貨物運送問題</div>
+			<div title="顧客服務問題">顧客服務問題</div>
+			<div title="4">填寫表格問題</div>
+			<div title="5">付款方式問題</div>
+		</div>
+		<!-- 購物問題 -->
+		<section id="購物問題" style="margin: 0px auto;">
+			<div style="width: 70%; text-align: left; font-size: 13px; margin: 0px auto;">
+				<p>Ｑ：什麼是購物稅?</p>
+				<p>Ａ：在美國購物和在台灣購物是不同的，在美國，除了商品本身的訂價之外，還要加上各州的購物稅（每洲不等），因此商品的最終價格是"售價+州稅"。有些州是免稅，有些州稅的百分比則因不同州所在地而有所不同，請您務必於購物前先了解此一費用的可能性。
+					本公司設在加州，所以基本上只有也在加州註冊或是在加州有實體店面的網路商店公司才會收稅（加州各城市的稅約8.25% -
+					9.75%)。如果商店設在外州或是只有在網路販售的商店是不會收購物稅的。</p>
+				<p>Ｑ：Billing Address與Shipping Address是什麼？在美國購物網站上要如何填寫訂購單？</p>
+				<p>Ａ：Billing Address指的是您信用卡的帳單寄送地址（如果您使用的是台灣發行的信用卡，這裡就填寫您的台灣地址)。
+					Shipping Address指的是商品的送貨地址。SpearNet所提供的地址就是Shipping
+					Address，請您填寫時要特注意，以免造成信用卡資料不符而在事後發生訂單錯誤的問題。</p>
+			</div>
+		</section>
+		<!-- 貨物運送問題 -->
+		<section id="2" style="margin: 0px auto;">
+			<div style="width: 70%; text-align: left; font-size: 13px; margin: 0px auto;">
+				<p>貨物運送問題</p>
+			</div>
+		</section>
+		<!-- 顧客服務問題-->
+		<section id="3" style="margin: 0px auto;">
+			<div style="width: 70%; text-align: left; font-size: 13px; margin: 0px auto;">
+				<p>顧客服務問題</p>
+			</div>
+		</section>
+		<!-- 填寫表格問題 -->
+		<section id="4" style="margin: 0px auto;">
+			<div style="width: 70%; text-align: left; font-size: 13px; margin: 0px auto;">
+				<p>填寫表格問題</p>
+			</div>
+		</section>
+		<!-- 付款方式問題 -->
+		<section id="5" style="margin: 0px auto;">
+			<div style="width: 70%; text-align: left; font-size: 13px; margin: 0px auto;">
+				<p>付款方式問題</p>
+			</div>
+		</section>
+	</div>
+</div>
+{% endblock %}

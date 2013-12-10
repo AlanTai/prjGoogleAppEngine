@@ -1,0 +1,139 @@
+{% extends "exwine_info_page.html"%} {% block info_content %}
+<div
+	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	<div style="display: block;">
+		<p class="link_page_content_title">酒類貨品配送流程</p>
+		<div
+			style="width: 900px; color: #353535; font-size: 13px; margin: 0px auto;">
+
+			<div style="display: inline-block; width: 200px; margin: 0px 0px;">
+				<p
+					style="display: inline-block; position: relative; top: 30px; left: 0px; margin: 0px 0px; padding: 0px 0px; z-index: 10; color: #644901; font-size: 13px;">1.
+					酒款訂購</p>
+				<canvas title="酒款訂購" id="order"
+					style="display: inline-block; position: relative; top: 0px; left: 0px; width: 200px; height: 50px; z-index: 1"></canvas>
+			</div>
+			<div style="display: inline-block; width: 200px; margin: 0px 0px;">
+				<p
+					style="display: inline-block; position: relative; top: 30px; left: 0px; margin: 0px 0px; padding: 0px 0px; z-index: 10; color: #644901; font-size: 13px;">2.
+					聯繫物流</p>
+				<canvas title="聯繫物流" id="contact_logistics"
+					style="width: 200px; height: 50px;"></canvas>
+			</div>
+			<div style="display: inline-block; width: 200px; margin: 0px 0px;">
+				<p
+					style="display: inline-block; position: relative; top: 30px; left: 0px; margin: 0px 0px; padding: 0px 0px; z-index: 10; color: #644901; font-size: 13px;">3.
+					物流取貨</p>
+				<canvas title="物流取貨" id="pick_up"
+					style="width: 200px; height: 50px;"></canvas>
+			</div>
+			<div style="display: inline-block; width: 200px; margin: 0px 0px;">
+				<p
+					style="display: inline-block; position: relative; top: 30px; left: 0px; margin: 0px 0px; padding: 0px 0px; z-index: 10; color: #644901; font-size: 13px;">4.
+					酒款訂購</p>
+				<canvas title="貨品運送" id="delivery"
+					style="width: 200px; height: 50px;"></canvas>
+			</div>
+
+
+			<!-- 購物問題 -->
+			<section id="酒款訂購" style="margin: 0px auto;">
+				<div
+					style="width: 70%; text-align: left; font-size: 13px; margin: 0px auto;">
+					<p>Ｑ：什麼是購物稅?</p>
+					<p>Ａ：在美國購物和在台灣購物是不同的，在美國，除了商品本身的訂價之外，還要加上各州的購物稅（每洲不等），因此商品的最終價格是"售價+州稅"。有些州是免稅，有些州稅的百分比則因不同州所在地而有所不同，請您務必於購物前先了解此一費用的可能性。
+						本公司設在加州，所以基本上只有也在加州註冊或是在加州有實體店面的網路商店公司才會收稅（加州各城市的稅約8.25% -
+						9.75%)。如果商店設在外州或是只有在網路販售的商店是不會收購物稅的。</p>
+					<p>Ｑ：Billing Address與Shipping Address是什麼？在美國購物網站上要如何填寫訂購單？</p>
+					<p>Ａ：Billing
+						Address指的是您信用卡的帳單寄送地址（如果您使用的是台灣發行的信用卡，這裡就填寫您的台灣地址)。 Shipping
+						Address指的是商品的送貨地址。SpearNet所提供的地址就是Shipping
+						Address，請您填寫時要特注意，以免造成信用卡資料不符而在事後發生訂單錯誤的問題。</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<script>
+	//
+	var canvas_order = document.getElementById('order');
+	var context_order = canvas_order.getContext('2d');
+
+	context_order.beginPath();
+	context_order.moveTo(0, 0);
+	context_order.lineTo(280, 0);
+	context_order.lineTo(300, 70);
+	context_order.lineTo(280, 140);
+	context_order.lineTo(0, 140);
+	context_order.lineTo(0, 0);
+	context_order.closePath();
+
+	context_order.fillStyle = '#ffffdd';
+	context_order.fill();
+	context_order.fillStyle = '#000';
+	context_order.font = '30px Calibri';
+	context_order.fillText('', 50, 50);
+
+	context_order.strokeStyle = '#ffffdd';
+	context_order.stroke();
+
+	//
+	var canvas_contact_logistics = document.getElementById('contact_logistics');
+	var context_contact_logistics = canvas_contact_logistics.getContext('2d');
+
+	context_contact_logistics.beginPath();
+	context_contact_logistics.moveTo(0, 0);
+	context_contact_logistics.lineTo(280, 0);
+	context_contact_logistics.lineTo(300, 70);
+	context_contact_logistics.lineTo(280, 140);
+	context_contact_logistics.lineTo(0, 140);
+	context_contact_logistics.lineTo(0, 0);
+	context_contact_logistics.closePath();
+
+	context_contact_logistics.fillStyle = '#ffffcc';
+	context_contact_logistics.fill();
+
+	context_contact_logistics.strokeStyle = '#ffffcc';
+	context_contact_logistics.stroke();
+
+	//
+	var canvas_pick_up = document.getElementById('pick_up');
+	var context_pick_up = canvas_pick_up.getContext('2d');
+
+	context_pick_up.beginPath();
+	context_pick_up.moveTo(0, 0);
+	context_pick_up.lineTo(280, 0);
+	context_pick_up.lineTo(300, 70);
+	context_pick_up.lineTo(280, 140);
+	context_pick_up.lineTo(0, 140);
+	context_pick_up.lineTo(0, 0);
+	context_pick_up.closePath();
+
+	context_pick_up.fillStyle = '#ffffbb';
+	context_pick_up.fill();
+
+	context_pick_up.strokeStyle = '#ffffbb';
+	context_pick_up.stroke();
+
+	//
+	var canvas_delivery = document.getElementById('delivery');
+	var context_delivery = canvas_delivery.getContext('2d');
+
+	context_delivery.beginPath();
+	context_delivery.moveTo(0, 0);
+	context_delivery.lineTo(280, 0);
+	context_delivery.lineTo(300, 70);
+	context_delivery.lineTo(280, 140);
+	context_delivery.lineTo(0, 140);
+	context_delivery.lineTo(0, 0);
+	context_delivery.closePath();
+
+	context_delivery.fillStyle = '#ffffaa';
+	context_delivery.fill();
+
+	context_delivery.strokeStyle = '#ffffaa';
+	context_delivery.stroke();
+</script>
+
+{% endblock %}

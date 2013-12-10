@@ -1,0 +1,100 @@
+{% extends "exwine_info_page.html"%} {% block info_content %}
+<div
+	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	<div style="display: block;">
+		<p class="link_page_content_title">酒類貨品配送流程</p>
+		<div
+			style="width: 900px; color: #353535; font-size: 13px; margin: 0px auto;">
+			<canvas title="酒款訂購" id="order"
+				style="width: 200px; height: 50px; position: relative;"></canvas>
+			<canvas title="聯繫物流" id="contact_logistics"
+				style="width: 200px; height: 50px;"></canvas>
+			<canvas title="物流取貨" id="pick_up" style="width: 200px; height: 50px;"></canvas>
+			<canvas title="貨品運送" id="delivery"
+				style="width: 200px; height: 50px;"></canvas>
+		</div>
+	</div>
+</div>
+
+<script>
+	//
+	var canvas_order = document.getElementById('order');
+	var context_order = canvas_order.getContext('2d');
+
+	context_order.beginPath();
+	context_order.moveTo(0, 0);
+	context_order.lineTo(280, 0);
+	context_order.lineTo(300, 70);
+	context_order.lineTo(280, 140);
+	context_order.lineTo(0, 140);
+	context_order.lineTo(0, 0);
+	context_order.closePath();
+
+	context_order.fillStyle = '#ffffdd';
+	context_order.fill();
+	context_order.fillStyle = '#000';
+	context_order.font = '20pt Calibri';
+	context_order.fillText('酒款訂購', 20, 70);
+
+	context_order.strokeStyle = '#ffffdd';
+	context_order.stroke();
+
+	//
+	var canvas_contact_logistics = document.getElementById('contact_logistics');
+	var context_contact_logistics = canvas_contact_logistics.getContext('2d');
+
+	context_contact_logistics.beginPath();
+	context_contact_logistics.moveTo(0, 0);
+	context_contact_logistics.lineTo(280, 0);
+	context_contact_logistics.lineTo(300, 70);
+	context_contact_logistics.lineTo(280, 140);
+	context_contact_logistics.lineTo(0, 140);
+	context_contact_logistics.lineTo(0, 0);
+	context_contact_logistics.closePath();
+
+	context_contact_logistics.fillStyle = '#ffffcc';
+	context_contact_logistics.fill();
+
+	context_contact_logistics.strokeStyle = '#ffffcc';
+	context_contact_logistics.stroke();
+
+	//
+	var canvas_pick_up = document.getElementById('pick_up');
+	var context_pick_up = canvas_pick_up.getContext('2d');
+
+	context_pick_up.beginPath();
+	context_pick_up.moveTo(0, 0);
+	context_pick_up.lineTo(280, 0);
+	context_pick_up.lineTo(300, 70);
+	context_pick_up.lineTo(280, 140);
+	context_pick_up.lineTo(0, 140);
+	context_pick_up.lineTo(0, 0);
+	context_pick_up.closePath();
+
+	context_pick_up.fillStyle = '#ffffbb';
+	context_pick_up.fill();
+
+	context_pick_up.strokeStyle = '#ffffbb';
+	context_pick_up.stroke();
+
+	//
+	var canvas_delivery = document.getElementById('delivery');
+	var context_delivery = canvas_delivery.getContext('2d');
+
+	context_order.beginPath();
+	context_order.moveTo(0, 0);
+	context_order.lineTo(280, 0);
+	context_order.lineTo(300, 70);
+	context_order.lineTo(280, 140);
+	context_order.lineTo(0, 140);
+	context_order.lineTo(0, 0);
+	context_order.closePath();
+
+	context_order.fillStyle = '#ffffaa';
+	context_order.fill();
+
+	context_order.strokeStyle = '#ffffaa';
+	context_order.stroke();
+</script>
+
+{% endblock %}
