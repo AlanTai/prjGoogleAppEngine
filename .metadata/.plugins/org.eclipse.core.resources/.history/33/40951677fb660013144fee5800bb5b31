@@ -153,16 +153,7 @@ function show_question_answer(){
 		'color':'#644901',
 		'border-bottom':'solid 1px transparent'
 	});
-	$('#question_answer> div').hover(
-			function (){
-		$(this).css({
-			'color':'#f00'
-		});
-	}, function (){
-		$(this).css({
-			'color':'#644901'
-		})
-	});
+	$('#question_answer> div').addClass( "question_answer_title question_answer_title:hover" );
 	$('#question_answer_main> section').css({
 		'display':'none'
 	});

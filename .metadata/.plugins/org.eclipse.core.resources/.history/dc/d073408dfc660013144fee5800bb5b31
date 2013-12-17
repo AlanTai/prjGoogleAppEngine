@@ -158,10 +158,6 @@ function show_question_answer(){
 		$(this).css({
 			'color':'#f00'
 		});
-	}, function (){
-		$(this).css({
-			'color':'#644901'
-		})
 	});
 	$('#question_answer_main> section').css({
 		'display':'none'
