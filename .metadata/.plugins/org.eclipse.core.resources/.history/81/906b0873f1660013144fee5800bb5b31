@@ -153,7 +153,6 @@ function show_question_answer(){
 		'color':'#644901',
 		'border-bottom':'solid 1px transparent'
 	});
-	$('#question_answer> div').addClass("question_answer_title");
 	$('#question_answer_main> section').css({
 		'display':'none'
 	});

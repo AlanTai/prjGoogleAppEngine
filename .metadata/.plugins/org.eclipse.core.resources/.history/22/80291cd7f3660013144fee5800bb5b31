@@ -149,10 +149,6 @@ function show_message(data){
 //question & answer
 function show_question_answer(){
 	var section_id = $(this).attr('title');
-	$('#question_answer> div').css({
-		'color':'#644901',
-		'border-bottom':'solid 1px transparent'
-	});
 	$('#question_answer> div').addClass("question_answer_title");
 	$('#question_answer_main> section').css({
 		'display':'none'

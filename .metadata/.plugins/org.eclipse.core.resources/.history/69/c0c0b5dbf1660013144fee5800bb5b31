@@ -472,7 +472,7 @@
 		outline: 0;
 		cursor: pointer;
 	}
-	.question_answer_title{
+	#question_answer> div{
 		position: relative;
 		display: inline-block;
 		top:1px;
@@ -487,11 +487,11 @@
 		-webkit-transition: color .5 ease-in-out;
 		-moz-transition: color .5 ease-in-out;
 	}
-	.question_answer_title:hover{
+	#question_answer> div:hover{
 		color: #f00;
 		cursor: pointer;
 	}
-	.question_answer_title, .question_answer_title:active, .question_answer_title:focus {
+	#question_answer> div, #question_qnswer> div:active, #question_qnswer> div:focus {
 		outline: 0;
 		cursor: pointer;
 	}

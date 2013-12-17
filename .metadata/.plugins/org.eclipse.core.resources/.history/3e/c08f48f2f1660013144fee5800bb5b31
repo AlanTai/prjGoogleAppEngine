@@ -6,10 +6,10 @@
 		<div id="question_answer"
 			style="width: 900px; color: #353535; font-size: 13px; margin: 0px auto; border-bottom: solid 1px #fff;">
 			<div title="購物問題" class="question_answer_title">購物問題</div>
-			<div title="貨物運送問題" class="question_answer_title">貨物運送問題</div>
-			<div title="顧客服務問題" class="question_answer_title">顧客服務問題</div>
-			<div title="填寫表格問題" class="question_answer_title">填寫表格問題</div>
-			<div title="付款方式問題" class="question_answer_title">付款方式問題</div>
+			<div title="貨物運送問題">貨物運送問題</div>
+			<div title="顧客服務問題">顧客服務問題</div>
+			<div title="填寫表格問題">填寫表格問題</div>
+			<div title="付款方式問題">付款方式問題</div>
 		</div>
 		<!-- 購物問題 -->
 		<section id="購物問題" style="margin: 0px auto;">
