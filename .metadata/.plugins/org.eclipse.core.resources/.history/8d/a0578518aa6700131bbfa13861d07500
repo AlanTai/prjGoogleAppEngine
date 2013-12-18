@@ -503,13 +503,13 @@
 	/**/
 	.logistics_process_title {
 		display: inline-block;
+		width: 200px;
 		color: #644901;
 		font-weight: 100;
 		transition: color .5 ease-in-out;
 		-webkit-transition: color .5 ease-in-out;
 		-moz-transition: color .5 ease-in-out;
 		margin: 0px 0px;
-		padding: 0px 0px;
 		font-size: 13px;
 	}
 	.logistics_process_title:hover {

@@ -509,7 +509,6 @@
 		-webkit-transition: color .5 ease-in-out;
 		-moz-transition: color .5 ease-in-out;
 		margin: 0px 0px;
-		padding: 0px 0px;
 		font-size: 13px;
 	}
 	.logistics_process_title:hover {

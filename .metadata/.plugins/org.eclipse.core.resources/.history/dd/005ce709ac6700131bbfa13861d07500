@@ -6,7 +6,7 @@
 		<div id="logistics_process"
 			style="width: 900px; color: #353535; font-size: 13px; margin: 0px auto;">
 
-			<div id="logistics_process_title_bar">
+			<div id="logistics_process_title_bar" style="height: 60px;">
 				<div title="酒款訂購" class="logistics_process_title">
 					<p style="position: relative; top: 32px; left: 0px; padding: 0px 0px; margin: 0px 0px; z-index: 10">1.
 						酒款訂購</p>

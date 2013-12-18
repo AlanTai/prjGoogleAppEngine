@@ -508,20 +508,25 @@
 		transition: color .5 ease-in-out;
 		-webkit-transition: color .5 ease-in-out;
 		-moz-transition: color .5 ease-in-out;
+		position: relative;
+		top: 30px;
+		left: 0px;
 		margin: 0px 0px;
 		padding: 0px 0px;
+		z-index: 10;
+		color: #644901;
 		font-size: 13px;
 	}
 	.logistics_process_title:hover {
 		color: #f00;
 		cursor: pointer;
 	}
-	.logistics_process_title,.logistics_process_title:active,.logistics_process_title:focus
+	.question_answer_title,.question_answer_title:active,.question_answer_title:focus
 		{
 		outline: 0;
 		cursor: pointer;
 	}
-	#logistics_process_main>section {
+	#question_answer_main>section {
 		display: none;
 	}
 	/**/

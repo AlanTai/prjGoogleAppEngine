@@ -77,7 +77,7 @@ $(document).ready(
 			// end of question&answer
 
 			// logistics
-			$('#logistics_process_title_bar> div').on('click',
+			$('#logistics_process> div> canvas').on('click',
 					show_logistics_process);
 			// end of logistics
 
@@ -183,10 +183,10 @@ function show_question_answer() {
 // logistics process
 function show_logistics_process() {
 	var section_id = $(this).attr('title');
-	$('#logistics_process_title_bar> div').css({
+	$('#logistics_process> div').css({
 		'color' : '#644901'
 	});
-	$('#logistics_process_title_bar> p').hover(function() {
+	$('#logistics_process> div').hover(function() {
 		$(this).css({
 			'color':'#f00'
 		});
@@ -195,15 +195,7 @@ function show_logistics_process() {
 			'color':'#644901'
 		})
 	});
-	$('#logistics_process_main> section').css({
-		'display':'none'
-	});
-	$('#logistics_process_main> section#'+section_id).css({
-		'display':'block'
-	});
-	$(this).css({
-		'color':'#f00'
-	});
+	$('#logistics_process> section')
 }
 // end of logistics process
 

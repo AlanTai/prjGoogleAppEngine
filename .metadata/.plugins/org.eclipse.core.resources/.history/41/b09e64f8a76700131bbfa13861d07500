@@ -8,28 +8,28 @@
 
 			<div id="logistics_process_title_bar">
 				<div title="酒款訂購" class="logistics_process_title">
-					<p style="position: relative; top: 32px; left: 0px; padding: 0px 0px; margin: 0px 0px; z-index: 10">1.
+					<p>1.
 						酒款訂購</p>
 					<canvas id="order"
-						style="position: relative; top: 0px; left: 0px; width: 200px; height: 50px; z-index: 1"></canvas>
+						style="display: inline-block; position: relative; top: 0px; left: 0px; width: 200px; height: 50px; z-index: 1"></canvas>
 				</div>
 				<div title="聯繫物流" class="logistics_process_title">
-					<p style="position: relative; top: 32px; left: 0px; padding: 0px 0px; margin: 0px 0px; z-index: 10">2.
+					<p>2.
 						聯繫物流</p>
 					<canvas id="contact_logistics"
-						style="position: relative; top: 0px; left: 0px; width: 200px; height: 50px; z-index: 1"></canvas>
+						style="width: 200px; height: 50px;"></canvas>
 				</div>
 				<div title="物流取貨" class="logistics_process_title">
-					<p style="position: relative; top: 32px; left: 0px; padding: 0px 0px; margin: 0px 0px; z-index: 10">3.
+					<p>3.
 						物流取貨</p>
 					<canvas id="pick_up"
-						style="position: relative; top: 0px; left: 0px; width: 200px; height: 50px; z-index: 1"></canvas>
+						style="width: 200px; height: 50px;"></canvas>
 				</div>
 				<div title="貨品運送" class="logistics_process_title">
-					<p style="position: relative; top: 32px; left: 0px; padding: 0px 0px; margin: 0px 0px; z-index: 10">4.
+					<p style="position: relative; top: 10px; left: 10px; padding: 0px 0px; margin: 0px 0px;">4.
 						貨品運送</p>
 					<canvas id="delivery"
-						style="position: relative; top: 0px; left: 0px; width: 200px; height: 50px; z-index: 1"></canvas>
+						style="width: 200px; height: 50px;"></canvas>
 				</div>
 
 			</div>
