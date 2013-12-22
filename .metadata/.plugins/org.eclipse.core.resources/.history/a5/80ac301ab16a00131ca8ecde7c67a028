@@ -79,12 +79,7 @@ $(document).ready(
 
 			// logistics
 			
-			$('#logistics_process_main> section#酒款訂購').css({
-				'display':'block'
-			});
-			$('#logistics_process_title_bar> div:first-child> p').css({
-				'color':'#f00'
-			});
+			$('#logistics_process_main> section#酒款訂購')
 			
 			$('#logistics_process_title_bar> div').on('click',
 					show_logistics_process);

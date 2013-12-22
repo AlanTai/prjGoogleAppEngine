@@ -34,7 +34,6 @@ $(document).ready(
 			 * $($(this).data("tooltip")).hide(); });
 			 */
 			// end of mousehover opoup txt
-			
 			// toggle button for information content
 			$('#container_toggle_btn').click(
 					function() {
@@ -78,14 +77,6 @@ $(document).ready(
 			// end of question&answer
 
 			// logistics
-			
-			$('#logistics_process_main> section#酒款訂購').css({
-				'display':'block'
-			});
-			$('#logistics_process_title_bar> div:first-child> p').css({
-				'color':'#f00'
-			});
-			
 			$('#logistics_process_title_bar> div').on('click',
 					show_logistics_process);
 			// end of logistics
