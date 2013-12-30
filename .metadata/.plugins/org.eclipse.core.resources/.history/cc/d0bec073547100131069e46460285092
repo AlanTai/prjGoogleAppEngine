@@ -191,14 +191,10 @@ function show_question_answer() {
 // logistics process
 function show_logistics_process() {
 	var section_id = $(this).attr('title');
-	$('#logistics_process_title_bar> div> p').css({
+	$('#logistics_process_title_bar> p').css({
 		'color' : '#644901'
 	});
-	$(this).find('p').css({
-		'color':'#f00'
-	});
-	
-	$('#logistics_process_title_bar> div').hover(function() {
+	$('#logistics_process_title_bar> p').hover(function() {
 		$(this).css({
 			'color':'#f00'
 		});
@@ -212,6 +208,9 @@ function show_logistics_process() {
 	});
 	$('#logistics_process_main> section#'+section_id).css({
 		'display':'block'
+	});
+	$(this).css({
+		'color':'#f00'
 	});
 }
 // end of logistics process

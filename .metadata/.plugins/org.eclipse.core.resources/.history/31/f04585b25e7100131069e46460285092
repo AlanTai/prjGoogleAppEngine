@@ -185,6 +185,10 @@ function show_question_answer() {
 		'color' : '#f00',
 		'border-bottom' : 'solid 1px #f00'
 	});
+	$(this).find('p').css({
+		'color' : '#f00',
+		'border-bottom' : 'solid 1px #f00'
+	});
 }
 // end of question & answer
 

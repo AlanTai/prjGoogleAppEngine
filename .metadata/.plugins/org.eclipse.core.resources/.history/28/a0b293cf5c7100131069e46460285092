@@ -191,10 +191,12 @@ function show_question_answer() {
 // logistics process
 function show_logistics_process() {
 	var section_id = $(this).attr('title');
-	$('#logistics_process_title_bar> div> p').css({
+	$('#logistics_process_title_bar> div').css({
 		'color' : '#644901'
 	});
-	$(this).find('p').css({
+	
+
+	$(this).css({
 		'color':'#f00'
 	});
 	
