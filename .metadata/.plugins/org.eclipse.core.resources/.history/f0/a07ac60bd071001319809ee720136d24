@@ -163,17 +163,16 @@ function show_message(data) {
 function show_question_answer() {
 	var section_id = $(this).attr('title');
 	$('#question_answer> p').css({
+		'color' : '#644901',
 		'border-bottom' : 'solid 1px transparent'
 	});
-	$('#question_answer> p> span').css({
-		'color' : '#644901'
-	});
+	
+
 	$(this).css({
+		'color' : '#ff0000',
 		'border-bottom' : 'solid 1px #f00'
 	});
-	$(this).find('span').css({
-		'color' : '#f00'
-	});
+	
 	
 	$('#question_answer> p').hover(function() {
 		$(this).css({

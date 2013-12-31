@@ -165,7 +165,7 @@ function show_question_answer() {
 	$('#question_answer> p').css({
 		'border-bottom' : 'solid 1px transparent'
 	});
-	$('#question_answer> p> span').css({
+	$('#question_answer> p>span').css({
 		'color' : '#644901'
 	});
 	$(this).css({

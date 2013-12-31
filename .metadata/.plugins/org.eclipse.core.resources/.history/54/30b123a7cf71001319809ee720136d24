@@ -165,16 +165,6 @@ function show_question_answer() {
 	$('#question_answer> p').css({
 		'border-bottom' : 'solid 1px transparent'
 	});
-	$('#question_answer> p> span').css({
-		'color' : '#644901'
-	});
-	$(this).css({
-		'border-bottom' : 'solid 1px #f00'
-	});
-	$(this).find('span').css({
-		'color' : '#f00'
-	});
-	
 	$('#question_answer> p').hover(function() {
 		$(this).css({
 			'color' : '#f00'
@@ -189,6 +179,10 @@ function show_question_answer() {
 	});
 	$('#question_answer_main> section#' + section_id).css({
 		'display' : 'block'
+	});
+	$(this).css({
+		'color' : '#ff0000',
+		'border-bottom' : 'solid 1px #f00'
 	});
 }
 // end of question & answer

@@ -5,11 +5,11 @@
 		<p class="link_page_content_title">常見問題</p>
 		<div id="question_answer"
 			style="width: 900px; font-size: 13px; margin: 0px auto; border-bottom: solid 1px #fff;">
-			<p title="購物問題" class="question_answer_title"><span>購物問題</span></p>
-			<p title="貨物運送問題" class="question_answer_title"><span>貨物運送問題</span></p>
-			<p title="顧客服務問題" class="question_answer_title"><span>顧客服務問題</span></p>
-			<p title="填寫表格問題" class="question_answer_title"><span>填寫表格問題</span></p>
-			<p title="付款方式問題" class="question_answer_title"><span>付款方式問題</span></p>
+			<p title="購物問題" class="question_answer_title">購物問題</p>
+			<p title="貨物運送問題" class="question_answer_title">貨物運送問題</p>
+			<p title="顧客服務問題" class="question_answer_title">顧客服務問題</p>
+			<p title="填寫表格問題" class="question_answer_title">填寫表格問題</p>
+			<p title="付款方式問題" class="question_answer_title">付款方式問題</p>
 		</div>
 		<!-- 購物問題 -->
 		<section id="購物問題" style="margin: 0px auto;">
