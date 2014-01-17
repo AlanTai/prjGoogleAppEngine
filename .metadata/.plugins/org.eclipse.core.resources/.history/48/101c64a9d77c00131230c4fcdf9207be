@@ -216,6 +216,9 @@
 		border-radius: 2px;
 		background-color: transparent;
 	}
+	.contact_area {
+		
+	}
 	.contact_block {
 		display: block;
 		width: 450px;
@@ -485,6 +488,7 @@
 		-moz-transition: color .5 ease-in-out;
 	}
 	.question_answer_title:hover {
+		color: #f00;
 		cursor: pointer;
 	}
 	.question_answer_title,.question_answer_title:active,.question_answer_title:focus
@@ -509,6 +513,7 @@
 		font-size: 13px;
 	}
 	.logistics_process_title:hover {
+		color: #f00;
 		cursor: pointer;
 	}
 	.logistics_process_title,.logistics_process_title:active,.logistics_process_title:focus

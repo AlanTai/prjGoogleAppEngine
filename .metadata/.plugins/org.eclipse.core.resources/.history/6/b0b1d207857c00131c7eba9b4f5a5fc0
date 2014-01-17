@@ -175,6 +175,15 @@ function show_question_answer() {
 		'color' : '#f00'
 	});
 	
+	$('#question_answer> p> span').hover(function() {
+		$(this).css({
+			'color' : '#f00'
+		});
+	}, function() {
+		$(this).css({
+			'color' : '#644901'
+		})
+	});
 	$('#question_answer_main> section').css({
 		'display' : 'none'
 	});

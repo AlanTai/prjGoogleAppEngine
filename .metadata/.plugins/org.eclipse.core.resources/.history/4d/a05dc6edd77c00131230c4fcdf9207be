@@ -509,6 +509,7 @@
 		font-size: 13px;
 	}
 	.logistics_process_title:hover {
+		color: #f00;
 		cursor: pointer;
 	}
 	.logistics_process_title,.logistics_process_title:active,.logistics_process_title:focus
