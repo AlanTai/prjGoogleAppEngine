@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Alan Tai">
+<meta name="company" content="exshipper">
+<meta name="page_tag" content="invoice">
+
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+
+<title>{{ title }}</title>
+
+</head>
+<body>
+
+	<div style="text-align: center; margin: 0px auto;">
+		<p style="font-size: 26px;">ExShipper Invoice Page</p>
+	</div>
+
+
+	<div id="invoice_container"></div>
+
+	<div id="keyin_info" style="text-align: center; margin: 0px auto;">
+		<form>
+			<br>
+			<div></div>
+			<div>
+				<p style="display: inline-block; width: 150px;">Yamato Tracking NO.:</p>
+				<input type="text" id="id_yamato_tr_number" name="yamato_tr_number"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 150px;">Shipper:</p>
+				<input type="text" id="id_shipper" name="shipper" style="display: inline-block;"
+					size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 150px;">Consignee (English):</p>
+				<input type="text" id="id_consignee_en" name="consignee_en"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 150px;">Consignee (Chinese):</p>
+				<input type="text" id="id_consignee_ch" name="consignee_ch"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 150px;">Address:</p>
+				<input type="text" id="id_address" name="address" style="display: inline-block;"
+					size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 150px;">Phone Number:</p>
+				<input type="text" id="id_phone_number" name="phone_number"
+					style="display: inline-block;" size="50">
+			</div>
+			<br> <input type="button" value="Add"
+				onclick="Add()">
+		</form>
+	</div>
+	<hr>
+	<br>
+
+	<div id="printout_section" style="text-align:center; margin: 0px auto;">
+		<div id="added_info" ></div>
+	<input type="button" value="Print"
+				onclick="PrintElem('#added_labels')" style="margin: 10px auto;">
+		<div id="added_labels"></div>
+		<br>
+	</div>
+
+	<!-- print function -->
+	<script type="text/javascript">
+	/**/
+	function Add(){
+		var yamato_tr_number = $('#id_yamato_tr_number').val();
+		var shipper = $('#id_shipper').val();
+		var consignee_en = $('#id_consignee_en').val();
+		var consignee_ch = $('#id_consignee_ch').val();
+		var address = $('#id_address').val();
+		var phone_number = $('#id_phone_number').val();
+		
+		$('#added_info').append('<form name="'+ yamato_tr_number +'">'+
+								'<input type="button" value="Remove" onclick="Select(this.form)" style="width: 90px;">'+
+								'<p style="display: inline-block; margin: 0px 5px;"> Yamato Tracking Number: '+ yamato_tr_number +'</p>'+
+								'<p style="display: inline-block; margin: 0px 5px;"> Shipper: '+ shipper +'</p>'+
+								'<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '+ consignee_en +'</p>'+
+								'<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '+ consignee_ch +'</p>'+
+								'<p style="display: inline-block; margin: 0px 5px;"> Address: '+ address +'</p>'+
+								'<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '+ phone_number +'</p>'+
+								'<br></form>');
+		$('#added_labels').append('<form id="label_'+ yamato_tr_number +'" style="border: 1px solid; width: 400px; margin: 5px auto; padding: 5px 5px;">'+
+				'<p style="display: block; margin: 0px 5px;"> Yamato Tracking Number: '+ yamato_tr_number +'</p>'+
+				'<p style="display: block; margin: 0px 5px;"> Shipper: '+ shipper +'</p>'+
+				'<p style="display: block; margin: 0px 5px;"> Consignee (English): '+ consignee_en +'</p>'+
+				'<p style="display: block; margin: 0px 5px;"> Consignee (Chinese): '+ consignee_ch +'</p>'+
+				'<p style="display: block; margin: 0px 5px;"> Address: '+ address +'</p>'+
+				'<p style="display: block; margin: 0px 5px;"> Phone Number: '+ phone_number +'</p>'+
+				'<br></form>');
+	}
+	
+	function Select(elem){
+		var select_status = $(elem).find('input').attr('value');
+		var elem_name=$(elem).attr('name');
+		if (select_status === 'Remove'){
+			$(elem).find('input').val('Select');
+			$('#added_labels> form[id="label_'+elem_name+'"]').css({'display':'none'});
+		}
+		else{
+			$(elem).find('input').val('Remove');
+			$('#added_labels> form[id="label_'+elem_name+'"]').css({'display':'inline-block'});
+		}
+		
+		/*remove element*/
+		//$(elem).remove();
+	}
+	
+	
+	/**/
+		function PrintElem(elem) {
+			Popup($(elem).html());
+		}
+
+		function Popup(data) {
+			var mywindow = window.open(", ", 'popup',
+					'toolbar = no, status = no');
+			mywindow.document
+					.write('<html><head><title> Label Layout </title>');
+			mywindow.document.write('<head><body>');
+			mywindow.document.write(data);
+			mywindow.document.write('</body></html>');
+
+			mywindow.print();
+			mywindow.close();
+			return true;
+		}
+
+		function displayHTML(form) {
+			var inf = form.shipper.value + '\n' + form.consignee_en.value
+					+ '\n' + form.consignee_ch.value;
+			win = window.open(", ", 'popup', 'toolbar = no, status = no');
+			win.document.write('<title> Label Layout </title>');
+			win.document
+					.write('<h1>ExShipper Test:</h1><br style="height:1000px;"><hr>'
+							+ inf + '<hr><p>End</p>');
+		}
+	</script>
+
+</body>
+</html>

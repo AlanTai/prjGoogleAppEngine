@@ -14,6 +14,8 @@ import json
 from app_dict import key_value
 
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates'))
+jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates/exshipper'))
+
 
 #default index page
 class ExWINE(webapp2.RequestHandler):
@@ -39,7 +41,6 @@ class InfoPageDispatcher(webapp2.RedirectHandler):
             return
     
     def get(self):
-        
         #default info
         user_info = get_users_info(self,users)
         
@@ -124,6 +125,18 @@ class ContactPageDispatcher(webapp2.RequestHandler):
         template = jinja_environment.get_template(contact_page)
         self.response.out.write(template.render(template_values))
 
+class ExShipperInvoiceHandler(webapp2.RequestHandler):
+    def get(self):
+        invoice_page = key_value.get('exshipper_invoice_page')
+        user_info = get_users_info(self,users)
+        
+        template_values = {'title':key_value.get('exshipper_invoice_title')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(invoice_page)
+        self.response.out.write(template.render(template_values))
+
+#self-defined functions
 #send email
 def send_email(receiver, sender, subject, body):
     
@@ -161,6 +174,8 @@ def get_users_info(self,users):
               'url': url,
               'url_linktxt': url_linktxt}
     return values
+#end of self-defined functions
+
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_invoice',ExShipperInvoiceHandler)], debug=True)
