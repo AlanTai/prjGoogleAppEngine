@@ -12,32 +12,32 @@
 			<br>
 			<div></div>
 			<div>
-				<p style="display: inline-block; width: 200px;">Yamato Tracking Number:</p>
+				<p style="display: inline-block; width: 150px;">Yamato Tracking NO.:</p>
 				<input type="text" id="id_yamato_tr_number" name="yamato_tr_number"
 					style="display: inline-block;" size="50">
 			</div>
 			<div>
-				<p style="display: inline-block; width: 200px;">Shipper:</p>
+				<p style="display: inline-block; width: 150px;">Shipper:</p>
 				<input type="text" id="id_shipper" name="shipper" style="display: inline-block;"
 					size="50">
 			</div>
 			<div>
-				<p style="display: inline-block; width: 200px;">Consignee (English):</p>
+				<p style="display: inline-block; width: 150px;">Consignee (English):</p>
 				<input type="text" id="id_consignee_en" name="consignee_en"
 					style="display: inline-block;" size="50">
 			</div>
 			<div>
-				<p style="display: inline-block; width: 200px;">Consignee (Chinese):</p>
+				<p style="display: inline-block; width: 150px;">Consignee (Chinese):</p>
 				<input type="text" id="id_consignee_ch" name="consignee_ch"
 					style="display: inline-block;" size="50">
 			</div>
 			<div>
-				<p style="display: inline-block; width: 200px;">Address:</p>
+				<p style="display: inline-block; width: 150px;">Address:</p>
 				<input type="text" id="id_address" name="address" style="display: inline-block;"
 					size="50">
 			</div>
 			<div>
-				<p style="display: inline-block; width: 200px;">Phone Number:</p>
+				<p style="display: inline-block; width: 150px;">Phone Number:</p>
 				<input type="text" id="id_phone_number" name="phone_number"
 					style="display: inline-block;" size="50">
 			</div>
