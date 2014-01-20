@@ -99,21 +99,6 @@
 		else{
 			consignee_ch = consignee_ch.trim();
 		}
-		
-		if(address === ''){
-			$('#id_address').focus();
-			return true;
-		}
-		else{
-			address = address.trim();
-		}
-		if(phone_number === ''){
-			$('#id_phone_number').focus();
-			return true;
-		}
-		else{
-			phone_number = phone_number.trim();
-		}
 		//end of checking information
 		
 		$('#added_info').append('<form name="'+ yamato_tr_number +'">'+
