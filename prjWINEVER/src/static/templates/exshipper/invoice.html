@@ -1,4 +1,4 @@
-{% extends "exshipper_base.html"%}
+{% extends "/exshipper/exshipper_base.html"%}
 {% block main_content %}
 	<div style="text-align: center; margin: 0px auto;">
 		<p style="font-size: 26px;">ExShipper Invoice Page</p>
@@ -14,6 +14,11 @@
 			<div>
 				<p style="display: inline-block; width: 200px;">Yamato Tracking Number:</p>
 				<input type="text" id="id_yamato_tr_number" name="yamato_tr_number"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 200px;">Reference Number:</p>
+				<input type="text" id="id_reference_number" name="reference_number"
 					style="display: inline-block;" size="50">
 			</div>
 			<div>
@@ -50,9 +55,14 @@
 
 	<div id="printout_section" style="text-align:center; margin: 0px auto;">
 		<div id="added_info" ></div>
-	<input type="button" value="Print"
-				onclick="PrintElem('#added_labels')" style="margin: 10px auto;">
+		<input type="button" value="Print Labels"
+				onclick="PrintElem('#added_labels')" style="margin: 10px auto; width: 150px;">
 		<div id="added_labels"></div>
+		
+		<hr>
+		<input type="button" value="Print List"
+				onclick="PrintElem('#check_list')" style="margin: 10px auto; width: 150px;">
+		<div id="check_list"></div>
 		<br>
 	</div>
 
@@ -61,6 +71,7 @@
 	/**/
 	function Add(){
 		var yamato_tr_number = $('#id_yamato_tr_number').val();
+		var reference_number = $('#id_reference_number').val();
 		var shipper = $('#id_shipper').val();
 		var consignee_en = $('#id_consignee_en').val();
 		var consignee_ch = $('#id_consignee_ch').val();
@@ -75,7 +86,13 @@
 		else{
 			yamato_tr_number = yamato_tr_number.trim();
 		}
-		
+		if(reference_number === ''){
+			$('#id_reference_number').focus();
+			return true;
+		}
+		else{
+			reference_number = reference_number.trim();
+		}
 		if(shipper === ''){
 			$('#id_shipper').focus();
 			return true;
@@ -119,6 +136,7 @@
 		$('#added_info').append('<form name="'+ yamato_tr_number +'">'+
 								'<input type="button" value="Remove" onclick="Select(this.form)" style="width: 90px;">'+
 								'<p style="display: inline-block; margin: 0px 5px;"> Yamato Tracking Number: '+ yamato_tr_number +'</p>'+
+								'<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '+ reference_number +'</p>'+
 								'<p style="display: inline-block; margin: 0px 5px;"> Shipper: '+ shipper +'</p>'+
 								'<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '+ consignee_en +'</p>'+
 								'<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '+ consignee_ch +'</p>'+
@@ -126,16 +144,19 @@
 								'<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '+ phone_number +'</p>'+
 								'<br></form>');
 		$('#added_labels').append('<form id="label_'+ yamato_tr_number +'" style="border: 1px solid; width: 300px; margin: 5px 5px; padding: 5px 5px; display:inline-block">'+
-				'<p style="display: block; margin: 0px 5px;"> Yamato Tracking Number: '+ yamato_tr_number +'</p>'+
-				'<p style="display: block; margin: 0px 5px;"> Shipper: '+ shipper +'</p>'+
-				'<p style="display: block; margin: 0px 5px;"> Consignee (English): '+ consignee_en +'</p>'+
-				'<p style="display: block; margin: 0px 5px;"> Consignee (Chinese): '+ consignee_ch +'</p>'+
-				'<p style="display: block; margin: 0px 5px;"> Address: '+ address +'</p>'+
-				'<p style="display: block; margin: 0px 5px;"> Phone Number: '+ phone_number +'</p>'+
-				'<div id="barcode_'+ yamato_tr_number +'" style="display: block; margin: 2px auto; padding: 2px auto;" >Barcode</div>'+
+				'<p style="display: block; margin: 0px auto;"> Shipper: '+ shipper +'</p>'+
+				'<p style="display: block; margin: 0px auto;"> Address: 1941 W Ave. 104th, San Leandro, CA 94577</p>'+
+				'<p style="display: block; margin: 0px auto;"> Phone Number: (510)351-8903</p>'+
+				'<hr>'+
+				'<p style="display: block; margin: 0px auto;"> Consignee (Chinese): '+ consignee_ch +'</p>'+
+				'<p style="display: block; margin: 0px auto;"> Address: '+ address +'</p>'+
+				'<p style="display: block; margin: 0px auto;"> Phone Number: '+ phone_number +'</p>'+
+				'<hr>'+
+				'<div class="barcode_title" style="display: block; margin: 2px auto;"> Yamato Tracking Number</div>'+
+				'<div class="barcode" id="barcode_'+ yamato_tr_number +'"></div>'+
 				'<br></form>');
 		
-		$('#added_labels> form[id="label_'+ yamato_tr_number +'"]').find('div').barcode(yamato_tr_number, 'code128', {barWidth:2, barHeight: 50, fontSize: 16});
+		$('#added_labels> form[id="label_'+ yamato_tr_number +'"]').find('div#barcode_'+yamato_tr_number).barcode(yamato_tr_number, 'code128', {barWidth:2, barHeight: 50, fontSize: 16});
 	}
 	
 	function Select(elem){
@@ -161,19 +182,23 @@
 		}
 
 		function Popup(data) {
-			var mywindow = window.open(", ", 'popup',
+			var mywindow = window.open("", 'my div',
 					'toolbar = no, status = no');
 			mywindow.document
 					.write('<html><head><title> Label Layout </title>');
-			mywindow.document.write('<head><body>');
+			mywindow.document.write('<link type="text/css" rel="stylesheet" media="print" href="/css/exshipper/css_exshipper.css"/>');
+			mywindow.document.write('</head><body>');
 			mywindow.document.write(data);
 			mywindow.document.write('</body></html>');
 
+			mywindow.document.close();
+			mywindow.focus();
 			mywindow.print();
 			mywindow.close();
 			return true;
 		}
 
+		//print text
 		function displayHTML(form) {
 			var inf = form.shipper.value + '\n' + form.consignee_en.value
 					+ '\n' + form.consignee_ch.value;

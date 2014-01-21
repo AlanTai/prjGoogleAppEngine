@@ -44,6 +44,6 @@ key_value = {
              
              
              #ExShipper
-             'exshipper_invoice_page':'invoice.html',
+             'exshipper_invoice_page':'/exshipper/invoice.html',
              'exshipper_invoice_title':'ExShipper Invoice'
              }
