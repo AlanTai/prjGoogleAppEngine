@@ -191,10 +191,10 @@
 			mywindow.document.write(data);
 			mywindow.document.write('</body></html>');
 
-			//mywindow.document.close();
+			mywindow.document.close();
 			mywindow.focus();
-			//mywindow.print();
-			//mywindow.close();
+			mywindow.print();
+			mywindow.close();
 			return true;
 		}
 
