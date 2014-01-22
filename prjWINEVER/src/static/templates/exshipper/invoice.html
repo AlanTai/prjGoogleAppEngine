@@ -1,83 +1,94 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
-<div style="text-align: center; margin: 0px auto;">
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Invoice Page</p>
-</div>
-
-
-<div id="invoice_container"></div>
-
-<div id="keyin_info" style="text-align: center; margin: 0px auto;">
-	<form>
-		<br>
-		<div></div>
-		<div>
-			<p style="display: inline-block; width: 200px;">Yamato Tracking
-				Number:</p>
-			<input type="text" id="id_yamato_tr_number" name="yamato_tr_number"
-				style="display: inline-block;" size="50">
-		</div>
-		<div>
-			<p style="display: inline-block; width: 200px;">Reference Number:</p>
-			<input type="text" id="id_reference_number" name="reference_number"
-				style="display: inline-block;" size="50">
-		</div>
-		<div>
-			<p style="display: inline-block; width: 200px;">Shipper:</p>
-			<input type="text" id="id_shipper" name="shipper"
-				style="display: inline-block;" size="50">
-		</div>
-		<div>
-			<p style="display: inline-block; width: 200px;">Consignee
-				(English):</p>
-			<input type="text" id="id_consignee_en" name="consignee_en"
-				style="display: inline-block;" size="50">
-		</div>
-		<div>
-			<p style="display: inline-block; width: 200px;">Consignee
-				(Chinese):</p>
-			<input type="text" id="id_consignee_ch" name="consignee_ch"
-				style="display: inline-block;" size="50">
-		</div>
-		<div>
-			<p style="display: inline-block; width: 200px;">Address:</p>
-			<input type="text" id="id_address" name="address"
-				style="display: inline-block;" size="50">
-		</div>
-		<div>
-			<p style="display: inline-block; width: 200px;">Phone Number:</p>
-			<input type="text" id="id_phone_number" name="phone_number"
-				style="display: inline-block;" size="50">
-		</div>
-		<br> <input type="button" value="Add" onclick="Add()">
-	</form>
-</div>
-<hr>
-<br>
-
-<div id="printout_section" style="text-align: center; margin: 0px auto;">
-	<div id="added_info"
-		style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px thin;"></div>
-	<input id="print_label" type="button" value="Print Labels"
-		onclick="PrintElem('#added_labels','Labels')"
-		style="margin: 10px auto; width: 150px;">
-	<div id="added_labels"
-		style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
-	<div id="printed_labels"></div>
-
-	<input type="button" value="Print List"
-		onclick="PrintElem('#check_list','Check List')"
-		style="margin: 10px auto; width: 150px;">
-	<div id="check_list"
-		style="width: 680px; max-height: 200px; overflow: auto; margin: 2px auto; padding:5px auto; border: 1px dashed;"></div>
-	<br>
 	<hr>
+</div>
+
+
+<div id="invoice_container"
+	style="position: absolute; top: 80px; text-align: center; width: 100%; z-index: 1;">
+	<div id="keyin_info" style="text-align: center; margin: 0px auto;">
+		<form>
+			<br>
+			<div>
+				<p style="display: inline-block; width: 200px;">Yamato Tracking
+					Number:</p>
+				<input type="text" id="id_yamato_tr_number" name="yamato_tr_number"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 200px;">Reference
+					Number:</p>
+				<input type="text" id="id_reference_number" name="reference_number"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 200px;">Shipper:</p>
+				<input type="text" id="id_shipper" name="shipper"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 200px;">Consignee
+					(English):</p>
+				<input type="text" id="id_consignee_en" name="consignee_en"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 200px;">Consignee
+					(Chinese):</p>
+				<input type="text" id="id_consignee_ch" name="consignee_ch"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 200px;">Address:</p>
+				<input type="text" id="id_address" name="address"
+					style="display: inline-block;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 200px;">Phone Number:</p>
+				<input type="text" id="id_phone_number" name="phone_number"
+					style="display: inline-block;" size="50">
+			</div>
+			<br> <input type="button" value="Add" onclick="Add()"
+				style="width: 100px; height: 30px;">
+		</form>
+	</div>
+	<hr>
+	<br>
+
+	<div id="print_area" style="text-align: center; margin: 0px auto;">
+		<div style="border: 1px thin; border-color: #666; display: block;">
+			<p>Item Information</p>
+			<div id="added_info"
+				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px thin;"></div>
+		</div>
+
+		<div style="border: 1px dotted; border-color: #666; display: block;">
+		<p>Printing Information</p>
+			<input id="print_label" type="button" value="Print Labels"
+				onclick="PrintElem('#added_labels','Labels')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="added_labels"
+				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<div id="printed_labels"></div>
+
+			<input type="button" value="Print List"
+				onclick="PrintElem('#check_list','Check List')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="check_list"
+				style="width: 680px; max-height: 200px; overflow: auto; margin: 2px auto; padding: 5px auto; border: 1px dashed;"></div>
+			<br>
+		</div>
+	</div>
+	<br>
 </div>
 
 <!-- print function -->
 <script type="text/javascript">
 	/**/
-	var info_array=[];
-	
+	var info_array = [];
+
 	function Add() {
 		var yamato_tr_number = $('#id_yamato_tr_number').val();
 		var reference_number = $('#id_reference_number').val();
@@ -137,23 +148,25 @@
 
 		//
 		var i = info_array.length;
-		while (i>0){
-			if(info_array[i-1].tr_number === yamato_tr_number){
+		while (i > 0) {
+			if (info_array[i - 1].tr_number === yamato_tr_number) {
 				alert('This Yamato Tracking Number Already Exist!');
 				$('#id_yamato_tr_number').focus();
 				return true;
 			}
-			if(info_array[i-1].ref_number === reference_number){
+			if (info_array[i - 1].ref_number === reference_number) {
 				alert('This Reference Number Already Exist!');
 				$('#id_reference_number').focus();
 				return true;
 			}
 			--i;
 		}
-		info_array.push({'tr_number': yamato_tr_number, 'ref_number': reference_number});
+		info_array.push({
+			'tr_number' : yamato_tr_number,
+			'ref_number' : reference_number
+		});
 		//
-		
-		
+
 		//
 		$('#added_info')
 				.append(
@@ -179,7 +192,8 @@
 								+ address
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
-								+ phone_number + '</p>' 
+								+ phone_number
+								+ '</p>'
 								+ '</div>'
 								+ '<br></form>');
 		//change color
@@ -278,13 +292,14 @@
 	}
 
 	//main function of printing
-	function PrintElem(elem,title) {
-		Popup($(elem).html(),title);
+	function PrintElem(elem, title) {
+		Popup($(elem).html(), title);
 	}
 
-	function Popup(data,page_title) {
+	function Popup(data, page_title) {
 		var mywindow = window.open("", 'my div', 'toolbar = no, status = no');
-		mywindow.document.write('<html><head><title>'+page_title+'</title>');
+		mywindow.document
+				.write('<html><head><title>' + page_title + '</title>');
 		mywindow.document
 				.write('<link type="text/css" rel="stylesheet" media="print" href="/css/exshipper/css_exshipper.css"/>');
 		mywindow.document.write('</head><body>');
