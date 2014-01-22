@@ -184,7 +184,7 @@
 								+ '<br></form>');
 		//change color
 		$('#added_info> form:even').css('background-color', '#dedede');
-		$('#added_info> form:odd').css('background-color', '#f9f9f9');
+		$('#added_info> form:odd').css('background-color', '#fefefe');
 		//end change color
 
 		$('#added_labels')

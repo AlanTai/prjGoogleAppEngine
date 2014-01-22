@@ -58,14 +58,14 @@
 	<div id="added_info"
 		style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px thin;"></div>
 	<input id="print_label" type="button" value="Print Labels"
-		onclick="PrintElem('#added_labels','Labels')"
+		onclick="PrintElem('#added_labels')"
 		style="margin: 10px auto; width: 150px;">
 	<div id="added_labels"
 		style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 	<div id="printed_labels"></div>
 
 	<input type="button" value="Print List"
-		onclick="PrintElem('#check_list','Check List')"
+		onclick="PrintElem('#check_list')"
 		style="margin: 10px auto; width: 150px;">
 	<div id="check_list"
 		style="width: 680px; max-height: 200px; overflow: auto; margin: 2px auto; padding:5px auto; border: 1px dashed;"></div>
@@ -135,31 +135,16 @@
 		}
 		//end of checking information
 
-		//
 		var i = info_array.length;
-		while (i>0){
-			if(info_array[i-1].tr_number === yamato_tr_number){
-				alert('This Yamato Tracking Number Already Exist!');
-				$('#id_yamato_tr_number').focus();
-				return true;
-			}
-			if(info_array[i-1].ref_number === reference_number){
-				alert('This Reference Number Already Exist!');
-				$('#id_reference_number').focus();
-				return true;
-			}
-			--i;
+		while (){
+			
 		}
-		info_array.push({'tr_number': yamato_tr_number, 'ref_number': reference_number});
-		//
-		
 		
 		//
 		$('#added_info')
 				.append(
 						'<form name="'+ yamato_tr_number +'">'
-								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
-								+ '<div style="width: 1000px; display: inline-block; margin: 0px 5px;">'
+								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px;">'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Yamato Tracking Number: '
 								+ yamato_tr_number
 								+ '</p>'
@@ -179,12 +164,10 @@
 								+ address
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
-								+ phone_number + '</p>' 
-								+ '</div>'
-								+ '<br></form>');
+								+ phone_number + '</p>' + '<br></form>');
 		//change color
 		$('#added_info> form:even').css('background-color', '#dedede');
-		$('#added_info> form:odd').css('background-color', '#f9f9f9');
+		$('#added_info> form:odd').css('background-color', '#fefefe');
 		//end change color
 
 		$('#added_labels')
@@ -220,17 +203,14 @@
 
 		$('#check_list')
 				.append(
-						'<form id="check_list_'+ yamato_tr_number +'" style="width: 700px; margin: 1px auto; padding: 5px auto; display:inline-block">'
-								+ '<input type="checkbox" disabled="true" style="height: 20px; width: 20px; display: inline-block;">'
-								+ '<div style="width:600px; display: inline-block; text-align: left;">'
-								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;">Yamato Tracking Number: '
+						'<form id="check_list_'+ yamato_tr_number +'" style="width: 600px; margin: 1px auto; padding: 5px auto; display:inline-block">'
+								+ '<input type="checkbox" disabled="true" style="height: 20px; width: 20px;">'
+								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px;; vertical-align: middle;">Yamato Tracking Number: '
 								+ yamato_tr_number
 								+ '</p>'
-								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;"> Reference Number: '
+								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle;"> Reference Number: '
 								+ reference_number
-								+ '</p>'
-								+ '</div>'
-								+ '<br></form>');
+								+ '</p>' + '<br></form>');
 	}
 
 	function selectOrRemove(elem) {
@@ -278,13 +258,13 @@
 	}
 
 	//main function of printing
-	function PrintElem(elem,title) {
-		Popup($(elem).html(),title);
+	function PrintElem(elem) {
+		Popup($(elem).html());
 	}
 
-	function Popup(data,page_title) {
+	function Popup(data) {
 		var mywindow = window.open("", 'my div', 'toolbar = no, status = no');
-		mywindow.document.write('<html><head><title>'+page_title+'</title>');
+		mywindow.document.write('<html><head><title>Label Layout</title>');
 		mywindow.document
 				.write('<link type="text/css" rel="stylesheet" media="print" href="/css/exshipper/css_exshipper.css"/>');
 		mywindow.document.write('</head><body>');
