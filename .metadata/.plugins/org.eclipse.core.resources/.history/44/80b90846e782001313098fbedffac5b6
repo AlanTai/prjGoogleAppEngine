@@ -1,0 +1,39 @@
+<!DOCTYPE>
+<html>
+<head>
+
+<link type="text/css" rel="stylesheet" href="/css/exshipper/css_exshipper.css" />
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
+<script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
+
+<script lang="javascript" type="text/javascript">
+$(function() {
+  $("#PrintButton").click( function() {
+      $('#divToPrint').jqprint();
+      return false;
+  });
+});
+
+$(document).ready(function() {
+	$("#PrintButton").click(function() {
+		$('#divToPrint').jqprint({
+			debug : false,
+			importCSS : true,
+			printContainer : true,
+			operaSupport : true
+		});
+		return true;
+	});
+});
+</script>
+</head>
+<body>
+<input id="PrintButton" type="button" name="Print" value="Print" />
+
+<div id="divToPrint" class="test">
+Print Me, I'm in DIV
+</div>
+<body>
+</html>

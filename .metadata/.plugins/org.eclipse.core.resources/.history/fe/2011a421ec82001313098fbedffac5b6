@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#div {
+ width: 400px; 
+ height: 400px;
+ background: url("http://image.shutterstock.com/display_pic_with_logo/231466/113194780/stock-photo-tree-of-love-113194780.jpg") no-repeat center center; 
+}
+
+</style>
+<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<script src="https://raw.github.com/niklasvh/html2canvas/gh-pages/build/html2canvas.js"></script>
+<script>
+  $(function() {
+  $src=$('#div');
+  
+  var div=$('<div>
+').append($src.clone());
+  div.width($src.width());
+  div.height($src.height());
+  
+  $('body').append(div);
+  div.html2canvas({
+  onrendered: function (canvas) {
+           div.remove();
+           var imgURL = canvas.toDataURL();
+           var img=new Image();
+           $('body').append(img);
+           img.src=imgURL;
+  }}
+                       
+  
+  ); 
+  
+});
+
+  
+  </script>
+
+<title>JS Bin</title>
+</head>
+<body>
+<p style="font-size: 20px; color: #ff0; width: 200px; text-align: center;">hello</p>
+<div id="div">
+<p style="font-size: 20px; color: #ff0; width: 200px;">Hello</p>
+<hr />
+</div>
+</body>
+</html>

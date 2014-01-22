@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Untitled Page</title>
+
+    <script lang="javascript" type="text/javascript">
+    function printContent(div_id){
+    var DocumentContainer = document.getElementById(div_id);
+    var html = '<html><head>'+
+                   '<link href="/css/css_exshipper.css" rel="stylesheet" type="text/css" />'+
+                   '</head><body style="background:#ffffff;">'+
+                   DocumentContainer.innerHTML+
+                   '</body></html>';
+     
+        var WindowObject = window.open("", "PrintWindow",
+        "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+        WindowObject.document.writeln(html);
+        WindowObject.document.close();
+        WindowObject.focus();
+        WindowObject.print();
+        WindowObject.close();
+        document.getElementById('print_link').style.display='block';
+    }
+    </script>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div id="printablediv" style="width: 100%; background-color: Blue; height: 200px">
+        Print me I am in 1st Div
+    </div>
+    <div id="donotprintdiv" style="width: 100%; background-color: Gray; height: 200px">
+        I am not going to print
+    </div>
+    <input type="button" value="Print 1st Div" onclick="printContent('printablediv')" />
+    </form>
+</body>
+</html>

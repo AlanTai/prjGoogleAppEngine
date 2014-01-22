@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<title>ExShipper Test</title>
+<style type="text/css" media="print">
+	.noprint
+        {
+		display:none;
+	}
+</style>
+<style type="text/css" media="screen">
+	.header
+        {
+		width:800px;
+                height:200px;
+	}
+</style>
+</head>
+<body>
+
+</body>
+</html>

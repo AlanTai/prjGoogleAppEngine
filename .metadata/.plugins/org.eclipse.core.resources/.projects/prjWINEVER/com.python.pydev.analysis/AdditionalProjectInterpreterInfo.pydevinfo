@@ -3,16 +3,14 @@
 D:\prjGoogleAppEngine\.metadata\.plugins\org.eclipse.core.resources\.projects\prjWINEVER\com.python.pydev.analysis\v1_indexcache
 .v1_indexcache
 ctrl_views|0|D:\prjGoogleAppEngine\prjWINEVER\src\ctrl_views.py
-app_dict|0|D:\prjGoogleAppEngine\prjWINEVER\src\app_dict.py
 -- END DISKCACHE
 -- START DICTIONARY
-6
+5
 1=ctrl_views
-5=InfoPageDispatcher
-6=ExWINE
-3=ExShipperInvoiceHandler
-2=app_dict
-4=ContactPageDispatcher
+4=InfoPageDispatcher
+5=ExWINE
+2=ExShipperInvoiceHandler
+3=ContactPageDispatcher
 -- END DICTIONARY
 -- START TREE 1
 10
@@ -24,14 +22,14 @@ exw|1|ExWINE!9@
 get|1|get_users_info!10@
 inf|1|InfoPageDispatcher!9@
 jin|1|jinja_environment!11@
-key|1|key_value!19@
+key|0|
 sen|1|send_email!10@
 -- END TREE
 -- START TREE 2
 5
 !<m|0|
 app|0|
-get|4|get!3&10@get!4&10@get!5&10@get!6&10@
-pos|2|post!4&10@post!5&10@
+get|4|get!2&10@get!3&10@get!4&10@get!5&10@
+pos|2|post!3&10@post!4&10@
 sen|0|
 -- END TREE

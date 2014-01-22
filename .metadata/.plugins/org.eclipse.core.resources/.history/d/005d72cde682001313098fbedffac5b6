@@ -1,0 +1,24 @@
+<!DOCTYPE>
+<html>
+<head>
+<script src="jquery.min.js" type="text/javascript"></script>
+<script src="jquery.jqprint-0.3.js" type="text/javascript"></script>
+<link rel="stylesheet" href="test.css">
+
+<script language="javascript" type="text/javascript">
+$(function() {
+  $("#PrintButton").click( function() {
+      $('#divToPrint').jqprint();
+      return false;
+  });
+});
+</script>
+</head>
+<body>
+<input id="PrintButton" type="button" name="Print" value="Print" />
+
+<div id="divToPrint" class="test">
+Print Me, I'm in DIV
+</div>
+<body>
+</html>
