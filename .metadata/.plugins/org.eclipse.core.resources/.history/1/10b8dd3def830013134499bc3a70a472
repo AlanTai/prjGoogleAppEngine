@@ -1,0 +1,19 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Invoice Page</p>
+	<hr>
+</div>
+
+<div>
+	<p>Login Invoice Page</p>
+	<br>
+	<form style="margin: 5px auto; text-align: center;">
+		<p>Please type in the account and password</p>
+		<label>Account Name</label> <input type="text" placeholder="Account Name"/>
+		<br>
+		<label>Password</label> <input type="text" placeholder="Password"/>
+	</form>
+</div>
+
+{% endblock %}

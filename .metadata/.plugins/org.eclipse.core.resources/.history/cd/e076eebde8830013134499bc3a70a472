@@ -1,0 +1,15 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Invoice Page</p>
+	<hr>
+</div>
+
+<div>
+	<p>Login Invoice Page</p>
+	<form>
+		<input>
+	</form>
+</div>
+
+{% endblock %}

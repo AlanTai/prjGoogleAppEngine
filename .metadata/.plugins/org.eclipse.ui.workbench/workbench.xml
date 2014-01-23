@@ -49,9 +49,9 @@
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.wst.html.core.htmlsource.source" name="invoice.html" partName="invoice.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/invoice.html" title="invoice.html" tooltip="prjWINEVER/src/static/templates/exshipper/invoice.html" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="invoice.html" partName="invoice.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/invoice.html" title="invoice.html" tooltip="prjWINEVER/src/static/templates/exshipper/invoice.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/invoice.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2036" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="149" selectionLength="4" selectionOffset="5525" selectionTopPixel="2520"/>
 </editor>
 <editor id="org.python.pydev.editor.PythonEditor" name="app_dict.py" partName="app_dict" path="D:/prjGoogleAppEngine/prjWINEVER/src/app_dict.py" title="app_dict" tooltip="prjWINEVER/src/app_dict.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/app_dict.py"/>
@@ -73,9 +73,9 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="367" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views" path="D:/prjGoogleAppEngine/prjWINEVER/src/ctrl_views.py" title="ctrl_views" tooltip="prjWINEVER/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
+<editor id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views" path="D:/prjGoogleAppEngine/prjWINEVER/src/ctrl_views.py" title="ctrl_views" tooltip="prjWINEVER/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/ctrl_views.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1298"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1275"/>
 </editor>
 </editors>
 <views>
@@ -107,14 +107,16 @@
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/css"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/css/exshipper"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper"/>
-<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/ctrl_views.py"/>
+<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER"/>
 </viewState>
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
 </views>
-<perspectives activePart="org.python.pydev.navigator.view" activePerspective="org.python.pydev.ui.PythonPerspective">
+<perspectives activePart="org.eclipse.wst.html.core.htmlsource.source" activePerspective="org.python.pydev.ui.PythonPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jst.j2ee.internal.perspective.J2EEPerspective" id="org.eclipse.jst.j2ee.J2EEPerspective" label="Java EE"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -324,10 +326,8 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/prjWINEVER/src/static/css/css_exwine_index.css"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/ctrl_views.py"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/invoice.html"/>
 </editors>
-<item historyLabel="exshipper_test.html" index="3">
-<position info="not_deleted" x="836" y="0"/>
-</item>
 <item historyLabel="exshipper_base.html" index="2">
 <position info="not_deleted" x="607" y="0"/>
 </item>
@@ -472,8 +472,11 @@
 <item historyLabel="exwine_base.html" index="13">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item active="true" historyLabel="ctrl_views" index="14">
+<item historyLabel="ctrl_views" index="14">
 <position info="not_deleted" x="0" y="0"/>
+</item>
+<item active="true" historyLabel="invoice.html" index="15">
+<position info="not_deleted" x="2041" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -481,12 +484,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="topLeft"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="bottom"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>

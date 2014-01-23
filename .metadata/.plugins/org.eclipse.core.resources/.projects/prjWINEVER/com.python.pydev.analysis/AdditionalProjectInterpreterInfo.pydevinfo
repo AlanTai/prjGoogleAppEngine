@@ -3,6 +3,7 @@
 D:\prjGoogleAppEngine\.metadata\.plugins\org.eclipse.core.resources\.projects\prjWINEVER\com.python.pydev.analysis\v1_indexcache
 .v1_indexcache
 ctrl_views|0|D:\prjGoogleAppEngine\prjWINEVER\src\ctrl_views.py
+app_dict|0|D:\prjGoogleAppEngine\prjWINEVER\src\app_dict.py
 -- END DISKCACHE
 -- START DICTIONARY
 6
@@ -31,6 +32,6 @@ sen|1|send_email!10@
 !<m|0|
 app|0|
 get|4|get!3&10@get!4&10@get!5&10@get!6&10@
-pos|2|post!4&10@post!5&10@
+pos|3|post!3&10@post!4&10@post!5&10@
 sen|0|
 -- END TREE

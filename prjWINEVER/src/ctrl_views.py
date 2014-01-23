@@ -127,7 +127,7 @@ class ContactPageDispatcher(webapp2.RequestHandler):
 
 class ExShipperInvoiceHandler(webapp2.RequestHandler):
     def get(self):
-        invoice_page = key_value.get('exshipper_invoice_page')
+        invoice_page = key_value.get('exshipper_invoice_login_page')
         user_info = get_users_info(self,users)
         
         template_values = {'title':key_value.get('exshipper_invoice_title')}
@@ -135,6 +135,22 @@ class ExShipperInvoiceHandler(webapp2.RequestHandler):
         
         template = jinja_environment.get_template(invoice_page)
         self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        invoice_account = self.request.get('invoice_account')
+        invoice_password = self.request.get('invoice_password')
+        
+        if((invoice_account == 'alantai') and (invoice_password == 'lct1014')):
+            invoice_page = key_value.get('exshipper_invoice_page')
+            user_info = get_users_info(self,users)
+            
+            template_values = {'title':key_value.get('exshipper_invoice_title')}
+            template_values.update(user_info)
+            
+            template = jinja_environment.get_template(invoice_page)
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect('/exshipper_invoice')
 
 #self-defined functions
 #send email
