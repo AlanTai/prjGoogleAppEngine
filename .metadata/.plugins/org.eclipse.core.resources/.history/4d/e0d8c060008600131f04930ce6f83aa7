@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Alan Tai">
+<meta name="company" content="exshipper">
+<meta name="page_tag" content="invoice">
+
+<link type="text/css" rel="stylesheet" href="/css/exshipper/css_exshipper.css" />
+
+{%  %}
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
+<script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
+<script type="text/javascript" src="/js/exshipper/html2canvas.js"></script>	
+
+<title>{{ title }}</title>
+
+</head>
+<body>
+	{% block main_content %}
+	<p>NO Templates Found</p>
+	{% endblock %}
+</body>
+</html>

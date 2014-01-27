@@ -1,0 +1,17 @@
+'''
+Created on Jan 25, 2014
+
+@author: Alan Tai
+'''
+
+class MyClass(object):
+    '''
+    classdocs
+    '''
+
+
+    def __init__(self):
+        '''
+        Constructor
+        '''
+        

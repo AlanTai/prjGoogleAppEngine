@@ -1,0 +1,13 @@
+'''
+Created on Jan 25, 2014
+
+@author: Alan Tai
+'''
+
+from google.appengine.ext import ndb
+
+class InvoiceInfo(ndb.Model):
+    yamato_tr_number = ndb.StringProperty()
+    ref_number = ndb.StringProperty()
+    shipper = ndb.StringProperty()
+    consignee = ndb.StringProperty()

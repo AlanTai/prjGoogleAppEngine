@@ -1,0 +1,26 @@
+'''
+Created on Jan 25, 2014
+
+@author: Alan Tai
+'''
+
+from google.appengine.ext import ndb
+
+    
+class Size(ndb.Model):
+    length = ndb.FloatProperty()
+    width = ndb.FloatProperty()
+    height = ndb.FloatProperty()
+
+class InvoiceInfo(ndb.Model):
+    yamato_tr_number = ndb.StringProperty()
+    ref_number = ndb.StringProperty()
+    shipper = ndb.StringProperty()
+    consignee_english = ndb.StringProperty()
+    consignee_chinese = ndb.StringProperty()
+    address = ndb.StringProperty()
+    consignee_phone_number = ndb.StringProperty()
+    
+    def create_invoice(self):
+        invoice = 
+    size = ndb.StructuredProperty(Size, repeated = True)
