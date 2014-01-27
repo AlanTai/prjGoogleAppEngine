@@ -127,19 +127,8 @@ class ContactPageDispatcher(webapp2.RequestHandler):
         template = jinja_environment.get_template(contact_page)
         self.response.out.write(template.render(template_values))
 
-
-class ExShipperIndexHandler(webapp2.RequestHandler):
-    def get(self):
-        user_info = get_users_info(self,users)
-        index_page = key_value.get('exshipper_index_page')
-        
-        template_values = {'title':key_value.get('exshipper_index_page_title')}
-        template_values.update(user_info)
-        
-        template = jinja_environment.get_template(index_page)
-        self.response.out.write(template.render(template_values))
-
 class ExShipperInvoiceLoginHandler(webapp2.RequestHandler):
+    
     def get(self):
         user_info = get_users_info(self,users)
         invoice_page = key_value.get('exshipper_invoice_login_page')
@@ -165,6 +154,10 @@ class ExShipperInvoiceLoginHandler(webapp2.RequestHandler):
             self.response.out.write(template.render(template_values))
         else:
             self.redirect('/exshipper_invoice')
+
+class ExshipperIndexHandler(webapp2.RequestHandler):
+    def get(self):
+        
 
 class ExShipperInvoiceInfoHandler(webapp2.RedirectHandler):
     def post(self):
@@ -223,4 +216,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_index',ExShipperIndexHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_invoice',ExShipperInvoiceLoginHandler)], debug=True)
