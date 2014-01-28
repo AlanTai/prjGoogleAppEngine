@@ -223,4 +223,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_index',ExShipperIndexHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler)], debug=True)

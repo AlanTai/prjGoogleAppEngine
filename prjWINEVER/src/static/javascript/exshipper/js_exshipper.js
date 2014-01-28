@@ -2,16 +2,15 @@
 
 //numeric value validation
 function isNumber(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
-}
-//end numeric value validation
+	var charCode = (evt.which) ? evt.which : event.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
 
-//
+	return true;
+}
+// end numeric value validation
+
+// add new items
 var info_array = [];
 
 function Add() {
@@ -22,6 +21,10 @@ function Add() {
 	var consignee_ch = $('#id_consignee_ch').val();
 	var address = $('#id_address').val();
 	var phone_number = $('#id_phone_number').val();
+	var size_length = $('#id_length').val();
+	var size_width = $('#id_width').val();
+	var size_height = $('#id_height').val();
+	var weight = $('#id_weight').val();
 
 	// check information
 	if (yamato_tr_number === '') {
@@ -69,9 +72,30 @@ function Add() {
 	} else {
 		phone_number = phone_number.trim();
 	}
+
+	if (!numberFilter(size_length)) {
+		alert('Please type in a number for the length!');
+		$('#id_length').focus();
+		return true;
+	}
+	if (!numberFilter(size_width)) {
+		alert('Please type in a number for the width!');
+		$('#id_width').focus();
+		return true;
+	}
+	if (!numberFilter(size_height)) {
+		alert('Please type in a number for the height!');
+		$('#id_height').focus();
+		return true;
+	}
+	if (!numberFilter(weight)) {
+		alert('Please type in a number for the weight!');
+		$('#id_weight').focus();
+		return true;
+	}
 	// end of checking information
 
-	//
+	// check yamato tracking number
 	var i = info_array.length;
 	while (i > 0) {
 		if (info_array[i - 1].tr_number === yamato_tr_number) {
@@ -90,9 +114,21 @@ function Add() {
 		'tr_number' : yamato_tr_number,
 		'ref_number' : reference_number
 	});
-	//
+	// end of check yamato tracking number
 
-	//
+	
+	//add the info to datastore
+	/*$.ajax('/exshipper_invoice_info_handler',{
+		type : 'POST',
+		data : {
+			fmt : 'json',
+			yamato_tr_number : yamato_tr_number
+		},
+		success : showReturnMsg
+	});*/
+	//end of add the info to datastore
+	
+	//append type-in info to html element
 	$('#added_info')
 			.append(
 					'<form name="'
@@ -177,6 +213,14 @@ function Add() {
 							+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;"> Reference Number: '
 							+ reference_number + '</p>' + '</div>'
 							+ '<br></form>');
+}
+
+function numberFilter(n) {
+	return !isNaN(parseFloat(n) && isFinite(n));
+}
+
+function showReturnMsg(return_msg){
+	alert(return_msg.ajax_confirmation);
 }
 
 function selectOrRemove(elem) {
@@ -277,12 +321,10 @@ function displayHTML(form) {
 					+ inf + '<hr><p>End</p>');
 }
 
+// send email
+function send_email(e) {
+	// form validation
 
-
-//send email
-function send_email(e){
-	//form validation
-	
-	//end of form validation
+	// end of form validation
 }
-//end of send email
+// end of send email

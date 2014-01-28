@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;prjWINEVER/src/static/templates/exshipper/invoice.html&apos; to &apos;exshipper_invoice.html&apos;" description="Rename resource &apos;invoice.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/static/templates/exshipper/invoice.html" name="exshipper_invoice.html" stamp="1390890492603" updateReferences="true"/>
+</session>
