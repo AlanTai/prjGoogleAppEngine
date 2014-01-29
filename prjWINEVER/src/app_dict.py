@@ -47,7 +47,9 @@ key_value = {
              'exshipper_index_page':'/exshipper/exshipper_index.html',
              'exshipper_index_page_title':'ExShipper Index Page',
              'exshipper_invoice_login_page':'/exshipper/exshipper_invoice_login.html',
+             'exshipper_invoice_login_title':'ExShipper Invoice Login',
              'exshipper_invoice_page':'/exshipper/exshipper_invoice.html',
              'exshipper_invoice_title':'ExShipper Invoice',
-             'exshipper_invoice_login_title':'ExShipper Invoice Login'
+             'exshipper_invoice_log_page':'/exshipper/exshipper_invoice_log.html',
+             'exshipper_invoice_log_title':'ExShipper Invoice Log'
              }

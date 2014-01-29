@@ -170,9 +170,24 @@ class ExShipperInvoiceInfoHandler(webapp2.RedirectHandler):
     def post(self):
         ajax_data = {'invoice_info_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
+            
+            new_size =Size()
+            new_size.length = self.request.get('valid_size_length')
+            new_size.width = self.request.get('valid_size_width')
+            new_size.height = self.request.get('valid_size_height')
+            
+            new_size.put()
+            
             new_invoice = InvoiceInfo()
             new_invoice.yamato_tr_number = self.request.get('valid_yamato_tr_number')
             new_invoice.ref_number = self.request.get('valid_ref_number')
+            new_invoice.shipper = self.request.get('valid_shipper')
+            new_invoice.consignee_english = self.request.get('valid_consignee_en')
+            new_invoice.consignee_chinese = self.request.get('valid_consignee_ch')
+            new_invoice.address = self.request.get('valid_address')
+            new_invoice.consignee_phone_number = self.request.get('valid_phone_number')
+            new_invoice.weight = self.request.get('valid_weight')
+            new_invoice.size = new_size
             
             new_invoice.put()
             
@@ -181,6 +196,25 @@ class ExShipperInvoiceInfoHandler(webapp2.RedirectHandler):
             self.response.out.write(json.dumps(ajax_data))
             return
 
+class ExShipperInvoiceLogHandler(webapp2.RequestHandler):
+    def post(self):
+        user_info = get_users_info(self,users)
+        invoice_account = self.request.get('invoice_account')
+        invoice_password = self.request.get('invoice_password')
+        
+        if((invoice_account == 'alantai') and (invoice_password == 'lct1014')):
+            invoice_log_page = key_value.get('exshipper_invoice_log_page')
+            log_invoice = InvoiceInfo.query()
+            
+            template_values = {'title':key_value.get('exshipper_invoice_log_title'),
+                               'invoice_log':log_invoice}
+            template_values.update(user_info)
+            
+            template = jinja_environment.get_template(invoice_log_page)
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect('/exshipper_invoice')
+        
 
 #self-defined functions
 #send email
@@ -224,4 +258,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler)], debug=True)

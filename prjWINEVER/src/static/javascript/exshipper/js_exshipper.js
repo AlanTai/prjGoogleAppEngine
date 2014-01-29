@@ -128,9 +128,26 @@ function Add() {
 		data : {
 			fmt : 'json',
 			valid_yamato_tr_number : yamato_tr_number,
-			valid_ref_number : reference_number
+			valid_ref_number : reference_number,
+			valid_shipper : shipper,
+			valid_consignee_en : consignee_en,
+			valid_consignee_ch : consignee_ch,
+			valid_address : address,
+			valid_phone_number : phone_number,
+			valid_size_length : size_length,
+			valid_size_width : size_width,
+			valid_size_height : size_height,
+			valid_weight : weight
 		},
-		success : showReturnMsg
+		success : showReturnMsg,
+		statusCode : {
+			400: function(){
+				alert('400 status code! user-side error');
+			},
+			500: function(){
+				alert('500 status code! server-side error')
+			}
+		}
 	});
 	//end of add the info to datastore
 	
@@ -189,8 +206,8 @@ function Add() {
 							+ '</p>'
 							+ '<hr>'
 							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;">易碎</p>'
-							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;"> (kg)</p>'
-							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;">Ref. NO.</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;">'+ weight +' (kg)</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;">Ref. NO. '+ reference_number +'</p>'
 							+ '<hr>'
 							+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
 							+ '<div class="barcode" id="barcode_'

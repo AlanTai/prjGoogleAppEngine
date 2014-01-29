@@ -8,9 +8,9 @@ from google.appengine.ext import ndb
 
     
 class Size(ndb.Model):
-    length = ndb.FloatProperty()
-    width = ndb.FloatProperty()
-    height = ndb.FloatProperty()
+    length = ndb.StringProperty()
+    width = ndb.StringProperty()
+    height = ndb.StringProperty()
 
 class InvoiceInfo(ndb.Model):
     yamato_tr_number = ndb.StringProperty()
@@ -21,7 +21,8 @@ class InvoiceInfo(ndb.Model):
     address = ndb.StringProperty(indexed = False)
     consignee_phone_number = ndb.StringProperty()
     
-    size = ndb.StructuredProperty(Size, repeated = True)
+    size = ndb.StructuredProperty(Size, repeated = False)
+    weight = ndb.StringProperty()
     
     date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)

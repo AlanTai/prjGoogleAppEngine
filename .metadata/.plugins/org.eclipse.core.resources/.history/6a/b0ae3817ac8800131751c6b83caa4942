@@ -1,0 +1,15 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Invoice Log Page</p>
+	<hr>
+</div>
+
+<div >
+	<br>
+	{% for single_row_data in invoice_log %}
+	<p><span>Yamato Tracking Number: {{ single_row_data.yamato_tr_number }}</span> <span>Ref. Number: {{ single_row_data.ref_number }}</span> </p>
+	{% endfor %}
+</div>
+
+{% endblock %}
