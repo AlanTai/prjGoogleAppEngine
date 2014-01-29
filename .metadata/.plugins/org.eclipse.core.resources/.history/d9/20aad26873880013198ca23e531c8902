@@ -127,8 +127,7 @@ function Add() {
 		type : 'POST',
 		data : {
 			fmt : 'json',
-			valid_yamato_tr_number : yamato_tr_number,
-			valid_ref_number : reference_number
+			yamato_tr_number : yamato_tr_number
 		},
 		success : showReturnMsg
 	});

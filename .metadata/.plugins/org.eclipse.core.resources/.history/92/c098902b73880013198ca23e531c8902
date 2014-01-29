@@ -8,11 +8,6 @@ function isNumber(evt) {
 
 	return true;
 }
-
-function numberFilter(n) {
-	return !isNaN(parseFloat(n) && isFinite(n));
-}
-
 // end numeric value validation
 
 // add new items
@@ -123,15 +118,14 @@ function Add() {
 
 	
 	//add the info to datastore
-	$.ajax('/exshipper_invoice_info_handler',{
+	/*$.ajax('/exshipper_invoice_info_handler',{
 		type : 'POST',
 		data : {
 			fmt : 'json',
-			valid_yamato_tr_number : yamato_tr_number,
-			valid_ref_number : reference_number
+			yamato_tr_number : yamato_tr_number
 		},
 		success : showReturnMsg
-	});
+	});*/
 	//end of add the info to datastore
 	
 	//append type-in info to html element
@@ -219,6 +213,10 @@ function Add() {
 							+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;"> Reference Number: '
 							+ reference_number + '</p>' + '</div>'
 							+ '<br></form>');
+}
+
+function numberFilter(n) {
+	return !isNaN(parseFloat(n) && isFinite(n));
 }
 
 function showReturnMsg(return_msg){

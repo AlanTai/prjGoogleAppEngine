@@ -169,14 +169,13 @@ class ExShipperInvoiceLoginHandler(webapp2.RequestHandler):
 class ExShipperInvoiceInfoHandler(webapp2.RedirectHandler):
     def post(self):
         ajax_data = {'invoice_info_submission':'NA'}
-        if(self.request.get('fmt') == 'json'):
+        if(self.request.get('fmt') == 'json' and self.request.get('account') == 'alantai' and self.request.get('password') == 'lct1014'):
             new_invoice = InvoiceInfo()
             new_invoice.yamato_tr_number = self.request.get('valid_yamato_tr_number')
             new_invoice.ref_number = self.request.get('valid_ref_number')
             
             new_invoice.put()
             
-            ajax_data['invoice_info_submission'] = 'Data saved into database'
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
             return

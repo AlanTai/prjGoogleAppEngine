@@ -123,15 +123,14 @@ function Add() {
 
 	
 	//add the info to datastore
-	$.ajax('/exshipper_invoice_info_handler',{
+	/*$.ajax('/exshipper_invoice_info_handler',{
 		type : 'POST',
 		data : {
 			fmt : 'json',
-			valid_yamato_tr_number : yamato_tr_number,
-			valid_ref_number : reference_number
+			yamato_tr_number : yamato_tr_number
 		},
 		success : showReturnMsg
-	});
+	});*/
 	//end of add the info to datastore
 	
 	//append type-in info to html element
