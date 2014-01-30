@@ -1,7 +1,7 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
 
 <script>
-	sessionStorage.setItem("Page2Visited", "True");    
+	sessionStorage.setItem("Page2Visited", "True");
 	window.onload = function() {
 		history.pushState(null, null, location.href);
 		window.onpopstate = function(event) {
@@ -28,21 +28,76 @@
 	{% endfor %} <br>
 	<script type="text/javascript" src="/js/exshipper/jquery.sheetrock.js"></script>
 	<table id="statistics" style="margin: 10px auto;"></table>
+	<br>
+	<hr>
+	<div id="id_log_labels"></div>
 </div>
 
 
 <script type="text/javascript">
-<!--
+	/*Retrieve data from google doc*/
 	//Define spreadsheet URL.
 	var mySpreadsheet = 'https://docs.google.com/spreadsheet/ccc?key=0AkUH5y_KfI3DdE9Qa19OWmNhMklTampRdVJiSDlDaHc#gid=0';
 
-	// Load an entire sheet.
+	// Load an entire sheet and print it out.
 	$(function() {
+		//convert data from google spreadsheet to table
 		$('#statistics').sheetrock({
 			url : mySpreadsheet
 		});
+
+		//print out data
+		generateLogLabels();
 	});
-//-->
+
+	function generateLogLabels() {
+		var invoice_log = "{{ invoice_log }}";
+		{% for single_row in invoice_log %}
+			$('#id_log_labels')
+					.append(
+							'<form id="log_label_'
+						+ "{{single_row.yamato_tr_number}}"
+						+ '" style="border: 1px solid; width: 300px; margin: 5px 5px; padding: 2px 5px; display:inline-block; text-align: left;">'
+									+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
+									+ "{{single_row.shipper}}"
+									+ '</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 地址: 1941 W Ave. 104th, San Leandro, CA 94577</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 電話: (510)351-8903</p>'
+									+ '<hr>'
+									+ '<p style="display: block; margin: 0px auto;"> 收件者: '
+									+ "{{single_row.consignee_chiness}}"
+									+ '</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 地址: '
+									+ "{{single_row.address}}"
+									+ '</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 電話: '
+									+ "{{single_row.consignee_phone_number}}"
+									+ '</p>'
+									+ '<hr>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">易碎</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'
+									+ "{{single_row.weight}}"
+									+ ' (kg)</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '
+									+ "{{single_row.weight}}"
+									+ '</p>'
+									+ '<hr>'
+									+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
+									+ '<div class="barcode" id="log_barcode_'
+						+ "{{single_row.yamato_tr_number}}"
+						+ '" style="margin: 2px auto; text-align:center;"></div>'
+									+ '</form>');
+
+			$('#id_log_labels> form[id="log_label_' + "{{single_row.yamato_tr_number}}" + '"]')
+					.find('div#log_barcode_' + "{{single_row.yamato_tr_number}}").barcode(
+							"{{single_row.yamato_tr_number}}", 'code128', {
+								barWidth : 2,
+								barHeight : 45,
+								fontSize : 16
+							});
+			{% endfor %}
+
+	};
 </script>
 
 {% endblock %}
