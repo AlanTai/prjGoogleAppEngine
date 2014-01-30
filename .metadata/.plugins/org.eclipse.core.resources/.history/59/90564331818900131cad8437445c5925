@@ -1,0 +1,48 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	sessionStorage.setItem("Page2Visited", "True");    
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	}
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Invoice Log Page</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% for single_row_data in invoice_log %}
+	<p>
+		<span>Yamato Tracking Number: {{
+			single_row_data.yamato_tr_number }}</span> <span>Ref. Number: {{
+			single_row_data.ref_number }}</span> <span>Length: {{
+			single_row_data.size.length }}</span>
+	</p>
+	{% endfor %} <br>
+	<script type="text/javascript" src="/js/exshipper/jquery.sheetrock.js"></script>
+	<table id="statistics" style="margin: 10px auto;"></table>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	//Define spreadsheet URL.
+	var mySpreadsheet = 'https://docs.google.com/spreadsheet/ccc?key=0AkUH5y_KfI3DdE9Qa19OWmNhMklTampRdVJiSDlDaHc#gid=0';
+
+	// Load an entire sheet.
+	$(function() {
+		$('#statistics').sheetrock({
+			url : mySpreadsheet
+		});
+	});
+//-->
+</script>
+
+{% endblock %}

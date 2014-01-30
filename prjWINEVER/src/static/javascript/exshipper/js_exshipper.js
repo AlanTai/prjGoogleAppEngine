@@ -205,9 +205,9 @@ function Add() {
 							+ phone_number
 							+ '</p>'
 							+ '<hr>'
-							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;">易碎</p>'
-							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;">'+ weight +' (kg)</p>'
-							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 0px 5px; display: inline-block;">Ref. NO. '+ reference_number +'</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">易碎</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'+ weight +' (kg)</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '+ reference_number +'</p>'
 							+ '<hr>'
 							+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
 							+ '<div class="barcode" id="barcode_'
@@ -227,8 +227,8 @@ function Add() {
 			.append(
 					'<form id="check_list_'
 							+ yamato_tr_number
-							+ '" style="width: 700px; margin: 1px auto; padding: 5px auto; display:inline-block">'
-							+ '<input type="checkbox" disabled="true" style="height: 20px; width: 20px; display: inline-block;">'
+							+ '" style="width: 800px; margin: 1px auto; padding: 5px auto; display:inline-block">'
+							+ '<input type="checkbox" disabled="true" style="height: 100%; width: 20px; display: inline-block; margin: auto 10px;">'
 							+ '<div style="width:600px; display: inline-block; text-align: left;">'
 							+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;">Yamato Tracking Number: '
 							+ yamato_tr_number

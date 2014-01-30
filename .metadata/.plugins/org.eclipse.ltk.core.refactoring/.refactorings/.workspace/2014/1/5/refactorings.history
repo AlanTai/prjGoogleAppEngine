@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/prjWINEVER/src/static/javascript/exshipper/html2canvas-0.4.1" element2="/prjWINEVER/src/static/javascript/exshipper/html2canvas.js" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1391055448979"/>
+</session>
