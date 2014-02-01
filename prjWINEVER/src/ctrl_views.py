@@ -225,6 +225,18 @@ class ExShipperInvoiceLogHandler(webapp2.RequestHandler):
         else:
             self.redirect('/exshipper_invoice_log_handler')
         
+        
+class TestHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        invoice_log_page = '/exshipper/exshipper_test.html'
+            
+        template_values = {'title':key_value.get('exshipper_invoice_log_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(invoice_log_page)
+        self.response.out.write(template.render(template_values))
+
 
 #self-defined functions
 #send email
@@ -268,4 +280,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_test', TestHandler)], debug=True)
