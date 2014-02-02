@@ -1,4 +1,6 @@
+
 <!doctype html>
+
 <html>
 <head>
 <meta charset="utf-8" />
@@ -55,7 +57,7 @@
 
   function printTable(file) {
     var reader = new FileReader();
-    reader.readAsText(file,'utf-8');
+    reader.readAsText(file);
     reader.onload = function(event){
       var csv = event.target.result;
       var data = $.csv.toArrays(csv);

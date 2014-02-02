@@ -55,7 +55,7 @@
 
   function printTable(file) {
     var reader = new FileReader();
-    reader.readAsText(file,'utf-8');
+    reader.readAsText(file);
     reader.onload = function(event){
       var csv = event.target.result;
       var data = $.csv.toArrays(csv);
@@ -75,6 +75,8 @@
 </head>
 
 <body>
+<a href="http://jsfromhell.com/geral/utf-8"> Converts a sequence of ANSI characters to UTF-8 and vice-versa. [UPDATED CODE AND HELP CAN BE FOUND HERE] </a>
+
 <div id=inputs class=clearfix>
   <input type=file id=files name=files[] multiple />
 </div>

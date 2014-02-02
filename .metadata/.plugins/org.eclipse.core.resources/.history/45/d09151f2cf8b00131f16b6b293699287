@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8" />
+<meta charset="ISO-8859-1" />
 <title>Demo - CSV-to-Table</title>
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="/js/exshipper/jquery.csv-0.71.js"></script>
@@ -55,7 +55,7 @@
 
   function printTable(file) {
     var reader = new FileReader();
-    reader.readAsText(file,'utf-8');
+    reader.readAsText(file);
     reader.onload = function(event){
       var csv = event.target.result;
       var data = $.csv.toArrays(csv);

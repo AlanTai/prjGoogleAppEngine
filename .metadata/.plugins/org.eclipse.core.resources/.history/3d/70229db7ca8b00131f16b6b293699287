@@ -65,7 +65,7 @@
 									+ '<p style="display: block; margin: 0px auto;"> 電話: (510)351-8903</p>'
 									+ '<hr>'
 									+ '<p style="display: block; margin: 0px auto;"> 收件者: '
-									+ "{{single_row.consignee_chinese}}"
+									+ "{{single_row.consignee_chiness}}"
 									+ '</p>'
 									+ '<p style="display: block; margin: 0px auto;"> 地址: '
 									+ "{{single_row.address}}"

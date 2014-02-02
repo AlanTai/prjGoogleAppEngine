@@ -43,6 +43,7 @@
     var output = ''
         output += '<span style="font-weight:bold;">' + escape(file.name) + '</span><br />\n';
         output += ' - FileType: ' + (file.type || 'n/a') + '<br />\n';
+        output += ' - FileEncode: ' + (file.type || 'n/a') + '<br />\n';
         output += ' - FileSize: ' + file.size + ' bytes<br />\n';
         output += ' - LastModified: ' + (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a') + '<br />\n';
 

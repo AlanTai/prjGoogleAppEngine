@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Simple Line Graph using SVG and d3.js</title>
+    <script src="http://mbostock.github.com/d3/d3.v2.js"></script>
+  </head>
+  
+  <body>
+    <script>
+        var dataset = [];
+        d3.csv("tmp.csv", function(data) {
+          dataset = data.map( function(d) { return [ +d["model year"], +d["origin"]]; });
+          console.log(dataset);
+        });                
+    </script>
+  </body>
+  
+</html>

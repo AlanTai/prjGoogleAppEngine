@@ -14,10 +14,8 @@
 			href="/exshipper_invoice_log_handler" target="blank"> Invoice Log</a>
 	</div>
 	<br>
-	<div>
-		<a href="/exshipper_spearnet_data_exchange" target="blank">Spearnet Page</a>
-	</div>
-	<br>
+	<hr style="border: 1px solid;">
+
 </div>
 
 
