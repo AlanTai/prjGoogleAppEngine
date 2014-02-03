@@ -226,15 +226,44 @@ class ExShipperInvoiceLogHandler(webapp2.RequestHandler):
             self.redirect('/exshipper_invoice_log_handler')
         
         
+class ExShipperSpearNetHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        invoice_log_page = key_value.get('exshipper_spearnet_page')
+            
+        template_values = {'title':key_value.get('eschipper_spearnet_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(invoice_log_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        user_info = get_users_info(self,users)
+        data_format = self.request.get('XLSX_XLS')
+        
+        if(data_format == 'XLS'):
+            parser_page = key_value.get('exshipper_spearnet_xlsx_page')
+            parser_page_title = key_value.get('exshipper_spearnet_xlsx_title')
+        elif (data_format == 'XLSX'):
+            parser_page = key_value.get('exshipper_spearnet_xls_page')
+            parser_page_title = key_value.get('exshipper_spearnet_xls_title')
+            
+        template_values = {'title':parser_page_title}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(parser_page)
+        self.response.out.write(template.render(template_values))
+
+#
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
-        invoice_log_page = '/exshipper/exshipper_test.html'
+        test_page = '/exshipper/exshipper_test.html'
             
         template_values = {'title':key_value.get('exshipper_invoice_log_title')}
         template_values.update(user_info)
             
-        template = jinja_environment.get_template(invoice_log_page)
+        template = jinja_environment.get_template(test_page)
         self.response.out.write(template.render(template_values))
 
 
@@ -280,4 +309,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_test', TestHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_test', TestHandler)], debug=True)

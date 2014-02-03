@@ -209,7 +209,7 @@ function Add() {
 							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'+ weight +' (kg)</p>'
 							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '+ reference_number +'</p>'
 							+ '<hr>'
-							+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
+							+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 追蹤碼</div>'
 							+ '<div class="barcode" id="barcode_'
 							+ yamato_tr_number
 							+ '" style="margin: 2px auto; text-align:center;"></div>'
