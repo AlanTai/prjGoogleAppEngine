@@ -59,7 +59,7 @@
 	<hr />
 	<input id="print_label" type="button" value="Print Labels"
 		onclick="PrintElem('#id_shipping_labels','Labels')"
-		style="margin: 10px 5px; width: 150px;">
+		style="margin: 10px auto; width: 150px;">
 	<div id="id_shipping_labels" style="border: 1px dashed;"></div>
 
 	<!--  -->
@@ -157,14 +157,12 @@
 			default:
 				output = to_csv(wb);
 				parseCSV(output, '\n', ',');
-				output = JSON.stringify(to_json(wb), 2, 2);
-				printLabel(output);
 			}
 			//show data structure on screen
-			if (out.innerText === undefined)
+			/* if (out.innerText === undefined)
 				out.textContent = output;
 			else
-				out.innerText = output;
+				out.innerText = output; */
 		}
 
 		//parse csv

@@ -44,7 +44,7 @@
 <input type="button" id="dotext" value="Click here to process the base64 text" onclick="b64it();"/>
 -->
 	<pre id="out"></pre>
-	
+
 	<!-- show data structure -->
 	<br />
 	<div id="contents"></div>
@@ -57,10 +57,10 @@
 	<hr />
 	<input id="print_label" type="button" value="Print Labels"
 		onclick="PrintElem('#id_shipping_labels','Labels')"
-		style="margin: 10px auto; width: 150px;">
+		style="margin: 10px 5px;; width: 150px;">
 	<div id="id_shipping_labels" style="border: 1px dashed;"></div>
-	
-	
+
+
 	<br />
 	<script>
 		function xlsworker(data, cb) {
@@ -149,16 +149,19 @@
 				output = to_formulae(wb);
 				break;
 			default:
+				output = JSON.stringify(to_json(wb), 2, 2);
+				printLabel(output);
 				output = to_csv(wb);
+				parseCSV(output, '\n', ',');
 			}
-			
+
 			//show data structure on screen
-			/* if (out.innerText === undefined)
+			if (out.innerText === undefined)
 				out.textContent = output;
 			else
-				out.innerText = output; */
+				out.innerText = output;
 		}
-		
+
 		//parse csv
 		function parseCSV(text, lineTerminator, cellTerminator) {
 			var div_content = document.getElementById('output_div');
@@ -236,8 +239,7 @@
 			drop.addEventListener('drop', handleDrop, false);
 		}
 		//end of drop event handler
-		
-		
+
 		//label generaor
 		function printLabel(info) {
 			var json_obj = JSON.parse(info);
@@ -270,9 +272,10 @@
 
 		function createLabels(rows, keys) {
 			var labels_layout = document.getElementById('id_shipping_labels');
-			if(labels_layout.hasChildNodes()){
+			if (labels_layout.hasChildNodes()) {
 				labels_layout.innerHTML = '';
-			};
+			}
+			;
 			for ( var ith in rows) {
 				/* for (var jth in row_keys)
 					alert(row_keys[jth]+rows_info[ith][row_keys[jth]]); */
