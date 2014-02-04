@@ -282,11 +282,6 @@
 		}
 
 		function createLabels(rows, keys) {
-			var labels_layout = document.getElementById('id_shipping_labels');
-			if(labels_layout.hasChildNodes()){
-				labels_layout.innerHTML = '';
-			};
-			
 			for ( var ith in rows) {
 				/* for (var jth in row_keys)
 					alert(row_keys[jth]+rows_info[ith][row_keys[jth]]); */
@@ -319,7 +314,7 @@
 										+ rows[ith]['index']
 										+ '</p>'
 										+ '<hr>'
-										+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 託運單號</div>'
+										+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
 										+ '<div class="barcode" id="shipping_barcode_'
 					+ rows[ith]['hawb']
 					+ '" style="margin: 2px auto; text-align:center;"></div>'

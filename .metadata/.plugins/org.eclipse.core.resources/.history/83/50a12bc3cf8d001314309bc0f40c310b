@@ -2,19 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-<title>JS-XLSX Live Demo</title>
+<title>JS-XLS Live Demo</title>
 
-<link type="text/css" rel="stylesheet"
-	href="/css/exshipper/css_exshipper.css" />
-
-
-<script src="/js/exshipper/jszip.js"></script>
-<script src="/js/exshipper/xlsx.js"></script>
+<script src="/js/exshipper/xls.js"></script>
 <script src="/js/exshipper/shim.js"></script>
 <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
 <script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
-
 <style>
 #drop {
 	border: 2px dashed #bbb;
@@ -32,21 +26,25 @@
 }
 </style>
 </head>
+
 <body>
-	<b>JS-XLSX (XLSX/XLSB/XLSM) Live Demo</b>
-	<br />
+
+	<b>JS-XLS Live Demo</b>
 	<br />
 	<input type="radio" name="format" value="csv" checked> CSV
-	<br />
+	<br>
 	<input type="radio" name="format" value="json"> JSON
-	<br />
+	<br>
 	<input type="radio" name="format" value="form"> FORMULAE
-	<br />
+	<br>
 
-	<div id="drop">Drop an XLSX or XLSM or XLSB file here to see
-		sheet data.</div>
+	<div id="drop">Drop an XLS file here to see sheet data.</div>
+	<!--
+<textarea id="b64data">... or paste a base64-encoding here</textarea>
+<input type="button" id="dotext" value="Click here to process the base64 text" onclick="b64it();"/>
+-->
 	<pre id="out"></pre>
-
+	
 	<!-- show data structure -->
 	<br />
 	<div id="contents"></div>
@@ -61,32 +59,24 @@
 		onclick="PrintElem('#id_shipping_labels','Labels')"
 		style="margin: 10px auto; width: 150px;">
 	<div id="id_shipping_labels" style="border: 1px dashed;"></div>
-
-	<!--  -->
+	
+	
+	<br />
 	<script>
-		var rABS = typeof FileReader !== "undefined"
-				&& typeof FileReader.prototype !== "undefined"
-				&& typeof FileReader.prototype.readAsBinaryString !== "undefined";
-		function xlsxworker(data, cb) {
-			var worker = new Worker('/js/exshipper/xlsxworker.js');
+		function xlsworker(data, cb) {
+			var worker = new Worker('/js/exshipper/xlsworker.js');
 			worker.onmessage = function(e) {
 				switch (e.data.t) {
 				case 'ready':
 					break;
 				case 'e':
 					console.error(e.data.d);
-					break;
-				case 'xlsx':
-					cb(JSON.parse(e.data.d));
+				case 'xls':
+					cb(e.data.d);
 					break;
 				}
 			};
-			var arr = rABS ? data : btoa(String.fromCharCode.apply(null,
-					new Uint8Array(data)));
-			worker.postMessage({
-				d : arr,
-				b : rABS
-			});
+			worker.postMessage(data);
 		}
 
 		function get_radio_value(radioName) {
@@ -101,7 +91,7 @@
 		function to_json(workbook) {
 			var result = {};
 			workbook.SheetNames.forEach(function(sheetName) {
-				var roa = XLSX.utils
+				var roa = XLS.utils
 						.sheet_to_row_object_array(workbook.Sheets[sheetName]);
 				if (roa.length > 0) {
 					result[sheetName] = roa;
@@ -113,7 +103,7 @@
 		function to_csv(workbook) {
 			var result = [];
 			workbook.SheetNames.forEach(function(sheetName) {
-				var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+				var csv = XLS.utils.make_csv(workbook.Sheets[sheetName]);
 				if (csv.length > 0) {
 					result.push("SHEET: " + sheetName);
 					result.push("");
@@ -126,7 +116,7 @@
 		function to_formulae(workbook) {
 			var result = [];
 			workbook.SheetNames.forEach(function(sheetName) {
-				var formulae = XLSX.utils
+				var formulae = XLS.utils
 						.get_formulae(workbook.Sheets[sheetName]);
 				if (formulae.length > 0) {
 					result.push("SHEET: " + sheetName);
@@ -139,13 +129,17 @@
 
 		var tarea = document.getElementById('b64data');
 		function b64it() {
-			var wb = XLSX.read(tarea.value, {
+			var cfb = XLS.CFB.read(tarea.value, {
 				type : 'base64'
 			});
+			var wb = XLS.parse_xlscfb(cfb);
 			process_wb(wb);
 		}
 
 		function process_wb(wb) {
+			if (typeof Worker !== 'undefined')
+				XLS.SSF.load_table(wb.SSF);
+			var output = "";
 			switch (get_radio_value("format")) {
 			case "json":
 				output = JSON.stringify(to_json(wb), 2, 2);
@@ -156,15 +150,15 @@
 				break;
 			default:
 				output = to_csv(wb);
-				//parseCSV(output, '\n', ',');
 			}
+			
 			//show data structure on screen
 			/* if (out.innerText === undefined)
 				out.textContent = output;
 			else
 				out.innerText = output; */
 		}
-
+		
 		//parse csv
 		function parseCSV(text, lineTerminator, cellTerminator) {
 			var div_content = document.getElementById('output_div');
@@ -214,27 +208,19 @@
 				reader.onload = function(e) {
 					var data = e.target.result;
 					if (typeof Worker !== 'undefined') {
-						xlsxworker(data, process_wb);
+						xlsworker(data, process_wb);
 					} else {
-						var wb;
-						if (rABS) {
-							wb = XLSX.read(data, {
-								type : 'binary'
-							});
-						} else {
-							var arr = String.fromCharCode.apply(null,
-									new Uint8Array(data));
-							wb = XLSX.read(btoa(arr), {
-								type : 'base64'
-							});
-						}
+						var cfb = XLS.CFB.read(data, {
+							type : 'binary'
+						});
+						//var arr = String.fromCharCode.apply(null, new Uint8Array(data));
+						//var cfb = XLS.CFB.read(btoa(arr), {type: 'base64'});
+						var wb = XLS.parse_xlscfb(cfb);
 						process_wb(wb);
 					}
 				};
-				if (rABS)
-					reader.readAsBinaryString(f);
-				else
-					reader.readAsArrayBuffer(f);
+				reader.readAsBinaryString(f);
+				//reader.readAsArrayBuffer(f);
 			}
 		}
 
@@ -250,7 +236,8 @@
 			drop.addEventListener('drop', handleDrop, false);
 		}
 		//end of drop event handler
-
+		
+		
 		//label generaor
 		function printLabel(info) {
 			var json_obj = JSON.parse(info);
@@ -282,11 +269,6 @@
 		}
 
 		function createLabels(rows, keys) {
-			var labels_layout = document.getElementById('id_shipping_labels');
-			if(labels_layout.hasChildNodes()){
-				labels_layout.innerHTML = '';
-			};
-			
 			for ( var ith in rows) {
 				/* for (var jth in row_keys)
 					alert(row_keys[jth]+rows_info[ith][row_keys[jth]]); */
@@ -319,7 +301,7 @@
 										+ rows[ith]['index']
 										+ '</p>'
 										+ '<hr>'
-										+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 託運單號</div>'
+										+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
 										+ '<div class="barcode" id="shipping_barcode_'
 					+ rows[ith]['hawb']
 					+ '" style="margin: 2px auto; text-align:center;"></div>'
@@ -380,7 +362,6 @@
 	</script>
 
 
-	<!-- generate csv file -->
 	<input type="button" value="DownLoad As Excel File (CSV Format)"
 		onclick="exportExcel()">
 	<script type="text/javascript">
@@ -405,5 +386,6 @@
 
 		}
 	</script>
+
 </body>
 </html>

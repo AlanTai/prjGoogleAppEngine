@@ -7,14 +7,6 @@
 <link type="text/css" rel="stylesheet"
 	href="/css/exshipper/css_exshipper.css" />
 
-
-<script src="/js/exshipper/jszip.js"></script>
-<script src="/js/exshipper/xlsx.js"></script>
-<script src="/js/exshipper/shim.js"></script>
-<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
-<script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
-
 <style>
 #drop {
 	border: 2px dashed #bbb;
@@ -47,13 +39,12 @@
 		sheet data.</div>
 	<pre id="out"></pre>
 
-	<!-- show data structure -->
 	<br />
 	<div id="contents"></div>
 	<br />
 
-	<!-- show labels -->
-	<div id="output_div" style="width: 100%; border: 1px; margin: 5px 5px;"></div>
+	<div id="output_div"
+		style="width: 100%; border: 1px; margin: 5px 5px;"></div>
 	<br />
 
 	<hr />
@@ -63,6 +54,12 @@
 	<div id="id_shipping_labels" style="border: 1px dashed;"></div>
 
 	<!--  -->
+	<script src="/js/exshipper/jszip.js"></script>
+	<script src="/js/exshipper/xlsx.js"></script>
+	<script src="/js/exshipper/shim.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
+	<script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
 	<script>
 		var rABS = typeof FileReader !== "undefined"
 				&& typeof FileReader.prototype !== "undefined"
@@ -282,11 +279,6 @@
 		}
 
 		function createLabels(rows, keys) {
-			var labels_layout = document.getElementById('id_shipping_labels');
-			if(labels_layout.hasChildNodes()){
-				labels_layout.innerHTML = '';
-			};
-			
 			for ( var ith in rows) {
 				/* for (var jth in row_keys)
 					alert(row_keys[jth]+rows_info[ith][row_keys[jth]]); */
@@ -294,7 +286,7 @@
 						.append(
 								'<form id="shipping_label_'
 					+ rows[ith]['hawb']
-					+ '" style="border: 1px solid; width: 350px; margin: 2px 2px; padding: 2px 2px; display:inline-block; text-align: left;">'
+					+ '" style="border: 1px solid; width: 330px; margin: 5px 5px; padding: 2px 5px; display:inline-block; text-align: left;">'
 										+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
 										+ rows[ith]['shipper_name']
 										+ '</p>'
@@ -319,14 +311,13 @@
 										+ rows[ith]['index']
 										+ '</p>'
 										+ '<hr>'
-										+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 託運單號</div>'
+										+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
 										+ '<div class="barcode" id="shipping_barcode_'
 					+ rows[ith]['hawb']
 					+ '" style="margin: 2px auto; text-align:center;"></div>'
 										+ '</form>');
 
-				$(
-						'#id_shipping_labels> form[id="shipping_label_'
+				$('#id_shipping_labels> form[id="shipping_label_'
 								+ rows[ith]['hawb'] + '"]').find(
 						'div#shipping_barcode_' + rows[ith]['hawb']).barcode(
 						rows[ith]['hawb'], 'code39', {
@@ -379,8 +370,6 @@
 		})();
 	</script>
 
-
-	<!-- generate csv file -->
 	<input type="button" value="DownLoad As Excel File (CSV Format)"
 		onclick="exportExcel()">
 	<script type="text/javascript">
