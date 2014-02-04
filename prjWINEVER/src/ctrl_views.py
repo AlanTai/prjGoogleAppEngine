@@ -242,11 +242,11 @@ class ExShipperSpearNetHandler(webapp2.RequestHandler):
         data_format = self.request.get('XLSX_XLS')
         
         if(data_format == 'XLS'):
-            parser_page = key_value.get('exshipper_spearnet_xlsx_page')
-            parser_page_title = key_value.get('exshipper_spearnet_xlsx_title')
-        elif (data_format == 'XLSX'):
             parser_page = key_value.get('exshipper_spearnet_xls_page')
             parser_page_title = key_value.get('exshipper_spearnet_xls_title')
+        elif (data_format == 'XLSX'):
+            parser_page = key_value.get('exshipper_spearnet_xlsx_page')
+            parser_page_title = key_value.get('exshipper_spearnet_xlsx_title')
             
         template_values = {'title':parser_page_title}
         template_values.update(user_info)

@@ -130,6 +130,8 @@
 			switch (get_radio_value("format")) {
 			case "json":
 				output = JSON.stringify(to_json(wb), 2, 2);
+				alert(output);
+				printLabel(output);
 				break;
 			case "form":
 				output = to_formulae(wb);
@@ -180,6 +182,8 @@
 		}
 		//end of parse csv
 
+		
+		//drop event handler
 		var drop = document.getElementById('drop');
 		function handleDrop(e) {
 			e.stopPropagation();
@@ -227,6 +231,37 @@
 			drop.addEventListener('dragover', handleDragover, false);
 			drop.addEventListener('drop', handleDrop, false);
 		}
+		//end of drop event handler
+		
+		//label generaor
+		function printLabel(info){
+			var json_obj = JSON.parse(info);
+			var row_keys = getListKeys(json_obj);
+			
+			//
+			var list_keys = getKeys(json_obj);
+		}
+		
+		function getListKeys(lists_obj){
+			var list_keys = getKeys(lists_obj);
+			var list_key = list_keys[0];
+			
+			var single_row = lists_obj[list_key][0];
+			var single_row_keys = getKeys(single_row);
+			for (var key in single_row_keys)
+				alert(single_row[single_row_keys[key]]);
+			
+			return single_row_keys;
+		}
+		
+		function getKeys(json_obj){
+			var headers = new Array();
+			for (var key in json_obj){
+				headers.push(key);
+			};
+			return headers;
+		}
+		//end of label generator
 	</script>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<title>JS-XLSX Live Demo</title>
+<style>
+#drop {
+	border: 2px dashed #bbb;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 25px;
+	text-align: center;
+	font: 20pt bold, "Vollkorn";
+	color: #bbb
+}
+
+#b64data {
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<b>JS-XLSX (XLSX/XLSB/XLSM) Live Demo</b>
+	<br />
+	<br />
+	<input type="radio" name="format" value="csv" checked> CSV
+	<br />
+	<input type="radio" name="format" value="json"> JSON
+	<br />
+	<input type="radio" name="format" value="form"> FORMULAE
+	<br />
+
+	<div id="drop">Drop an XLSX or XLSM or XLSB file here to see
+		sheet data.</div>
+	<pre id="out"></pre>
+
+	<br />
+	<div id="contents"></div>
+	<br />
+
+	<div id="output_div" style=" width: 100%; border: 1px dashed ; margin: 5px 5px;"></div>
+	<script src="/js/exshipper/jszip.js"></script>
+	<script src="/js/exshipper/xlsx.js"></script>
+	<script src="/js/exshipper/shim.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+	<script>
+		var rABS = typeof FileReader !== "undefined"
+				&& typeof FileReader.prototype !== "undefined"
+				&& typeof FileReader.prototype.readAsBinaryString !== "undefined";
+		function xlsxworker(data, cb) {
+			var worker = new Worker('/js/exshipper/xlsxworker.js');
+			worker.onmessage = function(e) {
+				switch (e.data.t) {
+				case 'ready':
+					break;
+				case 'e':
+					console.error(e.data.d);
+					break;
+				case 'xlsx':
+					cb(JSON.parse(e.data.d));
+					break;
+				}
+			};
+			var arr = rABS ? data : btoa(String.fromCharCode.apply(null,
+					new Uint8Array(data)));
+			worker.postMessage({
+				d : arr,
+				b : rABS
+			});
+		}
+
+		function get_radio_value(radioName) {
+			var radios = document.getElementsByName(radioName);
+			for ( var i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+					return radios[i].value;
+				}
+			}
+		}
+
+		function to_json(workbook) {
+			var result = {};
+			workbook.SheetNames.forEach(function(sheetName) {
+				var roa = XLSX.utils
+						.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+				if (roa.length > 0) {
+					result[sheetName] = roa;
+				}
+			});
+			return result;
+		}
+
+		function to_csv(workbook) {
+			var result = [];
+			workbook.SheetNames.forEach(function(sheetName) {
+				var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+				if (csv.length > 0) {
+					result.push("SHEET: " + sheetName);
+					result.push("");
+					result.push(csv);
+				}
+			});
+			return result.join("\n");
+		}
+
+		function to_formulae(workbook) {
+			var result = [];
+			workbook.SheetNames.forEach(function(sheetName) {
+				var formulae = XLSX.utils
+						.get_formulae(workbook.Sheets[sheetName]);
+				if (formulae.length > 0) {
+					result.push("SHEET: " + sheetName);
+					result.push("");
+					result.push(formulae.join("\n"));
+				}
+			});
+			return result.join("\n");
+		}
+
+		var tarea = document.getElementById('b64data');
+		function b64it() {
+			var wb = XLSX.read(tarea.value, {
+				type : 'base64'
+			});
+			process_wb(wb);
+		}
+
+		function process_wb(wb) {
+			switch (get_radio_value("format")) {
+			case "json":
+				output = JSON.stringify(to_json(wb), 2, 2);
+				alert(output);
+				printLabel(output);
+				break;
+			case "form":
+				output = to_formulae(wb);
+				break;
+			default:
+				output = to_csv(wb);
+				parseCSV(output, '\n', ',');
+			}
+			if (out.innerText === undefined)
+				out.textContent = output;
+			else
+				out.innerText = output;
+		}
+
+		//parse csv
+		function parseCSV(text, lineTerminator, cellTerminator) {
+			var div_content = document.getElementById('output_div');
+			var table = document.createElement('table');
+			div_content.appendChild(table);
+
+			//break the lines apart
+			var lines = text.split(lineTerminator);
+
+			for ( var j = 0; j < lines.length; j++) {
+
+				if (lines[j] != "") {
+
+					//create a table row 
+					var tableRow = table.appendChild(document
+							.createElement('tr'));
+
+					//split the rows at the cellTerminator character
+					var information = lines[j].split(cellTerminator);
+
+					for ( var k = 0; k < information.length; k++) {
+						//append the cell to the row
+						var cell = tableRow.appendChild(document
+								.createElement('td'));
+						cell.appendChild(document
+								.createTextNode(information[k]));
+
+					}
+
+				}
+
+			}
+
+		}
+		//end of parse csv
+
+		
+		//drop event handler
+		var drop = document.getElementById('drop');
+		function handleDrop(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			var files = e.dataTransfer.files;
+			var i, f;
+			for (i = 0, f = files[i]; i != files.length; ++i) {
+				var reader = new FileReader();
+				var name = f.name;
+				reader.onload = function(e) {
+					var data = e.target.result;
+					if (typeof Worker !== 'undefined') {
+						xlsxworker(data, process_wb);
+					} else {
+						var wb;
+						if (rABS) {
+							wb = XLSX.read(data, {
+								type : 'binary'
+							});
+						} else {
+							var arr = String.fromCharCode.apply(null,
+									new Uint8Array(data));
+							wb = XLSX.read(btoa(arr), {
+								type : 'base64'
+							});
+						}
+						process_wb(wb);
+					}
+				};
+				if (rABS)
+					reader.readAsBinaryString(f);
+				else
+					reader.readAsArrayBuffer(f);
+			}
+		}
+
+		function handleDragover(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			e.dataTransfer.dropEffect = 'copy';
+		}
+
+		if (drop.addEventListener) {
+			drop.addEventListener('dragenter', handleDragover, false);
+			drop.addEventListener('dragover', handleDragover, false);
+			drop.addEventListener('drop', handleDrop, false);
+		}
+		//end of drop event handler
+		
+		//label generaor
+		function printLabel(info){
+			var json_obj = JSON.parse(info);
+			var row_keys = getListKeys(json_obj);
+		}
+		
+		function getListKeys(lists_obj){
+			var list_keys = getKeys(lists_obj);
+			var list_key = list_keys[0];
+			
+			var single_row = lists_obj[list_key][0];
+			var single_row_keys = getKeys(single_row);
+			for (var key in single_row_keys)
+				alert(single_row[single_row_keys[key]]);
+			
+			return single_row_keys;
+		}
+		
+		function getKeys(json_obj){
+			var headers = new Array();
+			for (var key in json_obj){
+				headers.push(key);
+			};
+			return headers;
+		}
+		//end of label generator
+	</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-36810333-1' ]);
+		_gaq.push([ '_trackPageview' ]);
+
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+	<input type="button" value="DownLoad As Excel File (CSV Format)"
+		onclick="exportExcel()" >
+	<script type="text/javascript">
+		function exportExcel() {
+			var data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+			var csvContent = "data:text/csv;charset=utf-8,";
+			data.forEach(function(infoArray, index){
+
+			   dataString = infoArray.join(",");
+			   csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
+
+			});
+			
+			var encodedUri = encodeURI(csvContent);
+			var link = document.createElement("a");
+			link.setAttribute("href", encodedUri);
+			link.setAttribute("download", "my_data.csv");
+
+			link.click();
+
+		}
+	</script>
+</body>
+</html>
