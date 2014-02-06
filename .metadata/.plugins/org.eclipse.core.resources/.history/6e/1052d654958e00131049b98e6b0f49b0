@@ -1,0 +1,24 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Index Page</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; margin: 10px auto; width: 100%; text-align: center;">
+	<p>Services</p>
+	<br>
+	<div>
+		<a href="/exshipper_invoice" target="blank">ExShipper Invoice</a> <a
+			href="/exshipper_invoice_log_handler" target="blank"> Invoice Log</a>
+	</div>
+	<br>
+	<div>
+		<a href="/exshipper_spearnet" target="blank">Spearnet Page</a>
+	</div>
+	<br>
+</div>
+
+
+{% endblock %}

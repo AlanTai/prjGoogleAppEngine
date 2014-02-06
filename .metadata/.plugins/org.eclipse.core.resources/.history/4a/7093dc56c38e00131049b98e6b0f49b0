@@ -1,0 +1,29 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">SUDA Tracking Numbers</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> 
+	{% for single_row_data in suda_tracking_numbers %}
+	<p>
+		<span>SUDA Tracking Number: {{ single_row_data.tracking_number
+			}}</span> <span>Used Mark: {{ single_row_data.used_mark }}</span>
+	</p>
+	{% endfor %} <br>
+	<hr>
+</div>
+{% endblock %}

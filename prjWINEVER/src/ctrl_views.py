@@ -12,7 +12,7 @@ from google.appengine.api import mail
 import json
 
 from app_dict import key_value
-from models import Size, InvoiceInfo
+from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR
 
 
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates'))
@@ -231,7 +231,7 @@ class ExShipperSpearNetHandler(webapp2.RequestHandler):
         user_info = get_users_info(self,users)
         invoice_log_page = key_value.get('exshipper_spearnet_page')
             
-        template_values = {'title':key_value.get('eschipper_spearnet_title')}
+        template_values = {'title':key_value.get('exshipper_spearnet_title')}
         template_values.update(user_info)
             
         template = jinja_environment.get_template(invoice_log_page)
@@ -254,11 +254,51 @@ class ExShipperSpearNetHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(parser_page)
         self.response.out.write(template.render(template_values))
 
-#
+class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        invoice_log_page = key_value.get('exshipper_suda_tracking_number_handler_page')
+            
+        template_values = {'title':key_value.get('exshipper_suda_tracking_number_handler_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(invoice_log_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        ajax_data = {'suda_tracking_number_submission':'NA'}
+        if(self.request.get('fmt') == 'json'):
+            json_obj = json.loads(self.request.get('json_info'))
+            suda_number_array = json_obj['suda_tracking_numbers']
+            for row_info in suda_number_array:
+                new_suda_tr_number = SUDATrackingNumber_REGULAR()
+                new_suda_tr_number.tracking_number = row_info['suda_number']
+                new_suda_tr_number.used_mark = row_info['used_mark']
+                new_suda_tr_number.put()
+                
+            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+
+class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        test_page = '/exshipper/exshipper_spearnet_suda_tracking_number_handler.html'
+        suda_tracking_numbers = SUDATrackingNumber_REGULAR.query()
+            
+        template_values = {'title':key_value.get('exshipper_invoice_log_title'),
+                           'suda_numbers':suda_tracking_numbers}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(test_page)
+        self.response.out.write(template.render(template_values))
+
+#page for testing only
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
-        test_page = '/exshipper/exshipper_test.html'
+        test_page = '/exshipper/exshipper_spearnet_suda_number_handler.html'
             
         template_values = {'title':key_value.get('exshipper_invoice_log_title')}
         template_values.update(user_info)
@@ -309,4 +349,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_test', TestHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDANumberHandler), ('/exshipper_test', TestHandler)], debug=True)

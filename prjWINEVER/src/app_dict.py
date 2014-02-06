@@ -53,6 +53,8 @@ key_value = {
              'exshipper_invoice_log__login_page':'/exshipper/exshipper_invoice_log_login.html',
              'exshipper_invoice_log_page':'/exshipper/exshipper_invoice_log.html',
              'exshipper_invoice_log_title':'ExShipper Invoice Log',
+             'exshipper_suda_tracking_number_handler_page':'/exshipper/exshipper_suda_tracking_number_handler.html',
+             'exshipper_suda_tracking_number_handler_title':'ExShipper SUDA Tracking Number Handler',
              'exshipper_spearnet_page':'/exshipper/exshipper_spearnet.html',
              'exshipper_spearnet_title':'ExShipper SpearNet',
              'exshipper_spearnet_xls_page':'/exshipper/exshipper_xls_parser.html',

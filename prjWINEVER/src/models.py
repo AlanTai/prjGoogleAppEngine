@@ -7,6 +7,7 @@ Created on Jan 25, 2014
 from google.appengine.ext import ndb
 
     
+#invoice model
 class Size(ndb.Model):
     length = ndb.StringProperty()
     width = ndb.StringProperty()
@@ -26,3 +27,12 @@ class InvoiceInfo(ndb.Model):
     
     date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
+#end of invoice model
+
+#SUDA tracking number
+class SUDATrackingNumber_REGULAR(ndb.Model):
+    tracking_number = ndb.StringProperty()
+    used_mark = ndb.StringProperty()
+    date_time = ndb.DateTimeProperty(auto_now_add = True)
+    update_date_time = ndb.DateTimeProperty(auto_now = True)
+#end if SUDA tracking number
