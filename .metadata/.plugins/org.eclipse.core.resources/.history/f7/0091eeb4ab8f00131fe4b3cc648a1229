@@ -1,0 +1,24 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper SpearNet Page</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; margin: 10px auto; width: 100%; text-align: center;">
+	<p>Services</p>
+	<form name="exShipper_spearNet_data_exchange" method="post" action="/exshipper_spearnet">
+		<br> <input id="rYes" type="radio" name="XLSX_XLS" value="XLSX"
+			onclick="this.form.submit();"> <label for="r_xlsx">XLSX Data Exchange
+			Page</label><br>
+		<input id="rNo" type="radio" name="XLSX_XLS" value="XLS"
+			onclick="this.form.submit();"> <label for="r_xls">XLS
+			Data Exchange Page</label><br>
+	</form>
+	<br>
+	
+	<form action="/exshipper_spearnet_suda_tracking_number_handler"></form>
+	<a href="/exshipper_spearnet_suda_tracking_number_handler" target="blank">SUDA Tracking Numbers</a>
+</div>
+{% endblock %}

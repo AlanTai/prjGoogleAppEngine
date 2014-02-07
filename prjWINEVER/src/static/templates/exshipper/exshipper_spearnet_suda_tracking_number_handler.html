@@ -17,12 +17,16 @@
 
 <div
 	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	{% if suda_numbers %}
 	<br> {% for suda_tracking_number in suda_numbers %}
 	<p>
 		<span>SUDA Tracking Number: {{ suda_tracking_number.tracking_number
 			}}</span>
 	</p>
 	{% endfor %} <br>
+	{% else %}
+	<p>No New Tracking Number</p>
+	{% endif %}
 	<hr>
 </div>
 {% endblock %}

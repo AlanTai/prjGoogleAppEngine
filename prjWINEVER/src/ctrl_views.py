@@ -282,21 +282,28 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
             return
 
 class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
-    def get(self):
+    def post(self):
         user_info = get_users_info(self,users)
-        test_page = '/exshipper/exshipper_spearnet_suda_tracking_number_handler.html'
-        suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(5)
-        for suda_tracking_number in suda_tracking_numbers:
-            suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
-            suda_entity.used_mark = 'TRUE'
-            suda_entity.put()
+        spearnet_account = self.request.get('spearnet_account')
+        spearnet_password = self.request.get('spearnet_password')
+        
+        if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
+            test_page = '/exshipper/exshipper_spearnet_suda_tracking_number_handler.html'
+            suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
+            for suda_tracking_number in suda_tracking_numbers:
+                suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
+                suda_entity.used_mark = 'TRUE'
+                suda_entity.put()
+                    
+            template_values = {'title':key_value.get('exshipper_invoice_log_title'),
+                               'suda_numbers':suda_tracking_numbers}
+            template_values.update(user_info)
                 
-        template_values = {'title':key_value.get('exshipper_invoice_log_title'),
-                           'suda_numbers':suda_tracking_numbers}
-        template_values.update(user_info)
-            
-        template = jinja_environment.get_template(test_page)
-        self.response.out.write(template.render(template_values))
+            template = jinja_environment.get_template(test_page)
+            self.response.out.write(template.render(template_values))
+        else:
+            self.response.headers['Content-Type'] = 'text/plain'
+            self.response.write('Account or Password Are Incorrect!')
 
 #page for testing only
 class TestHandler(webapp2.RequestHandler):
