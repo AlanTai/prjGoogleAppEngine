@@ -271,7 +271,7 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
             json_obj = json.loads(self.request.get('json_info'))
             suda_number_array = json_obj['suda_tracking_numbers']
             for row_info in suda_number_array:
-                new_suda_tr_number = SUDATrackingNumber_REGULAR()
+                new_suda_tr_number = SUDATrackingNumber_REGULAR(id = row_info['suda_number'])
                 new_suda_tr_number.tracking_number = row_info['suda_number']
                 new_suda_tr_number.used_mark = row_info['used_mark']
                 new_suda_tr_number.put()
@@ -285,8 +285,12 @@ class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
         test_page = '/exshipper/exshipper_spearnet_suda_tracking_number_handler.html'
-        suda_tracking_numbers = SUDATrackingNumber_REGULAR.query()
-            
+        suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(5)
+        for suda_tracking_number in suda_tracking_numbers:
+            suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
+            suda_entity.used_mark = 'TRUE'
+            suda_entity.put()
+                
         template_values = {'title':key_value.get('exshipper_invoice_log_title'),
                            'suda_numbers':suda_tracking_numbers}
         template_values.update(user_info)
