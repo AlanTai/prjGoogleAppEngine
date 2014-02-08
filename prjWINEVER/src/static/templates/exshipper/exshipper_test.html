@@ -1,5 +1,6 @@
+{% extends "/exshipper/exshipper_base.html"%}
 
-<!DOCTYPE html>
+{% block css_content %}
 <style>
 #drop{
 	border:2px dashed #bbb;
@@ -14,6 +15,10 @@
 	width:100%;
 }
 </style>
+{% endblock %}
+
+
+{% block main_content %}
 <b>JS-XLS Live Demo</b><br />
 <input type="radio" name="format" value="csv" checked> CSV<br>
 <input type="radio" name="format" value="json"> JSON<br>
@@ -160,3 +165,4 @@ if(drop.addEventListener) {
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 </script>
+{% endblock %}

@@ -11,6 +11,8 @@
 
 <link type="text/css" rel="stylesheet"
 	href="/css/exshipper/css_exshipper.css" />
+{% block css_content %}
+{% endblock %}
 
 <script src="http://www.google.com/jsapi"></script>
 
@@ -18,9 +20,10 @@
 <script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
 <script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
 <script type="text/javascript" src="/js/exshipper/js_exshipper.js"></script>
+{% block js_content %}
+{% endblock %}
 
 <title>{{ title }}</title>
-
 </head>
 <body>
 	{% block main_content %}

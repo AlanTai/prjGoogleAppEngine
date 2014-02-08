@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-<title>JS-XLSX Live Demo</title>
-
-<link type="text/css" rel="stylesheet"
-	href="/css/exshipper/css_exshipper.css" />
-
-
-<script src="/js/exshipper/jszip.js"></script>
-<script src="/js/exshipper/xlsx.js"></script>
-<script src="/js/exshipper/shim.js"></script>
-<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
-<script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
-
+{% extends "/exshipper/exshipper_base.html"%} {% block css_content %}
 <style>
 #drop {
 	border: 2px dashed #bbb;
@@ -31,8 +15,13 @@
 	width: 100%;
 }
 </style>
-</head>
-<body>
+{% endblock %} {% block js_content %}
+<script src="/js/exshipper/jszip.js"></script>
+<script src="/js/exshipper/xlsx.js"></script>
+<script src="/js/exshipper/shim.js"></script>
+{% endblock %}
+
+{% block main_content %}
 	<b>JS-XLSX (XLSX/XLSB/XLSM) Live Demo</b>
 	<br />
 	<br />
@@ -407,5 +396,4 @@
 
 		}
 	</script>
-</body>
-</html>
+{% endblock %}

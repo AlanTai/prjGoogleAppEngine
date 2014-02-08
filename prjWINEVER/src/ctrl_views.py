@@ -309,7 +309,7 @@ class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
-        test_page = '/exshipper/exshipper_spearnet_suda_number_handler.html'
+        test_page = '/exshipper/exshipper_test.html'
             
         template_values = {'title':key_value.get('exshipper_invoice_log_title')}
         template_values.update(user_info)
