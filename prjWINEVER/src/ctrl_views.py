@@ -86,7 +86,7 @@ class ContactPageDispatcher(webapp2.RequestHandler):
             body = self.request.get('body')
             
             #pass info. to email function
-            result = send_email(receiver_address, sender_address, subject, body)
+            result = exwine_send_email(receiver_address, sender_address, subject, body)
             
             ajax_data['email_confirmation'] = result['email_status']
             self.response.out.headers['Content-Type'] = 'text/json'
@@ -290,17 +290,21 @@ class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
         if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
             test_page = '/exshipper/exshipper_spearnet_suda_tracking_number_handler.html'
             suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
-            for suda_tracking_number in suda_tracking_numbers:
-                suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
-                suda_entity.used_mark = 'TRUE'
-                suda_entity.put()
+            
+            if suda_tracking_numbers:
+                for suda_tracking_number in suda_tracking_numbers:
+                    suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
+                    suda_entity.used_mark = 'TRUE'
+                    suda_entity.put()
+                        
+                template_values = {'title':key_value.get('exshipper_invoice_log_title'),
+                                   'suda_numbers':suda_tracking_numbers}
+                template_values.update(user_info)
                     
-            template_values = {'title':key_value.get('exshipper_invoice_log_title'),
-                               'suda_numbers':suda_tracking_numbers}
-            template_values.update(user_info)
-                
-            template = jinja_environment.get_template(test_page)
-            self.response.out.write(template.render(template_values))
+                template = jinja_environment.get_template(test_page)
+                self.response.out.write(template.render(template_values))
+            else:
+                exshipper_send_email('jerry@spearnet-us.com','koseioyama@gmail.com','Notice for SUDA Tracking Number Shortage','')
         else:
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Account or Password Are Incorrect!')
@@ -319,8 +323,26 @@ class TestHandler(webapp2.RequestHandler):
 
 
 #self-defined functions
-#send email
-def send_email(receiver, sender, subject, body):
+
+#ExShipper Send email
+def exshipper_send_email(receiver, sender, subject, body):
+    result = {'email_status':'unknown'}
+    email_host = 'rainman.tai@gmail.com'
+    if not mail.is_email_valid(receiver):
+        result['email_status'] = 'invalid_email'
+    else:
+        try:
+            receiver_email_content = 'Notice: The SUDA tracking number ran out and new numbers will be ready soon. If you have further questions, please contact ExShipper.'
+            mail.send_mail(email_host, receiver, subject, receiver_email_content)
+            sender_email_content  = 'Notice: The SUDA tracking number ran out. Please update the database!'
+            mail.send_mail(email_host, receiver, subject, sender_email_content)
+            result['email_status'] = 'success'
+        except:
+            result['email_status'] = 'fail'
+    return result
+
+#ExWINE send email
+def exwine_send_email(receiver, sender, subject, body):
     
     result = {'email_status':'unknown'}
     email_host = 'rainman.tai@gmail.com'
@@ -329,10 +351,10 @@ def send_email(receiver, sender, subject, body):
         result['email_status'] = 'invalid_email'
     else:
         try:
-            receiver_email = 'Thank you very much for contacting ExWINE.\n'+'Your Question or Comments:\n'+body
-            mail.send_mail(email_host, receiver, subject, receiver_email)
-            sender_email = 'Question or Comments from '+receiver+':\n'+body
-            mail.send_mail(email_host, sender, subject, sender_email)
+            receiver_email_content = 'Thank you very much for contacting ExWINE.\n'+'Your Question or Comments:\n'+body
+            mail.send_mail(email_host, receiver, subject, receiver_email_content)
+            sender_email_content = 'Question or Comments from '+receiver+':\n'+body
+            mail.send_mail(email_host, sender, subject, sender_email_content)
             
             result['email_status'] = 'success'
         except:
