@@ -7,7 +7,7 @@ Created on Oct 1, 2013
 from webapp2_extras import sessions, sessions_memcache
 import uuid
 import logging
-
+from google.appengine.ext import ndb
 __author__ = 'Alan Tai'
 
 import webapp2

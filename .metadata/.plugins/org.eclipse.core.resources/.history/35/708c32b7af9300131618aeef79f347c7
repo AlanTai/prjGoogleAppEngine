@@ -7,13 +7,13 @@ Created on Oct 1, 2013
 from webapp2_extras import sessions, sessions_memcache
 import uuid
 import logging
-
+from google.appengine.ext import ndb
 __author__ = 'Alan Tai'
 
 import webapp2
 import jinja2
 import os
-from google.appengine.api import users, mail, memcache
+from google.appengine.api import users, mail, memcache, channel
 import json
 
 from app_dict import key_value
