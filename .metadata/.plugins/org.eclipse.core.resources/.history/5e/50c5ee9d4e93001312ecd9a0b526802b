@@ -1,0 +1,442 @@
+#-*- coding: utf-8 -*-
+'''
+Created on Oct 1, 2013
+
+@author: Alan Tai
+'''
+from webapp2_extras import sessions, sessions_memcache
+import uuid
+import logging
+__author__ = 'Alan Tai'
+
+import webapp2
+import jinja2
+import os
+from google.appengine.api import users, mail, memcache, channel
+import json
+
+from app_dict import key_value
+from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, Channels
+
+jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates'))
+#jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates/exshipper'))
+
+
+#default index page
+class ExWINE(webapp2.RequestHandler):
+    def get(self):
+        
+        user_info = get_users_info(self,users)
+            
+        template_values = {
+                           'title' : key_value.get('index_title'),
+                           'page_tag': key_value.get('page_tag_index')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(key_value.get('index_page'))
+        self.response.out.write(template.render( template_values))
+        
+#info. page dispatcher
+class InfoPageDispatcher(webapp2.RedirectHandler):
+    def post(self):
+        if self.request.get('fmt') == 'json':
+            ajax_data = {'submission':'Done'}
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+    
+    def get(self):
+        #default info
+        user_info = get_users_info(self,users)
+        
+        info_page = key_value.get('index_page')
+        title_page = key_value.get('index_title')
+        request_page = self.request.get('info_page_request')
+        
+        if request_page:
+            
+            if request_page == key_value.get('request_page_services'):
+                info_page = key_value.get('service_page')
+                title_page = key_value.get('service_title')
+                
+            elif request_page == key_value.get('request_page_logistics'):
+                info_page = key_value.get('logistics_page')
+                title_page = key_value.get('logistics_title')
+                
+            elif request_page == key_value.get('request_page_logistics_requirement'):
+                info_page = key_value.get('logistics_requirement_page')
+                title_page = key_value.get('logistics_requirement_title')
+                
+            elif request_page == key_value.get('request_page_question_answer'):
+                info_page = key_value.get('question_answer_page')
+                title_page = key_value.get('question_answer_title')
+            
+        template_values = {'title': title_page,
+                           'page_tag': key_value.get('page_tag_link_page') }
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(info_page)
+        self.response.out.write(template.render(template_values))
+        
+#contact page dispatcher
+class ContactPageDispatcher(webapp2.RequestHandler):
+    def post(self):
+        ajax_data = {'email_confirmation':'unknown'}
+        if self.request.get('fmt') == 'json':
+            receiver_address = self.request.get('receiver_address')
+            sender_address = self.request.get('sender_address')
+            subject = self.request.get('subject')
+            body = self.request.get('body')
+            
+            #pass info. to email function
+            result = exwine_send_email(receiver_address, sender_address, subject, body)
+            
+            ajax_data['email_confirmation'] = result['email_status']
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+        else:
+            ajax_data['email_confirmation'] = 'wrong_data_format'
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+        
+        
+    #dispatching request
+    def get(self):
+        
+        #default info
+        user_info = get_users_info(self,users)
+        request_page = self.request.get('contact_info_request')
+        
+        contact_page = key_value.get('index_page')
+        title_page = key_value.get('index_title')
+        
+        if request_page:
+            if request_page == key_value.get('request_page_contact_exshipper'):
+                contact_page = key_value.get('contact_exshipper_page')
+                title_page = key_value.get('contact_exshipper_title')
+                receiver_email = 'koseioyama@gmail.com'
+            elif request_page == key_value.get('request_page_contact_winever'):
+                contact_page = key_value.get('contact_winever_page')
+                title_page = key_value.get('contact_winever_title')
+                receiver_email = 'winever.tw@gmail.com'
+        
+        template_values = {'title': title_page,
+                           'page_tag':key_value.get('page_tag_link_page'),
+                           'receiver':receiver_email}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(contact_page)
+        self.response.out.write(template.render(template_values))
+
+
+class ExShipperIndexHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        index_page = key_value.get('exshipper_index_page')
+        
+        template_values = {'title':key_value.get('exshipper_index_page_title')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(index_page)
+        self.response.out.write(template.render(template_values))
+
+class ExShipperInvoiceLoginHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        invoice_page = key_value.get('exshipper_invoice_login_page')
+        
+        template_values = {'title':key_value.get('exshipper_invoice_login_title')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(invoice_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        user_info = get_users_info(self,users)
+        invoice_account = self.request.get('invoice_account')
+        invoice_password = self.request.get('invoice_password')
+        
+        if((invoice_account == 'alantai') and (invoice_password == 'lct1014')):
+            invoice_page = key_value.get('exshipper_invoice_page')
+            
+            template_values = {'title':key_value.get('exshipper_invoice_title')}
+            template_values.update(user_info)
+            
+            template = jinja_environment.get_template(invoice_page)
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect('/exshipper_invoice')
+
+class ExShipperInvoiceInfoHandler(webapp2.RedirectHandler):
+    def post(self):
+        ajax_data = {'invoice_info_submission':'NA'}
+        if(self.request.get('fmt') == 'json'):
+            
+            new_size =Size()
+            new_size.length = self.request.get('valid_size_length')
+            new_size.width = self.request.get('valid_size_width')
+            new_size.height = self.request.get('valid_size_height')
+            
+            new_size.put()
+            
+            new_invoice = InvoiceInfo()
+            new_invoice.yamato_tr_number = self.request.get('valid_yamato_tr_number')
+            new_invoice.ref_number = self.request.get('valid_ref_number')
+            new_invoice.shipper = self.request.get('valid_shipper')
+            new_invoice.consignee_english = self.request.get('valid_consignee_en')
+            new_invoice.consignee_chinese = self.request.get('valid_consignee_ch')
+            new_invoice.address = self.request.get('valid_address')
+            new_invoice.consignee_phone_number = self.request.get('valid_phone_number')
+            new_invoice.weight = self.request.get('valid_weight')
+            new_invoice.size = new_size
+            
+            new_invoice.put()
+            
+            ajax_data['invoice_info_submission'] = 'Data saved into database'
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+
+class ExShipperInvoiceLogHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        invoice_log_page = key_value.get('exshipper_invoice_log__login_page')
+            
+        template_values = {'title':key_value.get('exshipper_invoice_log_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(invoice_log_page)
+        self.response.out.write(template.render(template_values))
+    
+    def post(self):
+        user_info = get_users_info(self,users)
+        invoice_account = self.request.get('invoice_account')
+        invoice_password = self.request.get('invoice_password')
+        
+        if((invoice_account == 'alantai') and (invoice_password == 'lct1014')):
+            invoice_log_page = key_value.get('exshipper_invoice_log_page')
+            #log_invoice = InvoiceInfo.query()
+            
+            #use memcache
+            #ignore the undefined variable because both def get() and add() work fine
+            data = memcache.get('invoice_log')
+            if data is not None:
+                log_invoice = data
+            else:
+                data = InvoiceInfo.query()
+                memcache.add('invoice_log', data, 1000)
+                log_invoice = data
+            #end of memcache
+            
+            template_values = {'title':key_value.get('exshipper_invoice_log_title'),
+                               'invoice_log':log_invoice}
+            template_values.update(user_info)
+            
+            template = jinja_environment.get_template(invoice_log_page)
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect('/exshipper_invoice_log_handler')
+        
+        
+class ExShipperSpearNetHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        invoice_log_page = key_value.get('exshipper_spearnet_page')
+            
+        template_values = {'title':key_value.get('exshipper_spearnet_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(invoice_log_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        user_info = get_users_info(self,users)
+        data_format = self.request.get('XLSX_XLS')
+        
+        if(data_format == 'XLS'):
+            parser_page = key_value.get('exshipper_spearnet_xls_page')
+            parser_page_title = key_value.get('exshipper_spearnet_xls_title')
+        elif (data_format == 'XLSX'):
+            parser_page = key_value.get('exshipper_spearnet_xlsx_page')
+            parser_page_title = key_value.get('exshipper_spearnet_xlsx_title')
+            
+        template_values = {'title':parser_page_title}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(parser_page)
+        self.response.out.write(template.render(template_values))
+
+class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        invoice_log_page = key_value.get('exshipper_suda_tracking_number_handler_page')
+            
+        template_values = {'title':key_value.get('exshipper_suda_tracking_number_handler_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(invoice_log_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        ajax_data = {'suda_tracking_number_submission':'NA'}
+        if(self.request.get('fmt') == 'json'):
+            json_obj = json.loads(self.request.get('json_info'))
+            suda_number_array = json_obj['suda_tracking_numbers']
+            for row_info in suda_number_array:
+                new_suda_tr_number = SUDATrackingNumber_REGULAR(id = row_info['suda_number'])
+                new_suda_tr_number.tracking_number = row_info['suda_number']
+                new_suda_tr_number.used_mark = row_info['used_mark']
+                new_suda_tr_number.put()
+                
+            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+            return
+
+class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
+    def post(self):
+        user_info = get_users_info(self,users)
+        spearnet_account = self.request.get('spearnet_account')
+        spearnet_password = self.request.get('spearnet_password')
+        
+        if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
+            test_page = '/exshipper/exshipper_spearnet_suda_tracking_number_handler.html'
+            suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
+            
+            if suda_tracking_numbers:
+                for suda_tracking_number in suda_tracking_numbers:
+                    suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
+                    suda_entity.used_mark = 'TRUE'
+                    suda_entity.put()
+                        
+                template_values = {'title':key_value.get('exshipper_invoice_log_title'),
+                                   'suda_numbers':suda_tracking_numbers}
+                template_values.update(user_info)
+                    
+                template = jinja_environment.get_template(test_page)
+                self.response.out.write(template.render(template_values))
+            else:
+                exshipper_send_email('jerry@spearnet-us.com','koseioyama@gmail.com','Notice for SUDA Tracking Number Shortage','')
+        else:
+            self.response.headers['Content-Type'] = 'text/plain'
+            self.response.write('Account or Password Are Incorrect!')
+
+#page for testing only
+class TestHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        test_page = '/exshipper/exshipper_test.html'
+            
+        template_values = {'title':key_value.get('exshipper_invoice_log_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(test_page)
+        self.response.out.write(template.render(template_values))
+
+
+#channel test
+logging.getLogger().setLevel(logging.DEBUG)
+class ChannelHandler(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        
+        if users:
+            logging.debug('user (id: '+user.user_id()+') has logged in')
+            channel_id = user.user_id()
+            chat_token = channel.create_channel(channel_id)
+            template_values = {
+                             'nickname' : user.nickname(),
+                             'user_id' : user.user_id(),
+                             'channel_id' : channel_id,
+                             'chat_token' : chat_token}
+            
+            template = jinja_environment.get_template('/exshipper/chat_home.html')
+            self.response.out.write(template.render(template_values))
+            
+class PostMsgHandler(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        
+        if user:
+            template_values = {}
+            template = jinja_environment.get_template('post_message.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(users.create_login_url(self.request.uri))
+            
+    def post(self):
+        user = users.get_current_user()
+        message = '%s said %s </br>' % (user.nickname(), self.request.get('message'))
+        all_channels = Channels.query().fetch(1000)
+        for c in all_channels:
+            channel_msg = json.dumps({'success':True, 'html':message})
+            logging.debug('sending message to : '+c.channel_id)
+            channel.send_message(c.client_id, channel_msg)
+            
+        template_values = {}
+        template = jinja_environment.get_template('/exshipper/post_message.html')
+#end of channel
+
+#self-defined functions
+
+#ExShipper Send email
+def exshipper_send_email(receiver, sender, subject, body):
+    result = {'email_status':'unknown'}
+    email_host = 'rainman.tai@gmail.com'
+    if not mail.is_email_valid(receiver):
+        result['email_status'] = 'invalid_email'
+    else:
+        try:
+            receiver_email_content = 'Notice: The SUDA tracking number ran out and new numbers will be ready soon. If you have further questions, please contact ExShipper.'
+            mail.send_mail(email_host, receiver, subject, receiver_email_content)
+            sender_email_content  = 'Notice: The SUDA tracking number ran out. Please update the database!'
+            mail.send_mail(email_host, receiver, subject, sender_email_content)
+            result['email_status'] = 'success'
+        except:
+            result['email_status'] = 'fail'
+    return result
+
+#ExWINE send email
+def exwine_send_email(receiver, sender, subject, body):
+    
+    result = {'email_status':'unknown'}
+    email_host = 'rainman.tai@gmail.com'
+    if not mail.is_email_valid(receiver):
+        #response invalid information back to webpage
+        result['email_status'] = 'invalid_email'
+    else:
+        try:
+            receiver_email_content = 'Thank you very much for contacting ExWINE.\n'+'Your Question or Comments:\n'+body
+            mail.send_mail(email_host, receiver, subject, receiver_email_content)
+            sender_email_content = 'Question or Comments from '+receiver+':\n'+body
+            mail.send_mail(email_host, sender, subject, sender_email_content)
+            
+            result['email_status'] = 'success'
+        except:
+            result['email_status'] = 'fail'
+    
+    return result
+
+#get users info
+def get_users_info(self,users):
+    if users.get_current_user():
+        user_account = users.get_current_user()
+        url = users.create_logout_url(self.request.uri)
+        url_linktxt = key_value.get('logout_txt')
+    else:
+        user_account = key_value.get('unknown_user_txt')
+        url = users.create_login_url(self.request.uri)
+        url_linktxt = key_value.get('login_txt')
+        
+    values = {
+              'user_account': user_account,
+              'url': url,
+              'url_linktxt': url_linktxt}
+    return values
+#end of self-defined functions
+
+
+#set url
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDANumberHandler), ('/exshipper_test', TestHandler)], debug=True)

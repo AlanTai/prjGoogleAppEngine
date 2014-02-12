@@ -4,16 +4,20 @@ Created on Oct 1, 2013
 
 @author: Alan Tai
 '''
+from webapp2_extras import sessions, sessions_memcache
+import uuid
+import logging
+from google.appengine.ext import ndb
+__author__ = 'Alan Tai'
+
 import webapp2
 import jinja2
 import os
-from google.appengine.api import users
-from google.appengine.api import mail
+from google.appengine.api import users, mail, memcache, channel
 import json
 
 from app_dict import key_value
-from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR
-
+from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, Channels
 
 jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates'))
 #jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates/exshipper'))
@@ -214,7 +218,18 @@ class ExShipperInvoiceLogHandler(webapp2.RequestHandler):
         
         if((invoice_account == 'alantai') and (invoice_password == 'lct1014')):
             invoice_log_page = key_value.get('exshipper_invoice_log_page')
-            log_invoice = InvoiceInfo.query()
+            #log_invoice = InvoiceInfo.query()
+            
+            #use memcache
+            #ignore the undefined variable because both def get() and add() work fine
+            data = memcache.get('invoice_log')
+            if data is not None:
+                log_invoice = data
+            else:
+                data = InvoiceInfo.query()
+                memcache.add('invoice_log', data, 1000)
+                log_invoice = data
+            #end of memcache
             
             template_values = {'title':key_value.get('exshipper_invoice_log_title'),
                                'invoice_log':log_invoice}
@@ -320,8 +335,6 @@ class TestHandler(webapp2.RequestHandler):
             
         template = jinja_environment.get_template(test_page)
         self.response.out.write(template.render(template_values))
-
-
 #self-defined functions
 
 #ExShipper Send email
@@ -382,4 +395,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDANumberHandler), ('/exshipper_test', TestHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDANumberHandler), ('/exshipper_test', TestHandler), ('/channel_handler', ChannelHandler),('/post', PostMsgHandler), ('/logout', Logout), ('/_ah/channel/disconnected/',Disconnected), ('/_ah/connected', Connected)], debug=True)

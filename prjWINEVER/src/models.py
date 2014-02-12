@@ -36,3 +36,5 @@ class SUDATrackingNumber_REGULAR(ndb.Model):
     date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 #end if SUDA tracking number
+
+#end of channel

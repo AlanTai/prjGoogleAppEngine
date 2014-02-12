@@ -1040,6 +1040,7 @@ flags_modules_for_testing.__init__|C:\Program Files (x86)\Google\google_appengin
 flags_modules_for_testing.module_bar|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_bar.py
 flags_modules_for_testing.module_baz|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_baz.py
 flags_modules_for_testing.module_foo|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_foo.py
+gaeDatastoreHandler|D:\prjGoogleAppEngine\prjWINEVER\src\gaeDatastoreHandler.py
 gen_protorpc|C:\Program Files (x86)\Google\google_appengine\gen_protorpc.py
 gflags_googletest|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\gflags_googletest.py
 gflags_helpxml_test|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\gflags_helpxml_test.py

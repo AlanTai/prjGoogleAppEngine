@@ -24,6 +24,9 @@ handlers:
 - url: /.*
   script: ctrl_views.app
 
+inbound_services:
+ - channel_presence
+
 libraries:
 - name: webapp2
   version: latest
