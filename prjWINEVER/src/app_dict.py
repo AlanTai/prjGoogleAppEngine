@@ -58,7 +58,7 @@ key_value = {
              'exshipper_spearnet_page':'/exshipper/exshipper_spearnet.html',
              'exshipper_spearnet_title':'ExShipper SpearNet',
              'exshipper_spearnet_xls_page':'/exshipper/exshipper_xls_parser.html',
-             'exshipper_spearnet_xls_title':'/exshipper/exshipper_xls_parser_title',
+             'exshipper_spearnet_xls_title':'XLS Parser',
              'exshipper_spearnet_xlsx_page':'/exshipper/exshipper_xlsx_parser.html',
-             'exshipper_spearnet_xlsx_title':'/exshipper_xlsx_parser_title'
+             'exshipper_spearnet_xlsx_title':'XLSX Parser'
              }

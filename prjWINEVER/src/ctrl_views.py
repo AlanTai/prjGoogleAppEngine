@@ -324,6 +324,16 @@ class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Account or Password Are Incorrect!')
 
+#custom number handler for Android App
+class ExshipperCustomEntryHandler(webapp2.RequestHandler):
+    def post(self):
+        account = self.request.get('account')
+        password = self.request.get('password')
+        if(account == 'alantai' and password == '1014'):
+            self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
+            self.response.write('{"custom_number":"測試504PW213"}')
+
+
 #page for testing only
 class TestHandler(webapp2.RequestHandler):
     def get(self):
@@ -395,4 +405,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDANumberHandler), ('/exshipper_test', TestHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDANumberHandler), ('/exshipper_test', TestHandler), ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler)], debug=True)
