@@ -2,8 +2,6 @@
 -- START DISKCACHE
 D:\prjGoogleAppEngine\.metadata\.plugins\org.eclipse.core.resources\.projects\prjWINEVER\com.python.pydev.analysis\v1_indexcache
 .v1_indexcache
-models|0|D:\prjGoogleAppEngine\prjWINEVER\src\models.py
-gaeDatastoreHandler|0|D:\prjGoogleAppEngine\prjWINEVER\src\gaeDatastoreHandler.py
 ctrl_views|0|D:\prjGoogleAppEngine\prjWINEVER\src\ctrl_views.py
 app_dict|0|D:\prjGoogleAppEngine\prjWINEVER\src\app_dict.py
 -- END DISKCACHE
@@ -51,7 +49,7 @@ tes|1|TestHandler!9@
 20
 add|1|address!5&27@
 app|0|
-con|3|consignee_phone_number!5&27@consignee_chinese!5&27@consignee_english!5&27@
+con|3|consignee_english!5&27@consignee_phone_number!5&27@consignee_chinese!5&27@
 dat|2|date_time!6&27@date_time!5&27@
 exs|0|
 exw|0|
