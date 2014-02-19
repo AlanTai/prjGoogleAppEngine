@@ -64,11 +64,20 @@ key_value = {
              
              
              #ExShipper-Spearnet Session
-             'exshipper_spearnet_page':'/exshipper/exshipper_spearnet.html',
-             'exshipper_spearnet_title':'ExShipper SpearNet',
+             'exshipper_spearnet_index_page':'/exshipper/exshipper_spearnet_index.html',
+             'exshipper_spearnet_index_page_title':'ExShipper Spearnet Index Page',
+             
+             'exshipper_spearnet_data_exchange_page':'/exshipper/exshipper_spearnet_data_exchange_page.html',
+             'exshipper_spearnet_data_exchange_page_title':'ExShipper SpearNet Data Exchange Page',
+             
              'exshipper_spearnet_login_page':'/exshipper/exshipper_spearnet_login.html',
+             'exshipper_spearnet_login_page_title':'ExShipper Spearnet Login Page',
+             
              'exshipper_spearnet_xls_page':'/exshipper/exshipper_xls_parser.html',
              'exshipper_spearnet_xls_title':'XLS Parser',
              'exshipper_spearnet_xlsx_page':'/exshipper/exshipper_xlsx_parser.html',
-             'exshipper_spearnet_xlsx_title':'XLSX Parser'
+             'exshipper_spearnet_xlsx_title':'XLSX Parser',
+             
+             'exshipper_spearnet_suda_tracking_number_download_page':'/exshipper/exshipper_spearnet_suda_tracking_number_download.html',
+             'exshipper_spearnet_suda_tracking_number_download_page_title':'SUDA Tracking Number Download'
              }

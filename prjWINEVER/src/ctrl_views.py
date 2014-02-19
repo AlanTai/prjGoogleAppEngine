@@ -235,36 +235,6 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             self.response.out.write(json.dumps(ajax_data))
             return
 
-#exshipper spearnet data-exchange handler
-
-
-class ExShipperSpearNetDataExchangeHandler(webapp2.RequestHandler):
-    def get(self):
-        user_info = get_users_info(self,users)
-        invoice_log_page = key_value.get('exshipper_spearnet_page')
-            
-        template_values = {'title':key_value.get('exshipper_spearnet_title')}
-        template_values.update(user_info)
-            
-        template = jinja_environment.get_template(invoice_log_page)
-        self.response.out.write(template.render(template_values))
-        
-    def post(self):
-        user_info = get_users_info(self,users)
-        data_format = self.request.get('XLSX_XLS')
-        
-        if(data_format == 'XLS'):
-            parser_page = key_value.get('exshipper_spearnet_xls_page')
-            parser_page_title = key_value.get('exshipper_spearnet_xls_title')
-        elif (data_format == 'XLSX'):
-            parser_page = key_value.get('exshipper_spearnet_xlsx_page')
-            parser_page_title = key_value.get('exshipper_spearnet_xlsx_title')
-            
-        template_values = {'title':parser_page_title}
-        template_values.update(user_info)
-            
-        template = jinja_environment.get_template(parser_page)
-        self.response.out.write(template.render(template_values))
 
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
     def get(self):
@@ -292,6 +262,97 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
             return
+
+
+#-- Client Spearnet Session
+class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        exshipper_spearnet_index_page = key_value.get('exshipper_spearnet_index_page')
+        
+        template_values = {'title':key_value.get('exshipper_spearnet_index_page_title')}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(exshipper_spearnet_index_page)
+        self.response.out.write(template.render(template_values))
+
+class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        login_page = key_value.get('exshipper_spearnet_login_page')
+        
+        caller_page = self.request.get('caller_page')
+        
+        template_values = {'title':key_value.get('exshipper_spearnet_login_page_title'),'caller_page':caller_page}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(login_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        user_info = get_users_info(self,users)
+        caller_page = self.request.get('caller_page')
+        spearnet_account = self.request.get('spearnet_account')
+        spearnet_password = self.request.get('spearnet_password')
+        template_values = {}
+        
+        html_page = key_value.get('exshipper_invalid_login_page')
+        html_page_title = key_value.get('exshipper_invalid_login_page_title')
+        
+        #html page dispatching
+        if(caller_page == 'exshipper_spearnet_data_exchange'):
+            if(spearnet_account == 'spearnet' and spearnet_password == '1941dataexchange'):
+                html_page = key_value.get('exshipper_spearnet_data_exchange_page')
+                html_page_title = key_value.get('exshipper_spearnet_data_exchange_page_title')
+                
+        elif(caller_page == 'exshipper_spearnet_suda_tracking_number_download'):
+            if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
+                html_page = key_value.get('exshipper_spearnet_suda_tracking_number_download_page')
+                suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
+                template_values = {'title':key_value.get('exshipper_spearnet_suda_tracking_number_download_page_title')}
+                
+                if suda_tracking_numbers:
+                    for suda_tracking_number in suda_tracking_numbers:
+                        suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
+                        suda_entity.used_mark = 'TRUE'
+                        suda_entity.put()
+                            
+                    template_values.update({'suda_numbers':suda_tracking_numbers})
+                else:
+                    template_values.update({'suda_numbers':'No SUDA TRacking Number Available'})
+                    exshipper_send_email('jerry@spearnet-us.com','koseioyama@gmail.com','Notice for SUDA Tracking Number Shortage','')
+                    
+                template_values.update(user_info)
+                template = jinja_environment.get_template(html_page)
+                self.response.out.write(template.render(template_values))
+        else:
+            html_page = key_value.get('exshipper_invalid_login_page')
+            html_page_title = key_value.get('exshipper_invalid_login_page_title')
+            
+        template_values.update({'title':html_page_title})
+        template_values.update(user_info)
+        template = jinja_environment.get_template(html_page)
+        self.response.out.write(template.render(template_values))
+        #end of html page dispatching
+
+#exshipper spearnet data-exchange handler
+class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
+    def post(self):
+        user_info = get_users_info(self,users)
+        data_format = self.request.get('XLSX_XLS')
+        
+        if(data_format == 'XLS'):
+            parser_page = key_value.get('exshipper_spearnet_xls_page')
+            parser_page_title = key_value.get('exshipper_spearnet_xls_title')
+        elif (data_format == 'XLSX'):
+            parser_page = key_value.get('exshipper_spearnet_xlsx_page')
+            parser_page_title = key_value.get('exshipper_spearnet_xlsx_title')
+            
+        template_values = {'title':parser_page_title}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(parser_page)
+        self.response.out.write(template.render(template_values))
 
 class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
     def post(self):
@@ -402,4 +463,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_login_handler',ExShipperLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_spearnet',ExShipperSpearNetDataExchangeHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDATrackingNumberHandler), ('/exshipper_test', TestHandler), ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_login_handler',ExShipperLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_spearnet_index_page',ExShipperSpearnetIndexHandler), ('/exshipper_spearnet_login_handler',ExShipperSpearnetLoginHandler), ('/exshipper_spearnet_data_exchange_page',ExShipperSpearnetDataExchangeHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDATrackingNumberHandler), ('/exshipper_test', TestHandler), ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler)], debug=True)

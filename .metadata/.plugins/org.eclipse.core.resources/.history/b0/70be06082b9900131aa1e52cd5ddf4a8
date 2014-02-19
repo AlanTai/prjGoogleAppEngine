@@ -1,0 +1,48 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper SpearNet SUDA Tracking Number Page</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; margin: 10px auto; width: 100%; text-align: center;">
+	<p>Services</p>
+	<form name="exShipper_spearNet_data_exchange" method="post" action="/exshipper_spearnet_data_exchange_page">
+		<br> <input id="rYes" type="radio" name="XLSX_XLS" value="XLSX"
+			onclick="this.form.submit();"> <label for="r_xlsx">XLSX Data Exchange
+			Page</label><br>
+		<input id="rNo" type="radio" name="XLSX_XLS" value="XLS"
+			onclick="this.form.submit();"> <label for="r_xls">XLS
+			Data Exchange Page</label><br>
+	</form>
+	<br>
+	
+	<form action="/exshipper_spearnet_suda_tracking_number_handler" method="post"
+		style="margin: 5px auto; text-align: center; border: 1px solid;">
+		<p style="display: block;">Please type in the account name and password to get SUDA Tracking Number</p>
+		<div>
+			<label style="width: 150px; display: inline-block;">Account
+				Name</label> <input name="spearnet_account" type="text"
+				style="width: 250px; display: inline-block; padding: 2px 5px;" />
+		</div>
+		<br>
+		<div>
+			<label style="width: 150px; display: inline-block;">Password</label>
+			<input name="spearnet_password" type="password"
+				style="width: 250px; display: inline-block; padding: 2px 5px;" />
+		</div>
+		<br> <input id="submit_btn" type="submit" value="Submit" />
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">SUDA Tracking Numbers</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	{% if suda_numbers %} <br> {% for suda_tracking_number in
+	suda_numbers %}
+	<p>
+		<span>SUDA Tracking Number: {{
+			suda_tracking_number.tracking_number }}</span>
+	</p>
+	{% endfor %} <br> {% else %}
+	<p>No New Tracking Number</p>
+	{% endif %}
+	<hr>
+
+	<br /> <input type="button" value="Get New SUDA Tracking Number " onclick="reloadPage()">
+	<script type="text/javascript">
+		function reloadPage() {
+			location.reload(true);
+		}
+	</script>
+</div>
+
+{% endblock %}
