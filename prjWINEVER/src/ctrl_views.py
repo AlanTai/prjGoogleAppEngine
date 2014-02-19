@@ -4,9 +4,6 @@ Created on Oct 1, 2013
 
 @author: Alan Tai
 '''
-from webapp2_extras import sessions, sessions_memcache
-import uuid
-import logging
 
 __author__ = 'Alan Tai'
 
@@ -239,6 +236,8 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             return
 
 #exshipper spearnet data-exchange handler
+
+
 class ExShipperSpearNetDataExchangeHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
