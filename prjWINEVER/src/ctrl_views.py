@@ -143,34 +143,72 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(index_page)
         self.response.out.write(template.render(template_values))
 
-class ExShipperInvoiceLoginHandler(webapp2.RequestHandler):
+#for handling the login process
+'''working on'''
+class ExShipperLoginHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
-        invoice_page = key_value.get('exshipper_invoice_login_page')
+        login_page = key_value.get('exshipper_login_page')
         
-        template_values = {'title':key_value.get('exshipper_invoice_login_title')}
+        caller_page = self.request.get('caller_page')
+        
+        template_values = {'title':key_value.get('exhsipper_login_page_title'),'caller_page':caller_page}
         template_values.update(user_info)
         
-        template = jinja_environment.get_template(invoice_page)
+        template = jinja_environment.get_template(login_page)
         self.response.out.write(template.render(template_values))
         
     def post(self):
         user_info = get_users_info(self,users)
-        invoice_account = self.request.get('invoice_account')
-        invoice_password = self.request.get('invoice_password')
+        caller_page = self.request.get('caller_page')
+        exshipper_account = self.request.get('exshipper_account')
+        exshipper_password = self.request.get('exshipper_password')
+        template_values = {}
         
-        if((invoice_account == 'alantai') and (invoice_password == 'lct1014')):
-            invoice_page = key_value.get('exshipper_invoice_page')
-            
-            template_values = {'title':key_value.get('exshipper_invoice_title')}
-            template_values.update(user_info)
-            
-            template = jinja_environment.get_template(invoice_page)
-            self.response.out.write(template.render(template_values))
+        html_page = key_value.get('exshipper_invalid_login_page')
+        html_page_title = key_value.get('exshipper_invalid_login_page_title')
+        
+        #html page dispatching
+        if(caller_page == 'exshipper_invoice'):
+            if(exshipper_account == 'alantaiinvoice' and exshipper_password == '1014lct'):
+                html_page = key_value.get('exshipper_invoice_page')
+                html_page_title = key_value.get('exshipper_invoice_page_title')
+                
+        elif(caller_page == 'exshipper_invoice_log'):
+            if(exshipper_account == 'alantaiinvoicelog' and exshipper_password == '1014lct'):
+                html_page = key_value.get('exshipper_invoice_log_page')
+                html_page_title = key_value.get('exshipper_invoice_log_title')
+                
+                #use memcache
+                #ignore the undefined variable because both def get() and add() work fine
+                data = memcache.get('invoice_log')
+                if data is not None:
+                    log_invoice = data
+                else:
+                    data = InvoiceInfo.query()
+                    memcache.add('invoice_log', data, 1000)
+                    log_invoice = data
+                    template_values.update({'invoice_log':log_invoice})
+            #end of memcache
+                
+        elif(caller_page == 'exshipper_suda_tracking_number'):
+            if(exshipper_account == 'alantaisuda' and exshipper_password == '1014lct'):
+                html_page = key_value.get('exshipper_suda_tracking_number_handler_page')
+                html_page_title = key_value.get('exshipper_suda_tracking_number_handler_page_title')
+                  
         else:
-            self.redirect('/exshipper_invoice')
+            html_page = key_value.get('exshipper_invalid_login_page')
+            html_page_title = key_value.get('exshipper_invalid_login_page_title')
+            
+        template_values.update({'title':html_page_title})
+        template_values.update(user_info)
+        template = jinja_environment.get_template(html_page)
+        self.response.out.write(template.render(template_values))
+        #end of html page dispatching
+        
+#end of ExShipperLoginHandler
 
-class ExShipperInvoiceInfoHandler(webapp2.RedirectHandler):
+class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'invoice_info_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
@@ -200,48 +238,8 @@ class ExShipperInvoiceInfoHandler(webapp2.RedirectHandler):
             self.response.out.write(json.dumps(ajax_data))
             return
 
-class ExShipperInvoiceLogHandler(webapp2.RequestHandler):
-    def get(self):
-        user_info = get_users_info(self,users)
-        invoice_log_page = key_value.get('exshipper_invoice_log__login_page')
-            
-        template_values = {'title':key_value.get('exshipper_invoice_log_title')}
-        template_values.update(user_info)
-            
-        template = jinja_environment.get_template(invoice_log_page)
-        self.response.out.write(template.render(template_values))
-    
-    def post(self):
-        user_info = get_users_info(self,users)
-        invoice_account = self.request.get('invoice_account')
-        invoice_password = self.request.get('invoice_password')
-        
-        if((invoice_account == 'alantai') and (invoice_password == 'lct1014')):
-            invoice_log_page = key_value.get('exshipper_invoice_log_page')
-            #log_invoice = InvoiceInfo.query()
-            
-            #use memcache
-            #ignore the undefined variable because both def get() and add() work fine
-            data = memcache.get('invoice_log')
-            if data is not None:
-                log_invoice = data
-            else:
-                data = InvoiceInfo.query()
-                memcache.add('invoice_log', data, 1000)
-                log_invoice = data
-            #end of memcache
-            
-            template_values = {'title':key_value.get('exshipper_invoice_log_title'),
-                               'invoice_log':log_invoice}
-            template_values.update(user_info)
-            
-            template = jinja_environment.get_template(invoice_log_page)
-            self.response.out.write(template.render(template_values))
-        else:
-            self.redirect('/exshipper_invoice_log_handler')
-        
-        
-class ExShipperSpearNetHandler(webapp2.RequestHandler):
+#exshipper spearnet data-exchange handler
+class ExShipperSpearNetDataExchangeHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
         invoice_log_page = key_value.get('exshipper_spearnet_page')
@@ -296,7 +294,7 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
             self.response.out.write(json.dumps(ajax_data))
             return
 
-class ExShipperSpearnetSUDANumberHandler(webapp2.RequestHandler):
+class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
     def post(self):
         user_info = get_users_info(self,users)
         spearnet_account = self.request.get('spearnet_account')
@@ -405,4 +403,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_invoice',ExShipperInvoiceLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_invoice_log_handler',ExShipperInvoiceLogHandler), ('/exshipper_spearnet',ExShipperSpearNetHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDANumberHandler), ('/exshipper_test', TestHandler), ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_login_handler',ExShipperLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_spearnet',ExShipperSpearNetDataExchangeHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDATrackingNumberHandler), ('/exshipper_test', TestHandler), ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler)], debug=True)

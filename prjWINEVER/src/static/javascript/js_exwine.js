@@ -214,7 +214,7 @@ function show_logistics_process() {
 
 // go to main page
 function go_to_main_page() {
-	document.location.href = 'http://www.exwine-tw.appspot.com/exwine';
+	document.location.href = 'https://exwine-tw.appspot.com/exwine';
 }
 // end go to main page
 

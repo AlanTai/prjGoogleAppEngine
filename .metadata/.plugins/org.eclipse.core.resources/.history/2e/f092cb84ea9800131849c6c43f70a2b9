@@ -1,0 +1,36 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Log Page</p>
+	<hr>
+</div>
+
+
+<div
+	style="position: absolute; top: 100px; width: 100%; margin: 10px auto;">
+	<form action="/exshipper_invoice_log_handler" method="post"
+		style="margin: 5px auto; text-align: center;">
+		<p style="display: block;">Please type in the account and password</p>
+		<div>
+			<label style="width: 150px; display: inline-block;">Account
+				Name</label> <input name="invoice_account" type="text"
+				style="width: 250px; display: inline-block; padding: 2px 5px;" />
+		</div>
+		<br>
+		<div>
+			<label style="width: 150px; display: inline-block;">Password</label>
+			<input name="invoice_password" type="password"
+				style="width: 250px; display: inline-block; padding: 2px 5px;" />
+		</div>
+		<br> <input id="submit_btn" type="submit" value="Submit" />
+	</form>
+</div>
+
+<script>
+     if (sessionStorage.getItem("Page2Visited")) {
+          sessionStorage.removeItem("Page2Visited");
+          window.location.reload(true); // force refresh page1
+     }
+</script>
+{% endblock %}
