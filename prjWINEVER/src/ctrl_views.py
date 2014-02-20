@@ -353,6 +353,14 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
             
         template = jinja_environment.get_template(parser_page)
         self.response.out.write(template.render(template_values))
+        
+class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
+    def post(self):
+        user_info = get_users_info(self,users)
+        items = self.request.get('spearnet_pickup_packages')
+        json_obj = json.loads(self.request.get('spearnet_pickup_packages'))
+        packages_suda_number_array = json_obj['suda_tracking_numbers']
+        
 
 class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
     def post(self):
@@ -381,6 +389,16 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
         else:
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Account or Password Are Incorrect!')
+            
+class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self,users)
+        
+    def post(self):
+        user_info = get_users_info(self,users)
+        
+        
+#end of exshipper & spearnet
 
 #custom number handler for Android App
 class ExshipperCustomEntryHandler(webapp2.RequestHandler):
