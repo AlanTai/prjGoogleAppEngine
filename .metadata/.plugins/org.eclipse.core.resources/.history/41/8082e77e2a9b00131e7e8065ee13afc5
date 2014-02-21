@@ -497,5 +497,4 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDATrackingNumberHandler),
                                ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
-                               ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
                                ('/exshipper_test', TestHandler)], debug=True)

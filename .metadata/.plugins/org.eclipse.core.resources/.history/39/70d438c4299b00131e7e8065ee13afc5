@@ -389,14 +389,11 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
         else:
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Account or Password Are Incorrect!')
-     
-#   
-class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
+            
+class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
         
-            
-class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
     def post(self):
         user_info = get_users_info(self,users)
         
@@ -484,18 +481,4 @@ def get_users_info(self,users):
 
 
 #set url
-app = webapp2.WSGIApplication([('/exwine', ExWINE),
-                               ('/info_page_dispatcher',InfoPageDispatcher),
-                               ('/contact_page_dispatcher',ContactPageDispatcher),
-                               ('/exshipper_index',ExShipperIndexHandler),
-                               ('/exshipper_login_handler',ExShipperLoginHandler),
-                               ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler),
-                               ('/exshipper_spearnet_index_page',ExShipperSpearnetIndexHandler),
-                               ('/exshipper_spearnet_login_handler',ExShipperSpearnetLoginHandler),
-                               ('/exshipper_spearnet_data_exchange_page',ExShipperSpearnetDataExchangeHandler),
-                               ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler),
-                               ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDATrackingNumberHandler),
-                               ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler),
-                               ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
-                               ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
-                               ('/exshipper_test', TestHandler)], debug=True)
+app = webapp2.WSGIApplication([('/exwine', ExWINE), ('/info_page_dispatcher',InfoPageDispatcher), ('/contact_page_dispatcher',ContactPageDispatcher), ('/exshipper_index',ExShipperIndexHandler), ('/exshipper_login_handler',ExShipperLoginHandler), ('/exshipper_invoice_info_handler',ExShipperInvoiceInfoHandler), ('/exshipper_spearnet_index_page',ExShipperSpearnetIndexHandler), ('/exshipper_spearnet_login_handler',ExShipperSpearnetLoginHandler), ('/exshipper_spearnet_data_exchange_page',ExShipperSpearnetDataExchangeHandler), ('/exshipper_suda_tracking_number_handler',ExShipperSUDATrackingNumberHandler), ('/exshipper_spearnet_suda_tracking_number_handler',ExShipperSpearnetSUDATrackingNumberHandler), ('/exshipper_test', TestHandler), ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler)], debug=True)
