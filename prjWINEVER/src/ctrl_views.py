@@ -369,7 +369,7 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
         spearnet_password = self.request.get('spearnet_password')
         
         if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
-            test_page = '/exshipper/exshipper_spearnet_suda_tracking_number_handler.html'
+            html_page = key_value.get('exshipper_spearnet_suda_tracking_number_handler_page')
             suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
             
             if suda_tracking_numbers:
@@ -382,18 +382,24 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
                                    'suda_numbers':suda_tracking_numbers}
                 template_values.update(user_info)
                     
-                template = jinja_environment.get_template(test_page)
+                template = jinja_environment.get_template(html_page)
                 self.response.out.write(template.render(template_values))
             else:
-                exshipper_send_email('jerry@spearnet-us.com','koseioyama@gmail.com','Notice for SUDA Tracking Number Shortage','')
+                exshipper_send_email('jerry@spearnet-us.com','koseioyama@gmail.com','Notice for Running out of SUDA Tracking Number','')
         else:
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Account or Password Are Incorrect!')
      
-#   
+#working on
 class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self,users)
+        html_page = key_value.get('exshipper_spearnet_customer_index_page')
+        
+        template_values = {'title':key_value.get('exshipper_spearnet_customer_index_page_title')}
+        template_values.update(user_info)
+        template = jinja_environment.get_template(html_page)
+        self.response.out.writ(template.render(template_values))
         
             
 class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
