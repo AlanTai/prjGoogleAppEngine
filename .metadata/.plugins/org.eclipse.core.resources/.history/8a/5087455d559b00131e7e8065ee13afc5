@@ -399,7 +399,7 @@ class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
         template_values = {'title':key_value.get('exshipper_spearnet_customer_index_page_title')}
         template_values.update(user_info)
         template = jinja_environment.get_template(html_page)
-        self.response.out.write(template.render(template_values))
+        self.response.out.writ(template.render(template_values))
         
             
 class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
@@ -408,8 +408,6 @@ class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
         account = self.request.get('')
         password = self.request.get('')
         html_page = key_value.get('k')
-        
-        template_values = {'':key_value.get('k')}
         
         
 #end of exshipper & spearnet

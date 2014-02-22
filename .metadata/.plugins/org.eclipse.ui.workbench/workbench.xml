@@ -46,14 +46,20 @@
 <part id="5"/>
 <part id="6"/>
 <part id="7"/>
-<part id="8"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.internal.EditorStack@892c6c" ratio="0.5193548" ratioLeft="644" ratioRight="596" relationship="2" relative="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor activePart="true" focus="true" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views" path="D:/prjGoogleAppEngine/prjWINEVER/src/ctrl_views.py" title="ctrl_views" tooltip="prjWINEVER/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/ctrl_views.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="18824" selectionTopPixel="5580"/>
+<editorState selectionHorizontalPixel="11" selectionLength="1" selectionOffset="19439" selectionTopPixel="5894"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exwine_base.html" partName="exwine_base.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exwine_base.html" title="exwine_base.html" tooltip="prjWINEVER/src/static/templates/exwine_base.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exwine_base.html"/>
@@ -63,10 +69,6 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/javascript/js_exwine.js"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4944" selectionTopPixel="2880"/>
 </editor>
-<editor id="org.python.pydev.editor.PythonEditor" name="app_dict.py" partName="app_dict" path="D:/prjGoogleAppEngine/prjWINEVER/src/app_dict.py" title="app_dict" tooltip="prjWINEVER/src/app_dict.py" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/app_dict.py"/>
-<editorState selectionHorizontalPixel="95" selectionLength="0" selectionOffset="3991" selectionTopPixel="767"/>
-</editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_suda_tracking_number_download.html" partName="exshipper_spearnet_suda_tracking_number_download.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_download.html" title="exshipper_spearnet_suda_tracking_number_download.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_download.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_download.html"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
@@ -75,17 +77,21 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_login.html"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_invalid_login_page.html" partName="exshipper_invalid_login_page.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_invalid_login_page.html" title="exshipper_invalid_login_page.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_invalid_login_page.html" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invalid_login_page.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="662" selectionOffset="0" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customers_index.html" partName="exshipper_spearnet_customers_index.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customers_index.html" title="exshipper_spearnet_customers_index.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customers_index.html" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customers_index.html"/>
-<editorState selectionHorizontalPixel="42" selectionLength="0" selectionOffset="369" selectionTopPixel="0"/>
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_index.html" partName="exshipper_spearnet_customer_index.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_index.html" title="exshipper_spearnet_customer_index.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_index.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_index.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="427" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_services.html" partName="exshipper_spearnet_customer_services.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_services.html" title="exshipper_spearnet_customer_services.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_services.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_services.html"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="767" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_login.html" partName="exshipper_login.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_login.html" title="exshipper_login.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_login.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_login.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor focus="true" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" partName="app_dict" path="D:/prjGoogleAppEngine/prjWINEVER/src/app_dict.py" title="app_dict" tooltip="prjWINEVER/src/app_dict.py" workbook="org.eclipse.ui.internal.EditorStack@892c6c">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/app_dict.py"/>
+<editorState selectionHorizontalPixel="27" selectionLength="0" selectionOffset="3724" selectionTopPixel="757"/>
 </editor>
 </editors>
 <views>
@@ -121,8 +127,7 @@
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/javascript"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/javascript/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates"/>
-<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper"/>
-<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_invoice.html"/>
+<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/app_dict.py"/>
 </viewState>
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
@@ -303,7 +308,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.12008896" ratioLeft="162" ratioRight="1187" relationship="2" relative="topLeft"/>
+<info part="org.eclipse.ui.editorss" ratio="0.07857672" ratioLeft="106" ratioRight="1243" relationship="2" relative="topLeft"/>
 <info folder="true" part="bottom" ratio="0.6712329" ratioLeft="196" ratioRight="96" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
@@ -323,175 +328,167 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/ctrl_views.py"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_login.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invoice_log.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_data_exchange_page.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_download.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_handler.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/app_dict.py"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/ctrl_views.py"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invoice_log.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_suda_tracking_number_handler.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_download.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_login.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invalid_login_page.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customers_index.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_index.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_services.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invalid_login_page.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invoice.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.css.core.csssource.source" path="/prjWINEVER/src/static/css/exshipper/css_exshipper.css"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" path="/prjWINEVER/src/static/javascript/exshipper/js_exshipper.js"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_services.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customers_index.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invalid_login_page.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_login.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_download.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_invoice_log.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_login.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_customer_index.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/app_dict.py"/>
 </editors>
-<item historyLabel="exshipper_spearnet_data_exchange_page.html" index="3">
-<position/>
-</item>
-<item historyLabel="exshipper_spearnet_login.html" index="1">
-<position info="not_deleted" x="653" y="16"/>
-</item>
-<item historyLabel="exshipper_spearnet_data_exchange_page.html" index="3">
-<position/>
-</item>
-<item historyLabel="ctrl_views" index="0">
-<position info="not_deleted" x="13568" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice_log.html" index="2">
-<position info="not_deleted" x="278" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_suda_tracking_number_handler.html" index="5">
+<item historyLabel="exshipper_invoice.html" index="2">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="app_dict" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_suda_tracking_number_handler.html" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="app_dict" index="6">
-<position info="not_deleted" x="3991" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_data_exchange_page.html" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice_log.html" index="2">
-<position info="not_deleted" x="278" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_data_exchange_page.html" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice_log.html" index="2">
-<position info="not_deleted" x="278" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_suda_tracking_number_download.html" index="4">
-<position info="not_deleted" x="805" y="0"/>
-</item>
-<item historyLabel="ctrl_views" index="7">
-<position info="not_deleted" x="13568" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice_log.html" index="8">
-<position info="not_deleted" x="278" y="0"/>
-</item>
-<item historyLabel="ctrl_views" index="7">
-<position info="not_deleted" x="13568" y="0"/>
-</item>
-<item historyLabel="exshipper_suda_tracking_number_handler.html" index="9">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="ctrl_views" index="7">
-<position info="not_deleted" x="13568" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_suda_tracking_number_download.html" index="10">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_login.html" index="11">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="ctrl_views" index="7">
-<position info="not_deleted" x="13568" y="0"/>
-</item>
-<item historyLabel="exshipper_invalid_login_page.html" index="12">
-<position info="not_deleted" x="620" y="0"/>
-</item>
-<item historyLabel="ctrl_views" index="7">
-<position info="not_deleted" x="18773" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customers_index.html" index="13">
-<position info="not_deleted" x="556" y="0"/>
-</item>
-<item historyLabel="exshipper_index.html" index="14">
-<position info="not_deleted" x="0" y="945"/>
-</item>
-<item historyLabel="exshipper_spearnet_customers_index.html" index="13">
-<position info="not_deleted" x="538" y="0"/>
-</item>
-<item historyLabel="ctrl_views" index="7">
-<position info="not_deleted" x="16935" y="0"/>
-</item>
-<item historyLabel="exshipper_index.html" index="14">
-<position info="not_deleted" x="0" y="945"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
-<position info="not_deleted" x="803" y="0"/>
-</item>
-<item historyLabel="exshipper_index.html" index="14">
-<position info="not_deleted" x="415" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
-<position info="not_deleted" x="803" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customers_index.html" index="13">
-<position info="not_deleted" x="369" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
-<position info="not_deleted" x="803" y="0"/>
-</item>
-<item historyLabel="exshipper_invalid_login_page.html" index="16">
-<position info="not_deleted" x="0" y="662"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
-<position info="not_deleted" x="579" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice.html" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="css_exshipper.css" index="18">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice.html" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="js_exshipper.js" index="19">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice.html" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
-<position info="not_deleted" x="579" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice.html" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
-<position info="not_deleted" x="579" y="0"/>
-</item>
-<item historyLabel="exshipper_invoice.html" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customers_index.html" index="13">
-<position info="not_deleted" x="369" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
-<position/>
-</item>
-<item historyLabel="exshipper_invoice.html" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="exshipper_spearnet_customer_services.html" index="15">
+<item historyLabel="exshipper_spearnet_customer_services.html" index="1">
 <position info="not_deleted" x="767" y="0"/>
 </item>
-<item active="true" historyLabel="ctrl_views" index="7">
+<item historyLabel="ctrl_views" index="0">
 <position info="not_deleted" x="16935" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_services.html" index="3">
+<position info="not_deleted" x="767" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="375" y="0"/>
+</item>
+<item historyLabel="exshipper_invalid_login_page.html" index="5">
+<position info="not_deleted" x="0" y="662"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="389" y="1"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_services.html" index="3">
+<position info="not_deleted" x="767" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="389" y="1"/>
+</item>
+<item historyLabel="exshipper_spearnet_login.html" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_suda_tracking_number_download.html" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_services.html" index="3">
+<position info="not_deleted" x="767" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="404" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="19105" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_services.html" index="3">
+<position info="not_deleted" x="767" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="404" y="0"/>
+</item>
+<item historyLabel="exshipper_invoice_log.html" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="404" y="0"/>
+</item>
+<item historyLabel="exshipper_login.html" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="404" y="0"/>
+</item>
+<item historyLabel="exshipper_login.html" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="418" y="0"/>
+</item>
+<item historyLabel="exshipper_login.html" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_services.html" index="3">
+<position info="not_deleted" x="767" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customers_index.html" index="4">
+<position info="not_deleted" x="427" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="19105" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_index.html" index="10">
+<position info="not_deleted" x="427" y="0"/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="4288" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="4327" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="4461" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="18921" y="0"/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="4461" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="18864" y="0"/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="4392" y="44"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="18815" y="0"/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="4289" y="38"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="18809" y="0"/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="3996" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="3928" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="3928" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="17412" y="0"/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="3875" y="54"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="17412" y="0"/>
+</item>
+<item historyLabel="app_dict" index="11">
+<position info="not_deleted" x="3724" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="18690" y="0"/>
+</item>
+<item active="true" historyLabel="ctrl_views" index="0">
+<position info="not_deleted" x="19443" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -512,6 +509,12 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_login.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_login.html">
+<persistable path="/prjWINEVER/src/static/templates/exshipper/exshipper_login.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_invoice_log.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_invoice_log.html">
+<persistable path="/prjWINEVER/src/static/templates/exshipper/exshipper_invoice_log.html"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.jsdt.ui.CompilationUnitEditor" name="js_exshipper.js" tooltip="prjWINEVER/src/static/javascript/exshipper/js_exshipper.js">
 <persistable path="/prjWINEVER/src/static/javascript/exshipper/js_exshipper.js"/>
 </file>
@@ -550,12 +553,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_suda_tracking_number_handler.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_handler.html">
 <persistable path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_suda_tracking_number_handler.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_invoice_log.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_invoice_log.html">
-<persistable path="/prjWINEVER/src/static/templates/exshipper/exshipper_invoice_log.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_index.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_index.html">
-<persistable path="/prjWINEVER/src/static/templates/exshipper/exshipper_spearnet_index.html"/>
 </file>
 </mruList>
 </workbench>
