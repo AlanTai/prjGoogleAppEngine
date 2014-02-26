@@ -22,14 +22,11 @@
 {% endblock %}
 
 {% block main_content %}
-	<b>JS-XLSX (XLSX/XLSB/XLSM) Live Demo</b>
+	<b>JS-XLSX (XLSX/XLSB/XLSM) Data Exchange</b>
 	<br />
-	<br />
-	<input type="radio" name="format" value="csv" checked> CSV
-	<br />
-	<input type="radio" name="format" value="json"> JSON
-	<br />
-	<input type="radio" name="format" value="form"> FORMULAE
+	<!-- input type="radio" name="format" value="csv" checked -->
+	<input type="radio" name="format" value="json" checked> JSON
+	<!-- input type="radio" name="format" value="form" -->
 	<br />
 
 	<div id="drop">Drop an XLSX or XLSM or XLSB file here to see
@@ -250,7 +247,11 @@
 			//
 			var list_keys = getKeys(json_obj);
 			var rows_info = json_obj[list_keys[0]];
-			createLabels(rows_info, row_keys);
+			var confirm_result = confirm('Do you want to save the data into database and print out package\'s labels?');
+			if(confirm_result == true){
+				saveDataIntoDatabase(info);
+				createLabels(rows_info, row_keys);
+			}
 		}
 
 		function getRowKeys(sheets_obj) {
@@ -271,7 +272,13 @@
 			;
 			return headers;
 		}
+		
+		//save data into databse
+		function saveDataIntoDatabase(json_string){
+			
+		}
 
+		//create labels
 		function createLabels(rows, keys) {
 			var labels_layout = document.getElementById('id_shipping_labels');
 			if(labels_layout.hasChildNodes()){
@@ -281,6 +288,7 @@
 			for ( var ith in rows) {
 				/* for (var jth in row_keys)
 					alert(row_keys[jth]+rows_info[ith][row_keys[jth]]); */
+				
 				$('#id_shipping_labels')
 						.append(
 								'<form id="shipping_label_'
