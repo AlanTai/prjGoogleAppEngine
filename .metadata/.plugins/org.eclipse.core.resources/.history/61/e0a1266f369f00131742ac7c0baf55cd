@@ -1,0 +1,21 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">{{title}}</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; margin: 10px auto; width: 100%; text-align: center;">
+	<p>Customer Login</p>
+	<br>
+	<form action="/exshipper_spearnet_customer_services_handler" method="post">
+		<div><label style="width: 150px; display: inline-block;">Account
+				Name</label> <input type="text" name="spearnet_customer_account"/> </div>
+		<div><label style="width: 150px; display: inline-block;">Password</label> <input type="text" name="spearnet_customer_password"/> </div>
+		<br />
+		<input id="submit_btn_spearnet_customer" type="submit" value="Submit">
+	</form>
+	<br>
+</div>
+{% endblock %}

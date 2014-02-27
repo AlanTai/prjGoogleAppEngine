@@ -84,5 +84,7 @@ key_value = {
              'exshipper_spearnet_suda_tracking_number_download_page_title':'SUDA Tracking Number Download',
              
              'exshipper_spearnet_customer_index_page':'/exshipper/exshipper_spearnet_customer_index.html',
-             'exshipper_spearnet_customer_index_page_title':'Spearnet Customer Page'
+             'exshipper_spearnet_customer_index_page_title':'Spearnet Customer Page',
+             'exshipper_spearnet_customer_services_handler_page':'/exshipper/exshipper_spearnet_customer_services.html'
+             
              }

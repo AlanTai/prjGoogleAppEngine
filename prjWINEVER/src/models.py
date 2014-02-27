@@ -38,11 +38,6 @@ class SUDATrackingNumber_REGULAR(ndb.Model):
 #end if SUDA tracking number
 
 #Spearnet packages Info
-class Items(ndb.Model):
-    name = ndb.StringProperty()
-    quan = ndb.StringProperty()
-    price = ndb.StringProperty()
-
 class SpearnetPackagesInfo(ndb.Model):
     index = ndb.StringProperty()
     barcode_no  = ndb.StringProperty()
@@ -50,7 +45,7 @@ class SpearnetPackagesInfo(ndb.Model):
     ctn = ndb.StringProperty()
     weight_kg = ndb.StringProperty() #g/w(kg)
     weight_lb = ndb.StringProperty()
-    commodity_name = ndb.StructuredProperty(Items, repeated = False)
+    commodity_name = ndb.JsonProperty()
     pcs = ndb.StringProperty()
     unit = ndb.StringProperty()
     original = ndb.StringProperty()
@@ -63,10 +58,13 @@ class SpearnetPackagesInfo(ndb.Model):
     consignee_tel = ndb.StringProperty()
     consignee_address = ndb.StringProperty()
     consignee_address_chinese = ndb.StringProperty()
-    company_id_personal_id = ndb.StringProperty()
+    company_id_or_personal_id = ndb.StringProperty()
     remark = ndb.StringProperty()
     declaration_need_or_not = ndb.StringProperty()
     duty_paid_by = ndb.StringProperty()
+    package_status = ndb.StringProperty()
+    date = ndb.DateProperty(auto_now_add = True)
+    update_date_time = ndb.DateTimeProperty(auto_now = True)
 #end of Spearnet packages Info
 
 

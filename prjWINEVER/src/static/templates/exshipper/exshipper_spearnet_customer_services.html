@@ -20,11 +20,43 @@
 	<p>Package Status Tracking</p>
 	<form>
 		<div>
-			Tracking Number: <input type="text" />
+			<label style="width: 150px; display: inline-block;">Tracking Number: </label> <input id="spearnet_customer_tracking_number" type="text" /> <input type="button"
+				value="Submit" onclick="submitSpearnetCustomerTrackingNumber(this.form.spearnet_customer_tracking_number.value)" />
 		</div>
-		<input type="button" value="Submit" onclick="Submit_Tracking_Number()" />
 	</form>
-	<div id="id_customer_package_status"></div>
+	<p id="id_customer_package_status" style="color: #f00;"></p>
 </div>
+<script type="text/javascript">
+function submitSpearnetCustomerTrackingNumber(tracking_number){
+	if(tracking_number === ""){
+		alert('Please key in tracking number');
+		return;
+	}
+	$.ajax('/exshipper_spearnet_customer_package_tracking_handler',{
+		type: 'POST',
+		data:{
+			fmt: 'json',
+			customer_tracking_number: tracking_number
+		},
+		success: showMsg,
+		statusCode: {
+			400: function(){
+				alert('400 status code! user-side error');
+			},
+			500: function(){
+				alert('500 status code! server-side error; please contact ExShipper at 1-650-307-3834')
+			}
+		}
+	});
+}
 
+function showMsg(result){
+	var msg;
+	if(result.package_status === 'NA')
+		msg = 'NA'
+	else
+		msg = 'Your package status is at '+result.package_status
+	$('#id_customer_package_status').text(msg);
+}
+</script>
 {% endblock %}
