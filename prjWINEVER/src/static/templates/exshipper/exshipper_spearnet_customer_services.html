@@ -52,10 +52,34 @@ function submitSpearnetCustomerTrackingNumber(tracking_number){
 
 function showMsg(result){
 	var msg;
-	if(result.package_status === 'NA')
+	var destination;
+	if(result.package_status === 'NA'){
 		msg = 'NA'
-	else
-		msg = 'Your package status is at '+result.package_status
+	}
+	else{
+		if(result.package_status === 'spearnet'){
+			destination = 'at Spearnet';
+		}
+		else if(result.package_status === 'exshipper'){
+			destination = 'at ExShipper';
+		}
+		else if(result.package_status === 'sfo_airport'){
+			destination = 'at SFO Airport';
+		}
+		else if(result.package_status === 'taiwan_taoyuan_airport'){
+			destination = 'at Taiwan Taoyuan International Airport';
+		}
+		else if(result.package_status === 'suda'){
+			destination = 'at Taiwan SUDA';
+		}
+		else if(result.package_status === 'suda'){
+			destination = 'Delivered';
+		}
+		else{
+			destination = 'unnkown destination'
+		}
+		msg = 'Your package is '+destination
+	}
 	$('#id_customer_package_status').text(msg);
 }
 </script>

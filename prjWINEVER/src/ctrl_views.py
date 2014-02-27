@@ -372,7 +372,6 @@ class ExShipperSpearnetDataExchangeDispatcher(webapp2.RequestHandler):
 class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'spearnet_packages_info_upload_status':'NA','print_action':'off'}
-        user_info = get_users_info(self, users)
         
         if(self.request.get('fmt') == 'json'):
             json_obj = json.loads(self.request.get('packages_data'))
@@ -499,7 +498,22 @@ class ExShipperSpearnetCustomerPackageTrackingHandler(webapp2.RequestHandler):
                            
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
-        return
+        
+class ExShipperSpearnetCustomerPackageStatusHandler(webapp2.RequestHandler):
+    def post(self):
+        ajax_data = {'update_status':'NA'}
+        if(self.request.get('fmt') == 'json'):
+            update_packages_status = self.request.get('update_packages_status')
+            json_obj = json.loads(update_packages_status)
+            for key in json_obj.keys():
+                package_entity = SpearnetPackagesInfo.get_by_id(key)
+                package_entity.package_status = json_obj[key]
+                package_entity.put()
+                
+            ajax_data['update_status'] = 'Successfully update the packages status!'
+                
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
 # end of exshipper & spearnet
 
 # custom number handler for Android App
@@ -599,4 +613,5 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
                                ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
                                ('/exshipper_spearnet_customer_package_tracking_handler', ExShipperSpearnetCustomerPackageTrackingHandler),
+                               ('/exshipper_spearnet_customer_packages_status_handler',ExShipperSpearnetCustomerPackageStatusHandler),
                                ('/exshipper_test', TestHandler)], debug=True)

@@ -1,0 +1,72 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Spearnet Customer Package
+		Information Log</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if spearnet_customer_package_info_log %}
+
+	<div id="spearnet_customer_packages_info">
+		{% for single_row_data in spearnet_customer_package_info_log %}
+		<form>
+			<span>SUDA Tracking Number: {{ single_row_data.hawb }}</span> <span>Package
+				Status: <select id="{{ single_row_data.hawb }}" class="spearnet_customer_package_status">
+					<option value="spearnet">Spearnet</option>
+					<option value="exshipper">ExShipper</option>
+					<option value="sfo_airport">SFO Airport</option>
+					<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+						International Airport</option>
+					<option value="suda">SUDA</option>
+					<option value="delivered">Delivered</option>
+			</select>
+			</span> <span>Packaging Date: {{ single_row_data.date }}</span>
+		</form>
+		{% endfor %} {% else %}
+		<p>No Data Available</p>
+		{% endif %} <br> <input type="button" value="Update"
+			onclick="updatePackageStatus()">
+
+	</div>
+
+
+	<script type="text/javascript">
+		var packages_status = new Object();
+		$(function() {
+			//setup initial select values
+			$('#{{ single_row_data.hawb }}').val(
+					'{{ single_row_data.package_status }}');
+			//update json obj when select value change
+			$('#spearnet_customer_packages_info > .spearnet_customer_package_status').change(function(){
+				var key = $(this).val();
+				if (typeof packages_status[key] === 'undefined'){
+					packages_status[key] = $(this).val();
+				}
+			});
+		});
+		
+		//
+		
+		
+		function updatePackageStatus(){
+			
+		}
+	</script>
+
+	<hr>
+</div>
+
+{% endblock %}
