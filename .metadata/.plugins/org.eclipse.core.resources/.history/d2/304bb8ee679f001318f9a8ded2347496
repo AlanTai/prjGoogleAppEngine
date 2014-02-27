@@ -1,0 +1,102 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Invoice Log Page</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% for single_row_data in invoice_log %}
+	<p>
+		<span>Yamato Tracking Number: {{
+			single_row_data.yamato_tr_number }}</span> <span>Ref. Number: {{
+			single_row_data.ref_number }}</span> <span>Length: {{
+			single_row_data.size.length }}</span>
+	</p>
+	{% endfor %} <br>
+	<script type="text/javascript" src="/js/exshipper/jquery.sheetrock.js"></script>
+	<table id="statistics" style="margin: 10px auto;"></table>
+	<br>
+	<hr>
+	<div id="id_log_labels"></div>
+</div>
+
+
+<script type="text/javascript">
+	/*Retrieve data from google doc*/
+	//Define spreadsheet URL.
+	var mySpreadsheet = 'https://docs.google.com/spreadsheet/ccc?key=0AkUH5y_KfI3DdE9Qa19OWmNhMklTampRdVJiSDlDaHc#gid=1';
+
+	// Load an entire sheet and print it out.
+	$(function() {
+		//convert data from google spreadsheet to table
+		$('#statistics').sheetrock({
+			url : mySpreadsheet
+		});
+
+		//print out data
+		generateLogLabels();
+	});
+
+	function generateLogLabels() {
+		var invoice_log = "{{ invoice_log }}";
+		{% for single_row in invoice_log %}
+			$('#id_log_labels')
+					.append(
+							'<form id="log_label_'
+						+ "{{single_row.yamato_tr_number}}"
+						+ '" style="border: 1px solid; width: 300px; margin: 5px 5px; padding: 2px 5px; display:inline-block; text-align: left;">'
+									+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
+									+ "{{single_row.shipper}}"
+									+ '</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 地址: 1941 W Ave. 104th, San Leandro, CA 94577</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 電話: (510)351-8903</p>'
+									+ '<hr>'
+									+ '<p style="display: block; margin: 0px auto;"> 收件者: '
+									+ "{{single_row.consignee_chinese}}"
+									+ '</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 地址: '
+									+ "{{single_row.address}}"
+									+ '</p>'
+									+ '<p style="display: block; margin: 0px auto;"> 電話: '
+									+ "{{single_row.consignee_phone_number}}"
+									+ '</p>'
+									+ '<hr>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">易碎</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'
+									+ "{{single_row.weight}}"
+									+ ' (kg)</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '
+									+ "{{single_row.ref_number}}"
+									+ '</p>'
+									+ '<hr>'
+									+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">Yamato Tracking Number</div>'
+									+ '<div class="barcode" id="log_barcode_'
+						+ "{{single_row.yamato_tr_number}}"
+						+ '" style="margin: 2px auto; text-align:center;"></div>'
+									+ '</form>');
+
+			$('#id_log_labels> form[id="log_label_' + "{{single_row.yamato_tr_number}}" + '"]')
+					.find('div#log_barcode_' + "{{single_row.yamato_tr_number}}").barcode(
+							"{{single_row.yamato_tr_number}}", 'code128', {
+								barWidth : 2,
+								barHeight : 45,
+								fontSize : 16
+							});
+			{% endfor %}
+
+	};
+</script>
+
+{% endblock %}

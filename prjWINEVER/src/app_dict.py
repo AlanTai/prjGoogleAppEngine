@@ -79,12 +79,17 @@ key_value = {
              'exshipper_spearnet_xlsx_title':'XLSX Parser',
              
              'exshipper_spearnet_suda_tracking_number_handler_page':'/exshipper/exshipper_spearnet_suda_tracking_number_handler.html',
+             'exshipper_spearnet_suda_tracking_number_handler_page_title':'ExShipper Spearnet SUDA Tracking Number',
              
              'exshipper_spearnet_suda_tracking_number_download_page':'/exshipper/exshipper_spearnet_suda_tracking_number_download.html',
              'exshipper_spearnet_suda_tracking_number_download_page_title':'SUDA Tracking Number Download',
              
              'exshipper_spearnet_customer_index_page':'/exshipper/exshipper_spearnet_customer_index.html',
              'exshipper_spearnet_customer_index_page_title':'Spearnet Customer Page',
-             'exshipper_spearnet_customer_services_handler_page':'/exshipper/exshipper_spearnet_customer_services.html'
+             'exshipper_spearnet_customer_services_handler_page':'/exshipper/exshipper_spearnet_customer_services.html',
+             'exshipper_spearnet_customer_services_handler_page_title':'ExShipper Spearnet Customer Services',
+             
+             'exshipper_spearnet_customer_package_info_log_page':'/exshipper/exshipper_spearnet_customer_package_info_log.html',
+             'exshipper_spearnet_customer_package_info_log_page_title':'ExShipper Spearnet Customer Package Information Log'
              
              }

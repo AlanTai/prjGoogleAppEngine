@@ -186,13 +186,28 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                     data = InvoiceInfo.query()
                     memcache.add('invoice_log', data, 1000)
                     log_invoice = data
-                    template_values.update({'invoice_log':log_invoice})
+                template_values.update({'invoice_log':log_invoice})
             # end of memcache
                 
         elif(caller_page == 'exshipper_suda_tracking_number'):
             if(exshipper_account == 'alantaisuda' and exshipper_password == '1014lct'):
                 html_page = key_value.get('exshipper_suda_tracking_number_handler_page')
                 html_page_title = key_value.get('exshipper_suda_tracking_number_handler_page_title')
+                
+        elif(caller_page == 'exshipper_spearnet_customer_package_info_log'):
+            if(exshipper_account == 'alantaispearnet' and exshipper_password == '1014lct'):
+                html_page = key_value.get('exshipper_spearnet_customer_package_info_log_page')
+                html_page_title = key_value.get('exshipper_spearnet_customer_package_info_log_page_title')
+                
+                #use memcache
+                data = memcache.get('spearnet_customer_package_info_log')
+                if data is not None:
+                    log_spearnet_customer_package_info = data
+                else:
+                    data = SpearnetPackagesInfo.query()
+                    memcache.add('spearnet_customer_package_info_log',data,1000)
+                    log_spearnet_customer_package_info = data
+                template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
                   
         else:
             html_page = key_value.get('exshipper_invalid_login_page')
@@ -262,7 +277,6 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
             ajax_data['suda_tracking_number_submission'] = 'Data saved into database'
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
-            return
 
 
 # -- Client Spearnet Session
@@ -399,7 +413,7 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                     new_package.remark = package['remark']
                     new_package.declaration_need_or_not = package['declaration_need_or_not']
                     new_package.duty_paid_by = package['duty_paid_by']
-                    new_package.package_status = 'Spearnet' 
+                    new_package.package_status = 'spearnet' 
                     new_package.put()
                     
                 ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'

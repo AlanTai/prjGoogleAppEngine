@@ -1,0 +1,47 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Spearnet Customer Package
+		Information Log</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if spearnet_customer_package_info_log %} {% for
+	single_row_data in spearnet_customer_package_info_log %}
+	<p>
+		<span>SUDA Tracking Number: {{ single_row_data.hawb }}</span> <span>Package
+			Status: <select id="spearnet_customer_package_status_option">
+				<option value="Spearnet">Spearnet</option>
+				<option value="exshipper">ExShipper</option>
+				<option value="sfo_airport">SFO Airport</option>
+				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan International Airport</option>
+				<option value="suda">SUDA</option>
+				<option value="delivered">Delivered</option>
+		</select> {{ single_row_data.package_status }}
+		</span>
+
+		<script type="text/javascript">
+		document.getElementById('spearnet_customer_package_status_option').value="{{ single_row_data.package_status }}";
+		</script>
+
+		<span>Packaging Date: {{ single_row_data.date }}</span>
+	</p>
+	{% endfor %} {% else %}
+	<p>No Data Available</p>
+	{% endif %} <br>
+	<hr>
+</div>
+
+{% endblock %}
