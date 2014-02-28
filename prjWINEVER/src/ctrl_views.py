@@ -424,10 +424,29 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
         
 class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
     def post(self):
-        user_info = get_users_info(self, users)
-        items = self.request.get('spearnet_pickup_packages')
-        json_obj = json.loads(self.request.get('spearnet_pickup_packages'))
-        packages_suda_number_array = json_obj['suda_tracking_numbers']
+        account = self.request.get('account')
+        password = self.request.get('password')
+        response = 'Unable to access the server!'
+        if(account == 'alantai' and password == '1014'):
+            json_obj = json.loads(self.request.get('spearnet_picked_packages'))
+            suda_numbers_array = json_obj['suda_tracking_numbers']
+            try:
+                for key in suda_numbers_array:
+                    package_entity = SpearnetPackagesInfo.get_by_id(key)
+                    if(package_entity != None):
+                        response = 'Successfully Update Picked Packages Information'
+                        package_entity.package_status = 'exshipper'
+                        package_entity.put()
+                    else:
+                        response = 'Unknown Package!'
+                        break
+                
+            except:
+                response = 'Fail to Update Picked Packages Information'
+            
+                
+        self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
+        self.response.write('{"response":"'+response+'"}')
         
 
 class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
@@ -614,4 +633,5 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
                                ('/exshipper_spearnet_customer_package_tracking_handler', ExShipperSpearnetCustomerPackageTrackingHandler),
                                ('/exshipper_spearnet_customer_packages_status_handler',ExShipperSpearnetCustomerPackageStatusHandler),
+                               ('/exshipper_spearnet_packages_pickup_handler',ExShipperSpearnetPackagesPickupHandler),
                                ('/exshipper_test', TestHandler)], debug=True)
