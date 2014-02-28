@@ -434,14 +434,11 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                 for key in suda_numbers_array:
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
+                        response = 'Successfully Update Picked Packages Information'
                         package_entity.package_status = 'exshipper'
                         package_entity.put()
-                        response = 'Successfully Update Picked Packages Information'
                     else:
-                        if(package_entity !=None and package_entity.package_status != 'spearnet'):
-                            response = 'Tracking number is Duplicated!'
-                        else:
-                            response = 'Unknown Package!'
+                        response = 'Unknown Package- '+ key +'!'
                         break
                 
             except:
