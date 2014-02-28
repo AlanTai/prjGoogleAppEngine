@@ -35,7 +35,6 @@
 					<option value="delivered">Delivered</option>
 			</select>
 			</span> <span>Labeling Date: {{ single_row_data.date }}</span>
-			<span>Update Date: {{ single_row_data.update_date_time }}</span>
 		</form>
 
 

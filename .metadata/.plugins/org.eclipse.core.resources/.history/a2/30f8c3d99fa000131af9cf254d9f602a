@@ -438,7 +438,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         package_entity.package_status = 'exshipper'
                         package_entity.put()
                     else:
-                        response = 'Unknown Package- '+ key +'!'
+                        response = 'Unknown Package!'
                         break
                 
             except:
