@@ -32,6 +32,9 @@ function submitSpearnetCustomerTrackingNumber(tracking_number){
 		alert('Please key in tracking number');
 		return;
 	}
+	else{
+		tracking_number = tracking_number.trim();
+	}
 	$.ajax('/exshipper_spearnet_customer_package_tracking_handler',{
 		type: 'POST',
 		data:{

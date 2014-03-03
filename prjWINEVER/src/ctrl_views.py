@@ -220,7 +220,6 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         # end of html page dispatching
         
 # end of ExShipperLoginHandler
-
 class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'invoice_info_submission':'NA'}
@@ -249,7 +248,6 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             ajax_data['invoice_info_submission'] = 'Data saved into database'
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
-            return
 
 
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
