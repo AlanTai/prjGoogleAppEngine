@@ -1,0 +1,69 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Taiwan Custom Entry Invoice Log</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if spearnet_customer_package_info_log %}
+	<div id="spearnet_customer_packages_info"
+		style="height: 300px; overflow: auto; border: 1px solid #333333;">
+
+		
+		{% for single_row_data in spearnet_customer_package_info_log %}
+		<form>
+			<span>SUDA Tracking Number: {{ single_row_data.hawb }}</span> <span>Package
+				Status: <select id="{{ single_row_data.hawb }}"
+				class="spearnet_customer_package_status">
+					<option value="spearnet">Spearnet</option>
+					<option value="exshipper">ExShipper</option>
+					<option value="sfo_airport">SFO Airport</option>
+					<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+						International Airport</option>
+					<option value="suda">SUDA</option>
+					<option value="delivered">Delivered</option>
+			</select>
+			</span> <span>Labeling Date: {{ single_row_data.date }}</span>
+		</form>
+
+		<script type="text/javascript">
+			$(function() {
+				//setup initial select values
+				$('#{{ single_row_data.hawb }}').val(
+						'{{ single_row_data.package_status }}');
+				//update json obj when select value change
+				$('#{{ single_row_data.hawb }}').change(function() {
+					var key = $(this).attr('id');
+					/* if (typeof packages_status[key] === 'undefined'){
+						packages_status[key] = $(this).val();
+					}
+					packages_status[key] = $(this).val();*/
+				});
+			});
+		</script>
+		{% endfor %}
+		
+		{% else %}
+		<p>No Data Available</p>
+		{% endif %}
+	</div>
+
+	<div>
+		<br /> <a id="xls_download" href="">Download Data in XLS Format</a>
+	</div>
+	<hr>
+</div>
+
+{% endblock %}

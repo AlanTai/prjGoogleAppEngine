@@ -1,0 +1,283 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block css_content %}
+<style>
+#drop {
+	border: 2px dashed #bbb;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 25px;
+	text-align: center;
+	font: 20pt bold, "Vollkorn";
+	color: #bbb
+}
+
+#b64data {
+	width: 100%;
+}
+</style>
+{% endblock %} {% block js_content %}
+<script src="/js/exshipper/jszip.js"></script>
+<script src="/js/exshipper/xlsx.js"></script>
+<script src="/js/exshipper/shim.js"></script>
+{% endblock %}
+
+
+{% block main_content %}
+	<b>JS-XLSX ExShipper SUDA Tracking Number Handler</b>
+	<br />
+	<br />
+	<input type="radio" name="format" value="json" checked> JSON
+	<br />
+
+	<div id="drop">Drop an XLSX or XLSM or XLSB file here to see
+		sheet data.</div>
+	<pre id="out"></pre>
+
+	<!-- show data structure -->
+	<br />
+	<div id="contents"></div>
+	<br />
+
+	<!-- show labels -->
+	<div id="output_div" style="width: 100%; border: 1px; margin: 5px 5px;"></div>
+	<br />
+	
+	<div id="upload_cover" style=" position: absolute; top:0px; left:0px; width: 100%; height: 100%; z-index: 1000; text-align: center; background-color: #000000; opacity:0.9; display: none;"> <p style=" position:absolute ; opacity:1; color: #f00; width: 100%; margin: 100px auto;">Uploading Data</p></div>
+
+	<!--  -->
+	<script>
+		var rABS = typeof FileReader !== "undefined"
+				&& typeof FileReader.prototype !== "undefined"
+				&& typeof FileReader.prototype.readAsBinaryString !== "undefined";
+		function xlsxworker(data, cb) {
+			var worker = new Worker('/js/exshipper/xlsxworker.js');
+			worker.onmessage = function(e) {
+				switch (e.data.t) {
+				case 'ready':
+					break;
+				case 'e':
+					console.error(e.data.d);
+					break;
+				case 'xlsx':
+					cb(JSON.parse(e.data.d));
+					break;
+				}
+			};
+			var arr = rABS ? data : btoa(String.fromCharCode.apply(null,
+					new Uint8Array(data)));
+			worker.postMessage({
+				d : arr,
+				b : rABS
+			});
+		}
+
+		function get_radio_value(radioName) {
+			var radios = document.getElementsByName(radioName);
+			for ( var i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+					return radios[i].value;
+				}
+			}
+		}
+
+		function to_json(workbook) {
+			var result = {};
+			workbook.SheetNames.forEach(function(sheetName) {
+				var roa = XLSX.utils
+						.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+				if (roa.length > 0) {
+					result[sheetName] = roa;
+				}
+			});
+			return result;
+		}
+
+		function to_csv(workbook) {
+			var result = [];
+			workbook.SheetNames.forEach(function(sheetName) {
+				var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+				if (csv.length > 0) {
+					result.push("SHEET: " + sheetName);
+					result.push("");
+					result.push(csv);
+				}
+			});
+			return result.join("\n");
+		}
+
+		function to_formulae(workbook) {
+			var result = [];
+			workbook.SheetNames.forEach(function(sheetName) {
+				var formulae = XLSX.utils
+						.get_formulae(workbook.Sheets[sheetName]);
+				if (formulae.length > 0) {
+					result.push("SHEET: " + sheetName);
+					result.push("");
+					result.push(formulae.join("\n"));
+				}
+			});
+			return result.join("\n");
+		}
+
+		var tarea = document.getElementById('b64data');
+		function b64it() {
+			var wb = XLSX.read(tarea.value, {
+				type : 'base64'
+			});
+			process_wb(wb);
+		}
+
+		function process_wb(wb) {
+			switch (get_radio_value("format")) {
+			case "json":
+				output = JSON.stringify(to_json(wb), 2, 2);
+				//save data to datastore
+				saveDataToDatastore(output);
+				break;
+			case "form":
+				output = to_formulae(wb);
+				break;
+			default:
+				output = to_csv(wb);
+				parseCSV(output, '\n', ',');
+			}
+			//show data structure on screen
+			/* if (out.innerText === undefined)
+				out.textContent = output;
+			else
+				out.innerText = output; */
+		}
+
+		//parse csv
+		function parseCSV(text, lineTerminator, cellTerminator) {
+			var div_content = document.getElementById('output_div');
+			var table = document.createElement('table');
+			div_content.appendChild(table);
+
+			//break the lines apart
+			var lines = text.split(lineTerminator);
+
+			for ( var j = 0; j < lines.length; j++) {
+
+				if (lines[j] != "") {
+
+					//create a table row 
+					var tableRow = table.appendChild(document
+							.createElement('tr'));
+
+					//split the rows at the cellTerminator character
+					var information = lines[j].split(cellTerminator);
+
+					for ( var k = 0; k < information.length; k++) {
+						//append the cell to the row
+						var cell = tableRow.appendChild(document
+								.createElement('td'));
+						cell.appendChild(document
+								.createTextNode(information[k]));
+
+					}
+
+				}
+
+			}
+
+		}
+		//end of parse csv
+
+		//drop event handler
+		var drop = document.getElementById('drop');
+		function handleDrop(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			var files = e.dataTransfer.files;
+			var i, f;
+			for (i = 0, f = files[i]; i != files.length; ++i) {
+				var reader = new FileReader();
+				var name = f.name;
+				reader.onload = function(e) {
+					var data = e.target.result;
+					if (typeof Worker !== 'undefined') {
+						xlsxworker(data, process_wb);
+					} else {
+						var wb;
+						if (rABS) {
+							wb = XLSX.read(data, {
+								type : 'binary'
+							});
+						} else {
+							var arr = String.fromCharCode.apply(null,
+									new Uint8Array(data));
+							wb = XLSX.read(btoa(arr), {
+								type : 'base64'
+							});
+						}
+						process_wb(wb);
+					}
+				};
+				if (rABS)
+					reader.readAsBinaryString(f);
+				else
+					reader.readAsArrayBuffer(f);
+			}
+		}
+
+		function handleDragover(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			e.dataTransfer.dropEffect = 'copy';
+		}
+
+		if (drop.addEventListener) {
+			drop.addEventListener('dragenter', handleDragover, false);
+			drop.addEventListener('dragover', handleDragover, false);
+			drop.addEventListener('drop', handleDrop, false);
+		}
+		//end of drop event handler
+
+		//save suda tracking number to google datastore
+		function saveDataToDatastore(json_info_string) {
+			$('#upload_cover').css({'display':'none'});
+			
+			$.ajax('/exshipper_suda_tracking_number_handler', {
+				type : 'POST',
+				data : {
+					fmt : 'json',
+					json_info : json_info_string
+				},
+				success : showReturnMsg,
+				statusCode : {
+					400 : function() {
+						alert('400 status code! user-side error');
+					},
+					500 : function() {
+						alert('500 status code! server-side error');
+					}
+				}
+			});
+		}
+
+		function showReturnMsg(data) {
+			alert(data.suda_tracking_number_submission);
+			$('#upload_cover').css({'display':'block'});
+		}
+
+		//end of save suda tracking number to google datastore
+
+	</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-36810333-1' ]);
+		_gaq.push([ '_trackPageview' ]);
+
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+{% endblock %}

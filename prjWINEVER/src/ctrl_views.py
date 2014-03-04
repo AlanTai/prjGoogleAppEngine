@@ -266,13 +266,17 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
         if(self.request.get('fmt') == 'json'):
             json_obj = json.loads(self.request.get('json_info'))
             suda_number_array = json_obj['suda_tracking_numbers']
+            duplicated_numbers = ''
             for row_info in suda_number_array:
-                new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['suda_number'])
-                new_suda_tr_number.tracking_number = row_info['suda_number']
-                new_suda_tr_number.used_mark = row_info['used_mark']
-                new_suda_tr_number.put()
+                if(SUDATrackingNumber_REGULAR.get_by_id(row_info['suda_number'])):
+                    duplicated_numbers += 'Duplicated Number: '+ row_info['suda_number'] +'\n'
+                else:
+                    new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['suda_number'])
+                    new_suda_tr_number.tracking_number = row_info['suda_number']
+                    new_suda_tr_number.used_mark = row_info['used_mark']
+                    new_suda_tr_number.put()
                 
-            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'
+            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
 
@@ -536,6 +540,69 @@ class ExShipperSpearnetCustomerPackageStatusHandler(webapp2.RequestHandler):
         self.response.out.write(json.dumps(ajax_data))
 # end of exshipper & spearnet
 
+#exshipper tw custom entry login handler
+class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self, users)
+        login_page = '/exshipper/exshipper_tw_custom_entry_index.html'
+        
+        template_values = {'title':'Taiwan Custom Entry Login'}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(login_page)
+        self.response.out.write(template.render(template_values))
+        
+        
+class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self, users)
+        login_page = '/exshipper/exshipper_tw_custom_entry_login.html'
+        
+        caller_page = self.request.get('caller_page')
+        
+        template_values = {'title':'Taiwan Custom Entry Login', 'caller_page':caller_page}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(login_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        user_info = get_users_info(self, users)
+        caller_page = self.request.get('caller_page')
+        tw_custom_entry_account = self.request.get('tw_custom_entry_account')
+        tw_custom_entry_password = self.request.get('tw_custom_entry_password')
+        template_values = {}
+        
+        html_page = key_value.get('exshipper_invalid_login_page')
+        html_page_title = key_value.get('exshipper_invalid_login_page_title')
+        
+        # html page dispatching
+        if(caller_page == 'exshipper_tw_custom_entry_invoice_log'):
+            if(tw_custom_entry_account == 'exshippertwcustomentry' and tw_custom_entry_password == 'exshippertwcustomentry'):
+                html_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
+                html_page_title = 'Custom Entry Invoice Log'
+                
+                #use memcache
+                data = memcache.get('tw_custom_entry_invoice_log')
+                if data is not None:
+                    log_spearnet_customer_package_info = data
+                else:
+                    data = SpearnetPackagesInfo.query()
+                    memcache.add('tw_custom_entry_invoice_log',data,1000)
+                    log_spearnet_customer_package_info = data
+                template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
+        else:
+            html_page = key_value.get('exshipper_invalid_login_page')
+            html_page_title = key_value.get('exshipper_invalid_login_page_title')
+            
+        template_values.update({'title':html_page_title})
+        template_values.update(user_info)
+        template = jinja_environment.get_template(html_page)
+        self.response.out.write(template.render(template_values))
+        # end of html page dispatching
+
+#end of exshipper tw custom entry login handler
+
 # custom number handler for Android App
 class ExshipperCustomEntryHandler(webapp2.RequestHandler):
     def post(self):
@@ -635,4 +702,6 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_customer_package_tracking_handler', ExShipperSpearnetCustomerPackageTrackingHandler),
                                ('/exshipper_spearnet_customer_packages_status_handler',ExShipperSpearnetCustomerPackageStatusHandler),
                                ('/exshipper_spearnet_packages_pickup_handler',ExShipperSpearnetPackagesPickupHandler),
+                               ('/exshipper_tw_custom_entry_index_page',ExShipperTWCustomEntryIndexHandler),
+                               ('/exshipper_tw_custom_entry_login_handler',ExShipperTWCustomEntryLoginHandler),
                                ('/exshipper_test', TestHandler)], debug=True)
