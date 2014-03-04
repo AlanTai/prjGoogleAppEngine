@@ -1,0 +1,215 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Spearnet Customer Package
+		Information Log</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if spearnet_customer_package_info_log %}
+
+	<div id="spearnet_customer_packages_info"
+		style="height: 300px; overflow: auto; border: 1px solid #333333;">
+
+		<script type="text/javascript">
+		var packages_status = new Object();
+		var json_array = new Array();
+		
+		//put keys into array
+		var obj_keys = new Object();
+		</script>
+		
+		{% for single_row_data in spearnet_customer_package_info_log %}
+		<form>
+			<span>SUDA Tracking Number: {{ single_row_data.hawb }}</span> <span>Package
+				Status: <select id="{{ single_row_data.hawb }}"
+				class="spearnet_customer_package_status">
+					<option value="spearnet">Spearnet</option>
+					<option value="exshipper">ExShipper</option>
+					<option value="sfo_airport">SFO Airport</option>
+					<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+						International Airport</option>
+					<option value="suda">SUDA</option>
+					<option value="delivered">Delivered</option>
+			</select>
+			</span> <span>Labeling Date: {{ single_row_data.date }}</span> <span>Update
+				Date: {{ single_row_data.update_date_time }}</span>
+		</form>
+
+		<script type="text/javascript">
+			$(function() {
+				//setup initial select values
+				$('#{{ single_row_data.hawb }}').val(
+						'{{ single_row_data.package_status }}');
+				//update json obj when select value change
+				$('#{{ single_row_data.hawb }}').change(function() {
+					var key = $(this).attr('id');
+					/* if (typeof packages_status[key] === 'undefined'){
+						packages_status[key] = $(this).val();
+					} */
+					packages_status[key] = $(this).val();
+				});
+			});
+			
+			var obj = new Object();
+			obj['hawb'] = "{{ single_row_data.hawb }}";
+			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
+			json_array.push(obj);
+
+		</script>
+		{% endfor %}
+		
+		{% else %}
+		<p>No Data Available</p>
+		{% endif %} <br> <input type="button" value="Update"
+			onclick="updatePackageStatus()">
+		<script type="text/javascript">
+			function updatePackageStatus() {
+				var confirm_result = confirm('Do you want to update the packages\' status?');
+
+				if (confirm_result == true) {
+					if (Object.keys(packages_status).length != 0) {
+						var json_string = JSON.stringify(packages_status, 2, 2);
+						$
+								.ajax(
+										'/exshipper_spearnet_customer_packages_status_handler',
+										{
+											type : 'POST',
+											data : {
+												fmt : 'json',
+												update_packages_status : json_string
+											},
+											success : showMsg,
+											statusCode : {
+												400 : function() {
+													alert('400 status code! user-side error');
+												},
+												500 : function() {
+													alert('500 status code! server-side error');
+												}
+											}
+										});
+					} else {
+						alert('Nothing needs to be updated!');
+					}
+				}
+			}
+
+			function showMsg(return_msg) {
+				alert(return_msg.update_status);
+			}
+		</script>
+	</div>
+
+	<div>
+		<br /> <a id="xls_download" href="">Download Data in XLS Format</a>
+	</div>
+
+	<script type="text/javascript">
+		//Test script to generate a file from JavaScript such
+		//that MS Excel will honor non-ASCII characters.
+		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
+		
+		var obj_types = new Object();
+		obj_types.hawb = "String";
+		obj_types.consignee_address_chinese = "String";
+
+		alert(JSON.stringify(json_array)+JSON.stringify(obj_types));
+		testJson = json_array;
+		testTypes = obj_types;
+		
+		/* testJson = [ {
+			"name" : "Tony Peña",
+			"city" : "希臘",
+			"country" : "United States",
+			"birthdate" : "1978-03-15",
+			"amount" : 42
+
+		}, {
+			"name" : "Ζαλώνης Thessaloniki",
+			"city" : "雅典",
+			"country" : "Greece",
+			"birthdate" : "1987-11-23",
+			"amount" : 42
+		} ]; */
+
+		//Simple type mapping; dates can be hard
+		//and I would prefer to simply use `datevalue`
+		//... you could even add the formula in here.
+		/* testTypes = {
+			"name" : "String",
+			"city" : "String",
+			"country" : "String",
+			"birthdate" : "String",
+			"amount" : "Number"
+		}; */
+
+		emitXmlHeader = function() {
+			return '<?xml version="1.0"?>\n'
+					+ '<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
+					+ '<ss:Worksheet ss:Name="Sheet1">\n' + '<ss:Table>\n\n';
+		};
+
+		emitXmlFooter = function() {
+			return '\n</ss:Table>\n' + '</ss:Worksheet>\n' + '</ss:Workbook>\n';
+		};
+
+		jsonToSsXml = function(jsonObject) {
+			var row;
+			var col;
+			var xml;
+			var data = typeof jsonObject != "object" ? JSON.parse(jsonObject)
+					: jsonObject;
+
+			xml = emitXmlHeader();
+
+			for (row = 0; row < data.length; row++) {
+				xml += '<ss:Row>\n';
+
+				for (col in data[row]) {
+					xml += '  <ss:Cell>\n';
+					xml += '    <ss:Data ss:Type="' + testTypes[col]  + '">';
+					xml += data[row][col] + '</ss:Data>\n';
+					xml += '  </ss:Cell>\n';
+				}
+
+				xml += '</ss:Row>\n';
+			}
+
+			xml += emitXmlFooter();
+			return xml;
+		};
+
+		console.log(jsonToSsXml(testJson));
+
+		download = function(content, filename, contentType) {
+			if (!contentType)
+				contentType = 'application/octet-stream';
+			var a = document.getElementById('xls_download');
+			var blob = new Blob([ content ], {
+				'type' : contentType
+			});
+			a.href = window.URL.createObjectURL(blob);
+			a.download = filename;
+		};
+
+		download(jsonToSsXml(testJson), 'cargo_manifest.xls',
+				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	</script>
+
+	<hr>
+</div>
+
+{% endblock %}

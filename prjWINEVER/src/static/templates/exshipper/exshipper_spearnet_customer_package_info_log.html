@@ -19,13 +19,41 @@
 <div
 	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if spearnet_customer_package_info_log %}
-
+	<br> <input type="button" value="Update"
+			onclick="updatePackageStatus()">
 	<div id="spearnet_customer_packages_info"
 		style="height: 300px; overflow: auto; border: 1px solid #333333;">
 
 		<script type="text/javascript">
 		var packages_status = new Object();
 		var json_array = new Array();
+		
+		//put keys into array
+		var obj_keys = new Object();
+		obj_keys['barcode_no'] = 'barcode_no';
+		obj_keys['hawb'] = 'hawb';
+		obj_keys['ctn'] = 'ctn';
+		obj_keys['weight_kg'] = 'g/w(kg)';
+		obj_keys['weight_lb'] = 'g/w(lb)';
+		obj_keys['commodity_name'] = 'commodity_name';
+		obj_keys['pcs'] = 'pcs';
+		obj_keys['unit'] = 'unit';
+		obj_keys['original'] = 'original';
+		obj_keys['unit_price_fob_us_dollar'] = 'unit_price_fob_us_dollar';
+		obj_keys['consignee_address_chinese'] = 'consignee_address_chinese';
+		obj_keys['deliver_to'] = 'deliver_to';
+		obj_keys['shipper_name'] = 'shipper_name';
+		obj_keys['shipper_person'] = 'shipper_person';
+		obj_keys['consignee_name'] = 'consignee_name';
+		obj_keys['consignee_person'] = 'consignee_person';
+		obj_keys['consignee_tel'] = 'consignee_tel';
+		obj_keys['consignee_addr'] = 'consignee_addr';
+		obj_keys['company_id_or_person_id'] = 'company_id_or_person_id';
+		obj_keys['remark'] = 'remark';
+		obj_keys['declaration_need_or_not'] = 'declaration_need_or_not';
+		obj_keys['duty_paid_by'] = 'duty_paid_by';
+		
+		json_array.push(obj_keys);
 		</script>
 		
 		{% for single_row_data in spearnet_customer_package_info_log %}
@@ -41,8 +69,7 @@
 					<option value="suda">SUDA</option>
 					<option value="delivered">Delivered</option>
 			</select>
-			</span> <span>Labeling Date: {{ single_row_data.date }}</span> <span>Update
-				Date: {{ single_row_data.update_date_time }}</span>
+			</span> <span>Labeling Date: {{ single_row_data.date }}</span>
 		</form>
 
 		<script type="text/javascript">
@@ -61,8 +88,38 @@
 			});
 			
 			var obj = new Object();
-			obj['hawb'] = "{{ single_row_data.hawb }}";
+			obj['barcode_no'] = 'NA';
+			obj['hawb'] = '{{ single_row_data.hawb }}';
+			obj['ctn'] = '{{ single_row_data.ctn }}';
+			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
+			obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
+			
+			//parse json object
+			var commodity_json = JSON.parse('{{ single_row_data.commodity_name }}');
+			var commodity_string = new String();
+			for (var ith in commodity_json['items']){
+				var data = commodity_json['items'][ith];
+				commodity_string += " Item Name: "+data.name+" Quantity: "+data.quan+" Price: "+data.price+" ; ";
+			};
+			
+			obj['commodity_name'] = commodity_string;
+			obj['pcs'] = '{{ single_row_data.pcs }}';
+			obj['unit'] = "{{ single_row_data.unit }}";
+			obj['original'] = "{{ single_row_data.original }}";
+			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
+			obj['deliver_to'] = " {{ single_row_data.deliver_to }}";
+			obj['shipper_name'] = "{{ single_row_data.shipper_name }}";
+			obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
+			obj['consignee_name'] = "{{ single_row_data.consignee_english_name }}";
+			obj['consignee_person'] = "{{ single_row_data.consignee_chinese_name }}";
+			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
+			obj['consignee_addr'] = "{{ single_row_data.consignee_address }}";
+			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
+			obj['remark'] = "{{ single_row_data.remark }}";
+			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
+			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
+			
 			json_array.push(obj);
 
 		</script>
@@ -70,8 +127,7 @@
 		
 		{% else %}
 		<p>No Data Available</p>
-		{% endif %} <br> <input type="button" value="Update"
-			onclick="updatePackageStatus()">
+		{% endif %}
 		<script type="text/javascript">
 			function updatePackageStatus() {
 				var confirm_result = confirm('Do you want to update the packages\' status?');
@@ -120,10 +176,29 @@
 		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
 		
 		var obj_types = new Object();
+		obj_types.barcode_no = "String";
 		obj_types.hawb = "String";
+		obj_types.ctn = "String";
+		obj_types.weight_kg = "String";
+		obj_types.weight_lb = "String";
+		obj_types.commodity_name = "String";
+		obj_types.pcs = "String";
+		obj_types.unit = "String";
+		obj_types.original = "String";
+		obj_types.unit_price_fob_us_dollar ="String";
 		obj_types.consignee_address_chinese = "String";
-
-		alert(JSON.stringify(json_array)+JSON.stringify(obj_types));
+		obj_types.deliver_to = "String";
+		obj_types.shipper_name = "String";
+		obj_types.shipper_person = "String";
+		obj_types.consignee_name = "String";
+		obj_types.consignee_person = "String";
+		obj_types.consignee_tel = "String";
+		obj_types.consignee_addr = "String";
+		obj_types.company_id_or_person_id = "String";
+		obj_types.remark = "String";
+		obj_types.declaration_need_or_not = "String";
+		obj_types.duty_paid_by = "String";
+		
 		testJson = json_array;
 		testTypes = obj_types;
 		
