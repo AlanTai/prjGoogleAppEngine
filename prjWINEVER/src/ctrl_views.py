@@ -15,7 +15,7 @@ import json
 
 from app_dict import key_value
 from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, \
-    SpearnetPackagesInfo
+    SpearnetPackagesInfo, TWCustomEntryTrackingNumber
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))
 # jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates/exshipper'))
@@ -392,7 +392,7 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                 for package in packages_array:
                     new_package = SpearnetPackagesInfo(id=package['hawb'])
                     new_package.index = package['index']
-                    new_package.barcode_no = package['barcode_no']
+                    new_package.barcode_no = 'NA'
                     new_package.hawb = package['hawb']
                     new_package.ctn = package['ctn']
                     new_package.weight_kg = package['g/w(kg)']
@@ -404,7 +404,10 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                     new_package.unit_price_fob_us_dollar = 'NA'
                     new_package.deliver_to = package['deliver_to']
                     new_package.shipper_name = package['shipper_name']
-                    new_package.shipper_person = 'NA' 
+                    new_package.shipper_person = 'NA'
+                    new_package.shipper_tel = '510-351-8903'
+                    new_package.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
+                    new_package.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
                     new_package.consignee_english_name = package['consignee_english_name']
                     new_package.consignee_chinese_name = package['consignee_chinese_name']
                     new_package.consignee_tel = package['consignee_tel']
@@ -414,7 +417,9 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                     new_package.remark = package['remark']
                     new_package.declaration_need_or_not = package['declaration_need_or_not']
                     new_package.duty_paid_by = package['duty_paid_by']
-                    new_package.package_status = 'spearnet' 
+                    new_package.package_status = 'spearnet'
+                    new_package.pickup_status = 'FALSE'
+                    new_package.shipping_date = 'NA'
                     new_package.put()
                     
                 ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
@@ -552,7 +557,6 @@ class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(login_page)
         self.response.out.write(template.render(template_values))
         
-        
 class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
@@ -604,13 +608,18 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
 #end of exshipper tw custom entry login handler
 
 # custom number handler for Android App
-class ExshipperCustomEntryHandler(webapp2.RequestHandler):
+class ExshipperTWCustomEntryTrackingNumberHandler(webapp2.RequestHandler):
     def post(self):
         account = self.request.get('account')
         password = self.request.get('password')
         if(account == 'alantai' and password == '1014'):
+            tracking_number = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').fetch(1)
+            if(tracking_number):
+                tw_custom_entry_number = tracking_number
+            else:
+                tw_custom_entry_number = 'NA'
             self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
-            self.response.write('{"custom_number":"測試504PW213"}')
+            self.response.write('{"custom_number":"'+tw_custom_entry_number+'"}')
 
 
 # page for testing only
@@ -696,7 +705,7 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_data_exchange_handler', ExShipperSpearnetDataExchangeHandler),
                                ('/exshipper_suda_tracking_number_handler', ExShipperSUDATrackingNumberHandler),
                                ('/exshipper_spearnet_suda_tracking_number_handler', ExShipperSpearnetSUDATrackingNumberHandler),
-                               ('/exshipper_custom_entry_handler', ExshipperCustomEntryHandler),
+                               ('/exshipper_custom_entry_tracking_number_handler', ExshipperTWCustomEntryTrackingNumberHandler),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
                                ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
                                ('/exshipper_spearnet_customer_package_tracking_handler', ExShipperSpearnetCustomerPackageTrackingHandler),

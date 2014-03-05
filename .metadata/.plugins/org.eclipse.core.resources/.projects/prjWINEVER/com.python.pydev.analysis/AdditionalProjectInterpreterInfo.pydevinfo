@@ -8,14 +8,14 @@ models|0|D:\prjGoogleAppEngine\prjWINEVER\src\models.py
 7
 2=models
 1=gaeDatastoreHandler
+6=TrackingNumber
 4=InvoiceInfo
-5=SpearnetPackagesInfo
-6=SUDATrackingNumber_REGULAR
+5=PackageInfo
 3=app_dict
 7=Size
 -- END DICTIONARY
 -- START TREE 1
-17
+20
 __a|0|
 app|0|
 con|0|
@@ -29,19 +29,23 @@ inv|1|InvoiceInfo!17@
 ite|0|
 jin|0|
 key|1|key_value!27@
+pac|1|PackageInfo!17@
 siz|1|Size!17@
 spe|1|SpearnetPackagesInfo!17@
 sud|1|SUDATrackingNumber_REGULAR!17@
 tes|0|
+tra|1|TrackingNumber!17@
+twc|1|TWCustomEntryTrackingNumber!17@
 -- END TREE
 -- START TREE 2
-37
+41
 !<m|0|
+__i|0|
 add|1|address!4&19@
 app|0|
 bar|1|barcode_no!5&19@
-com|2|commodity_name!5&19@company_id_or_personal_id!5&19@
-con|8|consignee_tel!5&19@consignee_phone_number!4&19@consignee_chinese_name!5&19@consignee_english_name!5&19@consignee_address_chinese!5&19@consignee_chinese!4&19@consignee_english!4&19@consignee_address!5&19@
+com|2|company_id_or_personal_id!5&19@commodity_name!5&19@
+con|8|consignee_address_chinese!5&19@consignee_tel!5&19@consignee_address_english!5&19@consignee_phone_number!4&19@consignee_chinese_name!5&19@consignee_english_name!5&19@consignee_chinese!4&19@consignee_english!4&19@
 ctn|1|ctn!5&19@
 dat|3|date!5&19@date_time!6&19@date_time!4&19@
 dec|1|declaration_need_or_not!5&19@
@@ -58,13 +62,16 @@ nam|0|
 ori|1|original!5&19@
 pac|1|package_status!5&19@
 pcs|1|pcs!5&19@
+pic|1|pickup_status!5&19@
 pos|0|
 pri|0|
 qua|0|
 ref|1|ref_number!4&19@
 rem|1|remark!5&19@
-shi|3|shipper_person!5&19@shipper!4&19@shipper_name!5&19@
+shi|7|shipper!4&19@shipper_name!5&19@shipping_date!5&19@shipper_address_chinese!5&19@shipper_address_english!5&19@shipper_person!5&19@shipper_tel!5&19@
 siz|1|size!4&19@
+spe|0|
+sud|0|
 tes|0|
 tra|1|tracking_number!6&19@
 uni|2|unit!5&19@unit_price_fob_us_dollar!5&19@

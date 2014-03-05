@@ -54,6 +54,9 @@
 	style="margin: 10px 5px; width: 150px;">
 <div id="id_shipping_labels" style="border: 1px dashed;"></div>
 
+<div id="upload_cover" style=" position: absolute; top:0px; left:0px; width: 100%; height: 100%; z-index: 1000; text-align: center; color:#f00; background-color: #fff; opacity:0.9; display: none;"> <p style=" position:absolute ; opacity:1; color: #f00; width: 100%; margin: 100px auto;">Uploading Data</p></div>
+
+
 <!--  -->
 <script>
 	var rABS = typeof FileReader !== "undefined"
@@ -252,6 +255,8 @@
 		var rows_info = json_obj[list_keys[0]];
 		var confirm_result = confirm('Do you want to save the data into database and print out package\'s labels?');
 		if (confirm_result == true) {
+			//turn on upload cover
+			$('#upload_cover').css({'display':'block'});
 			saveDataIntoDatabase(info,rows_info, row_keys);
 		}
 	}
@@ -290,9 +295,14 @@
 							statusCode : {
 								400 : function() {
 									alert('400 status code! user-side error');
+									//turn on upload cover
+									$('#upload_cover').css({'display':'none'});
 								},
 								500 : function() {
-									alert('500 status code! server-side error; please contact ExShipper at 1-650-307-3834')
+									alert('500 status code! server-side error; please contact ExShipper at 1-650-307-3834');
+
+									//turn on upload cover
+									$('#upload_cover').css({'display':'none'});
 								}
 							}
 
@@ -300,6 +310,8 @@
 	}
 
 	function showMsgAndPrintLabels(return_msg, labels_info, labels_key) {
+		//turn on upload cover
+		$('#upload_cover').css({'display':'none'});
 		alert(return_msg.spearnet_packages_info_upload_status);
 		if(return_msg.print_action === 'on')
 			createLabels(labels_info, labels_key);

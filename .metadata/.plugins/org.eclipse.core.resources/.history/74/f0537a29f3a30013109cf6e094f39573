@@ -1,0 +1,78 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Taiwan Custom Entry Invoice
+		Log</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if spearnet_customer_package_info_log %}
+	<div id="tw_custom_entry_invoice_log"
+		style="height: 500px; overflow: auto;">
+
+
+		{% for single_row_data in spearnet_customer_package_info_log %}
+		<form>
+			<script type="text/javascript">
+				$('#tw_custom_entry_invoice_log').append('<form style="width:800px; margin:auto;">'
+						+'<p style="font-weight:bold;">Shipper\'s Information</p>'
+						+'<p>Name: {{single_row_data.consignee_english_name}}</p>'
+						+'<p>Phone: </p>'
+						+'<p>Address: </p>'
+						+'<p style="font-weight:bold;">Consignee\'s Information</p>'
+						+'<p>SUDA Tracking Number: {{ single_row_data.hawb }}</p>'
+						+'<p>Ref. Number: {{ single_row_data.index }}</p>'
+						+'<p>Weight (kg): <input value="{{ single_row_data.weight_kg }}" style="color:#000; border:1px solid; text-align:center;" /></p>'
+						+'<p>Consignee Address (chinese): {{ single_row_data.consignee_address_chinese }}</p>'
+						+'<div id="commodity_{{ single_row_data.hawb }}"></div>'
+						+'</form>');
+			
+				var items = JSON.parse('{{ single_row_data.commodity_name }}')['items'];
+				$.each(items, function(ith, obj){
+					$('#commodity_{{ single_row_data.hawb }}').append('<p><span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+					+'<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+					+'<span> Price: <input value = "'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+					+' </p>');
+				});
+			</script>
+		</form>
+		<br/>
+		<div></div>
+		<br />
+		<hr/>
+
+		<script type="text/javascript">
+			$(function() {
+				//setup initial select values
+				$('#{{ single_row_data.hawb }}').val(
+						'{{ single_row_data.package_status }}');
+				//update json obj when select value change
+				$('#{{ single_row_data.hawb }}').change(function() {
+					var key = $(this).attr('id');
+					/* if (typeof packages_status[key] === 'undefined'){
+						packages_status[key] = $(this).val();
+					}
+					packages_status[key] = $(this).val();*/
+				});
+			});
+		</script>
+		{% endfor %} {% else %}
+		<p>No Data Available</p>
+		{% endif %}
+	</div>
+	<hr>
+</div>
+
+{% endblock %}
