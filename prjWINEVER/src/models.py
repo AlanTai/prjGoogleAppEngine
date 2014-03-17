@@ -78,6 +78,7 @@ class PackageInfo(ndb.Model):
     duty_paid_by = ndb.StringProperty()
     package_status = ndb.StringProperty()
     pickup_status = ndb.StringProperty()
+    signature_img = ndb.BlobProperty()
     date = ndb.DateProperty(auto_now_add = True)
     shipping_date = ndb.StringProperty()
     update_date_time = ndb.DateTimeProperty(auto_now = True)

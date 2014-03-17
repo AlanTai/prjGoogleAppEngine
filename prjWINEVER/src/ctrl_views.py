@@ -445,16 +445,15 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         package_entity.put()
                         response = 'Successfully Update Picked Packages Information'
                     else:
-                        if(package_entity !=None and package_entity.package_status != 'spearnet'):
+                        if(package_entity != None and package_entity.package_status != 'spearnet'):
                             response = 'Tracking number is Duplicated!'
                         else:
-                            response = 'Unknown Package!'
+                            response = suda_numbers_array[0]
                         break
                 
             except:
                 response = 'Fail to Update Picked Packages Information'
-            
-                
+              
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
         self.response.write('{"response":"'+response+'"}')
         
@@ -612,14 +611,20 @@ class ExshipperTWCustomEntryTrackingNumberHandler(webapp2.RequestHandler):
     def post(self):
         account = self.request.get('account')
         password = self.request.get('password')
+        tw_custom_entry_number = 'NA'
         if(account == 'alantai' and password == '1014'):
-            tracking_number = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').fetch(1)
-            if(tracking_number):
-                tw_custom_entry_number = tracking_number
-            else:
+            try:
+                tracking_number = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').fetch(1)
+                if(tracking_number):
+                    tw_custom_entry_number = tracking_number
+                else:
+                    tw_custom_entry_number = 'NA'
+            except:
                 tw_custom_entry_number = 'NA'
-            self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
-            self.response.write('{"custom_number":"'+tw_custom_entry_number+'"}')
+                        
+        self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
+        self.response.write('{"response":"'+'12345'+'"}')
+        return
 
 
 # page for testing only
@@ -705,7 +710,7 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_data_exchange_handler', ExShipperSpearnetDataExchangeHandler),
                                ('/exshipper_suda_tracking_number_handler', ExShipperSUDATrackingNumberHandler),
                                ('/exshipper_spearnet_suda_tracking_number_handler', ExShipperSpearnetSUDATrackingNumberHandler),
-                               ('/exshipper_custom_entry_tracking_number_handler', ExshipperTWCustomEntryTrackingNumberHandler),
+                               ('/exshipper_tw_custom_entry_handler', ExshipperTWCustomEntryTrackingNumberHandler),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
                                ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
                                ('/exshipper_spearnet_customer_package_tracking_handler', ExShipperSpearnetCustomerPackageTrackingHandler),
