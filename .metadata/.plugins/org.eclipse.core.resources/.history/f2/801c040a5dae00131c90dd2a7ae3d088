@@ -447,9 +447,9 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         response = 'Successfully Update Picked Packages Information'
                     else:
                         if(package_entity != None and package_entity.package_status != 'spearnet'):
-                            response = 'Tracking Number, '+ key +', is Duplicated!'
+                            response = 'Tracking number is Duplicated!'
                         else:
-                            response = "Unknown Package- " + key
+                            response = key
                             break
                 
             except:

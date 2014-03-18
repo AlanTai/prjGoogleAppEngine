@@ -425,7 +425,7 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                 ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
                 ajax_data['print_action']='on'
                     
-        self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
+        self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
         return
         
@@ -433,11 +433,10 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
     def post(self):
         account = self.request.get('account')
         password = self.request.get('password')
-        response = 'NA'
-        json_response = {'response':'NA'}
+        response = 'Unable to access the server!'
         if(account == 'alantai' and password == '1014'):
             json_obj = json.loads(self.request.get('spearnet_picked_packages'))
-            suda_numbers_array = json.loads(json_obj['suda_tracking_numbers'])
+            suda_numbers_array = json_obj['suda_tracking_numbers']
             try:
                 for key in suda_numbers_array:
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
@@ -447,18 +446,16 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         response = 'Successfully Update Picked Packages Information'
                     else:
                         if(package_entity != None and package_entity.package_status != 'spearnet'):
-                            response = 'Tracking Number, '+ key +', is Duplicated!'
+                            response = 'Tracking number is Duplicated!'
                         else:
-                            response = "Unknown Package- " + key
-                            break
+                            response = key
+                        break
                 
             except:
                 response = 'Fail to Update Picked Packages Information'
-            finally:
-                json_response['response'] = response
-                
-        self.response.headers['Content-Type'] = 'text/json ; charset=UTF-8'
-        self.response.write(json.dumps(json_response))
+              
+        self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
+        self.response.write('{"response":"'+response+'"}')
         
 
 class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):

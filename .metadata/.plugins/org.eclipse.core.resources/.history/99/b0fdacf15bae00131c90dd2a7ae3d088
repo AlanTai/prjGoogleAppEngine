@@ -425,7 +425,7 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                 ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
                 ajax_data['print_action']='on'
                     
-        self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
+        self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
         return
         
@@ -447,10 +447,9 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         response = 'Successfully Update Picked Packages Information'
                     else:
                         if(package_entity != None and package_entity.package_status != 'spearnet'):
-                            response = 'Tracking Number, '+ key +', is Duplicated!'
+                            response = 'Tracking number is Duplicated!'
                         else:
-                            response = "Unknown Package- " + key
-                            break
+                            response += key + ';'
                 
             except:
                 response = 'Fail to Update Picked Packages Information'
