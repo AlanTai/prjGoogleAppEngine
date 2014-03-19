@@ -4,7 +4,6 @@ Created on Oct 1, 2013
 
 @author: Alan Tai
 '''
-import random
 
 __author__ = 'Alan Tai'
 
@@ -626,9 +625,8 @@ class ExshipperTWCustomEntryTrackingNumberHandler(webapp2.RequestHandler):
             except:
                 tw_custom_entry_number = 'NA'
                         
-        tw_custom_entry_number = random.randint(10000,99999)
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
-        self.response.write('{"response":"'+ tw_custom_entry_number.__str__() +'"}')
+        self.response.write('{"response":"'+ tw_custom_entry_number +'"}')
         return
 
 

@@ -628,7 +628,7 @@ class ExshipperTWCustomEntryTrackingNumberHandler(webapp2.RequestHandler):
                         
         tw_custom_entry_number = random.randint(10000,99999)
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
-        self.response.write('{"response":"'+ tw_custom_entry_number.__str__() +'"}')
+        self.response.write('{"response":"'+ tw_custom_entry_number +'"}')
         return
 
 
