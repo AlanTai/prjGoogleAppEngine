@@ -62,6 +62,8 @@ key_value = {
              'exshipper_suda_tracking_number_handler_page':'/exshipper/exshipper_suda_tracking_number_handler.html',
              'exshipper_suda_tracking_number_handler_page_title':'ExShipper SUDA Tracking Number Handler',
              
+             'exshipper_tw_custom_entry_number_handler_page':'/exshipper/exshipper_tw_custom_entry_number_handler.html',
+             'exshipper_tw_custom_entry_number_handler_title':'ExShipper TW Custom Entry Number Handler',
              
              #ExShipper-Spearnet Session
              'exshipper_spearnet_index_page':'/exshipper/exshipper_spearnet_index.html',

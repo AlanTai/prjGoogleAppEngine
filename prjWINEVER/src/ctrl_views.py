@@ -250,16 +250,16 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
 
-
+#SUDA Tracking Number Handler
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        invoice_log_page = key_value.get('exshipper_suda_tracking_number_handler_page')
+        suda_tracking_number_handler_page = key_value.get('exshipper_suda_tracking_number_handler_page')
             
         template_values = {'title':key_value.get('exshipper_suda_tracking_number_handler_title')}
         template_values.update(user_info)
             
-        template = jinja_environment.get_template(invoice_log_page)
+        template = jinja_environment.get_template(suda_tracking_number_handler_page)
         self.response.out.write(template.render(template_values))
         
     def post(self):
@@ -280,7 +280,39 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
             ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
+#end of SUDA Tracking Number Handler
 
+#TW Custom Entry Handler
+class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self, users)
+        suda_tracking_number_handler_page = key_value.get('exshipper_tw_custom_entry_number_handler_page')
+            
+        template_values = {'title':key_value.get('exshipper_tw_custom_entry_number_handler_title')}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(suda_tracking_number_handler_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        ajax_data = {'tw_custom_entry_number_submission':'NA'}
+        if(self.request.get('fmt') == 'json'):
+            json_obj = json.loads(self.request.get('json_info'))
+            suda_number_array = json_obj['tw_custom_entry_numbers']
+            duplicated_numbers = ''
+            for row_info in suda_number_array:
+                if(SUDATrackingNumber_REGULAR.get_by_id(row_info['tw_custom_entry_number'])):
+                    duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
+                else:
+                    new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['tw_custom_entry_number'])
+                    new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
+                    new_suda_tr_number.used_mark = row_info['used_mark']
+                    new_suda_tr_number.put()
+                
+            ajax_data['tw_custom_entry_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+            self.response.out.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+#end of TW Custom Entry Handler
 
 # -- Client Spearnet Session
 class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
@@ -610,14 +642,16 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
 
 #end of exshipper tw custom entry login handler
 
-# custom number handler for Android App
-class ExshipperTWCustomEntryTrackingNumberHandler(webapp2.RequestHandler):
+# custom entry handler
+class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
     def post(self):
         account = self.request.get('account')
         password = self.request.get('password')
         token = self.request.get('token')
-        tw_custom_entry_number = 'NA'
+        
+        #tw custom entry handler for getting a number
         if(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_get_number'):
+            tw_custom_entry_number = 'NA'
             try:
                 tracking_number = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').fetch(1)
                 if(tracking_number):
@@ -629,18 +663,24 @@ class ExshipperTWCustomEntryTrackingNumberHandler(webapp2.RequestHandler):
             finally:
                 tw_custom_entry_number = random.randint(10000,99999)
                 response = tw_custom_entry_number
+        #tw custom entry handler for submitting packages info
         elif(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_submit_packages_sets'):
+            response_result = ''
             try:
-                jsonObj = json.loads(self.request.get(''))
-                tw_custom_entry_submit_result  = jsonObj['']
+                jsonObj = json.loads(self.request.get('tw_custom_entry_packages_sets'))
+                for key in jsonObj.keys():
+                    for package_number in jsonObj[key].keys():
+                        response_result += 'TW Package NO.'+package_number + ';'
+                tw_custom_entry_submit_result = response_result
             except:
                 tw_custom_entry_submit_result = 'NA'
             finally:
                 response = tw_custom_entry_submit_result
+                
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
         self.response.write('{"response":"'+ response.__str__() +'"}')
         return
-
+#end of custom entry handler
 
 # page for testing only
 class TestHandler(webapp2.RequestHandler):
@@ -725,7 +765,7 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_data_exchange_handler', ExShipperSpearnetDataExchangeHandler),
                                ('/exshipper_suda_tracking_number_handler', ExShipperSUDATrackingNumberHandler),
                                ('/exshipper_spearnet_suda_tracking_number_handler', ExShipperSpearnetSUDATrackingNumberHandler),
-                               ('/exshipper_tw_custom_entry_handler', ExshipperTWCustomEntryTrackingNumberHandler),
+                               ('/exshipper_tw_custom_entry_handler', ExshipperTWCustomEntryHandler),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
                                ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
                                ('/exshipper_spearnet_customer_package_tracking_handler', ExShipperSpearnetCustomerPackageTrackingHandler),
