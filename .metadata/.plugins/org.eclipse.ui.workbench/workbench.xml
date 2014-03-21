@@ -64,7 +64,7 @@
 </editor>
 <editor activePart="true" focus="true" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views" path="D:/prjGoogleAppEngine/prjWINEVER/src/ctrl_views.py" title="ctrl_views" tooltip="prjWINEVER/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/ctrl_views.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="31433" selectionTopPixel="9255"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="35593" selectionTopPixel="7985"/>
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_suda_tracking_number_handler.html" partName="exshipper_suda_tracking_number_handler.html" path="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates/exshipper/exshipper_suda_tracking_number_handler.html" title="exshipper_suda_tracking_number_handler.html" tooltip="prjWINEVER/src/static/templates/exshipper/exshipper_suda_tracking_number_handler.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjWINEVER/src/static/templates/exshipper/exshipper_suda_tracking_number_handler.html"/>
@@ -299,7 +299,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.1608599" ratioLeft="217" ratioRight="1132" relationship="2" relative="topLeft"/>
+<info part="org.eclipse.ui.editorss" ratio="0.33951074" ratioLeft="458" ratioRight="891" relationship="2" relative="topLeft"/>
 <info folder="true" part="bottom" ratio="0.7354839" ratioLeft="456" ratioRight="164" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
@@ -331,10 +331,8 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/models.py"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/ctrl_views.py"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/ctrl_views.py"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjWINEVER/src/models.py"/>
 </editors>
-<item historyLabel="models" index="1">
-<position/>
-</item>
 <item historyLabel="exshipper_tw_custom_entry_invoice_log.html" index="3">
 <position info="not_deleted" x="1378" y="0"/>
 </item>
@@ -479,8 +477,11 @@
 <item historyLabel="models" index="10">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item active="true" historyLabel="ctrl_views" index="12">
+<item historyLabel="ctrl_views" index="12">
 <position info="not_deleted" x="31217" y="30"/>
+</item>
+<item active="true" historyLabel="models" index="13">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>

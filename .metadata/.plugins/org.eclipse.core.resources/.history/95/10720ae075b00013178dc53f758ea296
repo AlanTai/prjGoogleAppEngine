@@ -626,19 +626,12 @@ class ExshipperTWCustomEntryTrackingNumberHandler(webapp2.RequestHandler):
                     tw_custom_entry_number = 'NA'
             except:
                 tw_custom_entry_number = 'NA'
-            finally:
-                tw_custom_entry_number = random.randint(10000,99999)
-                response = tw_custom_entry_number
-        elif(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_submit_packages_sets'):
+        if(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_'):
             try:
-                jsonObj = json.loads(self.request.get(''))
-                tw_custom_entry_submit_result  = jsonObj['']
-            except:
-                tw_custom_entry_submit_result = 'NA'
-            finally:
-                response = tw_custom_entry_submit_result
+                jsonObj = self.request.get('')
+        tw_custom_entry_number = random.randint(10000,99999)
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
-        self.response.write('{"response":"'+ response.__str__() +'"}')
+        self.response.write('{"response":"'+ tw_custom_entry_number.__str__() +'"}')
         return
 
 

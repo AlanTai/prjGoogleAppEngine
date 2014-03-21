@@ -2,7 +2,10 @@
 -- START DISKCACHE
 D:\prjGoogleAppEngine\.metadata\.plugins\org.eclipse.core.resources\.projects\prjWINEVER\com.python.pydev.analysis\v1_indexcache
 .v1_indexcache
+models|0|D:\prjGoogleAppEngine\prjWINEVER\src\models.py
+gaeDatastoreHandler|0|D:\prjGoogleAppEngine\prjWINEVER\src\gaeDatastoreHandler.py
 ctrl_views|0|D:\prjGoogleAppEngine\prjWINEVER\src\ctrl_views.py
+app_dict|0|D:\prjGoogleAppEngine\prjWINEVER\src\app_dict.py
 -- END DISKCACHE
 -- START DICTIONARY
 29
@@ -61,10 +64,10 @@ twc|1|TWCustomEntryTrackingNumber!25@
 31
 add|1|address!5&27@
 bar|1|barcode_no!6&27@
-com|2|commodity_name!6&27@company_id_or_personal_id!6&27@
+com|2|company_id_or_personal_id!6&27@commodity_name!6&27@
 con|8|consignee_tel!6&27@consignee_address_english!6&27@consignee_phone_number!5&27@consignee_chinese_name!6&27@consignee_english_name!6&27@consignee_address_chinese!6&27@consignee_chinese!5&27@consignee_english!5&27@
 ctn|1|ctn!6&27@
-dat|3|date_time!5&27@date_time!7&27@date!6&27@
+dat|3|date!6&27@date_time!7&27@date_time!5&27@
 dec|1|declaration_need_or_not!6&27@
 del|1|deliver_to!6&27@
 dut|1|duty_paid_by!6&27@
@@ -85,7 +88,7 @@ sig|1|signature_img!6&27@
 siz|1|size!5&27@
 tra|1|tracking_number!7&27@
 uni|2|unit!6&27@unit_price_fob_us_dollar!6&27@
-upd|3|update_date_time!5&27@update_date_time!7&27@update_date_time!6&27@
+upd|3|update_date_time!6&27@update_date_time!7&27@update_date_time!5&27@
 use|1|used_mark!7&27@
 wei|3|weight_kg!6&27@weight!5&27@weight_lb!6&27@
 wid|1|width!20&27@
