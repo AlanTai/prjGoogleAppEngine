@@ -305,14 +305,8 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'tw_custom_entry_number_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
-            #get jsonObj from client side
-            try:
-                json_obj = json.loads(self.request.get('json_info'))
-                tw_custom_entry_number_array = json_obj['tw_custom_entry_numbers']
-            except Exception, e:
-                ajax_data['tw_custom_entry_number_submission'] = 'Error Message: %s' % e
-            
-            #check the size of upload numbers
+            json_obj = json.loads(self.request.get('json_info'))
+            tw_custom_entry_number_array = json_obj['tw_custom_entry_numbers']
             ary_length = tw_custom_entry_number_array.__len__()
             if(ary_length > 200):
                 ajax_data['tw_custom_entry_number_submission'] = 'Size of upload numbers is not more than 200!'
@@ -322,16 +316,16 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
                     for row_info in tw_custom_entry_number_array:
                         if(TWCustomEntryTrackingNumber.get_by_id(row_info['tw_custom_entry_number'])):
                             duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
-                            ajax_data['tw_custom_entry_number_submission'] = 'A duplicated number, %s , is uploaded!' % duplicated_numbers
                         else:
                             new_suda_tr_number = TWCustomEntryTrackingNumber(id=row_info['tw_custom_entry_number'])
                             new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
                             new_suda_tr_number.used_mark = row_info['used_mark']
                             new_suda_tr_number.put()
-                            ajax_data['tw_custom_entry_number_submission'] = 'Data are saved into database'
                 except Exception, e:
                     ajax_data['tw_custom_entry_number_submission'] = 'Error Message: %s' % e
-                
+                    
+                ajax_data['tw_custom_entry_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+            
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
 #end of TW Custom Entry Handler
