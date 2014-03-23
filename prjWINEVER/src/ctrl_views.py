@@ -169,12 +169,12 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         
         # html page dispatching
         if(caller_page == 'exshipper_invoice'):
-            if(exshipper_account == 'alantaiinvoice' and exshipper_password == '1014lct'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = key_value.get('exshipper_invoice_page')
                 html_page_title = key_value.get('exshipper_invoice_page_title')
                 
         elif(caller_page == 'exshipper_invoice_log'):
-            if(exshipper_account == 'alantaiinvoicelog' and exshipper_password == '1014lct'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = key_value.get('exshipper_invoice_log_page')
                 html_page_title = key_value.get('exshipper_invoice_log_title')
                 
@@ -191,12 +191,17 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             # end of memcache
                 
         elif(caller_page == 'exshipper_suda_tracking_number'):
-            if(exshipper_account == 'alantaisuda' and exshipper_password == '1014lct'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = key_value.get('exshipper_suda_tracking_number_handler_page')
                 html_page_title = key_value.get('exshipper_suda_tracking_number_handler_page_title')
                 
+        elif(caller_page == 'exshipper_tw_custom_entry_number'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+                html_page = key_value.get('exshipper_tw_custom_entry_number_handler_page')
+                html_page_title = key_value.get('exshipper_tw_custom_entry_number_handler_title')
+                
         elif(caller_page == 'exshipper_spearnet_customer_package_info_log'):
-            if(exshipper_account == 'alantaispearnet' and exshipper_password == '1014lct'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = key_value.get('exshipper_spearnet_customer_package_info_log_page')
                 html_page_title = key_value.get('exshipper_spearnet_customer_package_info_log_page_title')
                 
@@ -265,21 +270,24 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'suda_tracking_number_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
-            json_obj = json.loads(self.request.get('json_info'))
-            suda_number_array = json_obj['suda_tracking_numbers']
-            duplicated_numbers = ''
-            for row_info in suda_number_array:
-                if(SUDATrackingNumber_REGULAR.get_by_id(row_info['suda_number'])):
-                    duplicated_numbers += 'Duplicated Number: '+ row_info['suda_number'] +'\n'
-                else:
-                    new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['suda_number'])
-                    new_suda_tr_number.tracking_number = row_info['suda_number']
-                    new_suda_tr_number.used_mark = row_info['used_mark']
-                    new_suda_tr_number.put()
-                
-            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
-            self.response.out.headers['Content-Type'] = 'text/json'
-            self.response.out.write(json.dumps(ajax_data))
+            try:
+                json_obj = json.loads(self.request.get('json_info'))
+                suda_number_array = json_obj['suda_tracking_numbers']
+                duplicated_numbers = ''
+                for row_info in suda_number_array:
+                    if(SUDATrackingNumber_REGULAR.get_by_id(row_info['suda_number'])):
+                        duplicated_numbers += 'Duplicated Number: '+ row_info['suda_number'] +'\n'
+                    else:
+                        new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['suda_number'])
+                        new_suda_tr_number.tracking_number = row_info['suda_number']
+                        new_suda_tr_number.used_mark = row_info['used_mark']
+                        new_suda_tr_number.put()
+                        ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+            except Exception, e:
+                ajax_data['suda_tracking_number_submission'] = 'Error Message: %s' % e
+            
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
 #end of SUDA Tracking Number Handler
 
 #TW Custom Entry Handler
@@ -298,18 +306,26 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
         ajax_data = {'tw_custom_entry_number_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
             json_obj = json.loads(self.request.get('json_info'))
-            suda_number_array = json_obj['tw_custom_entry_numbers']
-            duplicated_numbers = ''
-            for row_info in suda_number_array:
-                if(SUDATrackingNumber_REGULAR.get_by_id(row_info['tw_custom_entry_number'])):
-                    duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
-                else:
-                    new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['tw_custom_entry_number'])
-                    new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
-                    new_suda_tr_number.used_mark = row_info['used_mark']
-                    new_suda_tr_number.put()
-                
-            ajax_data['tw_custom_entry_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+            tw_custom_entry_number_array = json_obj['tw_custom_entry_numbers']
+            ary_length = tw_custom_entry_number_array.__len__()
+            if(ary_length > 200):
+                ajax_data['tw_custom_entry_number_submission'] = 'Size of upload numbers is not more than 200!'
+            else:
+                duplicated_numbers = ''
+                try:
+                    for row_info in tw_custom_entry_number_array:
+                        if(TWCustomEntryTrackingNumber.get_by_id(row_info['tw_custom_entry_number'])):
+                            duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
+                        else:
+                            new_suda_tr_number = TWCustomEntryTrackingNumber(id=row_info['tw_custom_entry_number'])
+                            new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
+                            new_suda_tr_number.used_mark = row_info['used_mark']
+                            new_suda_tr_number.put()
+                except Exception, e:
+                    ajax_data['tw_custom_entry_number_submission'] = 'Error Message: %s' % e
+                    
+                ajax_data['tw_custom_entry_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+            
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
 #end of TW Custom Entry Handler
@@ -408,59 +424,61 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'spearnet_packages_info_upload_status':'NA','print_action':'off'}
         
-        if(self.request.get('fmt') == 'json'):
-            json_obj = json.loads(self.request.get('packages_data'))
-            packages_array = json_obj['spearnet_invoice']
-            for package in packages_array:
-                query_result = SpearnetPackagesInfo.get_by_id(package['hawb'])
-                if(query_result):
-                    duplication = True;
-                    ajax_data['spearnet_packages_info_upload_status']='You have a duplicated tracking number and please replace it with a new tracking number!'
-                    ajax_data['print_action']='off'
-                    break;
-                else:
-                    duplication = False;
-                    
-            if(duplication == False):
+        try:
+            if(self.request.get('fmt') == 'json'):
+                json_obj = json.loads(self.request.get('packages_data'))
+                packages_array = json_obj['spearnet_invoice']
                 for package in packages_array:
-                    new_package = SpearnetPackagesInfo(id=package['hawb'])
-                    new_package.index = package['index']
-                    new_package.barcode_no = 'NA'
-                    new_package.hawb = package['hawb']
-                    new_package.ctn = package['ctn']
-                    new_package.weight_kg = package['g/w(kg)']
-                    new_package.weight_lb = 'NA'
-                    new_package.commodity_name = package['commodity_name']
-                    new_package.pcs = 'NA'
-                    new_package.unit = package['unit']
-                    new_package.original = package['original']
-                    new_package.unit_price_fob_us_dollar = 'NA'
-                    new_package.deliver_to = package['deliver_to']
-                    new_package.shipper_name = package['shipper_name']
-                    new_package.shipper_person = 'NA'
-                    new_package.shipper_tel = '510-351-8903'
-                    new_package.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
-                    new_package.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
-                    new_package.consignee_english_name = package['consignee_english_name']
-                    new_package.consignee_chinese_name = package['consignee_chinese_name']
-                    new_package.consignee_tel = package['consignee_tel']
-                    new_package.consignee_address = package['consignee_address']
-                    new_package.consignee_address_chinese = package['consignee_address_chinese']
-                    new_package.company_id_or_personal_id = 'NA'
-                    new_package.remark = package['remark']
-                    new_package.declaration_need_or_not = package['declaration_need_or_not']
-                    new_package.duty_paid_by = package['duty_paid_by']
-                    new_package.package_status = 'spearnet'
-                    new_package.pickup_status = 'FALSE'
-                    new_package.shipping_date = 'NA'
-                    new_package.put()
-                    
-                ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
-                ajax_data['print_action']='on'
-                    
+                    query_result = SpearnetPackagesInfo.get_by_id(package['hawb'])
+                    if(query_result):
+                        duplication = True;
+                        ajax_data['spearnet_packages_info_upload_status']='You have a duplicated tracking number and please replace it with a new tracking number!'
+                        ajax_data['print_action']='off'
+                        break;
+                    else:
+                        duplication = False;
+                        
+                if(duplication == False):
+                    for package in packages_array:
+                        new_package = SpearnetPackagesInfo(id=package['hawb'])
+                        new_package.index = package['index']
+                        new_package.barcode_no = 'NA'
+                        new_package.hawb = package['hawb']
+                        new_package.ctn = package['ctn']
+                        new_package.weight_kg = package['g/w(kg)']
+                        new_package.weight_lb = 'NA'
+                        new_package.commodity_name = package['commodity_name']
+                        new_package.pcs = 'NA'
+                        new_package.unit = package['unit']
+                        new_package.original = package['original']
+                        new_package.unit_price_fob_us_dollar = 'NA'
+                        new_package.deliver_to = package['deliver_to']
+                        new_package.shipper_name = package['shipper_name']
+                        new_package.shipper_person = 'NA'
+                        new_package.shipper_tel = '510-351-8903'
+                        new_package.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
+                        new_package.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
+                        new_package.consignee_english_name = package['consignee_english_name']
+                        new_package.consignee_chinese_name = package['consignee_chinese_name']
+                        new_package.consignee_tel = package['consignee_tel']
+                        new_package.consignee_address = package['consignee_address']
+                        new_package.consignee_address_chinese = package['consignee_address_chinese']
+                        new_package.company_id_or_personal_id = 'NA'
+                        new_package.remark = package['remark']
+                        new_package.declaration_need_or_not = package['declaration_need_or_not']
+                        new_package.duty_paid_by = package['duty_paid_by']
+                        new_package.package_status = 'spearnet'
+                        new_package.pickup_status = 'FALSE'
+                        new_package.shipping_date = 'NA'
+                        new_package.put()
+                        
+                    ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
+                    ajax_data['print_action']='on'
+        except Exception, e:
+            ajax_data['spearnet_packages_info_upload_status'] = 'Error Message: %s' % e
+            
         self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
         self.response.out.write(json.dumps(ajax_data))
-        return
         
 class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
     def post(self):
@@ -485,8 +503,8 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                             response = "Unknown Package- " + key
                             break
                 
-            except:
-                response = 'Fail to Update Picked Packages Information'
+            except Exception, e:
+                response = 'Error Message: %s' % e
             finally:
                 json_response['response'] = response
                 
@@ -554,11 +572,14 @@ class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
 class ExShipperSpearnetCustomerPackageTrackingHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'package_status':'NA'}
-        if(self.request.get('fmt') == 'json'):
-            tracking_result = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).fetch(1)
-            if(tracking_result):
-                package_status = tracking_result[0].package_status
-                ajax_data['package_status'] = package_status
+        try:
+            if(self.request.get('fmt') == 'json'):
+                tracking_result = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).fetch(1)
+                if(tracking_result):
+                    package_status = tracking_result[0].package_status
+                    ajax_data['package_status'] = package_status
+        except Exception, e:
+            ajax_data['package_status'] = 'Error Message: %s' % e
                            
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
@@ -764,6 +785,7 @@ app = webapp2.WSGIApplication([('/exwine', ExWINE),
                                ('/exshipper_spearnet_data_exchange_page', ExShipperSpearnetDataExchangeDispatcher),
                                ('/exshipper_spearnet_data_exchange_handler', ExShipperSpearnetDataExchangeHandler),
                                ('/exshipper_suda_tracking_number_handler', ExShipperSUDATrackingNumberHandler),
+                               ('/exshipper_tw_custom_entry_number_handler', ExShipperTWCustomEntryNumberHandler),
                                ('/exshipper_spearnet_suda_tracking_number_handler', ExShipperSpearnetSUDATrackingNumberHandler),
                                ('/exshipper_tw_custom_entry_handler', ExshipperTWCustomEntryHandler),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
