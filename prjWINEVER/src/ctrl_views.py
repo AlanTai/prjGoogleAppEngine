@@ -322,7 +322,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
                     for row_info in tw_custom_entry_number_array:
                         if(TWCustomEntryTrackingNumber.get_by_id(row_info['tw_custom_entry_number'])):
                             duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
-                            ajax_data['tw_custom_entry_number_submission'] = 'A duplicated number, %s , is uploaded!' % duplicated_numbers
+                            ajax_data['tw_custom_entry_number_submission'] = 'Duplicated Numbers:\n'+' %s' % duplicated_numbers
                         else:
                             new_suda_tr_number = TWCustomEntryTrackingNumber(id=row_info['tw_custom_entry_number'])
                             new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
@@ -644,7 +644,7 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         
         # html page dispatching
         if(caller_page == 'exshipper_tw_custom_entry_invoice_log'):
-            if(tw_custom_entry_account == 'exshippertwcustomentry' and tw_custom_entry_password == 'exshippertwcustomentry'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
                 html_page_title = 'Custom Entry Invoice Log'
                 
