@@ -322,7 +322,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
                     for row_info in tw_custom_entry_number_array:
                         if(TWCustomEntryTrackingNumber.get_by_id(row_info['tw_custom_entry_number'])):
                             duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
-                            ajax_data['tw_custom_entry_number_submission'] = 'Duplicated Numbers:\n'+' %s' % duplicated_numbers
+                            ajax_data['tw_custom_entry_number_submission'] = 'Duplicated Numbers:\n'+'%s' % duplicated_numbers
                         else:
                             new_suda_tr_number = TWCustomEntryTrackingNumber(id=row_info['tw_custom_entry_number'])
                             new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
@@ -447,7 +447,6 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                 if(duplication == False):
                     for package in packages_array:
                         new_package = SpearnetPackagesInfo(id=package['hawb'])
-                        new_package.index = package['index']
                         new_package.barcode_no = 'NA'
                         new_package.hawb = package['hawb']
                         new_package.ctn = package['ctn']
@@ -475,7 +474,6 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                         new_package.duty_paid_by = package['duty_paid_by']
                         new_package.package_status = 'spearnet'
                         new_package.pickup_status = 'FALSE'
-                        new_package.shipping_date = 'NA'
                         new_package.put()
                         
                     ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'

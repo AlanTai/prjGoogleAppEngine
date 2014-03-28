@@ -1,0 +1,41 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">{{title}}</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; margin: 10px auto; width: 100%; text-align: center;">
+	<p>ExShipper Services for Internal Use</p>
+	<br>
+	<div>
+		<a href="/exshipper_login_handler?caller_page=exshipper_invoice"
+			target="_blank">ExShipper Page for Creating Invoice</a><br /> <a
+			href="/exshipper_login_handler?caller_page=exshipper_invoice_log"
+			target="_blank">Invoice Log</a><br /> <a
+			href="/exshipper_login_handler?caller_page=exshipper_suda_tracking_number"
+			target="_blank">Upload Regular SUDA Tracking Number</a> <br /> <a
+			href="/exshipper_login_handler?caller_page=exshipper_tw_custom_entry_number"
+			target="_blank">Upload TW Custom Entry Number</a> <br /> <a
+			href="/exshipper_login_handler?caller_page=exshipper_spearnet_customer_package_info_log"
+			target="_blank">Spearnet Customer Package Log</a><br /> <a
+			href="/exshipper_login_handler?caller_page=exshipper_spearnet_customer_package_info_log"
+			target="_blank">Regular Customer Package Log</a>
+	</div>
+	<br>
+	<div>
+		<p>ExShipper Taiwan Custom Entry Service</p>
+		<a href="/exshipper_tw_custom_entry_index_page" target="_blank">Taiwan
+			Custom Entry Service</a>
+	</div>
+
+	<div>
+		<p>ExShipper Services for Clients</p>
+		<a href="/exshipper_spearnet_index_page" target="blank">Spearnet</a>
+	</div>
+	<br>
+</div>
+
+
+{% endblock %}

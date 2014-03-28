@@ -50,11 +50,12 @@ class SUDATrackingNumber_REGULAR(TrackingNumber):
 
 #package information
 class PackageInfo(ndb.Model):
-    index = ndb.StringProperty()
+    reference_no = ndb.StringProperty()
     barcode_no  = ndb.StringProperty()
     hawb = ndb.StringProperty()
     ctn = ndb.StringProperty()
-    weight_kg = ndb.StringProperty() #g/w(kg)
+    size = ndb.StructuredProperty(Size, repeated = False)
+    weight_kg = ndb.StringProperty()
     weight_lb = ndb.StringProperty()
     commodity_name = ndb.JsonProperty()
     pcs = ndb.StringProperty()
@@ -80,7 +81,6 @@ class PackageInfo(ndb.Model):
     pickup_status = ndb.StringProperty()
     signature_img = ndb.BlobProperty()
     date = ndb.DateProperty(auto_now_add = True)
-    shipping_date = ndb.StringProperty()
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 #en of package information
 
@@ -88,6 +88,18 @@ class PackageInfo(ndb.Model):
 class SpearnetPackagesInfo(PackageInfo):
     pass
 #end of Spearnet packages Info
+class GeneralClientsPackagesInfo(PackageInfo):
+    pass
 
-
+class TWCustomEntryInfo(ndb.Model):
+    barcode_no = ndb.StringProperty()
+    mawb = ndb.StringProperty()
+    flight_date = ndb.StringProperty()
+    from_whom = ndb.StringProperty()
+    to_whom = ndb.StringProperty()
+    size = ndb.StructuredProperty(Size, repeated = False)
+    weight_kg = ndb.StringProperty()
+    ctn = ndb.StringProperty()
+    flight_date = ndb.StringProperty()
+    
 #end of channel
