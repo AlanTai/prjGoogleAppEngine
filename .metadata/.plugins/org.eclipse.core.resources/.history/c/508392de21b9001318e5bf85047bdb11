@@ -600,6 +600,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
+        Key_Value.index_title
         test_page = '/exshipper/exshipper_test.html'
             
         template_values = {'title':key_value.get('exshipper_invoice_log_title')}
