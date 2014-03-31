@@ -80,7 +80,6 @@ class PackageInfo(ndb.Model):
     package_status = ndb.StringProperty()
     pickup_status = ndb.StringProperty()
     signature_img = ndb.BlobProperty()
-    note = ndb.StringProperty()
     date = ndb.DateProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 #en of package information
@@ -102,6 +101,5 @@ class TWCustomEntryInfo(ndb.Model):
     weight_kg = ndb.StringProperty()
     ctn = ndb.StringProperty()
     flight_date = ndb.StringProperty()
-    note = ndb.StringProperty()
     
 #end of channel

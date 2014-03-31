@@ -90,7 +90,7 @@ pic|1|pickup_status!7&19@
 pos|16|post!23&10@post!10&10@post!24&10@post!25&10@post!26&10@post!27&10@post!28&10@post!29&10@post!30&10@post!13&10@post!15&10@post!16&10@post!31&10@post!17&10@post!19&10@post!20&10@
 ref|2|ref_number!5&19@reference_no!7&19@
 rem|1|remark!7&19@
-shi|6|shipper!5&19@shipper_name!7&19@shipper_address_chinese!7&19@shipper_address_english!7&19@shipper_person!7&19@shipper_tel!7&19@
+shi|6|shipper!5&19@shipper_address_chinese!7&19@shipper_address_english!7&19@shipper_name!7&19@shipper_person!7&19@shipper_tel!7&19@
 sig|1|signature_img!7&19@
 siz|3|size!6&19@size!7&19@size!5&19@
 to_|1|to_whom!6&19@

@@ -102,6 +102,5 @@ class TWCustomEntryInfo(ndb.Model):
     weight_kg = ndb.StringProperty()
     ctn = ndb.StringProperty()
     flight_date = ndb.StringProperty()
-    note = ndb.StringProperty()
     
 #end of channel
