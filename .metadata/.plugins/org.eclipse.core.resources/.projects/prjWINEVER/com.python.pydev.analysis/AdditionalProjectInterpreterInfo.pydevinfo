@@ -65,7 +65,7 @@ tra|1|TrackingNumber!17@
 twc|2|TWCustomEntryInfo!17@TWCustomEntryTrackingNumber!17@
 -- END TREE
 -- START TREE 2
-35
+36
 add|1|address!5&19@
 bar|2|barcode_no!6&19@barcode_no!7&19@
 com|2|commodity_name!7&19@company_id_or_personal_id!7&19@
@@ -83,6 +83,7 @@ hei|1|height!22&19@
 ind|0|
 len|1|length!22&19@
 maw|1|mawb!6&19@
+not|2|note!6&19@note!7&19@
 ori|1|original!7&19@
 pac|1|package_status!7&19@
 pcs|1|pcs!7&19@

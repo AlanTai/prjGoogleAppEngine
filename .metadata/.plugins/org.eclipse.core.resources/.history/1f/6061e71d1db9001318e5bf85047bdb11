@@ -1,0 +1,24 @@
+{% extends "exwine_info_page.html"%} {% block info_content %}
+<div
+	class="link_page_content link_page_content_gradient link_page_content_main_info">
+	<div style="display: block;">
+		<p class="link_page_content_title">服務項目</p>
+		<div
+			style="width: 800px; color: #000; font-size: 13px; margin: 0px auto;">
+			<p style="color: #644901; font-size: 15px;">酒類宅配</p>
+			<p>提供酒類物流配送服務加州灣區至台灣及香港</p>
+
+			<div id="wine_stores" style="color: #f00;">
+			<a href="http://www.aabalat.com/stores/?storeID=143" target="blank">Aabalat Fine & Rare Wines</a>
+			<a href="https://www.jjbuckley.com/" target="blank">JJ Buckley</a>
+				<a href="https://www.klwines.com/" target="blank">K&L Wine Merchants</a> <a
+					href="http://www.thewineclub.com/" target="blank">The Wine Club</a> <a
+					href="http://www.totalwine.com/" target="blank">Total Wine & More</a> <a
+					href="http://www.winebid.com/" target="blank">WineBid</a>
+			</div>
+
+			<p style="margin: 50px auto; color: #333;">註:建構中...</p>
+		</div>
+	</div>
+</div>
+{% endblock %}
