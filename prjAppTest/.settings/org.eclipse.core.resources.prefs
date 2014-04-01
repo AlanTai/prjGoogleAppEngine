@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/ctrl_views.py=utf-8
+encoding//src/emails_handler.py=utf-8
+encoding//src/users_handler.py=utf-8

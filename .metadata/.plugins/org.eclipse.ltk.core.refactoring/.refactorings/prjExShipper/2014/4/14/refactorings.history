@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;prjExShipper/src/gaeDatastoreHandler.py&apos; to &apos;gae_datastore_handler.py&apos;" description="Rename resource &apos;gaeDatastoreHandler.py&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/gaeDatastoreHandler.py" name="gae_datastore_handler.py" stamp="1396371037133" updateReferences="true"/>
+</session>

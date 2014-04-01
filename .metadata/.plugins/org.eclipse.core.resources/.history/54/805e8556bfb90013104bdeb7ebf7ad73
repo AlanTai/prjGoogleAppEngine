@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+'''
+Created on Apr 1, 2014
+
+@author: Alan Tai
+'''
+__author__ = 'Alan Tai'
+
+class Users_Handler():
+    def exshipper_send_email(receiver, sender, subject, body):
+    my_dict = Key_Value()
+    result = {'email_status':'unknown'}
+    email_host = 'winever.tw@gmail.com'
+    if not mail.is_email_valid(receiver):
+        result['email_status'] = 'invalid_email'
+    else:
+        try:
+            receiver_email_content = 'Notice: The SUDA tracking number ran out and new numbers will be ready soon. If you have further questions, please contact ExShipper.'
+            mail.send_mail(email_host, receiver, subject, receiver_email_content)
+            sender_email_content = 'Notice: The SUDA tracking number ran out. Please update the database!'
+            mail.send_mail(email_host, receiver, subject, sender_email_content)
+            result['email_status'] = my_dict.email_delivery_status_success
+        except:
+            result['email_status'] = my_dict.email_delivery_status_fail
+    return result

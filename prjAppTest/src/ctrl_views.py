@@ -609,7 +609,65 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         return
 #end of custom entry handler
 
-# ExShipper Send email
+class ExShipperGeneralClientsIndexHandler(webapp2.RequestHandler):
+    def get(self):
+        my_dict = Key_Value()
+        user_info = get_users_info(self, users)
+        exshipper_general_clients_index_page = my_dict.exshipper_general_clients_index_page
+        
+        template_values = {'title':my_dict.exshipper_general_clients_index_page_title}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(exshipper_general_clients_index_page)
+        self.response.out.write(template.render(template_values))
+    
+class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
+    def get(self):
+        my_dict = Key_Value()
+        user_info = get_users_info(self, users)
+        login_page = my_dict.exshipper_general_clients_login_page
+        
+        dispatch_token = self.request.get('dispatch_token')
+        
+        template_values = {'title':my_dict.exshipper_general_clients_login_page_title, 'dispatch_token':dispatch_token}
+        template_values.update(user_info)
+        
+        template = jinja_environment.get_template(login_page)
+        self.response.out.write(template.render(template_values))
+        
+    def post(self):
+        my_dict = Key_Value()
+        user_info = get_users_info(self, users)
+        dispatch_token = self.request.get('dispatch_token')
+        tw_custom_entry_account = self.request.get('general_clients_entry_account')
+        tw_custom_entry_password = self.request.get('general_clients_entry_password')
+        template_values = {}
+        
+        html_page = my_dict.exshipper_invalid_login_page
+        html_page_title = my_dict.exshipper_invalid_login_page_title
+        working_on = ''
+        
+        # html page dispatching
+        if(dispatch_token == 'creating_invoice'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
+                html_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
+                html_page_title = 'General Clients Invoice Log'
+        elif(dispatch_token == 'track_package_status'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
+                html_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
+                html_page_title = 'General Clients Invoice Log'
+        else:
+            html_page = my_dict.exshipper_invalid_login_page
+            html_page_title = my_dict.exshipper_invalid_login_page_title
+            
+        template_values.update({'title':html_page_title})
+        template_values.update(user_info)
+        template = jinja_environment.get_template(html_page)
+        self.response.out.write(template.render(template_values))
+        # end of html page dispatching
+        
+        
+#send email
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
@@ -678,4 +736,6 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_spearnet_packages_pickup_handler',ExShipperSpearnetPackagesPickupHandler),
                                ('/exshipper_tw_custom_entry_index_page',ExShipperTWCustomEntryIndexHandler),
                                ('/exshipper_tw_custom_entry_login_handler',ExShipperTWCustomEntryLoginHandler),
+                               ('/exshipper_exshipper_general_clients_index_page', ExShipperGeneralClientsIndexHandler),
+                               ('/exshipper_general_clients_login_handler', ExShipperGeneralClientsLoginHandler),
                                ('/exshipper_test', TestHandler)], debug=True)

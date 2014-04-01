@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+'''
+Created on Apr 1, 2014
+
+@author: Alan Tai
+'''
+__author__ = 'Alan Tai'
+from google.appengine.api import users, mail
+
+class Email_Handler():
+    
