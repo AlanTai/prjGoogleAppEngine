@@ -30,6 +30,7 @@ apiclient.mimeparse|C:\Program Files (x86)\Google\google_appengine\lib\google-ap
 apiclient.model|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\apiclient\model.py
 apiclient.oauth|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\apiclient\oauth.py
 apiclient.schema|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\apiclient\schema.py
+app_dict|D:\prjGoogleAppEngine\prjAppTest\src\app_dict.py
 appcfg|C:\Program Files (x86)\Google\google_appengine\appcfg.py
 bulkload_client|C:\Program Files (x86)\Google\google_appengine\bulkload_client.py
 bulkloader|C:\Program Files (x86)\Google\google_appengine\bulkloader.py
@@ -38,6 +39,7 @@ cpyamf.amf0|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\amf0
 cpyamf.amf3|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\amf3.pyx
 cpyamf.codec|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\codec.pyx
 cpyamf.util|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\cpyamf\util.pyx
+ctrl_views|D:\prjGoogleAppEngine\prjAppTest\src\ctrl_views.py
 dev_appserver|C:\Program Files (x86)\Google\google_appengine\dev_appserver.py
 distribute_setup|C:\Program Files (x86)\Google\google_appengine\lib\PyAMF\distribute_setup.py
 django.__init__|C:\Program Files (x86)\Google\google_appengine\lib\django_1_4\django\__init__.py
@@ -1038,6 +1040,7 @@ flags_modules_for_testing.__init__|C:\Program Files (x86)\Google\google_appengin
 flags_modules_for_testing.module_bar|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_bar.py
 flags_modules_for_testing.module_baz|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_baz.py
 flags_modules_for_testing.module_foo|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_foo.py
+gaeDatastoreHandler|D:\prjGoogleAppEngine\prjAppTest\src\gaeDatastoreHandler.py
 gen_protorpc|C:\Program Files (x86)\Google\google_appengine\gen_protorpc.py
 gflags_googletest|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\gflags_googletest.py
 gflags_helpxml_test|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\gflags_helpxml_test.py
@@ -1744,6 +1747,7 @@ markupsafe.__init__|C:\Program Files (x86)\Google\google_appengine\lib\markupsaf
 markupsafe._constants|C:\Program Files (x86)\Google\google_appengine\lib\markupsafe\markupsafe\_constants.py
 markupsafe._native|C:\Program Files (x86)\Google\google_appengine\lib\markupsafe\markupsafe\_native.py
 markupsafe.tests|C:\Program Files (x86)\Google\google_appengine\lib\markupsafe\markupsafe\tests.py
+models|D:\prjGoogleAppEngine\prjAppTest\src\models.py
 oauth2.__init__|C:\Program Files (x86)\Google\google_appengine\lib\oauth2\oauth2\__init__.py
 oauth2client.__init__|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\oauth2client\__init__.py
 oauth2client.anyjson|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\oauth2client\anyjson.py
