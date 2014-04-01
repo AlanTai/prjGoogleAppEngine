@@ -4,10 +4,9 @@ Created on Oct 1, 2013
 
 @author: Alan Tai
 '''
-import random
-
 __author__ = 'Alan Tai'
 
+import random
 import webapp2
 import jinja2
 import os
@@ -24,7 +23,7 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
-        index_page = my_dict.exshipper_index_page #get('exshipper_index_page')
+        index_page = my_dict.exshipper_index_page
         
         template_values = {'title':my_dict.exshipper_index_page_title}
         template_values.update(user_info)
@@ -33,39 +32,41 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
 
 # for handling the login process
-'''working on'''
 class ExShipperLoginHandler(webapp2.RequestHandler):
+    #login page
     def get(self):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
         login_page = my_dict.exshipper_login_page
         
-        caller_page = self.request.get('caller_page')
+        dispatch_token = self.request.get('dispatch_token')
         
-        template_values = {'title':my_dict.exshipper_login_page_title, 'caller_page':caller_page}
+        template_values = {'title':my_dict.exshipper_login_page_title, 'dispatch_token':dispatch_token}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(login_page)
         self.response.out.write(template.render(template_values))
         
+    #dispatch visitor to different pages according to the token users send
     def post(self):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
-        caller_page = self.request.get('caller_page')
+        dispatch_token = self.request.get('dispatch_token')
         exshipper_account = self.request.get('exshipper_account')
         exshipper_password = self.request.get('exshipper_password')
         template_values = {}
         
+        #set default page as invalid login page
         html_page = my_dict.exshipper_invalid_login_page
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        if(caller_page == 'exshipper_invoice'):
+        if(dispatch_token == 'exshipper_invoice'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_invoice_creating_page
                 html_page_title = my_dict.exshipper_invoice_creating_page_title
                 
-        elif(caller_page == 'exshipper_invoice_log'):
+        elif(dispatch_token == 'exshipper_invoice_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_invoice_log_page
                 html_page_title = my_dict.exshipper_invoice_log_title
@@ -82,17 +83,17 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 template_values.update({'invoice_log':log_invoice})
             # end of memcache
                 
-        elif(caller_page == 'exshipper_suda_tracking_number'):
+        elif(dispatch_token == 'exshipper_suda_tracking_number'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_suda_tracking_number_handler_page
                 html_page_title = my_dict.exshipper_suda_tracking_number_handler_page_title
                 
-        elif(caller_page == 'exshipper_tw_custom_entry_number'):
+        elif(dispatch_token == 'exshipper_tw_custom_entry_number'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_number_handler_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_number_handler_page_title
                 
-        elif(caller_page == 'exshipper_spearnet_customer_package_info_log'):
+        elif(dispatch_token == 'exshipper_spearnet_customer_package_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
                 html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
@@ -147,7 +148,7 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
 
-#SUDA Tracking Number Handler
+#SUDA Tracking Number Handler (For uploading number)
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
@@ -183,7 +184,7 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
         self.response.out.write(json.dumps(ajax_data))
 #end of SUDA Tracking Number Handler
 
-#TW Custom Entry Handler
+#TW Custom Entry Handler (For uploading number)
 class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
@@ -249,9 +250,9 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         user_info = get_users_info(self, users)
         login_page = my_dict.exshipper_spearnet_login_page
         
-        caller_page = self.request.get('caller_page')
+        dispatch_token = self.request.get('dispatch_token')
         
-        template_values = {'title':my_dict.exshipper_spearnet_login_page_title, 'caller_page':caller_page}
+        template_values = {'title':my_dict.exshipper_spearnet_login_page_title, 'dispatch_token':dispatch_token}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(login_page)
@@ -260,7 +261,7 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
-        caller_page = self.request.get('caller_page')
+        dispatch_token = self.request.get('dispatch_token')
         spearnet_account = self.request.get('spearnet_account')
         spearnet_password = self.request.get('spearnet_password')
         template_values = {}
@@ -269,12 +270,12 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        if(caller_page == 'exshipper_spearnet_data_exchange'):
+        if(dispatch_token == 'exshipper_spearnet_data_exchange'):
             if(spearnet_account == 'spearnet' and spearnet_password == '1941dataexchange'):
                 html_page = my_dict.exshipper_spearnet_data_exchange_page
                 html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
                 
-        elif(caller_page == 'exshipper_spearnet_suda_tracking_number_download'):
+        elif(dispatch_token == 'exshipper_spearnet_suda_tracking_number_download'):
             if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
                 html_page = my_dict.exshipper_spearnet_suda_tracking_number_download_page
                 suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
@@ -522,9 +523,9 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         user_info = get_users_info(self, users)
         login_page = '/exshipper/exshipper_tw_custom_entry_login.html'
         
-        caller_page = self.request.get('caller_page')
+        dispatch_token = self.request.get('dispatch_token')
         
-        template_values = {'title':'Taiwan Custom Entry Login', 'caller_page':caller_page}
+        template_values = {'title':'Taiwan Custom Entry Login', 'dispatch_token':dispatch_token}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(login_page)
@@ -533,7 +534,7 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
-        caller_page = self.request.get('caller_page')
+        dispatch_token = self.request.get('dispatch_token')
         tw_custom_entry_account = self.request.get('tw_custom_entry_account')
         tw_custom_entry_password = self.request.get('tw_custom_entry_password')
         template_values = {}
@@ -542,7 +543,7 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        if(caller_page == 'exshipper_tw_custom_entry_invoice_log'):
+        if(dispatch_token == 'exshipper_tw_custom_entry_invoice_log'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
                 html_page_title = 'Custom Entry Invoice Log'
