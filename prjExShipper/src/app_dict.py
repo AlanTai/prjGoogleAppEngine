@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Oct 1, 2013
 
@@ -24,8 +25,15 @@ class Key_Value():
         self.exshipper_invoice_log_title = 'ExShipper Invoice Log'
         self.exshipper_suda_tracking_number_handler_page = '/exshipper/exshipper_suda_tracking_number_handler.html'
         self.exshipper_suda_tracking_number_handler_page_title = 'ExShipper SUDA Tracking Number Handler'
+        
+        #taiwan custom entry
         self.exshipper_tw_custom_entry_number_handler_page = '/exshipper/exshipper_tw_custom_entry_number_handler.html'
         self.exshipper_tw_custom_entry_number_handler_page_title = 'ExShipper TW Custom Entry Number Handler'
+        
+        self.exshipper_tw_custom_entry_login_page = '/exshipper/exshipper_tw_custom_entry_login.html'
+        self.exshipper_tw_custom_entry_login_page_title = 'Taiwan Custom Entry Login'
+        
+        #spearnet
         self.exshipper_spearnet_index_page = '/exshipper/exshipper_spearnet_index.html'
         self.exshipper_spearnet_index_page_title = 'ExShipper Spearnet Index Page'
         self.exshipper_spearnet_data_exchange_page = '/exshipper/exshipper_spearnet_data_exchange_page.html'
@@ -52,3 +60,10 @@ class Key_Value():
              
         self.exshipper_spearnet_customer_package_info_log_page = '/exshipper/exshipper_spearnet_customer_package_info_log.html'
         self.exshipper_spearnet_customer_package_info_log_page_title = 'ExShipper Spearnet Customer Package Information Log'
+        
+        #general clients
+        self.exshipper_general_clients_index_page = '/exshipper/exshipper_general_clients_index.html'
+        self.exshipper_general_clients_index_page_title = 'ExShipper Clients Page'
+        
+        self.exshipper_general_clients_login_page = '/exshipper/exshipper_general_clients_login.html'
+        self.exshipper_general_clients_login_page_title = 'General Clients Login'
