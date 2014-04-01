@@ -14,7 +14,7 @@ import os
 from google.appengine.api import users, mail, memcache
 import json
 
-from app_dict import key_value, Key_Value
+from app_dict import Key_Value
 from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))
@@ -23,9 +23,9 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 class ExShipperIndexHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        index_page = key_value.get('exshipper_index_page')
+        index_page = Key_Value.exshipper_index_page #get('exshipper_index_page')
         
-        template_values = {'title':key_value.get('exshipper_index_page_title')}
+        template_values = {'title':Key_Value.exshipper_index_page_title}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(index_page)
@@ -36,11 +36,11 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
 class ExShipperLoginHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        login_page = key_value.get('exshipper_login_page')
+        login_page = Key_Value.exshipper_login_page
         
         caller_page = self.request.get('caller_page')
         
-        template_values = {'title':key_value.get('exhsipper_login_page_title'), 'caller_page':caller_page}
+        template_values = {'title':Key_Value.exshipper_login_page_title, 'caller_page':caller_page}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(login_page)
@@ -53,19 +53,19 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         exshipper_password = self.request.get('exshipper_password')
         template_values = {}
         
-        html_page = key_value.get('exshipper_invalid_login_page')
-        html_page_title = key_value.get('exshipper_invalid_login_page_title')
+        html_page = Key_Value.exshipper_invalid_login_page
+        html_page_title = Key_Value.exshipper_invalid_login_page_title
         
         # html page dispatching
         if(caller_page == 'exshipper_invoice'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = key_value.get('exshipper_invoice_page')
-                html_page_title = key_value.get('exshipper_invoice_page_title')
+                html_page = Key_Value.exshipper_invoice_creating_page
+                html_page_title = Key_Value.exshipper_invoice_creating_page_title
                 
         elif(caller_page == 'exshipper_invoice_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = key_value.get('exshipper_invoice_log_page')
-                html_page_title = key_value.get('exshipper_invoice_log_title')
+                html_page = Key_Value.exshipper_invoice_log_page
+                html_page_title = Key_Value.exshipper_invoice_log_title
                 
                 # use memcache
                 # ignore the undefined variable because both def get() and add() work fine
@@ -74,25 +74,25 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                     log_invoice = data
                 else:
                     data = InvoiceInfo.query()
-                    memcache.add('invoice_log', data, 1000)
+                    memcache.add('invoice_log', data, 500)
                     log_invoice = data
                 template_values.update({'invoice_log':log_invoice})
             # end of memcache
                 
         elif(caller_page == 'exshipper_suda_tracking_number'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = key_value.get('exshipper_suda_tracking_number_handler_page')
-                html_page_title = key_value.get('exshipper_suda_tracking_number_handler_page_title')
+                html_page = Key_Value.exshipper_suda_tracking_number_handler_page
+                html_page_title = Key_Value.exshipper_suda_tracking_number_handler_page_title
                 
         elif(caller_page == 'exshipper_tw_custom_entry_number'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = key_value.get('exshipper_tw_custom_entry_number_handler_page')
-                html_page_title = key_value.get('exshipper_tw_custom_entry_number_handler_title')
+                html_page = Key_Value.exshipper_tw_custom_entry_number_handler_page
+                html_page_title = Key_Value.exshipper_tw_custom_entry_number_handler_page_title
                 
         elif(caller_page == 'exshipper_spearnet_customer_package_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = key_value.get('exshipper_spearnet_customer_package_info_log_page')
-                html_page_title = key_value.get('exshipper_spearnet_customer_package_info_log_page_title')
+                html_page = Key_Value.exshipper_spearnet_customer_package_info_log_page
+                html_page_title = Key_Value.exshipper_spearnet_customer_package_info_log_page_title
                 
                 #use memcache
                 data = memcache.get('spearnet_customer_package_info_log')
@@ -105,8 +105,8 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
                   
         else:
-            html_page = key_value.get('exshipper_invalid_login_page')
-            html_page_title = key_value.get('exshipper_invalid_login_page_title')
+            html_page = Key_Value.exshipper_invalid_login_page
+            html_page_title = Key_Value.exshipper_invalid_login_page_title
             
         template_values.update({'title':html_page_title})
         template_values.update(user_info)
@@ -148,9 +148,9 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        suda_tracking_number_handler_page = key_value.get('exshipper_suda_tracking_number_handler_page')
+        suda_tracking_number_handler_page = Key_Value.exshipper_suda_tracking_number_handler_page
             
-        template_values = {'title':key_value.get('exshipper_suda_tracking_number_handler_title')}
+        template_values = {'title':Key_Value.exshipper_suda_tracking_number_handler_page_title}
         template_values.update(user_info)
             
         template = jinja_environment.get_template(suda_tracking_number_handler_page)
@@ -183,9 +183,9 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
 class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        suda_tracking_number_handler_page = key_value.get('exshipper_tw_custom_entry_number_handler_page')
+        suda_tracking_number_handler_page = Key_Value.exshipper_tw_custom_entry_number_handler_page
             
-        template_values = {'title':key_value.get('exshipper_tw_custom_entry_number_handler_title')}
+        template_values = {'title':Key_Value.exshipper_tw_custom_entry_number_handler_page_title}
         template_values.update(user_info)
             
         template = jinja_environment.get_template(suda_tracking_number_handler_page)
@@ -229,9 +229,9 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
 class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        exshipper_spearnet_index_page = key_value.get('exshipper_spearnet_index_page')
+        exshipper_spearnet_index_page = Key_Value.exshipper_spearnet_index_page
         
-        template_values = {'title':key_value.get('exshipper_spearnet_index_page_title')}
+        template_values = {'title':Key_Value.exshipper_spearnet_index_page_title}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(exshipper_spearnet_index_page)
@@ -240,11 +240,11 @@ class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
 class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        login_page = key_value.get('exshipper_spearnet_login_page')
+        login_page = Key_Value.exshipper_spearnet_login_page
         
         caller_page = self.request.get('caller_page')
         
-        template_values = {'title':key_value.get('exshipper_spearnet_login_page_title'), 'caller_page':caller_page}
+        template_values = {'title':Key_Value.exshipper_spearnet_login_page_title, 'caller_page':caller_page}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(login_page)
@@ -257,20 +257,20 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         spearnet_password = self.request.get('spearnet_password')
         template_values = {}
         
-        html_page = key_value.get('exshipper_invalid_login_page')
-        html_page_title = key_value.get('exshipper_invalid_login_page_title')
+        html_page = Key_Value.exshipper_invalid_login_page
+        html_page_title = Key_Value.exshipper_invalid_login_page_title
         
         # html page dispatching
         if(caller_page == 'exshipper_spearnet_data_exchange'):
             if(spearnet_account == 'spearnet' and spearnet_password == '1941dataexchange'):
-                html_page = key_value.get('exshipper_spearnet_data_exchange_page')
-                html_page_title = key_value.get('exshipper_spearnet_data_exchange_page_title')
+                html_page = Key_Value.exshipper_spearnet_data_exchange_page
+                html_page_title = Key_Value.exshipper_spearnet_data_exchange_page_title
                 
         elif(caller_page == 'exshipper_spearnet_suda_tracking_number_download'):
             if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
-                html_page = key_value.get('exshipper_spearnet_suda_tracking_number_download_page')
+                html_page = Key_Value.exshipper_spearnet_suda_tracking_number_download_page
                 suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
-                template_values = {'title':key_value.get('exshipper_spearnet_suda_tracking_number_download_page_title')}
+                template_values = {'title':Key_Value.exshipper_spearnet_suda_tracking_number_download_page_title}
                 
                 if suda_tracking_numbers:
                     for suda_tracking_number in suda_tracking_numbers:
@@ -287,8 +287,8 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
                 template = jinja_environment.get_template(html_page)
                 self.response.out.write(template.render(template_values))
         else:
-            html_page = key_value.get('exshipper_invalid_login_page')
-            html_page_title = key_value.get('exshipper_invalid_login_page_title')
+            html_page = Key_Value.exshipper_invalid_login_page
+            html_page_title = Key_Value.exshipper_invalid_login_page_title
             
         template_values.update({'title':html_page_title})
         template_values.update(user_info)
@@ -303,11 +303,11 @@ class ExShipperSpearnetDataExchangeDispatcher(webapp2.RequestHandler):
         data_format = self.request.get('XLSX_XLS')
         
         if(data_format == 'XLS'):
-            parser_page = key_value.get('exshipper_spearnet_xls_page')
-            parser_page_title = key_value.get('exshipper_spearnet_xls_title')
+            parser_page = Key_Value.exshipper_spearnet_xls_page
+            parser_page_title = Key_Value.exshipper_spearnet_xls_title
         elif (data_format == 'XLSX'):
-            parser_page = key_value.get('exshipper_spearnet_xlsx_page')
-            parser_page_title = key_value.get('exshipper_spearnet_xlsx_title')
+            parser_page = Key_Value.exshipper_spearnet_xlsx_page
+            parser_page_title = Key_Value.exshipper_spearnet_xlsx_title
             
         template_values = {'title':parser_page_title}
         template_values.update(user_info)
@@ -412,7 +412,7 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
         spearnet_password = self.request.get('spearnet_password')
         
         if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
-            html_page = key_value.get('exshipper_spearnet_suda_tracking_number_handler_page')
+            html_page = Key_Value.exshipper_spearnet_suda_tracking_number_handler_page
             suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
             
             if suda_tracking_numbers:
@@ -421,7 +421,7 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
                     suda_entity.used_mark = 'TRUE'
                     suda_entity.put()
                         
-                template_values = {'title':key_value.get('exshipper_invoice_log_title'),
+                template_values = {'title':Key_Value.exshipper_invoice_log_title,
                                    'suda_numbers':suda_tracking_numbers}
                 template_values.update(user_info)
                     
@@ -437,9 +437,9 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
 class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
     def get(self):
         user_info = get_users_info(self, users)
-        html_page = key_value.get('exshipper_spearnet_customer_index_page')
+        html_page = Key_Value.exshipper_spearnet_customer_index_page
         
-        template_values = {'title':key_value.get('exshipper_spearnet_customer_index_page_title')}
+        template_values = {'title':Key_Value.exshipper_spearnet_customer_index_page_title}
         template_values.update(user_info)
         template = jinja_environment.get_template(html_page)
         self.response.out.write(template.render(template_values))   
@@ -451,10 +451,10 @@ class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
         password = self.request.get('spearnet_customer_password')
         
         if(account == 'spearnetcustomer' and password == 'spearnetcustomer1941'):
-            html_page = key_value.get('exshipper_spearnet_customer_services_handler_page')
+            html_page = Key_Value.exshipper_spearnet_customer_services_handler_page
             page_title = 'ExShipper Spearnet Customer Service Page'
         else:
-            html_page = key_value.get('exshipper_invalid_login_page')
+            html_page = Key_Value.exshipper_invalid_login_page
             page_title = 'Invalid Login Page'
         
         template_values = {'title':page_title}
@@ -526,8 +526,8 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         tw_custom_entry_password = self.request.get('tw_custom_entry_password')
         template_values = {}
         
-        html_page = key_value.get('exshipper_invalid_login_page')
-        html_page_title = key_value.get('exshipper_invalid_login_page_title')
+        html_page = Key_Value.exshipper_invalid_login_page
+        html_page_title = Key_Value.exshipper_invalid_login_page_title
         
         # html page dispatching
         if(caller_page == 'exshipper_tw_custom_entry_invoice_log'):
@@ -541,12 +541,12 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
                     log_spearnet_customer_package_info = data
                 else:
                     data = SpearnetPackagesInfo.query()
-                    memcache.add('tw_custom_entry_invoice_log',data,1000)
+                    memcache.add('tw_custom_entry_invoice_log',data,500)
                     log_spearnet_customer_package_info = data
                 template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
         else:
-            html_page = key_value.get('exshipper_invalid_login_page')
-            html_page_title = key_value.get('exshipper_invalid_login_page_title')
+            html_page = Key_Value.exshipper_invalid_login_page
+            html_page_title = Key_Value.exshipper_invalid_login_page_title
             
         template_values.update({'title':html_page_title})
         template_values.update(user_info)
@@ -596,23 +596,10 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         return
 #end of custom entry handler
 
-# page for testing only
-class TestHandler(webapp2.RequestHandler):
-    def get(self):
-        user_info = get_users_info(self, users)
-        test_page = '/exshipper/exshipper_test.html'
-            
-        template_values = {'title':key_value.get('exshipper_invoice_log_title')}
-        template_values.update(user_info)
-            
-        template = jinja_environment.get_template(test_page)
-        self.response.out.write(template.render(template_values))
-# self-defined functions
-
 # ExShipper Send email
 def exshipper_send_email(receiver, sender, subject, body):
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
@@ -621,30 +608,9 @@ def exshipper_send_email(receiver, sender, subject, body):
             mail.send_mail(email_host, receiver, subject, receiver_email_content)
             sender_email_content = 'Notice: The SUDA tracking number ran out. Please update the database!'
             mail.send_mail(email_host, receiver, subject, sender_email_content)
-            result['email_status'] = 'success'
+            result['email_status'] = Key_Value.email_delivery_status_success
         except:
-            result['email_status'] = 'fail'
-    return result
-
-# ExWINE send email
-def exwine_send_email(receiver, sender, subject, body):
-    
-    result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
-    if not mail.is_email_valid(receiver):
-        # response invalid information back to webpage
-        result['email_status'] = 'invalid_email'
-    else:
-        try:
-            receiver_email_content = 'Thank you very much for contacting ExWINE.\n' + 'Your Question or Comments:\n' + body
-            mail.send_mail(email_host, receiver, subject, receiver_email_content)
-            sender_email_content = 'Question or Comments from ' + receiver + ':\n' + body
-            mail.send_mail(email_host, sender, subject, sender_email_content)
-            
-            result['email_status'] = 'success'
-        except:
-            result['email_status'] = 'fail'
-    
+            result['email_status'] = Key_Value.email_delivery_status_fail
     return result
 
 # get users info
@@ -652,18 +618,29 @@ def get_users_info(self, users):
     if users.get_current_user():
         user_account = users.get_current_user()
         url = users.create_logout_url(self.request.uri)
-        url_linktxt = key_value.get('logout_txt')
     else:
-        user_account = key_value.get('unknown_user_txt')
+        user_account = Key_Value.unknown_user
         url = users.create_login_url(self.request.uri)
-        url_linktxt = key_value.get('login_txt')
         
     values = {
               'user_account': user_account,
-              'url': url,
-              'url_linktxt': url_linktxt}
+              'url': url}
     return values
 # end of self-defined functions
+
+
+#test class
+class TestHandler(webapp2.RequestHandler):
+    def get(self):
+        user_info = get_users_info(self, users)
+        test_page = '/exshipper/exshipper_test.html'
+            
+        template_values = {'title':Key_Value.exshipper_invoice_log_title}
+        template_values.update(user_info)
+            
+        template = jinja_environment.get_template(test_page)
+        self.response.out.write(template.render(template_values))
+#end of test class
 
 
 # set url
