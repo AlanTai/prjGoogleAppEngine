@@ -30,8 +30,8 @@ class Key_Value():
         self.exshipper_tw_custom_entry_number_handler_page = '/exshipper/exshipper_tw_custom_entry_number_handler.html'
         self.exshipper_tw_custom_entry_number_handler_page_title = 'ExShipper TW Custom Entry Number Handler'
         
-        self.exshipper_tw_custom_entry_signature_img_upload_handler = '/exshipper/exshipper_tw_custom_entry_client_signature_handler.html'
-        self.exshipper_tw_custom_entry_signature_img_upload_handler_title = 'ExShipper TW custom Entry Signature Handler'
+        self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
+        self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
         
         self.exshipper_tw_custom_entry_login_page = '/exshipper/exshipper_tw_custom_entry_login.html'
         self.exshipper_tw_custom_entry_login_page_title = 'Taiwan Custom Entry Login'
@@ -76,4 +76,3 @@ class Key_Value():
         
         self.exshipper_general_clients_track_package_status_page = '/exshipper/exshipper_general_clients_track_package_status.html'
         self.exshipper_general_clients_track_package_status_page_title = 'Track Package Status (General Clients)'
-

@@ -66,10 +66,10 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_invoice_creating_page
                 html_page_title = my_dict.exshipper_invoice_creating_page_title
                 
-        elif(dispatch_token == 'exshipper_tw_custom_entry_signature'):
+        elif(dispatch_token == 'exshipper_create_client_info'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_tw_custom_entry_signature_img_upload_handler
-                html_page_title = my_dict.exshipper_tw_custom_entry_signature_img_upload_handler_title
+                html_page = my_dict.exshipper_create_client_info_handler
+                html_page_title = my_dict.exshipper_create_client_info_handler_title
                 
         elif(dispatch_token == 'exshipper_invoice_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
