@@ -65,10 +65,12 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_invoice_creating_page
                 html_page_title = my_dict.exshipper_invoice_creating_page_title
+                
         elif(dispatch_token == 'exshipper_tw_custom_entry_signature'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_signature_img_upload_handler
                 html_page_title = my_dict.exshipper_tw_custom_entry_signature_img_upload_handler_title
+                
         elif(dispatch_token == 'exshipper_invoice_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_invoice_log_page
@@ -660,12 +662,12 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         # html page dispatching
         if(dispatch_token == 'creating_invoice'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = my_dict.exshipper_general_clients_create_invoice_page
-                html_page_title = my_dict.exshipper_general_clients_create_invoice_page_title
+                html_page = '/exshipper/exshipper_general_clients_create_invoice.html'
+                html_page_title = 'Invoice Log (General Clients)'
         elif(dispatch_token == 'track_package_status'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = my_dict.exshipper_general_clients_track_package_status_page
-                html_page_title = my_dict.exshipper_general_clients_track_package_status_page_title
+                html_page = '/exshipper/exshipper_general_clients_track_package_status.html'
+                html_page_title = 'Track Package Status (General Clients)'
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
@@ -681,7 +683,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:

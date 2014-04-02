@@ -662,12 +662,12 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         # html page dispatching
         if(dispatch_token == 'creating_invoice'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = '/exshipper/exshipper_general_clients_create_invoice.html'
-                html_page_title = 'Invoice Log (General Clients)'
+                html_page = my_dict.exshipper_general_clients_create_invoice_page
+                html_page_title = my_dict.exshipper_general_clients_create_invoice_page_title
         elif(dispatch_token == 'track_package_status'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = '/exshipper/exshipper_general_clients_track_package_status.html'
-                html_page_title = 'Track Package Status (General Clients)'
+                html_page = my_dict.exshipper_general_clients_track_package_status_page
+                html_page_title = my_dict.exshipper_general_clients_track_package_status_page_title
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
