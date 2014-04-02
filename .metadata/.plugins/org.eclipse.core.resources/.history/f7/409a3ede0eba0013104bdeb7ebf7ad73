@@ -66,11 +66,6 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_invoice_creating_page
                 html_page_title = my_dict.exshipper_invoice_creating_page_title
                 
-        elif(dispatch_token == 'exshipper_tw_custom_entry_signature'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_tw_custom_entry_signature_img_upload_handler
-                html_page_title = my_dict.exshipper_tw_custom_entry_signature_img_upload_handler_title
-                
         elif(dispatch_token == 'exshipper_invoice_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_invoice_log_page
@@ -676,7 +671,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'winever.tw@gmail.com'
+    email_host = 'rainman.tai@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
