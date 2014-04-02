@@ -24,7 +24,7 @@
 			suda_tracking_number.tracking_number }}</span>
 	</p>
 	{% endfor %} <br> {% else %}
-	<p>No Unused Tracking Number</p>
+	<p>No New Tracking Number</p>
 	{% endif %}
 	<hr>
 

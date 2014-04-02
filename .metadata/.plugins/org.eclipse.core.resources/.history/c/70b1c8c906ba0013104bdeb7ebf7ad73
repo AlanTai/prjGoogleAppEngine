@@ -105,7 +105,6 @@ class TWCustomEntryInfo(ndb.Model):
     note = ndb.StringProperty()
     
 class ClientSignature(ndb.Model):
-    signature_img = ndb.BlobProperty()
-    signature_str = ndb.StringProperty()
-    date = ndb.DateTimeProperty(auto_now_add = True)
+    signature = ndb.BlobProperty()
+    date = ndb.DateProperty(auto_now_add = True)
 #end of channel
