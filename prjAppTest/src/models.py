@@ -104,8 +104,12 @@ class TWCustomEntryInfo(ndb.Model):
     flight_date = ndb.StringProperty()
     note = ndb.StringProperty()
     
-class ClientSignature(ndb.Model):
+class ClientsInfo(ndb.Model):
+    name = ndb.StringProperty()
+    address = ndb.StringProperty()
+    phone = ndb.StringProperty()
     signature_img = ndb.BlobProperty()
     signature_str = ndb.StringProperty()
     date = ndb.DateProperty(auto_now_add = True)
+    update_date_time = ndb.DateTimeProperty(auto_now = True)
 #end of channel

@@ -599,11 +599,18 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         elif(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_submit_packages_sets'):
             response_result = ''
             try:
-                jsonObj = json.loads(self.request.get('tw_custom_entry_packages_sets'))
-                for key in jsonObj.keys():
-                    for package_number in jsonObj[key].keys():
-                        response_result += 'TW Package NO.'+package_number + ';'
-                tw_custom_entry_submit_result = response_result
+                json_obj_packages_sets = json.loads(self.request.get('tw_custom_entry_packages_sets'))
+                json_obj_packages_size_weight = json.loads(self.request.get('tw_custom_entry_packages_size_weight'))
+                for key in json_obj_packages_sets.keys():
+                    json_obj_packages_size_weight = json_obj_packages_size_weight[key]['strObj']['length']
+                    
+                    for package_number in json_obj_packages_sets[key].keys():
+                        response_result += 'Package NO.'+package_number + ';'
+                    
+                    working_on = ''
+                    
+                    tw_custom_package = 'TW Custom Entry Package- ' + key + ', Length: ' + json_obj_packages_size_weight.__str__() + ' ; ' + response_result
+                tw_custom_entry_submit_result = tw_custom_package
             except:
                 tw_custom_entry_submit_result = 'NA'
             finally:
@@ -656,11 +663,11 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         if(dispatch_token == 'creating_invoice'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = '/exshipper/exshipper_general_clients_create_invoice.html'
-                html_page_title = 'General Clients Invoice Log'
+                html_page_title = 'Invoice Log (General Clients)'
         elif(dispatch_token == 'track_package_status'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = '/exshipper/exshipper_general_clients_track_package_status.html'
-                html_page_title = 'General Clients Invoice Log'
+                html_page_title = 'Track Package Status (General Clients)'
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
