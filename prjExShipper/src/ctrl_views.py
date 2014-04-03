@@ -455,15 +455,15 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/json ; charset=UTF-8'
         self.response.write(json.dumps(json_response))
         
-
+#download SUDA tracking number handler
 class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
-        spearnet_account = self.request.get('spearnet_account')
-        spearnet_password = self.request.get('spearnet_password')
-        
-        if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
+        user_account = self.request.get('user_account')
+        user_password = self.request.get('user_password')
+        ajax_data = {'suda_tracking_number':'NA'}
+        if(user_account == 'spearnet' and user_password == 'spearnet1941'):
             html_page = my_dict.exshipper_spearnet_suda_tracking_number_handler_page
             suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
             
@@ -480,7 +480,20 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
                 template = jinja_environment.get_template(html_page)
                 self.response.out.write(template.render(template_values))
             else:
-                exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number', '')
+                exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number')
+                
+        elif(user_account == 'alantai' and user_password == '1014lct'):
+            suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
+            if suda_tracking_numbers:
+                suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_numbers[0].tracking_number)
+                suda_entity.used_mark = 'TRUE'
+                suda_entity.put()
+                ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
+            else:
+                exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number')
+                
+            self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
+            self.response.out.write(json.dumps(ajax_data))
         else:
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Account or Password Are Incorrect!')
@@ -721,7 +734,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
