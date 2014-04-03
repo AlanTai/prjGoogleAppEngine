@@ -333,20 +333,6 @@
 			shipper_phone_number = shipper_phone_number.trim();
 			$('#id_shipper_phone_number').val(shipper_phone_number);
 		}
-		if (shipper_address_english === '') {
-			$('#id_shipper_address_english').focus();
-			return true;
-		} else {
-			shipper_address_english = shipper_address_english.trim();
-			$('#id_shipper_address_english').val(shipper_address_english);
-		}
-		if (shipper_address_chinese === '') {
-			$('#id_shipper_address_chinese').focus();
-			return true;
-		} else {
-			shipper_address_chinese = shipper_address_chinese.trim();
-			$('#id_shipper_address_chinese').val(shipper_address_chinese);
-		}
 		//end
 
 		//

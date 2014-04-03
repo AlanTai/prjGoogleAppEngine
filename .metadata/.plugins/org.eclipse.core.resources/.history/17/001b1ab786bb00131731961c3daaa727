@@ -176,14 +176,14 @@
 			
 			<br> <input
 						type="button" value="Add New Package Information" onclick="Add()"
-						style="width: 300px; height: 30px;"></form>
+						style="width: 100px; height: 30px;"></form>
 	</div>
 	<hr>
 	<br>
 
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
 		<div style="border: 1px thin; border-color: #666; display: block;">
-			<p>Packages Information</p>
+			<p>Items Information</p>
 			<div id="added_info"
 				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 			<br>
@@ -283,8 +283,6 @@
 		var shipper_company = $('#id_shipper_company').val();
 		var shipper_person = $('#id_shipper_person').val();
 		var shipper_phone_number = $('#id_shipper_phone_number').val();
-		var shipper_address_english = $('#id_shipper_address_english').val();
-		var shipper_address_chinese = $('#id_shipper_address_english').val();
 		
 		var consignee_name_english = $('#id_consignee_name_english').val();
 		var consignee_name_chinese = $('#id_consignee_name_chinese').val();
@@ -332,20 +330,6 @@
 		} else {
 			shipper_phone_number = shipper_phone_number.trim();
 			$('#id_shipper_phone_number').val(shipper_phone_number);
-		}
-		if (shipper_address_english === '') {
-			$('#id_shipper_address_english').focus();
-			return true;
-		} else {
-			shipper_address_english = shipper_address_english.trim();
-			$('#id_shipper_address_english').val(shipper_address_english);
-		}
-		if (shipper_address_chinese === '') {
-			$('#id_shipper_address_chinese').focus();
-			return true;
-		} else {
-			shipper_address_chinese = shipper_address_chinese.trim();
-			$('#id_shipper_address_chinese').val(shipper_address_chinese);
 		}
 		//end
 
