@@ -16,7 +16,7 @@ import json
 
 from app_dict import Key_Value
 from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
-    ClientsInfo
+    ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))
 # jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates/exshipper'))
@@ -132,7 +132,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
 # end of ExShipperLoginHandler
 class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
-        ajax_data = {'invoice_info_submission':'NA'}
+        ajax_data = {'submit_status':'NA'}
         if(self.request.get('fmt') == 'json'):
             
             new_size = Size()
@@ -141,21 +141,39 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             new_size.height = self.request.get('valid_size_height')
             
             new_size.put()
+            package_id = self.request.get('valid_suda_tr_number')
+            new_package_info = GeneralClientsPackagesInfo(id=package_id)
+            new_package_info.hawb = package_id
+            new_package_info.reference_no = self.request.get('valid_ref_number')
+            new_package_info.tw_custom_entry_no = 'NA'
+            new_package_info.ctn = self.request.get('ctn')
+            new_package_info.size = new_size
+            new_package_info.weight_kg = self.request.get('valid_weight')
+            new_package_info.weight_lb = 'NA'
+            new_package_info.commodity_detail = self.request.get('valid_commodity_detail')
+            new_package_info.pcs = self.request.get('valid_pcs')
+            new_package_info.unit = self.request.get('valid_unit')
+            new_package_info.original = 'USA'
+            new_package_info.unit_price_fob_us_dollar = self.request.get('valid_unit_price_fob_us_dollar')
+            new_package_info.deliver_to = self.request.get('valid_deliver_to')
+            new_package_info.shipper_company = self.request.get('valid_shipper_name')
+            new_package_info.shipper_person = self.request.get('valid_shipper_person')
+            new_package_info.shipper_tel = self.request.get('valid_shipper_tel')
+            new_package_info.shipper_address_english = self.request.get('valid_shipper_address_english')
+            new_package_info.shipper_address_chinese = self.request.get('valid_shipper_address_chinese')
+            new_package_info.consignee_name_english = self.request.get('valid_consignee_english_name')
+            new_package_info.consignee_name_chinese = self.request.get('valid_consignee_chinese_name')
+            new_package_info.consignee_tel = self.request.get('valid_consignee_tel')
+            new_package_info.consignee_address_english = self.request.get('valid_consignee_address_english')
+            new_package_info.consignee_address_chinese = self.request.get('valid_consignee_address_chinese')
+            new_package_info.company_id_or_personal_id = 'NA'
+            new_package_info.size_accumulation = 'NA'
+            new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
+            new_package_info.duty_paid_by = 'Shipper'
+            new_package_info.put()
             
-            new_invoice = InvoiceInfo()
-            new_invoice.yamato_tr_number = self.request.get('valid_yamato_tr_number')
-            new_invoice.ref_number = self.request.get('valid_ref_number')
-            new_invoice.shipper = self.request.get('valid_shipper')
-            new_invoice.consignee_english = self.request.get('valid_consignee_en')
-            new_invoice.consignee_chinese = self.request.get('valid_consignee_ch')
-            new_invoice.address = self.request.get('valid_address')
-            new_invoice.consignee_phone_number = self.request.get('valid_phone_number')
-            new_invoice.weight = self.request.get('valid_weight')
-            new_invoice.size = new_size
             
-            new_invoice.put()
-            
-            ajax_data['invoice_info_submission'] = 'Data saved into database'
+            ajax_data['submit_status'] = 'Data saved into database'
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
 
@@ -387,29 +405,29 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                 if(duplication == False):
                     for package in packages_array:
                         new_package = SpearnetPackagesInfo(id=package['hawb'])
-                        new_package.barcode_no = 'NA'
+                        new_package.tw_custom_entry_no = 'NA'
                         new_package.hawb = package['hawb']
                         new_package.ctn = package['ctn']
                         new_package.weight_kg = package['g/w(kg)']
                         new_package.weight_lb = 'NA'
-                        new_package.commodity_name = package['commodity_name']
+                        new_package.commodity_detail = package['commodity_detail']
                         new_package.pcs = 'NA'
                         new_package.unit = package['unit']
                         new_package.original = package['original']
                         new_package.unit_price_fob_us_dollar = 'NA'
                         new_package.deliver_to = package['deliver_to']
-                        new_package.shipper_name = package['shipper_name']
+                        new_package.shipper_company = package['shipper_name']
                         new_package.shipper_person = 'NA'
                         new_package.shipper_tel = '510-351-8903'
                         new_package.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
                         new_package.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
-                        new_package.consignee_english_name = package['consignee_english_name']
-                        new_package.consignee_chinese_name = package['consignee_chinese_name']
+                        new_package.consignee_name_english = package['consignee_english_name']
+                        new_package.consignee_name_chinese = package['consignee_chinese_name']
                         new_package.consignee_tel = package['consignee_tel']
                         new_package.consignee_address = package['consignee_address']
                         new_package.consignee_address_chinese = package['consignee_address_chinese']
                         new_package.company_id_or_personal_id = 'NA'
-                        new_package.remark = package['remark']
+                        new_package.size_accumulation = package['size_accumulation']
                         new_package.declaration_need_or_not = package['declaration_need_or_not']
                         new_package.duty_paid_by = package['duty_paid_by']
                         new_package.package_status = 'spearnet'
@@ -462,6 +480,7 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
         user_info = get_users_info(self, users)
         user_account = self.request.get('user_account')
         user_password = self.request.get('user_password')
+        suda_tracking_number_type = self.request.get('suda_tracking_number_type')
         ajax_data = {'suda_tracking_number':'NA'}
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):
             html_page = my_dict.exshipper_spearnet_suda_tracking_number_handler_page
@@ -480,18 +499,26 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
                 template = jinja_environment.get_template(html_page)
                 self.response.out.write(template.render(template_values))
             else:
-                exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number')
+                exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number', '')
                 
+        #download suda tracking number for exshipper
         elif(user_account == 'alantai' and user_password == '1014lct'):
-            suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
-            if suda_tracking_numbers:
-                suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_numbers[0].tracking_number)
-                suda_entity.used_mark = 'TRUE'
-                suda_entity.put()
-                ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
-            else:
-                exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number')
-                
+            if(suda_tracking_number_type == 'regular'):
+                suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
+                if suda_tracking_numbers:
+                    suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_numbers[0].tracking_number)
+                    suda_entity.used_mark = 'TRUE'
+                    suda_entity.put()
+                    ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
+                    
+            elif(suda_tracking_number_type == 'formal'):
+                suda_tracking_numbers = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').fetch(1)
+                if suda_tracking_numbers:
+                    suda_entity = SUDATrackingNumber_FORMAL.get_by_id(suda_tracking_numbers[0].tracking_number)
+                    suda_entity.used_mark = 'TRUE'
+                    suda_entity.put()
+                    ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
+                    
             self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
             self.response.out.write(json.dumps(ajax_data))
         else:

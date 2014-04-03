@@ -1,0 +1,431 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Create Invoice/Add New Package
+		Information (ExShipper)</p>
+	<hr>
+</div>
+
+
+<div id="invoice_container"
+	style="position: absolute; top: 80px; text-align: center; width: 100%; z-index: 1;">
+	<div id="keyin_info" style="text-align: center; margin: 0px auto;">
+		<form>
+			<br>
+			<div>
+				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
+					SUDA Tracking Number:</p>
+				<input type="text" id="id_suda_tr_number" name="yamato_tr_number"
+					style="display: inline-block; margin: 5px 1px;" size="50" />
+				<div style="display: inline-block;">
+					<input type="button" value="Get SUDA Tracking Number"
+						onclick="getSUDATrackingNumber()" />
+					<select id="suda_tracking_number_type">
+						<option value="regular">Regular</option>
+						<option value="formal">Formal</option>
+					</select>
+				</div>
+			</div>
+			<div>
+				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+					<span style="display: block;">Reference Number (If no
+						"Reference Number", please key in 0):</span>
+				</p>
+				<input type="text" id="id_reference_number" name="reference_number"
+					style="display: inline-block; margin: 5px 1px;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
+					<span style="display: block;">Shipper Company:</span>
+				</p>
+				<input type="text" id="id_shipper_company" name="shipper_company"
+					style="display: inline-block; margin: 5px 1px;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
+					<span style="display: block;">Consignee Name (English):</span>
+				</p>
+				<input type="text" id="id_consignee_en" name="consignee_en"
+					style="display: inline-block; margin: 5px 1px;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
+					<span style="display: block;">Consignee Name (Chinese):</span>
+				</p>
+				<input type="text" id="id_consignee_ch" name="consignee_ch"
+					style="display: inline-block; margin: 5px 1px;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
+					<span style="display: block;">Address (Office/Home):</span>
+				</p>
+				<input type="text" id="id_address" name="address"
+					style="display: inline-block; margin: 5px 1px;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
+					<span style="display: block;">Phone Number (Office/Home):</span>
+				</p>
+				<input type="text" id="id_phone_number" name="phone_number"
+					style="display: inline-block; margin: 5px 1px;" size="50">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 300px;">Size (inch):</p>
+				<input type="number" id="id_length" name="length"
+					style="display: inline-block;" size="10" min="0"
+					placeholder="Length"> <input type="number" id="id_width"
+					name="width" style="display: inline-block;" size="10" min="0"
+					placeholder="Width"> <input type="number" id="id_height"
+					name="height" style="display: inline-block;" size="10" min="0"
+					placeholder="Height">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 300px;">Weight (kg):</p>
+				<input type="number" id="id_weight" name="weight"
+					style="display: inline-block;" size="10" min="0">
+			</div>
+			<br> <input type="button" value="Add" onclick="Add()"
+				style="width: 100px; height: 30px;">
+		</form>
+	</div>
+	<hr>
+	<br>
+
+	<div id="print_area" style="text-align: center; margin: 0px auto;">
+		<div style="border: 1px thin; border-color: #666; display: block;">
+			<p>Items Information</p>
+			<div id="added_info"
+				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<br>
+		</div>
+
+		<div style="border: 1px dotted; border-color: #666; display: block;">
+			<p>Print Information</p>
+			<input id="print_label" type="button" value="Print Labels"
+				onclick="PrintElem('#added_labels','Labels')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="added_labels"
+				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<div id="printed_labels"></div>
+
+			<input type="button" value="Print List"
+				onclick="PrintElem('#check_list','Check List')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="check_list"
+				style="width: 680px; max-height: 200px; overflow: auto; margin: 2px auto; padding: 5px auto; border: 1px dashed;"></div>
+			<br>
+		</div>
+	</div>
+	<br>
+</div>
+
+<script type="text/javascript">
+	//
+	function getSUDATrackingNumber() {
+		//
+		$('#upload_cover').css({
+			'display' : 'block'
+		});
+		var selected_suda_tracking_number_type = $('#suda_tracking_number_type').val();
+
+		//add the info to datastore
+		$.ajax('/exshipper_spearnet_suda_tracking_number_handler', {
+			type : 'POST',
+			data : {
+				user_account : 'alantai',
+				user_password : '1014lct',
+				suda_tracking_number_type : selected_suda_tracking_number_type
+			},
+			success : updateSUDATrackingNumber,
+			statusCode : {
+				400 : function() {
+					alert('400 status code! user-side error');
+					$('#upload_cover').css({
+						'display' : 'none'
+					});
+				},
+				500 : function() {
+					alert('500 status code! server-side error');
+					$('#upload_cover').css({
+						'display' : 'none'
+					});
+				}
+			}
+		});
+		//end of add the info to datastore
+	}
+
+	function updateSUDATrackingNumber(response) {
+		if (response.suda_tracking_number != 'NA') {
+			$('#id_suda_tr_number').val(response.suda_tracking_number);
+		} else {
+			alert('NO SUDA Number Available to Dowonload!')
+		}
+		$('#upload_cover').css({
+			'display' : 'none'
+		});
+	}
+
+	/*end of get suda tracking number*/
+
+	/*add new package information*/
+	var info_array = [];
+	function Add() {
+		var yamato_tr_number = $('#id_suda_tr_number').val();
+		var reference_number = $('#id_reference_number').val();
+		var shipper_company = $('#id_shipper_company').val();
+		var consignee_en = $('#id_consignee_en').val();
+		var consignee_ch = $('#id_consignee_ch').val();
+		var address = $('#id_address').val();
+		var phone_number = $('#id_phone_number').val();
+		var size_length = $('#id_length').val();
+		var size_width = $('#id_width').val();
+		var size_height = $('#id_height').val();
+		var weight = $('#id_weight').val();
+
+		// check information
+		if (yamato_tr_number === '') {
+			$('#id_suda_tr_number').focus();
+			return true;
+		} else {
+			yamato_tr_number = yamato_tr_number.trim();
+		}
+		if (reference_number === '') {
+			$('#id_reference_number').focus();
+			return true;
+		} else {
+			reference_number = reference_number.trim();
+		}
+		if (shipper_company === '') {
+			$('#id_shipper_company').focus();
+			return true;
+		} else {
+			shipper_company = shipper_company.trim();
+		}
+
+		if (consignee_en === '') {
+			$('#id_consignee_en').focus();
+			return true;
+		} else {
+			consignee_en = consignee_en.trim();
+		}
+
+		if (consignee_ch === '') {
+			$('#id_consignee_ch').focus();
+			return true;
+		} else {
+			consignee_ch = consignee_ch.trim();
+		}
+
+		if (address === '') {
+			$('#id_address').focus();
+			return true;
+		} else {
+			address = address.trim();
+		}
+		if (phone_number === '') {
+			$('#id_phone_number').focus();
+			return true;
+		} else {
+			phone_number = phone_number.trim();
+		}
+
+		if (!numberFilter(size_length)) {
+			alert('Please type in a number for the length!');
+			$('#id_length').focus();
+			return true;
+		}
+		if (!numberFilter(size_width)) {
+			alert('Please type in a number for the width!');
+			$('#id_width').focus();
+			return true;
+		}
+		if (!numberFilter(size_height)) {
+			alert('Please type in a number for the height!');
+			$('#id_height').focus();
+			return true;
+		}
+		if (!numberFilter(weight)) {
+			alert('Please type in a number for the weight!');
+			$('#id_weight').focus();
+			return true;
+		}
+		// end of checking information
+
+		// check yamato tracking number
+		var i = info_array.length;
+		while (i > 0) {
+			if (info_array[i - 1].tr_number === suda_tr_number) {
+				alert('This Yamato Tracking Number Already Exist!');
+				$('#id_yamato_tr_number').focus();
+				return true;
+			}
+			if (info_array[i - 1].ref_number === reference_number) {
+				alert('This Reference Number Already Exist!');
+				$('#id_reference_number').focus();
+				return true;
+			}
+			--i;
+		}
+		info_array.push({
+			'tr_number' : suda_tr_number,
+			'ref_number' : reference_number
+		});
+		// end of check yamato tracking number
+
+		//add the info to datastore
+		$.ajax('/exshipper_invoice_info_handler', {
+			type : 'POST',
+			data : {
+				fmt : 'json',
+				valid_suda_tr_number : suda_tr_number,
+				valid_ref_number : reference_number,
+				valid_shipper : shipper,
+				valid_consignee_en : consignee_en,
+				valid_consignee_ch : consignee_ch,
+				valid_address : address,
+				valid_phone_number : phone_number,
+				valid_size_length : size_length,
+				valid_size_width : size_width,
+				valid_size_height : size_height,
+				valid_weight : weight
+			},
+			success : showReturnMsg,
+			statusCode : {
+				400 : function() {
+					alert('400 status code! user-side error');
+				},
+				500 : function() {
+					alert('500 status code! server-side error')
+				}
+			}
+		});
+		//end of add the info to datastore
+
+		//append type-in info to html element
+		$('#added_info')
+				.append(
+						'<form name="'
+							+ yamato_tr_number
+							+ '">'
+								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
+								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Yamato Tracking Number: '
+								+ yamato_tr_number
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '
+								+ reference_number
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
+								+ shipper
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
+								+ consignee_en
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '
+								+ consignee_ch
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Address: '
+								+ address
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
+								+ phone_number
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+		// change color
+		$('#added_info> form:even').css('background-color', '#dedede');
+		$('#added_info> form:odd').css('background-color', '#f9f9f9');
+		// end change color
+
+		$('#added_labels')
+				.append(
+						'<form id="label_'
+							+ yamato_tr_number
+							+ '" style="border: 1px solid; width: 300px; margin: 5px 5px; padding: 2px 5px; display:inline-block; text-align: left;">'
+								+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
+								+ shipper
+								+ '</p>'
+								+ '<p style="display: block; margin: 0px auto;"> 地址: 1941 W Ave. 104th, San Leandro, CA 94577</p>'
+								+ '<p style="display: block; margin: 0px auto;"> 電話: (510)351-8903</p>'
+								+ '<hr>'
+								+ '<p style="display: block; margin: 0px auto;"> 收件者: '
+								+ consignee_ch
+								+ '</p>'
+								+ '<p style="display: block; margin: 0px auto;"> 地址: '
+								+ address
+								+ '</p>'
+								+ '<p style="display: block; margin: 0px auto;"> 電話: '
+								+ phone_number
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">易碎</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'
+								+ weight
+								+ ' (kg)</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '
+								+ reference_number
+								+ '</p>'
+								+ '<hr>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 追蹤碼</div>'
+								+ '<div class="barcode" id="barcode_'
+							+ yamato_tr_number
+							+ '" style="margin: 2px auto; text-align:center;"></div>'
+								+ '</form>');
+
+		$('#added_labels> form[id="label_' + yamato_tr_number + '"]').find(
+				'div#barcode_' + yamato_tr_number).barcode(yamato_tr_number,
+				'code39', {
+					barWidth : 2,
+					barHeight : 45,
+					fontSize : 16
+				});
+
+		$('#check_list')
+				.append(
+						'<form id="check_list_'
+							+ yamato_tr_number
+							+ '" style="width: 800px; margin: 1px auto; padding: 5px auto; display:inline-block">'
+								+ '<input type="checkbox" disabled="true" style="height: 100%; width: 20px; display: inline-block; margin: auto 10px;">'
+								+ '<div style="width:600px; display: inline-block; text-align: left;">'
+								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;">Yamato Tracking Number: '
+								+ yamato_tr_number
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;"> Reference Number: '
+								+ reference_number
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+	}
+
+	function showReturnMsg(return_msg) {
+		alert(return_msg.submit_status);
+	}
+
+	function selectOrRemove(elem) {
+		var select_status = $(elem).find('input').attr('value');
+		var elem_name = $(elem).attr('name');
+		if (select_status === 'Remove') {
+			$(elem).find('input').val('Select');
+			$('#added_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'none'
+			});
+			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
+				'display' : 'none'
+			});
+		} else {
+			$(elem).find('input').val('Remove');
+			$('#added_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'inline-block'
+			});
+			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
+				'display' : 'inline-block'
+			});
+		}
+
+		/* remove element */
+		// $(elem).remove();
+	}
+</script>
+
+{% endblock %}
