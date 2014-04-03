@@ -150,6 +150,15 @@
 					style="display: inline-block; margin: 5px 1px;" size="50">
 			</div>
 			
+			
+			<div>
+				<p style="display: inline-block; width: 450px; height:50px; margin: 2px 1px;">
+				Note:
+				<textarea id="id_note" name="note"
+					style="display: inline-block; margin: 5px 1px;" cols="40"></textarea>
+				</p>
+			</div>
+			
 			<div>
 				<p style="display: inline-block; width: 450px;">Size (inch):</p>
 				<input type="number" id="id_length" name="length"
@@ -174,18 +183,6 @@
 						onclick="addNewCommodity()"> <div id="id_commodity_detail"></div>
 				</div>
 			</div>
-			
-			
-
-			<div>
-				<p style="display: inline-block; width: 450px; height:50px; margin: 2px 1px;">
-				<span style="display: block;">Note:</span>
-				<textarea id="id_note" name="note"
-					style="display: inline-block; margin: 5px 1px;" cols="40"></textarea>
-				</p>
-			</div>
-			
-			
 			
 			<br> <input
 						type="button" value="Add New Package Information" onclick="Add()"

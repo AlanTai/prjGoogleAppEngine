@@ -167,15 +167,6 @@
 					placeholder="Weight">
 			</div>
 
-			<div>
-				<div style="display: inline-block; width: 600px; margin: 2px 1px;">
-					<span style="display: block;">Commodity Detail:</span> <input
-						type="button" value="Add New Commodity"
-						onclick="addNewCommodity()"> <div id="id_commodity_detail"></div>
-				</div>
-			</div>
-			
-			
 
 			<div>
 				<p style="display: inline-block; width: 450px; height:50px; margin: 2px 1px;">
@@ -185,7 +176,14 @@
 				</p>
 			</div>
 			
-			
+
+			<div>
+				<div style="display: inline-block; width: 600px; margin: 2px 1px;">
+					<span style="display: block;">Commodity Detail:</span> <input
+						type="button" value="Add New Commodity"
+						onclick="addNewCommodity()"> <div id="id_commodity_detail"></div>
+				</div>
+			</div>
 			
 			<br> <input
 						type="button" value="Add New Package Information" onclick="Add()"

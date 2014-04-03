@@ -149,7 +149,6 @@
 				<input type="text" id="id_unit" name="unit"
 					style="display: inline-block; margin: 5px 1px;" size="50">
 			</div>
-			
 			<div>
 				<p style="display: inline-block; width: 450px;">Size (inch):</p>
 				<input type="number" id="id_length" name="length"
@@ -174,18 +173,6 @@
 						onclick="addNewCommodity()"> <div id="id_commodity_detail"></div>
 				</div>
 			</div>
-			
-			
-
-			<div>
-				<p style="display: inline-block; width: 450px; height:50px; margin: 2px 1px;">
-				<span style="display: block;">Note:</span>
-				<textarea id="id_note" name="note"
-					style="display: inline-block; margin: 5px 1px;" cols="40"></textarea>
-				</p>
-			</div>
-			
-			
 			
 			<br> <input
 						type="button" value="Add New Package Information" onclick="Add()"
@@ -307,7 +294,6 @@
 		
 		var unit_price_fob_us_dollar = $('#id_unit_price_fob_us_dollar').val();
 		var deliver_to = $('#id_deliver_to').val();
-		var note = $('#id_note') = $('#id_note').val();
 		
 		var ctn = $('#id_ctn').val();
 		var pcs = $('#id_pcs').val();
@@ -402,13 +388,6 @@
 		} else {
 			deliver_to = deliver_to.trim();
 			$('#id_deliver_to').val(deliver_to);
-		}
-		if (note === '') {
-			$('#id_note').focus();
-			return true;
-		} else {
-			note = note.trim();
-			$('#id_note').val(note);
 		}
 		//end
 		
@@ -572,7 +551,7 @@
 								+ reference_number
 								+ '</p>'
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">註: '
-								+ note
+								+ reference_number
 								+ '</p>'
 								+ '<hr>'
 								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 追蹤碼</div>'
