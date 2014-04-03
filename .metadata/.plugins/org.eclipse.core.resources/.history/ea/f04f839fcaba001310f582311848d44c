@@ -1,0 +1,117 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Create Client Information</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; margin: 10px auto;">
+
+	<div id="client_info_div">
+		<!--  -->
+		<form action="/exshipper_create_client_info_handler" method="post" enctype="multipart/form-data"
+			name="form_client_info" id="if_client_info"
+			onsubmit="return upload()"
+			style="margin: 5px auto; text-align: center;">
+			<div id="div_client_info">
+				<p style="display: block;">Please type in the client information</p>
+				<div>
+					<label style="width: 350px; display: inline-block;">Client
+						Name (Company/Individual Name): </label> <input name="client_name" id="id_client_name"
+						type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br>
+				<div>
+					<label style="width: 350px; display: inline-block;">
+						Address (Office/Home Address): </label> <input name="client_address" id="id_client_address"
+						type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br>
+				<div>
+					<label style="width: 350px; display: inline-block;"> Phone
+						(Office/Individual Phone): </label> <input name="client_phone" id="id_client_phone"
+						type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br>
+				<div>
+					<label style="width: 350px; display: inline-block;"> Name
+						for Signature (Individual Name): </label> <input name="name_for_signature" id="id_name_for_signature"
+						type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br>
+			</div>
+
+			<div id="div_client_signature">
+				<label style="width: 350px; display: inline-block;"> Please
+					Select Client Signature Image: </label> <input type="file"
+					name="form_client_signature" id="id_form_client_image"
+					accept="image/*"
+					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+			</div>
+			<br /> <input type="submit" name="submit" id="submit"
+				value="Submit Client Information" />
+		</form>
+		<br>
+		<hr>
+	</div>
+	
+	<!-- function for validating the client information -->
+	<script type="text/javascript">
+		var upload = function() {
+			var client_name = $('#id_client_name').val();
+			var client_address = $('#id_client_address').val();
+			var client_phone = $('#id_client_phone').val();
+			var client_name_for_signature = $('#id_name_for_signature').val();
+			var client_signature_img = $('#id_form_client_image').val();
+			
+			if(client_name === ''){
+				alert('Please key in the client\'s name');
+				$('#id_client_name').focus();
+				return false;
+			}
+			else if(client_address === ''){
+				alert('Please key in the client\'s address');
+				$('#id_client_address').focus();
+				return false;
+			}
+			else if(client_phone === ''){
+				alert('Please key in the client\'s phone');
+				$('#id_client_phone').focus();
+				return false;
+			}
+			else if(client_name_for_signature === ''){
+				alert('Please key in the client\'s name for signature');
+				$('#id_name_for_signature').focus();
+				return false;
+			}
+			else if(client_signature_img === ''){
+				alert('Please select the client\'s signature image');
+				return false;
+			}
+			else{
+				return true;
+			}
+			
+		};
+	</script>
+	<!-- end -->
+
+	<div id="data_div" style="margin: 5px auto; text-align: center;">
+		{% if clients_data %} {% for client_data in clients_data %}
+		<hr />
+		<p>{{ client_data.name }}</p>
+		<p>
+			<img src="img?entity_id={{ client_data.key }}" />
+		</p>
+		{% endfor %} {% else %}
+		<p>No Clients Data Available</p>
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

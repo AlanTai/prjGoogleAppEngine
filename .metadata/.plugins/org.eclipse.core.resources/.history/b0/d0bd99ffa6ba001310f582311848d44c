@@ -1,0 +1,32 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Create Client Information</p>
+	<hr>
+</div>
+
+<div id="client_info_div"
+	style="position: absolute; top: 100px; width: 100%; margin: 10px auto;">
+	<form action="/" method="post" enctype="multipart/form-data"
+		name="form_client_info" id="if_client_info"
+		style="margin: 5px auto; text-align: center;">
+		<div id="div_client_info">
+			<p style="display: block;">Please type in the account and
+				password</p>
+			<div>
+				<label style="width: 350px; display: inline-block;">Client
+					Name (Company/Individual Name)</label> <input name="exshipper_account" type="text"
+					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+			</div>
+			<br>
+		</div>
+
+		<div id="div_client_signature">
+			<label>Please Select Client Signature Image</label><input type="file"
+				name="form_client_signature" id="form_client_image">
+		</div>
+	</form>
+</div>
+
+<div id="data_div"></div>
+{% endblock %}

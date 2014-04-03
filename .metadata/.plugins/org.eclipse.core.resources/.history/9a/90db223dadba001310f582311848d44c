@@ -1,0 +1,67 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Create Client Information</p>
+	<hr>
+</div>
+
+<div id="client_info_div"
+	style="position: absolute; top: 100px; width: 100%; margin: 10px auto;">
+	<form action="/" method="post" enctype="multipart/form-data"
+		name="form_client_info" id="if_client_info"
+		style="margin: 5px auto; text-align: center;">
+		<div id="div_client_info">
+			<p style="display: block;">Please type in the client information</p>
+			<div>
+				<label style="width: 350px; display: inline-block;">Client
+					Name (Company/Individual Name): </label> <input name="exshipper_account"
+					type="text"
+					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+			</div>
+			<br>
+			<div>
+				<label style="width: 350px; display: inline-block;"> Address
+					(Office/Home Address): </label> <input name="exshipper_account" type="text"
+					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+			</div>
+			<br>
+			<div>
+				<label style="width: 350px; display: inline-block;"> Phone
+					(Office/Individual Phone): </label> <input name="exshipper_account"
+					type="text"
+					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+			</div>
+			<br>
+			<div>
+				<label style="width: 350px; display: inline-block;"> Name
+					for Signature (Individual Name): </label> <input name="exshipper_account"
+					type="text"
+					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+			</div>
+			<br>
+		</div>
+
+		<div id="div_client_signature">
+			<label style="width: 350px; display: inline-block;"> Please
+				Select Client Signature Image: </label> <input type="file"
+				name="form_client_signature" id="form_client_image" accept="image/*"
+				style="width: 250px; display: inline-block; padding: 2px 5px;" />
+		</div>
+		<br /> <input type="submit" name="submit" id="submit"
+			value="Submit Client Information" />
+	</form>
+	<br>
+	<hr>
+</div>
+
+<div id="data_div"
+	style="position: absolute; top: 100px; width: 100%; margin: 10px auto;">
+	{% if clients_data %} {% for client_data in clients_data %}
+	<hr />
+	<p>{{ message.text }}</p>
+	<p>
+		<img src="img?entity_id={{ client_data.key }}" />
+	</p>
+	{% endfor %} {% endif %}
+</div>
+{% endblock %}
