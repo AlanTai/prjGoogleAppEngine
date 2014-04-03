@@ -4,7 +4,6 @@ Created on Oct 1, 2013
 
 @author: Alan Tai
 '''
-from google.appengine.ext.key_range import ndb
 __author__ = 'Alan Tai'
 
 import random
@@ -15,8 +14,7 @@ from google.appengine.api import users, mail, memcache
 import json
 
 from app_dict import Key_Value
-from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
-    ClientsInfo
+from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))
 # jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates/exshipper'))
@@ -65,15 +63,11 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         # html page dispatching
         if(dispatch_token == 'exshipper_invoice'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                
                 html_page = my_dict.exshipper_invoice_creating_page
                 html_page_title = my_dict.exshipper_invoice_creating_page_title
                 
         elif(dispatch_token == 'exshipper_create_client_info'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                clients_data = ClientsInfo.query()
-                template_values.update({'clients_data':clients_data})
-                
                 html_page = my_dict.exshipper_create_client_info_handler
                 html_page_title = my_dict.exshipper_create_client_info_handler_title
                 
@@ -158,37 +152,6 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             ajax_data['invoice_info_submission'] = 'Data saved into database'
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
-
-class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
-    def post(self):
-        new_client = ClientsInfo()
-        new_client.name = self.request.get('client_name')
-        new_client.address = self.request.get('client_address')
-        new_client.phone = self.request.get('client_phone')
-        new_client.signature_str = self.request.get('name_for_signature')
-        new_client.signature_img = self.request.get('form_client_signature')
-        new_client.put()
-        
-        my_dict = Key_Value()
-        template_values = {}
-        user_info = get_users_info(self, users)
-        template_values.update(user_info)
-        clients_data = ClientsInfo.query()
-        template_values.update({'clients_data':clients_data})
-                
-        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
-        
-        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
-        self.response.out.write(template.render(template_values))
-        working_on = ''
-        
-class GetImage(webapp2.RequestHandler):
-    def get(self):
-        entity_id = self.request.get('entity_id')
-        entity = ndb.Key(urlsafe=entity_id).get()
-        if entity and entity.signature_img:
-            self.response.headers['Content-Type'] = 'image/png'
-            self.response.out.write(entity.signature_img)
 
 #SUDA Tracking Number Handler (For uploading number)
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
@@ -694,7 +657,6 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         
         html_page = my_dict.exshipper_invalid_login_page
         html_page_title = my_dict.exshipper_invalid_login_page_title
-        
         working_on = ''
         
         # html page dispatching
@@ -721,7 +683,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
@@ -771,8 +733,6 @@ class TestHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperInvoiceInfoHandler),
-                               ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
-                               ('/img', GetImage),
                                ('/exshipper_spearnet_index_page', ExShipperSpearnetIndexHandler),
                                ('/exshipper_spearnet_login_handler', ExShipperSpearnetLoginHandler),
                                ('/exshipper_spearnet_data_exchange_page', ExShipperSpearnetDataExchangeDispatcher),
