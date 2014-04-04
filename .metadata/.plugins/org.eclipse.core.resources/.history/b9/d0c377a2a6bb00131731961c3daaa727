@@ -161,8 +161,8 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             new_package_info.shipper_tel = self.request.get('valid_shipper_phone_number')
             new_package_info.shipper_address_english = self.request.get('valid_shipper_address_english')
             new_package_info.shipper_address_chinese = self.request.get('valid_shipper_address_chinese')
-            new_package_info.consignee_name_english = self.request.get('valid_consignee_name_english')
-            new_package_info.consignee_name_chinese = self.request.get('valid_consignee_name_chinese')
+            new_package_info.consignee_name_english = self.request.get('valid_consignee_english_name')
+            new_package_info.consignee_name_chinese = self.request.get('valid_consignee_chinese_name')
             new_package_info.consignee_tel = self.request.get('valid_consignee_phone_number')
             new_package_info.consignee_address_english = self.request.get('valid_consignee_address_english')
             new_package_info.consignee_address_chinese = self.request.get('valid_consignee_address_chinese')
@@ -761,7 +761,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'winever.tw@gmail.com'
+    email_host = 'rainman.tai@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:

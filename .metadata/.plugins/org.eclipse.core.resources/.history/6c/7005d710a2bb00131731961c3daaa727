@@ -238,13 +238,13 @@
 	function checkCommodityDetailAndGetCommodityDetailObj(){
 		if($('#id_commodity_detail').is(':empty')){
 			alert('Please Add Commodity Detail');
-			return true;
+			return false;
 		}
 		else{
 			var commodity_detail = new Object();
 			var commodity_ary = new Array();
 			
-			var isCommodityInvalid = $('#id_commodity_detail form').each(function(){
+			$('#id_commodity_detail form').each(function(){
 				var commodity_obj = new Object();
 				commodity_name = $(this).find('input#id_commodity_name').val();
 				commodity_quan = $(this).find('input#id_commodity_quantity').val();
@@ -252,17 +252,17 @@
 				if(commodity_name === ''){
 					alert('Commodity name is unknown!');
 					$(this).find('input#id_commodity_name').focus();
-					return true;
+					return false;
 				}
 				else if(commodity_quan === ''){
 					alert('Commodity quantity is unknown!');
 					$(this).find('input#id_commodity_quantity').focus();
-					return true;
+					return false;
 				}
 				else if(commodity_price === ''){
 					alert('Commodity price is unknown!');
 					$(this).find('input#id_commodity_price').focus();
-					return true;
+					return false;
 				}
 				else{
 					commodity_obj.name = $(this).find('input#id_commodity_name').val();
@@ -273,13 +273,8 @@
 				}
 			});
 			
-			if(isCommodityInvalid === true){
-				return true;
-			}
-			else{
-				commodity_detail.items = commodity_ary;
-				return commodity_detail;
-			}
+			commodity_detail.items = commodity_ary;
+			return commodity_detail;
 		}
 	}
 	
@@ -505,7 +500,8 @@
 
 		//check commodity detail
 		var commodity_detail_obj = checkCommodityDetailAndGetCommodityDetailObj();
-		if(commodity_detail_obj === true){
+		alert(commodity_detail_obj);
+		if(!commodity_detail_obj){
 			return true;
 		}
 		//end
@@ -536,7 +532,6 @@
 		$('#upload_cover').css({
 			'display' : 'block'
 		});
-		
 		$.ajax('/exshipper_invoice_info_handler', {
 			type : 'POST',
 			data : {
@@ -624,7 +619,7 @@
 				.append(
 						'<form id="label_'
 							+ suda_tr_number
-							+ '" style="border: 1px solid; width: 400px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
+							+ '" style="border: 1px solid; width: 400px; margin: 5px 5px; padding: 2px 5px; display:inline-block; text-align: left;">'
 								+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
 								+ shipper_company
 								+ '</p>'
@@ -641,13 +636,13 @@
 								+ consignee_phone_number
 								+ '</p>'
 								+ '<hr>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '
-								+ reference_number
-								+ '</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">易碎</p>'
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'
 								+ weight
 								+ ' (kg)</p>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">易碎</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '
+								+ reference_number
+								+ '</p>'
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">註: '
 								+ note
 								+ '</p>'
