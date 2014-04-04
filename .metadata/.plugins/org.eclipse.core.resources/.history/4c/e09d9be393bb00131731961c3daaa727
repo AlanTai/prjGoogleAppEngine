@@ -153,17 +153,17 @@
 			<div>
 				<p style="display: inline-block; width: 450px;">Size (inch):</p>
 				<input type="number" id="id_length" name="length"
-					style="display: inline-block; width: 110px;" size="10" min="0"
+					style="display: inline-block;" size="10" min="0"
 					placeholder="Length"> <input type="number" id="id_width"
-					name="width" style="display: inline-block; width: 110px;" size="10" min="0"
+					name="width" style="display: inline-block;" size="10" min="0"
 					placeholder="Width"> <input type="number" id="id_height"
-					name="height" style="display: inline-block; width: 110px;" size="10" min="0"
+					name="height" style="display: inline-block;" size="10" min="0"
 					placeholder="Height">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px;">Weight (kg):</p>
 				<input type="number" id="id_weight" name="weight"
-					style="display: inline-block; width: 330px; text-align: center;" size="10" min="0"
+					style="display: inline-block;" size="100" min="0"
 					placeholder="Weight">
 			</div>
 
