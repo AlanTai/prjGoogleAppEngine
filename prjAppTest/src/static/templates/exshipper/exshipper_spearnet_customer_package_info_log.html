@@ -30,33 +30,45 @@
 		
 		//put keys into array
 		var obj_keys = new Object();
-		obj_keys['barcode_no'] = 'barcode_no';
+		obj_keys['reference_number'] = 'reference_number';
+		obj_keys['tw_custom_entry_number'] = 'tw_custom_entry_number';
 		obj_keys['hawb'] = 'hawb';
+		
 		obj_keys['ctn'] = 'ctn';
 		obj_keys['weight_kg'] = 'g/w(kg)';
 		obj_keys['weight_lb'] = 'g/w(lb)';
-		obj_keys['commodity_name'] = 'commodity_name';
+		obj_keys['commodity_detail'] = 'commodity_detail';
 		obj_keys['pcs'] = 'pcs';
 		obj_keys['unit'] = 'unit';
+		
 		obj_keys['original'] = 'original';
-		obj_keys['unit_price_fob_us_dollar'] = 'unit_price_fob_us_dollar';
-		obj_keys['consignee_address_chinese'] = 'consignee_address_chinese';
 		obj_keys['deliver_to'] = 'deliver_to';
-		obj_keys['shipper_name'] = 'shipper_name';
+		
+		obj_keys['unit_price_fob_us_dollar'] = 'unit_price_fob_us_dollar';
+		
+		obj_keys['shipper_company'] = 'shipper_company';
 		obj_keys['shipper_person'] = 'shipper_person';
-		obj_keys['consignee_name'] = 'consignee_name';
-		obj_keys['consignee_person'] = 'consignee_person';
+		obj_keys['shipper_tel'] = 'shipper_tel';
+		obj_keys['shipper_address_english'] = 'shipper_address_english';
+		obj_keys['shipper_address_chinese'] = 'shipper_address_chinese';
+		
 		obj_keys['consignee_tel'] = 'consignee_tel';
-		obj_keys['consignee_addr'] = 'consignee_addr';
+		obj_keys['consignee_name_english'] = 'consignee_name_english';
+		obj_keys['consignee_name_chinese'] = 'consignee_name_chinese';
+		obj_keys['consignee_address_english'] = 'consignee_address_english';
+		obj_keys['consignee_address_chinese'] = 'consignee_address_chinese';
+		
 		obj_keys['company_id_or_person_id'] = 'company_id_or_person_id';
-		obj_keys['remark'] = 'remark';
+		obj_keys['size_accumulation'] = 'size_accumulation';
 		obj_keys['declaration_need_or_not'] = 'declaration_need_or_not';
 		obj_keys['duty_paid_by'] = 'duty_paid_by';
+		obj_keys['note'] = 'note';
+		
 		
 		json_array.push(obj_keys);
 		</script>
 		{% for single_row_data in spearnet_customer_package_info_log %}
-		<form>
+		<form style="height: 40px;">
 			<span>SUDA Tracking Number: {{ single_row_data.hawb }}</span> <span>Package
 				Status: <select id="{{ single_row_data.hawb }}"
 				class="spearnet_customer_package_status">
@@ -87,37 +99,48 @@
 			});
 			
 			var obj = new Object();
-			obj['barcode_no'] = 'NA';
+			obj['reference_number'] = '{{ single_row_data.reference_number }}';
+			obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
 			obj['hawb'] = '{{ single_row_data.hawb }}';
+			
 			obj['ctn'] = '{{ single_row_data.ctn }}';
 			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
 			obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
 			
 			//parse json object
-			var commodity_json = JSON.parse('{{ single_row_data.commodity_name }}');
+			var commodity_json = JSON.parse('{{ single_row_data.commodity_detail }}');
 			var commodity_string = new String();
 			for (var ith in commodity_json['items']){
 				var data = commodity_json['items'][ith];
 				commodity_string += " Item Name: "+data.name+" Quantity: "+data.quan+" Price: "+data.price+" ; ";
 			};
 			
-			obj['commodity_name'] = commodity_string;
-			obj['pcs'] = '{{ single_row_data.pcs }}';
+			obj['commodity_detail'] = commodity_string;
+			obj['pcs'] = "{{ single_row_data.pcs }}";
 			obj['unit'] = "{{ single_row_data.unit }}";
+			
 			obj['original'] = "{{ single_row_data.original }}";
+			obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
+			
 			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
-			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
-			obj['deliver_to'] = " {{ single_row_data.deliver_to }}";
-			obj['shipper_name'] = "{{ single_row_data.shipper_name }}";
+			
+			obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
 			obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
-			obj['consignee_name'] = "{{ single_row_data.consignee_english_name }}";
-			obj['consignee_person'] = "{{ single_row_data.consignee_chinese_name }}";
+			obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
+			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english }}";
+			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
+			
 			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
-			obj['consignee_addr'] = "{{ single_row_data.consignee_address }}";
+			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
+			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
+			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
+			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
+			
 			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
-			obj['remark'] = "{{ single_row_data.remark }}";
+			obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
 			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
 			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
+			obj['note'] = "{{ single_row_data.note }}";
 			
 			json_array.push(obj);
 			
@@ -128,6 +151,12 @@
 		<p>No Data Available</p>
 		{% endif %}
 		<script type="text/javascript">
+		// change color
+		$('#spearnet_customer_packages_info> form:even').css('background-color', '#dedede');
+		$('#spearnet_customer_packages_info> form:odd').css('background-color', '#f9f9f9');
+		// end change color
+		
+		
 			function updatePackageStatus() {
 				var confirm_result = confirm('Do you want to update the packages\' status?');
 
@@ -175,28 +204,39 @@
 		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
 		
 		var obj_types = new Object();
-		obj_types.barcode_no = "String";
+		obj_types.reference_number = "String";
+		obj_types.tw_custom_entry_number = "String";
 		obj_types.hawb = "String";
+		
 		obj_types.ctn = "String";
 		obj_types.weight_kg = "String";
 		obj_types.weight_lb = "String";
-		obj_types.commodity_name = "String";
+		obj_types.commodity_detail = "String";
 		obj_types.pcs = "String";
 		obj_types.unit = "String";
+		
 		obj_types.original = "String";
-		obj_types.unit_price_fob_us_dollar ="String";
-		obj_types.consignee_address_chinese = "String";
 		obj_types.deliver_to = "String";
-		obj_types.shipper_name = "String";
+		
+		obj_types.unit_price_fob_us_dollar ="String";
+		
+		obj_types.shipper_company = "String";
 		obj_types.shipper_person = "String";
-		obj_types.consignee_name = "String";
-		obj_types.consignee_person = "String";
+		obj_types.shipper_tel = "String";
+		obj_types.shipper_address_english = "String";
+		obj_types.shipper_address_chinese ="String";
+		
 		obj_types.consignee_tel = "String";
-		obj_types.consignee_addr = "String";
+		obj_types.consignee_name_english = "String";
+		obj_types.consignee_name_chinese = "String";
+		obj_types.consignee_address_english = "String";
+		obj_types.consignee_address_chinese ="String";
+		
 		obj_types.company_id_or_person_id = "String";
-		obj_types.remark = "String";
+		obj_types.size_accumulation ="String";
 		obj_types.declaration_need_or_not = "String";
 		obj_types.duty_paid_by = "String";
+		obj_types.note = "String";
 		
 		testJson = json_array;
 		testTypes = obj_types;

@@ -77,23 +77,6 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_create_client_info_handler
                 html_page_title = my_dict.exshipper_create_client_info_handler_title
                 
-        elif(dispatch_token == 'exshipper_invoice_log'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_invoice_log_page
-                html_page_title = my_dict.exshipper_invoice_log_title
-                
-                # use memcache
-                # ignore the undefined variable because both def get() and add() work fine
-                data = memcache.get('invoice_log')
-                if data is not None:
-                    log_invoice = data
-                else:
-                    data = InvoiceInfo.query()
-                    memcache.add('invoice_log', data, 500)
-                    log_invoice = data
-                template_values.update({'invoice_log':log_invoice})
-            # end of memcache
-                
         elif(dispatch_token == 'exshipper_suda_tracking_number'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_suda_tracking_number_handler_page
@@ -110,13 +93,14 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
                 
                 #use memcache
-                data = memcache.get('spearnet_customer_package_info_log')
-                if data is not None:
-                    log_spearnet_customer_package_info = data
-                else:
-                    data = SpearnetPackagesInfo.query()
-                    memcache.add('spearnet_customer_package_info_log',data,1000)
-                    log_spearnet_customer_package_info = data
+#                 data = memcache.get('spearnet_customer_package_info_log')
+#                 if data is not None:
+#                     log_spearnet_customer_package_info = data
+#                 else:
+#                     data = SpearnetPackagesInfo.query()
+#                     memcache.add('spearnet_customer_package_info_log',data,1000)
+#                     log_spearnet_customer_package_info = data
+                log_spearnet_customer_package_info = SpearnetPackagesInfo.query()
                 template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
                   
         else:
