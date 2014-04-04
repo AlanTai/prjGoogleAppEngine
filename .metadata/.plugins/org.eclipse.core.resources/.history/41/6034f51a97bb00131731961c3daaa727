@@ -156,14 +156,14 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             new_package_info.original = 'USA'
             new_package_info.unit_price_fob_us_dollar = self.request.get('valid_unit_price_fob_us_dollar')
             new_package_info.deliver_to = self.request.get('valid_deliver_to')
-            new_package_info.shipper_company = self.request.get('valid_shipper_company')
+            new_package_info.shipper_company = self.request.get('valid_shipper_name')
             new_package_info.shipper_person = self.request.get('valid_shipper_person')
-            new_package_info.shipper_tel = self.request.get('valid_shipper_phone_number')
+            new_package_info.shipper_tel = self.request.get('valid_shipper_tel')
             new_package_info.shipper_address_english = self.request.get('valid_shipper_address_english')
             new_package_info.shipper_address_chinese = self.request.get('valid_shipper_address_chinese')
             new_package_info.consignee_name_english = self.request.get('valid_consignee_english_name')
             new_package_info.consignee_name_chinese = self.request.get('valid_consignee_chinese_name')
-            new_package_info.consignee_tel = self.request.get('valid_consignee_phone_number')
+            new_package_info.consignee_tel = self.request.get('valid_consignee_tel')
             new_package_info.consignee_address_english = self.request.get('valid_consignee_address_english')
             new_package_info.consignee_address_chinese = self.request.get('valid_consignee_address_chinese')
             new_package_info.company_id_or_personal_id = 'NA'

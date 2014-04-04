@@ -495,6 +495,8 @@
 		}
 		// end of checking information
 
+		
+
 		//check commodity detail
 		var commodity_detail_obj = checkCommodityDetailAndGetCommodityDetailObj();
 		if(!commodity_detail_obj){

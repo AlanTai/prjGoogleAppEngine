@@ -163,7 +163,7 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             new_package_info.shipper_address_chinese = self.request.get('valid_shipper_address_chinese')
             new_package_info.consignee_name_english = self.request.get('valid_consignee_english_name')
             new_package_info.consignee_name_chinese = self.request.get('valid_consignee_chinese_name')
-            new_package_info.consignee_tel = self.request.get('valid_consignee_phone_number')
+            new_package_info.consignee_tel = self.request.get('valid_consignee_tel')
             new_package_info.consignee_address_english = self.request.get('valid_consignee_address_english')
             new_package_info.consignee_address_chinese = self.request.get('valid_consignee_address_chinese')
             new_package_info.company_id_or_personal_id = 'NA'

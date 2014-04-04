@@ -495,6 +495,8 @@
 		}
 		// end of checking information
 
+		
+
 		//check commodity detail
 		var commodity_detail_obj = checkCommodityDetailAndGetCommodityDetailObj();
 		if(!commodity_detail_obj){
@@ -537,22 +539,14 @@
 				valid_shipper_address_english : shipper_address_english,
 				valid_shipper_address_chinese : shipper_address_chinese,
 				valid_consignee_name_english : consignee_name_english,
-				valid_consignee_name_chinese : consignee_name_chinese,
-				valid_consignee_address_english : consignee_address_english,
-				valid_consignee_address_chinese : consignee_address_chinese,
-				valid_consignee_phone_number : consignee_phone_number,
-				valid_unit_price_fob_us_dollar : unit_price_fob_us_dollar,
-				valid_deliver_to : deliver_to,
-				valid_note : note,
-				valid_ctn : ctn,
-				valid_pcs : pcs,
-				valid_unit : unit,
+				valid_consignee_en : consignee_en,
+				valid_consignee_ch : consignee_ch,
+				valid_address : address,
+				valid_phone_number : phone_number,
 				valid_size_length : size_length,
 				valid_size_width : size_width,
 				valid_size_height : size_height,
-				valid_weight : weight,
-				valid_commodity_detail : commodity_detail_obj
-				
+				valid_weight : weight
 			},
 			success : showReturnMsg,
 			statusCode : {

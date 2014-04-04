@@ -495,6 +495,8 @@
 		}
 		// end of checking information
 
+		
+
 		//check commodity detail
 		var commodity_detail_obj = checkCommodityDetailAndGetCommodityDetailObj();
 		if(!commodity_detail_obj){
@@ -551,7 +553,7 @@
 				valid_size_width : size_width,
 				valid_size_height : size_height,
 				valid_weight : weight,
-				valid_commodity_detail : commodity_detail_obj
+				valid_commodity_detail_obj : commodity_detail_obj
 				
 			},
 			success : showReturnMsg,
