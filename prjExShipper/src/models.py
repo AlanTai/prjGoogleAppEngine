@@ -7,28 +7,6 @@ Created on Jan 25, 2014
 from google.appengine.ext import ndb
 
     
-#invoice model
-class Size(ndb.Model):
-    length = ndb.StringProperty()
-    width = ndb.StringProperty()
-    height = ndb.StringProperty()
-
-class InvoiceInfo(ndb.Model):
-    yamato_tr_number = ndb.StringProperty()
-    ref_number = ndb.StringProperty()
-    shipper = ndb.StringProperty()
-    consignee_english = ndb.StringProperty()
-    consignee_chinese = ndb.StringProperty()
-    address = ndb.StringProperty(indexed = False)
-    consignee_phone_number = ndb.StringProperty()
-    
-    size = ndb.StructuredProperty(Size, repeated = False)
-    weight = ndb.StringProperty()
-    
-    date_time = ndb.DateTimeProperty(auto_now_add = True)
-    update_date_time = ndb.DateTimeProperty(auto_now = True)
-#end of invoice model
-
 #tracking number basic class
 class TrackingNumber(ndb.Model):
     tracking_number = ndb.StringProperty()
@@ -52,9 +30,17 @@ class SUDATrackingNumber_FORMAL(TrackingNumber):
 
 
 #package information
+
+#invoice model
+class Size(ndb.Model):
+    length = ndb.StringProperty()
+    width = ndb.StringProperty()
+    height = ndb.StringProperty()
+
+
 class PackageInfo(ndb.Model):
-    reference_no = ndb.StringProperty()
-    tw_custom_entry_no  = ndb.StringProperty()
+    reference_number = ndb.StringProperty()
+    tw_custom_entry_number  = ndb.StringProperty()
     hawb = ndb.StringProperty()
     ctn = ndb.StringProperty()
     size = ndb.StructuredProperty(Size, repeated = False)
@@ -82,7 +68,7 @@ class PackageInfo(ndb.Model):
     duty_paid_by = ndb.StringProperty()
     package_status = ndb.StringProperty()
     pickup_status = ndb.StringProperty()
-    signature_img = ndb.BlobProperty()
+    signature_img_id = ndb.StringProperty()
     note = ndb.StringProperty()
     date = ndb.DateProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
@@ -95,6 +81,7 @@ class SpearnetPackagesInfo(PackageInfo):
 class GeneralClientsPackagesInfo(PackageInfo):
     pass
 
+#for pre-alert and on-hand documents
 class TWCustomEntryInfo(ndb.Model):
     barcode_no = ndb.StringProperty()
     mawb = ndb.StringProperty()

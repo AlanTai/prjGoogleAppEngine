@@ -15,7 +15,7 @@ from google.appengine.api import users, mail, memcache
 import json
 
 from app_dict import Key_Value
-from models import Size, InvoiceInfo, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
+from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))
@@ -144,8 +144,8 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             package_id = self.request.get('valid_suda_tr_number')
             new_package_info = GeneralClientsPackagesInfo(id=package_id)
             new_package_info.hawb = package_id
-            new_package_info.reference_no = self.request.get('valid_ref_number')
-            new_package_info.tw_custom_entry_no = 'NA'
+            new_package_info.reference_number = self.request.get('valid_ref_number')
+            new_package_info.tw_custom_entry_number = 'NA'
             new_package_info.ctn = self.request.get('ctn')
             new_package_info.size = new_size
             new_package_info.weight_kg = self.request.get('valid_weight')
@@ -170,6 +170,8 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             new_package_info.size_accumulation = 'NA'
             new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
             new_package_info.duty_paid_by = 'Shipper'
+            new_package_info.package_status = 'exshipper'
+            new_package_info.pickup_status = 'TRUE'
             new_package_info.put()
             
             
@@ -405,7 +407,8 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                 if(duplication == False):
                     for package in packages_array:
                         new_package = SpearnetPackagesInfo(id=package['hawb'])
-                        new_package.tw_custom_entry_no = 'NA'
+                        new_package.reference_number = package['reference_number']
+                        new_package.tw_custom_entry_number = 'NA'
                         new_package.hawb = package['hawb']
                         new_package.ctn = package['ctn']
                         new_package.weight_kg = package['g/w(kg)']
@@ -416,15 +419,15 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                         new_package.original = package['original']
                         new_package.unit_price_fob_us_dollar = 'NA'
                         new_package.deliver_to = package['deliver_to']
-                        new_package.shipper_company = package['shipper_name']
+                        new_package.shipper_company = package['shipper_company']
                         new_package.shipper_person = 'NA'
                         new_package.shipper_tel = '510-351-8903'
                         new_package.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
                         new_package.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
-                        new_package.consignee_name_english = package['consignee_english_name']
-                        new_package.consignee_name_chinese = package['consignee_chinese_name']
+                        new_package.consignee_name_english = package['consignee_name_english']
+                        new_package.consignee_name_chinese = package['consignee_name_chinese']
                         new_package.consignee_tel = package['consignee_tel']
-                        new_package.consignee_address = package['consignee_address']
+                        new_package.consignee_address_english = package['consignee_address_english']
                         new_package.consignee_address_chinese = package['consignee_address_chinese']
                         new_package.company_id_or_personal_id = 'NA'
                         new_package.size_accumulation = package['size_accumulation']
@@ -432,6 +435,7 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                         new_package.duty_paid_by = package['duty_paid_by']
                         new_package.package_status = 'spearnet'
                         new_package.pickup_status = 'FALSE'
+                        new_package.note = '常溫'
                         new_package.put()
                         
                     ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
