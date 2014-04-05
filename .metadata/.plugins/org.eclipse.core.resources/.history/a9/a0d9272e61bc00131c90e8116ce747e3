@@ -22,7 +22,7 @@
 	<br> <input type="button" value="Update"
 			onclick="updatePackageStatus()">
 	<div id="spearnet_customer_packages_info"
-		style="max-height: 400px; width:1500px; overflow: auto; border: 1px dashed #333333;">
+		style="max-height: 400px; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
 		var packages_status = new Object();
@@ -69,52 +69,21 @@
 		</script>
 		{% for single_row_data in spearnet_customer_package_info_log %}
 		<form style="height: 40px;">
-			<span>SUDA Tracking Number: <input type="text" value="{{ single_row_data.hawb }}" disabled> </span>
-			<span>TW Custom Entry Barcode Number: <input type="text" value="{{ single_row_data.tw_custom_entry_number }}" /> </span>
-			<span>Package Status:
-				<select id="{{ single_row_data.hawb }}"
-					class="spearnet_customer_package_status">
-						<option value="spearnet">Spearnet</option>
-						<option value="exshipper">ExShipper</option>
-						<option value="sfo_airport">SFO Airport</option>
-						<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
-							International Airport</option>
-						<option value="suda">SUDA</option>
-						<option value="delivered">Delivered</option>
-				</select>
-			</span>
-			
-			<span>Client Signature:
-				<select id="client_signature_{{ single_row_data.hawb }}"
-					class="spearnet_client_signature">
-					
-				</select>
-			</span>
-			
-			<span>Labeling Date: {{ single_row_data.date }}</span>
+			<span>SUDA Tracking Number: {{ single_row_data.hawb }}</span> <span>Package
+				Status: <select id="{{ single_row_data.hawb }}"
+				class="spearnet_customer_package_status">
+					<option value="spearnet">Spearnet</option>
+					<option value="exshipper">ExShipper</option>
+					<option value="sfo_airport">SFO Airport</option>
+					<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+						International Airport</option>
+					<option value="suda">SUDA</option>
+					<option value="delivered">Delivered</option>
+			</select>
+			</span> <span>Labeling Date: {{ single_row_data.date }}</span>
 		</form>
-		
-		<!--  -->
-		<script type="text/javascript">
-			var clients_info = "{{ clients_info }}";
-			var clients_signatures = new Object();
-			if((typeof clients_info.name != 'undefined') && (typeof clients_info.phone != 'undefined')){
-				clients_signatures[clients_info.key.urlsafe()] = 'Name: ' + clients_info.name + ' ; Phone: ' + clients_info.phone;
-			}
-			else{
-				clients_signatures['NA'] = 'No Data';
-			}
-			$.each(clients_signatures, function(key, value) {
-			    $('#client_signature_{{ single_row_data.hawb }}').append($("<option/>", {
-			        value: key,
-			        text: value
-			    }));
-			});
-		</script>
-		<!--  -->
 
 		<script type="text/javascript">
-			
 			$(function() {
 				//setup initial select values
 				$('#{{ single_row_data.hawb }}').val(
@@ -181,8 +150,6 @@
 		{% else %}
 		<p>No Data Available</p>
 		{% endif %}
-		
-		
 		<script type="text/javascript">
 		// change color
 		$('#spearnet_customer_packages_info> form:even').css('background-color', '#dedede');
@@ -352,6 +319,8 @@
 		download(jsonToSsXml(testJson), 'cargo_manifest.xls',
 				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	</script>
+
+	<hr>
 </div>
 
 {% endblock %}

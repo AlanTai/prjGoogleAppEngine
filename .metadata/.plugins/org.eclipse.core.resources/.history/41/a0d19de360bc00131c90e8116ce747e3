@@ -7,6 +7,28 @@ Created on Jan 25, 2014
 from google.appengine.ext import ndb
 
     
+#invoice model
+class Size(ndb.Model):
+    length = ndb.StringProperty()
+    width = ndb.StringProperty()
+    height = ndb.StringProperty()
+
+class InvoiceInfo(ndb.Model):
+    yamato_tr_number = ndb.StringProperty()
+    ref_number = ndb.StringProperty()
+    shipper = ndb.StringProperty()
+    consignee_english = ndb.StringProperty()
+    consignee_chinese = ndb.StringProperty()
+    address = ndb.StringProperty(indexed = False)
+    consignee_phone_number = ndb.StringProperty()
+    
+    size = ndb.StructuredProperty(Size, repeated = False)
+    weight = ndb.StringProperty()
+    
+    date_time = ndb.DateTimeProperty(auto_now_add = True)
+    update_date_time = ndb.DateTimeProperty(auto_now = True)
+#end of invoice model
+
 #tracking number basic class
 class TrackingNumber(ndb.Model):
     tracking_number = ndb.StringProperty()
@@ -23,52 +45,41 @@ class TWCustomEntryTrackingNumber(TrackingNumber):
 #SUDA tracking number
 class SUDATrackingNumber_REGULAR(TrackingNumber):
     pass
-
-class SUDATrackingNumber_FORMAL(TrackingNumber):
-    pass
 #end if SUDA tracking number
 
 
 #package information
-
-#invoice model
-class Size(ndb.Model):
-    length = ndb.StringProperty()
-    width = ndb.StringProperty()
-    height = ndb.StringProperty()
-
-
 class PackageInfo(ndb.Model):
-    reference_number = ndb.StringProperty()
-    tw_custom_entry_number  = ndb.StringProperty()
+    reference_no = ndb.StringProperty()
+    barcode_no  = ndb.StringProperty()
     hawb = ndb.StringProperty()
     ctn = ndb.StringProperty()
     size = ndb.StructuredProperty(Size, repeated = False)
     weight_kg = ndb.StringProperty()
     weight_lb = ndb.StringProperty()
-    commodity_detail = ndb.JsonProperty()
+    commodity_name = ndb.JsonProperty()
     pcs = ndb.StringProperty()
     unit = ndb.StringProperty()
     original = ndb.StringProperty()
-    deliver_to = ndb.StringProperty()
     unit_price_fob_us_dollar = ndb.StringProperty()
-    shipper_company = ndb.StringProperty()
+    deliver_to = ndb.StringProperty()
+    shipper_name = ndb.StringProperty()
     shipper_person = ndb.StringProperty()
     shipper_tel = ndb.StringProperty()
     shipper_address_english = ndb.StringProperty()
     shipper_address_chinese = ndb.StringProperty()
+    consignee_english_name = ndb.StringProperty()
+    consignee_chinese_name = ndb.StringProperty()
     consignee_tel = ndb.StringProperty()
-    consignee_name_english = ndb.StringProperty()
-    consignee_name_chinese = ndb.StringProperty()
     consignee_address_english = ndb.StringProperty()
     consignee_address_chinese = ndb.StringProperty()
     company_id_or_personal_id = ndb.StringProperty()
-    size_accumulation = ndb.StringProperty()
+    remark = ndb.StringProperty()
     declaration_need_or_not = ndb.StringProperty()
     duty_paid_by = ndb.StringProperty()
     package_status = ndb.StringProperty()
     pickup_status = ndb.StringProperty()
-    signature_img_id = ndb.StringProperty()
+    signature_img = ndb.BlobProperty()
     note = ndb.StringProperty()
     date = ndb.DateProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
@@ -81,9 +92,8 @@ class SpearnetPackagesInfo(PackageInfo):
 class GeneralClientsPackagesInfo(PackageInfo):
     pass
 
-#for pre-alert and on-hand documents
 class TWCustomEntryInfo(ndb.Model):
-    barcode_number = ndb.StringProperty()
+    barcode_no = ndb.StringProperty()
     mawb = ndb.StringProperty()
     flight_number = ndb.StringProperty()
     from_whom = ndb.StringProperty()
@@ -94,12 +104,4 @@ class TWCustomEntryInfo(ndb.Model):
     flight_date = ndb.StringProperty()
     note = ndb.StringProperty()
     
-class ClientsInfo(ndb.Model):
-    name = ndb.StringProperty()
-    address = ndb.StringProperty()
-    phone = ndb.StringProperty()
-    signature_img = ndb.BlobProperty()
-    signature_str = ndb.StringProperty()
-    date = ndb.DateProperty(auto_now_add = True)
-    update_date_time = ndb.DateTimeProperty(auto_now = True)
 #end of channel
