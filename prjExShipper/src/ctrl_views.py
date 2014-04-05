@@ -5,6 +5,7 @@ Created on Oct 1, 2013
 @author: Alan Tai
 '''
 from google.appengine.ext.key_range import ndb
+from django.contrib.gis.db.models import query
 __author__ = 'Alan Tai'
 
 import random
@@ -87,7 +88,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_tw_custom_entry_number_handler_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_number_handler_page_title
                 
-        elif(dispatch_token == 'exshipper_spearnet_customer_package_info_log'):
+        elif(dispatch_token == 'exshipper_spearnet_customers_package_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
                 html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
@@ -100,10 +101,32 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
 #                     data = SpearnetPackagesInfo.query()
 #                     memcache.add('spearnet_customer_package_info_log',data,1000)
 #                     log_spearnet_customer_package_info = data
+
                 spearnet_customer_package_info_log = SpearnetPackagesInfo.query()
-                client_info = ClientsInfo().query()
-                template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':client_info})
+                clients_info = ClientsInfo().query()
+                template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
                   
+        elif(dispatch_token == 'exshipper_general_clients_package_info_log'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+                html_page = my_dict.exshipper_general_clients_package_info_log_page
+                html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
+                general_clients_packages_info_log = GeneralClientsPackagesInfo.query()
+                clients_info = ClientsInfo().query()
+                template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+                
+        elif(dispatch_token == 'exshipper_pre_alert'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+                html_page = my_dict.exshipper_pre_alert_page
+                html_page_title = my_dict.exshipper_pre_alert_page_title
+                
+        elif(dispatch_token == 'exshipper_cargo_manifest'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+                html_page = my_dict.exshipper_cargo_manifest_page
+                html_page_title = my_dict.exshipper_cargo_manifest_page_title
+                cargo_manifest = ndb.Query(ndb.OR(kind = 'SpearnetPackagesInfo',
+                                                  kind = 'ClientsInfo'))
+                template_values.update({'cargo_manifest':cargo_manifest})
+        
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
@@ -764,7 +787,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'winever.tw@gmail.com'
+    email_host = 'rainman.tai@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:

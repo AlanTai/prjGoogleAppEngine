@@ -26,12 +26,18 @@ class Key_Value():
         self.exshipper_suda_tracking_number_handler_page = '/exshipper/exshipper_suda_tracking_number_handler.html'
         self.exshipper_suda_tracking_number_handler_page_title = 'ExShipper SUDA Tracking Number Handler'
         
+        self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
+        self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
+        
+        self.exshipper_pre_alert_page = '/exshipper/exshipper_pre_alert.html'
+        self.exshipper_pre_alert_page_title = 'ExShipper Pre-Alert'
+        
+        self.exshipper_cargo_manifest_page = '/exshipper/exshipper_cargo_manifest.html'
+        self.exshipper_cargo_manifest_page_title = 'ExShipper Cargo Manifest'
+        
         #taiwan custom entry
         self.exshipper_tw_custom_entry_number_handler_page = '/exshipper/exshipper_tw_custom_entry_number_handler.html'
         self.exshipper_tw_custom_entry_number_handler_page_title = 'ExShipper TW Custom Entry Number Handler'
-        
-        self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
-        self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
         
         self.exshipper_tw_custom_entry_index_page = '/exshipper/exshipper_tw_custom_entry_index.html'
         self.exshipper_tw_custom_entry_index_page_title = 'Taiwan Custom Entry Index'
@@ -82,3 +88,7 @@ class Key_Value():
         
         self.exshipper_general_clients_track_package_status_page = '/exshipper/exshipper_general_clients_track_package_status.html'
         self.exshipper_general_clients_track_package_status_page_title = 'Track Package Status (General Clients)'
+        
+        self.exshipper_general_clients_package_info_log_page = '/exshipper/exshipper_general_clients_package_info_log.html'
+        self.exshipper_general_clients_package_info_log_page_title = 'General Clients Packages Information Log'
+
