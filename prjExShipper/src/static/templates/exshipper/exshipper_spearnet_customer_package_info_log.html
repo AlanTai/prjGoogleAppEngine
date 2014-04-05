@@ -68,7 +68,7 @@
 		json_array.push(obj_keys);
 		</script>
 		{% for single_row_data in spearnet_customer_package_info_log %}
-		<form style="height: 40px;">
+		<form style="height: 40px; padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text" value="{{ single_row_data.hawb }}" disabled> </span>
 			<span>TW Custom Entry Barcode Number: <input type="text" value="{{ single_row_data.tw_custom_entry_number }}" /> </span>
 			<span>Package Status:

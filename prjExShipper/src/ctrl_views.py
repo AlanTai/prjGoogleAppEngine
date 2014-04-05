@@ -580,10 +580,11 @@ class ExShipperSpearnetCustomerPackageStatusHandler(webapp2.RequestHandler):
 #exshipper tw custom entry login handler
 class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
     def get(self):
+        my_dict = Key_Value()
         user_info = get_users_info(self, users)
-        login_page = '/exshipper/exshipper_tw_custom_entry_index.html'
+        login_page = my_dict.exshipper_tw_custom_entry_index_page
         
-        template_values = {'title':'Taiwan Custom Entry Login'}
+        template_values = {'title':my_dict.exshipper_tw_custom_entry_index_page_title}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(login_page)
@@ -591,12 +592,13 @@ class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
         
 class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
     def get(self):
+        my_dict = Key_Value()
         user_info = get_users_info(self, users)
-        login_page = '/exshipper/exshipper_tw_custom_entry_login.html'
+        login_page = my_dict.exshipper_tw_custom_entry_login_page
         
         dispatch_token = self.request.get('dispatch_token')
         
-        template_values = {'title':'Taiwan Custom Entry Login', 'dispatch_token':dispatch_token}
+        template_values = {'title':my_dict.exshipper_tw_custom_entry_login_page_title, 'dispatch_token':dispatch_token}
         template_values.update(user_info)
         
         template = jinja_environment.get_template(login_page)
@@ -616,8 +618,8 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         # html page dispatching
         if(dispatch_token == 'exshipper_tw_custom_entry_invoice_log'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
-                html_page_title = 'Custom Entry Invoice Log'
+                html_page = my_dict.exshipper_tw_custom_entry_login_page
+                html_page_title = my_dict.exshipper_general_clients_login_page_title
                 
                 #use memcache
                 data = memcache.get('tw_custom_entry_invoice_log')
@@ -667,15 +669,27 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
             try:
                 json_obj_packages_sets = json.loads(self.request.get('tw_custom_entry_packages_sets'))
                 json_obj_packages_size_weight = json.loads(self.request.get('tw_custom_entry_packages_size_weight'))
+                
+                has_duplicated_number = 'no'
+                
                 for key in json_obj_packages_sets.keys():
                     json_obj_packages_size_weight = json_obj_packages_size_weight[key]['strObj']['length']
                     
                     for package_number in json_obj_packages_sets[key].keys():
                         response_result += 'Package NO.'+package_number + ';'
-                    
-                    working_on = ''
+                        spearnet_package_entity = SpearnetPackagesInfo.get_by_id(package_number)
+                        general_client_package_entity = GeneralClientsPackagesInfo.get_by_id(package_number)
+                        if(spearnet_package_entity == None and general_client_package_entity == None):
+                            duplicated_response = 'Unknown Number- ' + package_number
+                            has_duplicated_number = 'yes'
+                            break;
+                        
+                    if(has_duplicated_number == 'yes'):
+                        tw_custom_package = duplicated_response
+                        break;
                     
                     tw_custom_package = 'TW Custom Entry Package- ' + key + ', Length: ' + json_obj_packages_size_weight.__str__() + ' ; ' + response_result
+                
                 tw_custom_entry_submit_result = tw_custom_package
             except:
                 tw_custom_entry_submit_result = 'NA'

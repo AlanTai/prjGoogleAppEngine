@@ -33,8 +33,14 @@ class Key_Value():
         self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
         self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
         
+        self.exshipper_tw_custom_entry_index_page = '/exshipper/exshipper_tw_custom_entry_index.html'
+        self.exshipper_tw_custom_entry_index_page_title = 'Taiwan Custom Entry Index'
+        
         self.exshipper_tw_custom_entry_login_page = '/exshipper/exshipper_tw_custom_entry_login.html'
         self.exshipper_tw_custom_entry_login_page_title = 'Taiwan Custom Entry Login'
+        
+        self.exshipper_tw_custom_entry_invoice_log_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
+        self.exshipper_tw_custom_entry_invoice_log_page_title = 'Custom Entry Invoice Log'
         
         #spearnet
         self.exshipper_spearnet_index_page = '/exshipper/exshipper_spearnet_index.html'

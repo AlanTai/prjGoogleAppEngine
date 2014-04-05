@@ -20,7 +20,7 @@ class Key_Value():
         self.exshipper_invalid_login_page = '/exshipper/exshipper_invalid_login_page.html'
         self.exshipper_invalid_login_page_title = 'Invalid Login Page'
         self.exshipper_invoice_creating_page = '/exshipper/exshipper_create_invoice.html'
-        self.exshipper_invoice_creating_page_title = 'ExShipper Create Invoice Page'
+        self.exshipper_invoice_creating_page_title = 'Create Invoice (ExShipper)'
         self.exshipper_invoice_log_page = '/exshipper/exshipper_invoice_log.html'
         self.exshipper_invoice_log_title = 'ExShipper Invoice Log'
         self.exshipper_suda_tracking_number_handler_page = '/exshipper/exshipper_suda_tracking_number_handler.html'
@@ -33,8 +33,14 @@ class Key_Value():
         self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
         self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
         
+        self.exshipper_tw_custom_entry_index_page = '/exshipper/exshipper_tw_custom_entry_index.html'
+        self.exshipper_tw_custom_entry_index_page_title = 'Taiwan Custom Entry Index'
+        
         self.exshipper_tw_custom_entry_login_page = '/exshipper/exshipper_tw_custom_entry_login.html'
         self.exshipper_tw_custom_entry_login_page_title = 'Taiwan Custom Entry Login'
+        
+        self.exshipper_tw_custom_entry_invoice_log_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
+        self.exshipper_tw_custom_entry_invoice_log_page_title = 'Custom Entry Invoice Log'
         
         #spearnet
         self.exshipper_spearnet_index_page = '/exshipper/exshipper_spearnet_index.html'
