@@ -83,7 +83,7 @@ class GeneralClientsPackagesInfo(PackageInfo):
 
 #for pre-alert and on-hand documents
 class TWCustomEntryInfo(ndb.Model):
-    barcode_no = ndb.StringProperty()
+    barcode_number = ndb.StringProperty()
     mawb = ndb.StringProperty()
     flight_number = ndb.StringProperty()
     from_whom = ndb.StringProperty()
