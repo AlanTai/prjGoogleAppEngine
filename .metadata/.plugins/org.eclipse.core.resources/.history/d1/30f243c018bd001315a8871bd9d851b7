@@ -122,12 +122,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_cargo_manifest_page
                 html_page_title = my_dict.exshipper_cargo_manifest_page_title
-                cargo_manifest = {}
-                spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
-                general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
-#                 cargo_manifest.update(spearnet_customers_package_info_cargo_manifest)
-#                 cargo_manifest.update(general_clients_package_info_cargo_manifest)
-                template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
+                working_on = ''
         
         else:
             html_page = my_dict.exshipper_invalid_login_page
@@ -789,7 +784,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
 def exshipper_send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'winever.tw@gmail.com'
+    email_host = 'rainman.tai@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
