@@ -236,14 +236,14 @@
 	}
 	
 	function checkCommodityDetailAndGetCommodityDetailObj(){
+		var commodity_detail = new Object();
+		var commodity_ary = new Array();
+		
 		if($('#id_commodity_detail').is(':empty')){
 			alert('Please Add Commodity Detail');
 			return true;
 		}
 		else{
-			var commodity_detail = new Object();
-			var commodity_ary = new Array();
-			
 			var isCommodityInvalid = $('#id_commodity_detail form').each(function(){
 				var commodity_obj = new Object();
 				commodity_name = $(this).find('input#id_commodity_name').val();
@@ -507,6 +507,9 @@
 		var commodity_detail_obj = checkCommodityDetailAndGetCommodityDetailObj();
 		if(commodity_detail_obj === true){
 			return true;
+		}
+		else{
+			commodity_detail_obj = JSON.stringify(commodity_detail_obj);
 		}
 		//end
 		
