@@ -122,7 +122,9 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_cargo_manifest_page
                 html_page_title = my_dict.exshipper_cargo_manifest_page_title
-                working_on = ''
+#                 cargo_manifest = ndb.Query(ndb.OR(kind = 'SpearnetPackagesInfo',
+#                                                   kind = 'ClientsInfo'))
+#                 template_values.update({'cargo_manifest':cargo_manifest})
         
         else:
             html_page = my_dict.exshipper_invalid_login_page

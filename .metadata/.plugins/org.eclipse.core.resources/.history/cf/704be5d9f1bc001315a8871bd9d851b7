@@ -122,7 +122,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_cargo_manifest_page
                 html_page_title = my_dict.exshipper_cargo_manifest_page_title
-                working_on = ''
+                working_on =''
         
         else:
             html_page = my_dict.exshipper_invalid_login_page

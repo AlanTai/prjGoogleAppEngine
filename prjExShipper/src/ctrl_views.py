@@ -5,7 +5,6 @@ Created on Oct 1, 2013
 @author: Alan Tai
 '''
 from google.appengine.ext.key_range import ndb
-from django.contrib.gis.db.models import query
 __author__ = 'Alan Tai'
 
 import random
@@ -123,9 +122,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_cargo_manifest_page
                 html_page_title = my_dict.exshipper_cargo_manifest_page_title
-                cargo_manifest = ndb.Query(ndb.OR(kind = 'SpearnetPackagesInfo',
-                                                  kind = 'ClientsInfo'))
-                template_values.update({'cargo_manifest':cargo_manifest})
+                working_on = ''
         
         else:
             html_page = my_dict.exshipper_invalid_login_page
