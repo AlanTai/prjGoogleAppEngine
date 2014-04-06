@@ -80,7 +80,7 @@
 		</form>
 
 		{% endfor %} {% else %}
-		<p style="text-align: center;">No Pre-Alert Data Available</p>
+		<p>No Pre-Alert Data Available</p>
 		{% endif %}
 	</div>
 	<hr>

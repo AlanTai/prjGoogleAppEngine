@@ -20,7 +20,7 @@
 </div>
 
 <div id="tw_custom_entry_pre_alert"
-	style="position: absolute; top: 150px; width: 100%; text-align: center;">
+	style="position: absolute; top: 150px; width: 100%; text-align: center; margin: 10px auto; border: 1px solid;">
 	<p style="font-size: 20px;">Pre-Alert ExShipper to Apex</p>
 	<p>
 	{% if flight_number %}<span>Flight Number:{{ flight_number }}</span>
@@ -37,7 +37,7 @@
 	{% endif %}
 	</p>
 	<br> {% if pre_alert %}
-	<div style="margin: 10px auto; border: 1px solid;">
+	<div style="height: 500px; overflow: auto;">
 		{% for single_row_data in pre_alert %}
 		<form>
 			<script type="text/javascript">
@@ -80,7 +80,7 @@
 		</form>
 
 		{% endfor %} {% else %}
-		<p style="text-align: center;">No Pre-Alert Data Available</p>
+		<p>No Pre-Alert Data Available</p>
 		{% endif %}
 	</div>
 	<hr>
