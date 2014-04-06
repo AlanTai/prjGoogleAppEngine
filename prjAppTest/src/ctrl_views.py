@@ -16,7 +16,8 @@ import json
 
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
-    ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL
+    ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
+    TWCustomEntryInfo
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))
 # jinja_environment = jinja2.Environment(loader = jinja2.FileSystemLoader(os.path.dirname(__file__)+'/static/templates/exshipper'))
@@ -117,6 +118,14 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_pre_alert_page
                 html_page_title = my_dict.exshipper_pre_alert_page_title
+                pre_alert = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
+                if(pre_alert is not None):
+                    flight_number = pre_alert.flight_number
+                    flight_date = pre_alert.flight_date
+                    mawb = pre_alert.mawb
+                    template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb})
+                    
+                template_values.update({'pre_alert':pre_alert})
                 
         elif(dispatch_token == 'exshipper_cargo_manifest'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
