@@ -85,8 +85,8 @@ class GeneralClientsPackagesInfo(PackageInfo):
 class TWCustomEntryInfo(ndb.Model):
     barcode_number = ndb.StringProperty()
     mawb = ndb.StringProperty()
-    sender = ndb.StringProperty()
-    receiver = ndb.StringProperty()
+    from_which = ndb.StringProperty()
+    to_which = ndb.StringProperty()
     size = ndb.StructuredProperty(Size, repeated = False)
     weight_kg = ndb.StringProperty()
     ctn = ndb.StringProperty()

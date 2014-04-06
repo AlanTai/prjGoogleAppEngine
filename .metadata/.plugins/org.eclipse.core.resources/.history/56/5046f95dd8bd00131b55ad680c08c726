@@ -30,12 +30,6 @@
 		{% if mawb %}<span>Flight Number:{{ mawb }}</span>
 		{% else %} <span>Mawb: NA</span> {% endif %}
 	</p>
-	<p>
-		{% if sender %}<span>From:{{ sender }}</span>
-		{% else %} <span>From: NA</span> {% endif %}
-		{% if receiver %}<span>To:{{ receiver }}</span>
-		{% else %} <span>To: NA</span> {% endif %}
-	</p>
 	<br> {% if pre_alert %}
 	<div style="margin: 10px auto; border: 1px solid;">
 		<form id="pre_alert_detail">
@@ -45,7 +39,7 @@
 		</form>
 		{% for single_row_data in pre_alert %}
 		<script type="text/javascript">
-			$('#pre_alert_detail').append();
+			$('#pre_alert_detail')
 		</script>
 		{% endfor %} {% else %}
 		<p style="text-align: center;">No Pre-Alert Data Available</p>

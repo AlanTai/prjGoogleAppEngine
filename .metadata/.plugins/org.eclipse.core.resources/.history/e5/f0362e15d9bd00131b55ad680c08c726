@@ -32,9 +32,9 @@
 	</p>
 	<p>
 		{% if sender %}<span>From:{{ sender }}</span>
-		{% else %} <span>From: NA</span> {% endif %}
+		{% else %} <span>NA</span> {% endif %}
 		{% if receiver %}<span>To:{{ receiver }}</span>
-		{% else %} <span>To: NA</span> {% endif %}
+		{% else %} <span>NA</span> {% endif %}
 	</p>
 	<br> {% if pre_alert %}
 	<div style="margin: 10px auto; border: 1px solid;">
