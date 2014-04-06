@@ -12,77 +12,53 @@
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Pre-Alert</p>
+	<input id="print_label" type="button" value="Print Labels"
+		onclick="PrintElem('#tw_custom_entry_pre_alert','Pre-Alert')"
+		style="margin: 10px auto; width: 150px;">
 	<hr>
+
 </div>
 
-<div
-	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
-	<br> {% if spearnet_customer_package_info_log %}
-	<div id="tw_custom_entry_invoice_log"
-		style="height: 500px; overflow: auto;">
-
-
-		{% for single_row_data in spearnet_customer_package_info_log %}
-		<form>
-			<script type="text/javascript">
-				$('#tw_custom_entry_invoice_log').append('<form style="width:800px; margin:auto; border: 1px solid;">'
-						+'<p style="font-weight:bold; font-size:20px;">Shipper\'s Information</p>'
-						+'<p>Name: {{single_row_data.shipper_name}}</p>'
-						+'<p>Phone: spearnet phone</p>'
-						+'<p>Address: spearnet address</p>'
-						+'<p style="font-weight:bold; font-size:20px;">Consignee\'s Information</p>'
-						+'<p>SUDA Tracking Number: {{ single_row_data.hawb }}</p>'
-						+'<p>Ref. Number: {{ single_row_data.index }}</p>'
-						+'<p>Chinese Name: {{ single_row_data.consignee_chinese_name }}</p>'
-						+'<p>Chinese Address: {{ single_row_data.consignee_address_chinese }}</p>'
-						+'<p>English Name: {{ single_row_data.consignee_english_name }}</p>'
-						+'<p>Phone: {{ single_row_data.consignee_tel }}</p>'
-						+'<p>English Address: {{ single_row_data.consignee_address }}</p>'
-						+'<p>Weight (kg): <input value="{{ single_row_data.weight_kg }}" style="color:#000; border:1px solid; text-align:center;" /></p>'
-						+'<p>Shipping Date:</p>'
-						+'<p style="font-weight:bold; font-size:20px;">Detail</p>'
-						+'<p>($ = USD)</p>'
-						+'<div id="commodity_{{ single_row_data.hawb }}"></div>'
-						+'</form>');
-			
-				var items = JSON.parse('{{ single_row_data.commodity_name }}')['items'];
-				var total_quan = 0;
-				var total_price = 0;
-				$.each(items, function(ith, obj){
-					$('#commodity_{{ single_row_data.hawb }}').append('<p><span style="font-weight: bold;">Item-'+(ith+1)+'</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
-					+'<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
-					+'<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
-					+'<span> Subtotal: <input value = "$'+Number(obj.quan)*Number(obj.price)+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
-					+' </p>');
-					total_quan +=Number(obj.quan);
-					total_price +=Number(obj.quan)*Number(obj.price);
-				});
-				$('#commodity_{{ single_row_data.hawb }}').append('<p><span>Total Quantity: '+total_quan+'</span> <span>Total Price: $'+total_price+'</span> </p>');
-				
-				
-			</script>
-		</form>
-		<br/>
-		<div></div>
-		<br />
-
+<div id="tw_custom_entry_pre_alert"
+	style="position: absolute; top: 150px; width: 100%; text-align: center;">
+	<p style="font-size: 20px;">Pre-Alert ExShipper to Apex</p>
+	<p>
+		{% if flight_number %}<span>Flight Number:{{ flight_number }}</span>
+		{% else %} <span>Flight Number: NA</span> {% endif %}
+		{% if flight_date %}<span>Flight Date:{{ flight_date }}</span>
+		{% else %} <span>Flight Date: NA</span> {% endif %}
+		{% if mawb %}<span>Flight Number:{{ mawb }}</span>
+		{% else %} <span>Mawb: NA</span> {% endif %}
+	</p>
+	<p>
+		{% if sender %}<span>From:{{ sender }}</span>
+		{% else %} <span>From: NA</span> {% endif %}
+		{% if receiver %}<span>To:{{ receiver }}</span>
+		{% else %} <span>To: NA</span> {% endif %}
+	</p>
+	<br> 
+	<div style="margin: 10px auto;">
+		{% if pre_alert %}
 		<script type="text/javascript">
-			$(function() {
-				//setup initial select values
-				$('#{{ single_row_data.hawb }}').val(
-						'{{ single_row_data.package_status }}');
-				//update json obj when select value change
-				$('#{{ single_row_data.hawb }}').change(function() {
-					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					}
-					packages_status[key] = $(this).val();*/
-				});
-			});
+		var total_weight;
+		var index = 0;
 		</script>
-		{% endfor %} {% else %}
-		<p>No Data Available</p>
+		<div id="pre_alert_detail">
+			<p style="font-weight: bold;">
+				<span>Index</span><span>Barcode NO.</span> <span>CTN.</span> <span>G/W(kg)</span> <span>Note</span>
+			</p>
+			{% for single_row_data in pre_alert %}
+			<p>
+				<span id="package_index"></span><span>{{ single_row_data.barcode_number }}</span> <span>{{ single_row_data.ctn }}</span> <span>{{ single_row_data.weight_kg }}</span> <span>{{ single_row_data.note }}</span>
+			</p>
+			<script type="text/javascript">
+				++index;
+				$('#package_index').val(index);
+			</script>
+			{% endfor %}
+		</div>
+		{% else %}
+		<p style="text-align: center;">No Pre-Alert Data Available</p>
 		{% endif %}
 	</div>
 	<hr>

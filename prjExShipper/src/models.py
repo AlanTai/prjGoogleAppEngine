@@ -85,13 +85,14 @@ class GeneralClientsPackagesInfo(PackageInfo):
 class TWCustomEntryInfo(ndb.Model):
     barcode_number = ndb.StringProperty()
     mawb = ndb.StringProperty()
-    flight_number = ndb.StringProperty()
-    from_whom = ndb.StringProperty()
-    to_whom = ndb.StringProperty()
+    sender = ndb.StringProperty()
+    receiver = ndb.StringProperty()
     size = ndb.StructuredProperty(Size, repeated = False)
     weight_kg = ndb.StringProperty()
     ctn = ndb.StringProperty()
+    flight_number = ndb.StringProperty()
     flight_date = ndb.StringProperty()
+    package_status = ndb.StringProperty()
     note = ndb.StringProperty()
     
 class ClientsInfo(ndb.Model):
