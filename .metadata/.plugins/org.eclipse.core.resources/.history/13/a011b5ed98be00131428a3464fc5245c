@@ -702,7 +702,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         account = self.request.get('account')
         password = self.request.get('password')
         token = self.request.get('token')
-        ajax_data = {}
         
         #tw custom entry handler for getting a number
         if(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_get_number'):
@@ -718,8 +717,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
             finally:
                 tw_custom_entry_number = random.randint(10000,99999)
                 response = tw_custom_entry_number
-                ajax_data.update({'response':response})
-                
         #tw custom entry handler for submitting packages info
         elif(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_submit_packages_sets'):
             
@@ -727,7 +724,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 json_obj_packages_sets = json.loads(self.request.get('tw_custom_entry_packages_sets'))
                 json_obj_packages_size_weight = json.loads(self.request.get('tw_custom_entry_packages_size_weight'))
                 has_unknown_number = 'no'
-                tw_custom_package = ''
                 tw_custom_entry_submit_response = {}
                 response_result = ''
                 
@@ -777,7 +773,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_package.package_status = 'exshipper'
                         tw_custom_entry_package.note = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
                         tw_custom_entry_package.put()
-                        tw_custom_package = tw_custom_package + 'TW Custom Entry Package- ' + key + ' ; ' + response_result
+                        tw_custom_package = 'TW Custom Entry Package- ' + key + ', Weight: ' + json_obj_packages_weight.__str__() + ' ; ' + response_result
                 
                         tw_custom_entry_submit_result = tw_custom_package
                         tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
@@ -788,11 +784,10 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 tw_custom_entry_submit_response['key'] = 'na'
             finally:
                 tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
-                response = tw_custom_entry_submit_response
-                ajax_data.update({'response':response})
+                response = tw_custom_entry_submit_response.__str__()
                 
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
-        self.response.write(json.dumps(ajax_data))
+        self.response.write('{"response":"'+ response.__str__() +'"}')
         return
 #end of custom entry handler
 

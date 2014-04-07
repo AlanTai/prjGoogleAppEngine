@@ -727,7 +727,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 json_obj_packages_sets = json.loads(self.request.get('tw_custom_entry_packages_sets'))
                 json_obj_packages_size_weight = json.loads(self.request.get('tw_custom_entry_packages_size_weight'))
                 has_unknown_number = 'no'
-                tw_custom_package = ''
                 tw_custom_entry_submit_response = {}
                 response_result = ''
                 
@@ -777,7 +776,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_package.package_status = 'exshipper'
                         tw_custom_entry_package.note = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
                         tw_custom_entry_package.put()
-                        tw_custom_package = tw_custom_package + 'TW Custom Entry Package- ' + key + ' ; ' + response_result
+                        tw_custom_package = 'TW Custom Entry Package- ' + key + ', Weight: ' + json_obj_packages_weight.__str__() + ' ; ' + response_result
                 
                         tw_custom_entry_submit_result = tw_custom_package
                         tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})

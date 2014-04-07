@@ -72,8 +72,8 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 						'<form id="label_'
 							+ "{{single_row_data.barcode_number}}"
 							+ '" style="border: 1px solid; width: 450px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
-							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size:20px; font-weight: bold; width: 100%;">聯締 /泓倫 </p>'
-							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px;">From SFO to Taoyuan International Airport</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size:20px; font-weight: bold;">聯締 /泓倫 </p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px;">From SFO to Taoyuan International Airport (舊金山機場 至 桃園國際機場)</p>'
 							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px;">(舊金山機場 至 桃園國際機場)</p>'
 								+ '<p style="display: block; margin: 10px 10px;"> MAWB/榮儲快遞艙:  '
 								+ "{{single_row_data.mawb}}"
