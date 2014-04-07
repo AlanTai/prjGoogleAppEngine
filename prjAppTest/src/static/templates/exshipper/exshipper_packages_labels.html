@@ -125,7 +125,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.shipper_address_english}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
-								+ "{{single_row_data.shipper_phone_number}}"
+								+ "{{single_row_data.tel}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '
@@ -180,7 +180,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.shipper_address_english}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
-								+ "{{single_row_data.shipper_phone_number}}"
+								+ "{{single_row_data.shipper_tel}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '
@@ -226,18 +226,12 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		var elem_name = $(elem).attr('name');
 		if (select_status === 'Remove') {
 			$(elem).find('input').val('Select');
-			$('#added_labels> form[id="label_' + elem_name + '"]').css({
-				'display' : 'none'
-			});
-			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
+			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
 				'display' : 'none'
 			});
 		} else {
 			$(elem).find('input').val('Remove');
-			$('#added_labels> form[id="label_' + elem_name + '"]').css({
-				'display' : 'inline-block'
-			});
-			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
+			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
 				'display' : 'inline-block'
 			});
 		}

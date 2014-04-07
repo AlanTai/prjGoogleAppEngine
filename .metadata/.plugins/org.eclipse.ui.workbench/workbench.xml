@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="51" version="2.0">
+<workbench progressCount="59" version="2.0">
 <workbenchAdvisor/>
 <window height="435" maximized="true" width="1319" x="39" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -20,7 +20,7 @@
 <coolItem id="org.eclipse.wst.ws.explorer.explorer" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="com.python.pydev.toolbars.evaluateActionSetterToolbar" itemType="typeToolBarContribution" x="38" y="22"/>
+<coolItem id="com.python.pydev.toolbars.evaluateActionSetterToolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
@@ -51,11 +51,11 @@
 </editor>
 <editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_packages_labels.html" partName="exshipper_packages_labels.html" path="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper/exshipper_packages_labels.html" title="exshipper_packages_labels.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_packages_labels.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjAppTest/src/static/templates/exshipper/exshipper_packages_labels.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="10904" selectionOffset="0" selectionTopPixel="405"/>
+<editorState selectionHorizontalPixel="0" selectionLength="10702" selectionOffset="0" selectionTopPixel="2413"/>
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_packages_labels.html" partName="exshipper_packages_labels.html" path="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper/exshipper_packages_labels.html" title="exshipper_packages_labels.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_packages_labels.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjExShipper/src/static/templates/exshipper/exshipper_packages_labels.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10904" selectionTopPixel="3315"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10702" selectionTopPixel="3215"/>
 </editor>
 </editors>
 <views>
@@ -307,13 +307,8 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_packages_labels.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjAppTest/src/models.py"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_invoice_log.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_packages_labels.html"/>
 </editors>
-<item historyLabel="exshipper_packages_labels.html" index="4">
-<position info="not_deleted" x="1566" y="0"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="7215" y="22"/>
-</item>
 <item historyLabel="exshipper_packages_labels.html" index="4">
 <position info="not_deleted" x="1594" y="0"/>
 </item>
@@ -455,6 +450,12 @@
 <item historyLabel="exshipper_packages_labels.html" index="8">
 <position info="not_deleted" x="0" y="10904"/>
 </item>
+<item historyLabel="exshipper_packages_labels.html" index="6">
+<position/>
+</item>
+<item historyLabel="exshipper_packages_labels.html" index="11">
+<position info="not_deleted" x="0" y="10702"/>
+</item>
 <item active="true" historyLabel="exshipper_packages_labels.html" index="6">
 <position/>
 </item>
@@ -464,9 +465,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="topLeft"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
@@ -476,7 +474,6 @@
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
 <trimItem IMemento.internal.id="com.google.gdt.eclipse.login.status.trim"/>
-<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>

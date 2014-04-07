@@ -226,12 +226,18 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		var elem_name = $(elem).attr('name');
 		if (select_status === 'Remove') {
 			$(elem).find('input').val('Select');
-			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
+			$('#added_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'none'
+			});
+			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
 				'display' : 'none'
 			});
 		} else {
 			$(elem).find('input').val('Remove');
-			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
+			$('#added_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'inline-block'
+			});
+			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
 				'display' : 'inline-block'
 			});
 		}

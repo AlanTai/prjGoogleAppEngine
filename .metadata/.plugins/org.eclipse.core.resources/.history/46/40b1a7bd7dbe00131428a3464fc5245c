@@ -180,7 +180,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.shipper_address_english}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
-								+ "{{single_row_data.shipper_phone_number}}"
+								+ "{{single_row_data.shipper_tel}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '

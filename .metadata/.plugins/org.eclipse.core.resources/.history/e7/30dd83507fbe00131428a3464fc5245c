@@ -72,14 +72,37 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 						'<form id="label_'
 							+ "{{single_row_data.hawb}}"
 							+ '" style="border: 1px solid; width: 450px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
-								+ '<p style="display: block; margin: 0px auto;"> MAWB/榮儲快遞艙  '
-								+ "{{single_row_data.mawb}}"
+								+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
+								+ "{{single_row_data.shipper_company}}"
 								+ '</p>'
-								+ '<p style="display: block; margin: 5px 10px;"> Flight Number/班機號碼 '
+								+ '<p style="display: block; margin: 5px 10px;"> 地址: '
 								+ "{{single_row_data.shipper_address_english}}"
 								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
+								+ "{{single_row_data.tel}}"
+								+ '</p>'
 								+ '<hr>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">聯締 /泓倫 (Taipei)</p>'
+								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '
+								+ "{{single_row_data.consignee_name_chinese}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px;"> 地址: '
+								+ "{{single_row_data.consignee_address_english}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
+								+ "{{single_row_data.consignee_phone_number}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '
+								+ "{{single_row_data.reference_number}}"
+								+ '</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'
+								+ "{{single_row_data.weight_kg}}"
+								+ ' (kg)</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">易碎</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">註: '
+								+ "{{single_row_data.note}}"
+								+ '</p>'
+								+ '<hr>'
 								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">台灣報關行追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'
 							+ "{{single_row_data.barcode_number}}"
