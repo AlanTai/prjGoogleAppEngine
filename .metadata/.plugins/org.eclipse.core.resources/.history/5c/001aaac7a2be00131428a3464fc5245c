@@ -21,7 +21,7 @@
 		<div style="border: 1px dotted; border-color: #666; display: block;">
 			<p>Print Information</p>
 			<input id="print_label" type="button" value="Print Labels"
-				onclick="PrintElem('#packages_labels','Packages Labels')"
+				onclick="PrintElem('#packages_labels','Labels')"
 				style="margin: 10px auto; width: 150px;">
 			<div id="packages_labels"
 				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
@@ -125,7 +125,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.shipper_address_english}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
-								+ "{{single_row_data.tel}}"
+								+ "{{single_row_data.shipper_phone_number}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '
@@ -180,7 +180,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.shipper_address_english}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
-								+ "{{single_row_data.shipper_tel}}"
+								+ "{{single_row_data.shipper_phone_number}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '
