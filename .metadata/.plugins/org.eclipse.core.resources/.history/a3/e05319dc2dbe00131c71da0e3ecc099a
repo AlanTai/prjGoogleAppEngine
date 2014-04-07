@@ -33,8 +33,9 @@
 </div>
 
 <script type="text/javascript">
-var spearnet_packages_info = "{{ spearnet_packages_info }}";
-var general_clients_packages_info = "{{ general_clients_packages_info }}";
+var spearnet_packages_info = "{{ spearnet_packages_info }}"
+var general_clients_packages_info = "{{ general_clients_packages_info }}"
+alert(spearnet_packages_info);
 
 		//append type-in info to html element
 		{% if spearnet_packages_info %}

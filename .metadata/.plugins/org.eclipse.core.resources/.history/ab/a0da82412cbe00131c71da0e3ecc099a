@@ -33,8 +33,9 @@
 </div>
 
 <script type="text/javascript">
-var spearnet_packages_info = "{{ spearnet_packages_info }}";
-var general_clients_packages_info = "{{ general_clients_packages_info }}";
+var spearnet_packages_info = "{{ spearnet_packages_info }}"
+var general_clients_packages_info = "{{ general_clients_packages_info }}"
+alert(spearnet_packages_info);
 
 		//append type-in info to html element
 		{% if spearnet_packages_info %}
@@ -139,7 +140,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '
-								+ "{{single_row_data.reference_number}}"
+								+ reference_number
 								+ '</p>'
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'
 								+ "{{single_row_data.weight_kg}}"
