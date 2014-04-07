@@ -510,8 +510,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                             break
                 
             except Exception, e:
-                result = 'Error Message: %s' % e
-                response.update({'result':result, 'key':'na'})
+                response = 'Error Message: %s' % e
             finally:
                 json_response['response'] = response
                 

@@ -487,7 +487,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
         account = self.request.get('account')
         password = self.request.get('password')
         response = {}
-        
+        result = {}
         json_response = {'response':'NA'}
         if(account == 'alantai' and password == '1014'):
             json_obj = json.loads(self.request.get('spearnet_picked_packages'))
@@ -506,12 +506,11 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         if(package_entity != None and package_entity.package_status != 'spearnet'):
                             response.update({'result':'Tracking Number, '+ key +', is Duplicated!', 'key':'duplicated_number'})
                         else:
-                            response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'}) 
+                            response.update({'result':"Unknown Package- " + key, 'key':'unknown_number'}) 
                             break
                 
             except Exception, e:
-                result = 'Error Message: %s' % e
-                response.update({'result':result, 'key':'na'})
+                response = 'Error Message: %s' % e
             finally:
                 json_response['response'] = response
                 

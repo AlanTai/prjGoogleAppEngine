@@ -149,7 +149,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.note}}"
 								+ '</p>'
 								+ '<hr>'
-								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">追蹤碼(SUDA/統一速達)</div>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'
 							+ "{{single_row_data.hawb}}"
 							+ '" style="margin: 2px auto; text-align:center;"></div>'
@@ -204,7 +204,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.note}}"
 								+ '</p>'
 								+ '<hr>'
-								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">追蹤碼(SUDA/統一速達)</div>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">SUDA 追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'
 							+ "{{single_row_data.hawb}}"
 							+ '" style="margin: 2px auto; text-align:center;"></div>'
