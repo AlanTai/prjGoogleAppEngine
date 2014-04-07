@@ -15,19 +15,29 @@ class Key_Value():
         #exshipper specific terms
         self.exshipper_index_page = '/exshipper/exshipper_index.html'
         self.exshipper_index_page_title = 'ExShipper Index Page'
+        
         self.exshipper_login_page = '/exshipper/exshipper_login.html'
         self.exshipper_login_page_title = 'ExShipper Login Page'
+        
         self.exshipper_invalid_login_page = '/exshipper/exshipper_invalid_login_page.html'
         self.exshipper_invalid_login_page_title = 'Invalid Login Page'
+        
         self.exshipper_invoice_creating_page = '/exshipper/exshipper_create_invoice.html'
         self.exshipper_invoice_creating_page_title = 'Create Invoice (ExShipper)'
         self.exshipper_invoice_log_page = '/exshipper/exshipper_invoice_log.html'
         self.exshipper_invoice_log_title = 'ExShipper Invoice Log'
+        
         self.exshipper_suda_tracking_number_handler_page = '/exshipper/exshipper_suda_tracking_number_handler.html'
         self.exshipper_suda_tracking_number_handler_page_title = 'ExShipper SUDA Tracking Number Handler'
         
         self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
         self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
+        
+        self.exshipper_packages_labels_page = '/exshipper/exshipper_packages_labels.html'
+        self.exshipper_packages_labels_page_title = 'ExShipper Packages Labels'
+        
+        self.exshipper_tw_custom_entry_labels_page = '/exshipper/exshipper_tw_custom_entry_labels.html'
+        self.exshipper_tw_custom_entry_labels_page_title = 'TW Custom Entry Labels'
         
         self.exshipper_pre_alert_page = '/exshipper/exshipper_pre_alert.html'
         self.exshipper_pre_alert_page_title = 'ExShipper Pre-Alert'

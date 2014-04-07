@@ -1,1 +1,15 @@
-DELSTRctrl_views
+INSTUPctrl_views
+D:\prjGoogleAppEngine\prjWINEVER\src\ctrl_views.py
+INFOS:&&3|1|2|0&&3|3|2|0&&1|4|2|0&&2|5|2|4&&1|6|2|0&&2|7|2|6&&2|5|2|6&&1|8|2|0&&2|7|2|8&&2|5|2|8&&1|9|2|0&&2|5|2|9&&2|10|2|0&&2|11|2|0&&3|12|2|0
+get_users_info=11
+TestHandler=9
+app=12
+post=7
+__author__=1
+get=5
+ctrl_views=2
+jinja_environment=3
+ContactPageDispatcher=8
+exwine_send_email=10
+InfoPageDispatcher=6
+ExWINE=4
