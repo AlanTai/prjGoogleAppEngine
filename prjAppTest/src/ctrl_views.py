@@ -496,6 +496,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
                         package_entity.package_status = 'exshipper'
+                        package_entity.pickup_status = 'pickup'
                         package_entity.put()
                         send_email('receiver', 'winever.tw@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper')
                         working_on = ''
@@ -718,42 +719,72 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 response = tw_custom_entry_number
         #tw custom entry handler for submitting packages info
         elif(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_submit_packages_sets'):
-            response_result = ''
+            
             try:
                 json_obj_packages_sets = json.loads(self.request.get('tw_custom_entry_packages_sets'))
                 json_obj_packages_size_weight = json.loads(self.request.get('tw_custom_entry_packages_size_weight'))
-                
-                has_duplicated_number = 'no'
+                has_unknown_number = 'no'
+                tw_custom_entry_submit_response = {}
+                response_result = ''
                 
                 for key in json_obj_packages_sets.keys():
-                    json_obj_packages_size_weight = json_obj_packages_size_weight[key]['strObj']['length']
+                    json_obj_packages_size_length = json_obj_packages_size_weight[key]['strObj']['length']
+                    json_obj_packages_size_width = json_obj_packages_size_weight[key]['strObj']['width']
+                    json_obj_packages_size_height = json_obj_packages_size_weight[key]['strObj']['height']
+                    json_obj_packages_weight = json_obj_packages_size_weight[key]['strObj']['weight']
                     
                     for package_number in json_obj_packages_sets[key].keys():
                         response_result += 'Package NO.'+package_number + ';'
                         spearnet_package_entity = SpearnetPackagesInfo.get_by_id(package_number)
                         general_client_package_entity = GeneralClientsPackagesInfo.get_by_id(package_number)
                         if(spearnet_package_entity == None and general_client_package_entity == None):
-                            duplicated_response = 'Unknown Number- ' + package_number
-                            has_duplicated_number = 'yes'
+                            unknown_package_response = 'Unknown Number- ' + package_number
+                            has_unknown_number = 'yes'
                             break;
-                        elif(spearnet_package_entity is not None):
+                        elif(spearnet_package_entity != None):
                             spearnet_package_entity.tw_custom_entry_number = key
-                        elif(general_client_package_entity is not None):
+                            spearnet_package_entity.put()
+                        elif(general_client_package_entity != None):
                             general_client_package_entity.tw_custom_entry_number = key
+                            general_client_package_entity.put()
                             
                             working_on = ''
                         
-                    if(has_duplicated_number == 'yes'):
-                        tw_custom_package = duplicated_response
+                    if(has_unknown_number == 'yes'):
+                        tw_custom_entry_submit_result = unknown_package_response
+                        tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
+                        tw_custom_entry_submit_response['key'] = 'unknown_package'
                         break;
-                    
-                    tw_custom_package = 'TW Custom Entry Package- ' + key + ', Length: ' + json_obj_packages_size_weight.__str__() + ' ; ' + response_result
+                    else:
+                        tw_custom_entry_package = TWCustomEntryInfo.get_by_id(key)
+                        if(tw_custom_entry_package is None):
+                            tw_custom_entry_package = TWCustomEntryInfo(id=key)
+                        
+                        tw_custom_entry_package.barcode_number = key
+                        tw_custom_entry_package.sender = 'Ezship2u'
+                        tw_custom_entry_package.receiver = 'EHU (Hung Lun)'
+                        tw_custom_entry_package.weight_kg = json_obj_packages_weight.__str__()
+                        new_size = Size()
+                        new_size.length = json_obj_packages_size_length.__str__()
+                        new_size.width = json_obj_packages_size_width.__str__()
+                        new_size.height = json_obj_packages_size_height.__str__()
+                        new_size.put()
+                        tw_custom_entry_package.size = new_size
+                        tw_custom_entry_package.package_status = 'exshipper'
+                        tw_custom_entry_package.note = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
+                        tw_custom_entry_package.put()
+                        tw_custom_package = 'TW Custom Entry Package- ' + key + ', Weight: ' + json_obj_packages_weight.__str__() + ' ; ' + response_result
                 
-                tw_custom_entry_submit_result = tw_custom_package
+                        tw_custom_entry_submit_result = tw_custom_package
+                        tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
+                        tw_custom_entry_submit_response['key'] = 'success'
             except:
-                tw_custom_entry_submit_result = 'NA'
+                tw_custom_entry_submit_result = 'Fail to submit the data'
+                tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
+                tw_custom_entry_submit_response['key'] = 'na'
             finally:
-                response = tw_custom_entry_submit_result
+                tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
+                response = tw_custom_entry_submit_response.__str__()
                 
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
         self.response.write('{"response":"'+ response.__str__() +'"}')

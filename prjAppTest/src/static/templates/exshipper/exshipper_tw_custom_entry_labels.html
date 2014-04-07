@@ -21,7 +21,7 @@
 		<div style="border: 1px dotted; border-color: #666; display: block;">
 			<p>Print Information</p>
 			<input id="print_label" type="button" value="Print Labels"
-				onclick="PrintElem('#packages_labels','Labels')"
+				onclick="PrintElem('#packages_labels','TW Custom Entry Labels')"
 				style="margin: 10px auto; width: 150px;">
 			<div id="packages_labels"
 				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
@@ -70,16 +70,16 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		$('#packages_labels')
 				.append(
 						'<form id="label_'
-							+ "{{single_row_data.hawb}}"
+							+ "{{single_row_data.barcode_number}}"
 							+ '" style="border: 1px solid; width: 450px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
-								+ '<p style="display: block; margin: 0px auto;"> MAWB/榮儲快遞艙  '
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">聯締 /泓倫 (Taipei)</p>'
+								+ '<p style="display: block; margin: 10px 10px;"> MAWB/榮儲快遞艙:  '
 								+ "{{single_row_data.mawb}}"
 								+ '</p>'
-								+ '<p style="display: block; margin: 5px 10px;"> Flight Number/班機號碼 '
-								+ "{{single_row_data.shipper_address_english}}"
+								+ '<p style="display: block; margin: 10px 10px;"> Flight Number/班機號碼: '
+								+ "{{single_row_data.flight_number}}"
 								+ '</p>'
 								+ '<hr>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">聯締 /泓倫 (Taipei)</p>'
 								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">台灣報關行追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'
 							+ "{{single_row_data.barcode_number}}"
