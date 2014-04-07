@@ -1,7 +1,7 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">TW Custom Entry Labels</p>
+	<p style="font-size: 26px;">ExShipper Packages Labels</p>
 	<hr>
 </div>
 
@@ -38,10 +38,46 @@
 </div>
 
 <script type="text/javascript">
-var tw_custom_entry_info = "{{ tw_custom_entry_info }}"
+var spearnet_packages_info = "{{ spearnet_packages_info }}"
+var general_clients_packages_info = "{{ general_clients_packages_info }}"
 		//append type-in info to html element
 		{% if tw_custom_entry_info %}
 		{% for single_row_data in tw_custom_entry_info %}
+		$('#added_info')
+				.append(
+						'<form name="'
+							+ suda_tr_number
+							+ '">'
+								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
+								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '
+								+ suda_tr_number
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '
+								+ reference_number
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
+								+ shipper_company
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
+								+ consignee_name_english
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '
+								+ consignee_name_chinese
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Address: '
+								+ consignee_address_english
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
+								+ consignee_phone_number
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+		{% endfor %}
+		{% endif %}
+		
+		{% if general_clients_packages_info %}
+		{% for single_row_data in general_clients_packages_info %}
 		$('#added_info')
 				.append(
 						'<form name="'

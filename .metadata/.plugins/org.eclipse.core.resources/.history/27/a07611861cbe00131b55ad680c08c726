@@ -1,7 +1,7 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">TW Custom Entry Labels</p>
+	<p style="font-size: 26px;">ExShipper Packages Labels</p>
 	<hr>
 </div>
 
@@ -38,7 +38,8 @@
 </div>
 
 <script type="text/javascript">
-var tw_custom_entry_info = "{{ tw_custom_entry_info }}"
+var spearnet_packages_info = "{{ spearnet_packages_info }}"
+var general_clients_packages_info = "{{ general_clients_packages_info }}"
 		//append type-in info to html element
 		{% if tw_custom_entry_info %}
 		{% for single_row_data in tw_custom_entry_info %}

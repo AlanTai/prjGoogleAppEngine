@@ -6,7 +6,7 @@
 </div>
 
 
-<div id="package_labels_container"
+<div id="invoice_container"
 	style="position: absolute; top: 80px; text-align: center; width: 100%; z-index: 1;">
 	
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
@@ -38,10 +38,8 @@
 </div>
 
 <script type="text/javascript">
-var tw_custom_entry_info = "{{ tw_custom_entry_info }}"
+
 		//append type-in info to html element
-		{% if tw_custom_entry_info %}
-		{% for single_row_data in tw_custom_entry_info %}
 		$('#added_info')
 				.append(
 						'<form name="'
@@ -72,15 +70,11 @@ var tw_custom_entry_info = "{{ tw_custom_entry_info }}"
 								+ '</p>'
 								+ '</div>'
 								+ '<br></form>');
-		{% endfor %}
-		{% endif %}
 		// change color
 		$('#added_info> form:even').css('background-color', '#dedede');
 		$('#added_info> form:odd').css('background-color', '#f9f9f9');
 		// end change color
 
-		
-		{% for single_row_data in tw_custom_entry_info %}
 		$('#added_labels')
 				.append(
 						'<form id="label_'
@@ -130,8 +124,29 @@ var tw_custom_entry_info = "{{ tw_custom_entry_info }}"
 					barHeight : 45,
 					fontSize : 16
 				});
-		
-		{% endfor %}
+
+		$('#check_list')
+				.append(
+						'<form id="check_list_'
+							+ suda_tr_number
+							+ '" style="width: 800px; margin: 1px auto; padding: 5px auto; display:inline-block">'
+								+ '<input type="checkbox" disabled="true" style="height: 100%; width: 20px; display: inline-block; margin: auto 10px;">'
+								+ '<div style="width:600px; display: inline-block; text-align: left;">'
+								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;">SUDA Tracking Number: '
+								+ suda_tr_number
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: auto 5px; height: 30px; padding:auto 5px; vertical-align: middle; text-align: left;"> Reference Number: '
+								+ reference_number
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+
+	function showReturnMsg(return_msg) {
+		alert(return_msg.submit_status);
+		$('#upload_cover').css({
+			'display' : 'none'
+		});
+	}
 
 	function selectOrRemove(elem) {
 		var select_status = $(elem).find('input').attr('value');
