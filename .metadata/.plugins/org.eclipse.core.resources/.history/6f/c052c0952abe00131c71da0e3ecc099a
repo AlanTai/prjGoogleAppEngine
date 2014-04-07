@@ -9,11 +9,13 @@
 <div id="package_labels_container"
 	style="position: absolute; top: 100px; text-align: center; width: 100%; z-index: 1;">
 	
+	<div id="packages_info"></div>
+	<div id="packages_labels"></div>
 	
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
 		<div style="border: 1px thin; border-color: #666; display: block;">
 			<p>Packages Information</p>
-			<div id="packages_info"
+			<div id="added_info"
 				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 			<br>
 		</div>
@@ -21,12 +23,18 @@
 		<div style="border: 1px dotted; border-color: #666; display: block;">
 			<p>Print Information</p>
 			<input id="print_label" type="button" value="Print Labels"
-				onclick="PrintElem('#packages_labels','Labels')"
+				onclick="PrintElem('#packages_info','Labels')"
 				style="margin: 10px auto; width: 150px;">
-			<div id="packages_labels"
+			<div id="added_labels"
 				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 			<div id="printed_labels"></div>
 
+			<input type="button" value="Print List"
+				onclick="PrintElem('#check_list','Check List')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="check_list"
+				style="width: 680px; max-height: 200px; overflow: auto; margin: 2px auto; padding: 5px auto; border: 1px dashed;"></div>
+			<br>
 		</div>
 	</div>
 	<br>
