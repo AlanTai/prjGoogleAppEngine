@@ -104,7 +104,6 @@
 		});
 
 		var upload = function() {
-			
 			var client_name = $('#id_client_name').val();
 			var client_address = $('#id_client_address').val();
 			var client_phone = $('#id_client_phone').val();

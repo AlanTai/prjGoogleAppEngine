@@ -102,7 +102,8 @@
 				if(package_status === 'None'){
 					package_status = 'NA';
 				}
-				$('#{{ single_row_data.hawb }}').val(package_status);
+				$('#{{ single_row_data.hawb }}').val(
+						'{{ single_row_data.package_status }}');
 				//update json obj when select value change
 				$('#{{ single_row_data.hawb }}').change(function() {
 					var key = $(this).attr('id');
