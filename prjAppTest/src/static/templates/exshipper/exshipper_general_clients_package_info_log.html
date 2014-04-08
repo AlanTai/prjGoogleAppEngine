@@ -141,9 +141,9 @@
 				//change function will be triggered after the focus changes
 				/* $('.notes > input[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
+					if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
-					} */
+					}
 					notes[key] = $(this).val();
 					alert(notes[key]);
 				}); */
@@ -154,7 +154,6 @@
 						packages_status[key] = $(this).val();
 					} */
 					notes[key] = $(this).val();
-					alert(notes[key]);
 				});
 				
 			});
@@ -248,29 +247,55 @@
 		$('#spearnet_customer_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end of distinct row color
 		
-		
+		//update information
 			function updatePackageStatus() {
 				var confirm_result = confirm('Do you want to update the packages\' status?');
 
 				if (confirm_result == true) {
-					if (Object.keys(packages_status).length != 0) {
-						var json_string = JSON.stringify(packages_status, 2, 2);
+					var json_obj_update_data = new Object();
+					var package_status_length = Object.keys(packages_status).length;
+					var clients_signature_length = Object.keys(clients_signature).length;
+					var notes_length = Object.keys(notes).length;
+					if(package_status_length != 0){
+						json_obj_update_data['package_status'] = packages_status;
+					}
+					else{
+						json_obj_update_data['package_status'] = 'NA'
+					}
+					if(clients_signature_length != 0){
+						json_obj_update_data['clients_signature'] = clients_signature;
+					}
+					else{
+						json_obj_update_data['clients_signature'] = 'NA'
+					}
+					if(notes_length != 0){
+						json_obj_update_data['notes'] = notes;
+					}
+					else{
+						json_obj_update_data['notes'] = 'NA'
+					}
+					
+					if (package_status_length != 0 || clients_signature_length != 0 || notes_length != 0) {
+						$('#upload_cover').css({'display':'block'});
+						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
-										'/exshipper_general_clients_packages_status_handler',
+										"/exshipper_general_clients_packages_info_update_handler",
 										{
 											type : 'POST',
 											data : {
 												fmt : 'json',
-												update_packages_status : json_string
+												update_packages_info : json_string
 											},
 											success : showMsg,
 											statusCode : {
 												400 : function() {
 													alert('400 status code! user-side error');
+													$('#upload_cover').css({'display':'none'});
 												},
 												500 : function() {
 													alert('500 status code! server-side error');
+													$('#upload_cover').css({'display':'none'});
 												}
 											}
 										});
@@ -282,6 +307,7 @@
 
 			function showMsg(return_msg) {
 				alert(return_msg.update_status);
+				$('#upload_cover').css({'display':'none'});
 			}
 		</script>
 	</div>
@@ -408,7 +434,7 @@
 			a.download = filename;
 		};
 
-		download(jsonToSsXml(testJson), 'cargo_manifest.xls',
+		download(jsonToSsXml(testJson), 'exshipper_general_clients_package_info.xls',
 				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	</script>
 </div>

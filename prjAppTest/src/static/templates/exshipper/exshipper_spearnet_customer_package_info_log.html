@@ -138,11 +138,10 @@
 		//change function will be triggered after the focus changes
 		/* $('.notes > input[id={{ single_row_data.hawb }}]').change(function() {
 			var key = $(this).attr('id');
-			/* if (typeof packages_status[key] === 'undefined'){
+			if (typeof packages_status[key] === 'undefined'){
 				packages_status[key] = $(this).val();
-			} */
+			}
 			notes[key] = $(this).val();
-			alert(notes[key]);
 		}); */
 		
 		$('.notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
@@ -151,7 +150,6 @@
 				packages_status[key] = $(this).val();
 			} */
 			notes[key] = $(this).val();
-			alert(notes[key]);
 		});
 			
 			var obj = new Object();
@@ -248,7 +246,7 @@
 						var json_string = JSON.stringify(packages_status, 2, 2);
 						$
 								.ajax(
-										'/exshipper_spearnet_customer_packages_status_handler',
+										'/exshipper_spearnet_customer_packages_info_update_handler',
 										{
 											type : 'POST',
 											data : {
