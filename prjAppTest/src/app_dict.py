@@ -45,6 +45,9 @@ class Key_Value():
         self.exshipper_cargo_manifest_page = '/exshipper/exshipper_cargo_manifest.html'
         self.exshipper_cargo_manifest_page_title = 'ExShipper Cargo Manifest'
         
+        self.exshipper_tw_custom_entry_packages_info_log_page = '/exshipper/exshipper_tw_custom_entry_packages_information_log.html'
+        self.exshipper_tw_custom_entry_packages_info_log_page_title = 'ExShipper TW Custom Entry Packages Information Log'
+        
         #taiwan custom entry
         self.exshipper_tw_custom_entry_number_handler_page = '/exshipper/exshipper_tw_custom_entry_number_handler.html'
         self.exshipper_tw_custom_entry_number_handler_page_title = 'ExShipper TW Custom Entry Number Handler'

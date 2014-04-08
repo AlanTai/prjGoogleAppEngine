@@ -94,6 +94,8 @@ class TWCustomEntryInfo(ndb.Model):
     flight_date = ndb.StringProperty()
     package_status = ndb.StringProperty()
     note = ndb.StringProperty()
+    date = ndb.DateProperty(auto_now_add = True)
+    update_date_time = ndb.DateTimeProperty(auto_now = True)
     
 class ClientsInfo(ndb.Model):
     name = ndb.StringProperty()

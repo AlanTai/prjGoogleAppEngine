@@ -19,7 +19,7 @@
 <div
 	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if general_clients_packages_info_log %}
-	<br> <input type="button" value="Update"
+	<br> <input type="button" value="Update Information"
 			onclick="updatePackageStatus()">
 	<div id="spearnet_customer_packages_info"
 		style="max-height: 400px; width:1500px; overflow: auto; border: 1px dashed #333333;">
@@ -198,7 +198,7 @@
 						var json_string = JSON.stringify(packages_status, 2, 2);
 						$
 								.ajax(
-										'/exshipper_spearnet_customer_packages_status_handler',
+										'/exshipper_general_clients_packages_status_handler',
 										{
 											type : 'POST',
 											data : {

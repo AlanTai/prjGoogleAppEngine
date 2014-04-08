@@ -88,7 +88,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_tw_custom_entry_number_handler_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_number_handler_page_title
                 
-        elif(dispatch_token == 'exshipper_spearnet_customers_package_info_log'):
+        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
                 html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
@@ -106,13 +106,20 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 clients_info = ClientsInfo().query()
                 template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
                   
-        elif(dispatch_token == 'exshipper_general_clients_package_info_log'):
+        elif(dispatch_token == 'exshipper_general_clients_packages_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_package_info_log_page
                 html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
                 general_clients_packages_info_log = GeneralClientsPackagesInfo.query()
                 clients_info = ClientsInfo().query()
                 template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+                
+        elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log'):
+            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+                html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
+                html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
+                tw_custom_entry_packages_info_log = TWCustomEntryInfo.query()
+                template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
                 
         elif(dispatch_token == 'exshipper_pre_alert'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
@@ -486,7 +493,8 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
     def post(self):
         account = self.request.get('account')
         password = self.request.get('password')
-        response = 'NA'
+        response = {}
+        
         json_response = {'response':'NA'}
         if(account == 'alantai' and password == '1014'):
             json_obj = json.loads(self.request.get('spearnet_picked_packages'))
@@ -499,17 +507,18 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         package_entity.pickup_status = 'pickup'
                         package_entity.put()
                         send_email('receiver', 'winever.tw@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper')
-                        working_on = ''
-                        response = 'Successfully Update Picked Packages Information'
+                        response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
+                        
                     else:
                         if(package_entity != None and package_entity.package_status != 'spearnet'):
-                            response = 'Tracking Number, '+ key +', is Duplicated!'
+                            response.update({'result':'Tracking Number, '+ key +', is Duplicated!', 'key':'duplicated_number'})
                         else:
-                            response = "Unknown Package- " + key
+                            response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'}) 
                             break
                 
             except Exception, e:
-                response = 'Error Message: %s' % e
+                result = 'Error Message: %s' % e
+                response.update({'result':result, 'key':'na'})
             finally:
                 json_response['response'] = response
                 
@@ -751,8 +760,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         elif(general_client_package_entity != None):
                             general_client_package_entity.tw_custom_entry_number = key
                             general_client_package_entity.put()
-                            
-                            working_on = ''
                         
                     if(has_unknown_number == 'yes'):
                         tw_custom_entry_submit_result = unknown_package_response
@@ -782,6 +789,8 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_submit_result = tw_custom_package
                         tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
                         tw_custom_entry_submit_response['key'] = 'success'
+                        
+                        working_on = ''
             except:
                 tw_custom_entry_submit_result = 'Fail to submit the data'
                 tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
