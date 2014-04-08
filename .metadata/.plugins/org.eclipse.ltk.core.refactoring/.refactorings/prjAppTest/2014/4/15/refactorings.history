@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;prjAppTest/src/users_handler.py&apos; to &apos;users_info_handler.py&apos;" description="Rename resource &apos;users_handler.py&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/users_handler.py" name="users_info_handler.py" stamp="1396925177512" updateReferences="true"/>
+</session>
