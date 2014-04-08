@@ -75,7 +75,7 @@
 			<span>TW Custom Entry Barcode Number: <input type="text" value="{{ single_row_data.tw_custom_entry_number }}" /> </span>
 			<span class="package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}"
-					class="general_client_package_status">
+					class="spearnet_customer_package_status">
 						<option value="spearnet">Spearnet</option>
 						<option value="exshipper">ExShipper</option>
 						<option value="sfo_airport">SFO Airport</option>
@@ -94,7 +94,7 @@
 			</span>
 			
 			<span class="notes">Note:
-				<input id="{{ single_row_data.hawb }}"
+				<input id="{{ single_row_data.hawb }}" value="{{ single_row_data.note }}"
 					class="note" type="text" />
 					
 			</span>
@@ -118,7 +118,7 @@
 				
 				//setup auto change mechanism for package status
 				$('.package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
-				$('.notes > input[id={{ single_row_data.hawb }}]').val(note);
+				$('.notes > input[id={{ single_row_data.note }}]').val(note);
 				//update json obj when select value change
 				$('.package_status > select[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
@@ -138,17 +138,7 @@
 				});
 				
 				//setup auto change mechanism for notes
-				//change function will be triggered after the focus changes
-				/* $('.notes > input[id={{ single_row_data.hawb }}]').change(function() {
-					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
-					notes[key] = $(this).val();
-					alert(notes[key]);
-				}); */
-				
-				$('.notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
+				$('.notes > input[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();

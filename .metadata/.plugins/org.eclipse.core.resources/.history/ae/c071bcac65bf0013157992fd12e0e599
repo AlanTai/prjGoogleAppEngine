@@ -75,7 +75,7 @@
 			<span>TW Custom Entry Barcode Number: <input type="text" value="{{ single_row_data.tw_custom_entry_number }}" /> </span>
 			<span class="package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}"
-					class="general_client_package_status">
+					class="spearnet_customer_package_status">
 						<option value="spearnet">Spearnet</option>
 						<option value="exshipper">ExShipper</option>
 						<option value="sfo_airport">SFO Airport</option>
