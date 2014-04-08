@@ -1902,7 +1902,7 @@ tests.test_request_nose|C:\Program Files (x86)\Google\google_appengine\lib\webob
 tests.test_response|C:\Program Files (x86)\Google\google_appengine\lib\webob_1_1_1\tests\test_response.py
 tests.test_util|C:\Program Files (x86)\Google\google_appengine\lib\webob_1_1_1\tests\test_util.py
 uritemplate.__init__|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\uritemplate\__init__.py
-users_handler|D:\prjGoogleAppEngine\prjExShipper\src\users_handler.py
+users_info_handler|D:\prjGoogleAppEngine\prjExShipper\src\users_info_handler.py
 webapp2|C:\Program Files (x86)\Google\google_appengine\lib\webapp2\webapp2.py
 webapp2_extras.__init__|C:\Program Files (x86)\Google\google_appengine\lib\webapp2\webapp2_extras\__init__.py
 webapp2_extras.appengine.__init__|C:\Program Files (x86)\Google\google_appengine\lib\webapp2\webapp2_extras\appengine\__init__.py

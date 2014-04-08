@@ -93,25 +93,6 @@
 			
 			<span>Labeling Date: {{ single_row_data.date }}</span>
 		</form>
-		
-		<!--  -->
-		<script type="text/javascript">
-			var clients_info = "{{ clients_info }}";
-			var clients_signatures = new Object();
-			if((typeof clients_info.name != 'undefined') && (typeof clients_info.phone != 'undefined')){
-				clients_signatures[clients_info.key.urlsafe()] = 'Name: ' + clients_info.name + ' ; Phone: ' + clients_info.phone;
-			}
-			else{
-				clients_signatures['NA'] = 'No Data';
-			}
-			$.each(clients_signatures, function(key, value) {
-			    $('#client_signature_{{ single_row_data.hawb }}').append($("<option/>", {
-			        value: key,
-			        text: value
-			    }));
-			});
-		</script>
-		<!--  -->
 
 		<script type="text/javascript">
 			
@@ -180,6 +161,31 @@
 		
 		{% else %}
 		<p>No Data Available</p>
+		{% endif %}
+		
+		{% if clients_info %}
+		{% for client_info in clients_info %}
+		<script type="text/javascript">
+			var clients_signatures = new Object();
+				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.name}}" + ' ; Phone: ' + "{{client_info.phone}}";
+			$.each(clients_signatures, function(key, value) {
+			    $('#spearnet_customer_packages_info > form').find('select').append($("<option/>", {
+			        value: key,
+			        text: value
+			    }));
+			});
+		</script>
+		{% endfor %}
+		<script type="text/javascript">
+		var clients_signatures = new Object();
+			clients_signatures['NA'] = 'No Data';
+			$.each(clients_signatures, function(key, value) {
+			    $('#spearnet_customer_packages_info > form').find('select').append($("<option/>", {
+			        value: key,
+			        text: value
+			    }));
+			});
+		</script>
 		{% endif %}
 		
 		
