@@ -623,18 +623,40 @@ class ExShipperSpearnetCustomerPackageTrackingHandler(webapp2.RequestHandler):
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
         
-class ExShipperSpearnetCustomerPackageStatusHandler(webapp2.RequestHandler):
+class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
     def post(self):
-        ajax_data = {'update_status':'NA'}
-        if(self.request.get('fmt') == 'json'):
-            update_packages_status = self.request.get('update_packages_status')
-            json_obj = json.loads(update_packages_status)
-            for key in json_obj.keys():
-                package_entity = SpearnetPackagesInfo.get_by_id(key)
-                package_entity.package_status = json_obj[key]
-                package_entity.put()
+        try:
+            ajax_data = {'update_status':'NA'}
+            if(self.request.get('fmt') == 'json'):
+                update_packages_status = self.request.get('update_packages_info')
+                json_obj = json.loads(update_packages_status)
+                json_obj_package_status = json_obj['packages_status']
+                json_obj_clients_signature = json_obj['clients_signature']
+                json_obj_notes = json_obj['notes']
                 
-            ajax_data['update_status'] = 'Successfully update the packages status!'
+                
+                if(json_obj_package_status != 'NA'):
+                    for key in json_obj_package_status:
+                        package_entity = SpearnetPackagesInfo.get_by_id(key)
+                        package_entity.package_status = json_obj_package_status[key]
+                        package_entity.put()
+                         
+                if(json_obj_clients_signature != 'NA'):
+                    for key in json_obj_clients_signature:
+                        package_entity = SpearnetPackagesInfo.get_by_id(key)
+                        package_entity.signature_img_id = json_obj_clients_signature[key]
+                        package_entity.put()
+                         
+                if(json_obj_notes != 'NA'):
+                    for key in json_obj_notes.keys():
+                        package_entity = SpearnetPackagesInfo.get_by_id(key)
+                        package_entity.note = json_obj_notes[key]
+                        package_entity.put()
+                    
+                ajax_data['update_status'] = 'Successfully update the packages status!'
+                
+        except Exception, e:
+                ajax_data['update_status'] = 'Error Message: %s' % e
                 
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
@@ -863,6 +885,43 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         # end of html page dispatching
         
+class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
+    def post(self):
+        try:
+            ajax_data = {'update_status':'NA'}
+            if(self.request.get('fmt') == 'json'):
+                update_packages_status = self.request.get('update_packages_info')
+                json_obj = json.loads(update_packages_status)
+                json_obj_package_status = json_obj['packages_status']
+                json_obj_clients_signature = json_obj['clients_signature']
+                json_obj_notes = json_obj['notes']
+                
+                if(json_obj_package_status != 'NA'):
+                    for key in json_obj_package_status:
+                        package_entity = GeneralClientsPackagesInfo.get_by_id(key)
+                        package_entity.package_status = json_obj_package_status[key]
+                        package_entity.put()
+                          
+                if(json_obj_clients_signature != 'NA'):
+                    for key in json_obj_clients_signature:
+                        package_entity = GeneralClientsPackagesInfo.get_by_id(key)
+                        package_entity.signature_img_id = json_obj_clients_signature[key]
+                        package_entity.put()
+                          
+                if(json_obj_notes != 'NA'):
+                    for key in json_obj_notes:
+                        package_entity = GeneralClientsPackagesInfo.get_by_id(key)
+                        package_entity.note = json_obj_notes[key]
+                        package_entity.put()
+                    
+                ajax_data['update_status'] = 'Successfully update the packages status!'
+                
+        except Exception, e:
+                ajax_data['update_status'] = 'Error Message: %s' % e
+                
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
+        
         
 #send email
 def send_email(receiver, sender, subject, body):
@@ -931,10 +990,11 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
                                ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),
                                ('/exshipper_spearnet_customer_package_tracking_handler', ExShipperSpearnetCustomerPackageTrackingHandler),
-                               ('/exshipper_spearnet_customer_packages_status_handler',ExShipperSpearnetCustomerPackageStatusHandler),
+                               ('/exshipper_spearnet_customer_packages_info_update_handler',ExShipperSpearnetCustomerPackageInfoUpdateHandler),
                                ('/exshipper_spearnet_packages_pickup_handler',ExShipperSpearnetPackagesPickupHandler),
                                ('/exshipper_tw_custom_entry_index_page',ExShipperTWCustomEntryIndexHandler),
                                ('/exshipper_tw_custom_entry_login_handler',ExShipperTWCustomEntryLoginHandler),
                                ('/exshipper_exshipper_general_clients_index_page', ExShipperGeneralClientsIndexHandler),
                                ('/exshipper_general_clients_login_handler', ExShipperGeneralClientsLoginHandler),
+                               ('/exshipper_general_clients_packages_info_update_handler', ExShipperGeneralClientsPackageInfoUpdateHandler),
                                ('/exshipper_test', TestHandler)], debug=True)

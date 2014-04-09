@@ -13,14 +13,14 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Spearnet Customers Packages
 		Information Log</p>
+	<input type="button" value="Update Information"
+			onclick="updatePackageStatus()" style="margin: 5px 5px;">
 	<hr>
 </div>
 
 <div
 	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if spearnet_customer_package_info_log %}
-	<br> <input type="button" value="Update Information"
-			onclick="updatePackageStatus()" style="margin: 5px 5px;">
 	<div id="spearnet_customer_packages_info"
 		style="width:100%; padding: 5px ; overflow: auto; border: 1px dashed #333333;">
 
@@ -83,17 +83,18 @@
 							International Airport</option>
 						<option value="suda">SUDA</option>
 						<option value="delivered">Delivered</option>
+						<option value="NA">No Data</option>
 				</select>
 			</span>
 			
 			<span class="spearnet_clients_signature">Client Signature:
 				<select id="{{ single_row_data.hawb }}"
-					class="spearnet_client_signature">
-					
+					class="client_signature">
+					<option value="NA">No Data</option>
 				</select>
 			</span>
 			
-			<span class="notes">Note:
+			<span class="spearnet_package_note">Note:
 				<input id="{{ single_row_data.hawb }}"
 					class="note" type="text" />
 					
@@ -115,13 +116,13 @@
 		
 		var signature_img_id = '{{ single_row_data.signature_img_id }}';
 		if(signature_img_id === 'None'){
-			note = 'NA';
+			signature_img_id = 'NA';
 		};
 		
 		//setup auto change mechanism for package status
 		$('.package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
-		$('.notes > input[id={{ single_row_data.hawb }}]').val(note);
-		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').val(note);
+		$('.spearnet_package_note > input[id={{ single_row_data.hawb }}]').val(note);
+		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').val(signature_img_id);
 		
 		//update json obj when select value change
 		$('.package_status > select[id={{ single_row_data.hawb }}]').change(function() {
@@ -152,7 +153,7 @@
 			notes[key] = $(this).val();
 		}); */
 		
-		$('.notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
+		$('.spearnet_package_note > input[id={{ single_row_data.hawb }}]').on('input', function() {
 			var key = $(this).attr('id');
 			/* if (typeof packages_status[key] === 'undefined'){
 				packages_status[key] = $(this).val();
@@ -219,23 +220,13 @@
 			var clients_signatures = new Object();
 				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.name}}" + ' ; Phone: ' + "{{client_info.phone}}";
 			$.each(clients_signatures, function(key, value) {
-			    $('.spearnet_clients_signature').find('select').append($("<option/>", {
+			    $('.spearnet_clients_signature > select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
 			});
 		</script>
 		{% endfor %}
-		<script type="text/javascript">
-		var clients_signatures = new Object();
-			clients_signatures['NA'] = 'No Data';
-			$.each(clients_signatures, function(key, value) {
-			    $('.spearnet_clients_signature').find('select').append($("<option/>", {
-			        value: key,
-			        text: value
-			    }));
-			});
-		</script>
 		{% endif %}
 		
 		
