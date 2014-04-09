@@ -16,7 +16,8 @@
 				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
 					SUDA Tracking Number:</p>
 				<input type="text" id="id_suda_tr_number" name="suda_tr_number"
-					style="display: inline-block; margin: 5px 1px;" size="50" placeholder="Click the button to get SUDA Number" disabled/>
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					placeholder="Click the button to get SUDA Number" disabled />
 				<div style="display: inline-block;">
 					<input type="button" value="Get SUDA Tracking Number"
 						onclick="getSUDATrackingNumber()" /> <select
@@ -34,157 +35,181 @@
 					style="display: inline-block; margin: 5px 1px;" size="50" disabled>
 			</div>
 			<br>
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Shipper (Company): (If Shipper
-						is Person, please key in NA)</span>
-				</p>
-				<input type="text" id="id_shipper_company" name="shipper_company"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+
+
+			<!--  -->
+			<div style="padding: 5px; background-color: #efefef;">
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper (Company): (If
+							Shipper is Person, please key in NA)</span>
+					</p>
+					<input type="text" id="id_shipper_company" name="shipper_company"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper (Person): (If Shipper
+							is Company, please key in NA)</span>
+					</p>
+					<input type="text" id="id_shipper_person" name="shipper_person"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Address (English):</span>
+					</p>
+					<input type="text" id="id_shipper_address_english"
+						name="shipper_address_english"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Address (Chinese):</span>
+					</p>
+					<input type="text" id="id_shipper_address_chinese"
+						name="shipper_address_chinese"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Phone Number:</span>
+					</p>
+					<input type="text" id="id_shipper_phone_number"
+						name="shipper_phone_number"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
 			</div>
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Shipper (Person): (If Shipper
-						is Company, please key in NA)</span>
-				</p>
-				<input type="text" id="id_shipper_person" name="shipper_person"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
-			
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Shipper Address (English):</span>
-				</p>
-				<input type="text" id="id_shipper_address_english" name="shipper_address_english"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Shipper Address (Chinese):</span>
-				</p>
-				<input type="text" id="id_shipper_address_chinese" name="shipper_address_chinese"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
-			
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Shipper Phone Number:</span>
-				</p>
-				<input type="text" id="id_shipper_phone_number" name="shipper_phone_number"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
+			<!-- end -->
+
 			<br>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 					<span style="display: block;">Consignee Name (English):</span>
 				</p>
-				<input type="text" id="id_consignee_name_english" name="consignee_name_english"
+				<input type="text" id="id_consignee_name_english"
+					name="consignee_name_english"
 					style="display: inline-block; margin: 5px 1px;" size="50">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 					<span style="display: block;">Consignee Name (Chinese):</span>
 				</p>
-				<input type="text" id="id_consignee_name_chinese" name="consignee_name_chinese"
+				<input type="text" id="id_consignee_name_chinese"
+					name="consignee_name_chinese"
 					style="display: inline-block; margin: 5px 1px;" size="50">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 					<span style="display: block;">Consignee Address (English):</span>
 				</p>
-				<input type="text" id="id_consignee_address_english" name="consignee_address_english"
+				<input type="text" id="id_consignee_address_english"
+					name="consignee_address_english"
 					style="display: inline-block; margin: 5px 1px;" size="50">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 					<span style="display: block;">Consignee Address (Chinese):</span>
 				</p>
-				<input type="text" id="id_consignee_address_chinese" name="consignee_address_english"
+				<input type="text" id="id_consignee_address_chinese"
+					name="consignee_address_english"
 					style="display: inline-block; margin: 5px 1px;" size="50">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 					<span style="display: block;">Consignee Phone Number:</span>
 				</p>
-				<input type="text" id="id_consignee_phone_number" name="consignee_phone_number"
+				<input type="text" id="id_consignee_phone_number"
+					name="consignee_phone_number"
 					style="display: inline-block; margin: 5px 1px;" size="50">
 			</div>
-			
+
 			<br>
-			
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Unit Price FOB (US Dollar):</span>
-				</p>
-				<input type="text" id="id_unit_price_fob_us_dollar" name="unit_price_fob_us_dollar"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+
+			<div style="padding: 5px; background-color: #efefef;">
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Unit Price FOB (US Dollar):</span>
+					</p>
+					<input type="text" id="id_unit_price_fob_us_dollar"
+						name="unit_price_fob_us_dollar"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Deliver To (Local Logistics
+							Company):</span>
+					</p>
+					<input type="text" id="id_deliver_to" name="deliver_to"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">CTN.</span>
+					</p>
+					<input type="text" id="id_ctn" name="ctn"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">PCS.</span>
+					</p>
+					<input type="text" id="id_pcs" name="pcs"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Unit</span>
+					</p>
+					<input type="text" id="id_unit" name="unit"
+						style="display: inline-block; margin: 5px 1px;" size="50">
+				</div>
+
 			</div>
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Deliver To (Local Logistics Company):</span>
-				</p>
-				<input type="text" id="id_deliver_to" name="deliver_to"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
-			
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">CTN.</span>
-				</p>
-				<input type="text" id="id_ctn" name="ctn"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">PCS.</span>
-				</p>
-				<input type="text" id="id_pcs" name="pcs"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
-			<div>
-				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Unit</span>
-				</p>
-				<input type="text" id="id_unit" name="unit"
-					style="display: inline-block; margin: 5px 1px;" size="50">
-			</div>
+			<!-- end -->
 			
 			<div>
 				<p style="display: inline-block; width: 450px;">Size (inch):</p>
 				<input type="number" id="id_length" name="length"
 					style="display: inline-block; width: 110px;" size="10" min="0"
 					placeholder="Length"> <input type="number" id="id_width"
-					name="width" style="display: inline-block; width: 110px;" size="10" min="0"
-					placeholder="Width"> <input type="number" id="id_height"
-					name="height" style="display: inline-block; width: 110px;" size="10" min="0"
+					name="width" style="display: inline-block; width: 110px;" size="10"
+					min="0" placeholder="Width"> <input type="number"
+					id="id_height" name="height"
+					style="display: inline-block; width: 110px;" size="10" min="0"
 					placeholder="Height">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px;">Weight (kg):</p>
 				<input type="number" id="id_weight" name="weight"
-					style="display: inline-block; width: 330px; text-align: center;" size="10" min="0"
-					placeholder="Weight">
+					style="display: inline-block; width: 330px; text-align: center;"
+					size="10" min="0" placeholder="Weight">
 			</div>
 
 			<div>
 				<div style="display: inline-block; width: 600px; margin: 2px 1px;">
 					<span style="display: block;">Commodity Detail:</span> <input
 						type="button" value="Add New Commodity"
-						onclick="addNewCommodity()"> <div id="id_commodity_detail"></div>
+						onclick="addNewCommodity()">
+					<div id="id_commodity_detail"></div>
 				</div>
 			</div>
 
 			<div>
-				<p style="display: inline-block; width: 450px; height:50px; margin: 2px 1px;">
-				<span style="display: block;">Note:</span>
-				<textarea id="id_note" name="note"
-					style="display: inline-block; margin: 5px 1px;" cols="40"></textarea>
+				<p
+					style="display: inline-block; width: 450px; height: 50px; margin: 2px 1px;">
+					<span style="display: block;">Note:</span>
+					<textarea id="id_note" name="note"
+						style="display: inline-block; margin: 5px 1px;" cols="40"></textarea>
 				</p>
 			</div>
-			
-			<br> <input
-						type="button" value="Add New Package Information" onclick="Add()"
-						style="width: 300px; height: 30px;"></form>
+
+			<br> <input type="button" value="Add New Package Information"
+				onclick="Add()" style="width: 300px; height: 30px;">
+		</form>
 	</div>
 	<hr>
 	<br>
@@ -218,14 +243,13 @@
 </div>
 
 <script type="text/javascript">
-
 	//
-	$(function(){
+	$(function() {
 		$.ajax('/get_ref_number', {
 			type : 'POST',
 			data : {
 				key : 'get_package_reference_number'
-				
+
 			},
 			success : update_reference_number,
 			statusCode : {
@@ -238,8 +262,8 @@
 			}
 		});
 	});
-	
-	function update_reference_number(response){
+
+	function update_reference_number(response) {
 		$('#id_reference_number').val(response.exshipper_package_number);
 	};
 
@@ -248,65 +272,72 @@
 		$('#id_commodity_detail')
 				.append(
 						'<form>'
-						+ '<input type="button" value="Delete" onclick="deleteCommodity(this.form)"></input>'		
-						+ '<input id="id_commodity_name" type="text" placeholder="Commodity Name"></input>'
+								+ '<input type="button" value="Delete" onclick="deleteCommodity(this.form)"></input>'
+								+ '<input id="id_commodity_name" type="text" placeholder="Commodity Name"></input>'
 								+ '<input id="id_commodity_quantity" type="text" placeholder="Quantity"></input>'
 								+ '<input id="id_commodity_price" type="text" placeholder="Price"></input>'
 								+ '</form>');
 	}
-	
-	function deleteCommodity(elem){
+
+	function deleteCommodity(elem) {
 		$(elem).remove();
 	}
-	
-	function checkCommodityDetailAndGetCommodityDetailObj(){
+
+	function checkCommodityDetailAndGetCommodityDetailObj() {
 		var commodity_detail = new Object();
 		var commodity_ary = new Array();
-		
-		if($('#id_commodity_detail').is(':empty')){
+
+		if ($('#id_commodity_detail').is(':empty')) {
 			alert('Please Add Commodity Detail');
 			return true;
-		}
-		else{
-			var isCommodityInvalid = $('#id_commodity_detail form').each(function(){
-				var commodity_obj = new Object();
-				commodity_name = $(this).find('input#id_commodity_name').val();
-				commodity_quan = $(this).find('input#id_commodity_quantity').val();
-				commodity_price = $(this).find('input#id_commodity_price').val();
-				if(commodity_name === ''){
-					alert('Commodity name is unknown!');
-					$(this).find('input#id_commodity_name').focus();
-					return true;
-				}
-				else if(commodity_quan === ''){
-					alert('Commodity quantity is unknown!');
-					$(this).find('input#id_commodity_quantity').focus();
-					return true;
-				}
-				else if(commodity_price === ''){
-					alert('Commodity price is unknown!');
-					$(this).find('input#id_commodity_price').focus();
-					return true;
-				}
-				else{
-					commodity_obj.name = $(this).find('input#id_commodity_name').val();
-					commodity_obj.quan = $(this).find('input#id_commodity_quantity').val();
-					commodity_obj.price = $(this).find('input#id_commodity_price').val();
-					
-					commodity_ary.push(commodity_obj);
-				}
-			});
-			
-			if(isCommodityInvalid === true){
+		} else {
+			var isCommodityInvalid = $('#id_commodity_detail form')
+					.each(
+							function() {
+								var commodity_obj = new Object();
+								commodity_name = $(this).find(
+										'input#id_commodity_name').val();
+								commodity_quan = $(this).find(
+										'input#id_commodity_quantity').val();
+								commodity_price = $(this).find(
+										'input#id_commodity_price').val();
+								if (commodity_name === '') {
+									alert('Commodity name is unknown!');
+									$(this).find('input#id_commodity_name')
+											.focus();
+									return true;
+								} else if (commodity_quan === '') {
+									alert('Commodity quantity is unknown!');
+									$(this).find('input#id_commodity_quantity')
+											.focus();
+									return true;
+								} else if (commodity_price === '') {
+									alert('Commodity price is unknown!');
+									$(this).find('input#id_commodity_price')
+											.focus();
+									return true;
+								} else {
+									commodity_obj.name = $(this).find(
+											'input#id_commodity_name').val();
+									commodity_obj.quan = $(this).find(
+											'input#id_commodity_quantity')
+											.val();
+									commodity_obj.price = $(this).find(
+											'input#id_commodity_price').val();
+
+									commodity_ary.push(commodity_obj);
+								}
+							});
+
+			if (isCommodityInvalid === true) {
 				return true;
-			}
-			else{
+			} else {
 				commodity_detail.items = commodity_ary;
 				return commodity_detail;
 			}
 		}
 	}
-	
+
 	//end commodity
 
 	//
@@ -368,21 +399,23 @@
 		var shipper_phone_number = $('#id_shipper_phone_number').val();
 		var shipper_address_english = $('#id_shipper_address_english').val();
 		var shipper_address_chinese = $('#id_shipper_address_english').val();
-		
+
 		var consignee_name_english = $('#id_consignee_name_english').val();
 		var consignee_name_chinese = $('#id_consignee_name_chinese').val();
-		var consignee_address_english = $('#id_consignee_address_english').val();
-		var consignee_address_chinese = $('#id_consignee_address_english').val();
+		var consignee_address_english = $('#id_consignee_address_english')
+				.val();
+		var consignee_address_chinese = $('#id_consignee_address_english')
+				.val();
 		var consignee_phone_number = $('#id_consignee_phone_number').val()
-		
+
 		var unit_price_fob_us_dollar = $('#id_unit_price_fob_us_dollar').val();
 		var deliver_to = $('#id_deliver_to').val();
 		var note = $('#id_note').val();
-		
+
 		var ctn = $('#id_ctn').val();
 		var pcs = $('#id_pcs').val();
 		var unit = $('#id_unit').val();
-		
+
 		var size_length = $('#id_length').val();
 		var size_width = $('#id_width').val();
 		var size_height = $('#id_height').val();
@@ -458,7 +491,7 @@
 			$('#id_consignee_phone_number').val(consignee_phone_number);
 		}
 		//end
-		
+
 		if (unit_price_fob_us_dollar === '') {
 			$('#id_unit_price_fob_us_dollar').focus();
 			return true;
@@ -481,7 +514,7 @@
 			$('#id_note').val(note);
 		}
 		//end
-		
+
 		if (ctn === '') {
 			$('#id_ctn').focus();
 			return true;
@@ -529,14 +562,13 @@
 
 		//check commodity detail
 		var commodity_detail_obj = checkCommodityDetailAndGetCommodityDetailObj();
-		if(commodity_detail_obj === true){
+		if (commodity_detail_obj === true) {
 			return true;
-		}
-		else{
+		} else {
 			commodity_detail_obj = JSON.stringify(commodity_detail_obj);
 		}
 		//end
-		
+
 		// check suda tracking number
 		var i = info_array.length;
 		while (i > 0) {
@@ -558,12 +590,11 @@
 		});
 		// end of check suda tracking number
 
-
 		//add the info to datastore
 		$('#upload_cover').css({
 			'display' : 'block'
 		});
-		
+
 		$.ajax('/exshipper_invoice_info_handler', {
 			type : 'POST',
 			data : {
@@ -591,7 +622,7 @@
 				valid_size_height : size_height,
 				valid_weight : weight,
 				valid_commodity_detail : commodity_detail_obj
-				
+
 			},
 			success : showReturnMsg,
 			statusCode : {
@@ -655,8 +686,12 @@
 								+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
 								+ shipper_company
 								+ '</p>'
-								+ '<p style="display: block; margin: 5px 10px;"> 地址: '+ shipper_address_english +'</p>'
-								+ '<p style="display: block; margin: 5px 10px;"> 電話: '+ shipper_phone_number +'</p>'
+								+ '<p style="display: block; margin: 5px 10px;"> 地址: '
+								+ shipper_address_english
+								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
+								+ shipper_phone_number
+								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '
 								+ consignee_name_chinese

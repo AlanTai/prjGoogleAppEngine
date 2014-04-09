@@ -136,6 +136,9 @@
 					} */
 					packages_status[key] = $(this).val();
 				});
+
+				//append calendar
+				$('.tw_custom_entry_flight_date > input').datepicker();
 			});
 			
 			var obj = new Object();
