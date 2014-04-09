@@ -19,7 +19,7 @@
 </div>
 
 <div
-	style="position: absolute; top: 130px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if spearnet_customer_package_info_log %}
 	<div id="spearnet_customer_packages_info"
 		style="width:100%; padding: 5px ; overflow: auto; border: 1px dashed #333333;">
@@ -423,9 +423,7 @@
 			a.download = filename;
 		};
 
-		var current_time = new Date();
-		var file_name = 'spearnet_customers_packages_info_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
-		download(jsonToSsXml(testJson), file_name,
+		download(jsonToSsXml(testJson), 'cargo_manifest.xls',
 				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	</script>
 </div>

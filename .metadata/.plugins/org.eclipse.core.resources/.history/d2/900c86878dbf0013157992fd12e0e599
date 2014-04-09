@@ -345,9 +345,7 @@
 				a.download = filename;
 			};
 
-			var current_time = new Date();
-			var file_name = 'cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
-			download(jsonToSsXml(testJson), file_name,
+			download(jsonToSsXml(testJson), 'cargo_manifest.xls',
 					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		</script>
 
