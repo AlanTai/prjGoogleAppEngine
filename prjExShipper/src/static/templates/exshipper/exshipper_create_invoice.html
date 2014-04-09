@@ -16,7 +16,7 @@
 				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
 					SUDA Tracking Number:</p>
 				<input type="text" id="id_suda_tr_number" name="suda_tr_number"
-					style="display: inline-block; margin: 5px 1px;" size="50" placeholder="Click the button to get SUDA Number"/>
+					style="display: inline-block; margin: 5px 1px;" size="50" placeholder="Click the button to get SUDA Number" disabled/>
 				<div style="display: inline-block;">
 					<input type="button" value="Get SUDA Tracking Number"
 						onclick="getSUDATrackingNumber()" /> <select
@@ -28,11 +28,10 @@
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Reference Number (If no
-						"Reference Number", please key in 0):</span>
+					<span style="display: block;">Reference Number: </span>
 				</p>
 				<input type="text" id="id_reference_number" name="reference_number"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+					style="display: inline-block; margin: 5px 1px;" size="50" disabled>
 			</div>
 			<br>
 			<div>
@@ -219,6 +218,31 @@
 </div>
 
 <script type="text/javascript">
+
+	//
+	$(function(){
+		$.ajax('/get_ref_number', {
+			type : 'POST',
+			data : {
+				key : 'get_package_reference_number'
+				
+			},
+			success : update_reference_number,
+			statusCode : {
+				400 : function() {
+					alert('400 status code! user-side error');
+				},
+				500 : function() {
+					alert('500 status code! server-side error');
+				}
+			}
+		});
+	});
+	
+	function update_reference_number(response){
+		$('#id_reference_number').val(response.exshipper_package_number);
+	};
+
 	//
 	function addNewCommodity() {
 		$('#id_commodity_detail')

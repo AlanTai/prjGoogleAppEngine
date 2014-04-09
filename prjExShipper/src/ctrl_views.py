@@ -5,7 +5,8 @@ Created on Oct 1, 2013
 @author: Alan Tai
 '''
 from google.appengine.ext.key_range import ndb
-from webapp2 import redirect
+import datetime
+import time
 __author__ = 'Alan Tai'
 
 import random
@@ -245,14 +246,7 @@ class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
         self.response.out.write(template.render(template_values))
         working_on = ''
-        
-class GetImage(webapp2.RequestHandler):
-    def get(self):
-        entity_id = self.request.get('entity_id')
-        entity = ndb.Key(urlsafe=entity_id).get()
-        if entity and entity.signature_img:
-            self.response.headers['Content-Type'] = 'image/png'
-            self.response.out.write(entity.signature_img)
+
 
 #SUDA Tracking Number Handler (For uploading number)
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
@@ -706,8 +700,10 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_invoice_log_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_invoice_log_page_title
-                data = SpearnetPackagesInfo.query()
-                template_values.update({'spearnet_customer_package_info_log':data})
+                spearnet_customer_package_info_log = SpearnetPackagesInfo.query()
+                general_client_package_info_log = GeneralClientsPackagesInfo.query()
+                
+                template_values.update({'spearnet_customer_package_info_log':spearnet_customer_package_info_log, 'general_client_package_info_log':general_client_package_info_log})
                 #use memcache
 #                 data = memcache.get('tw_custom_entry_invoice_log')
 #                 if data != None:
@@ -982,6 +978,26 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
         self.response.out.write(json.dumps(ajax_data))
         
         
+#get image
+class GetImage(webapp2.RequestHandler):
+    def get(self):
+        entity_id = self.request.get('entity_id')
+        entity = ndb.Key(urlsafe=entity_id).get()
+        if entity and entity.signature_img:
+            self.response.headers['Content-Type'] = 'image/png'
+            self.response.out.write(entity.signature_img)
+            
+class GetReferenceNumber(webapp2.RequestHandler):
+    def post(self):
+        ajax_data = {}
+        if(self.request.get('key') == 'get_package_reference_number'):
+            time_stamp = int(round(time.time())).__str__()
+            exshipper_package_number = 'EXPK' + time_stamp
+            ajax_data.update({'exshipper_package_number':exshipper_package_number})
+            
+            self.response.headers['Content-Type'] = 'text/json'
+            self.response.out.write(json.dumps(ajax_data))
+        
 #send email
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
@@ -1038,6 +1054,7 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_invoice_info_handler', ExShipperInvoiceInfoHandler),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
                                ('/img', GetImage),
+                               ('/get_ref_number', GetReferenceNumber),
                                ('/exshipper_spearnet_index_page', ExShipperSpearnetIndexHandler),
                                ('/exshipper_spearnet_login_handler', ExShipperSpearnetLoginHandler),
                                ('/exshipper_spearnet_data_exchange_page', ExShipperSpearnetDataExchangeDispatcher),

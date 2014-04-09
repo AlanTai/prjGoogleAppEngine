@@ -17,9 +17,9 @@
 </div -->
 
 <div
-	style="position: absolute; top: 5px; width: 100%; text-align: center; margin: auto;">
-	<br> {% if spearnet_customer_package_info_log %}
-	<div id="spearnet_packages_invoice_log" style="display: block; margin: auto;"></div>
+	style="position: absolute; top: 10px; width: 100%; text-align: center; margin: auto;">
+	{% if spearnet_customer_package_info_log %}
+	<div id="spearnet_packages_invoice_log"></div>
 		<!-- spearnet -->
 		{% for single_row_data in spearnet_customer_package_info_log %}
 			<script type="text/javascript">
@@ -27,7 +27,7 @@
 			var package_suda_number = '{{ single_row_data.hawb }}';
 			if(img_id !== 'None'){
 
-				$('#spearnet_packages_invoice_log').append('<form style="width:800px; height: 1050px; margin: 10px auto; border: 1px solid;">'
+				$('#spearnet_packages_invoice_log').append('<form style="width:800px; height: 1100px; margin: 20px auto; border: 1px solid;">'
 						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
 						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 						+'<p style="font-weight:bold; font-size:15px;">Client Signature</p>'
@@ -71,18 +71,16 @@
 		{% endif %}
 		<!-- end -->
 		
-		<hr>
-		
-		{% if general_client_package_info_log %}
-		<div id="general_clients_packages_invoice_log" style="display: block; margin: auto;"></div>
 		<!-- general clients -->
+		{% if general_client_package_info_log %}
+		<div id="general_clients_packages_invoice_log"></div>
 		{% for single_row_data in general_client_package_info_log %}
 			<script type="text/javascript">
 			var img_id = '{{ single_row_data.signature_img_id }}';
 			var package_suda_number = '{{ single_row_data.hawb }}';
 			if(img_id !== 'None'){
 
-				$('#general_clients_packages_invoice_log').append('<form style="width:800px; height: 1050px; margin: 10px auto; border: 1px solid;">'
+				$('#general_clients_packages_invoice_log').append('<form style="width:1100px; height: 1050px; margin: 10px auto; border: 1px solid;">'
 						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
 						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 						+'<p style="font-weight:bold; font-size:15px;">Client Signature</p>'

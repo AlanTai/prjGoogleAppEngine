@@ -1,0 +1,131 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<!-- div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Taiwan Custom Entry Invoice
+		Log</p>
+	<hr>
+</div -->
+
+<div
+	style="position: absolute; top: 5px; width: 100%; text-align: center; margin: auto;">
+	<br> {% if spearnet_customer_package_info_log %}
+	<div id="spearnet_packages_invoice_log" style="display: block; margin: auto;"></div>
+		<!-- spearnet -->
+		{% for single_row_data in spearnet_customer_package_info_log %}
+			<script type="text/javascript">
+			var img_id = '{{ single_row_data.signature_img_id }}';
+			var package_suda_number = '{{ single_row_data.hawb }}';
+			if(img_id !== 'None'){
+
+				$('#spearnet_packages_invoice_log').append('<form style="width:800px; height: 1050px; margin: 10px auto; border: 1px solid;">'
+						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
+						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
+						+'<p style="font-weight:bold; font-size:15px;">Client Signature</p>'
+						+'<img src="/img?entity_id={{ single_row_data.signature_img_id }}"/>'
+						+'<p>Name: {{single_row_data.shipper_company}}</p>'
+						+'<p>Phone: {{ single_row_data.shipper_tel }}</p>'
+						+'<p>Address: {{ single_row_data.shipper_address_english }}</p>'
+						+'<p style="font-weight:bold; font-size:18px;">Consignee\'s Information</p>'
+						+'<p>SUDA Tracking Number: {{ single_row_data.hawb }}</p>'
+						+'<p>Ref. Number: {{ single_row_data.reference_number }}</p>'
+						+'<p>Consignee Chinese Name: {{ single_row_data.consignee_name_chinese }}</p>'
+						+'<p>Consignee Chinese Address: {{ single_row_data.consignee_address_chinese }}</p>'
+						+'<p>English Name: {{ single_row_data.consignee_name_english }}</p>'
+						+'<p>Phone: {{ single_row_data.consignee_tel }}</p>'
+						+'<p>English Address: {{ single_row_data.consignee_address_english }}</p>'
+						+'<p>Weight (kg): <input value="{{ single_row_data.weight_kg }}" style="color:#000; border:1px solid; text-align:center;" /></p>'
+						+'<p>Shipping Date: {{ single_row_data.date }} (UTC)</p>'
+						+'<p style="font-weight:bold; font-size:20px;">Detail</p>'
+						+'<p>($ = USD)</p>'
+						+'<div id="commodity_{{ single_row_data.hawb }}"></div>'
+						+'</form>');
+			
+				var items = JSON.parse('{{ single_row_data.commodity_detail }}')['items'];
+				var total_quan = 0;
+				var total_price = 0;
+				$.each(items, function(ith, obj){
+					$('#commodity_{{ single_row_data.hawb }}').append('<p><span style="font-weight: bold;">Item-'+(ith+1)+'</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+					+'<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+					+'<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+					+'<span> Subtotal: <input value = "$'+Number(obj.quan)*Number(obj.price)+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+					+' </p>');
+					total_quan +=Number(obj.quan);
+					total_price +=Number(obj.quan)*Number(obj.price);
+				});
+				$('#commodity_{{ single_row_data.hawb }}').append('<p><span>Total Quantity: '+total_quan+'</span> <span>Total Price: $'+total_price+'</span> </p>');
+			}
+			
+		</script>
+		{% endfor %} {% else %}
+		<p>No Data Available</p>
+		{% endif %}
+		<!-- end -->
+		
+		<hr>
+		
+		{% if general_client_package_info_log %}
+		<div id="general_clients_packages_invoice_log" style="display: block; margin: auto;"></div>
+		<!-- general clients -->
+		{% for single_row_data in general_client_package_info_log %}
+			<script type="text/javascript">
+			var img_id = '{{ single_row_data.signature_img_id }}';
+			var package_suda_number = '{{ single_row_data.hawb }}';
+			if(img_id !== 'None'){
+
+				$('#general_clients_packages_invoice_log').append('<form style="width:800px; height: 1050px; margin: 10px auto; border: 1px solid;">'
+						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
+						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
+						+'<p style="font-weight:bold; font-size:15px;">Client Signature</p>'
+						+'<img src="/img?entity_id={{ single_row_data.signature_img_id }}"/>'
+						+'<p>Name: {{single_row_data.shipper_company}}</p>'
+						+'<p>Phone: {{ single_row_data.shipper_tel }}</p>'
+						+'<p>Address: {{ single_row_data.shipper_address_english }}</p>'
+						+'<p style="font-weight:bold; font-size:18px;">Consignee\'s Information</p>'
+						+'<p>SUDA Tracking Number: {{ single_row_data.hawb }}</p>'
+						+'<p>Ref. Number: {{ single_row_data.reference_number }}</p>'
+						+'<p>Consignee Chinese Name: {{ single_row_data.consignee_name_chinese }}</p>'
+						+'<p>Consignee Chinese Address: {{ single_row_data.consignee_address_chinese }}</p>'
+						+'<p>English Name: {{ single_row_data.consignee_name_english }}</p>'
+						+'<p>Phone: {{ single_row_data.consignee_tel }}</p>'
+						+'<p>English Address: {{ single_row_data.consignee_address_english }}</p>'
+						+'<p>Weight (kg): <input value="{{ single_row_data.weight_kg }}" style="color:#000; border:1px solid; text-align:center;" /></p>'
+						+'<p>Shipping Date: {{ single_row_data.date }} (UTC)</p>'
+						+'<p style="font-weight:bold; font-size:20px;">Detail</p>'
+						+'<p>($ = USD)</p>'
+						+'<div id="commodity_{{ single_row_data.hawb }}"></div>'
+						+'</form>');
+			
+				var items = JSON.parse('{{ single_row_data.commodity_detail }}')['items'];
+				var total_quan = 0;
+				var total_price = 0;
+				$.each(items, function(ith, obj){
+					$('#commodity_{{ single_row_data.hawb }}').append('<p><span style="font-weight: bold;">Item-'+(ith+1)+'</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+					+'<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+					+'<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+					+'<span> Subtotal: <input value = "$'+Number(obj.quan)*Number(obj.price)+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+					+' </p>');
+					total_quan +=Number(obj.quan);
+					total_price +=Number(obj.quan)*Number(obj.price);
+				});
+				$('#commodity_{{ single_row_data.hawb }}').append('<p><span>Total Quantity: '+total_quan+'</span> <span>Total Price: $'+total_price+'</span> </p>');
+			}
+			
+		</script>
+		{% endfor %} {% else %}
+		<p>No Data Available</p>
+		{% endif %}
+		<!-- end -->
+	<hr>
+</div>
+
+{% endblock %}
