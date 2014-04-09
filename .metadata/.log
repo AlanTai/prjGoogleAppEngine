@@ -1465,3 +1465,6 @@ Binding(CTRL+SHIFT+T,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.python.pydev.ui.editor.scope,,,system)
+
+!ENTRY org.python.pydev.shared_core 4 4 2014-04-09 11:37:45.582
+!MESSAGE Info: Rebuilding internal caches: D:\prjGoogleAppEngine\.metadata\.plugins\org.eclipse.core.resources\.projects\prjExWine\com.python.pydev.analysis\AdditionalProjectInterpreterInfo.pydevinfo (Expected error to be provided and got no error!)
