@@ -113,15 +113,14 @@
 			note = 'NA';
 		};
 		
-		var signature_img_id = '{{ single_row_data.signature_img_id }}';
-		if(signature_img_id === 'None'){
+		var note = '{{ single_row_data.note }}';
+		if(note === 'None'){
 			note = 'NA';
 		};
 		
 		//setup auto change mechanism for package status
 		$('.package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
 		$('.notes > input[id={{ single_row_data.hawb }}]').val(note);
-		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').val(note);
 		
 		//update json obj when select value change
 		$('.package_status > select[id={{ single_row_data.hawb }}]').change(function() {
@@ -132,9 +131,8 @@
 			packages_status[key] = $(this).val();
 		});
 		
-		
 		//setup auto change mechanism for client signature
-		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
+		$('.clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
 			var key = $(this).attr('id');
 			/* if (typeof packages_status[key] === 'undefined'){
 				packages_status[key] = $(this).val();

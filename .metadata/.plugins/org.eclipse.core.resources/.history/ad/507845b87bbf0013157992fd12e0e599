@@ -113,16 +113,9 @@
 			note = 'NA';
 		};
 		
-		var signature_img_id = '{{ single_row_data.signature_img_id }}';
-		if(signature_img_id === 'None'){
-			note = 'NA';
-		};
-		
 		//setup auto change mechanism for package status
 		$('.package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
 		$('.notes > input[id={{ single_row_data.hawb }}]').val(note);
-		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').val(note);
-		
 		//update json obj when select value change
 		$('.package_status > select[id={{ single_row_data.hawb }}]').change(function() {
 			var key = $(this).attr('id');
@@ -132,9 +125,8 @@
 			packages_status[key] = $(this).val();
 		});
 		
-		
 		//setup auto change mechanism for client signature
-		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
+		$('.clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
 			var key = $(this).attr('id');
 			/* if (typeof packages_status[key] === 'undefined'){
 				packages_status[key] = $(this).val();
@@ -274,7 +266,6 @@
 					}
 					
 					if (package_status_length != 0 || clients_signature_length != 0 || notes_length != 0) {
-						$('#upload_cover').css({'display':'block'});
 						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
@@ -289,11 +280,9 @@
 											statusCode : {
 												400 : function() {
 													alert('400 status code! user-side error');
-													$('#upload_cover').css({'display':'none'});
 												},
 												500 : function() {
 													alert('500 status code! server-side error');
-													$('#upload_cover').css({'display':'none'});
 												}
 											}
 										});
@@ -305,7 +294,6 @@
 
 			function showMsg(return_msg) {
 				alert(return_msg.update_status);
-				$('#upload_cover').css({'display':'none'});
 			}
 		</script>
 	</div>
