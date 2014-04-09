@@ -5,6 +5,7 @@ Created on Oct 1, 2013
 @author: Alan Tai
 '''
 from google.appengine.ext.key_range import ndb
+from webapp2 import redirect
 __author__ = 'Alan Tai'
 
 import random
@@ -703,18 +704,31 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         # html page dispatching
         if(dispatch_token == 'exshipper_tw_custom_entry_invoice_log'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = my_dict.exshipper_tw_custom_entry_login_page
-                html_page_title = my_dict.exshipper_general_clients_login_page_title
-                
+                html_page = my_dict.exshipper_tw_custom_entry_invoice_log_page
+                html_page_title = my_dict.exshipper_tw_custom_entry_invoice_log_page_title
+                data = SpearnetPackagesInfo.query()
+                template_values.update({'spearnet_customer_package_info_log':data})
                 #use memcache
-                data = memcache.get('tw_custom_entry_invoice_log')
-                if data is not None:
-                    log_spearnet_customer_package_info = data
-                else:
-                    data = SpearnetPackagesInfo.query()
-                    memcache.add('tw_custom_entry_invoice_log',data,500)
-                    log_spearnet_customer_package_info = data
-                template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
+#                 data = memcache.get('tw_custom_entry_invoice_log')
+#                 if data != None:
+#                     log_spearnet_customer_package_info = data
+#                 else:
+#                     data = SpearnetPackagesInfo.query()
+#                     memcache.add('tw_custom_entry_invoice_log',data,500)
+#                     log_spearnet_customer_package_info = data
+#                 template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
+
+        elif(dispatch_token == 'exshipper_tw_custom_entry_cargo_manifest'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
+                html_page = my_dict.exshipper_cargo_manifest_page
+                html_page_title = my_dict.exshipper_cargo_manifest_page_title
+                
+                spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
+                general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
+#                 cargo_manifest.update(spearnet_customers_package_info_cargo_manifest)
+#                 cargo_manifest.update(general_clients_package_info_cargo_manifest)
+                template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
+
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
