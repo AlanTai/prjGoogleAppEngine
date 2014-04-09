@@ -18,8 +18,7 @@
 			<br>
 		</div>
 
-		<div style="border: 1px dotted; border-color: #666; display: block;">
-			<p>Print Information</p>
+		<div style="border-color: #666; display: block;">
 			<input id="print_label" type="button" value="Print Labels"
 				onclick="PrintElem('#packages_labels','Packages Labels')"
 				style="margin: 10px auto; width: 150px;">
@@ -126,7 +125,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.shipper_address_english}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
-								+ "{{single_row_data.tel}}"
+								+ "{{single_row_data.shipper_tel}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 5px 10px;"> 收件者: '
@@ -191,7 +190,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.consignee_address_english}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
-								+ "{{single_row_data.tel}}"
+								+ "{{single_row_data.consignee_tel}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">Ref. NO. '

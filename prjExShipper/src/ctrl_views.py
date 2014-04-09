@@ -824,7 +824,52 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 
         self.response.headers['Content-Type'] = 'text/plain ; charset=UTF-8'
         self.response.write(json.dumps(ajax_data))
-        return
+        
+        
+class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
+    def post(self):
+        try:
+            ajax_data = {'update_status':'NA'}
+            if(self.request.get('fmt') == 'json'):
+                update_packages_status = self.request.get('update_packages_info')
+                json_obj = json.loads(update_packages_status)
+                json_obj_package_status = json_obj['packages_status']
+                json_obj_mawbs = json_obj['mawbs']
+                json_obj_flight_numbers = json_obj['flight_numbers']
+                json_obj_flight_dates = json_obj['flight_dates']
+                
+                if(json_obj_package_status != 'NA'):
+                    for key in json_obj_package_status:
+                        package_entity = GeneralClientsPackagesInfo.get_by_id(key)
+                        package_entity.package_status = json_obj_package_status[key]
+                        package_entity.put()
+                          
+                if(json_obj_mawbs != 'NA'):
+                    for key in json_obj_mawbs:
+                        package_entity = TWCustomEntryInfo.get_by_id(key)
+                        package_entity.signature_img_id = json_obj_mawbs[key]
+                        package_entity.put()
+                          
+                if(json_obj_flight_numbers != 'NA'):
+                    for key in json_obj_flight_numbers:
+                        package_entity = TWCustomEntryInfo.get_by_id(key)
+                        package_entity.note = json_obj_flight_numbers[key]
+                        package_entity.put()
+                        
+                if(json_obj_flight_dates != 'NA'):
+                    for key in json_obj_flight_dates:
+                        package_entity = TWCustomEntryInfo.get_by_id(key)
+                        package_entity.note = json_obj_flight_dates[key]
+                        package_entity.put()
+                    
+                ajax_data['update_status'] = 'Successfully update the packages status!'
+                
+        except Exception, e:
+                ajax_data['update_status'] = 'Error Message: %s' % e
+                
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
+        
 #end of custom entry handler
 
 class ExShipperGeneralClientsIndexHandler(webapp2.RequestHandler):
@@ -994,6 +1039,7 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_spearnet_packages_pickup_handler',ExShipperSpearnetPackagesPickupHandler),
                                ('/exshipper_tw_custom_entry_index_page',ExShipperTWCustomEntryIndexHandler),
                                ('/exshipper_tw_custom_entry_login_handler',ExShipperTWCustomEntryLoginHandler),
+                               ('/exshipper_tw_custom_entry_packages_info_update_handler', ExShipperTWCustomEntryPackageInfoUpdateHandler),
                                ('/exshipper_exshipper_general_clients_index_page', ExShipperGeneralClientsIndexHandler),
                                ('/exshipper_general_clients_login_handler', ExShipperGeneralClientsLoginHandler),
                                ('/exshipper_general_clients_packages_info_update_handler', ExShipperGeneralClientsPackageInfoUpdateHandler),
