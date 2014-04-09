@@ -88,7 +88,7 @@
 			
 			<span class="clients_signature">Client Signature:
 				<select id="{{ single_row_data.hawb }}"
-					class="spearnet_client_signature">
+					class="client_signature">
 					
 				</select>
 			</span>
@@ -218,7 +218,7 @@
 			var clients_signatures = new Object();
 				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.name}}" + ' ; Phone: ' + "{{client_info.phone}}";
 			$.each(clients_signatures, function(key, value) {
-			    $('#spearnet_customer_packages_info > form').find('select').append($("<option/>", {
+			    $('#clients_signature > form').find('select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
@@ -229,7 +229,7 @@
 		var clients_signatures = new Object();
 			clients_signatures['NA'] = 'No Data';
 			$.each(clients_signatures, function(key, value) {
-			    $('#spearnet_customer_packages_info > form').find('select').append($("<option/>", {
+			    $('#clients_signature > form').find('select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
@@ -257,22 +257,22 @@
 					var clients_signature_length = Object.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
 					if(package_status_length != 0){
-						json_obj_update_data['package_status'] = packages_status;
+						json_obj_update_data['packages_status'] = packages_status;
 					}
 					else{
-						json_obj_update_data['package_status'] = 'NA'
+						json_obj_update_data['packages_status'] = 'NA';
 					}
 					if(clients_signature_length != 0){
 						json_obj_update_data['clients_signature'] = clients_signature;
 					}
 					else{
-						json_obj_update_data['clients_signature'] = 'NA'
+						json_obj_update_data['clients_signature'] = 'NA';
 					}
 					if(notes_length != 0){
 						json_obj_update_data['notes'] = notes;
 					}
 					else{
-						json_obj_update_data['notes'] = 'NA'
+						json_obj_update_data['notes'] = 'NA';
 					}
 					
 					if (package_status_length != 0 || clients_signature_length != 0 || notes_length != 0) {

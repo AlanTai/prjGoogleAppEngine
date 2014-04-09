@@ -86,7 +86,7 @@
 				</select>
 			</span>
 			
-			<span class="clients_signature">Client Signature:
+			<span class="spearnet_clients_signature">Client Signature:
 				<select id="{{ single_row_data.hawb }}"
 					class="spearnet_client_signature">
 					
@@ -211,7 +211,7 @@
 			var clients_signatures = new Object();
 				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.name}}" + ' ; Phone: ' + "{{client_info.phone}}";
 			$.each(clients_signatures, function(key, value) {
-			    $('#spearnet_customer_packages_info > form').find('select').append($("<option/>", {
+			    $('.spearnet_clients_signature').find('select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
@@ -222,7 +222,7 @@
 		var clients_signatures = new Object();
 			clients_signatures['NA'] = 'No Data';
 			$.each(clients_signatures, function(key, value) {
-			    $('#spearnet_customer_packages_info > form').find('select').append($("<option/>", {
+			    $('.spearnet_clients_signature').find('select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
@@ -242,8 +242,31 @@
 				var confirm_result = confirm('Do you want to update the packages\' status?');
 
 				if (confirm_result == true) {
-					if (Object.keys(packages_status).length != 0) {
-						var json_string = JSON.stringify(packages_status, 2, 2);
+					var json_obj_update_data = new Object();
+					var package_status_length = Object.keys(packages_status).length;
+					var clients_signature_length = Object.keys(clients_signature).length;
+					var notes_length = Object.keys(notes).length;
+					if(package_status_length != 0){
+						json_obj_update_data['packages_status'] = packages_status;
+					}
+					else{
+						json_obj_update_data['packages_status'] = 'NA';
+					}
+					if(clients_signature_length != 0){
+						json_obj_update_data['clients_signature'] = clients_signature;
+					}
+					else{
+						json_obj_update_data['clients_signature'] = 'NA';
+					}
+					if(notes_length != 0){
+						json_obj_update_data['notes'] = notes;
+					}
+					else{
+						json_obj_update_data['notes'] = 'NA';
+					}
+					
+					if (package_status_length != 0 || clients_signature_length != 0 || notes_length != 0) {
+						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
 										'/exshipper_spearnet_customer_packages_info_update_handler',
@@ -251,7 +274,7 @@
 											type : 'POST',
 											data : {
 												fmt : 'json',
-												update_packages_status : json_string
+												update_packages_info : json_string
 											},
 											success : showMsg,
 											statusCode : {
