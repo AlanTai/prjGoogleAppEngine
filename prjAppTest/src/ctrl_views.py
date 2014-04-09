@@ -706,8 +706,10 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_invoice_log_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_invoice_log_page_title
-                data = SpearnetPackagesInfo.query()
-                template_values.update({'spearnet_customer_package_info_log':data})
+                spearnet_customer_package_info_log = SpearnetPackagesInfo.query()
+                general_client_package_info_log = GeneralClientsPackagesInfo.query()
+                
+                template_values.update({'spearnet_customer_package_info_log':spearnet_customer_package_info_log, 'general_client_package_info_log':general_client_package_info_log})
                 #use memcache
 #                 data = memcache.get('tw_custom_entry_invoice_log')
 #                 if data != None:
