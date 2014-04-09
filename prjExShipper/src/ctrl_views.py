@@ -127,13 +127,14 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_pre_alert_page
                 html_page_title = my_dict.exshipper_pre_alert_page_title
-                pre_alert = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
-                if(pre_alert is not None):
-                    flight_number = pre_alert.flight_number
-                    flight_date = pre_alert.flight_date
-                    mawb = pre_alert.mawb
-                    sender = pre_alert.from_which
-                    receiver = pre_alert.receiver
+                pre_alert_title = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
+                pre_alert = TWCustomEntryInfo.query()
+                if(pre_alert_title is not None):
+                    flight_number = pre_alert_title.flight_number
+                    flight_date = pre_alert_title.flight_date
+                    mawb = pre_alert_title.mawb
+                    sender = pre_alert_title.sender
+                    receiver = pre_alert_title.receiver
                     template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb, 'sender':sender, 'receiver':receiver})
                     
                 template_values.update({'pre_alert':pre_alert})
@@ -1002,7 +1003,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:

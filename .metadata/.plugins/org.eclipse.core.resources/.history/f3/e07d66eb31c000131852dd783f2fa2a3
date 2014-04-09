@@ -1,0 +1,71 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Pre-Alert</p>
+	<input id="print_label" type="button" value="Print Labels"
+		onclick="PrintElem('#tw_custom_entry_pre_alert','Pre-Alert')"
+		style="margin: 10px auto; width: 150px;">
+	<hr>
+
+</div>
+
+<div id="tw_custom_entry_pre_alert"
+	style="position: absolute; top: 150px; width: 100%; text-align: center;">
+	<p style="font-size: 20px;">Pre-Alert ExShipper to Apex</p>
+	<p>
+		{% if flight_number %}<span>Flight Number:{{ flight_number }}</span>
+		{% else %} <span>Flight Number: NA</span> {% endif %} {% if
+		flight_date %}<span>Flight Date:{{ flight_date }}</span> {% else %} <span>Flight
+			Date: NA</span> {% endif %} {% if mawb %}<span>Flight Number:{{ mawb
+			}}</span> {% else %} <span>Mawb: NA</span> {% endif %}
+	</p>
+	<p>
+		{% if sender %}<span>From:{{ sender }}</span> {% else %} <span>From:
+			NA</span> {% endif %} {% if receiver %}<span>To:{{ receiver }}</span> {%
+		else %} <span>To: NA</span> {% endif %}
+	</p>
+	<br>
+	<div style="margin: 10px auto; text-align: center;">
+		{% if pre_alert %}
+		<script type="text/javascript">
+			var total_weight;
+			var index = 0;
+		</script>
+		<table id="pre_alert_detail" style="margin: 5px auto;">
+			<tr style="font-weight: bold;">
+				<td>Index</td>
+				<td>Barcode NO.</td>
+				<td>CTN.</td>
+				<td>G/W(kg)</td>
+				<td>Note</td>
+			</tr>
+		</table>
+		{% for single_row_data in pre_alert %}
+		<script type="text/javascript">
+			$('#pre_alert_detail').append('<tr>'
+					+'<td> index </td>'
+					+'<td> {{ single_row_data.barcode_number }} </td>
+					+'<td> {{ single_row_data.ctn }} </td>
+					+'<td> {{ single_row_data.weight_kg }} </td>
+					+'<td> {{ single_row_data.note }} </td>
+					+'</tr>');
+		</script>
+		{% endfor %}
+		{% else %}
+		<p style="text-align: center;">No Pre-Alert Data Available</p>
+		{% endif %}
+	</div>
+	<hr>
+</div>
+
+{% endblock %}
