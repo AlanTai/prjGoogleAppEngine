@@ -47,7 +47,7 @@
 						+'<p>Phone: {{ single_row_data.consignee_tel }}</p>'
 						+'<p>English Address: {{ single_row_data.consignee_address_english }}</p>'
 						+'<p>Weight (kg): <input value="{{ single_row_data.weight_kg }}" style="color:#000; border:1px solid; text-align:center;" /></p>'
-						+'<p>Shipping Date: {{ single_row_data.date }} (UTC)</p>'
+						+'<p>Shipping Date: {{ single_row_data.date }} (Time Zone: TUC)</p>'
 						+'<p style="font-weight:bold; font-size:20px;">Detail</p>'
 						+'<p>($ = USD)</p>'
 						+'<div id="commodity_{{ single_row_data.hawb }}"></div>'
