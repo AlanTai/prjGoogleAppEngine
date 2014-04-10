@@ -13,16 +13,33 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper TW Custom Entry Packages
 		Information Log</p>
-		<div style="display: inline-block;">
-			<input id="flight_number_fields_main_control" type="text" placeholder="Flight Number" >
-			<input type="button" value="Update Flight Number Fields" onclick="updateFlightNumber()" >
+		<div style="display: block; text-align: center;">
+			<input type="button" value="Upload Update"
+				onclick="updatePackageStatus()" style="display: block;">
 		</div>
-		<div style="display: inline-block;">
-			<input id="flight_date_fields_main_control" type="text" placeholder="Flight Date" >
-			<input type="button" value="Update Flight Date Fields" onclick="updateFlightDate()" >
-		</div>
-		<input type="button" value="Upload Update"
-			onclick="updatePackageStatus()">
+			<div style="display: block; margin: 5px auot;">
+				<div style="display: inline-block;">
+					<input id="flight_number_fields_main_control" type="text" placeholder="Flight Number" >
+					<input type="button" value="Update Flight Number Fields" onclick="updateFlightNumber()" >
+				</div>
+				<div style="display: inline-block;">
+					<input id="flight_date_fields_main_control" type="text" placeholder="Flight Date" >
+					<input type="button" value="Update Flight Date Fields" onclick="updateFlightDate()" >
+				</div>
+				<div style="display: inline-block;">
+					<select id="flight_package_status_fields_main_control">
+						<option value="exshipper">ExShipper</option>
+						<option value="apex">Apex</option>
+						<option value="sfo_airport">SFO Airport</option>
+						<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+							International Airport</option>
+						<option value="delivered">Delivered (Leader Empire Wang International Company)</option>
+						<option value="NA">NA</option>
+					</select>
+					<input type="button" value="Update Package Status Fields" onclick="updatePackageStatusField()" >
+				</div>
+			</div>
+		
 	<hr>
 </div>
 
@@ -71,10 +88,11 @@
 				<select id="{{ single_row_data.barcode_number }}"
 					class="spearnet_customer_package_status">
 						<option value="exshipper">ExShipper</option>
+						<option value="apex">Apex</option>
 						<option value="sfo_airport">SFO Airport</option>
 						<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
 							International Airport</option>
-						<option value="delivered">Delivered</option>
+						<option value="delivered">Delivered (Leader Empire Wang International Company)</option>
 						<option value="NA">NA</option>
 				</select>
 			</span>
@@ -150,6 +168,7 @@
 						packages_status[key] = $(this).val();
 					} */
 					packages_status[key] = $(this).val();
+					alert(packages_status[key]);
 				});
 				
 				
@@ -189,13 +208,23 @@
 		$('#tw_custom_entry_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end change color
 		
+		function updatePackageStatusField(){
+			var package_status = $('#flight_package_status_fields_main_control').val();
+			
+			$('.tw_custom_entry_package_status > select').each(function() {
+				$(this).val(package_status);
+				var key = $(this).attr('id');
+				packages_status[key] = $(this).val();
+			});
+		}
+		
 		function updateFlightDate(){
 			var flight_date = $('#flight_date_fields_main_control').val().trim();
 			if(flight_date === ''){
 				alert('No Flight Date!');
 			}
 			else{
-				$('.tw_custom_entry_flight_date > input').each(function(index){
+				$('.tw_custom_entry_flight_date > input').each(function(){
 					$(this).val(flight_date);
 				});
 			};
@@ -207,8 +236,14 @@
 				alert('No Flight Number!');
 			}
 			else{
-				$('.tw_custom_entry_flight_number > input').each(function(index){
+				$('.tw_custom_entry_flight_number > input').each(function(){
 					$(this).val(flight_number);
+					
+					var key = $(this).attr('id');
+					/* if (typeof packages_status[key] === 'undefined'){
+						packages_status[key] = $(this).val();
+					} */
+					flight_numbers[key] = flight_number;
 				});
 			};
 		};
