@@ -12,7 +12,6 @@ import webapp2
 import jinja2
 import os
 import json
-from validate_email import validate_email
 
 from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value

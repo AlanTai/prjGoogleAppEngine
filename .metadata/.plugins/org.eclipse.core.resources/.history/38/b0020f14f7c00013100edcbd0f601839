@@ -11,10 +11,9 @@ __author__ = 'Alan Tai'
 import webapp2
 import jinja2
 import os
-import json
-from validate_email import validate_email
-
 from google.appengine.api import users, mail, memcache
+import json
+
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\

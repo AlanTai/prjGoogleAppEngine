@@ -10,6 +10,15 @@ CGIHTTPServer|C:\Python27\lib\CGIHTTPServer.py
 Canvas|C:\Python27\lib\lib-tk\Canvas.py
 ConfigParser|C:\Python27\lib\ConfigParser.py
 Cookie|C:\Python27\lib\Cookie.py
+DNS.Base|C:\Python27\lib\site-packages\DNS\Base.py
+DNS.Class|C:\Python27\lib\site-packages\DNS\Class.py
+DNS.Lib|C:\Python27\lib\site-packages\DNS\Lib.py
+DNS.Opcode|C:\Python27\lib\site-packages\DNS\Opcode.py
+DNS.Status|C:\Python27\lib\site-packages\DNS\Status.py
+DNS.Type|C:\Python27\lib\site-packages\DNS\Type.py
+DNS.__init__|C:\Python27\lib\site-packages\DNS\__init__.py
+DNS.lazy|C:\Python27\lib\site-packages\DNS\lazy.py
+DNS.win32dns|C:\Python27\lib\site-packages\DNS\win32dns.py
 Dialog|C:\Python27\lib\lib-tk\Dialog.py
 DocXMLRPCServer|C:\Python27\lib\DocXMLRPCServer.py
 FileDialog|C:\Python27\lib\lib-tk\FileDialog.py
@@ -1525,8 +1534,6 @@ encodings.uu_codec|C:\Python27\lib\encodings\uu_codec.py
 encodings.zlib_codec|C:\Python27\lib\encodings\zlib_codec.py
 errno
 exceptions
-fdb.fdboptions|C:\Python27\lib\site-packages\fdb\fdboptions.py
-fdb.tuple|C:\Python27\lib\site-packages\fdb\tuple.py
 filecmp|C:\Python27\lib\filecmp.py
 fileinput|C:\Python27\lib\fileinput.py
 flask.__init__|C:\Python27\lib\site-packages\flask\__init__.py
@@ -3355,6 +3362,7 @@ urlparse|C:\Python27\lib\urlparse.py
 user|C:\Python27\lib\user.py
 uu|C:\Python27\lib\uu.py
 uuid|C:\Python27\lib\uuid.py
+validate_email|C:\Python27\lib\site-packages\validate_email.py
 virtualenv|C:\Python27\lib\site-packages\virtualenv-1.10-py2.7.egg\virtualenv.py
 virtualenv_support.__init__|C:\Python27\lib\site-packages\virtualenv-1.10-py2.7.egg\virtualenv_support\__init__.py
 warnings|C:\Python27\lib\warnings.py
