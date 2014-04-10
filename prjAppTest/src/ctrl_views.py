@@ -377,6 +377,8 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         elif(dispatch_token == 'exshipper_spearnet_suda_tracking_number_download'):
             if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
                 html_page = my_dict.exshipper_spearnet_suda_tracking_number_download_page
+                
+                working_on = ''
                 suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
                 template_values = {'title':my_dict.exshipper_spearnet_suda_tracking_number_download_page_title}
                 
@@ -529,31 +531,38 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
         user_password = self.request.get('user_password')
         suda_tracking_number_type = self.request.get('suda_tracking_number_type')
         ajax_data = {'suda_tracking_number':'NA'}
+        
+        #check suda tracking numbers quantity
+        query_length = len(SUDATrackingNumber_REGULAR.query().fetch(150))
+        if(query_length < 150):
+            send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
+        query_length = len(SUDATrackingNumber_FORMAL.query().fetch(150))
+        if(query_length < 150):
+            send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
+                
+        #send the tracking number to users
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):
             html_page = my_dict.exshipper_spearnet_suda_tracking_number_handler_page
-            suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
             
+            suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
             if suda_tracking_numbers:
                 for suda_tracking_number in suda_tracking_numbers:
                     suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
                     suda_entity.used_mark = 'TRUE'
                     suda_entity.put()
                         
-                template_values = {'title':my_dict.exshipper_invoice_log_title,
+                template_values = {'title':my_dict.exshipper_suda_tracking_number_handler_page_title,
                                    'suda_numbers':suda_tracking_numbers}
                 template_values.update(user_info)
                     
                 template = jinja_environment.get_template(html_page)
                 self.response.out.write(template.render(template_values))
             else:
-                send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number', '')
+                send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                 
         #download suda tracking number for exshipper
         elif(user_account == 'alantai' and user_password == '1014lct'):
             if(suda_tracking_number_type == 'regular'):
-                query_length = len(SUDATrackingNumber_REGULAR.query().fetch(150))
-                if(query_length < 150):
-                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length + ' SUDA tracking numbers.')
                 suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
                 if suda_tracking_numbers:
                     suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_numbers[0].tracking_number)
@@ -562,10 +571,6 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
                     ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
                     
             elif(suda_tracking_number_type == 'formal'):
-                query_length = len(SUDATrackingNumber_FORMAL.query().fetch(150))
-                if(query_length < 150):
-                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length + ' SUDA tracking numbers.')
-                
                 suda_tracking_numbers = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').fetch(1)
                 if suda_tracking_numbers:
                     suda_entity = SUDATrackingNumber_FORMAL.get_by_id(suda_tracking_numbers[0].tracking_number)
@@ -756,16 +761,20 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         if(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_get_number'):
             try:
                 tw_custom_entry_number = 'NA'
-                query_length = len(TWCustomEntryTrackingNumber.query().fetch(30))
+                query_length = TWCustomEntryTrackingNumber.query().fetch(30).count(30)
                 if(query_length < 30):
-                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', 'There are/is only '+ query_length +' TW Custom Entry tracking numbers left.')
-                tracking_number = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').fetch(1)
-                if(tracking_number != None):
-                    tw_custom_entry_number = tracking_number
+                    body = 'There are/is only '+ query_length.__str__() +' TW Custom Entry tracking numbers left.'
+                    email_status = send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
+                
+                tracking_number_entity = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').get()
+                if(tracking_number_entity != None):
+                    tracking_number_entity.used_mark = 'TRUE'
+                    tracking_number_entity.put()
+                    tw_custom_entry_number = tracking_number_entity.tracking_number
                 else:
                     tw_custom_entry_number = 'NA'
-            except:
-                tw_custom_entry_number = 'NA'
+            except Exception, e:
+                tw_custom_entry_number = 'Error Message: %s' % e
             finally:
                 response = tw_custom_entry_number
                 ajax_data.update({'response':response})
@@ -1016,9 +1025,9 @@ def send_email(receiver, sender, subject, body):
         result['email_status'] = 'invalid_email'
     else:
         try:
-            receiver_email_content = 'Notice: The SUDA tracking number ran out and new numbers will be ready soon. If you have further questions, please contact ExShipper.'
+            receiver_email_content = body + 'Notice: The SUDA tracking number ran out and new numbers will be ready soon. If you have further questions, please contact ExShipper.'
             mail.send_mail(email_host, receiver, subject, receiver_email_content)
-            sender_email_content = 'Notice: The SUDA tracking number ran out. Please update the database!'
+            sender_email_content = body + 'Notice: The SUDA tracking number ran out. Please update the database!'
             mail.send_mail(email_host, receiver, subject, sender_email_content)
             result['email_status'] = my_dict.email_delivery_status_success
         except:
