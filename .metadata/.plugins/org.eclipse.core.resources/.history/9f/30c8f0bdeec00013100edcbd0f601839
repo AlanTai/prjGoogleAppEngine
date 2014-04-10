@@ -27,7 +27,7 @@
 			var package_suda_number = '{{ single_row_data.hawb }}';
 			if(img_id !== 'None'){
 
-				$('#spearnet_packages_invoice_log').append('<form style="width:900px; height: 1200px; margin: 20px auto; border: 1px solid;">'
+				$('#spearnet_packages_invoice_log').append('<form style="width:800px; height: 1100px; margin: 20px auto; border: 1px solid;">'
 						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
 						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 						+'<p style="font-weight:bold; font-size:15px;">Client Signature</p>'

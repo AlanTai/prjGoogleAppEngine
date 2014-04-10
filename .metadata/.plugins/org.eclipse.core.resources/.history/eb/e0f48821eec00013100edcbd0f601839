@@ -11,7 +11,7 @@
 
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">ExShipper General Clients Package
+	<p style="font-size: 26px;">ExShipper Spearnet Customers Packages
 		Information Log</p>
 	<input type="button" value="Update Information"
 			onclick="updatePackageStatus()" style="margin: 5px 5px;">
@@ -20,7 +20,7 @@
 
 <div
 	style="position: absolute; top: 130px; width: 100%; text-align: center; margin: 10px auto;">
-	<br> {% if general_clients_packages_info_log %}
+	<br> {% if spearnet_customer_package_info_log %}
 	<div id="spearnet_customer_packages_info"
 		style="width:100%; padding: 5px ; overflow: auto; border: 1px dashed #333333;">
 
@@ -69,16 +69,15 @@
 		
 		json_array.push(obj_keys);
 		</script>
-		{% for single_row_data in general_clients_packages_info_log %}
-		<form style="padding: 5px 5px;">
+		{% for single_row_data in spearnet_customer_package_info_log %}
+		<form style="padding: 5px 5px; margin: 5px auto;">
 			<span>SUDA Tracking Number: <input type="text" value="{{ single_row_data.hawb }}" disabled> </span>
 			<span>TW Custom Entry Barcode Number: <input type="text" value="{{ single_row_data.tw_custom_entry_number }}" /> </span>
-			<span class="general_clients_package_status">Package Status:
+			<span class="package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}"
-					class="package_status">
+					class="general_client_package_status">
 						<option value="spearnet">Spearnet</option>
 						<option value="exshipper">ExShipper</option>
-						<option value="apex">Apex</option>
 						<option value="sfo_airport">SFO Airport</option>
 						<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
 							International Airport</option>
@@ -88,85 +87,79 @@
 				</select>
 			</span>
 			
-			<span class="general_clients_signature">Client Signature:
+			<span class="spearnet_clients_signature">Client Signature:
 				<select id="{{ single_row_data.hawb }}"
 					class="client_signature">
 					<option value="NA">No Data</option>
 				</select>
 			</span>
 			
-			<span class="general_clients_notes">Note:
+			<span class="spearnet_package_note">Note:
 				<input id="{{ single_row_data.hawb }}"
 					class="note" type="text" />
+					
 			</span>
 			
 			<span>Labeling Date: {{ single_row_data.date }}</span>
 		</form>
 
 		<script type="text/javascript">
-			
-			$(function() {
-				//setup initial select values
-				var package_status = '{{ single_row_data.package_status }}';
-				if(package_status === 'None'){
-					alert(package_status);
-					package_status = 'NA';
-				};
-				
-				var note = '{{ single_row_data.note }}';
-				if(note === 'None'){
-					note = 'NA';
-				};
-				
-				var signature_img_id = '{{ single_row_data.signature_img_id }}';
-				if(signature_img_id === 'None'){
-					signature_img_id = 'NA';
-				};
-				
-				//setup auto change mechanism for package status
-				$('.general_clients_package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
-				$('.general_clients_signature > select[id={{ single_row_data.hawb }}]').val(signature_img_id);
-				$('.general_clients_notes > input[id={{ single_row_data.hawb }}]').val(note);
-				
-				
-				//update json obj when select value change
-				$('.general_clients_package_status > select[id={{ single_row_data.hawb }}]').change(function() {
-					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
-					packages_status[key] = $(this).val();
-				});
-				
-				//setup auto change mechanism for client signature
-				$('.general_clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
-					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
-					clients_signature[key] = $(this).val();
-				});
-				
-				//setup auto change mechanism for notes
-				//change function will be triggered after the focus changes
-				/* $('.notes > input[id={{ single_row_data.hawb }}]').change(function() {
-					var key = $(this).attr('id');
-					if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					}
-					notes[key] = $(this).val();
-					alert(notes[key]);
-				}); */
-				
-				$('.general_clients_notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
-					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
-					notes[key] = $(this).val();
-				});
-				
-			});
+		var package_status = '{{ single_row_data.package_status }}';
+		if(package_status === 'None'){
+			package_status = 'NA';
+		};
+		
+		var note = '{{ single_row_data.note }}';
+		if(note === 'None'){
+			note = 'NA';
+		};
+		
+		var signature_img_id = '{{ single_row_data.signature_img_id }}';
+		if(signature_img_id === 'None'){
+			signature_img_id = 'NA';
+		};
+		
+		//setup auto change mechanism for package status
+		$('.package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
+		$('.spearnet_package_note > input[id={{ single_row_data.hawb }}]').val(note);
+		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').val(signature_img_id);
+		
+		//update json obj when select value change
+		$('.package_status > select[id={{ single_row_data.hawb }}]').change(function() {
+			var key = $(this).attr('id');
+			/* if (typeof packages_status[key] === 'undefined'){
+				packages_status[key] = $(this).val();
+			} */
+			packages_status[key] = $(this).val();
+		});
+		
+		
+		//setup auto change mechanism for client signature
+		$('.spearnet_clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
+			var key = $(this).attr('id');
+			/* if (typeof packages_status[key] === 'undefined'){
+				packages_status[key] = $(this).val();
+			} */
+			clients_signature[key] = $(this).val();
+		});
+		
+		//setup auto change mechanism for notes
+		//change function will be triggered after the focus changes
+		/* $('.notes > input[id={{ single_row_data.hawb }}]').change(function() {
+			var key = $(this).attr('id');
+			if (typeof packages_status[key] === 'undefined'){
+				packages_status[key] = $(this).val();
+			}
+			notes[key] = $(this).val();
+		}); */
+		
+		$('.spearnet_package_note > input[id={{ single_row_data.hawb }}]').on('input', function() {
+			var key = $(this).attr('id');
+			/* if (typeof packages_status[key] === 'undefined'){
+				packages_status[key] = $(this).val();
+			} */
+			notes[key] = $(this).val();
+		});
 			
 			var obj = new Object();
 			obj['reference_number'] = '{{ single_row_data.reference_number }}';
@@ -221,14 +214,13 @@
 		<p>No Data Available</p>
 		{% endif %}
 		
-		<!-- upload client signature information -->
 		{% if clients_info %}
 		{% for client_info in clients_info %}
 		<script type="text/javascript">
 			var clients_signatures = new Object();
 				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.name}}" + ' ; Phone: ' + "{{client_info.phone}}";
 			$.each(clients_signatures, function(key, value) {
-			    $('.general_clients_signature > select').append($("<option/>", {
+			    $('.spearnet_clients_signature > select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
@@ -237,15 +229,14 @@
 		{% endfor %}
 		{% endif %}
 		
-		<!-- end of upload client signature information -->
 		
 		<script type="text/javascript">
-		// distinct row color
+		// change color
 		$('#spearnet_customer_packages_info> form:even').css('background-color', '#dedede');
 		$('#spearnet_customer_packages_info> form:odd').css('background-color', '#f9f9f9');
-		// end of distinct row color
+		// end change color
 		
-		//update information
+		
 			function updatePackageStatus() {
 				var confirm_result = confirm('Do you want to update the packages\' status?');
 
@@ -278,7 +269,7 @@
 						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
-										"/exshipper_general_clients_packages_info_update_handler",
+										'/exshipper_spearnet_customer_packages_info_update_handler',
 										{
 											type : 'POST',
 											data : {
@@ -433,7 +424,7 @@
 		};
 
 		var current_time = new Date();
-		var file_name = 'general_clients_package_info_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
+		var file_name = 'spearnet_customers_packages_info_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
 		download(jsonToSsXml(testJson), file_name,
 				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	</script>

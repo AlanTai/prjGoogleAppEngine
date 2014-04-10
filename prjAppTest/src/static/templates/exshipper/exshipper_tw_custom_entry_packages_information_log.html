@@ -50,7 +50,7 @@
 </div>
 
 <div
-	style="position: absolute; top: 130px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 200px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if tw_custom_entry_packages_info_log %}
 	<div id="tw_custom_entry_packages_info"
 		style="width:100%; overflow: auto; border: 1px dashed #333333;">
@@ -66,6 +66,7 @@
 		var obj_keys = new Object();
 		obj_keys['barcode_number'] = 'barcode_number';
 		obj_keys['mawb'] = 'mawb';
+		
 		obj_keys['sender'] = 'sender';
 		obj_keys['receiver'] = 'receiver';
 		
@@ -189,6 +190,7 @@
 			obj['sender'] = '{{ single_row_data.sender }}';
 			obj['receiver'] = '{{ single_row_data.receiver }}';
 			
+			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
 			obj['ctn'] = '{{ single_row_data.ctn }}';
 			
 			obj['flight_number'] = "{{ single_row_data.flight_number }}";
@@ -267,7 +269,7 @@
 		};
 		
 			function updatePackageStatus() {
-				var confirm_result = confirm('Do you want to update the packages\' status?');
+				var confirm_result = confirm('Do you want to update the packages\' information?');
 
 				if (confirm_result == true) {
 					var json_obj_update_data = new Object();
@@ -335,6 +337,7 @@
 			function showMsg(return_msg) {
 				alert(return_msg.update_status);
 				$('#upload_cover').css({'display':'none'});
+				location.reload();
 			}
 		</script>
 	</div>
@@ -356,7 +359,9 @@
 		obj_types.sender = "String";
 		obj_types.receiver = "String";
 		
+		obj_types.weight_kg = "String";
 		obj_types.ctn = "String";
+		
 		obj_types.flight_number = "String";
 		obj_types.flight_date = "String";
 		

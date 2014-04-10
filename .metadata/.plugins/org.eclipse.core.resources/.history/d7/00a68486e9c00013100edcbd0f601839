@@ -190,7 +190,7 @@
 			obj['sender'] = '{{ single_row_data.sender }}';
 			obj['receiver'] = '{{ single_row_data.receiver }}';
 			
-			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
+			obj_keys['weight_kg'] = '{{ single_row_data.weight_kg }}';
 			obj['ctn'] = '{{ single_row_data.ctn }}';
 			
 			obj['flight_number'] = "{{ single_row_data.flight_number }}";
@@ -358,9 +358,7 @@
 		obj_types.sender = "String";
 		obj_types.receiver = "String";
 		
-		obj_types.weight_kg = "String";
 		obj_types.ctn = "String";
-		
 		obj_types.flight_number = "String";
 		obj_types.flight_date = "String";
 		

@@ -149,7 +149,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_labels_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_labels_page_title
-                tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+                tw_custom_entry_info = TWCustomEntryInfo.query()
                 template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
                 
         elif(dispatch_token == 'exshipper_cargo_manifest'):
@@ -875,7 +875,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                 if(json_obj_mawbs != 'NA'):
                     for key in json_obj_mawbs:
                         package_entity = TWCustomEntryInfo.get_by_id(key)
-                        package_entity.mawb = json_obj_mawbs[key]
+                        package_entity.signature_img_id = json_obj_mawbs[key]
                         package_entity.put()
                           
                 if(json_obj_flight_numbers != 'NA'):
@@ -890,7 +890,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                         package_entity.flight_date = json_obj_flight_dates[key]
                         package_entity.put()
                     
-                ajax_data['update_status'] = 'Successfully update the packages information!'
+                ajax_data['update_status'] = 'Successfully update the packages status!'
                 
         except Exception, e:
                 ajax_data['update_status'] = 'Error Message: %s' % e

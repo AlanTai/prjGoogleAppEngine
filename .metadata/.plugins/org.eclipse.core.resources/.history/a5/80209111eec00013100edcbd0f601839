@@ -78,7 +78,6 @@
 					class="package_status">
 						<option value="spearnet">Spearnet</option>
 						<option value="exshipper">ExShipper</option>
-						<option value="apex">Apex</option>
 						<option value="sfo_airport">SFO Airport</option>
 						<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
 							International Airport</option>
@@ -109,7 +108,6 @@
 				//setup initial select values
 				var package_status = '{{ single_row_data.package_status }}';
 				if(package_status === 'None'){
-					alert(package_status);
 					package_status = 'NA';
 				};
 				

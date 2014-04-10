@@ -50,7 +50,7 @@
 </div>
 
 <div
-	style="position: absolute; top: 150px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 200px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if tw_custom_entry_packages_info_log %}
 	<div id="tw_custom_entry_packages_info"
 		style="width:100%; overflow: auto; border: 1px dashed #333333;">
@@ -337,6 +337,7 @@
 			function showMsg(return_msg) {
 				alert(return_msg.update_status);
 				$('#upload_cover').css({'display':'none'});
+				location.reload();
 			}
 		</script>
 	</div>

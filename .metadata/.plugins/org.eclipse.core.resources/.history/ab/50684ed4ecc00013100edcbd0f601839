@@ -890,7 +890,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                         package_entity.flight_date = json_obj_flight_dates[key]
                         package_entity.put()
                     
-                ajax_data['update_status'] = 'Successfully update the packages information!'
+                ajax_data['update_status'] = 'Successfully update the packages status!'
                 
         except Exception, e:
                 ajax_data['update_status'] = 'Error Message: %s' % e
