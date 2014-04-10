@@ -5,11 +5,9 @@ Created on Oct 1, 2013
 @author: Alan Tai
 '''
 from google.appengine.ext.key_range import ndb
-import datetime
 import time
 __author__ = 'Alan Tai'
 
-import random
 import webapp2
 import jinja2
 import os
@@ -502,7 +500,8 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         package_entity.package_status = 'exshipper'
                         package_entity.pickup_status = 'pickup'
                         package_entity.put()
-                        send_email('receiver', 'winever.tw@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper')
+                        send_email('jerry@spearnet-us.com', 'winever.tw@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper')
+                        
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
                         
                     else:
@@ -552,6 +551,9 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
         #download suda tracking number for exshipper
         elif(user_account == 'alantai' and user_password == '1014lct'):
             if(suda_tracking_number_type == 'regular'):
+                query_length = len(SUDATrackingNumber_REGULAR.query().fetch(150))
+                if(query_length < 150):
+                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length + ' SUDA tracking numbers.')
                 suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
                 if suda_tracking_numbers:
                     suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_numbers[0].tracking_number)
@@ -560,6 +562,10 @@ class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
                     ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
                     
             elif(suda_tracking_number_type == 'formal'):
+                query_length = len(SUDATrackingNumber_FORMAL.query().fetch(150))
+                if(query_length < 150):
+                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length + ' SUDA tracking numbers.')
+                
                 suda_tracking_numbers = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').fetch(1)
                 if suda_tracking_numbers:
                     suda_entity = SUDATrackingNumber_FORMAL.get_by_id(suda_tracking_numbers[0].tracking_number)
@@ -748,17 +754,19 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         
         #tw custom entry handler for getting a number
         if(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_get_number'):
-            tw_custom_entry_number = 'NA'
             try:
+                tw_custom_entry_number = 'NA'
+                query_length = len(TWCustomEntryTrackingNumber.query().fetch(30))
+                if(query_length < 30):
+                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', 'There are/is only '+ query_length +' TW Custom Entry tracking numbers left.')
                 tracking_number = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').fetch(1)
-                if(tracking_number is not None):
+                if(tracking_number != None):
                     tw_custom_entry_number = tracking_number
                 else:
                     tw_custom_entry_number = 'NA'
             except:
                 tw_custom_entry_number = 'NA'
             finally:
-                tw_custom_entry_number = random.randint(10000,99999)
                 response = tw_custom_entry_number
                 ajax_data.update({'response':response})
                 
@@ -801,7 +809,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         break;
                     else:
                         tw_custom_entry_package = TWCustomEntryInfo.get_by_id(key)
-                        if(tw_custom_entry_package is None):
+                        if(tw_custom_entry_package == None):
                             tw_custom_entry_package = TWCustomEntryInfo(id=key)
                         
                         tw_custom_entry_package.barcode_number = key
