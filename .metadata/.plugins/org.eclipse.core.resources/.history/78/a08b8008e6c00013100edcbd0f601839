@@ -15,15 +15,9 @@
 		Information Log</p>
 		<div style="display: block; text-align: center; width: 100%;">
 			<input type="button" value="Upload Update"
-				onclick="updatePackageStatus()" style="margin: 5px auto;">
+				onclick="updatePackageStatus()" style="display: block;">
 		</div>
 			<div style="display: block; margin: 5px auot;">
-				
-				<div style="display: inline-block;">
-					<input id="mawb_fields_main_control" type="text" placeholder="MAWB" >
-					<input type="button" value="Update MAWB Fields" onclick="updateMawb()" >
-				</div>
-				
 				<div style="display: inline-block;">
 					<input id="flight_number_fields_main_control" type="text" placeholder="Flight Number" >
 					<input type="button" value="Update Flight Number Fields" onclick="updateFlightNumber()" >
@@ -195,6 +189,7 @@
 			obj['flight_date'] = "{{ single_row_data.flight_date }}";
 			
 			obj['package_status'] = "{{ single_row_data.package_status }}";
+			
 			obj['note'] = "{{ single_row_data.note }}";
 			json_array.push(obj);
 			
@@ -212,21 +207,6 @@
 		$('#tw_custom_entry_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end change color
 		
-		function updateMawb(){
-			var mawb = $('#mawb_fields_main_control').val().trim();
-			if(mawb === ''){
-				alert('No MAWB!');
-				$('#mawb_fields_main_control').focus();
-			}
-			else{
-				$('.tw_custom_entry_mawb > input').each(function(){
-					var key = $(this).attr('id');
-					$(this).val(mawb);
-					mawbs[key] = mawb;
-				});
-			};
-		}
-		
 		function updatePackageStatusField(){
 			var package_status = $('#flight_package_status_fields_main_control').val();
 			
@@ -241,7 +221,6 @@
 			var flight_date = $('#flight_date_fields_main_control').val().trim();
 			if(flight_date === ''){
 				alert('No Flight Date!');
-				$('#flight_date_fields_main_control').focus();
 			}
 			else{
 				$('.tw_custom_entry_flight_date > input').each(function(){
@@ -254,13 +233,15 @@
 			var flight_number = $('#flight_number_fields_main_control').val().trim();
 			if(flight_number === ''){
 				alert('No Flight Number!');
-				$('#flight_number_fields_main_control').focus();
 			}
 			else{
 				$('.tw_custom_entry_flight_number > input').each(function(){
 					$(this).val(flight_number);
 					
 					var key = $(this).attr('id');
+					/* if (typeof packages_status[key] === 'undefined'){
+						packages_status[key] = $(this).val();
+					} */
 					flight_numbers[key] = flight_number;
 				});
 			};

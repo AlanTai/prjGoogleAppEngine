@@ -261,6 +261,9 @@
 					$(this).val(flight_number);
 					
 					var key = $(this).attr('id');
+					/* if (typeof packages_status[key] === 'undefined'){
+						packages_status[key] = $(this).val();
+					} */
 					flight_numbers[key] = flight_number;
 				});
 			};
