@@ -12,6 +12,7 @@ import webapp2
 import jinja2
 import os
 import json
+from validate_email import validate_email
 
 from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value
@@ -190,8 +191,7 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             new_package_info.hawb = package_id
             new_package_info.reference_number = self.request.get('valid_ref_number')
             new_package_info.tw_custom_entry_number = 'NA'
-            new_package_info.ctn = self.request.get('valid_ctn')
-            new_package_info.ctn = self.request.get('valid_note')
+            new_package_info.ctn = self.request.get('ctn')
             new_package_info.size = new_size
             new_package_info.weight_kg = self.request.get('valid_weight')
             new_package_info.weight_lb = 'NA'
@@ -621,9 +621,9 @@ class ExShipperSpearnetCustomerPackageTrackingHandler(webapp2.RequestHandler):
         ajax_data = {'package_status':'NA'}
         try:
             if(self.request.get('fmt') == 'json'):
-                tracking_result_entity = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).get()
-                if(tracking_result_entity):
-                    package_status = tracking_result_entity.package_status
+                tracking_result = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).fetch(1)
+                if(tracking_result):
+                    package_status = tracking_result[0].package_status
                     ajax_data['package_status'] = package_status
         except Exception, e:
             ajax_data['package_status'] = 'Error Message: %s' % e

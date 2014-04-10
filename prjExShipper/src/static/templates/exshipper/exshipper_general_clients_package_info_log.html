@@ -21,7 +21,7 @@
 <div
 	style="position: absolute; top: 130px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if general_clients_packages_info_log %}
-	<div id="spearnet_customer_packages_info"
+	<div id="general_clients_packages_info"
 		style="width:100%; padding: 5px ; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
@@ -109,7 +109,6 @@
 				//setup initial select values
 				var package_status = '{{ single_row_data.package_status }}';
 				if(package_status === 'None'){
-					alert(package_status);
 					package_status = 'NA';
 				};
 				
@@ -241,8 +240,8 @@
 		
 		<script type="text/javascript">
 		// distinct row color
-		$('#spearnet_customer_packages_info> form:even').css('background-color', '#dedede');
-		$('#spearnet_customer_packages_info> form:odd').css('background-color', '#f9f9f9');
+		$('#general_clients_packages_info> form:even').css('background-color', '#dedede');
+		$('#general_clients_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end of distinct row color
 		
 		//update information

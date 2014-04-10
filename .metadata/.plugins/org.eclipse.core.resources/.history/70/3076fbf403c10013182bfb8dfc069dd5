@@ -11,7 +11,7 @@
 
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">ExShipper General Clients Package
+	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
 	<input type="button" value="Update Information"
 			onclick="updatePackageStatus()" style="margin: 5px 5px;">
@@ -21,7 +21,7 @@
 <div
 	style="position: absolute; top: 130px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if general_clients_packages_info_log %}
-	<div id="general_clients_packages_info"
+	<div id="spearnet_customers_packages_info"
 		style="width:100%; padding: 5px ; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
@@ -240,8 +240,8 @@
 		
 		<script type="text/javascript">
 		// distinct row color
-		$('#general_clients_packages_info> form:even').css('background-color', '#dedede');
-		$('#general_clients_packages_info> form:odd').css('background-color', '#f9f9f9');
+		$('#spearnet_customers_packages_info> form:even').css('background-color', '#dedede');
+		$('#spearnet_customers_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end of distinct row color
 		
 		//update information
@@ -432,7 +432,7 @@
 		};
 
 		var current_time = new Date();
-		var file_name = 'general_clients_package_info_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
+		var file_name = 'spearnet_customers_packages_info_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
 		download(jsonToSsXml(testJson), file_name,
 				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	</script>

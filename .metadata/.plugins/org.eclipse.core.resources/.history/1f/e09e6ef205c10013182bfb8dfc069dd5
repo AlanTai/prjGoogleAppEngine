@@ -621,9 +621,9 @@ class ExShipperSpearnetCustomerPackageTrackingHandler(webapp2.RequestHandler):
         ajax_data = {'package_status':'NA'}
         try:
             if(self.request.get('fmt') == 'json'):
-                tracking_result_entity = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).get()
-                if(tracking_result_entity):
-                    package_status = tracking_result_entity.package_status
+                tracking_result = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).get()
+                if(tracking_result):
+                    package_status = tracking_result.package_status
                     ajax_data['package_status'] = package_status
         except Exception, e:
             ajax_data['package_status'] = 'Error Message: %s' % e

@@ -11,9 +11,9 @@ __author__ = 'Alan Tai'
 import webapp2
 import jinja2
 import os
-from google.appengine.api import users, mail, memcache
 import json
 
+from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
@@ -149,7 +149,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_labels_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_labels_page_title
-                tw_custom_entry_info = TWCustomEntryInfo.query()
+                tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
                 template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
                 
         elif(dispatch_token == 'exshipper_cargo_manifest'):
@@ -190,7 +190,8 @@ class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
             new_package_info.hawb = package_id
             new_package_info.reference_number = self.request.get('valid_ref_number')
             new_package_info.tw_custom_entry_number = 'NA'
-            new_package_info.ctn = self.request.get('ctn')
+            new_package_info.ctn = self.request.get('valid_ctn')
+            new_package_info.ctn = self.request.get('valid_note')
             new_package_info.size = new_size
             new_package_info.weight_kg = self.request.get('valid_weight')
             new_package_info.weight_lb = 'NA'
@@ -620,9 +621,9 @@ class ExShipperSpearnetCustomerPackageTrackingHandler(webapp2.RequestHandler):
         ajax_data = {'package_status':'NA'}
         try:
             if(self.request.get('fmt') == 'json'):
-                tracking_result = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).fetch(1)
-                if(tracking_result):
-                    package_status = tracking_result[0].package_status
+                tracking_result_entity = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == self.request.get('customer_tracking_number')).get()
+                if(tracking_result_entity):
+                    package_status = tracking_result_entity.package_status
                     ajax_data['package_status'] = package_status
         except Exception, e:
             ajax_data['package_status'] = 'Error Message: %s' % e
@@ -875,7 +876,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                 if(json_obj_mawbs != 'NA'):
                     for key in json_obj_mawbs:
                         package_entity = TWCustomEntryInfo.get_by_id(key)
-                        package_entity.signature_img_id = json_obj_mawbs[key]
+                        package_entity.mawb = json_obj_mawbs[key]
                         package_entity.put()
                           
                 if(json_obj_flight_numbers != 'NA'):
@@ -890,7 +891,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                         package_entity.flight_date = json_obj_flight_dates[key]
                         package_entity.put()
                     
-                ajax_data['update_status'] = 'Successfully update the packages status!'
+                ajax_data['update_status'] = 'Successfully update the packages information!'
                 
         except Exception, e:
                 ajax_data['update_status'] = 'Error Message: %s' % e
@@ -1020,7 +1021,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
