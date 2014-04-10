@@ -33,33 +33,47 @@
 		{% if sender %}<span>From:{{ sender }}</span> {% else %} <span>From: NA</span> {% endif %}
 		{% if receiver %}<span>To:{{ receiver }}</span> {% else %} <span>To: NA</span> {% endif %}
 	</p>
+	<p id="id_package_quantity"></p>
+	<p id="id_total_weight"></p>
 	<br>
 	<div style="margin: 10px auto; text-align: center;">
 		{% if pre_alert %}
 		<script type="text/javascript">
-			var total_weight;
+			var total_weight = 0;
+			var weight = 0;
 			var index = 0;
 		</script>
-		<table id="pre_alert_detail" style="margin: 5px auto; border: 1px #000 solid">
+		<table id="pre_alert_detail" style="margin: 5px auto; border: 1px #333 solid; border-collapse: collapse;">
 			<tr style="font-weight: bold; padding: 5px;">
-				<td>Index</td>
-				<td>Barcode NO.</td>
-				<td>CTN.</td>
-				<td>G/W(kg)</td>
-				<td>Note</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">Index</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">Barcode NO.</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">CTN.</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">G/W(kg)</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">Note</td>
 			</tr>
 		</table>
 		{% for single_row_data in pre_alert %}
 		<script type="text/javascript">
-			$('#pre_alert_detail > tbody').append('<tr>'
-					+'<td> '+ (++this.index) +' </td>'
-					+'<td> {{ single_row_data.barcode_number }} </td>'
-					+'<td> {{ single_row_data.ctn }} </td>'
-					+'<td> {{ single_row_data.weight_kg }} </td>'
-					+'<td> {{ single_row_data.note }} </td>'
+			if(numberFilter('{{ single_row_data.weight_kg }}')){
+				this.weight = Number('{{ single_row_data.weight_kg }}');
+			};
+			this.total_weight = this.total_weight + this.weight;
+		
+			$('#pre_alert_detail > tbody').append('<tr style="padding: 5px;">'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> '+ (++this.index) +' </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> {{ single_row_data.barcode_number }} </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> {{ single_row_data.ctn }} </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> '+ this.weight.toFixed(1) +' </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> {{ single_row_data.note }} </td>'
 					+'</tr>');
+			
+			
 		</script>
 		{% endfor %}
+		<script type="text/javascript">
+			$('#id_total_weight').text('Total Weight: '+ total_weight.toFixed(1));
+			$('#id_package_quantity').text('Package Quantity: '+ index);
+		</script>
 		{% else %}
 		<p style="text-align: center;">No Pre-Alert Data Available</p>
 		{% endif %}

@@ -13,7 +13,15 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper TW Custom Entry Packages
 		Information Log</p>
-		<input type="button" value="Update Information"
+		<div style="display: inline-block;">
+			<input id="flight_number_fields_main_control" type="text" placeholder="Flight Number" >
+			<input type="button" value="Update Flight Number Fields" onclick="updateFlightNumber()" >
+		</div>
+		<div style="display: inline-block;">
+			<input id="flight_date_fields_main_control" type="text" placeholder="Flight Date" >
+			<input type="button" value="Update Flight Date Fields" onclick="updateFlightDate()" >
+		</div>
+		<input type="button" value="Upload Update"
 			onclick="updatePackageStatus()">
 	<hr>
 </div>
@@ -56,7 +64,7 @@
 			<span class="tw_custom_entry_sender">Sender(寄送方): <input id="{{ single_row_data.barcode_number }}" type="text" value="{{ single_row_data.sender }}" disabled /> </span>
 			<span class="tw_custom_entry_receiver">Receiver(收件方): <input id="{{ single_row_data.barcode_number }}" type="text" value="{{ single_row_data.receiver }}" disabled /> </span>
 			<span class="tw_custom_entry_flight_number">Flight Number(班機編號): <input id="{{ single_row_data.barcode_number }}" type="text" value="{{ single_row_data.flight_number }}" /> </span>
-			<span class="tw_custom_entry_flight_date">Flight Date(班機日期): <input id="{{ single_row_data.barcode_number }}" type="text" value="{{ single_row_data.flight_date }}" /> </span>
+			<span class="tw_custom_entry_flight_date">Flight Date(班機日期): <input id="flight_date_{{ single_row_data.barcode_number }}" type="text" value="{{ single_row_data.flight_date }}" /> </span>
 			
 			
 			<span class="tw_custom_entry_package_status">Package Status:
@@ -104,7 +112,7 @@
 				$('.tw_custom_entry_package_status > select').val(tw_custom_entry_package_status);
 				
 				
-				$('.tw_custom_entry_mawb > input[id={{ single_row_data.hawb }}]').on('input', function() {
+				$('.tw_custom_entry_mawb > input[id={{ single_row_data.barcode_number }}]').on('input', function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -112,7 +120,7 @@
 					mawbs[key] = $(this).val();
 				});
 				
-				$('.tw_custom_entry_flight_number > input[id={{ single_row_data.hawb }}]').on('input', function() {
+				$('.tw_custom_entry_flight_number > input[id={{ single_row_data.barcode_number }}]').on('input', function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -120,23 +128,33 @@
 					flight_numbers[key] = $(this).val();
 				});
 				
-				$('.tw_custom_entry_flight_date > input[id={{ single_row_data.hawb }}]').on('input', function() {
-					var key = $(this).attr('id');
+				$('.tw_custom_entry_flight_date > input[id=flight_date_{{ single_row_data.barcode_number }}]').on('input', function() {
+					var key = $(this).attr('id').substring(12);
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
 					} */
+					
 					flight_dates[key] = $(this).val();
 				});
+				$(".tw_custom_entry_flight_date > input[id=flight_date_{{ single_row_data.barcode_number }}]").datepicker({
+				    onSelect: function(dateText) {
+				    	var key = $(this).attr('id').substring(12);
+				    	flight_dates[key] = dateText;
+				    }
+				  });
 				
 				//update json obj when select value change
-				$('.tw_custom_entry_package_status > select').change(function() {
+				$('.tw_custom_entry_package_status > select[id={{ single_row_data.barcode_number }}]').change(function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
 					} */
 					packages_status[key] = $(this).val();
 				});
-
+				
+				
+				//flight_date_main_control
+				$('#flight_date_fields_main_control').datepicker();
 			});
 			
 			var obj = new Object();
@@ -171,6 +189,29 @@
 		$('#tw_custom_entry_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end change color
 		
+		function updateFlightDate(){
+			var flight_date = $('#flight_date_fields_main_control').val().trim();
+			if(flight_date === ''){
+				alert('No Flight Date!');
+			}
+			else{
+				$('.tw_custom_entry_flight_date > input').each(function(index){
+					$(this).val(flight_date);
+				});
+			};
+		}
+		
+		function updateFlightNumber(){
+			var flight_number = $('#flight_number_fields_main_control').val().trim();
+			if(flight_number === ''){
+				alert('No Flight Number!');
+			}
+			else{
+				$('.tw_custom_entry_flight_number > input').each(function(index){
+					$(this).val(flight_number);
+				});
+			};
+		};
 		
 			function updatePackageStatus() {
 				var confirm_result = confirm('Do you want to update the packages\' status?');
@@ -182,7 +223,7 @@
 					var flight_numbers_length = Object.keys(flight_numbers).length;
 					var flight_dates_length = Object.keys(flight_dates).length;
 					
-					if(package_status_length != 0){
+					if(packages_status_length != 0){
 						json_obj_update_data['packages_status'] = packages_status;
 					}
 					else{
@@ -207,11 +248,9 @@
 						json_obj_update_data['flight_dates'] = 'NA';
 					}
 					
-					
-					
 					if (packages_status_length != 0 || mawbs_length != 0 || flight_numbers_length != 0 || flight_dates_length != 0) {
 						$('#upload_cover').css({'display':'block'});
-						var json_string = JSON.stringify(packages_status, 2, 2);
+						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
 										'/exshipper_tw_custom_entry_packages_info_update_handler',
@@ -219,7 +258,7 @@
 											type : 'POST',
 											data : {
 												fmt : 'json',
-												update_packages_status : json_string
+												update_packages_info : json_string
 											},
 											success : showMsg,
 											statusCode : {
@@ -242,6 +281,7 @@
 
 			function showMsg(return_msg) {
 				alert(return_msg.update_status);
+				$('#upload_cover').css({'display':'none'});
 			}
 		</script>
 	</div>

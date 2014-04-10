@@ -1,0 +1,82 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script type="text/javascript">
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Pre-Alert</p>
+	<input id="print_label" type="button" value="Print Labels"
+		onclick="PrintElem('#tw_custom_entry_pre_alert','Pre-Alert')"
+		style="margin: 10px auto; width: 150px;">
+	<hr>
+
+</div>
+
+<div id="tw_custom_entry_pre_alert"
+	style="position: absolute; top: 150px; width: 100%; text-align: center;">
+	<p style="font-size: 20px;">Pre-Alert ExShipper to Apex</p>
+	<p>
+		{% if flight_number %}<span>Flight Number:{{ flight_number }}</span>{% else %} <span>Flight Number: NA</span> {% endif %}
+		
+		{% if flight_date %}<span>Flight Date:{{ flight_date }}</span> {% else %} <span>Flight Date: NA</span> {% endif %}
+			
+		{% if mawb %}<span>Flight Number:{{ mawb }}</span> {% else %} <span>Mawb: NA</span> {% endif %}
+	</p>
+	<p>
+		{% if sender %}<span>From:{{ sender }}</span> {% else %} <span>From: NA</span> {% endif %}
+		{% if receiver %}<span>To:{{ receiver }}</span> {% else %} <span>To: NA</span> {% endif %}
+	</p>
+	<p id="id_package_quantity"></p>
+	<p id="id_total_weight"></p>
+	<br>
+	<div style="margin: 10px auto; text-align: center;">
+		{% if pre_alert %}
+		<script type="text/javascript">
+			var total_weight = 0;
+			var index = 0;
+		</script>
+		<table id="pre_alert_detail" style="margin: 5px auto; border: 1px #333 solid; border-collapse: collapse;">
+			<tr style="font-weight: bold; padding: 5px;">
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">Index</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">Barcode NO.</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">CTN.</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">G/W(kg)</td>
+				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">Note</td>
+			</tr>
+		</table>
+		{% for single_row_data in pre_alert %}
+		<script type="text/javascript">
+			$('#pre_alert_detail > tbody').append('<tr style="padding: 5px;">'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> '+ (++this.index) +' </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> {{ single_row_data.barcode_number }} </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> {{ single_row_data.ctn }} </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> {{ single_row_data.weight_kg }} </td>'
+					+'<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;"> {{ single_row_data.note }} </td>'
+					+'</tr>');
+			
+			var weight;
+			if(numberFilter('{{ single_row_data.weight_kg }}')){
+				weight = Number('{{ single_row_data.weight_kg }}');
+			};
+			this.total_weight = this.total_weight + weight;
+		</script>
+		{% endfor %}
+		<script type="text/javascript">
+			$('#id_total_weight').val(this.total_weight);
+			$('#id_package_quantity').val(this.index);
+		</script>
+		{% else %}
+		<p style="text-align: center;">No Pre-Alert Data Available</p>
+		{% endif %}
+	</div>
+	<hr>
+</div>
+
+{% endblock %}

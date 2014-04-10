@@ -870,7 +870,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                 if(json_obj_flight_dates != 'NA'):
                     for key in json_obj_flight_dates:
                         package_entity = TWCustomEntryInfo.get_by_id(key)
-                        package_entity.note = json_obj_flight_dates[key]
+                        package_entity.flight_date = json_obj_flight_dates[key]
                         package_entity.put()
                     
                 ajax_data['update_status'] = 'Successfully update the packages status!'
