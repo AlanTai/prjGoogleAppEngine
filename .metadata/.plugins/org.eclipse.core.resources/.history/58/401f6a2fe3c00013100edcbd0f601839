@@ -12,7 +12,7 @@
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Pre-Alert</p>
-	<input id="print_label" type="button" value="Print Pre-Alert"
+	<input id="print_label" type="button" value="Print Labels"
 		onclick="PrintElem('#tw_custom_entry_pre_alert','Pre-Alert')"
 		style="margin: 10px auto; width: 150px;">
 	<hr>
