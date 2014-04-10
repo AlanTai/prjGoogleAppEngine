@@ -851,7 +851,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                 
                 if(json_obj_package_status != 'NA'):
                     for key in json_obj_package_status:
-                        package_entity = TWCustomEntryInfo.get_by_id(key)
+                        package_entity = GeneralClientsPackagesInfo.get_by_id(key)
                         package_entity.package_status = json_obj_package_status[key]
                         package_entity.put()
                           
@@ -864,7 +864,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                 if(json_obj_flight_numbers != 'NA'):
                     for key in json_obj_flight_numbers:
                         package_entity = TWCustomEntryInfo.get_by_id(key)
-                        package_entity.flight_number = json_obj_flight_numbers[key]
+                        package_entity.note = json_obj_flight_numbers[key]
                         package_entity.put()
                         
                 if(json_obj_flight_dates != 'NA'):
