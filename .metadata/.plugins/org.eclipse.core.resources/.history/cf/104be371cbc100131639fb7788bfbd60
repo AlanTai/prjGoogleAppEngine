@@ -132,11 +132,9 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
-                
-                tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+                tw_custom_entry_packages_info_log = TWCustomEntryInfo.query()
                 template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
                 
-        # page of handling exshipper pre-alert
         elif(dispatch_token == 'exshipper_pre_alert'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_pre_alert_page

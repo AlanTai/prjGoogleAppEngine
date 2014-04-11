@@ -136,7 +136,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
                 template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
                 
-        # page of handling exshipper pre-alert
+        #
         elif(dispatch_token == 'exshipper_pre_alert'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_pre_alert_page
