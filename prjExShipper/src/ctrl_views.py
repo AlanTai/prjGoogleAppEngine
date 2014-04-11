@@ -24,7 +24,7 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 #exshipper main index handler
 class ExShipperIndexHandler(webapp2.RequestHandler):
     def get(self):
-        my_dict = Key_Value()
+        my_dict = Key_Value() #get key-value pair dictionary
         user_info = get_users_info(self, users)
         index_page = my_dict.exshipper_index_page
         
@@ -50,7 +50,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(login_page)
         self.response.out.write(template.render(template_values))
         
-    #dispatch visitor to different pages according to the token users send
+    #dispatch user to different pages according to the token, account and, password which users submit
     def post(self):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
@@ -59,17 +59,19 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         exshipper_password = self.request.get('exshipper_password')
         template_values = {}
         
-        #set default page as invalid login page
+        #set default page source and title as invalid login page
         html_page = my_dict.exshipper_invalid_login_page
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
-        # html page dispatching
+        # web-pages dispatcher
+        # page of creating invoice
         if(dispatch_token == 'exshipper_invoice'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 
                 html_page = my_dict.exshipper_invoice_creating_page
                 html_page_title = my_dict.exshipper_invoice_creating_page_title
                 
+        #page of creating client info
         elif(dispatch_token == 'exshipper_create_client_info'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 clients_data = ClientsInfo.query()
@@ -78,15 +80,17 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_create_client_info_handler
                 html_page_title = my_dict.exshipper_create_client_info_handler_title
                 
-        elif(dispatch_token == 'exshipper_suda_tracking_number'):
+        #page of 
+        elif(dispatch_token == 'exshipper_suda_tracking_number_upload'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_suda_tracking_number_handler_page
-                html_page_title = my_dict.exshipper_suda_tracking_number_handler_page_title
+                html_page = my_dict.exshipper_suda_tracking_number_upload_handler_page
+                html_page_title = my_dict.exshipper_suda_tracking_number_upload_handler_page_title
                 
         elif(dispatch_token == 'exshipper_tw_custom_entry_number'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_number_handler_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_number_handler_page_title
+                
                 
         elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
@@ -962,7 +966,6 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        working_on = ''
         if(dispatch_token == 'creating_invoice'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_create_invoice_page

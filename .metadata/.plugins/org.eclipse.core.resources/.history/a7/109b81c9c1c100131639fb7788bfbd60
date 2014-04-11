@@ -1,0 +1,73 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">{{title}}</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; margin: 10px auto; width: 100%; text-align: center;">
+	<p>ExShipper Services for Internal Use</p>
+	<div>
+	
+		<!-- Upload -->
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_suda_tracking_number"
+			target="_blank">Upload SUDA Tracking Numbers (Regular/Formal)</a> <br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_number"
+			target="_blank">Upload TW Custom Entry Numbers</a> <br /> <br />
+	
+	
+		<!-- Information Creator --> 
+		<a href="/exshipper_login_handler?dispatch_token=exshipper_create_client_info"
+			target="_blank">Create Client Information</a> <br />
+		<a href="/exshipper_login_handler?dispatch_token=exshipper_invoice"
+			target="_blank">Create Package Invoice</a><br /> <br />
+
+
+		<!-- Log Information -->
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log"
+			target="_blank">Spearnet Customers Packages Log (For Information Update)</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_general_clients_packages_info_log"
+			target="_blank">General Clients Packages Infomration Log (For Information Update)</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log"
+			target="_blank">TW Custom Entry Packages Information Log (For Information Update)</a>
+			
+		<br /> <br />
+		
+		<!-- Label -->
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_packages_labels"
+			target="_blank">ExShipper Packages Labels</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_labels"
+			target="_blank">TW Custom Entry Labels</a>
+			
+		<br /> <br />
+
+
+		<!-- Log Information -->
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_pre_alert"
+			target="_blank">Pre-Alert</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_cargo_manifest"
+			target="_blank">Cargo Manifest</a><br />
+	</div>
+	<br>
+	<div>
+		<p>ExShipper Taiwan Custom Entry Service</p>
+		<a href="/exshipper_tw_custom_entry_index_page" target="_blank">Taiwan
+			Custom Entry Service</a>
+	</div>
+
+	<div>
+		<p>ExShipper Services for Clients</p>
+		<a href="/exshipper_spearnet_index_page" target="_blank">Spearnet</a>
+		<br /> <a href="/exshipper_general_clients_index_page"
+			target="_blank">General Clients</a>
+	</div>
+	<br>
+</div>
+
+
+{% endblock %}

@@ -27,8 +27,8 @@ class Key_Value():
         self.exshipper_invoice_log_page = '/exshipper/exshipper_invoice_log.html'
         self.exshipper_invoice_log_title = 'ExShipper Invoice Log'
         
-        self.exshipper_suda_tracking_number_handler_page = '/exshipper/exshipper_suda_tracking_number_handler.html'
-        self.exshipper_suda_tracking_number_handler_page_title = 'ExShipper SUDA Tracking Number Handler'
+        self.exshipper_suda_tracking_number_upload_handler_page = '/exshipper/exshipper_suda_tracking_number_upload_handler.html'
+        self.exshipper_suda_tracking_number_upload_handler_page_title = 'ExShipper SUDA Tracking Number Upload Handler'
         
         self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
         self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
