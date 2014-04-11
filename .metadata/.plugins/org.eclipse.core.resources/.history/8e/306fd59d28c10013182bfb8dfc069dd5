@@ -34,7 +34,7 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(index_page)
         self.response.out.write(template.render(template_values))
 
-# for handling the exshipper users login process
+# for handling the login process
 class ExShipperLoginHandler(webapp2.RequestHandler):
     #login page
     def get(self):
@@ -93,7 +93,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
                 html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
                 
-                #use memcache to show information users had read
+                #use memcache
 #                 data = memcache.get('spearnet_customer_package_info_log')
 #                 if data is not None:
 #                     log_spearnet_customer_package_info = data

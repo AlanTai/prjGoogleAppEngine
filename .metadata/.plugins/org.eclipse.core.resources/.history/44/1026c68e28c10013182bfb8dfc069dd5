@@ -19,9 +19,9 @@ from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCus
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
     TWCustomEntryInfo
 
-jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates')) #append templates' path
+jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))
 
-#exshipper main index handler
+
 class ExShipperIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
@@ -34,7 +34,7 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(index_page)
         self.response.out.write(template.render(template_values))
 
-# for handling the exshipper users login process
+# for handling the login process
 class ExShipperLoginHandler(webapp2.RequestHandler):
     #login page
     def get(self):
@@ -93,7 +93,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
                 html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
                 
-                #use memcache to show information users had read
+                #use memcache
 #                 data = memcache.get('spearnet_customer_package_info_log')
 #                 if data is not None:
 #                     log_spearnet_customer_package_info = data
