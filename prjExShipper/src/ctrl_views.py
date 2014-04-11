@@ -266,17 +266,34 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
         if(self.request.get('fmt') == 'json'):
             try:
                 json_obj = json.loads(self.request.get('json_info'))
-                suda_number_array = json_obj['suda_tracking_numbers']
-                duplicated_numbers = ''
-                for row_info in suda_number_array:
-                    if(SUDATrackingNumber_REGULAR.get_by_id(row_info['suda_number'])):
-                        duplicated_numbers += 'Duplicated Number: '+ row_info['suda_number'] +'\n'
-                    else:
-                        new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['suda_number'])
-                        new_suda_tr_number.tracking_number = row_info['suda_number']
-                        new_suda_tr_number.used_mark = row_info['used_mark']
-                        new_suda_tr_number.put()
-                        ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+                suda_tracking_number_type = json_obj.keys()[0]
+                
+                if(suda_tracking_number_type == 'regular_suda_tracking_numbers'):
+                    suda_number_array = json_obj['regular_suda_tracking_numbers']
+                    duplicated_numbers = ''
+                    for row_info in suda_number_array:
+                        if(SUDATrackingNumber_REGULAR.get_by_id(row_info['suda_number'])):
+                            duplicated_numbers += 'Duplicated Number: '+ row_info['suda_number'] +'\n'
+                        else:
+                            new_suda_tr_number = SUDATrackingNumber_REGULAR(id=row_info['suda_number'])
+                            new_suda_tr_number.tracking_number = row_info['suda_number']
+                            new_suda_tr_number.used_mark = row_info['used_mark']
+                            new_suda_tr_number.put()
+                            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+                            
+                if(suda_tracking_number_type == 'formal_suda_tracking_numbers'):
+                    suda_number_array = json_obj['formal_suda_tracking_numbers']
+                    duplicated_numbers = ''
+                    for row_info in suda_number_array:
+                        if(SUDATrackingNumber_FORMAL.get_by_id(row_info['suda_number'])):
+                            duplicated_numbers += 'Duplicated Number: '+ row_info['suda_number'] +'\n'
+                        else:
+                            new_suda_tr_number = SUDATrackingNumber_FORMAL(id=row_info['suda_number'])
+                            new_suda_tr_number.tracking_number = row_info['suda_number']
+                            new_suda_tr_number.used_mark = row_info['used_mark']
+                            new_suda_tr_number.put()
+                            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+                            
             except Exception, e:
                 ajax_data['suda_tracking_number_submission'] = 'Error Message: %s' % e
             
@@ -307,7 +324,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
             except Exception, e:
                 ajax_data['tw_custom_entry_number_submission'] = 'Error Message: %s' % e
             
-            #check the size of upload numbers
+            #check the size of upload numbers; limit the number no more than 200
             ary_length = tw_custom_entry_number_array.__len__()
             if(ary_length > 200):
                 ajax_data['tw_custom_entry_number_submission'] = 'Size of upload numbers is not more than 200!'
@@ -375,25 +392,25 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_spearnet_data_exchange_page
                 html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
                 
-        elif(dispatch_token == 'exshipper_spearnet_suda_tracking_number_download'):
-            if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
-                html_page = my_dict.exshipper_spearnet_suda_tracking_number_download_page
-                
-                working_on = ''
-                suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
-                template_values = {'title':my_dict.exshipper_spearnet_suda_tracking_number_download_page_title}
-                
-                if suda_tracking_numbers:
-                    for suda_tracking_number in suda_tracking_numbers:
-                        suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
-                        suda_entity.used_mark = 'TRUE'
-                        suda_entity.put()
-                            
-                    template_values.update({'suda_numbers':suda_tracking_numbers})
-                else:
-                    template_values.update({'suda_numbers':'No SUDA TRacking Number Available'})
-                    send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for SUDA Tracking Number Shortage', '')
-                    
+#         elif(dispatch_token == 'exshipper_spearnet_suda_tracking_number_download'):
+#             if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
+#                 html_page = my_dict.exshipper_spearnet_suda_tracking_number_download_page
+#                 
+#                 working_on = ''
+#                 suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
+#                 template_values = {'title':my_dict.exshipper_spearnet_suda_tracking_number_download_page_title}
+#                 
+#                 if suda_tracking_numbers:
+#                     for suda_tracking_number in suda_tracking_numbers:
+#                         suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
+#                         suda_entity.used_mark = 'TRUE'
+#                         suda_entity.put()
+#                             
+#                     template_values.update({'suda_numbers':suda_tracking_numbers})
+#                 else:
+#                     template_values.update({'suda_numbers':'No SUDA TRacking Number Available'})
+#                     send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for SUDA Tracking Number Shortage', 'There is no SUDA tracking number available')
+ 
                 template_values.update(user_info)
                 template = jinja_environment.get_template(html_page)
                 self.response.out.write(template.render(template_values))
@@ -524,60 +541,65 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
         self.response.write(json.dumps(json_response))
         
 #download SUDA tracking number handler
-class ExShipperSpearnetSUDATrackingNumberHandler(webapp2.RequestHandler):
+class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
     def post(self):
-        my_dict = Key_Value()
-        user_info = get_users_info(self, users)
         user_account = self.request.get('user_account')
         user_password = self.request.get('user_password')
         suda_tracking_number_type = self.request.get('suda_tracking_number_type')
         ajax_data = {'suda_tracking_number':'NA'}
         
         #check suda tracking numbers quantity
-        query_length = len(SUDATrackingNumber_REGULAR.query().fetch(150))
-        if(query_length < 150):
+        query_length = len(SUDATrackingNumber_REGULAR.query().fetch(100))
+        if(query_length < 100):
             send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
-        query_length = len(SUDATrackingNumber_FORMAL.query().fetch(150))
-        if(query_length < 150):
+        query_length = len(SUDATrackingNumber_FORMAL.query().fetch(50))
+        if(query_length < 50):
             send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         #send the tracking number to users
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):
-            html_page = my_dict.exshipper_spearnet_suda_tracking_number_handler_page
-            
-            suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
-            if suda_tracking_numbers:
-                for suda_tracking_number in suda_tracking_numbers:
-                    suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
-                    suda_entity.used_mark = 'TRUE'
-                    suda_entity.put()
-                        
-                template_values = {'title':my_dict.exshipper_suda_tracking_number_handler_page_title,
-                                   'suda_numbers':suda_tracking_numbers}
-                template_values.update(user_info)
+            if(suda_tracking_number_type == 'regular'):
+                suda_tracking_number_regular_entity = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').get()
+                if suda_tracking_number_regular_entity != None:
+                    regular_suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number_regular_entity.tracking_number)
+                    regular_suda_entity.used_mark = 'TRUE'
+                    regular_suda_entity.put()
+                    ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
+                else:
+                    send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
-                template = jinja_environment.get_template(html_page)
-                self.response.out.write(template.render(template_values))
-            else:
-                send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
-                
+            elif(suda_tracking_number_type == 'formal'):
+                suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
+                if suda_tracking_number_formal_entity != None:
+                    formal_suda_entity = SUDATrackingNumber_FORMAL.get_by_id(suda_tracking_number_formal_entity.tracking_number)
+                    formal_suda_entity.used_mark = 'TRUE'
+                    formal_suda_entity.put()
+                    ajax_data['suda_tracking_number'] = suda_tracking_number_formal_entity.tracking_number
+                else:
+                    send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
+                    
+            
         #download suda tracking number for exshipper
         elif(user_account == 'alantai' and user_password == '1014lct'):
             if(suda_tracking_number_type == 'regular'):
-                suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
-                if suda_tracking_numbers:
-                    suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_numbers[0].tracking_number)
-                    suda_entity.used_mark = 'TRUE'
-                    suda_entity.put()
-                    ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
+                suda_tracking_number_regular_entity = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').get()
+                if suda_tracking_number_regular_entity != None:
+                    regular_suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number_regular_entity.tracking_number)
+                    regular_suda_entity.used_mark = 'TRUE'
+                    regular_suda_entity.put()
+                    ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
+                else:
+                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
             elif(suda_tracking_number_type == 'formal'):
-                suda_tracking_numbers = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').fetch(1)
-                if suda_tracking_numbers:
-                    suda_entity = SUDATrackingNumber_FORMAL.get_by_id(suda_tracking_numbers[0].tracking_number)
-                    suda_entity.used_mark = 'TRUE'
-                    suda_entity.put()
-                    ajax_data['suda_tracking_number'] = suda_tracking_numbers[0].tracking_number
+                suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
+                if suda_tracking_number_formal_entity != None:
+                    formal_suda_entity = SUDATrackingNumber_FORMAL.get_by_id(suda_tracking_number_formal_entity.tracking_number)
+                    formal_suda_entity.used_mark = 'TRUE'
+                    formal_suda_entity.put()
+                    ajax_data['suda_tracking_number'] = suda_tracking_number_formal_entity.tracking_number
+                else:
+                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                     
             self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
             self.response.out.write(json.dumps(ajax_data))
@@ -636,8 +658,8 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
         try:
             ajax_data = {'update_status':'NA'}
             if(self.request.get('fmt') == 'json'):
-                update_packages_status = self.request.get('update_packages_info')
-                json_obj = json.loads(update_packages_status)
+                update_packages_info = self.request.get('update_packages_info')
+                json_obj = json.loads(update_packages_info)
                 json_obj_package_status = json_obj['packages_status']
                 json_obj_clients_signature = json_obj['clients_signature']
                 json_obj_notes = json_obj['notes']
@@ -860,8 +882,8 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
         try:
             ajax_data = {'update_status':'NA'}
             if(self.request.get('fmt') == 'json'):
-                update_packages_status = self.request.get('update_packages_info')
-                json_obj = json.loads(update_packages_status)
+                update_packages_info = self.request.get('update_packages_info')
+                json_obj = json.loads(update_packages_info)
                 json_obj_package_status = json_obj['packages_status']
                 json_obj_mawbs = json_obj['mawbs']
                 json_obj_flight_numbers = json_obj['flight_numbers']
@@ -1080,7 +1102,7 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_spearnet_data_exchange_handler', ExShipperSpearnetDataExchangeHandler),
                                ('/exshipper_suda_tracking_number_handler', ExShipperSUDATrackingNumberHandler),
                                ('/exshipper_tw_custom_entry_number_handler', ExShipperTWCustomEntryNumberHandler),
-                               ('/exshipper_spearnet_suda_tracking_number_handler', ExShipperSpearnetSUDATrackingNumberHandler),
+                               ('/exshipper_suda_tracking_number_download_handler', ExShipperSUDATrackingNumberDownloadHandler),
                                ('/exshipper_tw_custom_entry_handler', ExshipperTWCustomEntryHandler),
                                ('/exshipper_spearnet_customer_index_page', ExShipperSpearnetCustomerIndexHandler),
                                ('/exshipper_spearnet_customer_services_handler', ExShipperSpearnetCustomerServicesHandler),

@@ -274,6 +274,7 @@
 					
 					if (package_status_length != 0 || clients_signature_length != 0 || notes_length != 0) {
 						$('#upload_cover').css({'display':'block'});
+						
 						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
@@ -299,6 +300,9 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
+					
+					//ajax function
+					
 				}
 			}
 
