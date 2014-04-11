@@ -619,6 +619,7 @@ class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(html_page)
         self.response.out.write(template.render(template_values))   
             
+#
 class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
@@ -960,17 +961,18 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         html_page = my_dict.exshipper_invalid_login_page
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
-        working_on = ''
-        
         # html page dispatching
+        working_on = ''
         if(dispatch_token == 'creating_invoice'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_create_invoice_page
                 html_page_title = my_dict.exshipper_general_clients_create_invoice_page_title
+                
         elif(dispatch_token == 'track_package_status'):
             if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_track_package_status_page
                 html_page_title = my_dict.exshipper_general_clients_track_package_status_page_title
+                
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
@@ -1019,6 +1021,31 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
         self.response.out.write(json.dumps(ajax_data))
         
         
+class ExShipperGeneralClientsPackageTrackingHandler(webapp2.RequestHandler):
+    def post(self):
+        ajax_data = {'package_status':'NA'}
+        hawb = self.request.get('customer_tracking_number')
+        try:
+            if(self.request.get('fmt') == 'json'):
+                tracking_result_entity = SpearnetPackagesInfo.query(SpearnetPackagesInfo.hawb == hawb).get()
+                if(tracking_result_entity != None):
+                    package_status = tracking_result_entity.package_status
+                    ajax_data['package_status'] = package_status
+                
+                tracking_result_entity = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.hawb == hawb).get()
+                if(tracking_result_entity != None):
+                    package_status = tracking_result_entity.package_status
+                    ajax_data['package_status'] = package_status
+                    
+        except Exception, e:
+            ajax_data['package_status'] = 'Error Message: %s' % e
+                           
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
+#end of general clients
+        
+        
+#function classes block
 #get image
 class GetImage(webapp2.RequestHandler):
     def get(self):
@@ -1028,6 +1055,7 @@ class GetImage(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = 'image/png'
             self.response.out.write(entity.signature_img)
             
+#get reference numbers
 class GetReferenceNumber(webapp2.RequestHandler):
     def post(self):
         ajax_data = {}
@@ -1038,7 +1066,10 @@ class GetReferenceNumber(webapp2.RequestHandler):
             
             self.response.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
+# end of function classes
         
+
+#temporary functions block (will be moved to the cooresponding handlers)
 #send email
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
@@ -1071,7 +1102,7 @@ def get_users_info(self, users):
               'user_account': user_account,
               'url': url}
     return values
-# end of self-defined functions
+# end of #temporary functions block
 
 
 #test class
@@ -1112,7 +1143,8 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_tw_custom_entry_index_page',ExShipperTWCustomEntryIndexHandler),
                                ('/exshipper_tw_custom_entry_login_handler',ExShipperTWCustomEntryLoginHandler),
                                ('/exshipper_tw_custom_entry_packages_info_update_handler', ExShipperTWCustomEntryPackageInfoUpdateHandler),
-                               ('/exshipper_exshipper_general_clients_index_page', ExShipperGeneralClientsIndexHandler),
+                               ('/exshipper_general_clients_index_page', ExShipperGeneralClientsIndexHandler),
                                ('/exshipper_general_clients_login_handler', ExShipperGeneralClientsLoginHandler),
                                ('/exshipper_general_clients_packages_info_update_handler', ExShipperGeneralClientsPackageInfoUpdateHandler),
+                               ('/exshipper_general_clients_packages_tracking_handler', ExShipperGeneralClientsPackageTrackingHandler),
                                ('/exshipper_test', TestHandler)], debug=True)
