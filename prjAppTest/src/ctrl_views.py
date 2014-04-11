@@ -307,7 +307,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
             except Exception, e:
                 ajax_data['tw_custom_entry_number_submission'] = 'Error Message: %s' % e
             
-            #check the size of upload numbers
+            #check the size of upload numbers; limit the number no more than 200
             ary_length = tw_custom_entry_number_array.__len__()
             if(ary_length > 200):
                 ajax_data['tw_custom_entry_number_submission'] = 'Size of upload numbers is not more than 200!'
@@ -636,8 +636,8 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
         try:
             ajax_data = {'update_status':'NA'}
             if(self.request.get('fmt') == 'json'):
-                update_packages_status = self.request.get('update_packages_info')
-                json_obj = json.loads(update_packages_status)
+                update_packages_info = self.request.get('update_packages_info')
+                json_obj = json.loads(update_packages_info)
                 json_obj_package_status = json_obj['packages_status']
                 json_obj_clients_signature = json_obj['clients_signature']
                 json_obj_notes = json_obj['notes']
@@ -860,8 +860,8 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
         try:
             ajax_data = {'update_status':'NA'}
             if(self.request.get('fmt') == 'json'):
-                update_packages_status = self.request.get('update_packages_info')
-                json_obj = json.loads(update_packages_status)
+                update_packages_info = self.request.get('update_packages_info')
+                json_obj = json.loads(update_packages_info)
                 json_obj_package_status = json_obj['packages_status']
                 json_obj_mawbs = json_obj['mawbs']
                 json_obj_flight_numbers = json_obj['flight_numbers']

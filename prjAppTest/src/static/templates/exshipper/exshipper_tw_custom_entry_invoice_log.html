@@ -1,5 +1,6 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
-<script type="text/javascript">
+
+<script>
 	window.onload = function() {
 		history.pushState(null, null, location.href);
 		window.onpopstate = function(event) {
@@ -16,7 +17,7 @@
 </div -->
 
 <div
-	style="position: absolute; top: 0px; width: 100%; text-align: center; margin: auto;">
+	style="position: absolute; top: 10px; width: 100%; text-align: center; margin: auto;">
 	{% if spearnet_customer_package_info_log %}
 	<div id="spearnet_packages_invoice_log"></div>
 		<!-- spearnet -->
@@ -26,11 +27,11 @@
 			var package_suda_number = '{{ single_row_data.hawb }}';
 			if(img_id !== 'None'){
 
-				$('#spearnet_packages_invoice_log').append('<form style="width:900px; height: 1200px; margin: 40px auto; border: 1px solid;">'
+				$('#spearnet_packages_invoice_log').append('<form style="width:1100px; height: 1400px; margin: 40px auto; border: 1px solid;">'
 						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
 						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 						+'<p style="font-weight:bold; font-size:15px;">Client Signature</p>'
-						+'<img src="/img?entity_id={{ single_row_data.signature_img_id }}"/>'
+						+'<img style="height: 100px;" src="/img?entity_id={{ single_row_data.signature_img_id }}"/>'
 						+'<p>Name: {{single_row_data.shipper_company}}</p>'
 						+'<p>Phone: {{ single_row_data.shipper_tel }}</p>'
 						+'<p>Address: {{ single_row_data.shipper_address_english }}</p>'
@@ -79,11 +80,11 @@
 			var package_suda_number = '{{ single_row_data.hawb }}';
 			if(img_id !== 'None'){
 
-				$('#general_clients_packages_invoice_log').append('<form style="width:1100px; height: 1050px; margin: 10px auto; border: 1px solid;">'
+				$('#general_clients_packages_invoice_log').append('<form style="width:1100px; height: 1400px; margin: 40px auto; border: 1px solid;">'
 						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
 						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 						+'<p style="font-weight:bold; font-size:15px;">Client Signature</p>'
-						+'<img src="/img?entity_id={{ single_row_data.signature_img_id }}"/>'
+						+'<img style="height: 100px;" src="/img?entity_id={{ single_row_data.signature_img_id }}"/>'
 						+'<p>Name: {{single_row_data.shipper_company}}</p>'
 						+'<p>Phone: {{ single_row_data.shipper_tel }}</p>'
 						+'<p>Address: {{ single_row_data.shipper_address_english }}</p>'

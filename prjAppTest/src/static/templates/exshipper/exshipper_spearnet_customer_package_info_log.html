@@ -73,7 +73,7 @@
 		<form style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text" value="{{ single_row_data.hawb }}" disabled> </span>
 			<span>TW Custom Entry Barcode Number: <input type="text" value="{{ single_row_data.tw_custom_entry_number }}" /> </span>
-			<span class="general_clients_package_status">Package Status:
+			<span class="spearnet_customers_package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}"
 					class="package_status">
 						<option value="spearnet">Spearnet</option>
@@ -88,14 +88,14 @@
 				</select>
 			</span>
 			
-			<span class="general_clients_signature">Client Signature:
+			<span class="spearnet_customers_signature">Client Signature:
 				<select id="{{ single_row_data.hawb }}"
 					class="client_signature">
 					<option value="NA">No Data</option>
 				</select>
 			</span>
 			
-			<span class="general_clients_notes">Note:
+			<span class="spearnet_customers_notes">Note:
 				<input id="{{ single_row_data.hawb }}"
 					class="note" type="text" />
 			</span>
@@ -123,13 +123,13 @@
 				};
 				
 				//setup auto change mechanism for package status
-				$('.general_clients_package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
-				$('.general_clients_signature > select[id={{ single_row_data.hawb }}]').val(signature_img_id);
-				$('.general_clients_notes > input[id={{ single_row_data.hawb }}]').val(note);
+				$('.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
+				$('.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]').val(signature_img_id);
+				$('.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]').val(note);
 				
 				
 				//update json obj when select value change
-				$('.general_clients_package_status > select[id={{ single_row_data.hawb }}]').change(function() {
+				$('.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -138,7 +138,7 @@
 				});
 				
 				//setup auto change mechanism for client signature
-				$('.general_clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
+				$('.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -157,7 +157,7 @@
 					alert(notes[key]);
 				}); */
 				
-				$('.general_clients_notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
+				$('.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -227,7 +227,7 @@
 			var clients_signatures = new Object();
 				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.name}}" + ' ; Phone: ' + "{{client_info.phone}}";
 			$.each(clients_signatures, function(key, value) {
-			    $('.general_clients_signature > select').append($("<option/>", {
+			    $('.spearnet_customers_signature > select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
@@ -274,10 +274,11 @@
 					
 					if (package_status_length != 0 || clients_signature_length != 0 || notes_length != 0) {
 						$('#upload_cover').css({'display':'block'});
+						
 						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
-										"/exshipper_general_clients_packages_info_update_handler",
+										"/exshipper_spearnet_customer_packages_info_update_handler",
 										{
 											type : 'POST',
 											data : {
@@ -299,6 +300,9 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
+					
+					//ajax function
+					
 				}
 			}
 
