@@ -50,7 +50,7 @@
 </div>
 
 <div
-	style="position: absolute; top: 200px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 150px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if tw_custom_entry_packages_info_log %}
 	<div id="tw_custom_entry_packages_info"
 		style="width:100%; overflow: auto; border: 1px dashed #333333;">
@@ -272,7 +272,7 @@
 		};
 		
 			function updatePackageStatus() {
-				var confirm_result = confirm('Do you want to update the packages\' information?');
+				var confirm_result = confirm('Do you want to update the packages\' status?');
 
 				if (confirm_result == true) {
 					var json_obj_update_data = new Object();
