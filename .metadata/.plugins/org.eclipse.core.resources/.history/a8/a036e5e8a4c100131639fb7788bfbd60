@@ -248,9 +248,6 @@
 			else{
 				$('.tw_custom_entry_flight_date > input').each(function(){
 					$(this).val(flight_date);
-					
-					var key = $(this).attr('id').substring(12);
-			    	flight_dates[key] = flight_date;
 				});
 			};
 		}

@@ -619,7 +619,6 @@ class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(html_page)
         self.response.out.write(template.render(template_values))   
             
-#
 class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
