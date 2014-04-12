@@ -150,7 +150,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                     mawb_response = 'Different MAWBs: '
                     flight_number_response = 'Different Flight Numbers: '
                     flight_date_response = 'Different Flight Dates: '
-                    has_inconsistent_data = 'no'
+                    has_inconsistent_data = ''
                     
                     for package_info in pre_alert:
                         if(pre_alert_entity.mawb != package_info.mawb):
@@ -181,15 +181,10 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_packages_labels_page
                 html_page_title = my_dict.exshipper_packages_labels_page_title
-                spearnet_packages_info = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
-                                                                           SpearnetPackagesInfo.package_status == 'exshipper'))
-                
-                general_clients_packages_info = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'client',
-                                                                                        GeneralClientsPackagesInfo.package_status == 'exshipper'))
-                
+                spearnet_packages_info = SpearnetPackagesInfo.query()
+                general_clients_packages_info = GeneralClientsPackagesInfo.query()
                 template_values.update({'spearnet_packages_info':spearnet_packages_info, 'general_clients_packages_info':general_clients_packages_info})
         
-        #
         elif(dispatch_token == 'exshipper_tw_custom_entry_labels'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_labels_page
