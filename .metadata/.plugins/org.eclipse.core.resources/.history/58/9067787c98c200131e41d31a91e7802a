@@ -189,7 +189,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 
                 template_values.update({'spearnet_packages_info':spearnet_packages_info, 'general_clients_packages_info':general_clients_packages_info})
         
-        #page of generating labels
+        #
         elif(dispatch_token == 'exshipper_tw_custom_entry_labels'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_labels_page
@@ -220,7 +220,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         # end of html page dispatching
         
 # end of ExShipperLoginHandler
-class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
+class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'submit_status':'NA'}
         if(self.request.get('fmt') == 'json'):
@@ -1168,7 +1168,7 @@ class TestHandler(webapp2.RequestHandler):
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
-                               ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
+                               ('/exshipper_invoice_info_handler', ExShipperInvoiceInfoHandler),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),
