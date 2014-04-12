@@ -80,24 +80,25 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_create_client_info_handler
                 html_page_title = my_dict.exshipper_create_client_info_handler_title
                 
-        #page of 
+        #page of uploading suda tracking numbers
         elif(dispatch_token == 'exshipper_suda_tracking_number_upload'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_suda_tracking_number_upload_handler_page
                 html_page_title = my_dict.exshipper_suda_tracking_number_upload_handler_page_title
                 
-        elif(dispatch_token == 'exshipper_tw_custom_entry_number'):
+        #page of uploading tw custom entry numbers
+        elif(dispatch_token == 'exshipper_tw_custom_entry_number_upload'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_number_handler_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_number_handler_page_title
                 
-                
+        #page of handling spearnet customers packages information
         elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
                 html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
                 
-                #use memcache to show information users had read
+                #use memcache to show information users had read (ignore the error message)
 #                 data = memcache.get('spearnet_customer_package_info_log')
 #                 if data is not None:
 #                     log_spearnet_customer_package_info = data
@@ -106,37 +107,67 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
 #                     memcache.add('spearnet_customer_package_info_log',data,1000)
 #                     log_spearnet_customer_package_info = data
 
-                spearnet_customer_package_info_log = SpearnetPackagesInfo.query()
+                # query package information (packages' status == spearnet or exshipper)
+                spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
+                                                                                       SpearnetPackagesInfo.package_status == 'exshipper'))
+                # pass clients informations
                 clients_info = ClientsInfo().query()
                 template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
                   
+                  
+        #page of handling general clients packages information
         elif(dispatch_token == 'exshipper_general_clients_packages_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_package_info_log_page
                 html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
-                general_clients_packages_info_log = GeneralClientsPackagesInfo.query()
+                
+                #query package information (packages' status == spearnet or exshipper)
+                general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'spearnet',
+                                                                                            GeneralClientsPackagesInfo.package_status == 'exshipper'))
                 clients_info = ClientsInfo().query()
                 template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
                 
+        # page of handling tw custom entry packages information
         elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
-                tw_custom_entry_packages_info_log = TWCustomEntryInfo.query()
+                
+                tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
                 template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
                 
+        # page of handling exshipper pre-alert
         elif(dispatch_token == 'exshipper_pre_alert'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_pre_alert_page
                 html_page_title = my_dict.exshipper_pre_alert_page_title
-                pre_alert_title = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
+                
+                pre_alert_entity = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
                 pre_alert = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
-                if(pre_alert_title != None):
-                    flight_number = pre_alert_title.flight_number
-                    flight_date = pre_alert_title.flight_date
-                    mawb = pre_alert_title.mawb
-                    sender = pre_alert_title.sender
-                    receiver = pre_alert_title.receiver
+                
+                if(pre_alert_entity != None and pre_alert != None):
+                    #different flight numbers, flight dates, or mawb
+                    mawb_response = 'Different MAWBs: ' + pre_alert_entity.mawb
+                    flight_number_response = 'Different Flight Numbers: ' + pre_alert_entity.flight_number
+                    flight_date_response = 'Different Flight Dates: ' + pre_alert_entity.flight_date
+                    
+                    for package_info in pre_alert:
+                        if(pre_alert_entity.mawb != package_info.mawb):
+                            mawb_response = mawb_response + package_info.mawb
+                        if(pre_alert_entity.flight_number != package_info.flight_number):
+                            flight_number_response = flight_number_response + package_info.flight_number
+                        if(pre_alert_entity.flight_date != package_info.flight_date):
+                            flight_date_response = flight_date_response + package_info.flight_date
+                            
+                    data_inconsistency_response = mawb_response + '\n' + flight_number_response + '\n' +flight_date_response
+                    template_values.update({'data_inconsistency_response':data_inconsistency_response})
+                    #end of different flight numbers, flight dates, or mawb
+                    
+                    flight_number = pre_alert_entity.flight_number
+                    flight_date = pre_alert_entity.flight_date
+                    mawb = pre_alert_entity.mawb
+                    sender = pre_alert_entity.sender
+                    receiver = pre_alert_entity.receiver
                     template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb, 'sender':sender, 'receiver':receiver})
                     
                 template_values.update({'pre_alert':pre_alert})
@@ -1077,7 +1108,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'winever.tw@gmail.com'
+    email_host = 'rainman.tai@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:

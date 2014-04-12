@@ -141,14 +141,33 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_pre_alert_page
                 html_page_title = my_dict.exshipper_pre_alert_page_title
-                pre_alert_title = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
+                
+                pre_alert_entity = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
                 pre_alert = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
-                if(pre_alert_title != None):
-                    flight_number = pre_alert_title.flight_number
-                    flight_date = pre_alert_title.flight_date
-                    mawb = pre_alert_title.mawb
-                    sender = pre_alert_title.sender
-                    receiver = pre_alert_title.receiver
+                
+                if(pre_alert_entity != None and pre_alert != None):
+                    #different flight numbers, flight dates, or mawb
+                    mawb_response = 'Different MAWBs: ' + pre_alert_entity.mawb
+                    flight_number_response = 'Different Flight Numbers: ' + pre_alert_entity.flight_number
+                    flight_date_response = 'Different Flight Dates: ' + pre_alert_entity.flight_date
+                    
+                    for package_info in pre_alert:
+                        if(pre_alert_entity.mawb != package_info.mawb):
+                            mawb_response = mawb_response + package_info.mawb
+                        if(pre_alert_entity.flight_number != package_info.flight_number):
+                            flight_number_response = flight_number_response + package_info.flight_number
+                        if(pre_alert_entity.flight_date != package_info.flight_date):
+                            flight_date_response = flight_date_response + package_info.flight_date
+                            
+                    data_inconsistency_response = mawb_response + '\n' + flight_number_response + '\n' +flight_date_response
+                    template_values.update({'data_inconsistency_response':data_inconsistency_response})
+                    #end of different flight numbers, flight dates, or mawb
+                    
+                    flight_number = pre_alert_entity.flight_number
+                    flight_date = pre_alert_entity.flight_date
+                    mawb = pre_alert_entity.mawb
+                    sender = pre_alert_entity.sender
+                    receiver = pre_alert_entity.receiver
                     template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb, 'sender':sender, 'receiver':receiver})
                     
                 template_values.update({'pre_alert':pre_alert})
