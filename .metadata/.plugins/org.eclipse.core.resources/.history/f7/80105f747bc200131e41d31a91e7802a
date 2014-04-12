@@ -150,18 +150,15 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                     mawb_response = 'Different MAWBs: '
                     flight_number_response = 'Different Flight Numbers: '
                     flight_date_response = 'Different Flight Dates: '
-                    
+                    has_inconsistent_data = 'yes'
                     
                     for package_info in pre_alert:
                         if(pre_alert_entity.mawb != package_info.mawb):
                             mawb_response = mawb_response + package_info.mawb
-                            has_inconsistent_data = 'yes'
                         if(pre_alert_entity.flight_number != package_info.flight_number):
                             flight_number_response = flight_number_response + package_info.flight_number
-                            has_inconsistent_data = 'yes'
                         if(pre_alert_entity.flight_date != package_info.flight_date):
                             flight_date_response = flight_date_response + package_info.flight_date
-                            has_inconsistent_data = 'yes'
                             
                     inconsistent_data_response = mawb_response + '\n' + flight_number_response + '\n' +flight_date_response
                     template_values.update({'has_inconsistent_data':has_inconsistent_data,'inconsistent_data_response':inconsistent_data_response})

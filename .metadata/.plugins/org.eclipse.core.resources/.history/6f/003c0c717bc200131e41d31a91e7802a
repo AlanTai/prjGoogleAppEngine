@@ -78,15 +78,6 @@
 		{% else %}
 		<p style="text-align: center;">No Pre-Alert Data Available</p>
 		{% endif %}
-		
-		
-		<script type="text/javascript">
-		var has_inconsistent_data = {{has_inconsistent_data}};
-		if(has_inconsistent_data === 'yes'){
-			alert(has_inconsistent_data);
-			$('#inconsistent_data').val(has_inconsistent_data);
-		}
-		</script>
 	</div>
 </div>
 

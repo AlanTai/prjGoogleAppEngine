@@ -22,7 +22,6 @@
 <div id="tw_custom_entry_pre_alert"
 	style="position: absolute; top: 150px; width: 100%; text-align: center;">
 	<p style="font-size: 20px; font-weight: bold;">Pre-Alert ExShipper to Apex</p>
-	<p id="inconsistent_data" style="color: #f00"></p>
 	<p>
 		{% if flight_number %}<span>Flight Number: {{ flight_number }}</span>{% else %} <span>Flight Number: NA</span> {% endif %}
 		
@@ -78,15 +77,6 @@
 		{% else %}
 		<p style="text-align: center;">No Pre-Alert Data Available</p>
 		{% endif %}
-		
-		
-		<script type="text/javascript">
-		var has_inconsistent_data = {{has_inconsistent_data}};
-		if(has_inconsistent_data === 'yes'){
-			alert(has_inconsistent_data);
-			$('#inconsistent_data').val(has_inconsistent_data);
-		}
-		</script>
 	</div>
 </div>
 
