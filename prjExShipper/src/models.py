@@ -11,13 +11,13 @@ from google.appengine.ext.ndb.model import JsonProperty
 #employee
 class PersonInfo(ndb.Model):
     id = ndb.StringProperty()
-    account = ndb.StringProperty()
+    account_name = ndb.StringProperty()
     password = ndb.StringProperty()
     
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
     birthday = ndb.DateProperty()
-    gender_title = ndb.StringProperty()
+    gender = ndb.StringProperty()
     address = ndb.StringProperty()
     phone = ndb.StringProperty()
     email = ndb.StringProperty()

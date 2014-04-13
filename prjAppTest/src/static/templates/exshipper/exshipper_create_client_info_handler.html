@@ -19,14 +19,23 @@
 				<!-- Account Name -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Account
-						Name: </label> <input name="client_name" id="client_account_name"
+						Name: </label> <input title="Account Name" name="client_account_name" id="client_account_name"
 						type="text"
 						style="width: 250px; display: inline-block; padding: 2px 5px;" />
 				</div>
+				<!-- Email -->
+				<div>
+					<label style="width: 430px; display: inline-block;"> Email:
+					</label> <input title="Email" name="client_email" id="client_email" type="tel"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br>
+				
+				
 				<!-- Account Name -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Password:
-					</label> <input name="client_password" id="client_password" type="text"
+					</label> <input title="Password" name="client_password" id="client_password" type="text"
 						style="width: 250px; display: inline-block; padding: 2px 5px;" />
 				</div>
 
@@ -34,14 +43,14 @@
 				<!-- First Name -->
 				<div>
 					<label style="width: 430px; display: inline-block;">First
-						Name: </label> <input name="client_first_name" id="client_first_name"
+						Name: </label> <input title="First Name" name="client_first_name" id="client_first_name"
 						type="text"
 						style="width: 250px; display: inline-block; padding: 2px 5px;" />
 				</div>
 				<!-- Last Name -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Last
-						Name: </label> <input name="client_last_name" id="client_last_name"
+						Name: </label> <input title="Last Name" name="client_last_name" id="client_last_name"
 						type="text"
 						style="width: 250px; display: inline-block; padding: 2px 5px;" />
 				</div>
@@ -50,15 +59,15 @@
 				<!-- Birthday -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Birthday:
-					</label> <select name="birthday_year" id="birthday_year"></select> <select
-						name="birthday_month" id="birthday_month"></select> <select
-						name="birthday_date" id="birthday_date"></select>
+					</label> <select name="birthday_year" id="birthday_year" form="client_info"></select> <select
+						name="birthday_month" id="birthday_month" form="client_info"></select> <select
+						name="birthday_date" id="birthday_date" form="client_info"></select>
 				</div>
 				<br>
 				<!-- Gender -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Gender:
-					</label> <select name="client_gender" id="client_gender">
+					</label> <select name="client_gender" id="client_gender" form="client_info">
 						<option value="male">Male</option>
 						<option value="female">Female</option>
 					</select>
@@ -68,26 +77,18 @@
 				<!-- Address -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Address:
-					</label> <input name="client_address" id="client_address" type="text"
+					</label> <input title="Address" name="client_address" id="client_address" type="text"
 						style="width: 250px; display: inline-block; padding: 2px 5px;" />
 				</div>
 				<br>
 
 				<!-- phone -->
 				<div>
-					<label style="width: 430px; display: inline-block;"> Phone:
-					</label> <input name="client_phone" id="client_phone" type="tel"
+					<label style="width: 430px; display: inline-block;"> Phone Number:
+					</label> <input title="Phone Number" name="client_phone_number" id="client_phone_number" type="tel"
 						style="width: 250px; display: inline-block; padding: 2px 5px;" />
 				</div>
-				<br>
-
-				<!-- Email -->
-				<div>
-					<label style="width: 430px; display: inline-block;"> Email:
-					</label> <input name="client_email" id="client_email" type="tel"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" />
-				</div>
-				<br> <br>
+				<br><br>
 
 				<div>
 					<label style="width: 430px; display: inline-block;"> Please
@@ -106,7 +107,7 @@
 			<!-- Signature -->
 			<div>
 				<label style="width: 430px; display: inline-block;">Signature
-					(Personal Name): </label> <input name="client_signature" id="client_signature"
+					(Personal Name): </label> <input title="Signature" name="client_signature" id="client_signature"
 					type="text"
 					style="width: 250px; display: inline-block; padding: 2px 5px;" />
 			</div>
@@ -178,9 +179,15 @@
 							$("#client_profile_img, #client_signature_img")
 									.change(
 											function() {
-												var iSize = ($(this)[0].files[0].size / 1024);
-												var title = $(this).attr(
-														'title');
+												var iSize;
+												var title = $(this).attr('title');
+												try{
+													iSize = ($(this)[0].files[0].size / 1024);
+												}
+												catch(err){
+													iSize = 0;
+												};
+												
 												if (iSize / 1024 > 1) {
 													if ($(this).attr('id') === 'client_profile_img') {
 														isProfileImageValid = false;
@@ -206,7 +213,17 @@
 																+ " (Mb) ; it's too big for upload!");
 
 													}
-												} else {
+												}
+												else if(iSize === 0){
+													alert('No image selected!');
+													if ($(this).attr('id') === 'client_profile_img') {
+														isProfileImageValid = false;
+													}
+													if ($(this).attr('id') === 'client_signature_img') {
+														isSignatureImageValid = false;
+													}
+												}
+												else {
 													if ($(this).attr('id') === 'client_profile_img') {
 														isProfileImageValid = true;
 													}
@@ -228,8 +245,8 @@
 			var isInfoValid = true;
 			var blank_field = 'Blank Field(s):\n';
 			$('#client_info').find('input').each(function(i){
-				if($(this).val() === ''){
-					blank_field = blank_field + $(this).attr('id') + '\n';
+				if( $(this).attr('type') === 'text' && $(this).val() === ''){
+					blank_field = blank_field + $(this).attr('title') + '\n';
 					isInfoValid = false;
 				}
 			});

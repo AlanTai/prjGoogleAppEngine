@@ -224,6 +224,55 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         # end of html page dispatching
         
+        
+#create employee information
+class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
+    def post(self):
+        ajax_data = {'submit_status':'NA'}
+        
+        
+#create client information
+class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
+    def post(self):
+        new_client = ClientsInfo()
+        new_client.name = self.request.get('client_account_name')
+        new_client.name = self.request.get('client_password')
+        new_client.name = self.request.get('client_first_name')
+        new_client.name = self.request.get('client_last_name')
+        
+        new_client.name = self.request.get('birthday_year')
+        new_client.name = self.request.get('birthday_month')
+        new_client.name = self.request.get('birthday_date')
+        
+        new_client.name = self.request.get('client_gender')
+        new_client.name = self.request.get('client_address')
+        new_client.name = self.request.get('client_phone_number')
+        new_client.signature_img = self.request.get('client_profile_img')
+        
+        new_client.signature_str = self.request.get('client_signature')
+        new_client.signature_img = self.request.get('client_signature_img')
+        new_client.put()
+        
+        my_dict = Key_Value()
+        template_values = {}
+        user_info = get_users_info(self, users)
+        template_values.update(user_info)
+        clients_data = ClientsInfo.query()
+        template_values.update({'clients_data':clients_data})
+                
+        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
+        
+        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
+        self.response.out.write(template.render(template_values))
+        working_on = ''
+        
+class ExShipperCheckClientAccountNameEmail(webapp2.RequestHandler):
+    def post(self):
+        account_name = self.request.get('account_name')
+        email = self.request.get('email')
+#end
+        
+        
 # end of ExShipperLoginHandler
 class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
@@ -276,30 +325,6 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
             ajax_data['submit_status'] = 'Data saved into database'
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
-
-class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
-    def post(self):
-        new_client = ClientsInfo()
-        new_client.name = self.request.get('client_name')
-        new_client.address = self.request.get('client_address')
-        new_client.phone = self.request.get('client_phone')
-        new_client.signature_str = self.request.get('name_for_signature')
-        new_client.signature_img = self.request.get('form_client_signature')
-        new_client.put()
-        
-        my_dict = Key_Value()
-        template_values = {}
-        user_info = get_users_info(self, users)
-        template_values.update(user_info)
-        clients_data = ClientsInfo.query()
-        template_values.update({'clients_data':clients_data})
-                
-        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
-        
-        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
-        self.response.out.write(template.render(template_values))
-        working_on = ''
-
 
 #SUDA Tracking Number Handler (For uploading number)
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
