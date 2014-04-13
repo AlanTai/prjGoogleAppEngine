@@ -225,23 +225,39 @@
 						});
 
 		var upload = function() {
-			var isInfoValid = true;
-			var blank_field = 'Blank Field(s):\n';
-			$('#client_info').find('input').each(function(i){
-				if($(this).val() === ''){
-					blank_field = blank_field + $(this).attr('id') + '\n';
-					isInfoValid = false;
-				}
+			$('#client_info > input').each(function(){
+				
 			});
-			if(isInfoValid){
-				alert('All information valid');
-			}
-			else{
-				alert(blank_field);
-				return false;
-			}
+			var client_name = $('#client_account_name').val();
+			var client_password = $('#client_password').val();
+			var client_name = $('#client_account_name').val();
+			var client_name = $('#client_account_name').val();
 			
-			if (!isProfileImageValid || !isSignatureImageValid) {
+			var client_address = $('#id_client_address').val();
+			var client_phone = $('#id_client_phone').val();
+			var client_name_for_signature = $('#id_name_for_signature').val();
+			var client_signature_img = $('#id_form_client_image').val();
+
+			if (client_name === '') {
+				alert('Please key in the client\'s name');
+				$('#id_client_name').focus();
+				return false;
+			} else if (client_address === '') {
+				alert('Please key in the client\'s address');
+				$('#id_client_address').focus();
+				return false;
+			} else if (client_phone === '') {
+				alert('Please key in the client\'s phone');
+				$('#id_client_phone').focus();
+				return false;
+			} else if (client_name_for_signature === '') {
+				alert('Please key in the client\'s name for signature');
+				$('#id_name_for_signature').focus();
+				return false;
+			} else if (client_signature_img === '') {
+				alert('Please select the client\'s signature image');
+				return false;
+			} else if (!isProfileImageValid || !isSignatureImageValid) {
 				return false;
 			} else {
 				return true;

@@ -225,23 +225,30 @@
 						});
 
 		var upload = function() {
-			var isInfoValid = true;
-			var blank_field = 'Blank Field(s):\n';
-			$('#client_info').find('input').each(function(i){
-				if($(this).val() === ''){
-					blank_field = blank_field + $(this).attr('id') + '\n';
-					isInfoValid = false;
-				}
+			$('#client_info > input').each(function(){
+					alert('These is blank field!');
 			});
-			if(isInfoValid){
-				alert('All information valid');
-			}
-			else{
-				alert(blank_field);
-				return false;
-			}
 			
-			if (!isProfileImageValid || !isSignatureImageValid) {
+			if (client_name === '') {
+				alert('Please key in the client\'s name');
+				$('#id_client_name').focus();
+				return false;
+			} else if (client_address === '') {
+				alert('Please key in the client\'s address');
+				$('#id_client_address').focus();
+				return false;
+			} else if (client_phone === '') {
+				alert('Please key in the client\'s phone');
+				$('#id_client_phone').focus();
+				return false;
+			} else if (client_name_for_signature === '') {
+				alert('Please key in the client\'s name for signature');
+				$('#id_name_for_signature').focus();
+				return false;
+			} else if (client_signature_img === '') {
+				alert('Please select the client\'s signature image');
+				return false;
+			} else if (!isProfileImageValid || !isSignatureImageValid) {
 				return false;
 			} else {
 				return true;

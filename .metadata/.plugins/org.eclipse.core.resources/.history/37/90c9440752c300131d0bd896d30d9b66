@@ -226,10 +226,9 @@
 
 		var upload = function() {
 			var isInfoValid = true;
-			var blank_field = 'Blank Field(s):\n';
 			$('#client_info').find('input').each(function(i){
 				if($(this).val() === ''){
-					blank_field = blank_field + $(this).attr('id') + '\n';
+					alert('These is blank field!');
 					isInfoValid = false;
 				}
 			});
@@ -237,7 +236,6 @@
 				alert('All information valid');
 			}
 			else{
-				alert(blank_field);
 				return false;
 			}
 			

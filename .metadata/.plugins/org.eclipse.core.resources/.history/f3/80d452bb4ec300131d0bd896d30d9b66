@@ -11,8 +11,8 @@
 	<div id="client_info_div">
 		<!--  -->
 		<form action="/exshipper_create_client_info_handler" method="post"
-			enctype="multipart/form-data" name="client_info"
-			id="client_info" onsubmit="return upload()"
+			enctype="multipart/form-data" name="form_client_info"
+			id="if_client_info" onsubmit="return upload()"
 			style="margin: 5px auto; text-align: center;">
 			<div id="div_client_info">
 				<p style="display: block; font-weight: bold;">Please fill in the client information</p>
@@ -106,7 +106,7 @@
 			<!-- Signature -->
 			<div>
 				<label style="width: 430px; display: inline-block;">Signature
-					(Personal Name): </label> <input name="client_signature" id="client_signature"
+					(Personal Name): </label> <input name="signature" id="signature"
 					type="text"
 					style="width: 250px; display: inline-block; padding: 2px 5px;" />
 			</div>
@@ -225,23 +225,33 @@
 						});
 
 		var upload = function() {
-			var isInfoValid = true;
-			var blank_field = 'Blank Field(s):\n';
-			$('#client_info').find('input').each(function(i){
-				if($(this).val() === ''){
-					blank_field = blank_field + $(this).attr('id') + '\n';
-					isInfoValid = false;
-				}
-			});
-			if(isInfoValid){
-				alert('All information valid');
-			}
-			else{
-				alert(blank_field);
+
+			var client_name = $('#id_client_name').val();
+			var client_address = $('#id_client_address').val();
+			var client_phone = $('#id_client_phone').val();
+			var client_name_for_signature = $('#id_name_for_signature').val();
+			var client_signature_img = $('#id_form_client_image').val();
+
+			if (client_name === '') {
+				alert('Please key in the client\'s name');
+				$('#id_client_name').focus();
 				return false;
-			}
-			
-			if (!isProfileImageValid || !isSignatureImageValid) {
+			} else if (client_address === '') {
+				alert('Please key in the client\'s address');
+				$('#id_client_address').focus();
+				return false;
+			} else if (client_phone === '') {
+				alert('Please key in the client\'s phone');
+				$('#id_client_phone').focus();
+				return false;
+			} else if (client_name_for_signature === '') {
+				alert('Please key in the client\'s name for signature');
+				$('#id_name_for_signature').focus();
+				return false;
+			} else if (client_signature_img === '') {
+				alert('Please select the client\'s signature image');
+				return false;
+			} else if (!isImageValid) {
 				return false;
 			} else {
 				return true;

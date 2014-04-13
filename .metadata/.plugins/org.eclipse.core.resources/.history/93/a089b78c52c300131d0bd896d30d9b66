@@ -226,10 +226,10 @@
 
 		var upload = function() {
 			var isInfoValid = true;
-			var blank_field = 'Blank Field(s):\n';
+			var blank_field;
 			$('#client_info').find('input').each(function(i){
 				if($(this).val() === ''){
-					blank_field = blank_field + $(this).attr('id') + '\n';
+					blank_field = blank_field + $(this).attr('id');
 					isInfoValid = false;
 				}
 			});
