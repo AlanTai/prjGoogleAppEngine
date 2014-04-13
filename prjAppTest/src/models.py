@@ -11,18 +11,24 @@ from google.appengine.ext.ndb.model import JsonProperty
 #employee
 class PersonInfo(ndb.Model):
     id = ndb.StringProperty()
-    title = ndb.StringProperty()
+    account = ndb.StringProperty()
+    password = ndb.StringProperty()
+    
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
     birthday = ndb.DateProperty()
+    gender_title = ndb.StringProperty()
     address = ndb.StringProperty()
     phone = ndb.StringProperty()
     email = ndb.StringProperty()
+    google_account = ndb.StringProperty()
+    profile_img = ndb.BlobProperty()
+    
     create_date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 
 class Employee(PersonInfo):
-    pass
+    job_title = ndb.StringProperty()
     
 class ClientsInfo(PersonInfo):
     company_title = ndb.StringProperty()
@@ -114,18 +120,20 @@ class GeneralClientsPackagesInfo(PackageInfo):
 class TWCustomEntryInfo(ndb.Model):
     barcode_number = ndb.StringProperty()
     mawb = ndb.StringProperty()
+    
     sender = ndb.StringProperty()
     receiver = ndb.StringProperty()
     size = ndb.StructuredProperty(Size, repeated = False)
     weight_kg = ndb.StringProperty()
     ctn = ndb.StringProperty()
+    note = ndb.StringProperty()
+    
     flight_number = ndb.StringProperty()
     flight_date = ndb.DateProperty()
     package_status = ndb.StringProperty()
-    note = ndb.StringProperty()
     access_people = JsonProperty()
-    packing_date_time = ndb.DateTimeProperty()
-    date = ndb.DateProperty(auto_now_add = True)
+    
+    create_date_time = ndb.DateProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
     
 #end of channel

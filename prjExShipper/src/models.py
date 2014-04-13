@@ -21,6 +21,8 @@ class PersonInfo(ndb.Model):
     address = ndb.StringProperty()
     phone = ndb.StringProperty()
     email = ndb.StringProperty()
+    google_account = ndb.StringProperty()
+    profile_img = ndb.BlobProperty()
     
     create_date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)

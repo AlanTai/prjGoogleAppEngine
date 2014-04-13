@@ -22,6 +22,15 @@ class Key_Value():
         self.exshipper_invalid_login_page = '/exshipper/exshipper_invalid_login_page.html'
         self.exshipper_invalid_login_page_title = 'Invalid Login Page'
         
+        self.exshipper_create_employee_info_page = '/exshipper/exshipper_create_employee_info.html'
+        self.exshipper_create_employee_info_page_title = 'Create Employee Information'
+        
+        self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
+        self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
+        #end
+        
+        
+        #path of handling invoice information
         self.exshipper_invoice_creating_page = '/exshipper/exshipper_create_invoice.html'
         self.exshipper_invoice_creating_page_title = 'Create Invoice (ExShipper)'
         self.exshipper_invoice_log_page = '/exshipper/exshipper_invoice_log.html'
@@ -30,8 +39,6 @@ class Key_Value():
         self.exshipper_suda_tracking_number_upload_handler_page = '/exshipper/exshipper_suda_tracking_number_upload_handler.html'
         self.exshipper_suda_tracking_number_upload_handler_page_title = 'ExShipper SUDA Tracking Number Upload Handler'
         
-        self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
-        self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
         
         self.exshipper_packages_labels_page = '/exshipper/exshipper_packages_labels.html'
         self.exshipper_packages_labels_page_title = 'ExShipper Packages Labels'
