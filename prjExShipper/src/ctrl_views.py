@@ -147,20 +147,24 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 
                 if(pre_alert_entity != None and pre_alert != None):
                     #different flight numbers, flight dates, or mawb
-                    mawb_response = 'Different MAWBs: ' + pre_alert_entity.mawb
-                    flight_number_response = 'Different Flight Numbers: ' + pre_alert_entity.flight_number
-                    flight_date_response = 'Different Flight Dates: ' + pre_alert_entity.flight_date
+                    mawb_response = 'Different MAWBs: '
+                    flight_number_response = 'Different Flight Numbers: '
+                    flight_date_response = 'Different Flight Dates: '
+                    has_inconsistent_data = 'no'
                     
                     for package_info in pre_alert:
                         if(pre_alert_entity.mawb != package_info.mawb):
                             mawb_response = mawb_response + package_info.mawb
+                            has_inconsistent_data = 'yes'
                         if(pre_alert_entity.flight_number != package_info.flight_number):
                             flight_number_response = flight_number_response + package_info.flight_number
+                            has_inconsistent_data = 'yes'
                         if(pre_alert_entity.flight_date != package_info.flight_date):
                             flight_date_response = flight_date_response + package_info.flight_date
+                            has_inconsistent_data = 'yes'
                             
-                    data_inconsistency_response = mawb_response + '\n' + flight_number_response + '\n' +flight_date_response
-                    template_values.update({'data_inconsistency_response':data_inconsistency_response})
+                    inconsistent_data_response = mawb_response + '\n' + flight_number_response + '\n' +flight_date_response
+                    template_values.update({'has_inconsistent_data':has_inconsistent_data,'inconsistent_data_response':inconsistent_data_response})
                     #end of different flight numbers, flight dates, or mawb
                     
                     flight_number = pre_alert_entity.flight_number
@@ -172,14 +176,20 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                     
                 template_values.update({'pre_alert':pre_alert})
                 
+        #page of rendering labels
         elif(dispatch_token == 'exshipper_packages_labels'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_packages_labels_page
                 html_page_title = my_dict.exshipper_packages_labels_page_title
-                spearnet_packages_info = SpearnetPackagesInfo.query()
-                general_clients_packages_info = GeneralClientsPackagesInfo.query()
+                spearnet_packages_info = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
+                                                                           SpearnetPackagesInfo.package_status == 'exshipper'))
+                
+                general_clients_packages_info = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'client',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'exshipper'))
+                
                 template_values.update({'spearnet_packages_info':spearnet_packages_info, 'general_clients_packages_info':general_clients_packages_info})
         
+        #page of generating labels
         elif(dispatch_token == 'exshipper_tw_custom_entry_labels'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_labels_page
@@ -187,6 +197,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
                 template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
                 
+        #page of creating cargo manifest
         elif(dispatch_token == 'exshipper_cargo_manifest'):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_cargo_manifest_page
@@ -209,17 +220,19 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         # end of html page dispatching
         
 # end of ExShipperLoginHandler
-class ExShipperInvoiceInfoHandler(webapp2.RequestHandler):
+class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'submit_status':'NA'}
         if(self.request.get('fmt') == 'json'):
             
+            #package size
             new_size = Size()
             new_size.length = self.request.get('valid_size_length')
             new_size.width = self.request.get('valid_size_width')
             new_size.height = self.request.get('valid_size_height')
-            
             new_size.put()
+            
+            #package information
             package_id = self.request.get('valid_suda_tr_number')
             new_package_info = GeneralClientsPackagesInfo(id=package_id)
             new_package_info.hawb = package_id
@@ -555,21 +568,22 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         package_entity.package_status = 'exshipper'
                         package_entity.pickup_status = 'pickup'
                         package_entity.put()
-                        send_email('jerry@spearnet-us.com', 'winever.tw@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper')
                         
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
                         
+                    elif(package_entity != None and package_entity.package_status != 'spearnet'):
+                        response.update({'result':'Tracking Number, '+ key +', is Duplicated!', 'key':'duplicated_number'})
+                        break
                     else:
-                        if(package_entity != None and package_entity.package_status != 'spearnet'):
-                            response.update({'result':'Tracking Number, '+ key +', is Duplicated!', 'key':'duplicated_number'})
-                        else:
-                            response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'}) 
-                            break
+                        response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'}) 
+                        break
                 
             except Exception, e:
                 result = 'Error Message: %s' % e
                 response.update({'result':result, 'key':'na'})
             finally:
+                if(response['key'] == 'success'):
+                    send_email('jerry@spearnet-us.com', 'winever.tw@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper')
                 json_response['response'] = response
                 
         self.response.headers['Content-Type'] = 'text/json ; charset=UTF-8'
@@ -1108,7 +1122,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
@@ -1157,7 +1171,7 @@ class TestHandler(webapp2.RequestHandler):
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
-                               ('/exshipper_invoice_info_handler', ExShipperInvoiceInfoHandler),
+                               ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),

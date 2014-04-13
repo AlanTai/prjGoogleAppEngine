@@ -1,11 +1,34 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Jan 25, 2014
 
 @author: Alan Tai
 '''
-
 from google.appengine.ext import ndb
+from google.appengine.ext.ndb.model import JsonProperty
 
+    
+#employee
+class PersonInfo(ndb.Model):
+    id = ndb.StringProperty()
+    title = ndb.StringProperty()
+    first_name = ndb.StringProperty()
+    last_name = ndb.StringProperty()
+    birthday = ndb.DateProperty()
+    address = ndb.StringProperty()
+    phone = ndb.StringProperty()
+    email = ndb.StringProperty()
+    create_date_time = ndb.DateTimeProperty(auto_now_add = True)
+    update_date_time = ndb.DateTimeProperty(auto_now = True)
+
+class Employee(PersonInfo):
+    pass
+    
+class ClientsInfo(PersonInfo):
+    company_title = ndb.StringProperty()
+    signature_img = ndb.BlobProperty()
+    signature_str = ndb.StringProperty()
+#end of person information
     
 #tracking number basic class
 class TrackingNumber(ndb.Model):
@@ -18,7 +41,6 @@ class TrackingNumber(ndb.Model):
 #tracking number basic class
 class TWCustomEntryTrackingNumber(TrackingNumber):
     pass
-#end of tracking number basic class
 
 #SUDA tracking number
 class SUDATrackingNumber_REGULAR(TrackingNumber):
@@ -52,25 +74,32 @@ class PackageInfo(ndb.Model):
     original = ndb.StringProperty()
     deliver_to = ndb.StringProperty()
     unit_price_fob_us_dollar = ndb.StringProperty()
+    
     shipper_company = ndb.StringProperty()
     shipper_person = ndb.StringProperty()
     shipper_tel = ndb.StringProperty()
     shipper_address_english = ndb.StringProperty()
     shipper_address_chinese = ndb.StringProperty()
+    
     consignee_tel = ndb.StringProperty()
     consignee_name_english = ndb.StringProperty()
     consignee_name_chinese = ndb.StringProperty()
     consignee_address_english = ndb.StringProperty()
     consignee_address_chinese = ndb.StringProperty()
+    
     company_id_or_personal_id = ndb.StringProperty()
     size_accumulation = ndb.StringProperty()
     declaration_need_or_not = ndb.StringProperty()
     duty_paid_by = ndb.StringProperty()
-    package_status = ndb.StringProperty()
-    pickup_status = ndb.StringProperty()
     signature_img_id = ndb.StringProperty()
     note = ndb.StringProperty()
-    date = ndb.DateProperty(auto_now_add = True)
+    
+    package_status = ndb.StringProperty()
+    pickup_status = ndb.StringProperty()
+    pickup_date_time = ndb.DateTimeProperty()
+    
+    access_people = JsonProperty()
+    create_date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 #en of package information
 
@@ -91,18 +120,12 @@ class TWCustomEntryInfo(ndb.Model):
     weight_kg = ndb.StringProperty()
     ctn = ndb.StringProperty()
     flight_number = ndb.StringProperty()
-    flight_date = ndb.StringProperty()
+    flight_date = ndb.DateProperty()
     package_status = ndb.StringProperty()
     note = ndb.StringProperty()
+    access_people = JsonProperty()
+    packing_date_time = ndb.DateTimeProperty()
     date = ndb.DateProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
     
-class ClientsInfo(ndb.Model):
-    name = ndb.StringProperty()
-    address = ndb.StringProperty()
-    phone = ndb.StringProperty()
-    signature_img = ndb.BlobProperty()
-    signature_str = ndb.StringProperty()
-    date = ndb.DateProperty(auto_now_add = True)
-    update_date_time = ndb.DateTimeProperty(auto_now = True)
 #end of channel

@@ -61,20 +61,6 @@
 		<hr>
 	</div>
 
-	<div style="margin: 5px auto; text-align: center;">
-		<div id="data_div" style="width: 600px; margin: 5px auto; text-align: center;">
-			{% if clients_data %} {% for client_data in clients_data %}
-			<p>
-				<span>Name: {{ client_data.name }}</span> <span>Address:
-					{{client_data.address }}</span>
-			</p>
-			<img src="/img?entity_id={{ client_data.key.urlsafe() }}"
-				onclick="printme(event)" /> {% endfor %} {% else %}
-			<p>No Clients Data Available</p>
-			{% endif %}
-		</div>
-	</div>
-
 	<!-- function for validating the client information -->
 	<script type="text/javascript">
 		//check image size
