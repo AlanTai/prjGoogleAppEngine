@@ -11,17 +11,13 @@ from google.appengine.ext.ndb.model import JsonProperty
 #employee
 class PersonInfo(ndb.Model):
     id = ndb.StringProperty()
-    account = ndb.StringProperty()
-    password = ndb.StringProperty()
-    
+    gender_title = ndb.StringProperty()
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
     birthday = ndb.DateProperty()
-    gender_title = ndb.StringProperty()
     address = ndb.StringProperty()
     phone = ndb.StringProperty()
     email = ndb.StringProperty()
-    
     create_date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 
