@@ -600,19 +600,16 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                         new_package.original = package['original']
                         new_package.unit_price_fob_us_dollar = 'NA'
                         new_package.deliver_to = package['deliver_to']
-                        
                         new_package.shipper_company = package['shipper_company']
                         new_package.shipper_person = 'NA'
                         new_package.shipper_tel = '510-351-8903'
                         new_package.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
                         new_package.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
-                        
                         new_package.consignee_name_english = package['consignee_name_english']
                         new_package.consignee_name_chinese = package['consignee_name_chinese']
                         new_package.consignee_tel = package['consignee_tel']
                         new_package.consignee_address_english = package['consignee_address_english']
                         new_package.consignee_address_chinese = package['consignee_address_chinese']
-                        
                         new_package.company_id_or_personal_id = 'NA'
                         new_package.size_accumulation = package['size_accumulation']
                         new_package.declaration_need_or_not = package['declaration_need_or_not']
@@ -620,6 +617,8 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                         new_package.package_status = 'spearnet'
                         new_package.note = '常溫'
                         
+                        access_people = ''
+                        new_package.access_people = json.dumps({'access_people':['alantai']})
                         new_package.put()
                         
                     ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
@@ -645,8 +644,6 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
                         package_entity.package_status = 'pickup'
-                        access_people = ''
-                        package_entity.access_people = json.dumps({'access_people':['alantai']})
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
                         
@@ -1190,7 +1187,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
         ajax_data = {}
         if(self.request.get('key') == 'get_package_reference_number'):
             time_stamp = int(round(time.time())).__str__()
-            exshipper_package_number = 'EXPKG' + time_stamp
+            exshipper_package_number = 'EXPK' + time_stamp
             ajax_data.update({'exshipper_package_number':exshipper_package_number})
             
             self.response.headers['Content-Type'] = 'text/json'

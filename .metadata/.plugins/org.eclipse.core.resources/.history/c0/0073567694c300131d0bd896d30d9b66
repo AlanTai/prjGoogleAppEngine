@@ -645,7 +645,6 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
                         package_entity.package_status = 'pickup'
-                        access_people = ''
                         package_entity.access_people = json.dumps({'access_people':['alantai']})
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()

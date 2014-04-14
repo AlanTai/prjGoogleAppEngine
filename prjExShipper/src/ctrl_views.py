@@ -6,6 +6,7 @@ Created on Oct 1, 2013
 '''
 from google.appengine.ext.key_range import ndb
 import time
+import datetime
 __author__ = 'Alan Tai'
 
 import webapp2
@@ -17,7 +18,7 @@ from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
-    TWCustomEntryInfo
+    TWCustomEntryInfo, EmployeeInfo
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates')) #append templates' path
 
@@ -224,6 +225,100 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         # end of html page dispatching
         
+class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
+    def post(self):
+        time_stamp = int(round(time.time())).__str__()
+        employee_id = 'ESEMP'+ time_stamp
+        new_employee = EmployeeInfo(employee_id)
+        new_employee.id = employee_id
+        
+        new_employee.account_name = self.request.get('employee_account_name')
+        new_employee.password = self.request.get('employee_password')
+        new_employee.job_title = self.request.get('employee_job_title')
+        
+        new_employee.first_name = self.request.get('employee_first_name')
+        new_employee.last_name = self.request.get('employee_last_name')
+        
+        birthday_year = self.request.get('birthday_year')
+        birthday_month = self.request.get('birthday_month')
+        birthday_day = self.request.get('birthday_day')
+        
+        new_employee.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
+        
+        new_employee.gender = self.request.get('employee_gender')
+        new_employee.address = self.request.get('employee_address')
+        new_employee.phone_number = self.request.get('employee_phone_number')
+        new_employee.profile_img = self.request.get('employee_profile_img')
+        
+        new_employee.put()
+        
+        my_dict = Key_Value()
+        template_values = {}
+        user_info = get_users_info(self, users)
+        template_values.update(user_info)
+        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
+        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
+        self.response.out.write(template.render(template_values))
+        
+
+class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
+    def post(self):
+        time_stamp = int(round(time.time())).__str__()
+        client_id = 'ESCL'+ time_stamp
+        new_client = ClientsInfo(id=client_id)
+        new_client.id = client_id
+        
+        new_client.account_name = self.request.get('client_account_name')
+        new_client.company_name = self.request.get('client_company_name')
+        new_client.password = self.request.get('client_password')
+        new_client.email = self.request.get('client_email')
+        
+        new_client.first_name = self.request.get('client_first_name')
+        new_client.last_name = self.request.get('client_last_name')
+        
+        birthday_year = self.request.get('birthday_year')
+        birthday_month = self.request.get('birthday_month')
+        birthday_day = self.request.get('birthday_day')
+        new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
+        
+        new_client.gender = self.request.get('client_gender')
+        new_client.address = self.request.get('client_address')
+        new_client.phone_number = self.request.get('client_phone_number')
+        new_client.profile_img = self.request.get('client_profile_img')
+        
+        new_client.signature_str = self.request.get('client_signature')
+        new_client.signature_img = self.request.get('client_signature_img')
+        new_client.put()
+        
+        my_dict = Key_Value()
+        template_values = {}
+        user_info = get_users_info(self, users)
+        template_values.update(user_info)
+        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
+        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
+        self.response.out.write(template.render(template_values))
+
+class ExShipperValidateClientAccountNameEmail(webapp2.RequestHandler):
+    def post(self):
+        account_name = self.request.get('account_name')
+        email = self.request.get('email')
+        ajax_data = {}
+        response = 'Your account name and email are valid'
+        
+        if(ClientsInfo.query(ClientsInfo.account_name == account_name) != None):
+            response = 'The Account name already exist, please pick up a new one!'
+        elif not mail.is_email_valid(email):
+            response = 'The email address is invalid!'
+        elif(ClientsInfo.query(ClientsInfo.email == email) != None):
+            response = response + 'The email already exist, please pick up a new one!'
+            
+        ajax_data.update({'validation_response':response})
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
+#end
+       
+        
+        
 # end of ExShipperLoginHandler
 class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
@@ -269,36 +364,12 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
             new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
             new_package_info.duty_paid_by = 'Shipper'
             new_package_info.package_status = 'exshipper'
-            new_package_info.pickup_status = 'TRUE'
             new_package_info.put()
             
             
             ajax_data['submit_status'] = 'Data saved into database'
             self.response.out.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
-
-class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
-    def post(self):
-        new_client = ClientsInfo()
-        new_client.name = self.request.get('client_name')
-        new_client.address = self.request.get('client_address')
-        new_client.phone = self.request.get('client_phone')
-        new_client.signature_str = self.request.get('name_for_signature')
-        new_client.signature_img = self.request.get('form_client_signature')
-        new_client.put()
-        
-        my_dict = Key_Value()
-        template_values = {}
-        user_info = get_users_info(self, users)
-        template_values.update(user_info)
-        clients_data = ClientsInfo.query()
-        template_values.update({'clients_data':clients_data})
-                
-        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
-        
-        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
-        self.response.out.write(template.render(template_values))
-        working_on = ''
 
 
 #SUDA Tracking Number Handler (For uploading number)
@@ -529,23 +600,26 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                         new_package.original = package['original']
                         new_package.unit_price_fob_us_dollar = 'NA'
                         new_package.deliver_to = package['deliver_to']
+                        
                         new_package.shipper_company = package['shipper_company']
                         new_package.shipper_person = 'NA'
                         new_package.shipper_tel = '510-351-8903'
                         new_package.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
                         new_package.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
+                        
                         new_package.consignee_name_english = package['consignee_name_english']
                         new_package.consignee_name_chinese = package['consignee_name_chinese']
                         new_package.consignee_tel = package['consignee_tel']
                         new_package.consignee_address_english = package['consignee_address_english']
                         new_package.consignee_address_chinese = package['consignee_address_chinese']
+                        
                         new_package.company_id_or_personal_id = 'NA'
                         new_package.size_accumulation = package['size_accumulation']
                         new_package.declaration_need_or_not = package['declaration_need_or_not']
                         new_package.duty_paid_by = package['duty_paid_by']
                         new_package.package_status = 'spearnet'
-                        new_package.pickup_status = 'FALSE'
                         new_package.note = '常溫'
+                        
                         new_package.put()
                         
                     ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
@@ -570,8 +644,10 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                 for key in suda_numbers_array:
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
-                        package_entity.package_status = 'exshipper'
-                        package_entity.pickup_status = 'pickup'
+                        package_entity.package_status = 'pickup'
+                        access_people = ''
+                        package_entity.access_people = json.dumps({'access_people':['alantai']})
+                        package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
                         
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
@@ -1114,7 +1190,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
         ajax_data = {}
         if(self.request.get('key') == 'get_package_reference_number'):
             time_stamp = int(round(time.time())).__str__()
-            exshipper_package_number = 'EXPK' + time_stamp
+            exshipper_package_number = 'EXPKG' + time_stamp
             ajax_data.update({'exshipper_package_number':exshipper_package_number})
             
             self.response.headers['Content-Type'] = 'text/json'
