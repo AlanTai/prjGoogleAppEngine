@@ -635,30 +635,39 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
         account = self.request.get('account')
         password = self.request.get('password')
         response = {}
-        
         json_response = {'response':'NA'}
         if(account == 'alantai' and password == '1014'):
             json_obj = json.loads(self.request.get('spearnet_picked_packages'))
             suda_numbers_array = json.loads(json_obj['suda_tracking_numbers'])
+            package_tracking_numbers = ''
+            pickup_status = ''
+            
             try:
                 for key in suda_numbers_array:
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
                         package_entity.package_status = 'pickup'
-                        access_people = ''
-                        package_entity.access_people = json.dumps({'access_people':['alantai']})
+                        
+                        current_date_time = datetime.datetime.now()
+                        package_entity.access_info = json.dumps({'access_info':[{'person':'alantai', 'date_time':current_date_time.__str__()}]})
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
-                        
+                        pickup_status = 'success'
+                        package_tracking_numbers = package_tracking_numbers + key + '\n'
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
                         
                     elif(package_entity != None and package_entity.package_status != 'spearnet'):
                         response.update({'result':'Tracking Number, '+ key +', is Duplicated!', 'key':'duplicated_number'})
+                        pickup_status = 'fail'
                         break
                     else:
-                        response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'}) 
+                        response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'})
+                        pickup_status = 'fail'
                         break
-                
+                    
+                    if(pickup_status == 'success'):
+                        email_response = response['result'] + '\n' + 'SUDA Tracking Numbers: ' + '\n' + package_tracking_numbers
+                        send_email('receiver', 'sender', 'Package Pickup Status', email_response)
             except Exception, e:
                 result = 'Error Message: %s' % e
                 response.update({'result':result, 'key':'na'})
