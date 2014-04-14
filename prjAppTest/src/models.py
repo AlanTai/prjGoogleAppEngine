@@ -101,7 +101,6 @@ class PackageInfo(ndb.Model):
     note = ndb.StringProperty()
     
     package_status = ndb.StringProperty()
-    pickup_status = ndb.StringProperty()
     pickup_date_time = ndb.DateTimeProperty()
     
     access_people = JsonProperty()
