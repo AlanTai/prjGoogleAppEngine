@@ -304,15 +304,19 @@ class ExShipperValidateClientAccountNameEmail(webapp2.RequestHandler):
         email = self.request.get('email')
         ajax_data = {}
         response = 'Your account name and email are valid'
+        status = 'valid'
         
         if(ClientsInfo.query(ClientsInfo.account_name == account_name) != None):
             response = 'The Account name already exist, please pick up a new one!'
+            status = 'invalid_account_name'
         elif not mail.is_email_valid(email):
             response = 'The email address is invalid!'
+            status = 'invalid_email'
         elif(ClientsInfo.query(ClientsInfo.email == email) != None):
             response = response + 'The email already exist, please pick up a new one!'
+            status = 'invalid_email'
             
-        ajax_data.update({'validation_response':response})
+        ajax_data.update({'validation_response':response, 'validation_status':status})
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
 #end
@@ -1264,6 +1268,7 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
+                               ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),
                                ('/exshipper_spearnet_index_page', ExShipperSpearnetIndexHandler),
