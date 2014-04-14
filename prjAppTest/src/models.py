@@ -19,7 +19,7 @@ class PersonInfo(ndb.Model):
     birthday = ndb.DateProperty()
     gender = ndb.StringProperty()
     address = ndb.StringProperty()
-    phone = ndb.StringProperty()
+    phone_number = ndb.StringProperty()
     email = ndb.StringProperty()
     google_account = ndb.StringProperty()
     profile_img = ndb.BlobProperty()
@@ -27,11 +27,11 @@ class PersonInfo(ndb.Model):
     create_date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 
-class Employee(PersonInfo):
+class EmployeeInfo(PersonInfo):
     job_title = ndb.StringProperty()
     
 class ClientsInfo(PersonInfo):
-    company_title = ndb.StringProperty()
+    company_name = ndb.StringProperty()
     signature_img = ndb.BlobProperty()
     signature_str = ndb.StringProperty()
 #end of person information

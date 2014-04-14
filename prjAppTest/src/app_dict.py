@@ -25,7 +25,7 @@ class Key_Value():
         self.exshipper_create_employee_info_page = '/exshipper/exshipper_create_employee_info.html'
         self.exshipper_create_employee_info_page_title = 'Create Employee Information'
         
-        self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info_handler.html'
+        self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info.html'
         self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
         #end
         

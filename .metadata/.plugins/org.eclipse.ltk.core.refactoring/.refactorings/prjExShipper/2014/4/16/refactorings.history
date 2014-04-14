@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;prjExShipper/src/static/templates/exshipper/exshipper_create_client_info_handler.html&apos; to &apos;exshipper_create_client_info.html&apos;" description="Rename resource &apos;exshipper_create_client_info_handler.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/static/templates/exshipper/exshipper_create_client_info_handler.html" name="exshipper_create_client_info.html" stamp="1397445865466" updateReferences="true"/>
+</session>

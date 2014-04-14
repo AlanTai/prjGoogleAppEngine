@@ -1,0 +1,300 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Create Client Information</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; margin: 10px auto;">
+
+	<div id="client_info_div">
+		<!--  -->
+		<form action="/exshipper_create_client_info_handler" method="post"
+			enctype="multipart/form-data" name="client_info"
+			id="client_info" onsubmit="return upload()"
+			style="margin: 5px auto; text-align: center;">
+			<div id="div_client_info">
+				<p style="display: block; font-weight: bold;">Please fill in the client information</p>
+				<!-- Account Name -->
+				<div>
+					<label style="width: 430px; display: inline-block;">Account
+						Name: </label> <input title="Account Name" name="client_account_name" id="client_account_name"
+						type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<!-- Email -->
+				<div>
+					<label style="width: 430px; display: inline-block;"> Email:
+					</label> <input title="Email" name="client_email" id="client_email" type="tel"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br>
+				
+				
+				<!-- Account Name -->
+				<div>
+					<label style="width: 430px; display: inline-block;">Password:
+					</label> <input title="Password" name="client_password" id="client_password" type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+
+				<!-- Client Info -->
+				<!-- First Name -->
+				<div>
+					<label style="width: 430px; display: inline-block;">First
+						Name: </label> <input title="First Name" name="client_first_name" id="client_first_name"
+						type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<!-- Last Name -->
+				<div>
+					<label style="width: 430px; display: inline-block;">Last
+						Name: </label> <input title="Last Name" name="client_last_name" id="client_last_name"
+						type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+
+				<br>
+				<!-- Birthday -->
+				<div>
+					<label style="width: 430px; display: inline-block;">Birthday:
+					</label> <select name="birthday_year" id="birthday_year" form="client_info"></select> <select
+						name="birthday_month" id="birthday_month" form="client_info"></select> <select
+						name="birthday_date" id="birthday_date" form="client_info"></select>
+				</div>
+				<br>
+				<!-- Gender -->
+				<div>
+					<label style="width: 430px; display: inline-block;">Gender:
+					</label> <select name="client_gender" id="client_gender" form="client_info">
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+					</select>
+				</div>
+				<br>
+
+				<!-- Address -->
+				<div>
+					<label style="width: 430px; display: inline-block;">Address:
+					</label> <input title="Address" name="client_address" id="client_address" type="text"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br>
+
+				<!-- phone -->
+				<div>
+					<label style="width: 430px; display: inline-block;"> Phone Number:
+					</label> <input title="Phone Number" name="client_phone_number" id="client_phone_number" type="tel"
+						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+				</div>
+				<br><br>
+
+				<div>
+					<label style="width: 430px; display: inline-block;"> Please
+						Client Profile Image (Maximum size is 1Mb): </label> <input type="file"
+						title="Client Profile Image" name="client_profile_img"
+						id="client_profile_img" accept="image/*"
+						style="display: inline-block; padding: 2px 5px;" />
+					<p id="id_img_size" style="display: inline-block;"></p>
+				</div>
+			</div>
+
+
+			<br />
+			<br />
+
+			<!-- Signature -->
+			<div>
+				<label style="width: 430px; display: inline-block;">Signature
+					(Personal Name): </label> <input title="Signature" name="client_signature" id="client_signature"
+					type="text"
+					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+			</div>
+			<div>
+				<label style="width: 430px; display: inline-block;"> Please
+					Client Signature Image (Maximum size is 1Mb): </label> <input type="file"
+					title="Client Signature Image" name="client_signature_img"
+					id="client_signature_img" accept="image/*"
+					style="display: inline-block; padding: 2px 5px;" />
+				<p id="id_img_size" style="display: inline-block;"></p>
+			</div>
+			<br /> <input type="submit" name="submit" id="submit"
+				value="Submit Client Information" />
+		</form>
+		<br>
+		<hr>
+	</div>
+
+	<!-- function for validating the client information -->
+	<script type="text/javascript">
+		/**/
+
+		for (i = new Date().getFullYear(); i > 1900; i--) {
+			$('#birthday_year').append($('<option />').val(i).html(i));
+		}
+		for (i = 1; i < 13; i++) {
+			$('#birthday_month').append($('<option />').val(i).html(i));
+		}
+
+		$('#birthday_year').change(function() {
+			var year = $('#birthday_year').val()
+			var month = $('#birthday_month').val()
+			for (i = 1; i < daysInMonth(month, year); i++) {
+				$('#birthday_year').append($('<option />').val(i).html(i));
+			}
+			function daysInMonth(month, year) {
+				return new Date(year, month, 0).getDate();
+			}
+		});
+
+		$('#birthday_month').change(function() {
+			$('#birthday_date').empty();
+			var year = $('#birthday_year').val()
+			var month = $('#birthday_month').val()
+			for (i = 1; i < daysInMonth(month, year) + 1; i++) {
+				$('#birthday_date').append($('<option />').val(i).html(i));
+			}
+		});
+
+		$(function() {
+			var year = $('#birthday_year').val()
+			var month = $('#birthday_month').val()
+			for (i = 1; i < daysInMonth(month, year) + 1; i++) {
+				$('#birthday_date').append($('<option />').val(i).html(i));
+			}
+		});
+
+		function daysInMonth(month, year) {
+			return new Date(year, month, 0).getDate();
+		}
+		/*end of set calander*/
+
+		//check image size
+		var isProfileImageValid = false;
+		var isSignatureImageValid = false;
+		$(document)
+				.ready(
+						function() {
+							$("#client_profile_img, #client_signature_img")
+									.change(
+											function() {
+												var iSize;
+												var title = $(this).attr('title');
+												try{
+													iSize = ($(this)[0].files[0].size / 1024);
+												}
+												catch(err){
+													iSize = 0;
+												};
+												
+												if (iSize / 1024 > 1) {
+													if ($(this).attr('id') === 'client_profile_img') {
+														isProfileImageValid = false;
+													}
+													if ($(this).attr('id') === 'client_signature_img') {
+														isSignatureImageValid = false;
+													}
+
+													if (((iSize / 1024) / 1024) > 1) {
+														iSize = (Math
+																.round(((iSize / 1024) / 1024) * 100) / 100);
+														alert(title
+																+ ": Image size is "
+																+ iSize
+																+ " (Gb) ; it's too big for upload!");
+
+													} else {
+														iSize = (Math
+																.round((iSize / 1024) * 100) / 100);
+														alert(title
+																+ ": Image size is "
+																+ iSize
+																+ " (Mb) ; it's too big for upload!");
+
+													}
+												}
+												else if(iSize === 0){
+													alert('No image selected!');
+													if ($(this).attr('id') === 'client_profile_img') {
+														isProfileImageValid = false;
+													};
+													if ($(this).attr('id') === 'client_signature_img') {
+														isSignatureImageValid = false;
+													};
+												}
+												else {
+													if ($(this).attr('id') === 'client_profile_img') {
+														isProfileImageValid = true;
+													}
+													if ($(this).attr('id') === 'client_signature_img') {
+														isSignatureImageValid = true;
+													}
+													iSize = (Math
+															.round(iSize * 100) / 100);
+													alert(title
+															+ ": Image size is "
+															+ iSize
+															+ " (Kb) ; "
+															+ "it's valid for upload");
+												}
+											});
+						});
+
+		var upload = function() {
+			var isInfoValid = true;
+			var blank_field = 'Blank Field(s):\n';
+			$('#client_info').find('input').each(function(i){
+				if( $(this).attr('type') === 'text' && $(this).val() === ''){
+					blank_field = blank_field + $(this).attr('title') + '\n';
+					isInfoValid = false;
+				}
+			});
+			if(isInfoValid){
+				alert('All information valid');
+			}
+			else{
+				alert(blank_field);
+				return false;
+			}
+			
+			if (!isProfileImageValid || !isSignatureImageValid) {
+				return false;
+			} else {
+				return true;
+			}
+
+		};
+
+		//test function
+		function makepage(src) {
+			return "<html>\n" + "<head>\n"
+					+ "<title>Client Signature</title>\n" + "<script>\n"
+					+ "function step1() {\n" + " setTimeout('step2()', 10);\n"
+					+ "}\n" + "function step2() {\n" + " window.print();\n"
+					+ " window.close();\n" + "}\n" + "</scr" + "ipt>\n"
+					+ "</head>\n" + "<body onLoad='step1()'>\n"
+					+ "<img src='" + src + "'/>\n" + "</body>\n" + "</html>\n";
+		};
+		function printme(evt) {
+			if (!evt) {
+				// Old IE
+				evt = window.event;
+			}
+			var image = evt.target;
+			if (!image) {
+				// Old IE
+				image = window.event.srcElement;
+			}
+			src = image.src;
+			link = "about:blank";
+			var pw = window.open(link, "_new");
+			pw.document.open();
+			pw.document.write(makepage(src));
+			pw.document.close();
+		}
+	</script>
+	<!-- end -->
+</div>
+
+{% endblock %}

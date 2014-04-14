@@ -6,6 +6,8 @@ Created on Oct 1, 2013
 '''
 from google.appengine.ext.key_range import ndb
 import time
+from django.utils.datetime_safe import datetime
+from jinja2._stringdefs import No
 __author__ = 'Alan Tai'
 
 import webapp2
@@ -17,7 +19,7 @@ from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
-    TWCustomEntryInfo
+    TWCustomEntryInfo, EmployeeInfo
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates')) #append templates' path
 
@@ -228,26 +230,63 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
 #create employee information
 class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
     def post(self):
-        ajax_data = {'submit_status':'NA'}
+        new_client = EmployeeInfo()
+        time_stamp = int(round(time.time())).__str__()
+        new_client.id = 'ESEMP'+ time_stamp
+        
+        new_client.account_name = self.request.get('employee_account_name')
+        new_client.password = self.request.get('employee_password')
+        new_client.job_title = self.request.get('employee_job_title')
+        
+        new_client.first_name = self.request.get('employee_first_name')
+        new_client.last_name = self.request.get('employee_last_name')
+        
+        birthday_year = self.request.get('birthday_year')
+        birthday_month = self.request.get('birthday_month')
+        birthday_day = self.request.get('birthday_day')
+        
+        new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
+        
+        new_client.gender = self.request.get('employee_gender')
+        new_client.address = self.request.get('employee_address')
+        new_client.phone_number = self.request.get('employee_phone_number')
+        new_client.profile_img = self.request.get('employee_profile_img')
+        
+        new_client.put()
+        
+        my_dict = Key_Value()
+        template_values = {}
+        user_info = get_users_info(self, users)
+        template_values.update(user_info)
+        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
+        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
+        self.response.out.write(template.render(template_values))
         
         
 #create client information
 class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
     def post(self):
         new_client = ClientsInfo()
-        new_client.name = self.request.get('client_account_name')
-        new_client.name = self.request.get('client_password')
-        new_client.name = self.request.get('client_first_name')
-        new_client.name = self.request.get('client_last_name')
+        time_stamp = int(round(time.time())).__str__()
+        new_client.id = 'ESCL'+ time_stamp
         
-        new_client.name = self.request.get('birthday_year')
-        new_client.name = self.request.get('birthday_month')
-        new_client.name = self.request.get('birthday_date')
+        new_client.account_name = self.request.get('client_account_name')
+        new_client.company_name = self.request.get('client_company_name')
+        new_client.password = self.request.get('client_password')
+        new_client.email = self.request.get('client_email')
         
-        new_client.name = self.request.get('client_gender')
-        new_client.name = self.request.get('client_address')
-        new_client.name = self.request.get('client_phone_number')
-        new_client.signature_img = self.request.get('client_profile_img')
+        new_client.first_name = self.request.get('client_first_name')
+        new_client.last_name = self.request.get('client_last_name')
+        
+        birthday_year = self.request.get('birthday_year')
+        birthday_month = self.request.get('birthday_month')
+        birthday_day = self.request.get('birthday_day')
+        new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
+        
+        new_client.gender = self.request.get('client_gender')
+        new_client.address = self.request.get('client_address')
+        new_client.phone_number = self.request.get('client_phone_number')
+        new_client.profile_img = self.request.get('client_profile_img')
         
         new_client.signature_str = self.request.get('client_signature')
         new_client.signature_img = self.request.get('client_signature_img')
@@ -257,19 +296,27 @@ class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
         template_values = {}
         user_info = get_users_info(self, users)
         template_values.update(user_info)
-        clients_data = ClientsInfo.query()
-        template_values.update({'clients_data':clients_data})
-                
         template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
-        
         template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
         self.response.out.write(template.render(template_values))
-        working_on = ''
         
 class ExShipperCheckClientAccountNameEmail(webapp2.RequestHandler):
     def post(self):
         account_name = self.request.get('account_name')
         email = self.request.get('email')
+        ajax_data = {}
+        response = 'Your account name and email are valid'
+        
+        if(ClientsInfo.query(ClientsInfo.account_name == account_name) != None):
+            response = 'The Account name already exist, please pick up a new one!'
+        elif not mail.is_email_valid(email):
+            response = 'The email address is invalid!'
+        elif(ClientsInfo.query(ClientsInfo.email == email) != None):
+            response = response + 'The email already exist, please pick up a new one!'
+            
+        ajax_data.update({'validation_response':response})
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
 #end
         
         
@@ -1139,7 +1186,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
         ajax_data = {}
         if(self.request.get('key') == 'get_package_reference_number'):
             time_stamp = int(round(time.time())).__str__()
-            exshipper_package_number = 'EXPK' + time_stamp
+            exshipper_package_number = 'EXPKG' + time_stamp
             ajax_data.update({'exshipper_package_number':exshipper_package_number})
             
             self.response.headers['Content-Type'] = 'text/json'
