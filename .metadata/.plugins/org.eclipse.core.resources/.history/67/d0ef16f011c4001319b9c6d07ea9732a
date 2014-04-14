@@ -19,7 +19,7 @@
 <div
 	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
 	<p>Package Status Tracking</p>
-	<form method="post" id="spearnet_package_tracking_form">
+	<form method="post">
 		<div>
 			<label style="width: 150px; display: inline-block;">Tracking Number: </label> <input id="spearnet_customer_tracking_number" type="text" /> <input type="button"
 				value="Submit" onclick="submitSpearnetCustomerTrackingNumber(this.form.spearnet_customer_tracking_number.value)" />
@@ -28,14 +28,6 @@
 	<p id="id_customer_package_status" style="color: #f00;"></p>
 </div>
 <script type="text/javascript">
-
-$('#spearnet_package_tracking_form').keypress(function (e) {     
-    var charCode = e.charCode || e.keyCode || e.which;
-    if (charCode  == 13) {
-        return false;
-    }
-});
-
 function submitSpearnetCustomerTrackingNumber(tracking_number){
 	if(tracking_number === ""){
 		alert('Please key in tracking number');

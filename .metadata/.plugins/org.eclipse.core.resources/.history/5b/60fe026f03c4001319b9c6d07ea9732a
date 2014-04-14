@@ -717,8 +717,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                 else:
                     send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                     
-            self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
-            self.response.out.write(json.dumps(ajax_data))
+            
         #download suda tracking number for exshipper
         elif(user_account == 'alantai' and user_password == '1014lct'):
             if(suda_tracking_number_type == 'regular'):

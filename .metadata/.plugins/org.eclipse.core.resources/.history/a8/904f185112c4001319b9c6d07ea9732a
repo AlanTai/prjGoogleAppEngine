@@ -1,42 +1,34 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
-
-<script>
-	window.onload = function() {
-		history.pushState(null, null, location.href);
-		window.onpopstate = function(event) {
-			history.go(1);
-		};
-	};
-</script>
-
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">Customer Service</p>
+	<p style="font-size: 26px;">Track Package Status (ExShipper General Clients)</p>
 	<hr>
 </div>
+
+
 
 <!--  -->
 <div
 	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
 	<p>Package Status Tracking</p>
-	<form method="post" id="spearnet_package_tracking_form">
+	<form method="post" id="package_tracking_form">
 		<div>
-			<label style="width: 150px; display: inline-block;">Tracking Number: </label> <input id="spearnet_customer_tracking_number" type="text" /> <input type="button"
-				value="Submit" onclick="submitSpearnetCustomerTrackingNumber(this.form.spearnet_customer_tracking_number.value)" />
+			<label style="width: 150px; display: inline-block;">Tracking Number: </label> <input id="general_clients_tracking_number" type="text" /> <input type="button"
+				value="Submit" onclick="submitGeneralClientsTrackingNumber(this.form.general_clients_tracking_number.value)" />
 		</div>
 	</form>
 	<p id="id_customer_package_status" style="color: #f00;"></p>
 </div>
 <script type="text/javascript">
-
-$('#spearnet_package_tracking_form').keypress(function (e) {     
+$('#package_tracking_form').keypress(function (e) {     
     var charCode = e.charCode || e.keyCode || e.which;
     if (charCode  == 13) {
         return false;
     }
 });
 
-function submitSpearnetCustomerTrackingNumber(tracking_number){
+
+function submitGeneralClientsTrackingNumber(tracking_number){
 	if(tracking_number === ""){
 		alert('Please key in tracking number');
 		return false;
@@ -44,7 +36,7 @@ function submitSpearnetCustomerTrackingNumber(tracking_number){
 	else{
 		tracking_number = tracking_number.trim();
 	}
-	$.ajax('/exshipper_spearnet_customer_package_tracking_handler',{
+	$.ajax('/exshipper_general_clients_packages_tracking_handler',{
 		type: 'POST',
 		data:{
 			fmt: 'json',
@@ -95,4 +87,6 @@ function showMsg(result){
 	$('#id_customer_package_status').text(msg);
 }
 </script>
+
+
 {% endblock %}

@@ -11,7 +11,7 @@
 <div
 	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
 	<p>Package Status Tracking</p>
-	<form>
+	<form method="post" id="general_client_package_tracking_form">
 		<div>
 			<label style="width: 150px; display: inline-block;">Tracking Number: </label> <input id="general_clients_tracking_number" type="text" /> <input type="button"
 				value="Submit" onclick="submitGeneralClientsTrackingNumber(this.form.general_clients_tracking_number.value)" />
@@ -20,6 +20,14 @@
 	<p id="id_customer_package_status" style="color: #f00;"></p>
 </div>
 <script type="text/javascript">
+$('#general_client_package_tracking_form').keypress(function (e) {     
+    var charCode = e.charCode || e.keyCode || e.which;
+    if (charCode  == 13) {
+        return false;
+    }
+});
+
+
 function submitGeneralClientsTrackingNumber(tracking_number){
 	if(tracking_number === ""){
 		alert('Please key in tracking number');
