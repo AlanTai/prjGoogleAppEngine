@@ -242,9 +242,9 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         new_employee.first_name = self.request.get('employee_first_name')
         new_employee.last_name = self.request.get('employee_last_name')
         
-        birthday_year = self.request.get('birthday_year')
-        birthday_month = self.request.get('birthday_month')
-        birthday_day = self.request.get('birthday_day')
+        birthday_year = int(self.request.get('birthday_year'))
+        birthday_month = int(self.request.get('birthday_month'))
+        birthday_day = int(self.request.get('birthday_day'))
         
         new_employee.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
         
@@ -291,9 +291,9 @@ class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
         new_client.first_name = self.request.get('client_first_name')
         new_client.last_name = self.request.get('client_last_name')
             
-        birthday_year = self.request.get('birthday_year')
-        birthday_month = self.request.get('birthday_month')
-        birthday_day = self.request.get('birthday_day')
+        birthday_year = int(self.request.get('birthday_year'))
+        birthday_month = int(self.request.get('birthday_month'))
+        birthday_day = int(self.request.get('birthday_day'))
         new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
             
         new_client.gender = self.request.get('client_gender')
@@ -1163,9 +1163,9 @@ class ExShipperGeneralClientsCreateClientInfoHandler(webapp2.RequestHandler):
             new_client.first_name = self.request.get('client_first_name')
             new_client.last_name = self.request.get('client_last_name')
             
-            birthday_year = self.request.get('birthday_year')
-            birthday_month = self.request.get('birthday_month')
-            birthday_day = self.request.get('birthday_day')
+            birthday_year = int(self.request.get('birthday_year'))
+            birthday_month = int(self.request.get('birthday_month'))
+            birthday_day = int(self.request.get('birthday_day'))
             new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
             
             new_client.gender = self.request.get('client_gender')

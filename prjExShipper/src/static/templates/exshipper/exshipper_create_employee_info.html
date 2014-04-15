@@ -63,7 +63,7 @@
 					<label style="width: 430px; display: inline-block;">Job Title: </label> <input
 						title="First Name" name="employee_job_title"
 						id="employee_job_title" type="text"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+						style="width: 250px; display: inline-block; padding: 2px 5px;" required="required" />
 				</div>
 
 				<!-- Client Info -->
@@ -262,7 +262,6 @@
 
 		//check image size
 		var isProfileImageValid = false;
-		var isSignatureImageValid = false;
 		$(document)
 				.ready(
 						function() {
@@ -355,7 +354,7 @@
 				return false;
 			}
 
-			if (!isProfileImageValid || !isSignatureImageValid) {
+			if (!isProfileImageValid) {
 				return false;
 			} else {
 				return true;

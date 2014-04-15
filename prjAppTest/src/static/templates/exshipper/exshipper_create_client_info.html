@@ -142,7 +142,7 @@
 				<label style="width: 430px; display: inline-block;">Signature
 					(Personal Name): </label> <input title="Signature" name="client_signature"
 					id="client_signature" type="text"
-					style="width: 250px; display: inline-block; padding: 2px 5px;" />
+					style="width: 250px; display: inline-block; padding: 2px 5px;" required="required" />
 			</div>
 			<div>
 				<label style="width: 430px; display: inline-block;"> Please
@@ -224,9 +224,6 @@
 
 		//
 		$('#client_account_name').change(function() {
-			availability_email = false;
-		});
-		$('#client_email').change(function() {
 			availability_account_name = false;
 		});
 		/**/
@@ -355,19 +352,20 @@
 			});
 
 			//
-			if (isProfileImageValid || isSignatureImageValid) {
-				alert('Please check the availability of your account name and email!')
+			if (!availability_account_name) {
+				alert('Please check the availability of your account name!')
 				return false;
 			}
 
 			if (isInfoValid) {
-				alert('All information valid');
+				alert('All fields\' information is valid');
 			} else {
 				alert(blank_field);
 				return false;
 			}
 
 			if (!isProfileImageValid || !isSignatureImageValid) {
+				alert('Please select your profile image and signature image!');
 				return false;
 			} else {
 				return true;
