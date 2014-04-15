@@ -10,7 +10,7 @@
 
 	<div id="client_info_div">
 		<!--  -->
-		<form action="/exshipper_create_client_info_handler" method="post"
+		<form action="/exshipper_general_clients_create_client_info_handler" method="post"
 			enctype="multipart/form-data" name="client_info" id="client_info"
 			onsubmit="return upload()"
 			style="margin: 5px auto; text-align: center;">
@@ -219,7 +219,7 @@
 			});
 			$
 					.ajax(
-							'/exshipper_validate_client_account_name_email',
+							'/exshipper_general_clients_validate_client_account_name_email',
 							{
 								type : 'POST',
 								data : {
@@ -411,7 +411,7 @@
 			});
 
 			//
-			if (isProfileImageValid || isSignatureImageValid) {
+			if (!availability_email || !availability_account_name) {
 				alert('Please check the availability of your account name and email!')
 				return false;
 			}

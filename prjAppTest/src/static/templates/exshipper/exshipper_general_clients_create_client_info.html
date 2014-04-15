@@ -411,7 +411,7 @@
 			});
 
 			//
-			if (isProfileImageValid || isSignatureImageValid) {
+			if (!availability_email || !availability_account_name) {
 				alert('Please check the availability of your account name and email!')
 				return false;
 			}

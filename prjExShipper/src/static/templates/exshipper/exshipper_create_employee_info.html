@@ -157,7 +157,7 @@
 		function checkAvailabilityOfAccountName() {
 			var employee_account_name = $('#employee_account_name').val().trim();
 
-			if (client_account_name === '') {
+			if (employee_account_name === '') {
 				alert('No account name');
 				$('#employee_account_name').focus();
 				return false;
@@ -343,7 +343,7 @@
 			});
 
 			//
-			if (isProfileImageValid || isSignatureImageValid) {
+			if (!availability_account_name) {
 				alert('Please check the availability of your account name and email!')
 				return false;
 			}

@@ -26,34 +26,16 @@
 							style="width: 250px; display: inline-block; padding: 2px 5px;"
 							required="required" />
 					</div>
-					<!-- Email -->
-					<div>
-						<label style="width: 430px; display: inline-block;">
-							Email: </label> <input title="Email" name="client_email"
-							id="client_email"
-							style="width: 250px; display: inline-block; padding: 2px 5px;"
-							required="required" />
-					</div>
 					<div>
 						<input type="button"
-							value="Check Availability of Account Name and Email and Get Verification Code"
-							onclick="checkAvailabilityOfAccountNameEmail()"
+							value="Check Availability of Account Name"
+							onclick="checkAvailabilityOfAccountName()"
 							style="display: inline-block;" />
-						<p id="account_name_email_validation_response"
+						<p id="account_name_validation_response"
 							style="display: inline-block;"></p>
 					</div>
 				</div>
 				<br>
-
-				<!-- Verification Name -->
-				<div>
-					<label style="width: 430px; display: inline-block;">Verification
-						Code: </label> <input title="Verification Code"
-						name="client_verification_code" id="client_verification_code"
-						type="password"
-						style="width: 250px; display: inline-block; padding: 2px 5px;"
-						required="required" />
-				</div>
 
 				<!-- Password Name -->
 				<div>
@@ -181,38 +163,15 @@
 	<script type="text/javascript">
 		/**/
 		var availability_account_name = false;
-		var availability_email = false;
 
-		function checkEmail() {
-			var email = document.getElementById('client_email');
-			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-			if (!filter.test(email.value)) {
-				alert('Please provide a valid email address');
-				email.focus;
-				return false;
-			} else {
-				return true;
-			}
-		};
-
-		function checkAvailabilityOfAccountNameEmail() {
+		function checkAvailabilityOfAccountName() {
 			var client_account_name = $('#client_account_name').val().trim();
-			var client_email = $('#client_email').val().trim();
 
 			if (client_account_name === '') {
 				alert('No account name');
 				$('#client_account_name').focus();
 				return false;
-			} else if (client_email === '') {
-				alert('No email');
-				$('#client_email').focus();
-				return false;
-			}
-			if (!checkEmail()) {
-				return false;
-			}
-			;
+			};
 
 			$('#upload_cover').css({
 				'display' : 'block'
@@ -224,19 +183,12 @@
 								type : 'POST',
 								data : {
 									fmt : 'json',
-									account_name : client_account_name,
-									email : client_email
+									account_name : client_account_name
 								},
 								success : showMsg,
 								statusCode : {
 									400 : function() {
 										alert('400 status code! user-side error');
-										$('#upload_cover').css({
-											'display' : 'none'
-										});
-									},
-									404 : function() {
-										alert('Invalid Email');
 										$('#upload_cover').css({
 											'display' : 'none'
 										});
@@ -251,32 +203,24 @@
 							});
 		}
 		function showMsg(response) {
-			if (response.validation_status === 'invalid_account_name') {
+			if (response.validation_status === 'invalid') {
 				availability_account_name = false;
-				$('#account_name_email_validation_response').css({
+				$('#account_name_validation_response').css({
 					'color' : '#f00'
 				});
-				$('#account_name_email_validation_response').text(
+				$('#account_name_validation_response').text(
 						response.validation_response);
 				$('#client_account_name').focus();
-			} else if (response.validation_status === 'invalid_email') {
-				availability_email = false;
-				$('#account_name_email_validation_response').css({
-					'color' : '#f00'
-				});
-				$('#account_name_email_validation_response').text(
-						response.validation_response);
-				$('#client_email').focus();
-			} else if (response.validation_status === 'valid') {
-				availability_email = true;
+			}
+			else if (response.validation_status === 'valid') {
 				availability_account_name = true;
-				$('#account_name_email_validation_response').text(
+				$('#account_name_validation_response').text(
 						response.validation_response);
 			}
 			$('#upload_cover').css({
 				'display' : 'none'
 			});
-		}
+		};
 
 		//
 		$('#client_account_name').change(function() {

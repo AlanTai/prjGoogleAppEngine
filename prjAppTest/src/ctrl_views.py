@@ -276,87 +276,57 @@ class ExShipperValidateEmployeeAccountName(webapp2.RequestHandler):
 
 class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
     def post(self):
-        client_verification_code = self.request.get('client_verification_code')
-        client_email = self.request.get('client_email')
-        query_entity = EmailVerification.query(ndb.AND(EmailVerification.email == client_email,
-                                                       EmailVerification.verification_code == client_verification_code)).get()
-                                       
-        if(query_entity != None):
-            my_dict = Key_Value()
-            template_values = {}
-            time_stamp = int(round(time.time())).__str__()
-            client_id = 'ESCL'+ time_stamp
-            new_client = ClientsInfo(id=client_id)
-            new_client.id = client_id
+        my_dict = Key_Value()
+        template_values = {}
+        time_stamp = int(round(time.time())).__str__()
+        client_id = 'ESCL' + time_stamp
+        new_client = ClientsInfo(id=client_id)
+        new_client.id = client_id
             
-            new_client.account_name = self.request.get('client_account_name')
-            new_client.company_name = self.request.get('client_company_name')
-            new_client.password = self.request.get('client_password')
-            new_client.email = self.request.get('client_email')
+        new_client.account_name = self.request.get('client_account_name')
+        new_client.company_name = self.request.get('client_company_name')
+        new_client.password = self.request.get('client_password')
             
-            new_client.first_name = self.request.get('client_first_name')
-            new_client.last_name = self.request.get('client_last_name')
+        new_client.first_name = self.request.get('client_first_name')
+        new_client.last_name = self.request.get('client_last_name')
             
-            birthday_year = self.request.get('birthday_year')
-            birthday_month = self.request.get('birthday_month')
-            birthday_day = self.request.get('birthday_day')
-            new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
+        birthday_year = self.request.get('birthday_year')
+        birthday_month = self.request.get('birthday_month')
+        birthday_day = self.request.get('birthday_day')
+        new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
             
-            new_client.gender = self.request.get('client_gender')
-            new_client.address = self.request.get('client_address')
-            new_client.phone_number = self.request.get('client_phone_number')
-            new_client.profile_img = self.request.get('client_profile_img')
+        new_client.gender = self.request.get('client_gender')
+        new_client.address = self.request.get('client_address')
+        new_client.phone_number = self.request.get('client_phone_number')
+        new_client.profile_img = self.request.get('client_profile_img')
             
-            new_client.signature_str = self.request.get('client_signature')
-            new_client.signature_img = self.request.get('client_signature_img')
-            new_client.put()
+        new_client.signature_str = self.request.get('client_signature')
+        new_client.signature_img = self.request.get('client_signature_img')
+        new_client.put()
         
-            template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
-            template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
-            self.response.out.write(template.render(template_values))
-        else:
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write('Verification Code and Email Do Not Match!')
+        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
+        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
+        self.response.out.write(template.render(template_values))
         
 
 class ExShipperValidateClientAccountNameEmail(webapp2.RequestHandler):
     def post(self):
         account_name = self.request.get('account_name')
-        email = self.request.get('email')
         ajax_data = {}
-        response = 'Verification Code was sent to the email account you provided'
+        response = ''
         status = 'valid'
         
         if(ClientsInfo.query(ClientsInfo.account_name == account_name).get() is not None):
-            response = 'The Account name already exist, please pick up a new one!'
-            status = 'invalid_account_name'
-        elif(ClientsInfo.query(ClientsInfo.email == email).get() is not None):
-            response = response + 'The email already exist, please pick up a new one!'
-            status = 'invalid_email'
+            response = 'The account name already exist, please pick up a new one!'
+            status = 'invalid'
         else:
-            try:
-                verification_code = id_generator().__str__()
-                if(EmailVerification.query(EmailVerification.email == email).get() is not None):
-                    verification_pair_entity = EmailVerification.query(EmailVerification.email == email).get()
-                else:
-                    verification_pair_entity = EmailVerification()
-                
-                verification_pair_entity.email = email
-                verification_pair_entity.verification_code = verification_code
-                verification_pair_entity.put()
-                
-                mail.send_mail('rainman.tai@gmail.com', email, 'Email Verification', 'Your Verification Code is: ' + verification_code )
-            except Exception, e:
-                response = response + 'The email is invalid; ' + e
-                status = 'invalid_email'
+            response = 'The account name is valid.'
             
         ajax_data.update({'validation_response':response, 'validation_status':status})
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
 #end
-def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))  
-        
+    
 # end of ExShipperLoginHandler
 class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
@@ -1165,6 +1135,86 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         # end of html page dispatching
         
+class ExShipperGeneralClientsCreateClientInfoHandler(webapp2.RequestHandler):
+    def post(self):
+        client_verification_code = self.request.get('client_verification_code')
+        client_email = self.request.get('client_email')
+        query_entity = EmailVerification.query(ndb.AND(EmailVerification.email == client_email,
+                                                       EmailVerification.verification_code == client_verification_code)).get()
+                                       
+        if(query_entity != None):
+            my_dict = Key_Value()
+            template_values = {}
+            time_stamp = int(round(time.time())).__str__()
+            client_id = 'ESCL'+ time_stamp
+            new_client = ClientsInfo(id=client_id)
+            new_client.id = client_id
+            
+            new_client.account_name = self.request.get('client_account_name')
+            new_client.company_name = self.request.get('client_company_name')
+            new_client.password = self.request.get('client_password')
+            new_client.email = self.request.get('client_email')
+            
+            new_client.first_name = self.request.get('client_first_name')
+            new_client.last_name = self.request.get('client_last_name')
+            
+            birthday_year = self.request.get('birthday_year')
+            birthday_month = self.request.get('birthday_month')
+            birthday_day = self.request.get('birthday_day')
+            new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
+            
+            new_client.gender = self.request.get('client_gender')
+            new_client.address = self.request.get('client_address')
+            new_client.phone_number = self.request.get('client_phone_number')
+            new_client.profile_img = self.request.get('client_profile_img')
+            
+            new_client.signature_str = self.request.get('client_signature')
+            new_client.signature_img = self.request.get('client_signature_img')
+            new_client.put()
+        
+            template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
+            template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
+            self.response.out.write(template.render(template_values))
+        else:
+            self.response.headers['Content-Type'] = 'text/plain'
+            self.response.write('Verification Code and Email Do Not Match!')
+        
+
+class ExShipperGeneralClientsValidateClientAccountNameEmail(webapp2.RequestHandler):
+    def post(self):
+        account_name = self.request.get('account_name')
+        email = self.request.get('email')
+        ajax_data = {}
+        response = 'Verification Code was sent to the email account you provided'
+        status = 'valid'
+        
+        if(ClientsInfo.query(ClientsInfo.account_name == account_name).get() is not None):
+            response = 'The Account name already exist, please pick up a new one!'
+            status = 'invalid_account_name'
+        elif(ClientsInfo.query(ClientsInfo.email == email).get() is not None):
+            response = response + 'The email already exist, please pick up a new one!'
+            status = 'invalid_email'
+        else:
+            try:
+                verification_code = id_generator().__str__()
+                if(EmailVerification.query(EmailVerification.email == email).get() is not None):
+                    verification_pair_entity = EmailVerification.query(EmailVerification.email == email).get()
+                else:
+                    verification_pair_entity = EmailVerification()
+                
+                verification_pair_entity.email = email
+                verification_pair_entity.verification_code = verification_code
+                verification_pair_entity.put()
+                
+                mail.send_mail('rainman.tai@gmail.com', email, 'Email Verification', 'Your Verification Code is: ' + verification_code )
+            except Exception, e:
+                response = response + 'The email is invalid; ' + e
+                status = 'invalid_email'
+            
+        ajax_data.update({'validation_response':response, 'validation_status':status})
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
+        
 class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
     def post(self):
         try:
@@ -1252,6 +1302,11 @@ class GetReferenceNumber(webapp2.RequestHandler):
         
 
 #temporary functions block (will be moved to the cooresponding handlers)
+
+#id generator
+def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))  
+    
 #send email
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
@@ -1286,22 +1341,6 @@ def get_users_info(self, users):
     return values
 # end of #temporary functions block
 
-
-#test class
-class TestHandler(webapp2.RequestHandler):
-    def get(self):
-        my_dict = Key_Value()
-        user_info = get_users_info(self, users)
-        test_page = '/exshipper/exshipper_test.html'
-            
-        template_values = {'title':my_dict.exshipper_invoice_log_title}
-        template_values.update(user_info)
-            
-        template = jinja_environment.get_template(test_page)
-        self.response.out.write(template.render(template_values))
-#end of test class
-
-
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
@@ -1329,6 +1368,7 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_tw_custom_entry_packages_info_update_handler', ExShipperTWCustomEntryPackageInfoUpdateHandler),
                                ('/exshipper_general_clients_index_page', ExShipperGeneralClientsIndexHandler),
                                ('/exshipper_general_clients_login_handler', ExShipperGeneralClientsLoginHandler),
+                               ('/exshipper_general_clients_create_client_info_handler', ExShipperGeneralClientsCreateClientInfoHandler),
+                               ('/exshipper_general_clients_validate_client_account_name_email', ExShipperGeneralClientsValidateClientAccountNameEmail),
                                ('/exshipper_general_clients_packages_info_update_handler', ExShipperGeneralClientsPackageInfoUpdateHandler),
-                               ('/exshipper_general_clients_packages_tracking_handler', ExShipperGeneralClientsPackageTrackingHandler),
-                               ('/exshipper_test', TestHandler)], debug=True)
+                               ('/exshipper_general_clients_packages_tracking_handler', ExShipperGeneralClientsPackageTrackingHandler)], debug=True)

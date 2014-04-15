@@ -224,7 +224,7 @@
 		{% for client_info in clients_info %}
 		<script type="text/javascript">
 			var clients_signatures = new Object();
-				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.first_name}} " + " {{client_info.last_name}}" + ' ; Phone: ' + "{{client_info.phone_number}}";
+				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Account Name: ' + "{{client_info.account_name}}" + ' ; ' + 'Name: ' + "{{client_info.first_name}} " + " {{client_info.last_name}}" + ' ; Phone: ' + "{{client_info.phone_number}}";
 			$.each(clients_signatures, function(key, value) {
 			    $('.general_clients_signature > select').append($("<option/>", {
 			        value: key,
