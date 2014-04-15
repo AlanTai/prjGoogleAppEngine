@@ -324,7 +324,7 @@ class ExShipperValidateClientAccountNameEmail(webapp2.RequestHandler):
         else:
             try:
                 verification_code = id_generator().__str__()
-                if(EmailVerification.query(EmailVerification.email == email).get() is not None):
+                if(EmailVerification(EmailVerification.query(EmailVerification.email == email).get()) is not None):
                     verification_pair_entity = EmailVerification.query(EmailVerification.email == email).get()
                 else:
                     verification_pair_entity = EmailVerification()

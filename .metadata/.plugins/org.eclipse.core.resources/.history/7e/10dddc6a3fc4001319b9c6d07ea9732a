@@ -39,7 +39,6 @@ class ClientsInfo(PersonInfo):
 class EmailVerification(ndb.Model):
     email = ndb.StringProperty()
     verification_code = ndb.StringProperty()
-    
 #end of person information
     
 #tracking number basic class
