@@ -18,34 +18,52 @@
 				<p style="display: block; font-weight: bold;">Please fill in the
 					client information</p>
 				<!-- Account Name -->
-				<div>
+				<div style="background-color: #efefef; padding: 5px;">
 					<div>
 						<label style="width: 430px; display: inline-block;">Account
 							Name: </label> <input title="Account Name" name="client_account_name"
 							id="client_account_name" type="text"
-							style="width: 250px; display: inline-block; padding: 2px 5px;" />
+							style="width: 250px; display: inline-block; padding: 2px 5px;"
+							required="required" />
 					</div>
 					<!-- Email -->
 					<div>
 						<label style="width: 430px; display: inline-block;">
 							Email: </label> <input title="Email" name="client_email"
-							id="client_email" type="tel"
-							style="width: 250px; display: inline-block; padding: 2px 5px;" />
+							id="client_email"
+							style="width: 250px; display: inline-block; padding: 2px 5px;"
+							required="required" />
 					</div>
-					<input type="button"
-						value="Check Availability of Account Name and Email"
-						onclick="checkAvailabilityOfAccountNameEmail()" />
+					<div>
+						<input type="button"
+							value="Check Availability of Account Name and Email and Get Verification Code"
+							onclick="checkAvailabilityOfAccountNameEmail()"
+							style="display: inline-block;" />
+						<p id="account_name_email_validation_response"
+							style="display: inline-block;"></p>
+					</div>
 				</div>
 				<br>
 
+				<!-- Verification Name -->
+				<div>
+					<label style="width: 430px; display: inline-block;">Verification
+						Code: </label> <input title="Verification Code"
+						name="client_verification_code" id="client_verification_code"
+						type="password"
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
+				</div>
 
-				<!-- Account Name -->
+				<!-- Password Name -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Password:
 					</label> <input title="Password" name="client_password"
-						id="client_password" type="text"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+						id="client_password" type="password"
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
 				</div>
+
 
 				<!-- Client Info -->
 				<!-- Company Title -->
@@ -63,7 +81,8 @@
 					<label style="width: 430px; display: inline-block;">First
 						Name: </label> <input title="First Name" name="client_first_name"
 						id="client_first_name" type="text"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
 				</div>
 
 				<!-- Last Name -->
@@ -71,44 +90,55 @@
 					<label style="width: 430px; display: inline-block;">Last
 						Name: </label> <input title="Last Name" name="client_last_name"
 						id="client_last_name" type="text"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
 				</div>
-
-				<br>
-				<!-- Birthday -->
-				<div>
-					<label style="width: 430px; display: inline-block;">Birthday:
-					</label> <select name="birthday_year" id="birthday_year" form="client_info"></select>
-					<select name="birthday_month" id="birthday_month"
-						form="client_info"></select> <select name="birthday_day"
-						id="birthday_day" form="client_info"></select>
-				</div>
-				<br>
-				<!-- Gender -->
-				<div>
-					<label style="width: 430px; display: inline-block;">Gender:
-					</label> <select name="client_gender" id="client_gender" form="client_info">
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-					</select>
-				</div>
-				<br>
 
 				<!-- Address -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Address:
 					</label> <input title="Address" name="client_address" id="client_address"
 						type="text"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
 				</div>
-				<br>
 
 				<!-- phone -->
 				<div>
 					<label style="width: 430px; display: inline-block;"> Phone
 						Number: </label> <input title="Phone Number" name="client_phone_number"
 						id="client_phone_number" type="tel"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" />
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
+				</div>
+				<br>
+
+				<!-- Birthday -->
+
+				<div style="background-color: #efefef; padding: 5px;">
+					<div>
+						<label style="width: 430px; display: inline-block;">Birthday:
+						</label>
+						<div style="width: 250px; display: inline-block;">
+							<select name="birthday_year" id="birthday_year"
+								form="client_info"></select> <select name="birthday_month"
+								id="birthday_month" form="client_info"></select> <select
+								name="birthday_day" id="birthday_day" form="client_info"></select>
+						</div>
+					</div>
+					<br>
+					<!-- Gender -->
+					<div>
+						<label style="width: 430px; display: inline-block;">Gender:
+						</label>
+						<div style="width: 250px; display: inline-block;">
+							<select name="client_gender" id="client_gender"
+								form="client_info">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+						</div>
+					</div>
 				</div>
 				<br> <br>
 
@@ -152,22 +182,41 @@
 		/**/
 		var availability_account_name = false;
 		var availability_email = false;
-		
+
+		function checkEmail() {
+			var email = document.getElementById('client_email');
+			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+			if (!filter.test(email.value)) {
+				alert('Please provide a valid email address');
+				email.focus;
+				return false;
+			} else {
+				return true;
+			}
+		};
+
 		function checkAvailabilityOfAccountNameEmail() {
 			var client_account_name = $('#client_account_name').val().trim();
 			var client_email = $('#client_email').val().trim();
-			
-			if(client_account_name === ''){
+
+			if (client_account_name === '') {
 				alert('No account name');
 				$('#client_account_name').focus();
 				return false;
-			}
-			else if(availability_email === ''){
+			} else if (client_email === '') {
 				alert('No email');
 				$('#client_email').focus();
 				return false;
 			}
+			if (!checkEmail()) {
+				return false;
+			}
+			;
 
+			$('#upload_cover').css({
+				'display' : 'block'
+			});
 			$
 					.ajax(
 							'/exshipper_validate_client_account_name_email',
@@ -182,33 +231,58 @@
 								statusCode : {
 									400 : function() {
 										alert('400 status code! user-side error');
+										$('#upload_cover').css({
+											'display' : 'none'
+										});
+									},
+									404 : function() {
+										alert('Invalid Email');
+										$('#upload_cover').css({
+											'display' : 'none'
+										});
 									},
 									500 : function() {
 										alert('500 status code! server-side error; please contact ExShipper at 1-650-307-3834');
+										$('#upload_cover').css({
+											'display' : 'none'
+										});
 									}
 								}
 							});
 		}
-		function showMsg(response){
-			if(response.validation_status === 'invalid_account_name'){
+		function showMsg(response) {
+			if (response.validation_status === 'invalid_account_name') {
 				availability_account_name = false;
+				$('#account_name_email_validation_response').css({
+					'color' : '#f00'
+				});
+				$('#account_name_email_validation_response').text(
+						response.validation_response);
 				$('#client_account_name').focus();
-			}
-			else if(response.validation_status === 'invalid_email'){
+			} else if (response.validation_status === 'invalid_email') {
 				availability_email = false;
+				$('#account_name_email_validation_response').css({
+					'color' : '#f00'
+				});
+				$('#account_name_email_validation_response').text(
+						response.validation_response);
 				$('#client_email').focus();
-			}
-			else{
+			} else if (response.validation_status === 'valid') {
 				availability_email = true;
 				availability_account_name = true;
+				$('#account_name_email_validation_response').text(
+						response.validation_response);
 			}
+			$('#upload_cover').css({
+				'display' : 'none'
+			});
 		}
-		
+
 		//
-		$('#client_account_name').change(function(){
+		$('#client_account_name').change(function() {
 			availability_email = false;
 		});
-		$('#client_email').change(function(){
+		$('#client_email').change(function() {
 			availability_account_name = false;
 		});
 		/**/
@@ -335,6 +409,13 @@
 					isInfoValid = false;
 				}
 			});
+
+			//
+			if (isProfileImageValid || isSignatureImageValid) {
+				alert('Please check the availability of your account name and email!')
+				return false;
+			}
+
 			if (isInfoValid) {
 				alert('All information valid');
 			} else {

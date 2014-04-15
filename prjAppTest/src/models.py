@@ -34,6 +34,11 @@ class ClientsInfo(PersonInfo):
     company_name = ndb.StringProperty()
     signature_img = ndb.BlobProperty()
     signature_str = ndb.StringProperty()
+    
+    
+class EmailVerification(ndb.Model):
+    email = ndb.StringProperty()
+    verification_code = ndb.StringProperty()
 #end of person information
     
 #tracking number basic class
