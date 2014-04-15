@@ -236,6 +236,7 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         new_employee.account_name = self.request.get('employee_account_name')
         new_employee.password = self.request.get('employee_password')
         new_employee.job_title = self.request.get('employee_job_title')
+        new_employee.email = self.request.get('employee_email')
         
         new_employee.first_name = self.request.get('employee_first_name')
         new_employee.last_name = self.request.get('employee_last_name')
@@ -260,7 +261,18 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
         template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
         self.response.out.write(template.render(template_values))
-        
+     
+class ExShipperValidateEmployeeAccountName(webapp2.RequestHandler):
+    def post(self):
+        employee_account_name = self.request.get('employee_account_name')
+        ajax_data = {}
+        if(EmployeeInfo.query(EmployeeInfo.account_name == employee_account_name).get() is not None):
+            ajax_data.update({'validation_response':'This account name already exists, please select a new one!', 'validation_status':'invalid'})
+        else:
+            ajax_data.update({'validation_response':'This account name is valid!', 'validation_status':'valid'})
+            
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
 
 class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
     def post(self):
@@ -1289,6 +1301,7 @@ class TestHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
+                               ('/exshipper_validate_employee_account_name', ExShipperValidateEmployeeAccountName),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
                                ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),
                                ('/img', GetImage),
