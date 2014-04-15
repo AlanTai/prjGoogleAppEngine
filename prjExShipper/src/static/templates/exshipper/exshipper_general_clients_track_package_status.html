@@ -64,10 +64,10 @@ function showMsg(result){
 		if(result.package_status === 'spearnet'){
 			destination = 'at Spearnet';
 		}
-		else if(result.package_status === 'exshipper'){
+		else if(result.package_status === 'exshipper' || result.package_status === 'pickup'){
 			destination = 'at ExShipper';
 		}
-		else if(result.package_status === 'sfo_airport'){
+		else if(result.package_status === 'sfo_airport' || result.package_status === 'apex'){
 			destination = 'at SFO Airport';
 		}
 		else if(result.package_status === 'taiwan_taoyuan_airport'){
@@ -76,7 +76,7 @@ function showMsg(result){
 		else if(result.package_status === 'suda'){
 			destination = 'at Taiwan SUDA';
 		}
-		else if(result.package_status === 'suda'){
+		else if(result.package_status === 'delivered'){
 			destination = 'Delivered';
 		}
 		else{

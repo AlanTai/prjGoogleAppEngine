@@ -45,7 +45,7 @@
 </editorArea>
 <editor activePart="true" focus="true" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views (prjAppTest.src)" path="D:/prjGoogleAppEngine/prjAppTest/src/ctrl_views.py" title="ctrl_views (prjAppTest.src)" tooltip="prjAppTest/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjAppTest/src/ctrl_views.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="72992" selectionOffset="0" selectionTopPixel="9405"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="17629" selectionTopPixel="4515"/>
 </editor>
 </editors>
 <views>
@@ -77,11 +77,12 @@
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static"/>
-<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/javascript/exshipper"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static"/>
-<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static"/>
 <selected IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/ctrl_views.py"/>
@@ -265,7 +266,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.22757599" ratioLeft="307" ratioRight="1042" relationship="2" relative="topLeft"/>
+<info part="org.eclipse.ui.editorss" ratio="0.2186805" ratioLeft="295" ratioRight="1054" relationship="2" relative="topLeft"/>
 <info folder="true" part="bottom" ratio="0.816129" ratioLeft="506" ratioRight="114" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
@@ -285,165 +286,164 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjAppTest/src/ctrl_views.py"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjAppTest/src/models.py"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_create_employee_info.html"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_create_client_info.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_create_employee_info.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjAppTest/src/app_dict.py"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjExShipper/src/app_dict.py"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjExShipper/src/models.py"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjAppTest/src/models.py"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_create_client_info.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_create_client_info.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_general_clients_create_client_info.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_create_client_info.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjExShipper/src/ctrl_views.py"/>
 </editors>
-<item historyLabel="app_dict" index="5">
-<position info="not_deleted" x="1123" y="0"/>
-</item>
-<item historyLabel="exshipper_create_employee_info.html" index="2">
-<position info="not_deleted" x="9919" y="0"/>
-</item>
-<item historyLabel="models (prjExShipper.src)" index="6">
+<item historyLabel="exshipper_create_client_info.html" index="4">
 <position/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="1">
-<position info="not_deleted" x="0" y="4384"/>
-</item>
-<item historyLabel="models (prjExShipper.src)" index="6">
-<position/>
-</item>
-<item historyLabel="exshipper_create_employee_info.html" index="2">
-<position info="not_deleted" x="9919" y="0"/>
-</item>
-<item historyLabel="models" index="7">
-<position info="not_deleted" x="3217" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="78658" y="52"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
 <position/>
 </item>
-<item historyLabel="models" index="7">
-<position info="not_deleted" x="3223" y="16"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position/>
-</item>
-<item historyLabel="models" index="7">
-<position info="not_deleted" x="3270" y="0"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position/>
-</item>
-<item historyLabel="app_dict" index="4">
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="65471" y="46"/>
+</item>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="5">
+<position info="not_deleted" x="414" y="0"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
 <position/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="78797" y="60"/>
+</item>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="5">
+<position info="not_deleted" x="7646" y="0"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
 <position/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="78797" y="60"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
 <position/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position/>
+<position info="not_deleted" x="79193" y="0"/>
 </item>
-<item historyLabel="exshipper_create_employee_info.html" index="2">
-<position info="not_deleted" x="9919" y="0"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="15575" y="1345"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="17629" y="0"/>
-</item>
-<item historyLabel="exshipper_create_client_info.html" index="3">
+<item historyLabel="app_dict" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="13902" y="0"/>
+<position info="not_deleted" x="74297" y="0"/>
 </item>
-<item historyLabel="exshipper_create_client_info.html" index="3">
-<position info="not_deleted" x="908" y="19"/>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="5">
+<position info="not_deleted" x="7646" y="0"/>
+</item>
+<item historyLabel="exshipper_create_employee_info.html" index="1">
+<position info="not_deleted" x="11040" y="0"/>
+</item>
+<item historyLabel="exshipper_create_employee_info.html" index="2">
+<position info="not_deleted" x="12296" y="0"/>
+</item>
+<item historyLabel="exshipper_create_employee_info.html" index="1">
+<position info="not_deleted" x="0" y="12296"/>
+</item>
+<item historyLabel="exshipper_create_employee_info.html" index="2">
+<position info="not_deleted" x="12296" y="0"/>
+</item>
+<item historyLabel="exshipper_create_employee_info.html" index="1">
+<position info="not_deleted" x="0" y="12296"/>
+</item>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="5">
+<position info="not_deleted" x="13458" y="0"/>
+</item>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="5">
+<position info="not_deleted" x="13467" y="49"/>
+</item>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="6">
+<position info="not_deleted" x="13484" y="0"/>
+</item>
+<item historyLabel="exshipper_general_clients_create_client_info.html" index="5">
+<position info="not_deleted" x="13467" y="49"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="74297" y="0"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
 <position/>
 </item>
-<item historyLabel="exshipper_create_client_info.html" index="3">
-<position info="not_deleted" x="1215" y="12"/>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
+<position/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="6410" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="37017" y="0"/>
-</item>
-<item historyLabel="models" index="7">
-<position info="not_deleted" x="3223" y="16"/>
+<position info="not_deleted" x="74297" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="34247" y="0"/>
+<position info="not_deleted" x="18366" y="0"/>
 </item>
-<item historyLabel="models" index="7">
-<position info="not_deleted" x="2749" y="0"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="36953" y="0"/>
-</item>
-<item historyLabel="models" index="7">
-<position info="not_deleted" x="2749" y="0"/>
-</item>
-<item historyLabel="models (prjExShipper.src)" index="6">
-<position info="not_deleted" x="4342" y="0"/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="7">
-<position info="not_deleted" x="0" y="4342"/>
-</item>
-<item historyLabel="models (prjExShipper.src)" index="6">
-<position info="not_deleted" x="4342" y="0"/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="7">
-<position info="not_deleted" x="0" y="4342"/>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="1382" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="36953" y="0"/>
+<position info="not_deleted" x="17914" y="0"/>
 </item>
-<item historyLabel="exshipper_create_client_info.html" index="3">
-<position info="not_deleted" x="1215" y="12"/>
-</item>
-<item historyLabel="exshipper_create_client_info.html" index="8">
-<position info="not_deleted" x="10304" y="0"/>
-</item>
-<item historyLabel="exshipper_create_client_info.html" index="3">
-<position info="not_deleted" x="0" y="10304"/>
-</item>
-<item historyLabel="exshipper_create_client_info.html" index="8">
-<position info="not_deleted" x="10304" y="0"/>
-</item>
-<item historyLabel="exshipper_create_client_info.html" index="3">
-<position info="not_deleted" x="0" y="10304"/>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="6651" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="36953" y="0"/>
+<position info="not_deleted" x="18510" y="17"/>
 </item>
-<item historyLabel="ctrl_views (prjExShipper.src)" index="9">
-<position info="not_deleted" x="72992" y="0"/>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="6970" y="0"/>
 </item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="0" y="72992"/>
+<position info="not_deleted" x="18478" y="19"/>
 </item>
-<item historyLabel="ctrl_views (prjExShipper.src)" index="9">
-<position info="not_deleted" x="72992" y="0"/>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="7498" y="0"/>
+</item>
+<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="18478" y="19"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
+<position info="not_deleted" x="12821" y="0"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="0" y="12821"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="4">
+<position info="not_deleted" x="12821" y="0"/>
+</item>
+<item historyLabel="exshipper_create_client_info.html" index="7">
+<position info="not_deleted" x="0" y="12821"/>
+</item>
+<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="18478" y="19"/>
+</item>
+<item historyLabel="ctrl_views (prjExShipper.src)" index="8">
+<position info="not_deleted" x="79208" y="0"/>
+</item>
+<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
+<position info="not_deleted" x="0" y="79209"/>
+</item>
+<item historyLabel="ctrl_views (prjExShipper.src)" index="8">
+<position info="not_deleted" x="74458" y="0"/>
 </item>
 <item active="true" historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="0" y="72992"/>
+<position info="not_deleted" x="0" y="79209"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -470,20 +470,11 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_client_info.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_create_client_info.html">
 <persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_create_client_info.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="models.py" tooltip="prjExShipper/src/models.py">
-<persistable path="/prjExShipper/src/models.py"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_client_info.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_create_client_info.html">
 <persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_create_client_info.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjAppTest/src/app_dict.py">
-<persistable path="/prjAppTest/src/app_dict.py"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="models.py" tooltip="prjAppTest/src/models.py">
-<persistable path="/prjAppTest/src/models.py"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjExShipper/src/app_dict.py">
-<persistable path="/prjExShipper/src/app_dict.py"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_create_client_info.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_general_clients_create_client_info.html">
+<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_general_clients_create_client_info.html"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_employee_info.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_create_employee_info.html">
 <persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_create_employee_info.html"/>
@@ -491,23 +482,32 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_employee_info.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_create_employee_info.html">
 <persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_create_employee_info.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_client_info_handler.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_create_client_info_handler.html">
-<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_create_client_info_handler.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjAppTest/src/app_dict.py">
+<persistable path="/prjAppTest/src/app_dict.py"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_invoice_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_invoice_log.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_invoice_log.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_create_client_info.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_general_clients_create_client_info.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_create_client_info.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_package_info_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html">
 <persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_create_invoice.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_general_clients_create_invoice.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_general_clients_create_invoice.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
+<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_client_info_handler.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_create_client_info_handler.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_create_client_info_handler.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="models.py" tooltip="prjAppTest/src/models.py">
+<persistable path="/prjAppTest/src/models.py"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_index.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_index.html">
-<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_index.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_index.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_general_clients_index.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_index.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjExShipper/src/app_dict.py">
+<persistable path="/prjExShipper/src/app_dict.py"/>
 </file>
 </mruList>
 </workbench>

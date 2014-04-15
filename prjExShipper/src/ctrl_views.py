@@ -116,6 +116,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
 
                 # query package information (packages' status == spearnet or exshipper)
                 spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
+                                                                                       SpearnetPackagesInfo.package_status == 'pickup',
                                                                                        SpearnetPackagesInfo.package_status == 'exshipper'))
                 # pass clients informations
                 clients_info = ClientsInfo().query()
@@ -129,7 +130,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
                 
                 #query package information (packages' status == spearnet or exshipper)
-                general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'spearnet',
+                general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
                                                                                             GeneralClientsPackagesInfo.package_status == 'exshipper'))
                 clients_info = ClientsInfo().query()
                 template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
@@ -649,6 +650,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
             suda_numbers_array = json.loads(json_obj['suda_tracking_numbers'])
             package_tracking_numbers = ''
             pickup_status = ''
+            total_packages = 0
             
             try:
                 for key in suda_numbers_array:
@@ -662,6 +664,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         package_entity.put()
                         pickup_status = 'success'
                         package_tracking_numbers = package_tracking_numbers + key + '\n'
+                        total_packages = total_packages + 1
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
                         
                     elif(package_entity != None and package_entity.package_status != 'spearnet'):
@@ -681,7 +684,9 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                 response.update({'result':result, 'key':'na'})
             finally:
                 if(response['key'] == 'success'):
-                    send_email('jerry@spearnet-us.com', 'winever.tw@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper')
+                    response_to_spearnet = 'Packages SUDA Tracking Numbers: ' + package_tracking_numbers + '\n' + 'Total Amount: ' + total_packages.__str__()
+                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper!' + 'Detail is as follows:' + '\n' + response_to_spearnet)
+                    
                 json_response['response'] = response
                 
         self.response.headers['Content-Type'] = 'text/json ; charset=UTF-8'
@@ -1311,7 +1316,7 @@ def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'winever.tw@gmail.com'
+    email_host = 'rainman.tai@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
