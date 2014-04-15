@@ -7,19 +7,18 @@ Created on Oct 1, 2013
 from google.appengine.ext.key_range import ndb
 import time
 import datetime
-import string
-import random
 __author__ = 'Alan Tai'
 
 import webapp2
 import jinja2
 import os
 import json
+
 from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
-    TWCustomEntryInfo, EmployeeInfo, EmailVerification
+    TWCustomEntryInfo, EmployeeInfo
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates')) #append templates' path
 
@@ -264,86 +263,61 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
 
 class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
     def post(self):
-        client_verification_code = self.request.get('client_verification_code')
-        client_email = self.request.get('client_email')
-        query_entity = EmailVerification.query(ndb.AND(EmailVerification.email == client_email,
-                                                       EmailVerification.verification_code == client_verification_code)).get()
-                                       
-        if(query_entity != None):
-            my_dict = Key_Value()
-            template_values = {}
-            time_stamp = int(round(time.time())).__str__()
-            client_id = 'ESCL'+ time_stamp
-            new_client = ClientsInfo(id=client_id)
-            new_client.id = client_id
-            
-            new_client.account_name = self.request.get('client_account_name')
-            new_client.company_name = self.request.get('client_company_name')
-            new_client.password = self.request.get('client_password')
-            new_client.email = self.request.get('client_email')
-            
-            new_client.first_name = self.request.get('client_first_name')
-            new_client.last_name = self.request.get('client_last_name')
-            
-            birthday_year = self.request.get('birthday_year')
-            birthday_month = self.request.get('birthday_month')
-            birthday_day = self.request.get('birthday_day')
-            new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
-            
-            new_client.gender = self.request.get('client_gender')
-            new_client.address = self.request.get('client_address')
-            new_client.phone_number = self.request.get('client_phone_number')
-            new_client.profile_img = self.request.get('client_profile_img')
-            
-            new_client.signature_str = self.request.get('client_signature')
-            new_client.signature_img = self.request.get('client_signature_img')
-            new_client.put()
+        time_stamp = int(round(time.time())).__str__()
+        client_id = 'ESCL'+ time_stamp
+        new_client = ClientsInfo(id=client_id)
+        new_client.id = client_id
         
-            template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
-            template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
-            self.response.out.write(template.render(template_values))
-        else:
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write('Verification Code and Email Do Not Match!')
+        new_client.account_name = self.request.get('client_account_name')
+        new_client.company_name = self.request.get('client_company_name')
+        new_client.password = self.request.get('client_password')
+        new_client.email = self.request.get('client_email')
         
+        new_client.first_name = self.request.get('client_first_name')
+        new_client.last_name = self.request.get('client_last_name')
+        
+        birthday_year = self.request.get('birthday_year')
+        birthday_month = self.request.get('birthday_month')
+        birthday_day = self.request.get('birthday_day')
+        new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
+        
+        new_client.gender = self.request.get('client_gender')
+        new_client.address = self.request.get('client_address')
+        new_client.phone_number = self.request.get('client_phone_number')
+        new_client.profile_img = self.request.get('client_profile_img')
+        
+        new_client.signature_str = self.request.get('client_signature')
+        new_client.signature_img = self.request.get('client_signature_img')
+        new_client.put()
+        
+        my_dict = Key_Value()
+        template_values = {}
+        user_info = get_users_info(self, users)
+        template_values.update(user_info)
+        template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
+        template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
+        self.response.out.write(template.render(template_values))
 
 class ExShipperValidateClientAccountNameEmail(webapp2.RequestHandler):
     def post(self):
         account_name = self.request.get('account_name')
         email = self.request.get('email')
         ajax_data = {}
-        response = 'Verification Code was sent to the email account you provided'
-        status = 'valid'
+        response = 'Your account name and email are valid'
         
-        if(ClientsInfo.query(ClientsInfo.account_name == account_name).get() is not None):
+        if(ClientsInfo.query(ClientsInfo.account_name == account_name) != None):
             response = 'The Account name already exist, please pick up a new one!'
-            status = 'invalid_account_name'
-        elif(ClientsInfo.query(ClientsInfo.email == email).get() is not None):
+        elif not mail.is_email_valid(email):
+            response = 'The email address is invalid!'
+        elif(ClientsInfo.query(ClientsInfo.email == email) != None):
             response = response + 'The email already exist, please pick up a new one!'
-            status = 'invalid_email'
-        else:
-            try:
-                verification_code = id_generator().__str__()
-                if(EmailVerification.query(EmailVerification.email == email).get() is not None):
-                    verification_pair_entity = EmailVerification.query(EmailVerification.email == email).get()
-                else:
-                    verification_pair_entity = EmailVerification()
-                
-                verification_pair_entity.email = email
-                verification_pair_entity.verification_code = verification_code
-                verification_pair_entity.put()
-                
-                mail.send_mail('rainman.tai@gmail.com', email, 'Email Verification', 'Your Verification Code is: ' + verification_code )
-            except Exception, e:
-                response = response + 'The email is invalid; ' + e
-                status = 'invalid_email'
             
-        ajax_data.update({'validation_response':response, 'validation_status':status})
+        ajax_data.update({'validation_response':response})
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
 #end
-def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))  
+       
+        
         
 # end of ExShipperLoginHandler
 class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
@@ -661,39 +635,30 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
         account = self.request.get('account')
         password = self.request.get('password')
         response = {}
+        
         json_response = {'response':'NA'}
         if(account == 'alantai' and password == '1014'):
             json_obj = json.loads(self.request.get('spearnet_picked_packages'))
             suda_numbers_array = json.loads(json_obj['suda_tracking_numbers'])
-            package_tracking_numbers = ''
-            pickup_status = ''
-            
             try:
                 for key in suda_numbers_array:
                     package_entity = SpearnetPackagesInfo.get_by_id(key)
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
                         package_entity.package_status = 'pickup'
-                        
-                        current_date_time = datetime.datetime.now()
-                        package_entity.access_info = json.dumps({'access_info':[{'person':'alantai', 'date_time':current_date_time.__str__()}]})
+                        access_people = ''
+                        package_entity.access_people = json.dumps({'access_people':['alantai']})
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
-                        pickup_status = 'success'
-                        package_tracking_numbers = package_tracking_numbers + key + '\n'
+                        
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
                         
                     elif(package_entity != None and package_entity.package_status != 'spearnet'):
                         response.update({'result':'Tracking Number, '+ key +', is Duplicated!', 'key':'duplicated_number'})
-                        pickup_status = 'fail'
                         break
                     else:
-                        response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'})
-                        pickup_status = 'fail'
+                        response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'}) 
                         break
-                    
-                    if(pickup_status == 'success'):
-                        email_response = response['result'] + '\n' + 'SUDA Tracking Numbers: ' + '\n' + package_tracking_numbers
-                        send_email('receiver', 'sender', 'Package Pickup Status', email_response)
+                
             except Exception, e:
                 result = 'Error Message: %s' % e
                 response.update({'result':result, 'key':'na'})
@@ -743,8 +708,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                 else:
                     send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                     
-            self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
-            self.response.out.write(json.dumps(ajax_data))
+            
         #download suda tracking number for exshipper
         elif(user_account == 'alantai' and user_password == '1014lct'):
             if(suda_tracking_number_type == 'regular'):
@@ -1239,7 +1203,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
@@ -1290,7 +1254,6 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
-                               ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),
                                ('/exshipper_spearnet_index_page', ExShipperSpearnetIndexHandler),

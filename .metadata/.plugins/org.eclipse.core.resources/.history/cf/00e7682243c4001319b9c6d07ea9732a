@@ -11,7 +11,7 @@
 
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">ExShipper General Clients Package
+	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
 	<input type="button" value="Update Information"
 			onclick="updatePackageStatus()" style="margin: 5px 5px;">
@@ -20,8 +20,8 @@
 
 <div
 	style="position: absolute; top: 130px; width: 100%; text-align: center; margin: 10px auto;">
-	<br> {% if general_clients_packages_info_log %}
-	<div id="general_clients_packages_info"
+	<br> {% if spearnet_customer_package_info_log %}
+	<div id="spearnet_customers_packages_info"
 		style="width:100%; padding: 5px ; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
@@ -69,11 +69,11 @@
 		
 		json_array.push(obj_keys);
 		</script>
-		{% for single_row_data in general_clients_packages_info_log %}
+		{% for single_row_data in spearnet_customer_package_info_log %}
 		<form style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text" value="{{ single_row_data.hawb }}" disabled> </span>
 			<span>TW Custom Entry Barcode Number: <input type="text" value="{{ single_row_data.tw_custom_entry_number }}" /> </span>
-			<span class="general_clients_package_status">Package Status:
+			<span class="spearnet_customers_package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}"
 					class="package_status">
 						<option value="spearnet">Spearnet</option>
@@ -88,14 +88,14 @@
 				</select>
 			</span>
 			
-			<span class="general_clients_signature">Client Signature:
+			<span class="spearnet_customers_signature">Client Signature:
 				<select id="{{ single_row_data.hawb }}"
 					class="client_signature">
 					<option value="NA">No Data</option>
 				</select>
 			</span>
 			
-			<span class="general_clients_notes">Note:
+			<span class="spearnet_customers_notes">Note:
 				<input id="{{ single_row_data.hawb }}"
 					class="note" type="text" />
 			</span>
@@ -122,13 +122,13 @@
 				};
 				
 				//setup auto change mechanism for package status
-				$('.general_clients_package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
-				$('.general_clients_signature > select[id={{ single_row_data.hawb }}]').val(signature_img_id);
-				$('.general_clients_notes > input[id={{ single_row_data.hawb }}]').val(note);
+				$('.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]').val(package_status);
+				$('.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]').val(signature_img_id);
+				$('.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]').val(note);
 				
 				
 				//update json obj when select value change
-				$('.general_clients_package_status > select[id={{ single_row_data.hawb }}]').change(function() {
+				$('.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -137,7 +137,7 @@
 				});
 				
 				//setup auto change mechanism for client signature
-				$('.general_clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
+				$('.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -156,7 +156,7 @@
 					alert(notes[key]);
 				}); */
 				
-				$('.general_clients_notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
+				$('.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
 					var key = $(this).attr('id');
 					/* if (typeof packages_status[key] === 'undefined'){
 						packages_status[key] = $(this).val();
@@ -224,9 +224,9 @@
 		{% for client_info in clients_info %}
 		<script type="text/javascript">
 			var clients_signatures = new Object();
-				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.first_name}} " + " {{client_info.last_name}}" + ' ; Phone: ' + "{{client_info.phone_number}}";
+				clients_signatures["{{client_info.key.urlsafe()}}"] = 'Name: ' + "{{client_info.first_name}}" + ' ; Phone: ' + "{{client_info.phone}}";
 			$.each(clients_signatures, function(key, value) {
-			    $('.general_clients_signature > select').append($("<option/>", {
+			    $('.spearnet_customers_signature > select').append($("<option/>", {
 			        value: key,
 			        text: value
 			    }));
@@ -239,8 +239,8 @@
 		
 		<script type="text/javascript">
 		// distinct row color
-		$('#general_clients_packages_info> form:even').css('background-color', '#dedede');
-		$('#general_clients_packages_info> form:odd').css('background-color', '#f9f9f9');
+		$('#spearnet_customers_packages_info> form:even').css('background-color', '#dedede');
+		$('#spearnet_customers_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end of distinct row color
 		
 		//update information
@@ -273,10 +273,11 @@
 					
 					if (package_status_length != 0 || clients_signature_length != 0 || notes_length != 0) {
 						$('#upload_cover').css({'display':'block'});
+						
 						var json_string = JSON.stringify(json_obj_update_data, 2, 2);
 						$
 								.ajax(
-										"/exshipper_general_clients_packages_info_update_handler",
+										"/exshipper_spearnet_customer_packages_info_update_handler",
 										{
 											type : 'POST',
 											data : {
@@ -298,6 +299,9 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
+					
+					//ajax function
+					
 				}
 			}
 
@@ -431,7 +435,7 @@
 		};
 
 		var current_time = new Date();
-		var file_name = 'general_clients_package_info_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
+		var file_name = 'spearnet_customers_packages_info_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
 		download(jsonToSsXml(testJson), file_name,
 				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 	</script>
