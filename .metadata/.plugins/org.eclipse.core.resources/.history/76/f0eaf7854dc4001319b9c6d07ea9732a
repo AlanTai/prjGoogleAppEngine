@@ -1132,26 +1132,21 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
-        general_client_account_name = self.request.get('general_clients_entry_account')
-        general_client_password = self.request.get('general_clients_entry_password')
+        tw_custom_entry_account = self.request.get('general_clients_entry_account')
+        tw_custom_entry_password = self.request.get('general_clients_entry_password')
         template_values = {}
         
         html_page = my_dict.exshipper_invalid_login_page
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        if(dispatch_token == 'creating_client_info'):
-            if(general_client_account_name == 'alantai' and general_client_password == '1014lct'):
-                html_page = my_dict.exshipper_general_clients_create_client_info_page
-                html_page_title = my_dict.exshipper_general_clients_create_client_info_page_title
-        
-        elif(dispatch_token == 'creating_invoice'):
-            if(general_client_account_name == 'alantai' and general_client_password == '1014lct'):
+        if(dispatch_token == 'creating_invoice'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_create_invoice_page
                 html_page_title = my_dict.exshipper_general_clients_create_invoice_page_title
                 
         elif(dispatch_token == 'track_package_status'):
-            if(general_client_account_name == 'alantai' and general_client_password == '1014lct'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_track_package_status_page
                 html_page_title = my_dict.exshipper_general_clients_track_package_status_page_title
                 

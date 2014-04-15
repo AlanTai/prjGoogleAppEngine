@@ -103,6 +103,9 @@ class Key_Value():
         self.exshipper_general_clients_login_page = '/exshipper/exshipper_general_clients_login.html'
         self.exshipper_general_clients_login_page_title = 'General Clients Login'
         
+        self.exshipper_general_clients_create_client_info_page = '/exshipper/exshipper_general_clients_create_client_info.html'
+        self.exshipper_general_clients_create_client_info_page_title = 'Add New Client Information'
+        
         self.exshipper_general_clients_create_invoice_page = '/exshipper/exshipper_general_clients_create_invoice.html'
         self.exshipper_general_clients_create_invoice_page_title = 'Invoice Log (General Clients)'
         

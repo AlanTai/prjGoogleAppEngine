@@ -236,7 +236,6 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         new_employee.account_name = self.request.get('employee_account_name')
         new_employee.password = self.request.get('employee_password')
         new_employee.job_title = self.request.get('employee_job_title')
-        new_employee.email = self.request.get('employee_email')
         
         new_employee.first_name = self.request.get('employee_first_name')
         new_employee.last_name = self.request.get('employee_last_name')
@@ -261,18 +260,7 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
         template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
         self.response.out.write(template.render(template_values))
-     
-class ExShipperValidateEmployeeAccountName(webapp2.RequestHandler):
-    def post(self):
-        employee_account_name = self.request.get('employee_account_name')
-        ajax_data = {}
-        if(EmployeeInfo.query(EmployeeInfo.account_name == employee_account_name).get() is not None):
-            ajax_data.update({'validation_response':'This account name already exists, please select a new one!', 'validation_status':'invalid'})
-        else:
-            ajax_data.update({'validation_response':'This account name is valid!', 'validation_status':'valid'})
-            
-        self.response.out.headers['Content-Type'] = 'text/json'
-        self.response.out.write(json.dumps(ajax_data))
+        
 
 class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
     def post(self):
@@ -1132,26 +1120,21 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         my_dict = Key_Value()
         user_info = get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
-        general_client_account_name = self.request.get('general_clients_entry_account')
-        general_client_password = self.request.get('general_clients_entry_password')
+        tw_custom_entry_account = self.request.get('general_clients_entry_account')
+        tw_custom_entry_password = self.request.get('general_clients_entry_password')
         template_values = {}
         
         html_page = my_dict.exshipper_invalid_login_page
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        if(dispatch_token == 'creating_client_info'):
-            if(general_client_account_name == 'alantai' and general_client_password == '1014lct'):
-                html_page = my_dict.exshipper_general_clients_create_client_info_page
-                html_page_title = my_dict.exshipper_general_clients_create_client_info_page_title
-        
-        elif(dispatch_token == 'creating_invoice'):
-            if(general_client_account_name == 'alantai' and general_client_password == '1014lct'):
+        if(dispatch_token == 'creating_invoice'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_create_invoice_page
                 html_page_title = my_dict.exshipper_general_clients_create_invoice_page_title
                 
         elif(dispatch_token == 'track_package_status'):
-            if(general_client_account_name == 'alantai' and general_client_password == '1014lct'):
+            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
                 html_page = my_dict.exshipper_general_clients_track_package_status_page
                 html_page_title = my_dict.exshipper_general_clients_track_package_status_page_title
                 
@@ -1256,7 +1239,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
@@ -1306,7 +1289,6 @@ class TestHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
-                               ('/exshipper_validate_employee_account_name', ExShipperValidateEmployeeAccountName),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
                                ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),
                                ('/img', GetImage),
