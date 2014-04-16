@@ -1,0 +1,124 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Packages Labels</p>
+	<hr>
+</div>
+
+
+<div id="package_labels_container"
+	style="position: absolute; top: 100px; text-align: center; width: 100%; z-index: 1;">
+	
+	
+	<div id="print_area" style="text-align: center; margin: 0px auto;">
+		<div style="border: 1px thin; border-color: #666; display: block;">
+			<p>Packages Information</p>
+			<div id="packages_info"
+				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<br>
+		</div>
+
+		<div style="border: 1px dotted; border-color: #666; display: block;">
+			<p>Print Information</p>
+			<input id="print_label" type="button" value="Print Labels"
+				onclick="PrintElem('#packages_labels','TW Custom Entry Labels')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="packages_labels"
+				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<div id="printed_labels"></div>
+
+		</div>
+	</div>
+	<br>
+</div>
+
+<script type="text/javascript">
+var spearnet_packages_info = "{{ spearnet_packages_info }}";
+var general_clients_packages_info = "{{ general_clients_packages_info }}";
+var tw_custom_entry_packages_set = "{{ tw_custom_entry_packages_set }}"
+
+		//append type-in info to html element
+		{% if tw_custom_entry_info %}
+		{% for single_row_data in tw_custom_entry_info %}
+		$('#packages_info')
+				.append(
+						'<form name="'
+							+ "{{ single_row_data.barcode_number }}"
+							+ '">'
+								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
+								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '
+								+ "{{ single_row_data.barcode_number }}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '
+								+ "{{ single_row_data.mawb }}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
+								+ "{{single_row_data.flight_number}}"
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+		{% endfor %}
+		{% endif %}
+		
+		// change color
+		$('#packages_info> form:even').css('background-color', '#dedede');
+		$('#packages_info> form:odd').css('background-color', '#f9f9f9');
+		// end change color
+
+		{% if tw_custom_entry_info %}
+		{% for single_row_data in tw_custom_entry_info %}
+		$('#packages_labels')
+				.append(
+						'<form id="label_'
+							+ "{{single_row_data.barcode_number}}"
+							+ '" style="border: 1px solid; width: 450px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
+							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size:20px; font-weight: bold; width: 100%;">聯締 /泓倫 </p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; width: 100%;">From SFO to Taoyuan International Airport</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; width: 100%;">(舊金山機場 至 桃園國際機場)</p>'
+								+ '<p style="display: block; margin: 10px 10px;"> MAWB/榮儲快遞艙:  '
+								+ "{{single_row_data.mawb}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 10px 10px;"> Flight Number/班機號碼: '
+								+ "{{single_row_data.flight_number}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">台灣報關行追蹤碼</div>'
+								+ '<div class="barcode" id="barcode_'
+							+ "{{single_row_data.barcode_number}}"
+							+ '" style="margin: 2px auto; text-align:center;"></div>'
+								+ '</form>');
+
+		$('#packages_labels> form[id="label_' + "{{single_row_data.barcode_number}}" + '"]').find(
+				'div#barcode_' + "{{single_row_data.barcode_number}}").barcode("{{single_row_data.barcode_number}}",
+				'code39', {
+					barWidth : 2,
+					barHeight : 45,
+					fontSize : 16
+				});
+		
+		{% endfor %}
+		{% endif %}
+		
+
+	function selectOrRemove(elem) {
+		var select_status = $(elem).find('input').attr('value');
+		var elem_name = $(elem).attr('name');
+		if (select_status === 'Remove') {
+			$(elem).find('input').val('Select');
+			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'none'
+			});
+		} else {
+			$(elem).find('input').val('Remove');
+			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'inline-block'
+			});
+		}
+
+		/* remove element */
+		// $(elem).remove();
+	}
+</script>
+
+{% endblock %}

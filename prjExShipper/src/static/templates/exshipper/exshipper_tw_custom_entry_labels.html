@@ -8,8 +8,8 @@
 
 <div id="package_labels_container"
 	style="position: absolute; top: 100px; text-align: center; width: 100%; z-index: 1;">
-	
-	
+
+
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
 		<div style="border: 1px thin; border-color: #666; display: block;">
 			<p>Packages Information</p>
@@ -26,15 +26,12 @@
 			<div id="packages_labels"
 				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 			<div id="printed_labels"></div>
-
 		</div>
 	</div>
 	<br>
 </div>
 
 <script type="text/javascript">
-var spearnet_packages_info = "{{ spearnet_packages_info }}";
-var general_clients_packages_info = "{{ general_clients_packages_info }}";
 
 		//append type-in info to html element
 		{% if tw_custom_entry_info %}
@@ -82,6 +79,9 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 								+ "{{single_row_data.flight_number}}"
 								+ '</p>'
 								+ '<hr>'
+								+ '<p style="margin: 10px 10px;"> 包裹速達追蹤碼(SUDA Tracking Numbers):</p>'
+								+ '<p id="suda_numbers_{{single_row_data.barcode_number}}" style="margin: 10px 10px;" ></p>'
+								+ '<hr>'
 								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">台灣報關行追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'
 							+ "{{single_row_data.barcode_number}}"
@@ -115,9 +115,18 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 			});
 		}
 
-		/* remove element */
-		// $(elem).remove();
 	}
+	
+	//add packages numbers on the labels
+	var tw_custom_entry_packages_set = "{{ tw_custom_entry_packages_set }}";
+	tw_custom_entry_packages_set = tw_custom_entry_packages_set.replace(/'/g, '"');
+	var json_tw_custom_entry_packages_set = jQuery.parseJSON( tw_custom_entry_packages_set );
+	$.each(json_tw_custom_entry_packages_set, function(key, data){
+		$.each(data, function (index, data) {
+			$('#suda_numbers_' + key).append('<span style="display: inline-block; "> '+ data +'\/ </span>');
+    	})
+	});
+
 </script>
 
 {% endblock %}

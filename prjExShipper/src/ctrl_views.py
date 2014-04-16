@@ -202,8 +202,27 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
                 html_page = my_dict.exshipper_tw_custom_entry_labels_page
                 html_page_title = my_dict.exshipper_tw_custom_entry_labels_page_title
+                
                 tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+                
+                tw_custom_entry_packages_set = {}
+                for tw_custom_entry_entity in tw_custom_entry_info:
+                    spearnet_package_query = SpearnetPackagesInfo.query(SpearnetPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
+                    general_client_package_query = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
+                    packages_suda_numbers_set = []
+                    if(spearnet_package_query is not None):
+                        for spearnet_package_entity in spearnet_package_query:
+                            packages_suda_numbers_set.append(str(spearnet_package_entity.hawb))
+                    if(general_client_package_query is not None):
+                        for general_clients_package_entity in general_client_package_query:
+                            packages_suda_numbers_set.append(str(general_clients_package_entity.hawb))
+                    tw_custom_entry_packages_set[str(tw_custom_entry_entity.barcode_number)] = packages_suda_numbers_set
+                    
+                json_str_tw_custom_entry_packages_set = tw_custom_entry_packages_set
+                template_values['tw_custom_entry_packages_set'] = json_str_tw_custom_entry_packages_set
+                
                 template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
+                
                 
         #page of creating cargo manifest
         elif(dispatch_token == 'exshipper_cargo_manifest'):
@@ -242,9 +261,9 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         new_employee.first_name = self.request.get('employee_first_name')
         new_employee.last_name = self.request.get('employee_last_name')
         
-        birthday_year = self.request.get('birthday_year')
-        birthday_month = self.request.get('birthday_month')
-        birthday_day = self.request.get('birthday_day')
+        birthday_year = int(self.request.get('birthday_year'))
+        birthday_month = int(self.request.get('birthday_month'))
+        birthday_day = int(self.request.get('birthday_day'))
         
         new_employee.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
         
@@ -291,9 +310,9 @@ class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
         new_client.first_name = self.request.get('client_first_name')
         new_client.last_name = self.request.get('client_last_name')
             
-        birthday_year = self.request.get('birthday_year')
-        birthday_month = self.request.get('birthday_month')
-        birthday_day = self.request.get('birthday_day')
+        birthday_year = int(self.request.get('birthday_year'))
+        birthday_month = int(self.request.get('birthday_month'))
+        birthday_day = int(self.request.get('birthday_day'))
         new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
             
         new_client.gender = self.request.get('client_gender')
@@ -1163,9 +1182,9 @@ class ExShipperGeneralClientsCreateClientInfoHandler(webapp2.RequestHandler):
             new_client.first_name = self.request.get('client_first_name')
             new_client.last_name = self.request.get('client_last_name')
             
-            birthday_year = self.request.get('birthday_year')
-            birthday_month = self.request.get('birthday_month')
-            birthday_day = self.request.get('birthday_day')
+            birthday_year = int(self.request.get('birthday_year'))
+            birthday_month = int(self.request.get('birthday_month'))
+            birthday_day = int(self.request.get('birthday_day'))
             new_client.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
             
             new_client.gender = self.request.get('client_gender')
@@ -1316,7 +1335,7 @@ def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
 def send_email(receiver, sender, subject, body):
     my_dict = Key_Value()
     result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
+    email_host = 'winever.tw@gmail.com'
     if not mail.is_email_valid(receiver):
         result['email_status'] = 'invalid_email'
     else:
