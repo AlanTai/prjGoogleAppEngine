@@ -18,8 +18,10 @@
 
 <div
 	style="position: absolute; top: 0px; width: 100%; text-align: center; margin: auto;">
+	<a href="javascript:window.print()">Print Test</a>
+	
 	{% if spearnet_customer_package_info_log %}
-	<div id="spearnet_packages_invoice_log"></div>
+	<div id="spearnet_packages_invoice_log" style="width: 100%; text-align: center; margin: auto;"></div>
 		<!-- spearnet -->
 		{% for single_row_data in spearnet_customer_package_info_log %}
 			<script type="text/javascript">

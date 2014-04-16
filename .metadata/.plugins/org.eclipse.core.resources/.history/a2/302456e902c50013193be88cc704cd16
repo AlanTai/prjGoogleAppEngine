@@ -1,12 +1,14 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
 
-<script>
+<script type="text/javascript">
 	window.onload = function() {
 		history.pushState(null, null, location.href);
 		window.onpopstate = function(event) {
 			history.go(1);
 		};
-	};
+	}
+	
+	
 </script>
 
 <!-- div
@@ -18,8 +20,9 @@
 
 <div
 	style="position: absolute; top: 0px; width: 100%; text-align: center; margin: auto;">
+	
 	{% if spearnet_customer_package_info_log %}
-	<div id="spearnet_packages_invoice_log"></div>
+	<div id="spearnet_packages_invoice_log" style="width: 100%; text-align: center; margin: auto;"></div>
 		<!-- spearnet -->
 		{% for single_row_data in spearnet_customer_package_info_log %}
 			<script type="text/javascript">

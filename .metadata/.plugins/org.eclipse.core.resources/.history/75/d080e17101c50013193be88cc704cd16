@@ -387,7 +387,7 @@
 	}
 
 	function Popup(data, page_title) {
-		var mywindow = window.open('', 'current div', 'toolbar = no, status = no');
+		var mywindow = window.open("", 'my div', 'toolbar = no, status = no');
 		mywindow.document
 				.write('<html><head><title>' + page_title + '</title>');
 		mywindow.document

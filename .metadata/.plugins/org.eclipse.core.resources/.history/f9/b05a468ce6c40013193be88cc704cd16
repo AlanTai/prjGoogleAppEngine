@@ -19,7 +19,7 @@
 <div
 	style="position: absolute; top: 0px; width: 100%; text-align: center; margin: auto;">
 	{% if spearnet_customer_package_info_log %}
-	<div id="spearnet_packages_invoice_log"></div>
+	<div id="spearnet_packages_invoice_log" ></div>
 		<!-- spearnet -->
 		{% for single_row_data in spearnet_customer_package_info_log %}
 			<script type="text/javascript">
@@ -80,7 +80,7 @@
 			var package_suda_number = '{{ single_row_data.hawb }}';
 			if(img_id !== 'None'){
 
-				$('#general_clients_packages_invoice_log').append('<form style="width:1100px; height: 1450px; margin: 20px auto; border: 1px solid;">'
+				$('#general_clients_packages_invoice_log').append('<form style="width:1100px; height: 1450px; margin: 20px 5px; border: 1px solid;">'
 						+'<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'		
 						+'<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 						+'<p style="font-weight:bold; font-size:15px;">Client Signature ({{single_row_data.shipper_person | title}})</p>'

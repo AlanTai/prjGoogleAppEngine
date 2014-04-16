@@ -11,7 +11,7 @@
 	$(function() {
 		$("#hrefPrint").click(function() {
 			// Print the DIV.
-			$("#print_div").print();
+			$("#spearnet_packages_invoice_log").print();
 			return (false);
 		});
 	});
@@ -20,12 +20,13 @@
 <div
 	style="text-align:center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Taiwan Custom Entry Invoice Log</p>
-	<input id="hrefPrint" type="button" value="Print Invoice" />
+	<a href="#" id="hrefPrint">Print DIV</a>
 	<hr>
 </div>
 
 
-<div id="print_div" style="position: absolute; top: 100px; width: 100%; text-align: center; margin: auto;">
+<div id="printdiv"
+	style="position: absolute; top: 0px; width: 100%; text-align: center; margin: auto;">
 
 	{% if spearnet_customer_package_info_log %}
 	<div id="spearnet_packages_invoice_log"
@@ -39,7 +40,7 @@
 
 			$('#spearnet_packages_invoice_log')
 					.append(
-							'<form style="width:1100px; height: 1450px; margin: 20px auto; border: 1px solid; display:inline-block; text-align: center;">'
+							'<form style="width:1100px; height: 1450px; margin: 20px auto; border: 1px solid;">'
 									+ '<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'
 									+ '<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 									+ '<p style="font-weight:bold; font-size:15px;">Client Signature ({{single_row_data.shipper_company | title}})</p>'
@@ -107,7 +108,7 @@
 
 			$('#general_clients_packages_invoice_log')
 					.append(
-							'<form style="width:1100px; height: 1450px; margin: 20px auto; border: 1px solid; display:inline-block; text-align: center;">'
+							'<form style="width:1100px; height: 1450px; margin: 20px auto; border: 1px solid;">'
 									+ '<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'
 									+ '<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 									+ '<p style="font-weight:bold; font-size:15px;">Client Signature ({{single_row_data.shipper_person | title}})</p>'
