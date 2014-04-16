@@ -26,7 +26,7 @@ handlers:
   secure: always
 
 inbound_services:
- - channel_presence
+- channel_presence
 
 libraries:
 - name: webapp2

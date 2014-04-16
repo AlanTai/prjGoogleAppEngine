@@ -10,7 +10,7 @@
 
 	<div id="client_info_div">
 		<!--  -->
-		<form action="/exshipper_create_client_info_handler" method="post"
+		<form action="/exshipper_create_employee_info_handler" method="post"
 			enctype="multipart/form-data" name="employee_info" id="employee_info"
 			onsubmit="return upload()"
 			style="margin: 5px auto; text-align: center;">
@@ -228,23 +228,21 @@
 		}
 
 		$('#birthday_year').change(function() {
-			var year = $('#birthday_year').val()
-			var month = $('#birthday_month').val()
-			for (i = 1; i < daysInMonth(month, year); i++) {
-				$('#birthday_year').append($('<option />').val(i).html(i));
-			}
-			function daysInMonth(month, year) {
-				return new Date(year, month, 0).getDate();
-			}
-		});
-
-		$('#birthday_month').change(function() {
-			$('#birthday_date').empty();
-			var year = $('#birthday_year').val()
-			var month = $('#birthday_month').val()
-			for (i = 1; i < daysInMonth(month, year) + 1; i++) {
+			var year = $('#birthday_year').val();
+			var month = $('#birthday_month').val();
+			$('#birthday_day').find('option').remove().end();
+			for (i = 1; i <= daysInMonth(month, year); i++) {
 				$('#birthday_day').append($('<option />').val(i).html(i));
-			}
+			};
+		});
+		
+		$('#birthday_month').change(function() {
+			$('#birthday_day').find('option').remove().end();
+			var year = $('#birthday_year').val()
+			var month = $('#birthday_month').val()
+			for (i = 1; i <= daysInMonth(month, year); i++) {
+				$('#birthday_day').append($('<option />').val(i).html(i));
+			};
 		});
 
 		$(function() {
@@ -279,11 +277,8 @@
 												;
 
 												if (iSize / 1024 > 1) {
-													if ($(this).attr('id') === 'client_profile_img') {
+													if ($(this).attr('id') === 'employee_profile_img') {
 														isProfileImageValid = false;
-													}
-													if ($(this).attr('id') === 'client_signature_img') {
-														isSignatureImageValid = false;
 													}
 
 													if (((iSize / 1024) / 1024) > 1) {
@@ -305,20 +300,12 @@
 													}
 												} else if (iSize === 0) {
 													alert('No image selected!');
-													if ($(this).attr('id') === 'client_profile_img') {
+													if ($(this).attr('id') === 'employee_profile_img') {
 														isProfileImageValid = false;
 													}
-													;
-													if ($(this).attr('id') === 'client_signature_img') {
-														isSignatureImageValid = false;
-													}
-													;
 												} else {
-													if ($(this).attr('id') === 'client_profile_img') {
+													if ($(this).attr('id') === 'employee_profile_img') {
 														isProfileImageValid = true;
-													}
-													if ($(this).attr('id') === 'client_signature_img') {
-														isSignatureImageValid = true;
 													}
 													iSize = (Math
 															.round(iSize * 100) / 100);
@@ -355,6 +342,7 @@
 			}
 
 			if (!isProfileImageValid) {
+				alert('Please select a profile image');
 				return false;
 			} else {
 				return true;

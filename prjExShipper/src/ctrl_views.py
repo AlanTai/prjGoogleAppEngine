@@ -190,6 +190,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_packages_labels_page
                 html_page_title = my_dict.exshipper_packages_labels_page_title
                 spearnet_packages_info = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
+                                                                           SpearnetPackagesInfo.package_status == 'pickup',
                                                                            SpearnetPackagesInfo.package_status == 'exshipper'))
                 
                 general_clients_packages_info = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'client',
@@ -957,8 +958,8 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         if(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_get_number'):
             try:
                 tw_custom_entry_number = 'NA'
-                query_length = TWCustomEntryTrackingNumber.query().fetch(30).count(30)
-                if(query_length < 30):
+                query_length = TWCustomEntryTrackingNumber.query().fetch(20).count(20)
+                if(query_length < 20):
                     body = 'There are/is only '+ query_length.__str__() +' TW Custom Entry tracking numbers left.'
                     email_status = send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
                 
@@ -1036,7 +1037,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
                         tw_custom_entry_submit_response['key'] = 'success'
                         
-                        working_on = ''
             except:
                 tw_custom_entry_submit_result = 'Fail to submit the data'
                 tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
@@ -1083,7 +1083,8 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
                 if(json_obj_flight_dates != 'NA'):
                     for key in json_obj_flight_dates:
                         package_entity = TWCustomEntryInfo.get_by_id(key)
-                        package_entity.flight_date = json_obj_flight_dates[key]
+                        flight_date = datetime.datetime.strptime(json_obj_flight_dates[key], '%m/%d/%Y').date()
+                        package_entity.flight_date = flight_date
                         package_entity.put()
                     
                 ajax_data['update_status'] = 'Successfully update the packages information!'
@@ -1369,6 +1370,7 @@ def get_users_info(self, users):
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
+                               ('/exshipper_create_employee_info_handler', ExShipperCreateEmployeeInfoHandler),
                                ('/exshipper_validate_employee_account_name', ExShipperValidateEmployeeAccountName),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
                                ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),

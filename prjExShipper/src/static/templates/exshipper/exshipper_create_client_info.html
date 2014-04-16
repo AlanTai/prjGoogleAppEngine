@@ -237,10 +237,11 @@
 		}
 
 		$('#birthday_year').change(function() {
-			var year = $('#birthday_year').val()
-			var month = $('#birthday_month').val()
+			var year = $('#birthday_year').val();
+			var month = $('#birthday_month').val();
+			$('#birthday_day').empty();
 			for (i = 1; i < daysInMonth(month, year); i++) {
-				$('#birthday_year').append($('<option />').val(i).html(i));
+				$('#birthday_day').append($('<option />').val(i).html(i));
 			}
 			function daysInMonth(month, year) {
 				return new Date(year, month, 0).getDate();
@@ -248,7 +249,7 @@
 		});
 
 		$('#birthday_month').change(function() {
-			$('#birthday_date').empty();
+			$('#birthday_day').empty();
 			var year = $('#birthday_year').val()
 			var month = $('#birthday_month').val()
 			for (i = 1; i < daysInMonth(month, year) + 1; i++) {
