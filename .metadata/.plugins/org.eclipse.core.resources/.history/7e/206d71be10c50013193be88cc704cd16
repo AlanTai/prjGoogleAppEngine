@@ -218,7 +218,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                     tw_custom_entry_packages_set.update({tw_custom_entry_entity.barcode_number:packages_suda_numbers_set})
                     
                 
-                template_values.update({'tw_custom_entry_info':tw_custom_entry_info, 'tw_custom_entry_packages_set':json.dumps(tw_custom_entry_packages_set)})
+                template_values.update({'tw_custom_entry_info':tw_custom_entry_info, 'tw_custom_entry_packages_set':tw_custom_entry_packages_set})
                 
         #page of creating cargo manifest
         elif(dispatch_token == 'exshipper_cargo_manifest'):

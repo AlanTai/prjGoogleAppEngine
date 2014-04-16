@@ -215,10 +215,9 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                     elif(general_client_package_query is not None):
                         for general_clients_package_entity in general_client_package_query:
                             packages_suda_numbers_set.append(general_clients_package_entity.hawb)
-                    tw_custom_entry_packages_set.update({tw_custom_entry_entity.barcode_number:packages_suda_numbers_set})
                     
                 
-                template_values.update({'tw_custom_entry_info':tw_custom_entry_info, 'tw_custom_entry_packages_set':json.dumps(tw_custom_entry_packages_set)})
+                template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
                 
         #page of creating cargo manifest
         elif(dispatch_token == 'exshipper_cargo_manifest'):
