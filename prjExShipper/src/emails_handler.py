@@ -17,9 +17,9 @@ class Email_Handler():
             result['email_status'] = 'invalid_email'
         else:
             try:
-                receiver_email_content = 'Notice: The SUDA tracking number ran out and new numbers will be ready soon. If you have further questions, please contact ExShipper.'
+                receiver_email_content = body
                 mail.send_mail(email_host, receiver, subject, receiver_email_content)
-                sender_email_content = 'Notice: The SUDA tracking number ran out. Please update the database!'
+                sender_email_content = body
                 mail.send_mail(email_host, receiver, subject, sender_email_content)
                 result['email_status'] = my_dict.email_delivery_status_success
             except:

@@ -20,6 +20,8 @@ from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
     TWCustomEntryInfo, EmployeeInfo, EmailVerification
+from users_info_handler import Users_Handler
+from emails_handler import Email_Handler
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates')) #append templates' path
 
@@ -27,7 +29,7 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 class ExShipperIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value() #get key-value pair dictionary
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         index_page = my_dict.exshipper_index_page
         
         template_values = {'title':my_dict.exshipper_index_page_title}
@@ -41,7 +43,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
     #login page
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         login_page = my_dict.exshipper_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -55,7 +57,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
     #dispatch user to different pages according to the token, account and, password which users submit
     def post(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         exshipper_account = self.request.get('exshipper_account')
         exshipper_password = self.request.get('exshipper_password')
@@ -277,7 +279,7 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         
         my_dict = Key_Value()
         template_values = {}
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         template_values.update(user_info)
         template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
         template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
@@ -405,7 +407,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         suda_tracking_number_handler_page = my_dict.exshipper_suda_tracking_number_handler_page
             
         template_values = {'title':my_dict.exshipper_suda_tracking_number_handler_page_title}
@@ -458,7 +460,7 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
 class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         suda_tracking_number_handler_page = my_dict.exshipper_tw_custom_entry_number_handler_page
             
         template_values = {'title':my_dict.exshipper_tw_custom_entry_number_handler_page_title}
@@ -505,7 +507,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
 class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         exshipper_spearnet_index_page = my_dict.exshipper_spearnet_index_page
         
         template_values = {'title':my_dict.exshipper_spearnet_index_page_title}
@@ -517,7 +519,7 @@ class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
 class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         login_page = my_dict.exshipper_spearnet_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -530,7 +532,7 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         
     def post(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         spearnet_account = self.request.get('spearnet_account')
         spearnet_password = self.request.get('spearnet_password')
@@ -562,7 +564,7 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
 class ExShipperSpearnetDataExchangeDispatcher(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         data_format = self.request.get('XLSX_XLS')
         
         if(data_format == 'XLS'):
@@ -679,14 +681,14 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                     
                     if(pickup_status == 'success'):
                         email_response = response['result'] + '\n' + 'SUDA Tracking Numbers: ' + '\n' + package_tracking_numbers
-                        send_email('receiver', 'sender', 'Package Pickup Status', email_response)
+                        Email_Handler.exshipper_send_email('receiver', 'sender', 'Package Pickup Status', email_response)
             except Exception, e:
                 result = 'Error Message: %s' % e
                 response.update({'result':result, 'key':'na'})
             finally:
                 if(response['key'] == 'success'):
                     response_to_spearnet = 'Packages SUDA Tracking Numbers: ' + package_tracking_numbers + '\n' + 'Total Amount: ' + total_packages.__str__()
-                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper!' + 'Detail is as follows:' + '\n' + response_to_spearnet)
+                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper!' + 'Detail is as follows:' + '\n' + response_to_spearnet)
                     
                 json_response['response'] = response
                 
@@ -704,10 +706,10 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         #check suda tracking numbers quantity
         query_length = SUDATrackingNumber_REGULAR.query().count()
         if(query_length < 50):
-            send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
+            Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
         query_length = SUDATrackingNumber_FORMAL.query().count()
         if(query_length < 20):
-            send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
+            Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         #send the tracking number to users
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):
@@ -719,7 +721,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     regular_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
                 else:
-                    send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice of Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice of Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
             elif(suda_tracking_number_type == 'formal'):
                 suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
@@ -729,7 +731,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     formal_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_formal_entity.tracking_number
                 else:
-                    send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                     
             self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
             self.response.out.write(json.dumps(ajax_data))
@@ -743,7 +745,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     regular_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
                 else:
-                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
             elif(suda_tracking_number_type == 'formal'):
                 suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
@@ -753,7 +755,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     formal_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_formal_entity.tracking_number
                 else:
-                    send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                     
             self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
             self.response.out.write(json.dumps(ajax_data))
@@ -767,7 +769,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
 class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         html_page = my_dict.exshipper_spearnet_customer_index_page
         
         template_values = {'title':my_dict.exshipper_spearnet_customer_index_page_title}
@@ -780,7 +782,7 @@ class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
         template_values = {}
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         template_values.update(user_info)
         account = self.request.get('spearnet_customer_account')
         password = self.request.get('spearnet_customer_password')
@@ -855,7 +857,7 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
 class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         login_page = my_dict.exshipper_tw_custom_entry_index_page
         
         template_values = {'title':my_dict.exshipper_tw_custom_entry_index_page_title}
@@ -867,7 +869,7 @@ class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
 class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         login_page = my_dict.exshipper_tw_custom_entry_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -880,7 +882,7 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         
     def post(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         tw_custom_entry_account = self.request.get('tw_custom_entry_account')
         tw_custom_entry_password = self.request.get('tw_custom_entry_password')
@@ -944,7 +946,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 query_length = TWCustomEntryTrackingNumber.query().fetch(20).count(20)
                 if(query_length < 20):
                     body = 'There are/is only '+ query_length.__str__() +' TW Custom Entry tracking numbers left.'
-                    email_status = send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
+                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
                 
                 tracking_number_entity = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').get()
                 if(tracking_number_entity != None):
@@ -1083,7 +1085,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
 class ExShipperGeneralClientsIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         exshipper_general_clients_index_page = my_dict.exshipper_general_clients_index_page
         
         template_values = {'title':my_dict.exshipper_general_clients_index_page_title}
@@ -1095,7 +1097,7 @@ class ExShipperGeneralClientsIndexHandler(webapp2.RequestHandler):
 class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         login_page = my_dict.exshipper_general_clients_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -1108,7 +1110,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         
     def post(self):
         my_dict = Key_Value()
-        user_info = get_users_info(self, users)
+        user_info = Users_Handler.get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         general_client_account_name = self.request.get('general_clients_entry_account')
         general_client_password = self.request.get('general_clients_entry_password')
@@ -1204,7 +1206,7 @@ class ExShipperGeneralClientsValidateClientAccountNameEmail(webapp2.RequestHandl
             status = 'invalid_email'
         else:
             try:
-                verification_code = id_generator().__str__()
+                verification_code = generate_random_registration_id().__str__()
                 if(EmailVerification.query(EmailVerification.email == email).get() is not None):
                     verification_pair_entity = EmailVerification.query(EmailVerification.email == email).get()
                 else:
@@ -1312,41 +1314,9 @@ class GetReferenceNumber(webapp2.RequestHandler):
 #temporary functions block (will be moved to the cooresponding handlers)
 
 #id generator
-def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
+def generate_random_registration_id(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))  
     
-#send email
-def send_email(receiver, sender, subject, body):
-    my_dict = Key_Value()
-    result = {'email_status':'unknown'}
-    email_host = 'rainman.tai@gmail.com'
-    if not mail.is_email_valid(receiver):
-        result['email_status'] = 'invalid_email'
-    else:
-        try:
-            receiver_email_content = body
-            mail.send_mail(email_host, receiver, subject, receiver_email_content)
-            sender_email_content = body
-            mail.send_mail(email_host, receiver, subject, sender_email_content)
-            result['email_status'] = my_dict.email_delivery_status_success
-        except:
-            result['email_status'] = my_dict.email_delivery_status_fail
-    return result
-
-# get users info
-def get_users_info(self, users):
-    my_dict = Key_Value()
-    if users.get_current_user():
-        user_account = users.get_current_user()
-        url = users.create_logout_url(self.request.uri)
-    else:
-        user_account = my_dict.unknown_user
-        url = users.create_login_url(self.request.uri)
-        
-    values = {
-              'user_account': user_account,
-              'url': url}
-    return values
 # end of #temporary functions block
 
 # set url
