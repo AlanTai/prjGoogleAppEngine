@@ -1,1 +1,1 @@
-DELSTRapp_handlers.cron_tasks_handler
+DELSTRdatabase_handlers.gae_datastore_handler

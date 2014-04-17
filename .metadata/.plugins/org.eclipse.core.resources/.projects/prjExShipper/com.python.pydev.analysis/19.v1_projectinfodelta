@@ -1,7 +1,7 @@
-INSTUPemails_handler
-D:\prjGoogleAppEngine\prjExShipper\src\emails_handler.py
+INSTUPgeneral_handlers.emails_handler
+D:\prjGoogleAppEngine\prjExShipper\src\general_handlers\emails_handler.py
 INFOS:&&3|1|2|0&&1|3|2|0&&2|4|2|3
 __author__=1
-emails_handler=2
+general_handlers.emails_handler=2
 Email_Handler=3
 exshipper_send_email=4
