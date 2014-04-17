@@ -11,7 +11,6 @@
 </pydev_pathproperty>
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>${GOOGLE_APP_ENGINE}</path>
-<path>${GOOGLE_APP_ENGINE}/lib/PyAMF</path>
 <path>${GOOGLE_APP_ENGINE}/lib/antlr3</path>
 <path>${GOOGLE_APP_ENGINE}/lib/django_1_4</path>
 <path>${GOOGLE_APP_ENGINE}/lib/enum</path>
@@ -25,13 +24,14 @@
 <path>${GOOGLE_APP_ENGINE}/lib/markupsafe</path>
 <path>${GOOGLE_APP_ENGINE}/lib/oauth2</path>
 <path>${GOOGLE_APP_ENGINE}/lib/prettytable</path>
-<path>${GOOGLE_APP_ENGINE}/lib/protorpc</path>
 <path>${GOOGLE_APP_ENGINE}/lib/python-gflags/tests</path>
 <path>${GOOGLE_APP_ENGINE}/lib/simplejson</path>
 <path>${GOOGLE_APP_ENGINE}/lib/sqlcmd</path>
 <path>${GOOGLE_APP_ENGINE}/lib/webapp2</path>
 <path>${GOOGLE_APP_ENGINE}/lib/webob_1_1_1</path>
 <path>${GOOGLE_APP_ENGINE}/lib/yaml/lib</path>
+<path>C:\Program Files (x86)\Google\google_appengine\lib\protorpc-1.0</path>
+<path>C:\Program Files (x86)\Google\google_appengine\lib\PyAMF-0.6.1</path>
 </pydev_pathproperty>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.7</pydev_property>
 <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>

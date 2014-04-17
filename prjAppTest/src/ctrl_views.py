@@ -946,7 +946,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 query_length = TWCustomEntryTrackingNumber.query().fetch(20).count(20)
                 if(query_length < 20):
                     body = 'There are/is only '+ query_length.__str__() +' TW Custom Entry tracking numbers left.'
-                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
+                    Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
                 
                 tracking_number_entity = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').get()
                 if(tracking_number_entity != None):

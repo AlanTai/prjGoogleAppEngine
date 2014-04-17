@@ -29,7 +29,7 @@ jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.di
 class ExShipperIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value() #get key-value pair dictionary
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         index_page = my_dict.exshipper_index_page
         
         template_values = {'title':my_dict.exshipper_index_page_title}
@@ -43,7 +43,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
     #login page
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         login_page = my_dict.exshipper_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -57,7 +57,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
     #dispatch user to different pages according to the token, account and, password which users submit
     def post(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         exshipper_account = self.request.get('exshipper_account')
         exshipper_password = self.request.get('exshipper_password')
@@ -279,7 +279,7 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         
         my_dict = Key_Value()
         template_values = {}
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         template_values.update(user_info)
         template_values.update({'title':my_dict.exshipper_create_client_info_handler_title})
         template = jinja_environment.get_template(my_dict.exshipper_create_client_info_handler)
@@ -407,7 +407,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
 class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         suda_tracking_number_handler_page = my_dict.exshipper_suda_tracking_number_handler_page
             
         template_values = {'title':my_dict.exshipper_suda_tracking_number_handler_page_title}
@@ -460,7 +460,7 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
 class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         suda_tracking_number_handler_page = my_dict.exshipper_tw_custom_entry_number_handler_page
             
         template_values = {'title':my_dict.exshipper_tw_custom_entry_number_handler_page_title}
@@ -507,7 +507,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
 class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         exshipper_spearnet_index_page = my_dict.exshipper_spearnet_index_page
         
         template_values = {'title':my_dict.exshipper_spearnet_index_page_title}
@@ -519,7 +519,7 @@ class ExShipperSpearnetIndexHandler(webapp2.RequestHandler):
 class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         login_page = my_dict.exshipper_spearnet_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -532,7 +532,7 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         
     def post(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         spearnet_account = self.request.get('spearnet_account')
         spearnet_password = self.request.get('spearnet_password')
@@ -564,7 +564,7 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
 class ExShipperSpearnetDataExchangeDispatcher(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         data_format = self.request.get('XLSX_XLS')
         
         if(data_format == 'XLS'):
@@ -769,7 +769,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
 class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         html_page = my_dict.exshipper_spearnet_customer_index_page
         
         template_values = {'title':my_dict.exshipper_spearnet_customer_index_page_title}
@@ -782,7 +782,7 @@ class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
         template_values = {}
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         template_values.update(user_info)
         account = self.request.get('spearnet_customer_account')
         password = self.request.get('spearnet_customer_password')
@@ -857,7 +857,7 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
 class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         login_page = my_dict.exshipper_tw_custom_entry_index_page
         
         template_values = {'title':my_dict.exshipper_tw_custom_entry_index_page_title}
@@ -869,7 +869,7 @@ class ExShipperTWCustomEntryIndexHandler(webapp2.RequestHandler):
 class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         login_page = my_dict.exshipper_tw_custom_entry_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -882,7 +882,7 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         
     def post(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         tw_custom_entry_account = self.request.get('tw_custom_entry_account')
         tw_custom_entry_password = self.request.get('tw_custom_entry_password')
@@ -946,7 +946,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 query_length = TWCustomEntryTrackingNumber.query().fetch(20).count(20)
                 if(query_length < 20):
                     body = 'There are/is only '+ query_length.__str__() +' TW Custom Entry tracking numbers left.'
-                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
+                    Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
                 
                 tracking_number_entity = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'FALSE').get()
                 if(tracking_number_entity != None):
@@ -1085,7 +1085,7 @@ class ExShipperTWCustomEntryPackageInfoUpdateHandler(webapp2.RequestHandler):
 class ExShipperGeneralClientsIndexHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         exshipper_general_clients_index_page = my_dict.exshipper_general_clients_index_page
         
         template_values = {'title':my_dict.exshipper_general_clients_index_page_title}
@@ -1097,7 +1097,7 @@ class ExShipperGeneralClientsIndexHandler(webapp2.RequestHandler):
 class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         login_page = my_dict.exshipper_general_clients_login_page
         
         dispatch_token = self.request.get('dispatch_token')
@@ -1110,7 +1110,7 @@ class ExShipperGeneralClientsLoginHandler(webapp2.RequestHandler):
         
     def post(self):
         my_dict = Key_Value()
-        user_info = Users_Handler.get_users_info(self, users)
+        user_info = Users_Handler().get_users_info(self, users)
         dispatch_token = self.request.get('dispatch_token')
         general_client_account_name = self.request.get('general_clients_entry_account')
         general_client_password = self.request.get('general_clients_entry_password')

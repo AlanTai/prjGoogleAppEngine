@@ -3368,6 +3368,29 @@ virtualenv_support.__init__|C:\Python27\lib\site-packages\virtualenv-1.10-py2.7.
 warnings|C:\Python27\lib\warnings.py
 wave|C:\Python27\lib\wave.py
 weakref|C:\Python27\lib\weakref.py
+webapp2|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2.py
+webapp2_extras.__init__|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\__init__.py
+webapp2_extras.appengine.__init__|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\appengine\__init__.py
+webapp2_extras.appengine.auth.__init__|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\appengine\auth\__init__.py
+webapp2_extras.appengine.auth.models|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\appengine\auth\models.py
+webapp2_extras.appengine.sessions_memcache|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\appengine\sessions_memcache.py
+webapp2_extras.appengine.sessions_ndb|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\appengine\sessions_ndb.py
+webapp2_extras.appengine.users|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\appengine\users.py
+webapp2_extras.auth|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\auth.py
+webapp2_extras.config|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\config.py
+webapp2_extras.i18n|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\i18n.py
+webapp2_extras.jinja2|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\jinja2.py
+webapp2_extras.json|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\json.py
+webapp2_extras.local|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\local.py
+webapp2_extras.local_app|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\local_app.py
+webapp2_extras.mako|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\mako.py
+webapp2_extras.routes|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\routes.py
+webapp2_extras.securecookie|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\securecookie.py
+webapp2_extras.security|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\security.py
+webapp2_extras.sessions|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\sessions.py
+webapp2_extras.sessions_memcache|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\sessions_memcache.py
+webapp2_extras.sessions_ndb|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\sessions_ndb.py
+webapp2_extras.users|C:\Program Files (x86)\Google\google_appengine\lib\webapp2-2.5.2\webapp2_extras\users.py
 webbrowser|C:\Python27\lib\webbrowser.py
 werkzeug
 werkzeug.__init__|C:\Python27\lib\site-packages\werkzeug\__init__.py
