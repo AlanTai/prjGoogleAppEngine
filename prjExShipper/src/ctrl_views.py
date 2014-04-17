@@ -719,7 +719,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     regular_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
                 else:
-                    send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
+                    send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice of Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
             elif(suda_tracking_number_type == 'formal'):
                 suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
@@ -1324,9 +1324,9 @@ def send_email(receiver, sender, subject, body):
         result['email_status'] = 'invalid_email'
     else:
         try:
-            receiver_email_content = body + 'Notice: The SUDA tracking number ran out and new numbers will be ready soon. If you have further questions, please contact ExShipper.'
+            receiver_email_content = body
             mail.send_mail(email_host, receiver, subject, receiver_email_content)
-            sender_email_content = body + 'Notice: The SUDA tracking number ran out. Please update the database!'
+            sender_email_content = body
             mail.send_mail(email_host, receiver, subject, sender_email_content)
             result['email_status'] = my_dict.email_delivery_status_success
         except:
