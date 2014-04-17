@@ -545,25 +545,6 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
                 html_page = my_dict.exshipper_spearnet_data_exchange_page
                 html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
                 
-#         elif(dispatch_token == 'exshipper_spearnet_suda_tracking_number_download'):
-#             if(spearnet_account == 'spearnet' and spearnet_password == 'spearnet1941'):
-#                 html_page = my_dict.exshipper_spearnet_suda_tracking_number_download_page
-#                 
-#                 working_on = ''
-#                 suda_tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').fetch(1)
-#                 template_values = {'title':my_dict.exshipper_spearnet_suda_tracking_number_download_page_title}
-#                 
-#                 if suda_tracking_numbers:
-#                     for suda_tracking_number in suda_tracking_numbers:
-#                         suda_entity = SUDATrackingNumber_REGULAR.get_by_id(suda_tracking_number.tracking_number)
-#                         suda_entity.used_mark = 'TRUE'
-#                         suda_entity.put()
-#                             
-#                     template_values.update({'suda_numbers':suda_tracking_numbers})
-#                 else:
-#                     template_values.update({'suda_numbers':'No SUDA TRacking Number Available'})
-#                     send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for SUDA Tracking Number Shortage', 'There is no SUDA tracking number available')
- 
                 template_values.update(user_info)
                 template = jinja_environment.get_template(html_page)
                 self.response.out.write(template.render(template_values))
@@ -721,11 +702,11 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         ajax_data = {'suda_tracking_number':'NA'}
         
         #check suda tracking numbers quantity
-        query_length = len(SUDATrackingNumber_REGULAR.query().fetch(100))
-        if(query_length < 100):
-            send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
-        query_length = len(SUDATrackingNumber_FORMAL.query().fetch(50))
+        query_length = len(SUDATrackingNumber_REGULAR.query().fetch(50))
         if(query_length < 50):
+            send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
+        query_length = len(SUDATrackingNumber_FORMAL.query().fetch(30))
+        if(query_length < 30):
             send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         #send the tracking number to users
@@ -779,7 +760,9 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         else:
             self.response.headers['Content-Type'] = 'text/plain'
             self.response.write('Account or Password Are Incorrect!')
-     
+            
+            
+# Spearnet Services Handlers
 # working on
 class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
     def get(self):
@@ -792,11 +775,13 @@ class ExShipperSpearnetCustomerIndexHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template(html_page)
         self.response.out.write(template.render(template_values))   
             
-#
+#spearnet customer services handler
 class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
     def post(self):
         my_dict = Key_Value()
+        template_values = {}
         user_info = get_users_info(self, users)
+        template_values.update(user_info)
         account = self.request.get('spearnet_customer_account')
         password = self.request.get('spearnet_customer_password')
         
@@ -807,11 +792,11 @@ class ExShipperSpearnetCustomerServicesHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_invalid_login_page
             page_title = 'Invalid Login Page'
         
-        template_values = {'title':page_title}
-        template_values.update(user_info)
+        template_values.update({'title':page_title})
         template = jinja_environment.get_template(html_page)
         self.response.out.write(template.render(template_values))
 
+#spearnet custom package tracking handler
 class ExShipperSpearnetCustomerPackageTrackingHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'package_status':'NA'}

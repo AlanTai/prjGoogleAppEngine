@@ -1,4 +1,14 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script type="text/javascript">
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	}
+</script>
+
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">Create Client Information</p>
@@ -239,22 +249,19 @@
 		$('#birthday_year').change(function() {
 			var year = $('#birthday_year').val();
 			var month = $('#birthday_month').val();
-			$('#birthday_day').empty();
-			for (i = 1; i < daysInMonth(month, year); i++) {
+			$('#birthday_day').find('option').remove().end();
+			for (i = 1; i <= daysInMonth(month, year); i++) {
 				$('#birthday_day').append($('<option />').val(i).html(i));
-			}
-			function daysInMonth(month, year) {
-				return new Date(year, month, 0).getDate();
-			}
+			};
 		});
 
 		$('#birthday_month').change(function() {
-			$('#birthday_day').empty();
-			var year = $('#birthday_year').val()
-			var month = $('#birthday_month').val()
-			for (i = 1; i < daysInMonth(month, year) + 1; i++) {
+			var year = $('#birthday_year').val();
+			var month = $('#birthday_month').val();
+			$('#birthday_day').find('option').remove().end();
+			for (i = 1; i <= daysInMonth(month, year); i++) {
 				$('#birthday_day').append($('<option />').val(i).html(i));
-			}
+			};
 		});
 
 		$(function() {
@@ -292,9 +299,6 @@
 												if (iSize / 1024 > 1) {
 													if ($(this).attr('id') === 'client_profile_img') {
 														isProfileImageValid = false;
-													}
-													if ($(this).attr('id') === 'client_signature_img') {
-														isSignatureImageValid = false;
 													}
 
 													if (((iSize / 1024) / 1024) > 1) {
@@ -374,33 +378,6 @@
 
 		};
 
-		//test function
-		function makepage(src) {
-			return "<html>\n" + "<head>\n"
-					+ "<title>Client Signature</title>\n" + "<script>\n"
-					+ "function step1() {\n" + " setTimeout('step2()', 10);\n"
-					+ "}\n" + "function step2() {\n" + " window.print();\n"
-					+ " window.close();\n" + "}\n" + "</scr" + "ipt>\n"
-					+ "</head>\n" + "<body onLoad='step1()'>\n"
-					+ "<img src='" + src + "'/>\n" + "</body>\n" + "</html>\n";
-		};
-		function printme(evt) {
-			if (!evt) {
-				// Old IE
-				evt = window.event;
-			}
-			var image = evt.target;
-			if (!image) {
-				// Old IE
-				image = window.event.srcElement;
-			}
-			src = image.src;
-			link = "about:blank";
-			var pw = window.open(link, "_new");
-			pw.document.open();
-			pw.document.write(makepage(src));
-			pw.document.close();
-		}
 	</script>
 	<!-- end -->
 </div>

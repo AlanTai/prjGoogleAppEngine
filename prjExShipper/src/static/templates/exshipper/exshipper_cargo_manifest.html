@@ -1,12 +1,12 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
 
-<script>
+<script type="text/javascript">
 	window.onload = function() {
 		history.pushState(null, null, location.href);
 		window.onpopstate = function(event) {
 			history.go(1);
 		};
-	};
+	}
 </script>
 
 <div
@@ -79,9 +79,6 @@
 				//update json obj when select value change
 				$('#{{ single_row_data.hawb }}').change(function() {
 					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
 					packages_status[key] = $(this).val();
 				});
 			});

@@ -1,4 +1,14 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script type="text/javascript">
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	}
+</script>
+
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">Create Invoice/Add New Package
@@ -17,7 +27,7 @@
 					SUDA Tracking Number:</p>
 				<input type="text" id="id_suda_tr_number" name="suda_tr_number"
 					style="display: inline-block; margin: 5px 1px;" size="50"
-					placeholder="Click the button to get SUDA Number" disabled />
+					placeholder="Click the button to get SUDA Number" disabled required="required" />
 				<div style="display: inline-block;">
 					<input type="button" value="Get SUDA Tracking Number"
 						onclick="getSUDATrackingNumber()" /> <select
@@ -32,7 +42,7 @@
 					<span style="display: block;">Reference Number: </span>
 				</p>
 				<input type="text" id="id_reference_number" name="reference_number"
-					style="display: inline-block; margin: 5px 1px;" size="50" disabled>
+					style="display: inline-block; margin: 5px 1px;" size="50" disabled required="required" />
 			</div>
 			<br>
 
@@ -45,7 +55,7 @@
 							Shipper is Person, please key in NA)</span>
 					</p>
 					<input type="text" id="id_shipper_company" name="shipper_company"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -53,7 +63,7 @@
 							is Company, please key in NA)</span>
 					</p>
 					<input type="text" id="id_shipper_person" name="shipper_person"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 
 				<div>
@@ -62,7 +72,7 @@
 					</p>
 					<input type="text" id="id_shipper_address_english"
 						name="shipper_address_english"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -70,7 +80,7 @@
 					</p>
 					<input type="text" id="id_shipper_address_chinese"
 						name="shipper_address_chinese"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 
 				<div>
@@ -79,7 +89,7 @@
 					</p>
 					<input type="text" id="id_shipper_phone_number"
 						name="shipper_phone_number"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 			</div>
 			<!-- end -->
@@ -91,7 +101,7 @@
 				</p>
 				<input type="text" id="id_consignee_name_english"
 					name="consignee_name_english"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+					style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -99,7 +109,7 @@
 				</p>
 				<input type="text" id="id_consignee_name_chinese"
 					name="consignee_name_chinese"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+					style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -107,7 +117,7 @@
 				</p>
 				<input type="text" id="id_consignee_address_english"
 					name="consignee_address_english"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+					style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -115,7 +125,7 @@
 				</p>
 				<input type="text" id="id_consignee_address_chinese"
 					name="consignee_address_english"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+					style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -123,7 +133,7 @@
 				</p>
 				<input type="text" id="id_consignee_phone_number"
 					name="consignee_phone_number"
-					style="display: inline-block; margin: 5px 1px;" size="50">
+					style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 			</div>
 
 			<br>
@@ -135,7 +145,7 @@
 					</p>
 					<input type="text" id="id_unit_price_fob_us_dollar"
 						name="unit_price_fob_us_dollar"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -143,7 +153,7 @@
 							Company):</span>
 					</p>
 					<input type="text" id="id_deliver_to" name="deliver_to"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 
 				<div>
@@ -151,21 +161,21 @@
 						<span style="display: block;">CTN.</span>
 					</p>
 					<input type="text" id="id_ctn" name="ctn"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 						<span style="display: block;">PCS.</span>
 					</p>
 					<input type="text" id="id_pcs" name="pcs"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 						<span style="display: block;">Unit</span>
 					</p>
 					<input type="text" id="id_unit" name="unit"
-						style="display: inline-block; margin: 5px 1px;" size="50">
+						style="display: inline-block; margin: 5px 1px;" size="50" required="required">
 				</div>
 
 			</div>
@@ -177,16 +187,16 @@
 					style="display: inline-block; width: 110px;" size="10" min="0"
 					placeholder="Length"> <input type="number" id="id_width"
 					name="width" style="display: inline-block; width: 110px;" size="10"
-					min="0" placeholder="Width"> <input type="number"
+					min="0" placeholder="Width" required="required"> <input type="number"
 					id="id_height" name="height"
 					style="display: inline-block; width: 110px;" size="10" min="0"
-					placeholder="Height">
+					placeholder="Height" required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px;">Weight (kg):</p>
 				<input type="number" id="id_weight" name="weight"
 					style="display: inline-block; width: 330px; text-align: center;"
-					size="10" min="0" placeholder="Weight">
+					size="10" min="0" placeholder="Weight" required="required">
 			</div>
 
 			<div>
@@ -203,7 +213,7 @@
 					style="display: inline-block; width: 450px; height: 50px; margin: 2px 1px;">
 					<span style="display: block;">Note:</span>
 					<textarea id="id_note" name="note"
-						style="display: inline-block; margin: 5px 1px;" cols="40"></textarea>
+						style="display: inline-block; margin: 5px 1px;" cols="40" ></textarea>
 				</p>
 			</div>
 
