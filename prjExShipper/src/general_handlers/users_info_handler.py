@@ -10,6 +10,8 @@ import random
 __author__ = 'Alan Tai'
 
 class Users_Info_Handler():
+    def __init__(self):
+        pass
     # get users info
     def get_users_info(self, request_handler, users):
         my_dict = Key_Value()

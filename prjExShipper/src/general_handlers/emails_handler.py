@@ -9,10 +9,13 @@ from app_dict import Key_Value
 from google.appengine.api import mail
 
 class Email_Handler():
+    def __init__(self):
+        pass
+    
     def exshipper_send_email(self, receiver, sender, subject, body):
         my_dict = Key_Value()
         result = {'email_status':'unknown'}
-        email_host = 'rainman.tai@gmail.com'
+        email_host = 'winever.tw@gmail.com'
         if not mail.is_email_valid(receiver):
             result['email_status'] = 'invalid_email'
         else:

@@ -21,6 +21,7 @@ from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCus
     TWCustomEntryInfo, EmployeeInfo, EmailVerification
 from general_handlers.users_info_handler import Users_Info_Handler
 from general_handlers.emails_handler import Email_Handler
+from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
 # from app_handlers.cron_tasks_handler import Cron_Tasks_Handler
 
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates')) #append templates' path
@@ -1208,7 +1209,7 @@ class ExShipperGeneralClientsValidateClientAccountNameEmail(webapp2.RequestHandl
             status = 'invalid_email'
         else:
             try:
-                verification_code = generate_random_registration_id().__str__()
+                verification_code = Cron_Tasks_Handler().generate_random_registration_id().__str__()
                 if(EmailVerification.query(EmailVerification.email == email).get() is not None):
                     verification_pair_entity = EmailVerification.query(EmailVerification.email == email).get()
                 else:
@@ -1312,15 +1313,6 @@ class GetReferenceNumber(webapp2.RequestHandler):
             self.response.out.write(json.dumps(ajax_data))
 # end of function classes
         
-
-#temporary functions block (will be moved to the cooresponding handlers)
-
-#id generator
-def generate_random_registration_id(size=15, chars=string.ascii_uppercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))  
-    
-# end of #temporary functions block
-
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),

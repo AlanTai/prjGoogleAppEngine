@@ -6,5 +6,6 @@ Created on Feb 9, 2014
 
 from models import Size, SUDATrackingNumber_REGULAR
 
-def insert_data():
-    return True
+class Google_DataStore_Handler():
+    def __init__(self):
+        pass
