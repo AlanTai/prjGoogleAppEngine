@@ -655,6 +655,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
             json_obj = json.loads(self.request.get('spearnet_picked_packages'))
             suda_numbers_array = json.loads(json_obj['suda_tracking_numbers'])
             package_tracking_numbers = ''
+            pickup_status = ''
             total_packages = 0
             
             try:

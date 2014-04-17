@@ -655,6 +655,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
             json_obj = json.loads(self.request.get('spearnet_picked_packages'))
             suda_numbers_array = json.loads(json_obj['suda_tracking_numbers'])
             package_tracking_numbers = ''
+            pickup_status = ''
             total_packages = 0
             
             try:
@@ -667,24 +668,30 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                         package_entity.access_info = json.dumps({'access_info':[{'person':'alantai', 'date_time':current_date_time.__str__()}]})
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
+                        pickup_status = 'success'
                         package_tracking_numbers = package_tracking_numbers + key + '\n'
                         total_packages = total_packages + 1
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
                         
                     elif(package_entity != None and package_entity.package_status != 'spearnet'):
                         response.update({'result':'Tracking Number, '+ key +', is Duplicated!', 'key':'duplicated_number'})
+                        pickup_status = 'fail'
                         break
                     else:
                         response.update({'result':'Unknown Package- ' + key, 'key':'unknown_number'})
+                        pickup_status = 'fail'
                         break
                     
+                    if(pickup_status == 'success'):
+                        email_response = response['result'] + '\n' + 'SUDA Tracking Numbers: ' + '\n' + package_tracking_numbers
+                        Email_Handler.exshipper_send_email('receiver', 'sender', 'Package Pickup Status', email_response)
             except Exception, e:
                 result = 'Error Message: %s' % e
                 response.update({'result':result, 'key':'na'})
             finally:
                 if(response['key'] == 'success'):
                     response_to_spearnet = 'Packages SUDA Tracking Numbers: ' + package_tracking_numbers + '\n' + 'Total Amount: ' + total_packages.__str__()
-                    Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper!' + 'Detail is as follows:' + '\n' + response_to_spearnet)
+                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper!' + 'Detail is as follows:' + '\n' + response_to_spearnet)
                     
                 json_response['response'] = response
                 
@@ -702,10 +709,10 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         #check suda tracking numbers quantity
         query_length = SUDATrackingNumber_REGULAR.query().count()
         if(query_length < 50):
-            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
+            Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
         query_length = SUDATrackingNumber_FORMAL.query().count()
         if(query_length < 20):
-            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
+            Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         #send the tracking number to users
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):
@@ -717,7 +724,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     regular_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
                 else:
-                    Email_Handler().exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice of Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice of Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
             elif(suda_tracking_number_type == 'formal'):
                 suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
@@ -727,7 +734,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     formal_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_formal_entity.tracking_number
                 else:
-                    Email_Handler().exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                     
             self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
             self.response.out.write(json.dumps(ajax_data))
@@ -741,7 +748,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     regular_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
                 else:
-                    Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
             elif(suda_tracking_number_type == 'formal'):
                 suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
@@ -751,7 +758,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     formal_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_formal_entity.tracking_number
                 else:
-                    Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
+                    Email_Handler.exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Notice for Running out of Formal SUDA Tracking Number', 'No Regular SUDA Tracking Number Available! ')
                     
             self.response.out.headers['Content-Type'] = 'text/json; charset=UTF-8'
             self.response.out.write(json.dumps(ajax_data))
