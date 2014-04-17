@@ -915,6 +915,8 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
                 
                 spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
                 general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
+#                 cargo_manifest.update(spearnet_customers_package_info_cargo_manifest)
+#                 cargo_manifest.update(general_clients_package_info_cargo_manifest)
                 template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
 
         else:
