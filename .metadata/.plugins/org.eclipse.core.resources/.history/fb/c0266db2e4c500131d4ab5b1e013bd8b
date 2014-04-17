@@ -702,11 +702,11 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         ajax_data = {'suda_tracking_number':'NA'}
         
         #check suda tracking numbers quantity
-        query_length = SUDATrackingNumber_REGULAR.query().count()
+        query_length = len(SUDATrackingNumber_REGULAR.query().fetch(50))
         if(query_length < 50):
             send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
-        query_length = SUDATrackingNumber_FORMAL.query().count()
-        if(query_length < 20):
+        query_length = len(SUDATrackingNumber_FORMAL.query().fetch(30))
+        if(query_length < 30):
             send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         #send the tracking number to users
