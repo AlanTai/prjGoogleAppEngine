@@ -25,7 +25,7 @@
 {% block main_content %}
 <div style="text-align: center;">
 
-	<b>JS-XLSX ExShipper SUDA Tracking Number Handler</b>
+	<b>JS-XLSX ExShipper Tracking Number Handler (SUDA REgualr/Formal Tracking Numbers and TW Custom Entry Numbers)</b>
 	<br />
 	<br />
 	<input type="radio" name="format" value="json" checked> JSON
@@ -262,7 +262,7 @@
 		}
 
 		function showReturnMsg(data) {
-			alert(data.suda_tracking_number_submission);
+			alert(data.submit_status);
 			$('#upload_cover').css({'display':'none'});
 		}
 

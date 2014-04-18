@@ -8,8 +8,6 @@ __author__ = 'Alan Tai'
 from google.appengine.ext.key_range import ndb
 import time
 import datetime
-import string
-import random
 import webapp2
 import jinja2
 import os
@@ -72,45 +70,37 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         
         # web-pages dispatcher
         # page of creating invoice
-        if(dispatch_token == 'exshipper_invoice'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+        if(dispatch_token == 'exshipper_create_invoice' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_invoice_creating_page
+            html_page_title = my_dict.exshipper_invoice_creating_page_title
                 
-                html_page = my_dict.exshipper_invoice_creating_page
-                html_page_title = my_dict.exshipper_invoice_creating_page_title
-                
-        elif(dispatch_token == 'exshipper_create_employee_info'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_create_employee_info_page
-                html_page_title = my_dict.exshipper_create_employee_info_page_title
+        elif(dispatch_token == 'exshipper_create_employee_info' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_create_employee_info_page
+            html_page_title = my_dict.exshipper_create_employee_info_page_title
                 
         #page of creating client info
-        elif(dispatch_token == 'exshipper_create_client_info'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                clients_data = ClientsInfo.query()
-                template_values.update({'clients_data':clients_data})
-                
-                html_page = my_dict.exshipper_create_client_info_handler
-                html_page_title = my_dict.exshipper_create_client_info_handler_title
+        elif(dispatch_token == 'exshipper_create_client_info' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            clients_data = ClientsInfo.query()
+            template_values.update({'clients_data':clients_data})
+            html_page = my_dict.exshipper_create_client_info_handler
+            html_page_title = my_dict.exshipper_create_client_info_handler_title
                 
         #page of uploading suda tracking numbers
-        elif(dispatch_token == 'exshipper_suda_tracking_number_upload'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_suda_tracking_number_upload_handler_page
-                html_page_title = my_dict.exshipper_suda_tracking_number_upload_handler_page_title
+        elif(dispatch_token == 'exshipper_suda_tracking_number_upload' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_suda_tracking_number_upload_handler_page
+            html_page_title = my_dict.exshipper_suda_tracking_number_upload_handler_page_title
                 
         #page of uploading tw custom entry numbers
-        elif(dispatch_token == 'exshipper_tw_custom_entry_number_upload'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_tw_custom_entry_number_handler_page
-                html_page_title = my_dict.exshipper_tw_custom_entry_number_handler_page_title
+        elif(dispatch_token == 'exshipper_tw_custom_entry_number_upload' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_number_handler_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_number_handler_page_title
                 
         #page of handling spearnet customers packages information
-        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
-                html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
-                
-                #use memcache to show information users had read (ignore the error message)
+        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
+            html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
+            
+            #use memcache to show information users had read (ignore the error message)
 #                 data = memcache.get('spearnet_customer_package_info_log')
 #                 if data is not None:
 #                     log_spearnet_customer_package_info = data
@@ -119,129 +109,122 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
 #                     memcache.add('spearnet_customer_package_info_log',data,1000)
 #                     log_spearnet_customer_package_info = data
 
-                # query package information (packages' status == spearnet or exshipper)
-                spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
-                                                                                       SpearnetPackagesInfo.package_status == 'pickup',
-                                                                                       SpearnetPackagesInfo.package_status == 'exshipper'))
-                # pass clients informations
-                clients_info = ClientsInfo().query()
-                template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
-                  
+            # query package information (packages' status == spearnet or exshipper)
+            spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
+                                                                                   SpearnetPackagesInfo.package_status == 'pickup',
+                                                                                   SpearnetPackagesInfo.package_status == 'exshipper'))
+            # pass clients informations
+            clients_info = ClientsInfo().query()
+            template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
+              
                   
         #page of handling general clients packages information
-        elif(dispatch_token == 'exshipper_general_clients_packages_info_log'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_general_clients_package_info_log_page
-                html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
-                
-                #query package information (packages' status == spearnet or exshipper)
-                general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
-                                                                                            GeneralClientsPackagesInfo.package_status == 'exshipper'))
-                clients_info = ClientsInfo().query()
-                template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
-                
-        # page of handling tw custom entry packages information
-        elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
-                html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
-                
-                tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
-                template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
-                
-        # page of handling exshipper pre-alert
-        elif(dispatch_token == 'exshipper_pre_alert'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_pre_alert_page
-                html_page_title = my_dict.exshipper_pre_alert_page_title
-                
-                pre_alert_entity = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
-                pre_alert = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
-                
-                if(pre_alert_entity != None and pre_alert != None):
-                    #different flight numbers, flight dates, or mawb
-                    mawb_response = 'Different MAWBs: '
-                    flight_number_response = 'Different Flight Numbers: '
-                    flight_date_response = 'Different Flight Dates: '
-                    has_inconsistent_data = 'no'
-                    
-                    for package_info in pre_alert:
-                        if(pre_alert_entity.mawb != package_info.mawb):
-                            mawb_response = mawb_response + package_info.mawb
-                            has_inconsistent_data = 'yes'
-                        if(pre_alert_entity.flight_number != package_info.flight_number):
-                            flight_number_response = flight_number_response + package_info.flight_number
-                            has_inconsistent_data = 'yes'
-                        if(pre_alert_entity.flight_date != package_info.flight_date):
-                            flight_date_response = flight_date_response + package_info.flight_date
-                            has_inconsistent_data = 'yes'
-                            
-                    inconsistent_data_response = mawb_response + '\n' + flight_number_response + '\n' +flight_date_response
-                    template_values.update({'has_inconsistent_data':has_inconsistent_data,'inconsistent_data_response':inconsistent_data_response})
-                    #end of different flight numbers, flight dates, or mawb
-                    
-                    flight_number = pre_alert_entity.flight_number
-                    flight_date = pre_alert_entity.flight_date
-                    mawb = pre_alert_entity.mawb
-                    sender = pre_alert_entity.sender
-                    receiver = pre_alert_entity.receiver
-                    template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb, 'sender':sender, 'receiver':receiver})
-                    
-                template_values.update({'pre_alert':pre_alert})
-                
-        #page of rendering labels
-        elif(dispatch_token == 'exshipper_packages_labels'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_packages_labels_page
-                html_page_title = my_dict.exshipper_packages_labels_page_title
-                spearnet_packages_info = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
-                                                                           SpearnetPackagesInfo.package_status == 'pickup',
-                                                                           SpearnetPackagesInfo.package_status == 'exshipper'))
-                
-                general_clients_packages_info = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'client',
+        elif(dispatch_token == 'exshipper_general_clients_packages_info_log' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_general_clients_package_info_log_page
+            html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
+            
+            #query package information (packages' status == spearnet or exshipper)
+            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
                                                                                         GeneralClientsPackagesInfo.package_status == 'exshipper'))
+            clients_info = ClientsInfo().query()
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+            
+        # page of handling tw custom entry packages information
+        elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
+            
+            tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+            template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
+            
+        # page of handling exshipper pre-alert
+        elif(dispatch_token == 'exshipper_pre_alert' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_pre_alert_page
+            html_page_title = my_dict.exshipper_pre_alert_page_title
+            
+            pre_alert_entity = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
+            pre_alert = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+            
+            if(pre_alert_entity != None and pre_alert != None):
+                #different flight numbers, flight dates, or mawb
+                mawb_response = 'Different MAWBs: '
+                flight_number_response = 'Different Flight Numbers: '
+                flight_date_response = 'Different Flight Dates: '
+                has_inconsistent_data = 'no'
                 
-                template_values.update({'spearnet_packages_info':spearnet_packages_info, 'general_clients_packages_info':general_clients_packages_info})
-        
+                #build the array of package information
+                for package_info in pre_alert:
+                    if(pre_alert_entity.mawb != package_info.mawb):
+                        mawb_response = mawb_response + package_info.mawb
+                        has_inconsistent_data = 'yes'
+                    if(pre_alert_entity.flight_number != package_info.flight_number):
+                        flight_number_response = flight_number_response + package_info.flight_number
+                        has_inconsistent_data = 'yes'
+                    if(pre_alert_entity.flight_date != package_info.flight_date):
+                        flight_date_response = flight_date_response + package_info.flight_date
+                        has_inconsistent_data = 'yes'
+                        
+                inconsistent_data_response = mawb_response + '\n' + flight_number_response + '\n' +flight_date_response
+                template_values.update({'has_inconsistent_data':has_inconsistent_data,'inconsistent_data_response':inconsistent_data_response})
+                #end of different flight numbers, flight dates, or mawb
+                
+                flight_number = pre_alert_entity.flight_number
+                flight_date = pre_alert_entity.flight_date
+                mawb = pre_alert_entity.mawb
+                sender = pre_alert_entity.sender
+                receiver = pre_alert_entity.receiver
+                template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb, 'sender':sender, 'receiver':receiver})
+                
+            template_values.update({'pre_alert':pre_alert})
+            
+        #page of rendering labels
+        elif(dispatch_token == 'exshipper_packages_labels' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_packages_labels_page
+            html_page_title = my_dict.exshipper_packages_labels_page_title
+            spearnet_packages_info = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'spearnet',
+                                                                       SpearnetPackagesInfo.package_status == 'pickup',
+                                                                       SpearnetPackagesInfo.package_status == 'exshipper'))
+            
+            general_clients_packages_info = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'client',
+                                                                                    GeneralClientsPackagesInfo.package_status == 'exshipper'))
+            
+            template_values.update({'spearnet_packages_info':spearnet_packages_info, 'general_clients_packages_info':general_clients_packages_info})
+    
         #page of generating labels
-        elif(dispatch_token == 'exshipper_tw_custom_entry_labels'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_tw_custom_entry_labels_page
-                html_page_title = my_dict.exshipper_tw_custom_entry_labels_page_title
+        elif(dispatch_token == 'exshipper_tw_custom_entry_labels' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_labels_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_labels_page_title
+            
+            tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+            
+            tw_custom_entry_packages_set = {}
+            for tw_custom_entry_entity in tw_custom_entry_info:
+                spearnet_package_query = SpearnetPackagesInfo.query(SpearnetPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
+                general_client_package_query = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
+                packages_suda_numbers_set = []
+                if(spearnet_package_query is not None):
+                    for spearnet_package_entity in spearnet_package_query:
+                        packages_suda_numbers_set.append(str(spearnet_package_entity.hawb))
+                if(general_client_package_query is not None):
+                    for general_clients_package_entity in general_client_package_query:
+                        packages_suda_numbers_set.append(str(general_clients_package_entity.hawb))
+                tw_custom_entry_packages_set[str(tw_custom_entry_entity.barcode_number)] = packages_suda_numbers_set
                 
-                tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
-                
-                tw_custom_entry_packages_set = {}
-                for tw_custom_entry_entity in tw_custom_entry_info:
-                    spearnet_package_query = SpearnetPackagesInfo.query(SpearnetPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
-                    general_client_package_query = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
-                    packages_suda_numbers_set = []
-                    if(spearnet_package_query is not None):
-                        for spearnet_package_entity in spearnet_package_query:
-                            packages_suda_numbers_set.append(str(spearnet_package_entity.hawb))
-                    if(general_client_package_query is not None):
-                        for general_clients_package_entity in general_client_package_query:
-                            packages_suda_numbers_set.append(str(general_clients_package_entity.hawb))
-                    tw_custom_entry_packages_set[str(tw_custom_entry_entity.barcode_number)] = packages_suda_numbers_set
-                    
-                json_str_tw_custom_entry_packages_set = tw_custom_entry_packages_set
-                template_values['tw_custom_entry_packages_set'] = json_str_tw_custom_entry_packages_set
-                
-                template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
-                
-                
+            json_str_tw_custom_entry_packages_set = tw_custom_entry_packages_set
+            template_values['tw_custom_entry_packages_set'] = json_str_tw_custom_entry_packages_set
+            
+            template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
+            
+            
         #page of creating cargo manifest
-        elif(dispatch_token == 'exshipper_cargo_manifest'):
-            if(exshipper_account == 'alantai' and exshipper_password == '1014lct'):
-                html_page = my_dict.exshipper_cargo_manifest_page
-                html_page_title = my_dict.exshipper_cargo_manifest_page_title
-                
-                spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
-                general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
-#                 cargo_manifest.update(spearnet_customers_package_info_cargo_manifest)
-#                 cargo_manifest.update(general_clients_package_info_cargo_manifest)
-                template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
-        
+        elif(dispatch_token == 'exshipper_cargo_manifest' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_cargo_manifest_page
+            html_page_title = my_dict.exshipper_cargo_manifest_page_title
+            
+            spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
+            general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
+            template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
+    
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
@@ -420,13 +403,13 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         
     def post(self):
-        ajax_data = {'suda_tracking_number_submission':'NA'}
+        ajax_data = {'submit_status':'NA'}
         if(self.request.get('fmt') == 'json'):
             try:
                 json_obj = json.loads(self.request.get('json_info'))
-                suda_tracking_number_type = json_obj.keys()[0]
+                tracking_number_type = json_obj.keys()[0]
                 
-                if(suda_tracking_number_type == 'regular_suda_tracking_numbers'):
+                if(tracking_number_type == 'regular_suda_tracking_numbers'):
                     suda_number_array = json_obj['regular_suda_tracking_numbers']
                     duplicated_numbers = ''
                     for row_info in suda_number_array:
@@ -437,9 +420,9 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                             new_suda_tr_number.tracking_number = row_info['suda_number']
                             new_suda_tr_number.used_mark = row_info['used_mark']
                             new_suda_tr_number.put()
-                            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+                            ajax_data['submit_status'] = 'Data saved into database:\n %s' % duplicated_numbers
                             
-                if(suda_tracking_number_type == 'formal_suda_tracking_numbers'):
+                elif(tracking_number_type == 'formal_suda_tracking_numbers'):
                     suda_number_array = json_obj['formal_suda_tracking_numbers']
                     duplicated_numbers = ''
                     for row_info in suda_number_array:
@@ -450,8 +433,33 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                             new_suda_tr_number.tracking_number = row_info['suda_number']
                             new_suda_tr_number.used_mark = row_info['used_mark']
                             new_suda_tr_number.put()
-                            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+                            ajax_data['submit_status'] = 'Data saved into database:\n %s' % duplicated_numbers
                             
+                elif(tracking_number_type == 'tw_custom_entry_numbers'):
+                    tw_custom_entry_number_array = json_obj['tw_custom_entry_numbers']
+                    ary_length = tw_custom_entry_number_array.__len__()
+                    if(ary_length > 200):
+                        ajax_data['submit_status'] = 'Size of upload numbers is not more than 200!'
+                    else:
+                        duplicated_numbers = ''
+                        try:
+                            for row_info in tw_custom_entry_number_array:
+                                if(TWCustomEntryTrackingNumber.get_by_id(row_info['tw_custom_entry_number'])):
+                                    duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
+                                    ajax_data['submit_status'] = 'Duplicated Numbers:\n %s' % duplicated_numbers
+                                else:
+                                    new_suda_tr_number = TWCustomEntryTrackingNumber(id=row_info['tw_custom_entry_number'])
+                                    new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
+                                    new_suda_tr_number.used_mark = row_info['used_mark']
+                                    new_suda_tr_number.put()
+                                    ajax_data['submit_status'] = 'Data are saved into database'
+                        except Exception, e:
+                            ajax_data['submit_status'] = 'Error Message: %s' % e  
+                        
+                else:
+                    ajax_data['submit_status'] = 'File Key- ' + tracking_number_type + ' is invalid!'
+                #end of 
+                
             except Exception, e:
                 ajax_data['suda_tracking_number_submission'] = 'Error Message: %s' % e
             
@@ -473,6 +481,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         
     def post(self):
+        tw_custom_entry_number = ''
         ajax_data = {'tw_custom_entry_number_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
             #get jsonObj from client side
@@ -545,14 +554,13 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        if(dispatch_token == 'exshipper_spearnet_data_exchange'):
-            if(spearnet_account == 'spearnet' and spearnet_password == '1941dataexchange'):
-                html_page = my_dict.exshipper_spearnet_data_exchange_page
-                html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
-                
-                template_values.update(user_info)
-                template = jinja_environment.get_template(html_page)
-                self.response.out.write(template.render(template_values))
+        if(dispatch_token == 'exshipper_spearnet_data_exchange' and spearnet_account == 'spearnet' and spearnet_password == '1941dataexchange'):
+            html_page = my_dict.exshipper_spearnet_data_exchange_page
+            html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
+            
+            template_values.update(user_info)
+            template = jinja_environment.get_template(html_page)
+            self.response.out.write(template.render(template_values))
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title
@@ -700,10 +708,10 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         ajax_data = {'suda_tracking_number':'NA'}
         
         #check suda tracking numbers quantity
-        query_length = SUDATrackingNumber_REGULAR.query().count()
+        query_length = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').count()
         if(query_length < 50):
             Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
-        query_length = SUDATrackingNumber_FORMAL.query().count()
+        query_length = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').count()
         if(query_length < 20):
             Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
@@ -939,7 +947,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
         if(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_get_number'):
             try:
                 tw_custom_entry_number = 'NA'
-                query_length = TWCustomEntryTrackingNumber.query().fetch(20).count(20)
+                query_length = TWCustomEntryTrackingNumber.query().count(20)
                 if(query_length < 20):
                     body = 'There are/is only '+ query_length.__str__() +' TW Custom Entry tracking numbers left.'
                     Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'TW Custom Entry Barcode Number Shortage', body)
@@ -959,7 +967,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 
         #tw custom entry handler for submitting packages info
         elif(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_submit_packages_sets'):
-            
             try:
                 json_obj_packages_sets = json.loads(self.request.get('tw_custom_entry_packages_sets'))
                 json_obj_packages_size_weight = json.loads(self.request.get('tw_custom_entry_packages_size_weight'))
@@ -1299,7 +1306,7 @@ class GetReferenceNumber(webapp2.RequestHandler):
         ajax_data = {}
         if(self.request.get('key') == 'get_package_reference_number'):
             time_stamp = int(round(time.time())).__str__()
-            exshipper_package_number = 'EXPKG' + time_stamp
+            exshipper_package_number = 'ESPKG' + time_stamp
             ajax_data.update({'exshipper_package_number':exshipper_package_number})
             
             self.response.headers['Content-Type'] = 'text/json'

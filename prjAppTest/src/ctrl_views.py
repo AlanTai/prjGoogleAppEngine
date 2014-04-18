@@ -403,14 +403,13 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         
     def post(self):
-        ajax_data = {'suda_tracking_number_submission':'NA'}
+        ajax_data = {'submit_status':'NA'}
         if(self.request.get('fmt') == 'json'):
             try:
                 json_obj = json.loads(self.request.get('json_info'))
-                suda_tracking_number_type = json_obj.keys()[0]
+                tracking_number_type = json_obj.keys()[0]
                 
-                tracking_numbers = ''
-                if(suda_tracking_number_type == 'regular_suda_tracking_numbers'):
+                if(tracking_number_type == 'regular_suda_tracking_numbers'):
                     suda_number_array = json_obj['regular_suda_tracking_numbers']
                     duplicated_numbers = ''
                     for row_info in suda_number_array:
@@ -421,9 +420,9 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                             new_suda_tr_number.tracking_number = row_info['suda_number']
                             new_suda_tr_number.used_mark = row_info['used_mark']
                             new_suda_tr_number.put()
-                            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
+                            ajax_data['submit_status'] = 'Data saved into database:\n %s' % duplicated_numbers
                             
-                if(suda_tracking_number_type == 'formal_suda_tracking_numbers'):
+                elif(tracking_number_type == 'formal_suda_tracking_numbers'):
                     suda_number_array = json_obj['formal_suda_tracking_numbers']
                     duplicated_numbers = ''
                     for row_info in suda_number_array:
@@ -434,10 +433,33 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                             new_suda_tr_number.tracking_number = row_info['suda_number']
                             new_suda_tr_number.used_mark = row_info['used_mark']
                             new_suda_tr_number.put()
-                            ajax_data['suda_tracking_number_submission'] = 'Data saved into database'+ '\n' + duplicated_numbers
-                else:
-                    ajax_data['suda_tracking_number_submission'] = 'File Key- ' + suda_tracking_number_type + ' is invalid!'
+                            ajax_data['submit_status'] = 'Data saved into database:\n %s' % duplicated_numbers
                             
+                elif(tracking_number_type == 'tw_custom_entry_numbers'):
+                    tw_custom_entry_number_array = json_obj['tw_custom_entry_numbers']
+                    ary_length = tw_custom_entry_number_array.__len__()
+                    if(ary_length > 200):
+                        ajax_data['submit_status'] = 'Size of upload numbers is not more than 200!'
+                    else:
+                        duplicated_numbers = ''
+                        try:
+                            for row_info in tw_custom_entry_number_array:
+                                if(TWCustomEntryTrackingNumber.get_by_id(row_info['tw_custom_entry_number'])):
+                                    duplicated_numbers += 'Duplicated Number: '+ row_info['tw_custom_entry_number'] +'\n'
+                                    ajax_data['submit_status'] = 'Duplicated Numbers:\n %s' % duplicated_numbers
+                                else:
+                                    new_suda_tr_number = TWCustomEntryTrackingNumber(id=row_info['tw_custom_entry_number'])
+                                    new_suda_tr_number.tracking_number = row_info['tw_custom_entry_number']
+                                    new_suda_tr_number.used_mark = row_info['used_mark']
+                                    new_suda_tr_number.put()
+                                    ajax_data['submit_status'] = 'Data are saved into database'
+                        except Exception, e:
+                            ajax_data['submit_status'] = 'Error Message: %s' % e  
+                        
+                else:
+                    ajax_data['submit_status'] = 'File Key- ' + tracking_number_type + ' is invalid!'
+                #end of 
+                
             except Exception, e:
                 ajax_data['suda_tracking_number_submission'] = 'Error Message: %s' % e
             
@@ -459,6 +481,7 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         
     def post(self):
+        tw_custom_entry_number = ''
         ajax_data = {'tw_custom_entry_number_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
             #get jsonObj from client side
@@ -944,7 +967,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                 
         #tw custom entry handler for submitting packages info
         elif(account == 'alantai' and password == '1014' and token == 'tw_custom_entry_handler_submit_packages_sets'):
-            
             try:
                 json_obj_packages_sets = json.loads(self.request.get('tw_custom_entry_packages_sets'))
                 json_obj_packages_size_weight = json.loads(self.request.get('tw_custom_entry_packages_size_weight'))

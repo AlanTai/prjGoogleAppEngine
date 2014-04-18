@@ -2077,3 +2077,6 @@ Binding(CTRL+SHIFT+T,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.python.pydev.ui.editor.scope,,,system)
+
+!ENTRY org.eclipse.epp.usagedata.recording 1 0 2014-04-17 23:05:26.933
+!MESSAGE Usage data upload to http://udc.eclipse.org/upload.php failed with error code 404.
