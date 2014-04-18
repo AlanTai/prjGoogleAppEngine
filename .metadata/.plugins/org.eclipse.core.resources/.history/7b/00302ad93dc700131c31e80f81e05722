@@ -1,0 +1,5 @@
+cron:
+-description: daily packages information log migration
+ url: /packages_information_log_migration
+ schedule: every 1 days
+ timezone:US/Pacific

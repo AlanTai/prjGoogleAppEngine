@@ -1,0 +1,2 @@
+cron:
+-description: daily packages information log migration
