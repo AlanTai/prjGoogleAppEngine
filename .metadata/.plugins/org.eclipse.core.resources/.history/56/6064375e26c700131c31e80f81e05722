@@ -424,10 +424,6 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                             
                 elif(tracking_number_type == 'formal_suda_tracking_numbers'):
                     suda_number_array = json_obj['formal_suda_tracking_numbers']
-                    ary_length = suda_number_array.__len__()
-                    if(ary_length > 200):
-                        ajax_data['submit_status'] = 'Please Keep the upload tracking numbers lower than 200'
-                    
                     duplicated_numbers = ''
                     for row_info in suda_number_array:
                         if(SUDATrackingNumber_FORMAL.get_by_id(row_info['suda_number'])):
@@ -443,7 +439,7 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                     tw_custom_entry_number_array = json_obj['tw_custom_entry_numbers']
                     ary_length = tw_custom_entry_number_array.__len__()
                     if(ary_length > 200):
-                        ajax_data['submit_status'] = 'Please Keep the upload tracking numbers lower than 200'
+                        ajax_data['submit_status'] = 'Please Keep the upload tracking numbers fewer than 200'
                     else:
                         duplicated_numbers = ''
                         try:

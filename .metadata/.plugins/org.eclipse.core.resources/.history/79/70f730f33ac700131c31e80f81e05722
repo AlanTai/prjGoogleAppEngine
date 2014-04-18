@@ -121,10 +121,7 @@ class SpearnetPackagesInfo(PackageInfo):
 class GeneralClientsPackagesInfo(PackageInfo):
     pass
 
-class SpearnetPackagesInfoLog(PackageInfo):
-    pass
-
-class GeneralClientsPackagesInfoLog(PackageInfo):
+class PackageInfoLog(PackageInfo):
     pass
 
 #for pre-alert and on-hand documents

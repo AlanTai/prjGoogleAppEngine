@@ -38,6 +38,7 @@ backends_conversion|C:\Program Files (x86)\Google\google_appengine\backends_conv
 bulkload_client|C:\Program Files (x86)\Google\google_appengine\bulkload_client.py
 bulkloader|C:\Program Files (x86)\Google\google_appengine\bulkloader.py
 ctrl_views|D:\prjGoogleAppEngine\prjAppTest\src\ctrl_views.py
+database_handlers.__init__|D:\prjGoogleAppEngine\prjAppTest\src\database_handlers\__init__.py
 database_handlers.gae_datastore_handler|D:\prjGoogleAppEngine\prjAppTest\src\database_handlers\gae_datastore_handler.py
 dev_appserver|C:\Program Files (x86)\Google\google_appengine\dev_appserver.py
 download_appstats|C:\Program Files (x86)\Google\google_appengine\download_appstats.py
@@ -52,6 +53,7 @@ flags_modules_for_testing.module_bar|C:\Program Files (x86)\Google\google_appeng
 flags_modules_for_testing.module_baz|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_baz.py
 flags_modules_for_testing.module_foo|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_foo.py
 gen_protorpc|C:\Program Files (x86)\Google\google_appengine\gen_protorpc.py
+general_handlers.__init__|D:\prjGoogleAppEngine\prjAppTest\src\general_handlers\__init__.py
 general_handlers.cron_tasks_handler|D:\prjGoogleAppEngine\prjAppTest\src\general_handlers\cron_tasks_handler.py
 general_handlers.emails_handler|D:\prjGoogleAppEngine\prjAppTest\src\general_handlers\emails_handler.py
 general_handlers.users_info_handler|D:\prjGoogleAppEngine\prjAppTest\src\general_handlers\users_info_handler.py

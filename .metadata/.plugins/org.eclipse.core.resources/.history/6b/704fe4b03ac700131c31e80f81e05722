@@ -121,12 +121,6 @@ class SpearnetPackagesInfo(PackageInfo):
 class GeneralClientsPackagesInfo(PackageInfo):
     pass
 
-class SpearnetPackagesInfoLog(PackageInfo):
-    pass
-
-class GeneralClientsPackagesInfoLog(PackageInfo):
-    pass
-
 #for pre-alert and on-hand documents
 class TWCustomEntryInfo(ndb.Model):
     barcode_number = ndb.StringProperty()

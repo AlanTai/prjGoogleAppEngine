@@ -124,7 +124,7 @@ class GeneralClientsPackagesInfo(PackageInfo):
 class SpearnetPackagesInfoLog(PackageInfo):
     pass
 
-class GeneralClientsPackagesInfoLog(PackageInfo):
+class GeneralClientsPackagesInfoLog(PackageInfokag):
     pass
 
 #for pre-alert and on-hand documents
