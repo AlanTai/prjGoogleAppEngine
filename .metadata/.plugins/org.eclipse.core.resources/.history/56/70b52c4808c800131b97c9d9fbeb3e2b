@@ -97,7 +97,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 
         #page of handling spearnet customers packages information
         #packages status are spearnet, pickup, and exshipper
-        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log_processing' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log_' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
             html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
             
@@ -119,7 +119,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
         
         #packages status are apex, sfo, taoyuan international airport, and suda
-        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log_processed' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
             html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
             
@@ -135,7 +135,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                   
         
         #packages status are apex, sfo, taoyuan international airport, and suda
-        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log_delivered' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+        elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_spearnet_customer_package_info_log_page
             html_page_title = my_dict.exshipper_spearnet_customer_package_info_log_page_title
             
