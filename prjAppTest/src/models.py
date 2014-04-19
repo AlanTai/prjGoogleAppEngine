@@ -109,7 +109,7 @@ class PackageInfo(ndb.Model):
     package_status = ndb.StringProperty()
     pickup_date_time = ndb.DateTimeProperty()
     
-    access_people = JsonProperty()
+    access_info = JsonProperty()
     create_date_time = ndb.DateTimeProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
 #en of package information

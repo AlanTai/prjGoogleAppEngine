@@ -1,0 +1,5 @@
+cron:
+- description: daily packages information log migration
+  url: /exshipper_migrate_packages_information_log
+  schedule: every 24 hours
+  timezone:US/Pacific

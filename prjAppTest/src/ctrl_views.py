@@ -1371,7 +1371,6 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 spearnet_package_info_entity.key.delete()
                 
         
-        
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),

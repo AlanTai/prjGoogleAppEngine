@@ -16,7 +16,7 @@ from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
-    TWCustomEntryInfo, EmployeeInfo, EmailVerification
+    TWCustomEntryInfo, EmployeeInfo, EmailVerification, SpearnetPackagesInfoLog
 from general_handlers.users_info_handler import Users_Info_Handler
 from general_handlers.emails_handler import Email_Handler
 from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
@@ -424,6 +424,10 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                             
                 elif(tracking_number_type == 'formal_suda_tracking_numbers'):
                     suda_number_array = json_obj['formal_suda_tracking_numbers']
+                    ary_length = suda_number_array.__len__()
+                    if(ary_length > 200):
+                        ajax_data['submit_status'] = 'Please Keep the upload tracking numbers lower than 200'
+                    
                     duplicated_numbers = ''
                     for row_info in suda_number_array:
                         if(SUDATrackingNumber_FORMAL.get_by_id(row_info['suda_number'])):
@@ -439,7 +443,7 @@ class ExShipperSUDATrackingNumberHandler(webapp2.RequestHandler):
                     tw_custom_entry_number_array = json_obj['tw_custom_entry_numbers']
                     ary_length = tw_custom_entry_number_array.__len__()
                     if(ary_length > 200):
-                        ajax_data['submit_status'] = 'Size of upload numbers is not more than 200!'
+                        ajax_data['submit_status'] = 'Please Keep the upload tracking numbers lower than 200'
                     else:
                         duplicated_numbers = ''
                         try:
@@ -1312,6 +1316,60 @@ class GetReferenceNumber(webapp2.RequestHandler):
             self.response.headers['Content-Type'] = 'text/json'
             self.response.out.write(json.dumps(ajax_data))
 # end of function classes
+
+#cron task
+#migrate packages data
+class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
+    def get(self):
+        spearnet_packages_info_formigration = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'delivered')
+        if(spearnet_packages_info_formigration.count() > 0):
+            for spearnet_package_info_entity in spearnet_packages_info_formigration:
+                new_spearnet_package_log = SpearnetPackagesInfoLog(id=spearnet_package_info_entity.hawb)
+                new_spearnet_package_log.reference_number = spearnet_package_info_entity.reference_number
+                new_spearnet_package_log.tw_custom_entry_number = spearnet_package_info_entity.tw_custom_entry_number
+                new_spearnet_package_log.hawb = spearnet_package_info_entity.hawb
+                new_spearnet_package_log.ctn = spearnet_package_info_entity.ctn
+                new_spearnet_package_log.size = spearnet_package_info_entity.size
+                new_spearnet_package_log.weight_kg = spearnet_package_info_entity.weight_kg
+                new_spearnet_package_log.weight_lb = spearnet_package_info_entity.weight_lb
+                new_spearnet_package_log.commodity_detail = spearnet_package_info_entity.commodity_detail
+                new_spearnet_package_log.pcs = spearnet_package_info_entity.pcs
+                new_spearnet_package_log.unit = spearnet_package_info_entity.unit
+                new_spearnet_package_log.original = spearnet_package_info_entity.original
+                new_spearnet_package_log.deliver_to = spearnet_package_info_entity.deliver_to
+                new_spearnet_package_log.unit_price_fob_us_dollar = spearnet_package_info_entity.unit_price_fob_us_dollar
+                
+                new_spearnet_package_log.shipper_company = spearnet_package_info_entity.shipper_company
+                new_spearnet_package_log.shipper_person = spearnet_package_info_entity.shipper_person
+                new_spearnet_package_log.shipper_tel = spearnet_package_info_entity.shipper_tel
+                new_spearnet_package_log.shipper_address_english = spearnet_package_info_entity.shipper_address_english
+                new_spearnet_package_log.shipper_address_chinese = spearnet_package_info_entity.shipper_address_chinese
+                
+                new_spearnet_package_log.consignee_tel = spearnet_package_info_entity.consignee_tel
+                new_spearnet_package_log.consignee_name_english = spearnet_package_info_entity.consignee_name_english
+                new_spearnet_package_log.consignee_name_chinese = spearnet_package_info_entity.consignee_name_chinese
+                new_spearnet_package_log.consignee_address_english = spearnet_package_info_entity.consignee_address_english
+                new_spearnet_package_log.consignee_address_chinese = spearnet_package_info_entity.consignee_address_chinese
+                
+                new_spearnet_package_log.company_id_or_personal_id = spearnet_package_info_entity.company_id_or_personal_id
+                new_spearnet_package_log.size_accumulation = spearnet_package_info_entity.size_accumulation
+                new_spearnet_package_log.declaration_need_or_not = spearnet_package_info_entity.declaration_need_or_not
+                new_spearnet_package_log.duty_paid_by = spearnet_package_info_entity.duty_paid_by
+                new_spearnet_package_log.signature_img_id = spearnet_package_info_entity.signature_img_id
+                new_spearnet_package_log.note = spearnet_package_info_entity.note
+                
+                new_spearnet_package_log.package_status = spearnet_package_info_entity.package_status
+                new_spearnet_package_log.pickup_date_time = spearnet_package_info_entity.pickup_date_time
+                
+                new_spearnet_package_log.access_people = spearnet_package_info_entity.access_people
+                new_spearnet_package_log.create_date_time = spearnet_package_info_entity.create_date_time
+                new_spearnet_package_log.update_date_time = spearnet_package_info_entity.update_date_time
+                
+                new_spearnet_package_log.put()
+                
+                #delete entity
+                spearnet_package_info_entity.key.delete()
+                
         
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
@@ -1323,6 +1381,7 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),
+                               ('exshipper_migrate_packages_information_log', ExShipperPackagesInfoLogMigrationHandler),
                                ('/exshipper_spearnet_index_page', ExShipperSpearnetIndexHandler),
                                ('/exshipper_spearnet_login_handler', ExShipperSpearnetLoginHandler),
                                ('/exshipper_spearnet_data_exchange_page', ExShipperSpearnetDataExchangeDispatcher),
