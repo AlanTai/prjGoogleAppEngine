@@ -116,7 +116,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 				.append(
 						'<form id="label_'
 							+ "{{single_row_data.hawb}}"
-							+ '" style="border: 1px solid; width: 320px; margin: 10px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
+							+ '" style="border: 1px solid; width: 320px; margin: 10px 10px; padding: 2px 2px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size: 16px; font-weight: bold;">ExShipper</p>'
 							+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 寄件者: '
 								+ "{{single_row_data.shipper_company}}"
