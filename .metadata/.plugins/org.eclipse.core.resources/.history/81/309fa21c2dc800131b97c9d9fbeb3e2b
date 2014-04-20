@@ -763,7 +763,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                             package_entity.access_info = json.dumps(old_access_info_dict)
                         else:
                             current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            new_access_info = {'access_info':[{'person':'spearnet', 'date_time':current_time}]}
                             package_entity.access_info = json.dumps(new_access_info)
                             
                         package_entity.pickup_date_time = datetime.datetime.now()
@@ -934,10 +934,6 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                             person = ''
                             old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
                             package_entity.access_info = json.dumps(old_access_info_dict)
-                        else:
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-                            package_entity.access_info = json.dumps(new_access_info)
                         
                         package_entity.put()
                          
@@ -952,10 +948,6 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                             person = ''
                             old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
                             package_entity.access_info = json.dumps(old_access_info_dict)
-                        else:
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-                            package_entity.access_info = json.dumps(new_access_info)
                         
                         package_entity.put()
                          
@@ -970,10 +962,6 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                             person = ''
                             old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
                             package_entity.access_info = json.dumps(old_access_info_dict)
-                        else:
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-                            package_entity.access_info = json.dumps(new_access_info)
                         
                         package_entity.put()
                         
