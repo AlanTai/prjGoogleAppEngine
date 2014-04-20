@@ -1158,20 +1158,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_package.size = new_size
                         tw_custom_entry_package.package_status = 'exshipper'
                         tw_custom_entry_package.note = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
-                        
-                        if(tw_custom_entry_package.access_info != None):
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            old_access_info = tw_custom_entry_package.access_info
-                            old_access_info_dict = json.loads(old_access_info)
-                            person = ''
-                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
-                            tw_custom_entry_package.access_info = json.dumps(old_access_info_dict)
-                        else:
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-                            tw_custom_entry_package.access_info = json.dumps(new_access_info)
-                        
-                        
                         tw_custom_entry_package.put()
                         tw_custom_package = tw_custom_package + 'TW Custom Entry Package- ' + key + ' ; ' + response_result
                 
@@ -1558,8 +1544,7 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 
                 #delete entity
                 spearnet_package_info_entity.key.delete()
-        
-        self.response.write('Cron Task Done')
+            self.response.write('Cron Task Done')
         
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),

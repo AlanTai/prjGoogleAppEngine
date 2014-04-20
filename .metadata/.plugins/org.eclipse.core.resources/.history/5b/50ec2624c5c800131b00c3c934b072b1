@@ -144,7 +144,7 @@ class TWCustomEntryInfo(ndb.Model):
     flight_number = ndb.StringProperty()
     flight_date = ndb.DateProperty()
     package_status = ndb.StringProperty()
-    access_info = JsonProperty()
+    access_people = JsonProperty()
     
     create_date_time = ndb.DateProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
