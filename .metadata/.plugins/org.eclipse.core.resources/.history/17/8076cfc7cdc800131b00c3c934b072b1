@@ -56,7 +56,7 @@
 	</div>
 	<br><br>
 	<div>
-		<input id="tw_custom_entry_tracking_number" style="width: 200px;" placeholder="TW Custom Entry Tracking Number"/> <input id="search_tw_custom_entry_tracking_number"
+		<input id="tw_custom_entry_tracking_numbers" style="width: 200px;" placeholder="TW Custom Entry Tracking Number"/> <input id="search_tw_custom_entry_tracking_number"
 			type="button" value="Search" />
 	</div>
 	<hr>
@@ -388,7 +388,7 @@
 			//scroll page to show selected item
 			try{
 				$('#search_tw_custom_entry_tracking_number').click(function() {
-					var suda_tracking_number = $('#tw_custom_entry_tracking_number').val();
+					var suda_tracking_number = $('#tw_custom_entry_tracking_numbers').val();
 					$('html, body').animate({
 						scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
 					}, 800);

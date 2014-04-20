@@ -391,7 +391,7 @@
 			//scroll page to show selected item
 			try{
 				$('#search_suda_tracking_number').click(function() {
-					var suda_tracking_number = $('#packages_suda_tracking_number').val();
+					var suda_tracking_number = $('#packages_suda_tracking_numbers').val();
 					$('html, body').animate({
 						scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
 					}, 800);
