@@ -149,7 +149,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             
               
         #page of handling general clients packages information
-        elif(dispatch_token == 'exshipper_general_clients_packages_info_log' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+        elif(dispatch_token == 'exshipper_general_clients_packages_info_log_processing' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_general_clients_package_info_log_page
             html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
             
@@ -158,14 +158,59 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                                                                                         GeneralClientsPackagesInfo.package_status == 'exshipper'))
             clients_info = ClientsInfo().query()
             template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+           
+        elif(dispatch_token == 'exshipper_general_clients_packages_info_log_processed' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_general_clients_package_info_log_page
+            html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
+            
+            #query package information (packages' status == spearnet or exshipper)
+            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'exshipper'))
+            clients_info = ClientsInfo().query()
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+           
+        elif(dispatch_token == 'exshipper_general_clients_packages_info_log_delivered' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_general_clients_package_info_log_page
+            html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
+            
+            #query package information (packages' status == spearnet or exshipper)
+            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'exshipper'))
+            clients_info = ClientsInfo().query()
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+              
+           
+           
             
         # page of handling tw custom entry packages information
-        elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+        #tw custom entry package; package status exshipper
+        elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log_processing' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
             html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
             
             tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
             template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
+            
+        #
+        elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log_processed' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
+            
+            tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'apex',
+                                                                               TWCustomEntryInfo.package_status == 'sfo_airport',
+                                                                               TWCustomEntryInfo.package_status == 'taiwan_taoyuan_airport'))
+            template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
+        
+        #    
+        elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log_delivered' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
+            
+            tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'delivered')
+            template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
+            
+            
+            
             
         # page of handling exshipper pre-alert
         elif(dispatch_token == 'exshipper_pre_alert' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
