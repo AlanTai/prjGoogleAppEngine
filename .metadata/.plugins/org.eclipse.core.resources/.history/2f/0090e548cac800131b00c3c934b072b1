@@ -388,18 +388,12 @@
 			}
 			
 			
-			try{
-				$('#search_suda_tracking_number').click(function() {
-					var suda_tracking_number = $('#packages_suda_tracking_numbers').val();
-					$('html, body').animate({
-						scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
-					}, 800);
-				});
-			}
-			catch(err){
-				consoe.log('No such information in the SUDA tracking numbers\' array');
-			}
-			
+			$('#search_suda_tracking_number').click(function() {
+				var suda_tracking_number = $('#packages_suda_tracking_numbers').val();
+				$('html, body').animate({
+					scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
+				}, 800);
+			});
 		</script>
 	</div>
 
