@@ -314,7 +314,7 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
     def post(self):
         time_stamp = int(round(time.time())).__str__()
         employee_id = 'ESEMP'+ time_stamp
-        new_employee = EmployeeInfo(id=employee_id)
+        new_employee = EmployeeInfo(employee_id)
         new_employee.id = employee_id
         
         new_employee.account_name = self.request.get('employee_account_name')
@@ -328,6 +328,7 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         birthday_year = int(self.request.get('birthday_year'))
         birthday_month = int(self.request.get('birthday_month'))
         birthday_day = int(self.request.get('birthday_day'))
+        
         new_employee.birthday = datetime.date(birthday_year, birthday_month, birthday_day)
         
         new_employee.gender = self.request.get('employee_gender')
@@ -335,7 +336,8 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         new_employee.phone_number = self.request.get('employee_phone_number')
         new_employee.profile_img = self.request.get('employee_profile_img')
         
-        new_employee.access_level = self.request.get('employee_access_level')
+        access_level = ''
+        new_employee.access_level = 'general'
         
         new_employee.put()
         
@@ -388,7 +390,7 @@ class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
         new_client.signature_str = self.request.get('client_signature')
         new_client.signature_img = self.request.get('client_signature_img')
         
-        new_client.membership_level = self.request.get('client_membership_level')
+        new_client.membership_level = 'general'
         
         new_client.put()
         
@@ -1158,20 +1160,6 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_package.size = new_size
                         tw_custom_entry_package.package_status = 'exshipper'
                         tw_custom_entry_package.note = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
-                        
-                        if(tw_custom_entry_package.access_info != None):
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            old_access_info = tw_custom_entry_package.access_info
-                            old_access_info_dict = json.loads(old_access_info)
-                            person = ''
-                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
-                            tw_custom_entry_package.access_info = json.dumps(old_access_info_dict)
-                        else:
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-                            tw_custom_entry_package.access_info = json.dumps(new_access_info)
-                        
-                        
                         tw_custom_entry_package.put()
                         tw_custom_package = tw_custom_package + 'TW Custom Entry Package- ' + key + ' ; ' + response_result
                 
@@ -1558,8 +1546,7 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 
                 #delete entity
                 spearnet_package_info_entity.key.delete()
-        
-        self.response.write('Cron Task Done')
+                
         
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
