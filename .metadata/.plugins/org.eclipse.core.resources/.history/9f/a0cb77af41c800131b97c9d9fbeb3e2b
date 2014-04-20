@@ -336,9 +336,6 @@ class ExShipperCreateEmployeeInfoHandler(webapp2.RequestHandler):
         new_employee.phone_number = self.request.get('employee_phone_number')
         new_employee.profile_img = self.request.get('employee_profile_img')
         
-        access_level = ''
-        new_employee.access_level = 'general'
-        
         new_employee.put()
         
         my_dict = Key_Value()

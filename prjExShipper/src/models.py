@@ -29,11 +29,13 @@ class PersonInfo(ndb.Model):
 
 class EmployeeInfo(PersonInfo):
     job_title = ndb.StringProperty()
+    access_level = ndb.StringProperty()
     
 class ClientsInfo(PersonInfo):
     company_name = ndb.StringProperty()
     signature_img = ndb.BlobProperty()
     signature_str = ndb.StringProperty()
+    membership_level = ndb.StringProperty()
     
     
 class EmailVerification(ndb.Model):
