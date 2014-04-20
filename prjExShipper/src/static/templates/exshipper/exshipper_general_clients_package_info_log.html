@@ -15,11 +15,38 @@
 		Information Log</p>
 	<input type="button" value="Update Information"
 			onclick="updatePackageStatus()" style="margin: 5px 5px;">
+			
+	<!-- main control fileds -->
+	<div style="display: block; margin: 5px auot;">
+		
+		<div style="display: inline-block;">
+			<select id="general_clients_signature_fields_main_control">
+				<option value="NA">No Data</option>
+			</select> <input type="button" value="Update Client Siganture"
+				onclick="updateClientSignature()">
+		</div>
+		<div style="display: inline-block;">
+			<select id="package_status_fields_main_control">
+				<option value="exshipper">ExShipper</option>
+				<option value="apex">Apex</option>
+				<option value="sfo_airport">SFO Airport</option>
+				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+					International Airport</option>
+				<option value="delivered">Delivered (Leader Empire Wang
+					International Company)</option>
+				<option value="NA">NA</option>
+			</select> <input type="button" value="Update Package Status Fields"
+				onclick="updatePackageStatusField()">
+		</div>
+	</div>
+<br /> <a id="xls_download" href="">Download Data in XLS
+		Format</a>
+			
 	<hr>
 </div>
 
 <div
-	style="position: absolute; top: 130px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 180px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if general_clients_packages_info_log %}
 	<div id="general_clients_packages_info"
 		style="width:100%; padding: 5px ; overflow: auto; border: 1px dashed #333333;">
@@ -131,37 +158,18 @@
 				//update json obj when select value change
 				$('.general_clients_package_status > select[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
 					packages_status[key] = $(this).val();
 				});
 				
 				//setup auto change mechanism for client signature
 				$('.general_clients_signature > select[id={{ single_row_data.hawb }}]').change(function() {
 					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
 					clients_signature[key] = $(this).val();
 				});
 				
-				//setup auto change mechanism for notes
-				//change function will be triggered after the focus changes
-				/* $('.notes > input[id={{ single_row_data.hawb }}]').change(function() {
-					var key = $(this).attr('id');
-					if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					}
-					notes[key] = $(this).val();
-					alert(notes[key]);
-				}); */
 				
 				$('.general_clients_notes > input[id={{ single_row_data.hawb }}]').on('input', function() {
 					var key = $(this).attr('id');
-					/* if (typeof packages_status[key] === 'undefined'){
-						packages_status[key] = $(this).val();
-					} */
 					notes[key] = $(this).val();
 				});
 				
@@ -244,6 +252,29 @@
 		$('#general_clients_packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end of distinct row color
 		
+		//fields update mechanism
+			function updateClientSignature(){
+				var client_signature_id = $('#general_clients_signature_fields_main_control').val().trim();
+				
+				$('.general_clients_signature > select').each(function(){
+					$(this).val(client_signature_id);
+					var key = $(this).attr('id');
+					clients_signature[key] = $(this).val();
+				});
+			}
+			
+			function updatePackageStatusField(){
+				var package_status = $('#package_status_fields_main_control').val();
+				
+				$('.package_status').each(function(){
+					$(this).val(package_status);
+					var key = $(this).attr('id');
+					packages_status[key] = $(this).val();
+				});
+			}
+		
+		
+		
 		//update information
 			function updatePackageStatus() {
 				var confirm_result = confirm('Do you want to update the packages\' status?');
@@ -307,10 +338,6 @@
 				$('#upload_cover').css({'display':'none'});
 			}
 		</script>
-	</div>
-
-	<div>
-		<br /> <a id="xls_download" href="">Download Data in XLS Format</a>
 	</div>
 
 	<script type="text/javascript">
