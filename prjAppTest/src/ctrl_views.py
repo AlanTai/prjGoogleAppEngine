@@ -164,8 +164,9 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
             
             #query package information (packages' status == spearnet or exshipper)
-            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
-                                                                                        GeneralClientsPackagesInfo.package_status == 'exshipper'))
+            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'apex',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'sfo_airport',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
             clients_info = ClientsInfo().query()
             template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
            
@@ -174,8 +175,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
             
             #query package information (packages' status == spearnet or exshipper)
-            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
-                                                                                        GeneralClientsPackagesInfo.package_status == 'exshipper'))
+            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.package_status == 'delivered')
             clients_info = ClientsInfo().query()
             template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
               
@@ -722,6 +722,10 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                         new_package.package_status = 'spearnet'
                         new_package.note = '常溫'
                         
+                        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        new_access_info = {'access_info':[{'person':'spearnet', 'date_time':current_time}]}
+                        new_package.access_info = json.dumps(new_access_info)
+                        
                         new_package.put()
                         
                     ajax_data['spearnet_packages_info_upload_status'] = 'Data saved into database'
@@ -750,8 +754,14 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                     if(package_entity != None and package_entity.package_status == 'spearnet'):
                         package_entity.package_status = 'pickup'
                         
-                        current_date_time = datetime.datetime.now()
-                        package_entity.access_info = json.dumps({'access_info':[{'person':'alantai', 'date_time':current_date_time.__str__()}]})
+                        if(package_entity.access_info != None):
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            old_access_info = package_entity.access_info
+                            old_access_info_dict = json.loads(old_access_info)
+                            person = ''
+                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
+                            package_entity.access_info = json.dumps(old_access_info_dict)
+                            
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
                         package_tracking_numbers = package_tracking_numbers + key + '\n'
@@ -913,19 +923,44 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                     for key in json_obj_package_status:
                         package_entity = SpearnetPackagesInfo.get_by_id(key)
                         package_entity.package_status = json_obj_package_status[key]
+                        if(package_entity.access_info != None):
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            old_access_info = package_entity.access_info
+                            old_access_info_dict = json.loads(old_access_info)
+                            person = ''
+                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
+                            package_entity.access_info = json.dumps(old_access_info_dict)
+                        
                         package_entity.put()
                          
                 if(json_obj_clients_signature != 'NA'):
                     for key in json_obj_clients_signature:
                         package_entity = SpearnetPackagesInfo.get_by_id(key)
                         package_entity.signature_img_id = json_obj_clients_signature[key]
+                        if(package_entity.access_info != None):
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            old_access_info = package_entity.access_info
+                            old_access_info_dict = json.loads(old_access_info)
+                            person = ''
+                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
+                            package_entity.access_info = json.dumps(old_access_info_dict)
+                        
                         package_entity.put()
                          
                 if(json_obj_notes != 'NA'):
                     for key in json_obj_notes.keys():
                         package_entity = SpearnetPackagesInfo.get_by_id(key)
                         package_entity.note = json_obj_notes[key]
+                        if(package_entity.access_info != None):
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            old_access_info = package_entity.access_info
+                            old_access_info_dict = json.loads(old_access_info)
+                            person = ''
+                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
+                            package_entity.access_info = json.dumps(old_access_info_dict)
+                        
                         package_entity.put()
+                        
                     
                 ajax_data['update_status'] = 'Successfully update the packages status!'
                 
