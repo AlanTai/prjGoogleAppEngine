@@ -16,9 +16,9 @@
 	<input type="button" value="Update Information"
 		onclick="updatePackageStatus()" style="margin: 5px 5px;">
 
-	<!-- main control fileds -->
+	<!--  -->
 	<div style="display: block; margin: 5px auot;">
-		
+
 		<div style="display: inline-block;">
 			<select id="spearnet_customers_signature_fields_main_control">
 				<option value="NA">No Data</option>
@@ -39,18 +39,22 @@
 				onclick="updatePackageStatusField()">
 		</div>
 	</div>
-<br /> <a id="xls_download" href="">Download Data in XLS
-		Format</a>
+	<br /> <a id="xls_download" href="">Download Data in XLS Format</a> <br><br>
+	<div>
+		<input id="packages_suda_tracking_numbers" style="width: 200px;" placeholder="SUDA Tracking Number"/> <input id="search_suda_tracking_number"
+			type="button" value="Search" onclick="" />
+	</div>
 	<hr>
 </div>
 
 <div
-	style="position: absolute; top: 200px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 230px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if spearnet_customer_package_info_log %}
 	<div id="spearnet_customers_packages_info"
 		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
+			var packages_suda_tracking_numbers_ary = new Array();
 			var packages_status = new Object();
 			var clients_signature = new Object();
 			var notes = new Object();
@@ -95,7 +99,7 @@
 			json_array.push(obj_keys);
 		</script>
 		{% for single_row_data in spearnet_customer_package_info_log %}
-		<form style="padding: 5px 5px;">
+		<form id="form_{{single_row_data.hawb}}" style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text"
 				value="{{ single_row_data.hawb }}" disabled>
 			</span> <span>TW Custom Entry Barcode Number: <input type="text"
@@ -232,6 +236,8 @@
 			obj['note'] = "{{ single_row_data.note }}";
 
 			json_array.push(obj);
+			packages_suda_tracking_numbers_ary
+					.push('{{ single_row_data.hawb }}');
 		</script>
 		{% endfor %} {% else %}
 		<p>No Data Available</p>
@@ -249,13 +255,17 @@
 					+ " {{client_info.last_name}}"
 					+ ' ; Phone: '
 					+ "{{client_info.phone_number}}";
-			$.each(clients_signatures, function(key, value) {
-				$('.spearnet_customers_signature > select, #spearnet_customers_signature_fields_main_control ').append(
-						$("<option/>", {
-							value : key,
-							text : value
-						}));
-			});
+			$
+					.each(
+							clients_signatures,
+							function(key, value) {
+								$(
+										'.spearnet_customers_signature > select, #spearnet_customers_signature_fields_main_control ')
+										.append($("<option/>", {
+											value : key,
+											text : value
+										}));
+							});
 		</script>
 		{% endfor %} {% endif %}
 
@@ -269,31 +279,38 @@
 					'background-color', '#f9f9f9');
 			// end of distinct row color
 
-			
+			//autocomplete
+			$("#packages_suda_tracking_numbers").autocomplete({
+				source : packages_suda_tracking_numbers_ary
+			});
+			//end
+
 			//fields update mechanism
-			function updateClientSignature(){
-				var client_signature_id = $('#spearnet_customers_signature_fields_main_control').val().trim();
-				
-				$('.spearnet_customers_signature > select').each(function(){
+			function updateClientSignature() {
+				var client_signature_id = $(
+						'#spearnet_customers_signature_fields_main_control')
+						.val().trim();
+
+				$('.spearnet_customers_signature > select').each(function() {
 					$(this).val(client_signature_id);
 					var key = $(this).attr('id');
 					clients_signature[key] = $(this).val();
 				});
 			}
-			
-			function updatePackageStatusField(){
-				var package_status = $('#package_status_fields_main_control').val();
-				
-				$('.package_status').each(function(){
+
+			function updatePackageStatusField() {
+				var package_status = $('#package_status_fields_main_control')
+						.val();
+
+				$('.package_status').each(function() {
 					$(this).val(package_status);
 					var key = $(this).attr('id');
 					packages_status[key] = $(this).val();
 				});
 			}
-			
+
 			//
-			
-			
+
 			//update information
 			function updatePackageStatus() {
 				var confirm_result = confirm('Do you want to update the packages\' status?');
@@ -369,13 +386,20 @@
 					'display' : 'none'
 				});
 			}
+			
+			
+			$('#search_suda_tracking_number').click(function() {
+				var suda_tracking_number = $('#packages_suda_tracking_numbers').val();
+				$('html, body').animate({
+					scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
+				}, 800);
+			});
 		</script>
 	</div>
 
 	<script type="text/javascript">
 		//Test script to generate a file from JavaScript such
-		//that MS Excel will honor non-ASCII characters.
-		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
+		//that MS Excel will honor non-ASCII characters.\
 
 		var obj_types = new Object();
 		obj_types.reference_number = "String";
@@ -414,32 +438,6 @@
 
 		testJson = json_array;
 		testTypes = obj_types;
-
-		/* testJson = [ {
-			"name" : "Tony Peña",
-			"city" : "希臘",
-			"country" : "United States",
-			"birthdate" : "1978-03-15",
-			"amount" : 42
-
-		}, {
-			"name" : "Ζαλώνης Thessaloniki",
-			"city" : "雅典",
-			"country" : "Greece",
-			"birthdate" : "1987-11-23",
-			"amount" : 42
-		} ]; */
-
-		//Simple type mapping; dates can be hard
-		//and I would prefer to simply use `datevalue`
-		//... you could even add the formula in here.
-		/* testTypes = {
-			"name" : "String",
-			"city" : "String",
-			"country" : "String",
-			"birthdate" : "String",
-			"amount" : "Number"
-		}; */
 
 		emitXmlHeader = function() {
 			return '<?xml version="1.0"?>\n'

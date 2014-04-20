@@ -74,6 +74,17 @@
 						required="required" />
 				</div>
 
+				<div>
+					<label style="width: 430px; display: inline-block;">Access
+						Level: </label> <select title="Access Level" name="employee_access_level"
+						id="employee_access_level"
+						style="width: 250px; display: inline-block; padding: 2px 5px;">
+						<option value="general">General Level</option>
+						<option value="manager">Manager Level</option>
+						<option value="admin">Administrator</option>
+					</select>
+				</div>
+
 				<!-- Client Info -->
 				<!-- First Name -->
 				<div>
@@ -120,9 +131,9 @@
 						</label>
 						<div style="width: 250px; display: inline-block;">
 							<select name="birthday_year" id="birthday_year"
-								form="client_info"></select> <select name="birthday_month"
-								id="birthday_month" form="client_info"></select> <select
-								name="birthday_day" id="birthday_day" form="client_info"></select>
+								form="employee_info"></select> <select name="birthday_month"
+								id="birthday_month" form="employee_info"></select> <select
+								name="birthday_day" id="birthday_day" form="employee_info"></select>
 						</div>
 					</div>
 					<br>
@@ -332,7 +343,7 @@
 		var upload = function() {
 			var isInfoValid = true;
 			var blank_field = 'Blank Field(s):\n';
-			$('#client_info').find('input').each(function(i) {
+			$('#employee_info').find('input').each(function(i) {
 				if ($(this).attr('type') === 'text' && $(this).val() === '') {
 					blank_field = blank_field + $(this).attr('title') + '\n';
 					isInfoValid = false;
