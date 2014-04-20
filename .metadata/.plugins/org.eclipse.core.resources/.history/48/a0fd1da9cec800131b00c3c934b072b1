@@ -54,11 +54,7 @@
 	<div>
 		<a id="xls_download" href="">Download Data in XLS Format</a>
 	</div>
-	<br><br>
-	<div>
-		<input id="tw_custom_entry_tracking_number" style="width: 200px;" placeholder="TW Custom Entry Tracking Number"/> <input id="search_tw_custom_entry_tracking_number"
-			type="button" value="Search" />
-	</div>
+
 	<hr>
 </div>
 
@@ -69,7 +65,6 @@
 		style="width: 100%; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
-			var tw_custom_entry_tracking_numbers_ary = new Array();
 			var packages_status = new Object();
 			var mawbs = new Object();
 			var flight_numbers = new Object();
@@ -94,10 +89,9 @@
 			obj_keys['note'] = 'note';
 
 			json_array.push(obj_keys);
-			tw_custom_entry_tracking_numbers_ary.push({{ single_row_data.barcode_number }});
 		</script>
 		{% for single_row_data in tw_custom_entry_packages_info_log %}
-		<form id="form_{{ single_row_data.barcode_number }}" style="padding: 5px 5px;">
+		<form style="padding: 5px 5px;">
 			<span>TW Custom Entry Barcode Number: <input type="text"
 				value="{{ single_row_data.barcode_number }}" disabled>
 			</span> <span class="tw_custom_entry_mawb">MAWB(榮儲快遞艙): <input
@@ -383,29 +377,13 @@
 					'display' : 'none'
 				});
 			}
-			
-			
-			//scroll page to show selected item
-			try{
-				$('#search_tw_custom_entry_tracking_number').click(function() {
-					var suda_tracking_number = $('#tw_custom_entry_tracking_number').val();
-					$('html, body').animate({
-						scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
-					}, 800);
-					$("#form_" + suda_tracking_number ).focus();
-				});
-				
-			}
-			catch(err){
-				consoe.log('No such information in the SUDA tracking numbers\' array');
-			}
-			
 		</script>
 	</div>
 
 	<script type="text/javascript">
 		//Test script to generate a file from JavaScript such
 		//that MS Excel will honor non-ASCII characters.
+		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
 
 		var obj_types = new Object();
 		obj_types.barcode_number = "String";
@@ -425,6 +403,32 @@
 
 		testJson = json_array;
 		testTypes = obj_types;
+
+		/* testJson = [ {
+			"name" : "Tony Peña",
+			"city" : "希臘",
+			"country" : "United States",
+			"birthdate" : "1978-03-15",
+			"amount" : 42
+
+		}, {
+			"name" : "Ζαλώνης Thessaloniki",
+			"city" : "雅典",
+			"country" : "Greece",
+			"birthdate" : "1987-11-23",
+			"amount" : 42
+		} ]; */
+
+		//Simple type mapping; dates can be hard
+		//and I would prefer to simply use `datevalue`
+		//... you could even add the formula in here.
+		/* testTypes = {
+			"name" : "String",
+			"city" : "String",
+			"country" : "String",
+			"birthdate" : "String",
+			"amount" : "Number"
+		}; */
 
 		emitXmlHeader = function() {
 			return '<?xml version="1.0"?>\n'
