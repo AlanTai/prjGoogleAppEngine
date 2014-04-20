@@ -457,11 +457,6 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
         new_package_info.duty_paid_by = 'Shipper'
         new_package_info.package_status = 'exshipper'
-        
-        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-        new_package_info.access_info = json.dumps(new_access_info)
-        
         new_package_info.put()
         
         

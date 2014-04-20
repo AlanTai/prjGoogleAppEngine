@@ -415,53 +415,59 @@ class ExShipperValidateClientAccountNameEmail(webapp2.RequestHandler):
 class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'submit_status':'NA'}
-        if(self.request.get('fmt') == 'json'):
-            
-            #package size
-            new_size = Size()
-            new_size.length = self.request.get('valid_size_length')
-            new_size.width = self.request.get('valid_size_width')
-            new_size.height = self.request.get('valid_size_height')
-            new_size.put()
-            
-            #package information
-            package_id = self.request.get('valid_suda_tr_number')
-            new_package_info = GeneralClientsPackagesInfo(id=package_id)
-            new_package_info.hawb = package_id
-            new_package_info.reference_number = self.request.get('valid_ref_number')
-            new_package_info.tw_custom_entry_number = 'NA'
-            new_package_info.ctn = self.request.get('valid_ctn')
-            new_package_info.ctn = self.request.get('valid_note')
-            new_package_info.size = new_size
-            new_package_info.weight_kg = self.request.get('valid_weight')
-            new_package_info.weight_lb = 'NA'
-            new_package_info.commodity_detail = self.request.get('valid_commodity_detail')
-            new_package_info.pcs = self.request.get('valid_pcs')
-            new_package_info.unit = self.request.get('valid_unit')
-            new_package_info.original = 'USA'
-            new_package_info.unit_price_fob_us_dollar = self.request.get('valid_unit_price_fob_us_dollar')
-            new_package_info.deliver_to = self.request.get('valid_deliver_to')
-            new_package_info.shipper_company = self.request.get('valid_shipper_company')
-            new_package_info.shipper_person = self.request.get('valid_shipper_person')
-            new_package_info.shipper_tel = self.request.get('valid_shipper_phone_number')
-            new_package_info.shipper_address_english = self.request.get('valid_shipper_address_english')
-            new_package_info.shipper_address_chinese = self.request.get('valid_shipper_address_chinese')
-            new_package_info.consignee_name_english = self.request.get('valid_consignee_name_english')
-            new_package_info.consignee_name_chinese = self.request.get('valid_consignee_name_chinese')
-            new_package_info.consignee_tel = self.request.get('valid_consignee_phone_number')
-            new_package_info.consignee_address_english = self.request.get('valid_consignee_address_english')
-            new_package_info.consignee_address_chinese = self.request.get('valid_consignee_address_chinese')
-            new_package_info.company_id_or_personal_id = 'NA'
-            new_package_info.size_accumulation = 'NA'
-            new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
-            new_package_info.duty_paid_by = 'Shipper'
-            new_package_info.package_status = 'exshipper'
-            new_package_info.put()
-            
-            
-            ajax_data['submit_status'] = 'Data saved into database'
-            self.response.out.headers['Content-Type'] = 'text/json'
-            self.response.out.write(json.dumps(ajax_data))
+        #package size
+        new_size = Size()
+        new_size.length = self.request.get('valid_size_length')
+        new_size.width = self.request.get('valid_size_width')
+        new_size.height = self.request.get('valid_size_height')
+        new_size.put()
+        
+        #package information
+        package_id = self.request.get('valid_suda_tr_number')
+        new_package_info = GeneralClientsPackagesInfo(id=package_id)
+        new_package_info.hawb = package_id
+        new_package_info.reference_number = self.request.get('valid_ref_number')
+        new_package_info.tw_custom_entry_number = 'NA'
+        new_package_info.ctn = self.request.get('valid_ctn')
+        new_package_info.note = self.request.get('valid_note')
+        new_package_info.size = new_size
+        new_package_info.weight_kg = self.request.get('valid_weight')
+        new_package_info.weight_lb = 'NA'
+        new_package_info.commodity_detail = self.request.get('valid_commodity_detail')
+        new_package_info.pcs = self.request.get('valid_pcs')
+        new_package_info.unit = self.request.get('valid_unit')
+        new_package_info.original = 'USA'
+        new_package_info.unit_price_fob_us_dollar = self.request.get('valid_unit_price_fob_us_dollar')
+        new_package_info.deliver_to = self.request.get('valid_deliver_to')
+        
+        new_package_info.shipper_company = self.request.get('valid_shipper_company')
+        new_package_info.shipper_person = self.request.get('valid_shipper_person')
+        new_package_info.shipper_tel = self.request.get('valid_shipper_phone_number')
+        new_package_info.shipper_address_english = self.request.get('valid_shipper_address_english')
+        new_package_info.shipper_address_chinese = self.request.get('valid_shipper_address_chinese')
+        
+        new_package_info.consignee_name_english = self.request.get('valid_consignee_name_english')
+        new_package_info.consignee_name_chinese = self.request.get('valid_consignee_name_chinese')
+        new_package_info.consignee_tel = self.request.get('valid_consignee_phone_number')
+        new_package_info.consignee_address_english = self.request.get('valid_consignee_address_english')
+        new_package_info.consignee_address_chinese = self.request.get('valid_consignee_address_chinese')
+        
+        new_package_info.company_id_or_personal_id = 'NA'
+        new_package_info.size_accumulation = 'NA'
+        new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
+        new_package_info.duty_paid_by = 'Shipper'
+        new_package_info.package_status = 'exshipper'
+        
+        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+        new_package_info.access_info = json.dumps(new_access_info)
+        
+        new_package_info.put()
+        
+        
+        ajax_data['submit_status'] = 'success'
+        self.response.out.headers['Content-Type'] = 'text/json'
+        self.response.out.write(json.dumps(ajax_data))
 
 
 #SUDA Tracking Number Handler (For uploading number)
@@ -761,6 +767,10 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                             person = ''
                             old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
                             package_entity.access_info = json.dumps(old_access_info_dict)
+                        else:
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            package_entity.access_info = json.dumps(new_access_info)
                             
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
@@ -930,6 +940,10 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                             person = ''
                             old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
                             package_entity.access_info = json.dumps(old_access_info_dict)
+                        else:
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            package_entity.access_info = json.dumps(new_access_info)
                         
                         package_entity.put()
                          
@@ -944,6 +958,10 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                             person = ''
                             old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
                             package_entity.access_info = json.dumps(old_access_info_dict)
+                        else:
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            package_entity.access_info = json.dumps(new_access_info)
                         
                         package_entity.put()
                          
@@ -958,6 +976,10 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                             person = ''
                             old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
                             package_entity.access_info = json.dumps(old_access_info_dict)
+                        else:
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            package_entity.access_info = json.dumps(new_access_info)
                         
                         package_entity.put()
                         
@@ -1357,18 +1379,57 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                     for key in json_obj_package_status:
                         package_entity = GeneralClientsPackagesInfo.get_by_id(key)
                         package_entity.package_status = json_obj_package_status[key]
+                        
+                        if(package_entity.access_info != None):
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            old_access_info = package_entity.access_info
+                            old_access_info_dict = json.loads(old_access_info)
+                            person = ''
+                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
+                            package_entity.access_info = json.dumps(old_access_info_dict)
+                        else:
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            package_entity.access_info = json.dumps(new_access_info)
+                            
                         package_entity.put()
                           
                 if(json_obj_clients_signature != 'NA'):
                     for key in json_obj_clients_signature:
                         package_entity = GeneralClientsPackagesInfo.get_by_id(key)
                         package_entity.signature_img_id = json_obj_clients_signature[key]
+                        
+                        if(package_entity.access_info != None):
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            old_access_info = package_entity.access_info
+                            old_access_info_dict = json.loads(old_access_info)
+                            person = ''
+                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
+                            package_entity.access_info = json.dumps(old_access_info_dict)
+                        else:
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            package_entity.access_info = json.dumps(new_access_info)
+                            
                         package_entity.put()
                           
                 if(json_obj_notes != 'NA'):
                     for key in json_obj_notes:
                         package_entity = GeneralClientsPackagesInfo.get_by_id(key)
                         package_entity.note = json_obj_notes[key]
+                        
+                        if(package_entity.access_info != None):
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            old_access_info = package_entity.access_info
+                            old_access_info_dict = json.loads(old_access_info)
+                            person = ''
+                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
+                            package_entity.access_info = json.dumps(old_access_info_dict)
+                        else:
+                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
+                            package_entity.access_info = json.dumps(new_access_info)
+                        
                         package_entity.put()
                     
                 ajax_data['update_status'] = 'Successfully update the packages status!'

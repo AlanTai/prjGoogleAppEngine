@@ -402,7 +402,7 @@
 		var shipper_person = $('#id_shipper_person').val();
 		var shipper_phone_number = $('#id_shipper_phone_number').val();
 		var shipper_address_english = $('#id_shipper_address_english').val();
-		var shipper_address_chinese = $('#id_shipper_address_chinese').val();
+		var shipper_address_chinese = $('#id_shipper_address_english').val();
 
 		var consignee_name_english = $('#id_consignee_name_english').val();
 		var consignee_name_chinese = $('#id_consignee_name_chinese').val();

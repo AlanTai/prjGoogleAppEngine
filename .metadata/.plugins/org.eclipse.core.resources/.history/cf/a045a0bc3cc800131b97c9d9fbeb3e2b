@@ -460,7 +460,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
         
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-        new_package_info.access_info = json.dumps(new_access_info)
+        package_entity.access_info = json.dumps(new_access_info)
         
         new_package_info.put()
         
