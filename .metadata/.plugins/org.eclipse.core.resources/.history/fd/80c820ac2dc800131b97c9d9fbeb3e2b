@@ -16,7 +16,7 @@
 	<input type="button" value="Update Information"
 		onclick="updatePackageStatus()" style="margin: 5px 5px;">
 
-	<!-- main control fileds -->
+	<!--  -->
 	<div style="display: block; margin: 5px auot;">
 		
 		<div style="display: inline-block;">
