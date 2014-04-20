@@ -94,7 +94,7 @@
 			obj_keys['note'] = 'note';
 
 			json_array.push(obj_keys);
-			tw_custom_entry_tracking_numbers_ary.push({{ single_row_data.barcode_number }});
+			tw_custom_entry_tracking_numbers_ary.push('{{ single_row_data.barcode_number }}');
 		</script>
 		{% for single_row_data in tw_custom_entry_packages_info_log %}
 		<form id="form_{{ single_row_data.barcode_number }}" style="padding: 5px 5px;">
