@@ -1574,6 +1574,9 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 new_spearnet_package_log.update_date_time = spearnet_package_info_entity.update_date_time
                 
                 new_spearnet_package_log.put()
+                
+                #delete entity
+                spearnet_package_info_entity.key.delete()
         
         self.response.write('Cron Task Done')
         

@@ -1529,9 +1529,9 @@ class GetReferenceNumber(webapp2.RequestHandler):
 #migrate packages data
 class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
     def get(self):
-        spearnet_packages_info_formigration = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'delivered')
-        if(spearnet_packages_info_formigration.count() > 0):
-            for spearnet_package_info_entity in spearnet_packages_info_formigration:
+        spearnet_packages_info_for_migration = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'delivered')
+        if(spearnet_packages_info_for_migration.count() > 0):
+            for spearnet_package_info_entity in spearnet_packages_info_for_migration:
                 new_spearnet_package_log = SpearnetPackagesInfoLog(id=spearnet_package_info_entity.hawb)
                 new_spearnet_package_log.reference_number = spearnet_package_info_entity.reference_number
                 new_spearnet_package_log.tw_custom_entry_number = spearnet_package_info_entity.tw_custom_entry_number
@@ -1575,8 +1575,6 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 
                 new_spearnet_package_log.put()
                 
-                #delete entity
-                spearnet_package_info_entity.key.delete()
         
         self.response.write('Cron Task Done')
         
