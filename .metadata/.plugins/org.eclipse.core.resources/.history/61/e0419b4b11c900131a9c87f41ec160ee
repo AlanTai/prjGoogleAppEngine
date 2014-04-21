@@ -387,7 +387,9 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
-					//ajax upload
+
+					//ajax function
+
 				}
 			}
 

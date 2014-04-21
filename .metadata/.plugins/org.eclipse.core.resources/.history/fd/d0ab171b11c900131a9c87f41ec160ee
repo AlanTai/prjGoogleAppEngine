@@ -328,11 +328,6 @@
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
 					
-					if (tw_custom_entry_numbers_length != 0) {
-						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
-					} else {
-						json_obj_update_data['tw_custom_entry_numbers'] = 'NA';
-					}
 					if (package_status_length != 0) {
 						json_obj_update_data['packages_status'] = packages_status;
 					} else {
@@ -351,8 +346,7 @@
 
 					if (package_status_length != 0
 							|| clients_signature_length != 0
-							|| notes_length != 0
-							|| tw_custom_entry_numbers_length != 0) {
+							|| notes_length != 0) {
 						$('#upload_cover').css({
 							'display' : 'block'
 						});
@@ -387,7 +381,9 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
-					//ajax upload
+
+					//ajax function
+
 				}
 			}
 

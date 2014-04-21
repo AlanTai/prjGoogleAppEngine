@@ -351,8 +351,7 @@
 
 					if (package_status_length != 0
 							|| clients_signature_length != 0
-							|| notes_length != 0
-							|| tw_custom_entry_numbers_length != 0) {
+							|| notes_length != 0) {
 						$('#upload_cover').css({
 							'display' : 'block'
 						});
@@ -387,7 +386,9 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
-					//ajax upload
+
+					//ajax function
+
 				}
 			}
 

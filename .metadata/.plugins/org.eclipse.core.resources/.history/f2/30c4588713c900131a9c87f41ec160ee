@@ -56,10 +56,7 @@
 								+ '</p>'
 								+ '</div>'
 								+ '<br></form>');
-		++exshipper_tw_custom_entry_packages_labels_amount;
 		{% endfor %}
-
-		$('#exshipper_tw_custom_entry_packages_labels_amount').text(exshipper_tw_custom_entry_packages_labels_amount);
 		{% endif %}
 		
 		// change color

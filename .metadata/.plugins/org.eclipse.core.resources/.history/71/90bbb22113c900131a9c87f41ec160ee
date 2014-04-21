@@ -1,8 +1,8 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">ExShipper TW Custom Entry Packages Labels</p>
-	<p id="exshipper_tw_custom_entry_packages_labels_amount" style="font-size: 20px; color: #f00;"></p>
+	<p style="font-size: 26px;">ExShipper Packages Labels</p>
+	<p style="font-size: 20px;""></p>
 	<hr>
 </div>
 
@@ -36,7 +36,6 @@
 
 		//append type-in info to html element
 		{% if tw_custom_entry_info %}
-		var exshipper_tw_custom_entry_packages_labels_amount = 0;
 		{% for single_row_data in tw_custom_entry_info %}
 		$('#packages_info')
 				.append(
@@ -56,10 +55,7 @@
 								+ '</p>'
 								+ '</div>'
 								+ '<br></form>');
-		++exshipper_tw_custom_entry_packages_labels_amount;
 		{% endfor %}
-
-		$('#exshipper_tw_custom_entry_packages_labels_amount').text(exshipper_tw_custom_entry_packages_labels_amount);
 		{% endif %}
 		
 		// change color
