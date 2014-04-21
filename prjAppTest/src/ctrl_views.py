@@ -1142,6 +1142,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_submit_response['key'] = 'unknown_package'
                         break;
                     else:
+                        #create new tw customentry package information
                         tw_custom_entry_package = TWCustomEntryInfo.get_by_id(key)
                         if(tw_custom_entry_package == None):
                             tw_custom_entry_package = TWCustomEntryInfo(id=key)
@@ -1571,7 +1572,7 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),
-                               ('exshipper_migrate_packages_information_log', ExShipperPackagesInfoLogMigrationHandler),
+                               ('/exshipper_migrate_packages_information_log', ExShipperPackagesInfoLogMigrationHandler),
                                ('/exshipper_spearnet_index_page', ExShipperSpearnetIndexHandler),
                                ('/exshipper_spearnet_login_handler', ExShipperSpearnetLoginHandler),
                                ('/exshipper_spearnet_data_exchange_page', ExShipperSpearnetDataExchangeDispatcher),

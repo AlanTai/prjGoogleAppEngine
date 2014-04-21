@@ -41,8 +41,8 @@
 	</div>
 	<br /> <a id="xls_download" href="">Download Data in XLS Format</a> <br><br>
 	<div>
-		<input id="packages_suda_tracking_number" style="width: 200px;" placeholder="SUDA Tracking Number"/> <input id="search_suda_tracking_number"
-			type="button" value="Search" />
+		<input id="packages_suda_tracking_numbers" style="width: 200px;" placeholder="SUDA Tracking Number"/> <input id="search_suda_tracking_number"
+			type="button" value="Search" onclick="" />
 	</div>
 	<hr>
 </div>
@@ -388,20 +388,18 @@
 			}
 			
 			
-			//scroll page to show selected item
-			try{
-				$('#search_suda_tracking_number').click(function() {
-					var suda_tracking_number = $('#packages_suda_tracking_number').val();
+			$('#search_suda_tracking_number').click(function() {
+				try{
+					var suda_tracking_number = $('#packages_suda_tracking_numbers').val();
 					$('html, body').animate({
 						scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
 					}, 800);
-					$("#form_" + suda_tracking_number ).focus();
-				});
+				}
+				catch(err){
+					console.log('No such information in the SUDA tracking numbers\' array; Error Message: ' + err);
+				}
 				
-			}
-			catch(err){
-				consoe.log('No such information in the SUDA tracking numbers\' array');
-			}
+			});
 			
 		</script>
 	</div>

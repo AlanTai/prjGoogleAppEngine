@@ -1,0 +1,496 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script type="text/javascript">
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper TW Custom Entry Packages
+		Information Log</p>
+	<div style="display: block; text-align: center; width: 100%;">
+		<input type="button" value="Upload Update"
+			onclick="updatePackageStatus()" style="margin: 5px auto;">
+	</div>
+	<div style="display: block; margin: 5px auot;">
+
+		<div style="display: inline-block;">
+			<input id="mawb_fields_main_control" type="text" placeholder="MAWB">
+			<input type="button" value="Update MAWB Fields"
+				onclick="updateMawb()">
+		</div>
+
+		<div style="display: inline-block;">
+			<input id="flight_number_fields_main_control" type="text"
+				placeholder="Flight Number"> <input type="button"
+				value="Update Flight Number Fields" onclick="updateFlightNumber()">
+		</div>
+		<div style="display: inline-block;">
+			<input id="flight_date_fields_main_control" type="text"
+				placeholder="Flight Date"> <input type="button"
+				value="Update Flight Date Fields" onclick="updateFlightDate()">
+		</div>
+		<div style="display: inline-block;">
+			<select id="package_status_fields_main_control">
+				<option value="exshipper">ExShipper</option>
+				<option value="apex">Apex</option>
+				<option value="sfo_airport">SFO Airport</option>
+				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+					International Airport</option>
+				<option value="delivered">Delivered (Leader Empire Wang
+					International Company)</option>
+				<option value="NA">NA</option>
+			</select> <input type="button" value="Update Package Status Fields"
+				onclick="updatePackageStatusField()">
+		</div>
+	</div>
+	
+	<br>
+	<div>
+		<a id="xls_download" href="">Download Data in XLS Format</a>
+	</div>
+	<div>
+		<input id="tw_custom_entry_tracking_number" style="width: 250px;" placeholder="TW Custom Entry Tracking Number"/> <input id="search_tw_custom_entry_tracking_number"
+			type="button" value="Search" />
+	</div>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 230px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if tw_custom_entry_packages_info_log %}
+	<div id="tw_custom_entry_packages_info"
+		style="width: 100%; overflow: auto; border: 1px dashed #333333;">
+
+		<script type="text/javascript">
+			var tw_custom_entry_tracking_numbers_ary = new Array();
+			var packages_status = new Object();
+			var mawbs = new Object();
+			var flight_numbers = new Object();
+			var flight_dates = new Object();
+			var json_array = new Array();
+
+			//put keys into array
+			var obj_keys = new Object();
+			obj_keys['barcode_number'] = 'barcode_number';
+			obj_keys['mawb'] = 'mawb';
+
+			obj_keys['sender'] = 'sender';
+			obj_keys['receiver'] = 'receiver';
+
+			obj_keys['weight_kg'] = 'g/w(kg)';
+			obj_keys['ctn'] = 'ctn';
+
+			obj_keys['flight_number'] = 'flight_number';
+			obj_keys['flight_date'] = 'flight_date';
+
+			obj_keys['package_status'] = 'package_status';
+			obj_keys['note'] = 'note';
+
+			json_array.push(obj_keys);
+		</script>
+		{% for single_row_data in tw_custom_entry_packages_info_log %}
+		<form id="form_{{ single_row_data.barcode_number }}" style="padding: 5px 5px;">
+			<span>TW Custom Entry Barcode Number: <input type="text"
+				value="{{ single_row_data.barcode_number }}" disabled>
+			</span> <span class="tw_custom_entry_mawb">MAWB(榮儲快遞艙): <input
+				id="{{ single_row_data.barcode_number }}" type="text"
+				value="{{ single_row_data.mawb }}" />
+			</span> <span class="tw_custom_entry_sender">Sender(寄送方): <input
+				id="{{ single_row_data.barcode_number }}" type="text"
+				value="{{ single_row_data.sender }}" disabled />
+			</span> <span class="tw_custom_entry_receiver">Receiver(收件方): <input
+				id="{{ single_row_data.barcode_number }}" type="text"
+				value="{{ single_row_data.receiver }}" disabled />
+			</span> <span class="tw_custom_entry_flight_number">Flight
+				Number(班機編號): <input id="{{ single_row_data.barcode_number }}"
+				type="text" value="{{ single_row_data.flight_number }}" />
+			</span> <span class="tw_custom_entry_flight_date">Flight Date(班機日期):
+				<input id="flight_date_{{ single_row_data.barcode_number }}"
+				type="text" value="{{ single_row_data.flight_date }}" />
+			</span> <span class="tw_custom_entry_package_status">Package Status:
+				<select id="{{ single_row_data.barcode_number }}"
+				class="spearnet_customer_package_status">
+					<option value="exshipper">ExShipper</option>
+					<option value="apex">Apex</option>
+					<option value="sfo_airport">SFO Airport</option>
+					<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+						International Airport</option>
+					<option value="delivered">Delivered (Leader Empire Wang
+						International Company)</option>
+					<option value="NA">NA</option>
+			</select>
+			</span>
+
+		</form>
+
+		<script type="text/javascript">
+			$(function() {
+				//setup initial select values
+				var mawb = '{{ single_row_data.mawb }}';
+				if (mawb === 'None') {
+					mawb = 'NA';
+				}
+				;
+
+				var flight_number = '{{ single_row_data.flight_number }}';
+				if (flight_number === 'None') {
+					flight_number = 'NA';
+				}
+
+				var flight_date = '{{ single_row_data.flight_date }}';
+				if (flight_date === 'None') {
+					flight_date = 'NA';
+				}
+				;
+
+				var tw_custom_entry_package_status = '{{single_row_data.package_status}}';
+				if (tw_custom_entry_package_status === 'None') {
+					tw_custom_entry_package_status = 'NA';
+				}
+
+				$('.tw_custom_entry_mawb > input').val(mawb);
+				$('.tw_custom_entry_flight_number > input').val(flight_number);
+				$('.tw_custom_entry_flight_date > input').val(flight_date);
+				$('.tw_custom_entry_package_status > select').val(
+						tw_custom_entry_package_status);
+
+				$(
+						'.tw_custom_entry_mawb > input[id={{ single_row_data.barcode_number }}]')
+						.on('input', function() {
+							var key = $(this).attr('id');
+							/* if (typeof packages_status[key] === 'undefined'){
+								packages_status[key] = $(this).val();
+							} */
+							mawbs[key] = $(this).val();
+						});
+
+				$(
+						'.tw_custom_entry_flight_number > input[id={{ single_row_data.barcode_number }}]')
+						.on('input', function() {
+							var key = $(this).attr('id');
+							/* if (typeof packages_status[key] === 'undefined'){
+								packages_status[key] = $(this).val();
+							} */
+							flight_numbers[key] = $(this).val();
+						});
+
+				$(
+						'.tw_custom_entry_flight_date > input[id=flight_date_{{ single_row_data.barcode_number }}]')
+						.on('input', function() {
+							var key = $(this).attr('id').substring(12);
+							/* if (typeof packages_status[key] === 'undefined'){
+								packages_status[key] = $(this).val();
+							} */
+
+							flight_dates[key] = $(this).val();
+						});
+				$(
+						".tw_custom_entry_flight_date > input[id=flight_date_{{ single_row_data.barcode_number }}]")
+						.datepicker({
+							onSelect : function(dateText) {
+								var key = $(this).attr('id').substring(12);
+								flight_dates[key] = dateText;
+							}
+						});
+
+				//update json obj when select value change
+				$(
+						'.tw_custom_entry_package_status > select[id={{ single_row_data.barcode_number }}]')
+						.change(function() {
+							var key = $(this).attr('id');
+							packages_status[key] = $(this).val();
+						});
+
+				//flight_date_main_control
+				$('#flight_date_fields_main_control').datepicker();
+			});
+
+			var obj = new Object();
+			obj['barcode_number'] = '{{ single_row_data.barcode_number }}';
+			obj['mawb'] = '{{ single_row_data.mawb }}';
+
+			obj['sender'] = '{{ single_row_data.sender }}';
+			obj['receiver'] = '{{ single_row_data.receiver }}';
+
+			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
+			obj['ctn'] = '{{ single_row_data.ctn }}';
+
+			obj['flight_number'] = "{{ single_row_data.flight_number }}";
+			obj['flight_date'] = "{{ single_row_data.flight_date }}";
+
+			obj['package_status'] = "{{ single_row_data.package_status }}";
+			obj['note'] = "{{ single_row_data.note }}";
+			json_array.push(obj);
+			tw_custom_entry_tracking_numbers_ary.push('{{ single_row_data.barcode_number }}');
+		</script>
+		{% endfor %} {% else %}
+		<p>No Data Available</p>
+		{% endif %}
+
+
+		<script type="text/javascript">
+			// change color
+			$('#tw_custom_entry_packages_info> form:even').css(
+					'background-color', '#dedede');
+			$('#tw_custom_entry_packages_info> form:odd').css(
+					'background-color', '#f9f9f9');
+			// end change color
+
+			function updateMawb() {
+				var mawb = $('#mawb_fields_main_control').val().trim();
+				if (mawb === '') {
+					alert('No MAWB!');
+					$('#mawb_fields_main_control').focus();
+				} else {
+					$('.tw_custom_entry_mawb > input').each(function() {
+						var key = $(this).attr('id');
+						$(this).val(mawb);
+						mawbs[key] = mawb;
+					});
+				}
+				;
+			}
+
+			function updatePackageStatusField() {
+				var package_status = $(
+						'#package_status_fields_main_control').val();
+
+				$('.tw_custom_entry_package_status > select').each(function() {
+					$(this).val(package_status);
+					var key = $(this).attr('id');
+					packages_status[key] = $(this).val();
+				});
+			}
+
+			function updateFlightDate() {
+				var flight_date = $('#flight_date_fields_main_control').val()
+						.trim();
+				if (flight_date === '') {
+					alert('No Flight Date!');
+					$('#flight_date_fields_main_control').focus();
+				} else {
+					$('.tw_custom_entry_flight_date > input').each(function() {
+						$(this).val(flight_date);
+
+						var key = $(this).attr('id').substring(12);
+						flight_dates[key] = flight_date;
+					});
+				}
+				;
+			}
+
+			function updateFlightNumber() {
+				var flight_number = $('#flight_number_fields_main_control')
+						.val().trim();
+				if (flight_number === '') {
+					alert('No Flight Number!');
+					$('#flight_number_fields_main_control').focus();
+				} else {
+					$('.tw_custom_entry_flight_number > input').each(
+							function() {
+								$(this).val(flight_number);
+
+								var key = $(this).attr('id');
+								flight_numbers[key] = flight_number;
+							});
+				}
+				;
+			};
+
+			function updatePackageStatus() {
+				var confirm_result = confirm('Do you want to update the packages\' information?');
+
+				if (confirm_result == true) {
+					var json_obj_update_data = new Object();
+					var packages_status_length = Object.keys(packages_status).length;
+					var mawbs_length = Object.keys(mawbs).length;
+					var flight_numbers_length = Object.keys(flight_numbers).length;
+					var flight_dates_length = Object.keys(flight_dates).length;
+
+					if (packages_status_length != 0) {
+						json_obj_update_data['packages_status'] = packages_status;
+					} else {
+						json_obj_update_data['packages_status'] = 'NA';
+					}
+					if (mawbs_length != 0) {
+						json_obj_update_data['mawbs'] = mawbs;
+					} else {
+						json_obj_update_data['mawbs'] = 'NA';
+					}
+					if (flight_numbers_length != 0) {
+						json_obj_update_data['flight_numbers'] = flight_numbers;
+					} else {
+						json_obj_update_data['flight_numbers'] = 'NA';
+					}
+					if (flight_dates_length != 0) {
+						json_obj_update_data['flight_dates'] = flight_dates;
+					} else {
+						json_obj_update_data['flight_dates'] = 'NA';
+					}
+
+					if (packages_status_length != 0 || mawbs_length != 0
+							|| flight_numbers_length != 0
+							|| flight_dates_length != 0) {
+						$('#upload_cover').css({
+							'display' : 'block'
+						});
+						var json_string = JSON.stringify(json_obj_update_data,
+								2, 2);
+						$
+								.ajax(
+										'/exshipper_tw_custom_entry_packages_info_update_handler',
+										{
+											type : 'POST',
+											data : {
+												fmt : 'json',
+												update_packages_info : json_string
+											},
+											success : showMsg,
+											statusCode : {
+												400 : function() {
+													alert('400 status code! user-side error');
+													$('#upload_cover').css({
+														'display' : 'none'
+													});
+												},
+												500 : function() {
+													alert('500 status code! server-side error');
+													$('#upload_cover').css({
+														'display' : 'none'
+													});
+												}
+											}
+										});
+					} else {
+						alert('Nothing needs to be updated!');
+						$('#upload_cover').css({
+							'display' : 'none'
+						});
+					}
+				}
+			}
+
+			function showMsg(return_msg) {
+				alert(return_msg.update_status);
+				$('#upload_cover').css({
+					'display' : 'none'
+				});
+			}
+			
+			
+			//autocomplete
+			$("#tw_custom_entry_tracking_number").autocomplete({
+				source : tw_custom_entry_tracking_numbers_ary
+			});
+			//end
+			
+			//scroll page to show selected item
+			try{
+				var element_top = $("#form_" + suda_tracking_number ).offset().top
+				if(typeof element_top !== 'undefined'){
+					$('#search_tw_custom_entry_tracking_number').click(function() {
+						var suda_tracking_number = $('#tw_custom_entry_tracking_number').val();
+						$('html, body').animate({
+							scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
+						}, 800);
+						$("#form_" + suda_tracking_number ).focus();
+					});
+				}
+			}
+			catch(err){
+				consoe.log('No such information in the SUDA tracking numbers\' array');
+			}
+			
+		</script>
+	</div>
+
+	<script type="text/javascript">
+		//Test script to generate a file from JavaScript such
+		//that MS Excel will honor non-ASCII characters.
+
+		var obj_types = new Object();
+		obj_types.barcode_number = "String";
+		obj_types.mawb = "String";
+
+		obj_types.sender = "String";
+		obj_types.receiver = "String";
+
+		obj_types.weight_kg = "String";
+		obj_types.ctn = "String";
+
+		obj_types.flight_number = "String";
+		obj_types.flight_date = "String";
+
+		obj_types.package_status = "String";
+		obj_types.note = "String";
+
+		testJson = json_array;
+		testTypes = obj_types;
+
+		emitXmlHeader = function() {
+			return '<?xml version="1.0"?>\n'
+					+ '<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
+					+ '<ss:Worksheet ss:Name="Sheet1">\n' + '<ss:Table>\n\n';
+		};
+
+		emitXmlFooter = function() {
+			return '\n</ss:Table>\n' + '</ss:Worksheet>\n' + '</ss:Workbook>\n';
+		};
+
+		jsonToSsXml = function(jsonObject) {
+			var row;
+			var col;
+			var xml;
+			var data = typeof jsonObject != "object" ? JSON.parse(jsonObject)
+					: jsonObject;
+
+			xml = emitXmlHeader();
+
+			for (row = 0; row < data.length; row++) {
+				xml += '<ss:Row>\n';
+
+				for (col in data[row]) {
+					xml += '  <ss:Cell>\n';
+					xml += '    <ss:Data ss:Type="' + testTypes[col]  + '">';
+					xml += data[row][col] + '</ss:Data>\n';
+					xml += '  </ss:Cell>\n';
+				}
+
+				xml += '</ss:Row>\n';
+			}
+
+			xml += emitXmlFooter();
+			return xml;
+		};
+
+		console.log(jsonToSsXml(testJson));
+
+		download = function(content, filename, contentType) {
+			if (!contentType)
+				contentType = 'application/octet-stream';
+			var a = document.getElementById('xls_download');
+			var blob = new Blob([ content ], {
+				'type' : contentType
+			});
+			a.href = window.URL.createObjectURL(blob);
+			a.download = filename;
+		};
+
+		var current_time = new Date();
+		var file_name = 'tw_custom_entry_packages_info_'
+				+ current_time.getFullYear() + (current_time.getMonth() + 1)
+				+ current_time.getDate() + current_time.getHours()
+				+ current_time.getMinutes() + current_time.getSeconds()
+				+ '.xls'
+		download(jsonToSsXml(testJson), file_name,
+				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	</script>
+</div>
+
+{% endblock %}
