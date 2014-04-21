@@ -59,7 +59,7 @@
 		++exshipper_tw_custom_entry_packages_labels_amount;
 		{% endfor %}
 
-		$('#exshipper_tw_custom_entry_packages_labels_amount').text('Amount of Tw Custom Entry Packages- ' + exshipper_tw_custom_entry_packages_labels_amount);
+		$('#exshipper_tw_custom_entry_packages_labels_amount').text(exshipper_tw_custom_entry_packages_labels_amount);
 		{% endif %}
 		
 		// change color
