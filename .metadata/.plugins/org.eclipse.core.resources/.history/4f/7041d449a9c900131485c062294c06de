@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta name="author" content="Alan Tai">
+<meta name="company" content="exshipper">
+<meta name="page_tag" content="invoice">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+
+<link type="text/css" rel="stylesheet"
+	href="/css/exshipper/css_exshipper.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+{% block css_content %}
+{% endblock %}
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/js/exshipper/jquery-barcode.js"></script>
+<script type="text/javascript" src="/js/exshipper/jquery-print.js"></script>
+<script type="text/javascript" src="/js/exshipper/js_exshipper.js"></script>
+<script type="text/javascript" src="/js/exshipper/jquery.print.js"></script>
+
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+{% block js_content %}
+{% endblock %}
+
+<title>{{ title }}</title>
+</head>
+<body>
+    <!-- Processing Cover -->
+	<div id="upload_cover" style=" position: fixed ; top:0px; left:0px; width: 100%; height: 100%; z-index: 1000; text-align: center; color:#f00; background-color: #fff; opacity:0.9; display: none;"> <p style=" position:absolute ; opacity:1; color: #f00; width: 100%; margin: 100px auto;">Processing</p></div>
+	{% block main_content %}
+	<p>NO Templates Found</p>
+	{% endblock %}
+</body>
+</html>
