@@ -934,7 +934,7 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                 json_obj_notes = json_obj['notes']
                 
                 if(json_obj_tw_custom_entry_number != 'NA'):
-                    for key in json_obj_tw_custom_entry_number:
+                    for key in json_obj_package_status:
                         package_entity = SpearnetPackagesInfo.get_by_id(key)
                         package_entity.tw_custom_entry_number = json_obj_tw_custom_entry_number[key]
                         if(package_entity.access_info != None):

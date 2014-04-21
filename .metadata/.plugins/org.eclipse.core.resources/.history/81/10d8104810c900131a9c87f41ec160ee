@@ -933,23 +933,6 @@ class ExShipperSpearnetCustomerPackageInfoUpdateHandler(webapp2.RequestHandler):
                 json_obj_clients_signature = json_obj['clients_signature']
                 json_obj_notes = json_obj['notes']
                 
-                if(json_obj_tw_custom_entry_number != 'NA'):
-                    for key in json_obj_tw_custom_entry_number:
-                        package_entity = SpearnetPackagesInfo.get_by_id(key)
-                        package_entity.tw_custom_entry_number = json_obj_tw_custom_entry_number[key]
-                        if(package_entity.access_info != None):
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            old_access_info = package_entity.access_info
-                            old_access_info_dict = json.loads(old_access_info)
-                            person = ''
-                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
-                            package_entity.access_info = json.dumps(old_access_info_dict)
-                        else:
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-                            package_entity.access_info = json.dumps(new_access_info)
-                        
-                        package_entity.put()
                 
                 if(json_obj_package_status != 'NA'):
                     for key in json_obj_package_status:

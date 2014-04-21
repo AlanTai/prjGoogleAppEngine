@@ -162,10 +162,11 @@
 						.val(note);
 
 				//update json obj when select value change
-				$('.spearnet_customers_tw_custom_entry_number > input[id={{ single_row_data.hawb }}]').on('input', function(){
+				$('.spearnet_customers_tw_custom_entry_number > input[id={{ single_row_data.hawb }}]').change(function(){
 					var key = $(this).attr('id');
 					tw_custom_entry_numbers[key] = $(this).val();
 				});
+				
 				
 				
 				$(
