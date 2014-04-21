@@ -1,4 +1,14 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script type="text/javascript">
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	}
+</script>
+
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">Create Client Information</p>
@@ -10,7 +20,7 @@
 
 	<div id="client_info_div">
 		<!--  -->
-		<form action="/exshipper_general_clients_create_client_info_handler" method="post"
+		<form action="/exshipper_create_client_info_handler" method="post"
 			enctype="multipart/form-data" name="client_info" id="client_info"
 			onsubmit="return upload()"
 			style="margin: 5px auto; text-align: center;">
@@ -219,7 +229,7 @@
 			});
 			$
 					.ajax(
-							'/exshipper_general_clients_validate_client_account_name_email',
+							'/exshipper_validate_client_account_name_email',
 							{
 								type : 'POST',
 								data : {

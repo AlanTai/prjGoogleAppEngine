@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;prjExShipper/src/static/javascript/exshipper/jquery-barcode.min.js&apos;" deleteContents="false" description="Delete resource &apos;prjExShipper/src/static/javascript/exshipper/jquery-barcode.min.js&apos;" element1="/prjExShipper/src/static/javascript/exshipper/jquery-barcode.min.js" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1398060906103"/>
+</session>

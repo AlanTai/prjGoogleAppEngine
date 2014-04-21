@@ -35,10 +35,9 @@
 							style="width: 250px; display: inline-block; padding: 2px 5px;"
 							required="required" />
 					</div>
-					
+
 					<div>
-						<input type="button"
-							value="Check Availability of Account Name"
+						<input type="button" value="Check Availability of Account Name"
 							onclick="checkAvailabilityOfAccountName()"
 							style="display: inline-block;" />
 						<p id="account_name_validation_response"
@@ -48,13 +47,12 @@
 				<br>
 
 				<!-- Email -->
-					<div>
-						<label style="width: 430px; display: inline-block;">
-							Email: </label> <input title="Email" name="employee_email"
-							id="employee_email"
-							style="width: 250px; display: inline-block; padding: 2px 5px;"
-							required="required" />
-					</div>
+				<div>
+					<label style="width: 430px; display: inline-block;"> Email:
+					</label> <input title="Email" name="employee_email" id="employee_email"
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
+				</div>
 
 				<!-- Password Name -->
 				<div>
@@ -69,10 +67,22 @@
 				<!-- Client Info -->
 				<!-- Job Title -->
 				<div>
-					<label style="width: 430px; display: inline-block;">Job Title: </label> <input
-						title="First Name" name="employee_job_title"
+					<label style="width: 430px; display: inline-block;">Job
+						Title: </label> <input title="First Name" name="employee_job_title"
 						id="employee_job_title" type="text"
-						style="width: 250px; display: inline-block; padding: 2px 5px;" required="required" />
+						style="width: 250px; display: inline-block; padding: 2px 5px;"
+						required="required" />
+				</div>
+
+				<div>
+					<label style="width: 430px; display: inline-block;">Access
+						Level: </label> <select title="Access Level" name="employee_access_level"
+						id="employee_access_level"
+						style="width: 250px; display: inline-block; padding: 2px 5px;">
+						<option value="general">General Level</option>
+						<option value="manager">Manager Level</option>
+						<option value="admin">Administrator</option>
+					</select>
 				</div>
 
 				<!-- Client Info -->
@@ -97,8 +107,8 @@
 				<!-- Address -->
 				<div>
 					<label style="width: 430px; display: inline-block;">Address:
-					</label> <input title="Address" name="employee_address" id="employee_address"
-						type="text"
+					</label> <input title="Address" name="employee_address"
+						id="employee_address" type="text"
 						style="width: 250px; display: inline-block; padding: 2px 5px;"
 						required="required" />
 				</div>
@@ -162,9 +172,10 @@
 	<script type="text/javascript">
 		/**/
 		var availability_account_name = false;
-		
+
 		function checkAvailabilityOfAccountName() {
-			var employee_account_name = $('#employee_account_name').val().trim();
+			var employee_account_name = $('#employee_account_name').val()
+					.trim();
 
 			if (employee_account_name === '') {
 				alert('No account name');
@@ -175,7 +186,7 @@
 			$('#upload_cover').css({
 				'display' : 'block'
 			});
-			
+
 			//start ajax
 			$
 					.ajax(
@@ -212,7 +223,7 @@
 				$('#account_name_validation_response').text(
 						response.validation_response);
 				$('#employee_account_name').focus();
-			}else if (response.validation_status === 'valid') {
+			} else if (response.validation_status === 'valid') {
 				availability_account_name = true;
 				$('#account_name_validation_response').text(
 						response.validation_response);
@@ -242,16 +253,18 @@
 			$('#birthday_day').find('option').remove().end();
 			for (i = 1; i <= daysInMonth(month, year); i++) {
 				$('#birthday_day').append($('<option />').val(i).html(i));
-			};
+			}
+			;
 		});
-		
+
 		$('#birthday_month').change(function() {
 			$('#birthday_day').find('option').remove().end();
 			var year = $('#birthday_year').val()
 			var month = $('#birthday_month').val()
 			for (i = 1; i <= daysInMonth(month, year); i++) {
 				$('#birthday_day').append($('<option />').val(i).html(i));
-			};
+			}
+			;
 		});
 
 		$(function() {
@@ -330,7 +343,7 @@
 		var upload = function() {
 			var isInfoValid = true;
 			var blank_field = 'Blank Field(s):\n';
-			$('#client_info').find('input').each(function(i) {
+			$('#employee_info').find('input').each(function(i) {
 				if ($(this).attr('type') === 'text' && $(this).val() === '') {
 					blank_field = blank_field + $(this).attr('title') + '\n';
 					isInfoValid = false;

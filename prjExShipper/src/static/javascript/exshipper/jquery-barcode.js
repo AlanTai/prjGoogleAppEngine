@@ -22,7 +22,7 @@
       barHeight: 50,
       moduleSize: 5,
       showHRI: true,
-      addQuietZone: true,
+      addQuietZone: false,
       marginHRI: 5,
       bgColor: "#FFFFFF",
       color: "#000000",
