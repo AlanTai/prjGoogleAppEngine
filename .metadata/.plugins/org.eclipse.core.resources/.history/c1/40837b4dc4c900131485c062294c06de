@@ -152,10 +152,10 @@
 			parseCSV(output, '\n', ',');
 		}
 		//show data structure on screen
-		if (out.innerText === undefined)
+		/* if (out.innerText === undefined)
 			out.textContent = output;
 		else
-			out.innerText = output;
+			out.innerText = output; */
 	}
 
 	//parse csv

@@ -687,10 +687,8 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
             if(self.request.get('fmt') == 'json'):
                 json_obj = json.loads(self.request.get('packages_data'))
                 packages_array = json_obj['spearnet_invoice']
-                is_hawb_blank = True
-                duplication = True
                 for package in packages_array:
-                    if(package['hawb'] == ''):
+                    if(package['hawb'] != ''):
                         is_hawb_blank = True
                         ajax_data['spearnet_packages_info_upload_status'] = 'One hawb field is blank!'
                         ajax_data['print_action']='off'

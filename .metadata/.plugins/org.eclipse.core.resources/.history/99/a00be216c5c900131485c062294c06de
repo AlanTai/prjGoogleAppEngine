@@ -253,8 +253,8 @@
 		var confirm_result = confirm('Do you want to save the data into database and print out package\'s labels?');
 		if (confirm_result == true) {
 			//turn on upload cover
-			$('#upload_cover').css({'display':'block'});
-			saveDataIntoDatabase(info,rows_info, row_keys);
+			//$('#upload_cover').css({'display':'block'});
+			//saveDataIntoDatabase(info,rows_info, row_keys);
 		}
 	}
 

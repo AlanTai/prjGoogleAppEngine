@@ -687,26 +687,17 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
             if(self.request.get('fmt') == 'json'):
                 json_obj = json.loads(self.request.get('packages_data'))
                 packages_array = json_obj['spearnet_invoice']
-                is_hawb_blank = True
-                duplication = True
                 for package in packages_array:
-                    if(package['hawb'] == ''):
-                        is_hawb_blank = True
-                        ajax_data['spearnet_packages_info_upload_status'] = 'One hawb field is blank!'
-                        ajax_data['print_action']='off'
-                        break
-                    else:
-                        is_hawb_blank = False
                     query_result = SpearnetPackagesInfo.get_by_id(package['hawb'])
                     if(query_result):
                         duplication = True;
-                        ajax_data['spearnet_packages_info_upload_status']='You have a duplicated tracking number and please replace it with a new tracking number- %s.' % query_result.hawb
+                        ajax_data['spearnet_packages_info_upload_status']='You have a duplicated tracking number and please replace it with a new tracking number!'
                         ajax_data['print_action']='off'
                         break;
                     else:
                         duplication = False;
                         
-                if(duplication == False and is_hawb_blank == False):
+                if(duplication == False):
                     for package in packages_array:
                         new_package = SpearnetPackagesInfo(id=package['hawb'])
                         new_package.reference_number = package['reference_number']
@@ -1583,7 +1574,6 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 new_spearnet_package_log.update_date_time = spearnet_package_info_entity.update_date_time
                 
                 new_spearnet_package_log.put()
-                
         
         self.response.write('Cron Task Done')
         
