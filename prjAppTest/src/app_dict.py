@@ -39,7 +39,6 @@ class Key_Value():
         self.exshipper_suda_tracking_number_upload_handler_page = '/exshipper/exshipper_suda_tracking_number_upload_handler.html'
         self.exshipper_suda_tracking_number_upload_handler_page_title = 'ExShipper SUDA Tracking Number Upload Handler'
         
-        
         self.exshipper_packages_labels_page = '/exshipper/exshipper_packages_labels.html'
         self.exshipper_packages_labels_page_title = 'ExShipper Packages Labels'
         
@@ -71,14 +70,19 @@ class Key_Value():
         #spearnet
         self.exshipper_spearnet_index_page = '/exshipper/exshipper_spearnet_index.html'
         self.exshipper_spearnet_index_page_title = 'ExShipper Spearnet Index Page'
+        
         self.exshipper_spearnet_data_exchange_page = '/exshipper/exshipper_spearnet_data_exchange_page.html'
-        self.exshipper_spearnet_data_exchange_page_title = 'ExShipper SpearNet Data Exchange Page'
+        self.exshipper_spearnet_data_exchange_page_title = 'ExShipper Spearnet Data Exchange Page'
+        
+        self.exshipper_spearnet_packages_labels_page = '/exshipper/exshipper_spearnet_packages_labels.html'
+        self.exshipper_spearnet_packages_labels_page_title = 'Spearnet Current Packages Labels'
              
         self.exshipper_spearnet_login_page = '/exshipper/exshipper_spearnet_login.html'
         self.exshipper_spearnet_login_page_title = 'ExShipper Spearnet Login Page'
              
         self.exshipper_spearnet_xls_page = '/exshipper/exshipper_xls_parser.html'
         self.exshipper_spearnet_xls_title = 'XLS Parser'
+        
         self.exshipper_spearnet_xlsx_page = '/exshipper/exshipper_xlsx_parser.html'
         self.exshipper_spearnet_xlsx_title = 'XLSX Parser'
              
@@ -90,6 +94,7 @@ class Key_Value():
              
         self.exshipper_spearnet_customer_index_page = '/exshipper/exshipper_spearnet_customer_index.html'
         self.exshipper_spearnet_customer_index_page_title = 'Spearnet Customer Page'
+        
         self.exshipper_spearnet_customer_services_handler_page = '/exshipper/exshipper_spearnet_customer_services.html'
         self.exshipper_spearnet_customer_services_handler_page_title = 'ExShipper Spearnet Customer Services'
              

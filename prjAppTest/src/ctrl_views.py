@@ -570,7 +570,6 @@ class ExShipperTWCustomEntryNumberHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         
     def post(self):
-        tw_custom_entry_number = ''
         ajax_data = {'tw_custom_entry_number_submission':'NA'}
         if(self.request.get('fmt') == 'json'):
             #get jsonObj from client side
@@ -648,6 +647,15 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
             html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
             
             template_values.update(user_info)
+            template = jinja_environment.get_template(html_page)
+            self.response.out.write(template.render(template_values))
+            
+        elif(dispatch_token == 'exshipper_spearnet_packages_labels' and spearnet_account == 'spearnet' and spearnet_password == '1941spearnet'):
+            html_page = my_dict.exshipper_packages_labels_page
+            html_page_title = my_dict.exshipper_packages_labels_page_title
+            spearnet_packages_info = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'spearnet')
+            
+            template_values.update({'spearnet_packages_info':spearnet_packages_info})
             template = jinja_environment.get_template(html_page)
             self.response.out.write(template.render(template_values))
         else:

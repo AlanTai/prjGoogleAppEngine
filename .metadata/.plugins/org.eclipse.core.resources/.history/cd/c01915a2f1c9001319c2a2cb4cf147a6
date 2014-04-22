@@ -1,0 +1,143 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Spearnet Packages Labels</p>
+	<hr>
+</div>
+
+
+
+<div id="print_area" style="text-align: center; margin: 0px auto; top: 150px;">
+	<div
+		style="border: 1px thin; border-color: #666; display: block; margin: 10px">
+		<p>Packages Information</p>
+		<div id="spearnet_packages_info"
+			style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed; z-index: 100"></div>
+		<br>
+	</div>
+
+	<div style="border-color: #666; display: block; margin: 10px;">
+		<input id="spearnet_print_label" type="button" value="Print Labels"
+			onclick="PrintElem('#packages_labels','Packages Labels')"
+			style="margin: 10px auto; width: 150px; z-index: 5">
+		<div id="spearnet_packages_labels"
+			style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed; z-index: 5"></div>
+	</div>
+</div>
+<br>
+{% if spearnet_packages_info %} {% for single_row_data in spearnet_packages_info %}
+<script type="text/javascript">
+	$('#spearnet_packages_info')
+			.append(
+					'<form name="'
+							+ "{{ single_row_data.hawb }}"
+							+ '">'
+							+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
+							+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
+							+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '
+							+ "{{ single_row_data.hawb }}"
+							+ '</p>'
+							+ '<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '
+							+ "{{ single_row_data.reference_number }}"
+							+ '</p>'
+							+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
+							+ "{{single_row_data.shipper_company}}"
+							+ '</p>'
+							+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
+							+ "{{single_row_data.consignee_name_english}}"
+							+ '</p>'
+							+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '
+							+ "{{single_row_data.consignee_name_chinese}}"
+							+ '</p>'
+							+ '<p style="display: inline-block; margin: 0px 5px;"> Address: '
+							+ "{{single_row_data.consignee_address_english}}"
+							+ '</p>'
+							+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
+							+ "{{single_row_data.consignee_phone_number}}"
+							+ '</p>' + '</div>' + '<br></form>');
+</script>
+{% endfor %} {% endif %}
+
+{% if spearnet_packages_info %} {% for single_row_data in
+spearnet_packages_info %}
+<script type="text/javascript">
+	$('#spearnet_packages_labels')
+			.append(
+					'<form id="label_'
+							+ "{{single_row_data.hawb}}"
+							+ '" style="border: 1px solid; width: 320px; margin: 10px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
+							+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 寄件者: '
+							+ "{{single_row_data.shipper_company}}"
+							+ '</p>'
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 地址: '
+							+ "{{single_row_data.shipper_address_english}}"
+							+ '</p>'
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 電話: '
+							+ "{{single_row_data.shipper_tel}}"
+							+ '</p>'
+							+ '<hr>'
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 收件者: '
+							+ "{{single_row_data.consignee_name_chinese}}"
+							+ '</p>'
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 地址: '
+							+ "{{single_row_data.consignee_address_chinese}}"
+							+ '</p>'
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 電話: '
+							+ "{{single_row_data.consignee_tel}}"
+							+ '</p>'
+							+ '<hr>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">Ref. NO. '
+							+ "{{single_row_data.reference_number}}"
+							+ '</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">'
+							+ "{{single_row_data.weight_kg}}"
+							+ ' (kg)</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">易碎</p>'
+							+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">配送方式: '
+							+ "{{single_row_data.note}}"
+							+ '</p>'
+							+ '<hr>'
+							+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center; font-size: 13px;">追蹤碼(SUDA/統一速達)</div>'
+							+ '<div class="barcode" id="barcode_'
+							+ "{{single_row_data.hawb}}"
+							+ '" style="margin: 2px auto; text-align:center; display: block;"></div>'
+							+ '</form>');
+
+	$(
+			'#spearnet_packages_labels> form[id="label_'
+					+ "{{single_row_data.hawb}}" + '"]').find(
+			'div#barcode_' + "{{single_row_data.hawb}}").barcode(
+			"{{single_row_data.hawb}}", 'code39', {
+				barWidth : 2,
+				barHeight : 45,
+				fontSize : 13
+			});
+</script>
+
+{% endfor %} {% endif %}
+
+<script type="text/javascript">
+	$('#spearnet_packages_info> form:even').css('background-color', '#dedede');
+	$('#spearnet_packages_info> form:odd').css('background-color', '#f9f9f9');
+
+	function selectOrRemove(elem) {
+		var select_status = $(elem).find('input').attr('value');
+		var elem_name = $(elem).attr('name');
+		if (select_status === 'Remove') {
+			$(elem).find('input').val('Select');
+			$('#spearnet_packages_labels> form[id="label_' + elem_name + '"]')
+					.css({
+						'display' : 'none'
+					});
+		} else {
+			$(elem).find('input').val('Remove');
+			$('#spearnet_packages_labels> form[id="label_' + elem_name + '"]')
+					.css({
+						'display' : 'inline-block'
+					});
+		}
+	}
+</script>
+
+{% endblock %}
