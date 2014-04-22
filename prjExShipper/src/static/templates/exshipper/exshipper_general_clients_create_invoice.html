@@ -656,7 +656,7 @@
 								+ reference_number
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
-								+ shipper_company
+								+ shipper_person
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
 								+ consignee_name_english
@@ -665,7 +665,7 @@
 								+ consignee_name_chinese
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Address: '
-								+ consignee_address_english
+								+ consignee_address_chinese
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
 								+ consignee_phone_number
@@ -682,8 +682,8 @@
 						'<form id="label_'
 							+ suda_tr_number
 							+ '" style="border: 1px solid; width: 450px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
-								+ '<p style="display: block; margin: 0px auto;"> 寄件者: '
-								+ shipper_company
+								+ '<p style="display: block; margin: 0px auto;"> 寄件者(公司): '
+								+ shipper_person + '(' + shipper_company + ')'
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 地址: '
 								+ shipper_address_english
@@ -696,7 +696,7 @@
 								+ consignee_name_chinese
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 地址: '
-								+ consignee_address_english
+								+ consignee_address_chinese
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px;"> 電話: '
 								+ consignee_phone_number

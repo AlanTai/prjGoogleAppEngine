@@ -28,7 +28,7 @@
 		
 		{% if flight_date %}<span>Flight Date: {{ flight_date }}</span> {% else %} <span>Flight Date: NA</span> {% endif %}
 			
-		{% if mawb %}<span>MAWB : {{ mawb }}</span> {% else %} <span>Mawb: NA</span> {% endif %}
+		{% if mawb %}<span>MAWB: {{ mawb }}</span> {% else %} <span>Mawb: NA</span> {% endif %}
 	</p>
 	<p>
 		{% if sender %}<span>From: {{ sender }}</span> {% else %} <span>From: NA</span> {% endif %}
