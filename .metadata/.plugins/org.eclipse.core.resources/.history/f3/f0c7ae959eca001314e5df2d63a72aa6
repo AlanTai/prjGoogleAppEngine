@@ -650,8 +650,8 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_spearnet_packages_labels_page
             html_page_title = my_dict.exshipper_spearnet_packages_labels_page_title
             spearnet_packages_info = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'spearnet')
-            template_values.update({'spearnet_packages_info':spearnet_packages_info})
             
+            template_values.update({'spearnet_packages_info':spearnet_packages_info})
         else:
             html_page = my_dict.exshipper_invalid_login_page
             html_page_title = my_dict.exshipper_invalid_login_page_title

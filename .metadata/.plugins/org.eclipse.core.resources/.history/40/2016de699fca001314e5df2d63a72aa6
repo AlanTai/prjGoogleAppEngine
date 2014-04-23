@@ -85,7 +85,7 @@
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="margin: 10px 10px;"> 包裹速達追蹤碼(SUDA Tracking Numbers):</p>'
-								+ '<p id="suda_numbers_{{single_row_data.barcode_number}}" style="margin: 10px 10px; height: 90px;" ></p>'
+								+ '<p id="suda_numbers_{{single_row_data.barcode_number}}" style="margin: 10px 10px;" ></p>'
 								+ '<hr>'
 								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">台灣報關行追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'

@@ -222,6 +222,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		{% endfor %}
 		{% endif %}
 
+		
 	function selectOrRemove(elem) {
 		var select_status = $(elem).find('input').attr('value');
 		var elem_name = $(elem).attr('name');
@@ -236,9 +237,6 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 				'display' : 'inline-block'
 			});
 		}
-
-		/* remove element */
-		// $(elem).remove();
 	}
 </script>
 
