@@ -87,7 +87,7 @@ function displayHTML(form) {
 					+ inf + '<hr><p>End</p>');
 }
 
-//add single quote slash
+//
 if(!String.prototype.addSlasches){
    String.prototype.addSlashes = function(){
 	   return this.replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
@@ -96,8 +96,6 @@ if(!String.prototype.addSlasches){
 else{
 	alert("Warning: String.addSlasches has already been declared by someone else!");
 }
-
-
 
 
 
