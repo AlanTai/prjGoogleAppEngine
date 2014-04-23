@@ -103,6 +103,7 @@
 			<span class="general_clients_package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}"
 					class="package_status">
+						<option value="spearnet">Spearnet</option>
 						<option value="pickup">Pick Up</option>
 						<option value="exshipper">ExShipper</option>
 						<option value="apex">Apex</option>

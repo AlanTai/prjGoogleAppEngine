@@ -73,9 +73,9 @@
 										.append(
 												'<p><span style="font-weight: bold;">Item-'
 														+ (ith + 1)
-														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 350px;"/></span>'
-														+ '<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" /></span>'
-														+ '<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" /></span>'
+														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+														+ '<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+														+ '<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
 														+ '<span> Subtotal: <input value = "$'
 														+ Number(obj.quan)
 														* Number(obj.price)
@@ -141,7 +141,7 @@
 										.append(
 												'<p><span style="font-weight: bold;">Item-'
 														+ (ith + 1)
-														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 350px;"/></span>'
+														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 250px;"/></span>'
 														+ '<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;"/></span>'
 														+ '<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;"/></span>'
 														+ '<span> Subtotal: <input value = "$'

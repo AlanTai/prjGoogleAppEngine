@@ -39,7 +39,7 @@
 
 			$('#spearnet_packages_invoice_log')
 					.append(
-							'<form style="width:1000px; height: 1300px; margin: 20px auto; border: 1px solid; display:inline-block; text-align: center;">'
+							'<form style="width:1100px; height: 1350px; margin: 20px auto; border: 1px solid; display:inline-block; text-align: center;">'
 									+ '<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'
 									+ '<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 									+ '<p style="font-weight:bold; font-size:15px;">Client Signature ({{single_row_data.shipper_company | title}})</p>'
@@ -73,9 +73,9 @@
 										.append(
 												'<p><span style="font-weight: bold;">Item-'
 														+ (ith + 1)
-														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 350px;"/></span>'
-														+ '<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" /></span>'
-														+ '<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" /></span>'
+														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+														+ '<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+														+ '<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
 														+ '<span> Subtotal: <input value = "$'
 														+ Number(obj.quan)
 														* Number(obj.price)
@@ -107,7 +107,7 @@
 
 			$('#general_clients_packages_invoice_log')
 					.append(
-							'<form style="width:1000px; height: 1300px; margin: 20px auto; border: 1px solid; display:inline-block; text-align: center;">'
+							'<form style="width:1100px; height: 1450px; margin: 20px auto; border: 1px solid; display:inline-block; text-align: center;">'
 									+ '<p style="font-weight:bold; font-size:20px;">ExShipper Shipping Invoice Document</p>'
 									+ '<p style="font-weight:bold; font-size:18px;">Shipper\'s Information</p>'
 									+ '<p style="font-weight:bold; font-size:15px;">Client Signature ({{single_row_data.shipper_person | title}})</p>'
@@ -141,9 +141,9 @@
 										.append(
 												'<p><span style="font-weight: bold;">Item-'
 														+ (ith + 1)
-														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 350px;"/></span>'
-														+ '<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;"/></span>'
-														+ '<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;"/></span>'
+														+ '</span> <span> Commodity Name: <input value = "'+obj.name+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center;" ; disabled/></span>'
+														+ '<span> Quantity: <input value = "'+obj.quan+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
+														+ '<span> Unit Price: <input value = "$'+obj.price+'" ; style="color:#000; background-color:#fff; border:1px solid; text-align:center; width: 50px;" ; disabled/></span>'
 														+ '<span> Subtotal: <input value = "$'
 														+ Number(obj.quan)
 														* Number(obj.price)
