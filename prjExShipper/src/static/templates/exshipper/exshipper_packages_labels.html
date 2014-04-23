@@ -7,7 +7,7 @@
 
 
 <div id="package_labels_container"
-	style="position: absolute; top: 100px; text-align: center; width: 100%; z-index: 1;">
+	style="position: absolute; top: 130px; text-align: center; width: 100%; z-index: 1;">
 	
 	
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
@@ -223,6 +223,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		{% endif %}
 
 		
+	//onclick
 	function selectOrRemove(elem) {
 		var select_status = $(elem).find('input').attr('value');
 		var elem_name = $(elem).attr('name');
@@ -237,6 +238,45 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 				'display' : 'inline-block'
 			});
 		}
+	}
+
+	//remove labels
+	$(function(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Select');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'none'
+			});
+		});
+	});
+	
+	//show all labels
+	function showAllLabels(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Remove');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'block'
+			});
+		});
+	}
+	
+	//remove all labels
+	function removeAllLabels(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Select');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'none'
+			});
+		});
 	}
 </script>
 

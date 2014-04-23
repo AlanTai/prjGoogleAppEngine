@@ -647,8 +647,8 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
             html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
             
         elif(dispatch_token == 'exshipper_spearnet_packages_labels' and spearnet_account == 'spearnet' and spearnet_password == '1941spearnet'):
-            html_page = my_dict.exshipper_packages_labels_page
-            html_page_title = my_dict.exshipper_packages_labels_page_title
+            html_page = my_dict.exshipper_spearnet_packages_labels_page
+            html_page_title = my_dict.exshipper_spearnet_packages_labels_page_title
             spearnet_packages_info = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'spearnet')
             template_values.update({'spearnet_packages_info':spearnet_packages_info})
             

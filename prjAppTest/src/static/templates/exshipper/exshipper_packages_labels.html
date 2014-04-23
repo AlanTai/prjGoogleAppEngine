@@ -2,12 +2,13 @@
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Packages Labels</p>
+	<input type="button" value="Show All Labels" onclick="showAllLabels()" > <input type="button" value="Remove All Labels" onclick="removeAllLabels()" >
 	<hr>
 </div>
 
 
 <div id="package_labels_container"
-	style="position: absolute; top: 100px; text-align: center; width: 100%; z-index: 1;">
+	style="position: absolute; top: 130px; text-align: center; width: 100%; z-index: 1;">
 	
 	
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
@@ -220,6 +221,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		{% endfor %}
 		{% endif %}
 
+	//onclick
 	function selectOrRemove(elem) {
 		var select_status = $(elem).find('input').attr('value');
 		var elem_name = $(elem).attr('name');
@@ -234,9 +236,45 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 				'display' : 'inline-block'
 			});
 		}
-
-		/* remove element */
-		// $(elem).remove();
+	}
+	
+	//remove labels
+	$(function(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Select');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'none'
+			});
+		});
+	});
+	
+	//show all labels
+	function showAllLabels(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Remove');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'block'
+			});
+		});
+	}
+	
+	//remove all labels
+	function removeAllLabels(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Select');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'none'
+			});
+		});
 	}
 </script>
 
