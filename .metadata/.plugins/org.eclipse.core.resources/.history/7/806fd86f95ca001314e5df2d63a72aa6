@@ -748,7 +748,6 @@
 		$('#upload_cover').css({
 			'display' : 'none'
 		});
-		$('#id_commodity_detail').empty();
 	}
 
 	function selectOrRemove(elem) {

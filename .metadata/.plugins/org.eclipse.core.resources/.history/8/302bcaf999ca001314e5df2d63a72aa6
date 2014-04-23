@@ -254,8 +254,9 @@
 		var confirm_result = confirm('Do you want to save the data into database and print out package\'s labels?');
 		if (confirm_result == true) {
 			//turn on upload cover
-			$('#upload_cover').css({'display':'block'});
-			saveDataIntoDatabase(info,rows_info, row_keys);
+			//$('#upload_cover').css({'display':'block'});
+			//saveDataIntoDatabase(info,rows_info, row_keys);
+			createLabels(rows_info, row_keys);
 		}
 	}
 
@@ -354,14 +355,14 @@
 									+ rows[ith]['consignee_tel']
 									+ '</p>'
 									+ '<hr>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 15px; ">'
 									+ rows[ith]['reference_number']
 									+ '</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 15px; ">'
 									+ rows[ith]['g/w(kg)']
 									+ ' (kg)</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">易碎</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">配送方式: 常溫</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 15px; ">易碎</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 15px; ">配送方式: 常溫</p>'
 									+ '<hr>'
 									+ '<div class="barcode_title" style="display: block; margin: 5px auto; text-align:center; font-size: 12px; ">追蹤碼(SUDA/統一速達)</div>'
 									+ '<div class="barcode" id="shipping_barcode_'

@@ -354,16 +354,16 @@
 									+ rows[ith]['consignee_tel']
 									+ '</p>'
 									+ '<hr>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">Ref. NO. '
 									+ rows[ith]['reference_number']
 									+ '</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">'
 									+ rows[ith]['g/w(kg)']
 									+ ' (kg)</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">易碎</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">配送方式: 常溫</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">易碎</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">配送方式: 常溫</p>'
 									+ '<hr>'
-									+ '<div class="barcode_title" style="display: block; margin: 5px auto; text-align:center; font-size: 12px; ">追蹤碼(SUDA/統一速達)</div>'
+									+ '<div class="barcode_title" style="display: block; margin: 5px auto; text-align:center; font-size: 13px; ">追蹤碼(SUDA/統一速達)</div>'
 									+ '<div class="barcode" id="shipping_barcode_'
 					+ rows[ith]['hawb']
 					+ '" style="margin: 2px auto; text-align: center;"></div>'

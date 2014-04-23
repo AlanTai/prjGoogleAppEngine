@@ -153,10 +153,10 @@
 			parseCSV(output, '\n', ',');
 		}
 		//show data structure on screen
-		/* if (out.innerText === undefined)
+		if (out.innerText === undefined)
 			out.textContent = output;
 		else
-			out.innerText = output; */
+			out.innerText = output;
 	}
 
 	//parse csv
@@ -254,8 +254,8 @@
 		var confirm_result = confirm('Do you want to save the data into database and print out package\'s labels?');
 		if (confirm_result == true) {
 			//turn on upload cover
-			$('#upload_cover').css({'display':'block'});
-			saveDataIntoDatabase(info,rows_info, row_keys);
+			//$('#upload_cover').css({'display':'block'});
+			//saveDataIntoDatabase(info,rows_info, row_keys);
 		}
 	}
 
@@ -332,7 +332,7 @@
 					.append(
 							'<form id="shipping_label_'
 					+ rows[ith]['hawb']
-					+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
+					+ '" style="border: 1px solid; width: 330px; margin: 10px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
 					+ '<p style="width: 100%; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size: 16px; font-weight: bold;">Spearnet</p>'				
 					+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者: '
 									+ rows[ith]['shipper_company']
@@ -354,16 +354,16 @@
 									+ rows[ith]['consignee_tel']
 									+ '</p>'
 									+ '<hr>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">Ref. NO. '
 									+ rows[ith]['reference_number']
 									+ '</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">'
 									+ rows[ith]['g/w(kg)']
 									+ ' (kg)</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">易碎</p>'
-									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 16px; ">配送方式: 常溫</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">易碎</p>'
+									+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">配送方式: 常溫</p>'
 									+ '<hr>'
-									+ '<div class="barcode_title" style="display: block; margin: 5px auto; text-align:center; font-size: 12px; ">追蹤碼(SUDA/統一速達)</div>'
+									+ '<div class="barcode_title" style="display: block; margin: 5px auto; text-align:center; font-size: 13px; ">追蹤碼(SUDA/統一速達)</div>'
 									+ '<div class="barcode" id="shipping_barcode_'
 					+ rows[ith]['hawb']
 					+ '" style="margin: 2px auto; text-align: center;"></div>'
