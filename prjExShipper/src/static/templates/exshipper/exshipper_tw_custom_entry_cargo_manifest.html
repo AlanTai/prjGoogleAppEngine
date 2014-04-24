@@ -28,7 +28,6 @@
 
 		//put keys into array
 		var obj_keys = new Object();
-		//obj_keys['reference_number'] = 'reference_number';
 		obj_keys['tw_custom_entry_number'] = 'tw_custom_entry_number';
 		obj_keys['hawb'] = 'hawb';
 
@@ -47,17 +46,10 @@
 		obj_keys['shipper_company'] = 'shipper_company';
 		obj_keys['shipper_person'] = 'shipper_person';
 		
-		//obj_keys['shipper_tel'] = 'shipper_tel';
-		//obj_keys['shipper_address_english'] = 'shipper_address_english';
-		//obj_keys['shipper_address_chinese'] = 'shipper_address_chinese';
-
-		
 		obj_keys['consignee_name_english'] = 'consignee_name_english';
 		obj_keys['consignee_name_chinese'] = 'consignee_name_chinese';
 		obj_keys['consignee_tel'] = 'consignee_tel';
-		
 		obj_keys['consignee_address_english'] = 'consignee_address_english';
-		//obj_keys['consignee_address_chinese'] = 'consignee_address_chinese';
 
 		obj_keys['company_id_or_person_id'] = 'company_id_or_person_id';
 		obj_keys['size_accumulation'] = 'size_accumulation';
@@ -167,9 +159,8 @@
 				var commodity_string = new String();
 				for ( var ith in commodity_json['items']) {
 					var data = commodity_json['items'][ith];
-					commodity_string += " Item Name: " + data.name
-							+ " Quantity: " + data.quan + " Price: "
-							+ data.price + " ; ";
+					commodity_string += " Item Name: " + data.name + " Quantity: "
+							+ data.quan + " Price: " + data.price + " ; ";
 				};
 
 				obj['commodity_detail'] = commodity_string;
@@ -204,7 +195,6 @@
 			//Test script to generate a file from JavaScript such
 			//that MS Excel will honor non-ASCII characters.
 			//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
-
 			var obj_types = new Object();
 			obj_types.tw_custom_entry_number = "String";
 			obj_types.hawb = "String";
@@ -220,7 +210,6 @@
 			obj_types.original = "String";
 			obj_types.unit_price_fob_us_dollar = "String";
 			obj_types.deliver_to = "String";
-
 
 			obj_types.shipper_company = "String";
 			obj_types.shipper_person = "String";

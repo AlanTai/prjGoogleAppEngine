@@ -1084,8 +1084,8 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
             template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
             
         elif(dispatch_token == 'exshipper_tw_custom_entry_suda_manifest' and tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-            html_page = my_dict.exshipper_cargo_manifest_page
-            html_page_title = my_dict.exshipper_cargo_manifest_page_title
+            html_page = my_dict.exshipper_tw_custom_entry_suda_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_suda_page_title
             
             spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
             general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
