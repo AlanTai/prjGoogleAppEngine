@@ -716,6 +716,10 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_spearnet_data_exchange_page
             html_page_title = my_dict.exshipper_spearnet_data_exchange_page_title
             
+        elif(dispatch_token == 'exshipper_spearnet_create_invoice_info' and spearnet_account == 'spearnet' and spearnet_password == '1941spearnet'):
+            html_page = my_dict.exshipper_spearnet_create_invoice_info_page
+            html_page_title = my_dict.exshipper_spearnet_create_invoice_info_page_title
+            
         elif(dispatch_token == 'exshipper_spearnet_packages_labels' and spearnet_account == 'spearnet' and spearnet_password == '1941spearnet'):
             html_page = my_dict.exshipper_spearnet_packages_labels_page
             html_page_title = my_dict.exshipper_spearnet_packages_labels_page_title
@@ -848,7 +852,7 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.unit = 'pcs'
         new_package_info.original = 'USA' #required
         new_package_info.unit_price_fob_us_dollar = self.request.get('valid_unit_price_fob_us_dollar') #required
-        new_package_info.deliver_to = self.request.get('valid_deliver_to') #required
+        new_package_info.deliver_to = 'SUDA'
         
         new_package_info.shipper_company = 'Spearnet'
         new_package_info.shipper_person = 'NA'

@@ -98,8 +98,6 @@ else{
 }
 
 
-
-
 // send email
 function send_email(e) {
 	// form validation

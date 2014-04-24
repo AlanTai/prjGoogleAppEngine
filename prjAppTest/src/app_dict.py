@@ -80,6 +80,9 @@ class Key_Value():
         self.exshipper_spearnet_data_exchange_page = '/exshipper/exshipper_spearnet_data_exchange_page.html'
         self.exshipper_spearnet_data_exchange_page_title = 'ExShipper Spearnet Data Exchange Page'
         
+        self.exshipper_spearnet_create_invoice_info_page = '/exshipper/exshipper_spearnet_create_invoice.html'
+        self.exshipper_spearnet_create_invoice_info_page_title = 'Spearnet Pakcage Invoice'
+        
         self.exshipper_spearnet_packages_labels_page = '/exshipper/exshipper_spearnet_packages_labels.html'
         self.exshipper_spearnet_packages_labels_page_title = 'Spearnet Current Packages Labels'
              
