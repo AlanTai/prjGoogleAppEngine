@@ -840,13 +840,12 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_size.put()
         
         #package information
-        package_id = self.request.get('valid_suda_tr_number')
+        package_id = self.request.get('valid_suda_tr_number')#required
         new_package_info = SpearnetPackagesInfo(id=package_id)
         new_package_info.hawb = package_id
-        new_package_info.reference_number = self.request.get('valid_ref_number')
-        new_package_info.tw_custom_entry_number = 'NA'
-        new_package_info.ctn = self.request.get('valid_ctn')
-        new_package_info.note = self.request.get('valid_note')
+        new_package_info.reference_number = self.request.get('valid_ref_number') #required
+        new_package_info.tw_custom_entry_number = 'NA' #required
+        new_package_info.ctn = self.request.get('valid_ctn') #required
         new_package_info.size = new_size
         new_package_info.weight_kg = self.request.get('valid_weight')
         new_package_info.weight_lb = 'NA'
@@ -874,6 +873,7 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
         new_package_info.duty_paid_by = 'Shipper'
         new_package_info.package_status = 'spearnet'
+        new_package_info.note = self.request.get('valid_note')
         
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
