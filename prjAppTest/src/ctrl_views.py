@@ -180,8 +180,6 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
               
            
-           
-            
         # page of handling tw custom entry packages information
         #tw custom entry package; package status exshipper
         elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log_processing' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
@@ -208,9 +206,6 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             
             tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'delivered')
             template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
-            
-            
-            
             
         # page of handling exshipper pre-alert
         elif(dispatch_token == 'exshipper_pre_alert' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
@@ -269,7 +264,6 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
         elif(dispatch_token == 'exshipper_tw_custom_entry_labels' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_tw_custom_entry_labels_page
             html_page_title = my_dict.exshipper_tw_custom_entry_labels_page_title
-            
             tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
             
             tw_custom_entry_packages_set = {}
@@ -789,7 +783,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
                             
                         package_entity.pickup_date_time = datetime.datetime.now()
                         package_entity.put()
-                        package_tracking_numbers = package_tracking_numbers + key + '\n'
+                        package_tracking_numbers = '\n' + package_tracking_numbers + key
                         total_packages = total_packages + 1
                         response.update({'result':'Successfully Update Picked Packages Information', 'key':'success'})
                         
@@ -806,7 +800,7 @@ class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
             finally:
                 if(response['key'] == 'success'):
                     response_to_spearnet = 'Packages SUDA Tracking Numbers: ' + package_tracking_numbers + '\n' + 'Total Amount: ' + total_packages.__str__()
-                    Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper!' + 'Detail is as follows:' + '\n' + response_to_spearnet)
+                    Email_Handler().exshipper_send_email('support.tw@spearnet-us.com', 'koseioyama@gmail.com', 'Package Pickup Done', 'Packages Pickup Done by ExShipper!\n' + 'Detail is as follows:' + '\n' + response_to_spearnet)
                     
                 json_response['response'] = response
                 
@@ -824,7 +818,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         #check suda tracking numbers quantity
         query_length = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').count()
         if(query_length < 50):
-            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'SUDA TRacking Numbers Shrtage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
+            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA Tracking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
         query_length = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').count()
         if(query_length < 20):
             Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
@@ -839,7 +833,7 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
                     regular_suda_entity.put()
                     ajax_data['suda_tracking_number'] = suda_tracking_number_regular_entity.tracking_number
                 else:
-                    Email_Handler().exshipper_send_email('jerry@spearnet-us.com', 'koseioyama@gmail.com', 'Notice of Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
+                    Email_Handler().exshipper_send_email('support.tw@spearnet-us.com', 'koseioyama@gmail.com', 'Notice of Running out of Regular SUDA Tracking Number', 'No Regular Regular SUDA Tracking Number Available! ')
                     
             elif(suda_tracking_number_type == 'formal'):
                 suda_tracking_number_formal_entity = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').get()
@@ -1065,15 +1059,13 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         html_page_title = my_dict.exshipper_invalid_login_page_title
         
         # html page dispatching
-        if(dispatch_token == 'exshipper_tw_custom_entry_invoice_log'):
-            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = my_dict.exshipper_tw_custom_entry_invoice_log_page
-                html_page_title = my_dict.exshipper_tw_custom_entry_invoice_log_page_title
-                spearnet_customer_package_info_log = SpearnetPackagesInfo.query()
-                general_client_package_info_log = GeneralClientsPackagesInfo.query()
-                
-                template_values.update({'spearnet_customer_package_info_log':spearnet_customer_package_info_log, 'general_client_package_info_log':general_client_package_info_log})
-                #use memcache
+        if(dispatch_token == 'exshipper_tw_custom_entry_invoice_log' and tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_invoice_log_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_invoice_log_page_title
+            spearnet_customer_package_info_log = SpearnetPackagesInfo.query()
+            general_client_package_info_log = GeneralClientsPackagesInfo.query()
+            template_values.update({'spearnet_customer_package_info_log':spearnet_customer_package_info_log, 'general_client_package_info_log':general_client_package_info_log})
+            #use memcache
 #                 data = memcache.get('tw_custom_entry_invoice_log')
 #                 if data != None:
 #                     log_spearnet_customer_package_info = data
@@ -1083,14 +1075,21 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
 #                     log_spearnet_customer_package_info = data
 #                 template_values.update({'spearnet_customer_package_info_log':log_spearnet_customer_package_info})
 
-        elif(dispatch_token == 'exshipper_tw_custom_entry_cargo_manifest'):
-            if(tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
-                html_page = my_dict.exshipper_cargo_manifest_page
-                html_page_title = my_dict.exshipper_cargo_manifest_page_title
-                
-                spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
-                general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
-                template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
+        elif(dispatch_token == 'exshipper_tw_custom_entry_cargo_manifest' and tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_manifest_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_manifest_page_title
+            
+            spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
+            general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
+            template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
+            
+        elif(dispatch_token == 'exshipper_tw_custom_entry_suda_manifest' and tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
+            html_page = my_dict.exshipper_cargo_manifest_page
+            html_page_title = my_dict.exshipper_cargo_manifest_page_title
+            
+            spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
+            general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
+            template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
 
         else:
             html_page = my_dict.exshipper_invalid_login_page

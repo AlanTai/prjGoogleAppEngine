@@ -27,7 +27,7 @@
 					SUDA Tracking Number:</p>
 				<input type="text" id="id_suda_tr_number" name="suda_tr_number"
 					style="display: inline-block; margin: 5px 1px;" size="50"
-					placeholder="Click the button to get SUDA Number" required="required" />
+					placeholder="Click the button to get SUDA Number" disabled="disabled" required="required" />
 				<div style="display: inline-block;">
 					<input type="button" value="Get SUDA Tracking Number"
 						onclick="getSUDATrackingNumber()" /> <select
@@ -42,7 +42,7 @@
 					<span style="display: block;">Reference Number: </span>
 				</p>
 				<input type="text" id="id_reference_number" name="reference_number"
-					style="display: inline-block; margin: 5px 1px;" size="50" required="required" />
+					style="display: inline-block; margin: 5px 1px;" size="50" disabled required="required" />
 			</div>
 			<br>
 
@@ -321,8 +321,9 @@
 											.focus();
 									return true;
 								} else {
-									commodity_obj.name = $(this).find(
-											'input#id_commodity_name').val();
+									//add slash before single quote
+									var commodity_name = $(this).find('input#id_commodity_name').val();
+									commodity_obj.name = commodity_name.addSlashes();
 									commodity_obj.quan = $(this).find(
 											'input#id_commodity_quantity')
 											.val();
@@ -688,8 +689,8 @@
 							+ suda_tr_number
 							+ '" style="border: 1px solid; width: 320px; margin: 10px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
-								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者(公司): '
-								+ shipper_person + '(' + shipper_company + ')'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者/公司: '
+								+ shipper_person + ' / ' + shipper_company
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
 								+ shipper_address_english
@@ -702,7 +703,7 @@
 								+ consignee_name_chinese
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
-								+ consignee_address_chinese
+								+ consignee_address_english
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 電話: '
 								+ consignee_phone_number
@@ -711,7 +712,7 @@
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">Ref. NO. '
 								+ reference_number
 								+ '</p>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block;">'
 								+ weight
 								+ ' (kg)</p>'
 								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">易碎</p>'

@@ -67,6 +67,12 @@ class Key_Value():
         self.exshipper_tw_custom_entry_invoice_log_page = '/exshipper/exshipper_tw_custom_entry_invoice_log.html'
         self.exshipper_tw_custom_entry_invoice_log_page_title = 'Custom Entry Invoice Log'
         
+        self.exshipper_tw_custom_entry_manifest_page = '/exshipper/exshipper_tw_custom_entry_cargo_manifest.html'
+        self.exshipper_tw_custom_entry_manifest_page_title = 'TW Custom Entry Manifest'
+        
+        self.exshipper_tw_custom_entry_suda_page = '/exshipper/exshipper_tw_custom_entry_suda_manifest.html'
+        self.exshipper_tw_custom_entry_suda_page_title = 'Tw Custom Entry SUDA Manifest'
+        
         #spearnet
         self.exshipper_spearnet_index_page = '/exshipper/exshipper_spearnet_index.html'
         self.exshipper_spearnet_index_page_title = 'ExShipper Spearnet Index Page'

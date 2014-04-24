@@ -321,8 +321,9 @@
 											.focus();
 									return true;
 								} else {
-									commodity_obj.name = $(this).find(
-											'input#id_commodity_name').val();
+									//add slash before single quote
+									var commodity_name = $(this).find('input#id_commodity_name').val();
+									commodity_obj.name = commodity_name.addSlashes();
 									commodity_obj.quan = $(this).find(
 											'input#id_commodity_quantity')
 											.val();
@@ -688,8 +689,8 @@
 							+ suda_tr_number
 							+ '" style="border: 1px solid; width: 320px; margin: 10px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
-								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者: '
-								+ shipper_company
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者/公司: '
+								+ shipper_person + " / " + shipper_company
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
 								+ shipper_address_english

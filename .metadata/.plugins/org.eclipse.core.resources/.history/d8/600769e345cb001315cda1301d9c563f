@@ -1,0 +1,380 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script type="text/javascript">
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	}
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Cargo Manifest</p>
+	
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<div>
+		<br /> <a id="xls_download">Download Cargo Manifest in XLS Format</a>
+	</div>
+	<br>
+	<script type="text/javascript">
+		var packages_status = new Object();
+		var json_array = new Array();
+
+		//put keys into array
+		var obj_keys = new Object();
+		//obj_keys['reference_number'] = 'reference_number';
+		obj_keys['tw_custom_entry_number'] = 'tw_custom_entry_number';
+		obj_keys['hawb'] = 'hawb';
+
+		obj_keys['ctn'] = 'ctn';
+		obj_keys['weight_kg'] = 'g/w(kg)';
+		obj_keys['weight_lb'] = 'g/w(lb)';
+		
+		obj_keys['commodity_detail'] = 'commodity_detail';
+		obj_keys['pcs'] = 'pcs';
+		obj_keys['unit'] = 'unit';
+
+		obj_keys['original'] = 'original';
+		obj_keys['unit_price_fob_us_dollar'] = 'unit_price_fob_us_dollar';
+		obj_keys['deliver_to'] = 'deliver_to';
+
+		obj_keys['shipper_company'] = 'shipper_company';
+		obj_keys['shipper_person'] = 'shipper_person';
+		
+		//obj_keys['shipper_tel'] = 'shipper_tel';
+		//obj_keys['shipper_address_english'] = 'shipper_address_english';
+		//obj_keys['shipper_address_chinese'] = 'shipper_address_chinese';
+
+		
+		obj_keys['consignee_name_english'] = 'consignee_name_english';
+		obj_keys['consignee_name_chinese'] = 'consignee_name_chinese';
+		obj_keys['consignee_tel'] = 'consignee_tel';
+		
+		obj_keys['consignee_address_english'] = 'consignee_address_english';
+		//obj_keys['consignee_address_chinese'] = 'consignee_address_chinese';
+
+		obj_keys['company_id_or_person_id'] = 'company_id_or_person_id';
+		obj_keys['size_accumulation'] = 'size_accumulation';
+		obj_keys['declaration_need_or_not'] = 'declaration_need_or_not';
+		obj_keys['duty_paid_by'] = 'duty_paid_by';
+		//obj_keys['note'] = 'note';
+
+		json_array.push(obj_keys);
+	</script>
+
+	<!-- spearnet cargo manifest -->
+	{% if cargo_manifest_spearnet %} <br>
+		{% for single_row_data in cargo_manifest_spearnet %}
+		
+		<!--  -->
+		<script type="text/javascript">
+
+			$(function() {
+				//setup initial select values
+				$('#{{ single_row_data.hawb }}').val(
+						'{{ single_row_data.package_status }}');
+				//update json obj when select value change
+				$('#{{ single_row_data.hawb }}').change(function() {
+					var key = $(this).attr('id');
+					packages_status[key] = $(this).val();
+				});
+			});
+
+			
+			obj_keys['original'] = 'original';
+			obj_keys['unit_price_fob_us_dollar'] = 'unit_price_fob_us_dollar';
+			obj_keys['deliver_to'] = 'deliver_to';
+
+			obj_keys['shipper_company'] = 'shipper_company';
+			obj_keys['shipper_person'] = 'shipper_person';
+			
+			//obj_keys['shipper_tel'] = 'shipper_tel';
+			//obj_keys['shipper_address_english'] = 'shipper_address_english';
+			//obj_keys['shipper_address_chinese'] = 'shipper_address_chinese';
+
+			
+			obj_keys['consignee_name_english'] = 'consignee_name_english';
+			obj_keys['consignee_name_chinese'] = 'consignee_name_chinese';
+			obj_keys['consignee_tel'] = 'consignee_tel';
+			
+			obj_keys['consignee_address_english'] = 'consignee_address_english';
+			//obj_keys['consignee_address_chinese'] = 'consignee_address_chinese';
+
+			obj_keys['company_id_or_person_id'] = 'company_id_or_person_id';
+			obj_keys['size_accumulation'] = 'size_accumulation';
+			obj_keys['declaration_need_or_not'] = 'declaration_need_or_not';
+			obj_keys['duty_paid_by'] = 'duty_paid_by';
+			//obj_keys['note'] = 'note';
+			
+			var obj = new Object();
+			//obj['reference_number'] = '{{ single_row_data.reference_number }}';
+			obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
+			obj['hawb'] = '{{ single_row_data.hawb }}';
+
+			obj['ctn'] = '{{ single_row_data.ctn }}';
+			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
+			obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
+
+			//parse json object
+			var commodity_json = JSON
+					.parse('{{ single_row_data.commodity_detail }}');
+			var commodity_string = new String();
+			for ( var ith in commodity_json['items']) {
+				var data = commodity_json['items'][ith];
+				commodity_string += " Item Name: " + data.name + " Quantity: "
+						+ data.quan + " Price: " + data.price + " ; ";
+			};
+
+			obj['commodity_detail'] = commodity_string;
+			obj['pcs'] = "{{ single_row_data.pcs }}";
+			obj['unit'] = "{{ single_row_data.unit }}";
+
+			obj['original'] = "{{ single_row_data.original }}";
+			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
+			obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
+
+			obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
+			obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
+			obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
+			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english }}";
+			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
+
+			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
+			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
+			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
+			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
+			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
+
+			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
+			obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
+			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
+			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
+			obj['note'] = "{{ single_row_data.note }}";
+
+			json_array.push(obj);
+		</script>
+		{% endfor %}
+		{% endif %}
+		<!-- end spearnet cargo manifest -->
+
+		<!-- general clients cargo manifest -->
+		{% if cargo_manifest_general_clients %} <br>
+			{% for single_row_data in cargo_manifest_general_clients %}
+			
+			<!--  -->
+			<script type="text/javascript">
+				
+				$(function() {
+					//setup initial select values
+					$('#{{ single_row_data.hawb }}').val(
+							'{{ single_row_data.package_status }}');
+					//update json obj when select value change
+					$('#{{ single_row_data.hawb }}').change(function() {
+						var key = $(this).attr('id');
+						/* if (typeof packages_status[key] === 'undefined'){
+							packages_status[key] = $(this).val();
+						} */
+						packages_status[key] = $(this).val();
+					});
+				});
+
+				var obj = new Object();
+				obj['reference_number'] = '{{ single_row_data.reference_number }}';
+				obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
+				obj['hawb'] = '{{ single_row_data.hawb }}';
+
+				obj['ctn'] = '{{ single_row_data.ctn }}';
+				obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
+				obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
+
+				//parse json object
+				var commodity_json = JSON
+						.parse('{{ single_row_data.commodity_detail }}');
+				var commodity_string = new String();
+				for ( var ith in commodity_json['items']) {
+					var data = commodity_json['items'][ith];
+					commodity_string += " Item Name: " + data.name
+							+ " Quantity: " + data.quan + " Price: "
+							+ data.price + " ; ";
+				};
+
+				obj['commodity_detail'] = commodity_string;
+				obj['pcs'] = "{{ single_row_data.pcs }}";
+				obj['unit'] = "{{ single_row_data.unit }}";
+
+				obj['original'] = "{{ single_row_data.original }}";
+				obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
+
+				obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
+
+				obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
+				obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
+				obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
+				obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english }}";
+				obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
+
+				obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
+				obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
+				obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
+				obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
+				obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
+
+				obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
+				obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
+				obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
+				obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
+				obj['note'] = "{{ single_row_data.note }}";
+
+				json_array.push(obj);
+			</script>
+			{% endfor %}
+			{% endif %}
+			<!-- end -->
+
+		<script type="text/javascript">
+			// change color
+			$('#spearnet_customer_packages_info> form:even').css(
+					'background-color', '#dedede');
+			$('#spearnet_customer_packages_info> form:odd').css(
+					'background-color', '#f9f9f9');
+	
+			$('#general_clients_packages_info> form:even').css(
+					'background-color', '#dedede');
+			$('#general_clients_packages_info> form:odd').css(
+					'background-color', '#f9f9f9');
+			// end change color
+			
+		
+			//Test script to generate a file from JavaScript such
+			//that MS Excel will honor non-ASCII characters.
+			//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
+
+			var obj_types = new Object();
+			obj_types.reference_number = "String";
+			obj_types.tw_custom_entry_number = "String";
+			obj_types.hawb = "String";
+
+			obj_types.ctn = "String";
+			obj_types.weight_kg = "String";
+			obj_types.weight_lb = "String";
+			obj_types.commodity_detail = "String";
+			obj_types.pcs = "String";
+			obj_types.unit = "String";
+
+			obj_types.original = "String";
+			obj_types.deliver_to = "String";
+
+			obj_types.unit_price_fob_us_dollar = "String";
+
+			obj_types.shipper_company = "String";
+			obj_types.shipper_person = "String";
+			obj_types.shipper_tel = "String";
+			obj_types.shipper_address_english = "String";
+			obj_types.shipper_address_chinese = "String";
+
+			obj_types.consignee_tel = "String";
+			obj_types.consignee_name_english = "String";
+			obj_types.consignee_name_chinese = "String";
+			obj_types.consignee_address_english = "String";
+			obj_types.consignee_address_chinese = "String";
+
+			obj_types.company_id_or_person_id = "String";
+			obj_types.size_accumulation = "String";
+			obj_types.declaration_need_or_not = "String";
+			obj_types.duty_paid_by = "String";
+			obj_types.note = "String";
+
+			testJson = json_array;
+			testTypes = obj_types;
+
+			/* testJson = [ {
+				"name" : "Tony Peña",
+				"city" : "希臘",
+				"country" : "United States",
+				"birthdate" : "1978-03-15",
+				"amount" : 42
+
+			}, {
+				"name" : "Ζαλώνης Thessaloniki",
+				"city" : "雅典",
+				"country" : "Greece",
+				"birthdate" : "1987-11-23",
+				"amount" : 42
+			} ]; */
+
+			//Simple type mapping; dates can be hard
+			//and I would prefer to simply use `datevalue`
+			//... you could even add the formula in here.
+			/* testTypes = {
+				"name" : "String",
+				"city" : "String",
+				"country" : "String",
+				"birthdate" : "String",
+				"amount" : "Number"
+			}; */
+
+			emitXmlHeader = function() {
+				return '<?xml version="1.0"?>\n'
+						+ '<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
+						+ '<ss:Worksheet ss:Name="Sheet1">\n'
+						+ '<ss:Table>\n\n';
+			};
+
+			emitXmlFooter = function() {
+				return '\n</ss:Table>\n' + '</ss:Worksheet>\n'
+						+ '</ss:Workbook>\n';
+			};
+
+			jsonToSsXml = function(jsonObject) {
+				var row;
+				var col;
+				var xml;
+				var data = typeof jsonObject != "object" ? JSON
+						.parse(jsonObject) : jsonObject;
+
+				xml = emitXmlHeader();
+
+				for (row = 0; row < data.length; row++) {
+					xml += '<ss:Row>\n';
+
+					for (col in data[row]) {
+						xml += '  <ss:Cell>\n';
+						xml += '    <ss:Data ss:Type="' + testTypes[col]  + '">';
+						xml += data[row][col] + '</ss:Data>\n';
+						xml += '  </ss:Cell>\n';
+					}
+
+					xml += '</ss:Row>\n';
+				}
+
+				xml += emitXmlFooter();
+				return xml;
+			};
+
+			console.log(jsonToSsXml(testJson));
+
+			download = function(content, filename, contentType) {
+				if (!contentType)
+					contentType = 'application/octet-stream';
+				var a = document.getElementById('xls_download');
+				var blob = new Blob([ content ], {
+					'type' : contentType
+				});
+				a.href = window.URL.createObjectURL(blob);
+				a.download = filename;
+			};
+
+			var current_time = new Date();
+			var file_name = 'tw_custom_entry_cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
+			download(jsonToSsXml(testJson), file_name,
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		</script>
+
+</div>
+{% endblock %}
