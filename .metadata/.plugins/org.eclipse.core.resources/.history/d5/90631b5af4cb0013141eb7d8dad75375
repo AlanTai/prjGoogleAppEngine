@@ -329,6 +329,10 @@
 
 		var ctn = $('#id_ctn').val();
 		var pcs = $('#id_pcs').val();
+
+		var size_length = $('#id_length').val();
+		var size_width = $('#id_width').val();
+		var size_height = $('#id_height').val();
 		var weight = $('#id_weight').val();
 
 		// check information
@@ -410,6 +414,26 @@
 			$('#id_pcs').val(pcs);
 		}
 
+		if (!numberFilter(size_length)) {
+			alert('Please type in a number for the length!');
+			$('#id_length').focus();
+			return true;
+		}
+		if (!numberFilter(size_width)) {
+			alert('Please type in a number for the width!');
+			$('#id_width').focus();
+			return true;
+		}
+		if (!numberFilter(size_height)) {
+			alert('Please type in a number for the height!');
+			$('#id_height').focus();
+			return true;
+		}
+		if (!numberFilter(weight)) {
+			alert('Please type in a number for the weight!');
+			$('#id_weight').focus();
+			return true;
+		}
 		// end of checking information
 
 		//check commodity detail
@@ -463,6 +487,9 @@
 				valid_note : note,
 				valid_ctn : ctn,
 				valid_pcs : pcs,
+				valid_size_length : size_length,
+				valid_size_width : size_width,
+				valid_size_height : size_height,
 				valid_weight : weight,
 				valid_commodity_detail : commodity_detail_obj
 
@@ -500,7 +527,7 @@
 								+ reference_number
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
-								+ 'Spearnet'
+								+ shipper_company
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
 								+ consignee_name_english
@@ -528,13 +555,13 @@
 							+ '" style="border: 1px solid; width: 320px; margin: 10px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者: '
-								+ 'Spearnet'
+								+ shipper_company
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
-								+ '1941 W Ave 140th, San Leandro, CA 94577'
+								+ shipper_address_english
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 電話: '
-								+ '510-351-8903'
+								+ shipper_phone_number
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 收件者: '
@@ -610,6 +637,9 @@
 				'display' : 'inline-block'
 			});
 		}
+
+		/* remove element */
+		// $(elem).remove();
 	}
 </script>
 

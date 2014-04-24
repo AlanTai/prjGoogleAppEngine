@@ -832,6 +832,12 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
 class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'submit_status':'NA'}
+        #package size
+        new_size = Size()
+        new_size.length = 'NA'
+        new_size.width = 'NA'
+        new_size.height = 'NA'
+        new_size.put()
         
         #package information
         package_id = self.request.get('valid_suda_tr_number')#required
@@ -840,7 +846,7 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.reference_number = self.request.get('valid_ref_number') #required
         new_package_info.tw_custom_entry_number = 'NA' #required
         new_package_info.ctn = self.request.get('valid_ctn') #required
-        
+        new_package_info.size = new_size
         new_package_info.weight_kg = self.request.get('valid_weight') #required
         new_package_info.weight_lb = 'NA'
         new_package_info.commodity_detail = self.request.get('valid_commodity_detail') #reqiured

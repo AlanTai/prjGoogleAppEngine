@@ -531,10 +531,10 @@
 								+ 'Spearnet'
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
-								+ '1941 W Ave 140th, San Leandro, CA 94577'
+								+ shipper_address_english
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 電話: '
-								+ '510-351-8903'
+								+ shipper_phone_number
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 收件者: '
@@ -610,6 +610,9 @@
 				'display' : 'inline-block'
 			});
 		}
+
+		/* remove element */
+		// $(elem).remove();
 	}
 </script>
 

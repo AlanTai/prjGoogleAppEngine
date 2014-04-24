@@ -610,6 +610,9 @@
 				'display' : 'inline-block'
 			});
 		}
+
+		/* remove element */
+		// $(elem).remove();
 	}
 </script>
 

@@ -528,13 +528,13 @@
 							+ '" style="border: 1px solid; width: 320px; margin: 10px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者: '
-								+ 'Spearnet'
+								+ shipper_company
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
-								+ '1941 W Ave 140th, San Leandro, CA 94577'
+								+ shipper_address_english
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 電話: '
-								+ '510-351-8903'
+								+ shipper_phone_number
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 收件者: '
@@ -610,6 +610,9 @@
 				'display' : 'inline-block'
 			});
 		}
+
+		/* remove element */
+		// $(elem).remove();
 	}
 </script>
 
