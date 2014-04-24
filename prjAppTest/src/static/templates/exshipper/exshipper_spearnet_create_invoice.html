@@ -215,7 +215,7 @@
 				</p>
 			</div>
 
-			<br> <input type="button" value="Add New Package Information"
+			<br> <input type="button" value="Submit Information"
 				onclick="Add()" style="width: 300px; height: 30px;">
 		</form>
 	</div>
@@ -349,8 +349,7 @@
 		$('#upload_cover').css({
 			'display' : 'block'
 		});
-		var selected_suda_tracking_number_type = $('#suda_tracking_number_type')
-				.val();
+		var selected_suda_tracking_number_type = $('#suda_tracking_number_type').val();
 
 		//add the info to datastore
 		$.ajax('/exshipper_suda_tracking_number_download_handler', {
@@ -598,7 +597,7 @@
 			'display' : 'block'
 		});
 
-		$.ajax('/exshipper_invoice_info_handler', {
+		$.ajax('/exshipper_spearnet_create_invoice_info_handler', {
 			type : 'POST',
 			data : {
 				fmt : 'json',
