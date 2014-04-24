@@ -876,7 +876,7 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.note = self.request.get('valid_note')
         
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        new_access_info = {'access_info':[{'person':'spearnet', 'date_time':current_time}]}
+        new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
         new_package_info.access_info = json.dumps(new_access_info)
         
         new_package_info.put()

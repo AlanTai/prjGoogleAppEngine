@@ -859,8 +859,8 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.shipper_company = self.request.get('valid_shipper_company') #required
         new_package_info.shipper_person = 'NA'
         new_package_info.shipper_tel = '510-351-8903'
-        new_package_info.shipper_address_english = '1941 W Ave 140th, San Leandro, CA 94577'
-        new_package_info.shipper_address_chinese = '1941號  第140西街, 勝利安卓, 加州 94577'
+        new_package_info.shipper_address_english = self.request.get('valid_shipper_address_english')
+        new_package_info.shipper_address_chinese = self.request.get('valid_shipper_address_chinese')
         
         new_package_info.consignee_name_english = self.request.get('valid_consignee_name_english')
         new_package_info.consignee_name_chinese = self.request.get('valid_consignee_name_chinese')
@@ -876,7 +876,7 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.note = self.request.get('valid_note')
         
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        new_access_info = {'access_info':[{'person':'spearnet', 'date_time':current_time}]}
+        new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
         new_package_info.access_info = json.dumps(new_access_info)
         
         new_package_info.put()
