@@ -129,6 +129,16 @@
 					<option value="NA">NA</option>
 			</select>
 			</span>
+			{% if single_row_data.pickup_date_time %}
+			<span class="tw_custom_entry_datetime">Creating DateTime: <input
+				id="{{ single_row_data.barcode_number }}" value="{{ single_row_data.create_date_time.strftime('%Y-%m-%d') }}" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% else %}
+			<span class="tw_custom_entry_datetime">Creating DateTime: <input
+				id="{{ single_row_data.barcode_number }}" value="NA" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% endif %}
+			
 
 		</form>
 

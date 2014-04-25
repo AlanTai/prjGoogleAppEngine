@@ -1253,6 +1253,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         tw_custom_entry_package.size = new_size
                         tw_custom_entry_package.package_status = 'exshipper'
                         tw_custom_entry_package.note = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
+                        tw_custom_entry_package.ctn = '1'
                         
                         if(tw_custom_entry_package.access_info != None):
                             current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

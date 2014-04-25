@@ -127,6 +127,15 @@
 			</span> <span class="spearnet_customers_notes">Note: <input
 				id="{{ single_row_data.hawb }}" class="note" type="text" />
 			</span>
+			{% if single_row_data.pickup_date_time %}
+			<span class="spearnet_customers_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}" value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% else %}
+			<span class="spearnet_customers_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}" value="Not Pickup Yet" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% endif %}
 
 		</form>
 

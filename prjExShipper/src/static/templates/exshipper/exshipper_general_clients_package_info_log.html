@@ -27,6 +27,7 @@
 		</div>
 		<div style="display: inline-block;">
 			<select id="package_status_fields_main_control">
+				<option value="exshipper">ExShipper</option>
 				<option value="apex">Apex</option>
 				<option value="sfo_airport">SFO Airport</option>
 				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
@@ -125,6 +126,15 @@
 				<input id="{{ single_row_data.hawb }}"
 					class="note" type="text" />
 			</span>
+			{% if single_row_data.pickup_date_time %}
+			<span class="general_clients_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}" value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% else %}
+			<span class="general_clients_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}" value="Not Pickup Yet" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% endif %}
 			
 		</form>
 
