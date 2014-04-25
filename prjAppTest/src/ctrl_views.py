@@ -686,11 +686,14 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
         my_dict = Key_Value()
         user_info = Users_Info_Handler().get_users_info(self, users)
         html_page = my_dict.exshipper_spearnet_login_page
-        
+        template_values = {}
         dispatch_token = self.request.get('dispatch_token')
         if(dispatch_token == 'exshipper_spearnet_packages_labels'):
             html_page = my_dict.exshipper_spearnet_packages_labels_page
             html_page_title = my_dict.exshipper_spearnet_packages_labels_page_title
+            
+            spearnet_packages_info = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'spearnet')
+            template_values.update({'spearnet_packages_info':spearnet_packages_info})
         else:
             html_page = my_dict.exshipper_spearnet_login_page
             html_page_title = my_dict.exshipper_spearnet_login_page_title
