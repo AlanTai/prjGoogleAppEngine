@@ -316,7 +316,7 @@
 								$(this).val('CI5107/' + flight_number); //auto-append day after CI5107/
 
 								var key = $(this).attr('id');
-								flight_numbers[key] = 'CI5107/' + flight_number;
+								flight_numbers[key] = 'CI5107/' +flight_number;
 							});
 				}
 				;
