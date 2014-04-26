@@ -124,7 +124,8 @@ class GeneralClientsPackagesInfo(PackageInfo):
     pass
 
 class SpearnetPackagesInfoLog(PackageInfo):
-    pass
+    original_create_date_time = ndb.DateTimeProperty()
+    original_update_date_time = ndb.DateTimeProperty()
 
 class GeneralClientsPackagesInfoLog(PackageInfo):
     pass
