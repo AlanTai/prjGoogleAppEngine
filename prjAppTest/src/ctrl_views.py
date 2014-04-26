@@ -1669,6 +1669,8 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 
                 new_spearnet_package_log.put()
                 
+                spearnet_package_info_entity.key.delete()
+                
         
         self.response.write('Cron Task Done')
         
