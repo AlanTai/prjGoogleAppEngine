@@ -70,11 +70,11 @@
 			});
 			
 			var obj = new Object();
-			obj['shipping_date'] = "{{ single_row_data.update_date_time.strftime('%Y-%m-%d') }}";
+			obj['shipping_date'] = "{{ single_row_data.create_date_time.strftime('%Y-%m-%d') }}";
 			obj['hawb_1'] = '{{ single_row_data.hawb }}';
 
 			obj['replaced_tracking_number'] = 'NA';
-			obj['hawb_2'] = '{{ single_row_data.weight_kg }}';
+			obj['hawb_2'] = '{{ single_row_data.hawb }}';
 			obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
 
 			obj['customer_number'] = 'NA';
@@ -137,7 +137,7 @@
 				});
 
 				var obj = new Object();
-				obj['shipping_date'] = "{{ single_row_data.update_date_time.strftime('%Y-%m-%d') }}";
+				obj['shipping_date'] = "{{ single_row_data.create_date_time.strftime('%Y-%m-%d') }}";
 				obj['hawb_1'] = '{{ single_row_data.hawb }}';
 
 				obj['replaced_tracking_number'] = 'NA';

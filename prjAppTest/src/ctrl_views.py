@@ -694,6 +694,7 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
             
             spearnet_packages_info = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'spearnet')
             template_values.update({'spearnet_packages_info':spearnet_packages_info})
+    
         else:
             html_page = my_dict.exshipper_spearnet_login_page
             html_page_title = my_dict.exshipper_spearnet_login_page_title
@@ -1131,8 +1132,12 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
         if(dispatch_token == 'exshipper_tw_custom_entry_invoice_log' and tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
             html_page = my_dict.exshipper_tw_custom_entry_invoice_log_page
             html_page_title = my_dict.exshipper_tw_custom_entry_invoice_log_page_title
-            spearnet_customer_package_info_log = SpearnetPackagesInfo.query()
-            general_client_package_info_log = GeneralClientsPackagesInfo.query()
+            spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'apex',
+                                                                                               SpearnetPackagesInfo.package_status == 'sfo_airport',
+                                                                                               SpearnetPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
+            general_client_package_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'apex',
+                                                                                               GeneralClientsPackagesInfo.package_status == 'sfo_airport',
+                                                                                               GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
             template_values.update({'spearnet_customer_package_info_log':spearnet_customer_package_info_log, 'general_client_package_info_log':general_client_package_info_log})
             #use memcache
 #                 data = memcache.get('tw_custom_entry_invoice_log')
@@ -1148,16 +1153,24 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_tw_custom_entry_manifest_page
             html_page_title = my_dict.exshipper_tw_custom_entry_manifest_page_title
             
-            spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
-            general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
+            spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'apex',
+                                                                                               SpearnetPackagesInfo.package_status == 'sfo_airport',
+                                                                                               SpearnetPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
+            general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'apex',
+                                                                                               GeneralClientsPackagesInfo.package_status == 'sfo_airport',
+                                                                                               GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
             template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
             
         elif(dispatch_token == 'exshipper_tw_custom_entry_suda_manifest' and tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
             html_page = my_dict.exshipper_tw_custom_entry_suda_page
             html_page_title = my_dict.exshipper_tw_custom_entry_suda_page_title
             
-            spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query()
-            general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query()
+            spearnet_customers_package_info_cargo_manifest = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'apex',
+                                                                                               SpearnetPackagesInfo.package_status == 'sfo_airport',
+                                                                                               SpearnetPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
+            general_clients_package_info_cargo_manifest = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'apex',
+                                                                                               GeneralClientsPackagesInfo.package_status == 'sfo_airport',
+                                                                                               GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
             template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
 
         else:
