@@ -1662,7 +1662,7 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 new_spearnet_package_log.package_status = spearnet_package_info_entity.package_status
                 new_spearnet_package_log.pickup_date_time = spearnet_package_info_entity.pickup_date_time
                 
-                new_spearnet_package_log.access_people = spearnet_package_info_entity.access_people
+                new_spearnet_package_log.access_info = spearnet_package_info_entity.access_info
                 new_spearnet_package_log.original_create_date_time = spearnet_package_info_entity.create_date_time
                 new_spearnet_package_log.original_update_date_time = spearnet_package_info_entity.update_date_time
                 
