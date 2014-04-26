@@ -1,5 +1,10 @@
 cron:
-- description: daily packages information log migration
-  url: /exshipper_migrate_packages_information_log
-  schedule: every 12 hours
+- description: packages information log migration every sunday
+  url: /exshipper_migrate_packages_information_handler
+  schedule: every sunday 01:00
+  timezone: US/Pacific
+
+- description: tracking numbers deletion three times a month
+  url: /exshipper_delete_tracking_numbers_handler
+  schedule: 1,10,19 of month 01:00
   timezone: US/Pacific

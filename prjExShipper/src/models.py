@@ -123,11 +123,14 @@ class SpearnetPackagesInfo(PackageInfo):
 class GeneralClientsPackagesInfo(PackageInfo):
     pass
 
-class SpearnetPackagesInfoLog(PackageInfo):
+class PackagsInfoLog(PackageInfo):
     original_create_date_time = ndb.DateTimeProperty()
     original_update_date_time = ndb.DateTimeProperty()
 
-class GeneralClientsPackagesInfoLog(PackageInfo):
+class SpearnetPackagesInfoLog(PackagsInfoLog):
+    pass
+
+class GeneralClientsPackagesInfoLog(PackagsInfoLog):
     pass
 
 #for pre-alert and on-hand documents

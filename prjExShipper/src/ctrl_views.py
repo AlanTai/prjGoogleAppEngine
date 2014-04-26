@@ -16,7 +16,8 @@ from google.appengine.api import users, mail, memcache
 from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber,\
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL,\
-    TWCustomEntryInfo, EmployeeInfo, EmailVerification, SpearnetPackagesInfoLog
+    TWCustomEntryInfo, EmployeeInfo, EmailVerification, SpearnetPackagesInfoLog,\
+    GeneralClientsPackagesInfoLog
 from general_handlers.users_info_handler import Users_Info_Handler
 from general_handlers.emails_handler import Email_Handler
 from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
@@ -1622,56 +1623,108 @@ class GetReferenceNumber(webapp2.RequestHandler):
 #migrate packages data
 class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
     def get(self):
-        spearnet_packages_info_for_migration = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'delivered')
-        if(spearnet_packages_info_for_migration.count() > 0):
-            for spearnet_package_info_entity in spearnet_packages_info_for_migration:
-                new_spearnet_package_log = SpearnetPackagesInfoLog(id=spearnet_package_info_entity.hawb)
-                new_spearnet_package_log.reference_number = spearnet_package_info_entity.reference_number
-                new_spearnet_package_log.tw_custom_entry_number = spearnet_package_info_entity.tw_custom_entry_number
-                new_spearnet_package_log.hawb = spearnet_package_info_entity.hawb
-                new_spearnet_package_log.ctn = spearnet_package_info_entity.ctn
-                new_spearnet_package_log.size = spearnet_package_info_entity.size
-                new_spearnet_package_log.weight_kg = spearnet_package_info_entity.weight_kg
-                new_spearnet_package_log.weight_lb = spearnet_package_info_entity.weight_lb
-                new_spearnet_package_log.commodity_detail = spearnet_package_info_entity.commodity_detail
-                new_spearnet_package_log.pcs = spearnet_package_info_entity.pcs
-                new_spearnet_package_log.unit = spearnet_package_info_entity.unit
-                new_spearnet_package_log.original = spearnet_package_info_entity.original
-                new_spearnet_package_log.deliver_to = spearnet_package_info_entity.deliver_to
-                new_spearnet_package_log.unit_price_fob_us_dollar = spearnet_package_info_entity.unit_price_fob_us_dollar
+        general_clients_packages_info_for_migration = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'delivered')
+        if(general_clients_packages_info_for_migration.count() > 0):
+            for package_info_entity in general_clients_packages_info_for_migration:
+                new_package_info_log = SpearnetPackagesInfoLog(id=package_info_entity.hawb)
+                new_package_info_log.reference_number = package_info_entity.reference_number
+                new_package_info_log.tw_custom_entry_number = package_info_entity.tw_custom_entry_number
+                new_package_info_log.hawb = package_info_entity.hawb
+                new_package_info_log.ctn = package_info_entity.ctn
+                new_package_info_log.size = package_info_entity.size
+                new_package_info_log.weight_kg = package_info_entity.weight_kg
+                new_package_info_log.weight_lb = package_info_entity.weight_lb
+                new_package_info_log.commodity_detail = package_info_entity.commodity_detail
+                new_package_info_log.pcs = package_info_entity.pcs
+                new_package_info_log.unit = package_info_entity.unit
+                new_package_info_log.original = package_info_entity.original
+                new_package_info_log.deliver_to = package_info_entity.deliver_to
+                new_package_info_log.unit_price_fob_us_dollar = package_info_entity.unit_price_fob_us_dollar
                 
-                new_spearnet_package_log.shipper_company = spearnet_package_info_entity.shipper_company
-                new_spearnet_package_log.shipper_person = spearnet_package_info_entity.shipper_person
-                new_spearnet_package_log.shipper_tel = spearnet_package_info_entity.shipper_tel
-                new_spearnet_package_log.shipper_address_english = spearnet_package_info_entity.shipper_address_english
-                new_spearnet_package_log.shipper_address_chinese = spearnet_package_info_entity.shipper_address_chinese
+                new_package_info_log.shipper_company = package_info_entity.shipper_company
+                new_package_info_log.shipper_person = package_info_entity.shipper_person
+                new_package_info_log.shipper_tel = package_info_entity.shipper_tel
+                new_package_info_log.shipper_address_english = package_info_entity.shipper_address_english
+                new_package_info_log.shipper_address_chinese = package_info_entity.shipper_address_chinese
                 
-                new_spearnet_package_log.consignee_tel = spearnet_package_info_entity.consignee_tel
-                new_spearnet_package_log.consignee_name_english = spearnet_package_info_entity.consignee_name_english
-                new_spearnet_package_log.consignee_name_chinese = spearnet_package_info_entity.consignee_name_chinese
-                new_spearnet_package_log.consignee_address_english = spearnet_package_info_entity.consignee_address_english
-                new_spearnet_package_log.consignee_address_chinese = spearnet_package_info_entity.consignee_address_chinese
+                new_package_info_log.consignee_tel = package_info_entity.consignee_tel
+                new_package_info_log.consignee_name_english = package_info_entity.consignee_name_english
+                new_package_info_log.consignee_name_chinese = package_info_entity.consignee_name_chinese
+                new_package_info_log.consignee_address_english = package_info_entity.consignee_address_english
+                new_package_info_log.consignee_address_chinese = package_info_entity.consignee_address_chinese
                 
-                new_spearnet_package_log.company_id_or_personal_id = spearnet_package_info_entity.company_id_or_personal_id
-                new_spearnet_package_log.size_accumulation = spearnet_package_info_entity.size_accumulation
-                new_spearnet_package_log.declaration_need_or_not = spearnet_package_info_entity.declaration_need_or_not
-                new_spearnet_package_log.duty_paid_by = spearnet_package_info_entity.duty_paid_by
-                new_spearnet_package_log.signature_img_id = spearnet_package_info_entity.signature_img_id
-                new_spearnet_package_log.note = spearnet_package_info_entity.note
+                new_package_info_log.company_id_or_personal_id = package_info_entity.company_id_or_personal_id
+                new_package_info_log.size_accumulation = package_info_entity.size_accumulation
+                new_package_info_log.declaration_need_or_not = package_info_entity.declaration_need_or_not
+                new_package_info_log.duty_paid_by = package_info_entity.duty_paid_by
+                new_package_info_log.signature_img_id = package_info_entity.signature_img_id
+                new_package_info_log.note = package_info_entity.note
                 
-                new_spearnet_package_log.package_status = spearnet_package_info_entity.package_status
-                new_spearnet_package_log.pickup_date_time = spearnet_package_info_entity.pickup_date_time
+                new_package_info_log.package_status = package_info_entity.package_status
+                new_package_info_log.pickup_date_time = package_info_entity.pickup_date_time
                 
-                new_spearnet_package_log.access_info = spearnet_package_info_entity.access_info
-                new_spearnet_package_log.original_create_date_time = spearnet_package_info_entity.create_date_time
-                new_spearnet_package_log.original_update_date_time = spearnet_package_info_entity.update_date_time
+                new_package_info_log.access_info = package_info_entity.access_info
+                new_package_info_log.original_create_date_time = package_info_entity.create_date_time
+                new_package_info_log.original_update_date_time = package_info_entity.update_date_time
                 
-                new_spearnet_package_log.put()
+                new_package_info_log.put()
                 
-                spearnet_package_info_entity.key.delete()
+                package_info_entity.key.delete()
                 
+        #general clients package info log
+        general_clients_packages_info_for_migration = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.package_status == 'delivered')
+        if(general_clients_packages_info_for_migration.count() > 0):
+            for package_info_entity in general_clients_packages_info_for_migration:
+                new_package_info_log = GeneralClientsPackagesInfoLog(id=package_info_entity.hawb)
+                new_package_info_log.reference_number = package_info_entity.reference_number
+                new_package_info_log.tw_custom_entry_number = package_info_entity.tw_custom_entry_number
+                new_package_info_log.hawb = package_info_entity.hawb
+                new_package_info_log.ctn = package_info_entity.ctn
+                new_package_info_log.size = package_info_entity.size
+                new_package_info_log.weight_kg = package_info_entity.weight_kg
+                new_package_info_log.weight_lb = package_info_entity.weight_lb
+                new_package_info_log.commodity_detail = package_info_entity.commodity_detail
+                new_package_info_log.pcs = package_info_entity.pcs
+                new_package_info_log.unit = package_info_entity.unit
+                new_package_info_log.original = package_info_entity.original
+                new_package_info_log.deliver_to = package_info_entity.deliver_to
+                new_package_info_log.unit_price_fob_us_dollar = package_info_entity.unit_price_fob_us_dollar
+                
+                new_package_info_log.shipper_company = package_info_entity.shipper_company
+                new_package_info_log.shipper_person = package_info_entity.shipper_person
+                new_package_info_log.shipper_tel = package_info_entity.shipper_tel
+                new_package_info_log.shipper_address_english = package_info_entity.shipper_address_english
+                new_package_info_log.shipper_address_chinese = package_info_entity.shipper_address_chinese
+                
+                new_package_info_log.consignee_tel = package_info_entity.consignee_tel
+                new_package_info_log.consignee_name_english = package_info_entity.consignee_name_english
+                new_package_info_log.consignee_name_chinese = package_info_entity.consignee_name_chinese
+                new_package_info_log.consignee_address_english = package_info_entity.consignee_address_english
+                new_package_info_log.consignee_address_chinese = package_info_entity.consignee_address_chinese
+                
+                new_package_info_log.company_id_or_personal_id = package_info_entity.company_id_or_personal_id
+                new_package_info_log.size_accumulation = package_info_entity.size_accumulation
+                new_package_info_log.declaration_need_or_not = package_info_entity.declaration_need_or_not
+                new_package_info_log.duty_paid_by = package_info_entity.duty_paid_by
+                new_package_info_log.signature_img_id = package_info_entity.signature_img_id
+                new_package_info_log.note = package_info_entity.note
+                
+                new_package_info_log.package_status = package_info_entity.package_status
+                new_package_info_log.pickup_date_time = package_info_entity.pickup_date_time
+                
+                new_package_info_log.access_info = package_info_entity.access_info
+                new_package_info_log.original_create_date_time = package_info_entity.create_date_time
+                new_package_info_log.original_update_date_time = package_info_entity.update_date_time
+                
+                new_package_info_log.put()
+                package_info_entity.key.delete()
         
-        self.response.write('Cron Task Done')
+class ExShipperTrackingNumbersDeletion(webapp2.RequestHandler):
+    def get(self):
+        tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'TRUE')
+        if(tracking_numbers != None):
+            for tracking_number_entity in tracking_numbers:
+                tracking_number_entity.key.delete()
         
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
@@ -1681,9 +1734,6 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_validate_employee_account_name', ExShipperValidateEmployeeAccountName),
                                ('/exshipper_create_client_info_handler', ExShipperCreateClientInfoHandler),
                                ('/exshipper_validate_client_account_name_email', ExShipperValidateClientAccountNameEmail),
-                               ('/img', GetImage),
-                               ('/get_ref_number', GetReferenceNumber),
-                               ('/exshipper_migrate_packages_information_log', ExShipperPackagesInfoLogMigrationHandler),
                                ('/exshipper_suda_tracking_number_handler', ExShipperSUDATrackingNumberHandler),
                                ('/exshipper_tw_custom_entry_number_handler', ExShipperTWCustomEntryNumberHandler),
                                ('/exshipper_suda_tracking_number_download_handler', ExShipperSUDATrackingNumberDownloadHandler),
@@ -1706,4 +1756,8 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_general_clients_create_client_info_handler', ExShipperGeneralClientsCreateClientInfoHandler),
                                ('/exshipper_general_clients_validate_client_account_name_email', ExShipperGeneralClientsValidateClientAccountNameEmail),
                                ('/exshipper_general_clients_packages_info_update_handler', ExShipperGeneralClientsPackageInfoUpdateHandler),
-                               ('/exshipper_general_clients_packages_tracking_handler', ExShipperGeneralClientsPackageTrackingHandler)], debug=True)
+                               ('/exshipper_general_clients_packages_tracking_handler', ExShipperGeneralClientsPackageTrackingHandler),
+                               ('/img', GetImage),
+                               ('/get_ref_number', GetReferenceNumber),
+                               ('/exshipper_migrate_packages_information_handler', ExShipperPackagesInfoLogMigrationHandler),
+                               ('/exshipper_delete_tracking_numbers_handler', ExShipperTrackingNumbersDeletion)], debug=True)

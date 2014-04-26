@@ -25,6 +25,14 @@ handlers:
   script: ctrl_views.app
   secure: always
 
+- url: /exshipper_migrate_packages_information_handler
+  script: ctrl_views.app
+  login: admin
+
+- url: /exshipper_delete_tracking_numbers_handler
+  script: ctrl_views.app
+  login: admin
+
 inbound_services:
 - channel_presence
 
