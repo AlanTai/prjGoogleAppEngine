@@ -1729,10 +1729,6 @@ class ExShipperTrackingNumbersDeletion(webapp2.RequestHandler):
         if(tracking_numbers != None):
             for tracking_number_entity in tracking_numbers:
                 tracking_number_entity.key.delete()
-        tracking_numbers = TWCustomEntryTrackingNumber.query(TWCustomEntryTrackingNumber.used_mark == 'TRUE')
-        if(tracking_numbers != None):
-            for tracking_number_entity in tracking_numbers:
-                tracking_number_entity.key.delete()
         
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
