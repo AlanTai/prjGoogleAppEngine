@@ -700,7 +700,7 @@ class ExShipperSpearnetLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_spearnet_login_page
             html_page_title = my_dict.exshipper_spearnet_login_page_title
             
-        template_values = {'title':html_page_title, 'dispatch_token':dispatch_token}
+        template_values.update({'title':html_page_title, 'dispatch_token':dispatch_token})
         template_values.update(user_info)
         template = jinja_environment.get_template(html_page)
         self.response.out.write(template.render(template_values))
