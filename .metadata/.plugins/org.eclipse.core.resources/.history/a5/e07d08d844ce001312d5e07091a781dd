@@ -423,12 +423,7 @@
 				blank_field = blank_field + $(this).attr('id') + '\n';
 				isInfoValid = false;
 				$(this).css({
-					'border-color':'#f00'
-				});
-			}
-			else if($(this).attr('type') === 'text'){
-				$(this).css({
-					'border-color':'#a2c1ff'
+					
 				});
 			}
 		});
@@ -436,14 +431,6 @@
 			if($(this).val() === ''){
 				blank_field = blank_field + $(this).attr('id') + '\n';
 				isInfoValid = false;
-				$(this).css({
-					'border-color':'#f00'
-				});
-			}
-			else{
-				$(this).css({
-					'border-color':'#a2c1ff'
-				});
 			}
 		});
 		

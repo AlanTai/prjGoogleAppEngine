@@ -256,7 +256,7 @@
 				onclick="PrintElem('#added_labels','Labels')"
 				style="margin: 10px auto; width: 150px;">
 			<div id="added_labels"
-				style="width: 500px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 			<div id="printed_labels"></div>
 
 		</div>
@@ -361,6 +361,7 @@
 			}
 		}
 	}
+
 	//end commodity
 
 	//
@@ -422,28 +423,12 @@
 			if($(this).attr('type') === 'text' && $(this).val() === ''){
 				blank_field = blank_field + $(this).attr('id') + '\n';
 				isInfoValid = false;
-				$(this).css({
-					'border-color':'#f00'
-				});
-			}
-			else if($(this).attr('type') === 'text'){
-				$(this).css({
-					'border-color':'#a2c1ff'
-				});
 			}
 		});
 		$('#invoice_form').find('textarea').each(function(){
 			if($(this).val() === ''){
 				blank_field = blank_field + $(this).attr('id') + '\n';
 				isInfoValid = false;
-				$(this).css({
-					'border-color':'#f00'
-				});
-			}
-			else{
-				$(this).css({
-					'border-color':'#a2c1ff'
-				});
 			}
 		});
 		

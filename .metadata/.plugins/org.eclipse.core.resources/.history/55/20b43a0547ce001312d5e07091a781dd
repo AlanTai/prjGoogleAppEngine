@@ -2,7 +2,6 @@
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Packages Labels</p>
-	<input type="button" value="Show All Labels" onclick="showAllLabels()" > <input type="button" value="Remove All Labels" onclick="removeAllLabels()" >
 	<hr>
 </div>
 
@@ -24,7 +23,9 @@
 				onclick="PrintElem('#packages_labels','Packages Labels')"
 				style="margin: 10px auto; width: 150px;">
 			<div id="packages_labels"
-				style="width: 500px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<div id="printed_labels"></div>
+
 		</div>
 	</div>
 	<br>
@@ -117,8 +118,8 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 							+ "{{single_row_data.hawb}}"
 							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
-							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 寄件者: '
-								+ "{{single_row_data.shipper_company}}"
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 寄件者/公司: '
+								+ "{{single_row_data.shipper_person}}" + " / " + "{{single_row_data.shipper_company}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 地址: '
 								+ "{{single_row_data.shipper_address_english}}"
@@ -171,10 +172,10 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 				.append(
 						'<form id="label_'
 							+ "{{single_row_data.hawb}}"
-							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
+							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 5px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size: 20px; font-weight: bold;">ExShipper</p>'	
-							+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 寄件者: '
-								+ "{{single_row_data.shipper_company}}"
+							+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 寄件者/公司: '
+								+ "{{single_row_data.shipper_person}}" + " / " + "{{single_row_data.shipper_company}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 地址: '
 								+ "{{single_row_data.shipper_address_english}}"
@@ -221,6 +222,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		{% endfor %}
 		{% endif %}
 
+		
 	//onclick
 	function selectOrRemove(elem) {
 		var select_status = $(elem).find('input').attr('value');
@@ -237,7 +239,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 			});
 		}
 	}
-	
+
 	//remove labels
 	$(function(){
 		$('#packages_info > form').find('input[type=button]').each(function(){
@@ -259,8 +261,7 @@ var general_clients_packages_info = "{{ general_clients_packages_info }}";
 		
 		$('#packages_labels > form').each(function(){
 			$(this).css({
-				'display' : 'inline-block',
-				'margin' : '8px 8px'
+				'display' : 'block'
 			});
 		});
 	}

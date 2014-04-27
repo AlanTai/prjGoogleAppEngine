@@ -440,11 +440,6 @@
 					'border-color':'#f00'
 				});
 			}
-			else{
-				$(this).css({
-					'border-color':'#a2c1ff'
-				});
-			}
 		});
 		
 		if(isInfoValid){

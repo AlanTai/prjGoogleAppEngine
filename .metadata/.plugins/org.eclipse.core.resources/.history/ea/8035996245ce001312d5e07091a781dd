@@ -24,7 +24,7 @@
 				onclick="PrintElem('#packages_labels','Packages Labels')"
 				style="margin: 10px auto; width: 150px;">
 			<div id="packages_labels"
-				style="width: 500px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 		</div>
 	</div>
 	<br>
