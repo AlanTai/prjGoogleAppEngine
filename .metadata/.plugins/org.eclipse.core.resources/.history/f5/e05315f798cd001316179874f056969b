@@ -1,4 +1,5 @@
 {% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
 <script type="text/javascript">
 	window.onload = function() {
 		history.pushState(null, null, location.href);
@@ -19,15 +20,15 @@
 <div id="invoice_container"
 	style="position: absolute; top: 80px; text-align: center; width: 100%; z-index: 1;">
 	<div id="keyin_info" style="text-align: center; margin: 0px auto;">
-		<form>
+		<form id="invoice_form">
 			<br>
 			<div>
 				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
 					SUDA Tracking Number:</p>
 				<input type="text" id="id_suda_tr_number" name="suda_tr_number"
-					style="display: inline-block; margin: 5px 1px; text-align: center;"
-					size="50" placeholder="Click the button to get SUDA Number"
-					required="required" />
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					placeholder="Click the button to get SUDA Number"
+					disabled="disabled" required="required" />
 				<div style="display: inline-block;">
 					<input type="button" value="Get SUDA Tracking Number"
 						onclick="getSUDATrackingNumber()" /> <select
@@ -39,23 +40,76 @@
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-					<span style="display: block;">Customer Reference Number: </span>
+					<span style="display: block;">Reference Number: </span>
 				</p>
 				<input type="text" id="id_reference_number" name="reference_number"
-					placeholder="Customer Reference Number"
-					style="display: inline-block; margin: 5px 1px; text-align: center;"
-					size="50" required="required" />
+					style="display: inline-block; margin: 5px 1px;" size="50" disabled
+					required="required" />
 			</div>
-			<br> <br>
+			<br>
+
+
+			<!--  -->
+			<div style="padding: 5px; background-color: #efefef;">
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper (Company): (If
+							Shipper is Person, please key in NA)</span>
+					</p>
+					<input type="text" id="id_shipper_company" name="shipper_company"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper (Person): (If Shipper
+							is Company, please key in NA)</span>
+					</p>
+					<input type="text" id="id_shipper_person" name="shipper_person"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Address (English):</span>
+					</p>
+					<input type="text" id="id_shipper_address_english"
+						name="shipper_address_english"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Address (Chinese):</span>
+					</p>
+					<input type="text" id="id_shipper_address_chinese"
+						name="shipper_address_chinese"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Phone Number:</span>
+					</p>
+					<input type="text" id="id_shipper_phone_number"
+						name="shipper_phone_number"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+			</div>
+			<!-- end -->
+
+			<br>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 					<span style="display: block;">Consignee Name (English):</span>
 				</p>
 				<input type="text" id="id_consignee_name_english"
 					name="consignee_name_english"
-					placeholder="Consignee Name (English)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;"
-					size="50" required="required">
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -63,9 +117,8 @@
 				</p>
 				<input type="text" id="id_consignee_name_chinese"
 					name="consignee_name_chinese"
-					placeholder="Consignee Name (Chinese)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;"
-					size="50" required="required">
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -73,9 +126,8 @@
 				</p>
 				<input type="text" id="id_consignee_address_english"
 					name="consignee_address_english"
-					placeholder="Consignee Address (English)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;"
-					size="50" required="required">
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
@@ -83,18 +135,17 @@
 				</p>
 				<input type="text" id="id_consignee_address_chinese"
 					name="consignee_address_english"
-					placeholder="Consignee Address (Chinese)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;"
-					size="50" required="required">
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
 			</div>
 			<div>
 				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 					<span style="display: block;">Consignee Phone Number:</span>
 				</p>
 				<input type="text" id="id_consignee_phone_number"
-					name="consignee_phone_number" placeholder="Consignee Phone Number"
-					style="display: inline-block; margin: 5px 1px; text-align: center;"
-					size="50" required="required">
+					name="consignee_phone_number"
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
 			</div>
 
 			<br>
@@ -106,28 +157,59 @@
 					</p>
 					<input type="text" id="id_unit_price_fob_us_dollar"
 						name="unit_price_fob_us_dollar"
-						placeholder="Unit Price FOB (US Dollar)"
-						style="display: inline-block; margin: 5px 1px; text-align: center;"
-						size="50" required="required">
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
 				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Deliver To (Local Logistics
+							Company):</span>
+					</p>
+					<input type="text" id="id_deliver_to" name="deliver_to"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 						<span style="display: block;">CTN.</span>
 					</p>
-					<input type="text" id="id_ctn" name="ctn" placeholder="CTN."
-						style="display: inline-block; margin: 5px 1px; text-align: center;"
-						size="50" required="required">
+					<input type="text" id="id_ctn" name="ctn"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
 				</div>
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 						<span style="display: block;">PCS.</span>
 					</p>
-					<input type="text" id="id_pcs" name="pcs" placeholder="PCS"
-						style="display: inline-block; margin: 5px 1px; text-align: center;"
-						size="50" required="required">
+					<input type="text" id="id_pcs" name="pcs"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
 				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Unit</span>
+					</p>
+					<input type="text" id="id_unit" name="unit"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
 			</div>
 			<!-- end -->
+
+			<div>
+				<p style="display: inline-block; width: 450px;">Size (inch):</p>
+				<input type="text" id="id_length" name="length"
+					style="display: inline-block; width: 110px; text-align: center;"
+					size="10" min="0" placeholder="Length"> <input type="text"
+					id="id_width" name="width"
+					style="display: inline-block; width: 110px; text-align: center;"
+					size="10" min="0" placeholder="Width" required="required">
+				<input type="text" id="id_height" name="height"
+					style="display: inline-block; width: 110px; text-align: center;"
+					size="10" min="0" placeholder="Height" required="required">
+			</div>
 			<div>
 				<p style="display: inline-block; width: 450px;">Weight (kg):</p>
 				<input type="text" id="id_weight" name="weight"
@@ -184,6 +266,31 @@
 
 <script type="text/javascript">
 	//
+	$(get_reference_number());
+	function get_reference_number() {
+		$.ajax('/get_ref_number', {
+			type : 'POST',
+			data : {
+				key : 'get_package_reference_number'
+
+			},
+			success : update_reference_number,
+			statusCode : {
+				400 : function() {
+					alert('400 status code! user-side error');
+				},
+				500 : function() {
+					alert('500 status code! server-side error');
+				}
+			}
+		});
+	}
+
+	function update_reference_number(response) {
+		$('#id_reference_number').val(response.exshipper_package_number);
+	};
+
+	//
 	function addNewCommodity() {
 		$('#id_commodity_detail')
 				.append(
@@ -233,9 +340,9 @@
 											.focus();
 									return true;
 								} else {
+									//add slash before single quote
 									commodity_obj.name = $(this).find(
 											'input#id_commodity_name').val();
-
 									commodity_obj.quan = $(this).find(
 											'input#id_commodity_quantity')
 											.val();
@@ -309,119 +416,99 @@
 	/*add new package information*/
 	var info_array = [];
 	function Add() {
-		var suda_tr_number = $('#id_suda_tr_number').val();
-		var reference_number = $('#id_reference_number').val();
+		var suda_tr_number;
+		var reference_number;
+		var shipper_company;
+		var shipper_person;
+		var shipper_phone_number;
+		var shipper_address_english;
+		var shipper_address_chinese;
 
-		var consignee_name_english = $('#id_consignee_name_english').val();
-		var consignee_name_chinese = $('#id_consignee_name_chinese').val();
-		var consignee_address_english = $('#id_consignee_address_english')
-				.val();
-		var consignee_address_chinese = $('#id_consignee_address_chinese')
-				.val();
-		var consignee_phone_number = $('#id_consignee_phone_number').val()
+		var consignee_name_english;
+		var consignee_name_chinese;
+		var consignee_address_english;
+		var consignee_address_chinese;
+		var consignee_phone_number;
 
-		var unit_price_fob_us_dollar = $('#id_unit_price_fob_us_dollar').val();
-		var note = $('#id_note').val();
+		var unit_price_fob_us_dollar;
+		var deliver_to;
+		var note;
 
-		var ctn = $('#id_ctn').val();
-		var pcs = $('#id_pcs').val();
-		var weight = $('#id_weight').val();
+		var ctn;
+		var pcs;
+		var unit;
 
-		// check information
-		if (suda_tr_number === '') {
-			$('#id_suda_tr_number').focus();
-			return true;
-		} else {
-			suda_tr_number = suda_tr_number.trim();
-			$('#id_suda_tr_number').val(suda_tr_number);
-		}
-		if (reference_number === '') {
-			$('#id_reference_number').focus();
-			return true;
-		} else {
-			reference_number = reference_number.trim();
-			$('#id_reference_number').val(reference_number);
+		var size_length;
+		var size_width;
+		var size_height;
+		var weight;
+		var isInfoValid = true;
+		var blank_field = 'Blank Field(s):\n';
+		$('#invoice_form').find('input').each(function(){
+			if($(this).attr('type') === 'text' && $(this).val() === ''){
+				blank_field = blank_field + $(this).attr('title') + '\n';
+				isInfoValid = false;
+				$(this).focus();
+			}
+		});
+		$('#invoice_form').find('textarea').each(function(){
+			if($(this).val() === ''){
+				blank_field = blank_field + $(this).attr('title') + '\n';
+				isInfoValid = false;
+			}
+		});
+		if(isInfoValid){
+			suda_tr_number = $('#id_suda_tr_number').val();
+			reference_number = $('#id_reference_number').val();
+			shipper_company = $('#id_shipper_company').val();
+			shipper_person = $('#id_shipper_person').val();
+			shipper_phone_number = $('#id_shipper_phone_number').val();
+			shipper_address_english = $('#id_shipper_address_english').val();
+			shipper_address_chinese = $('#id_shipper_address_chinese').val();
+
+			consignee_name_english = $('#id_consignee_name_english').val();
+			consignee_name_chinese = $('#id_consignee_name_chinese').val();
+			consignee_address_english = $('#id_consignee_address_english')
+					.val();
+			consignee_address_chinese = $('#id_consignee_address_chinese')
+					.val();
+			consignee_phone_number = $('#id_consignee_phone_number').val()
+
+			unit_price_fob_us_dollar = $('#id_unit_price_fob_us_dollar').val();
+			deliver_to = $('#id_deliver_to').val();
+			note = $('#id_note').val();
+
+			ctn = $('#id_ctn').val();
+			pcs = $('#id_pcs').val();
+			unit = $('#id_unit').val();
+
+			size_length = $('#id_length').val();
+			size_width = $('#id_width').val();
+			size_height = $('#id_height').val();
+			weight = $('#id_weight').val();
 		}
 
-		//consignee english
-		if (consignee_name_english === '') {
-			$('#id_consignee_name_english').focus();
+		//check if numbers are valid
+		if (!numberFilter(size_length)) {
+			alert('Please type in a number for the length!');
+			$('#id_length').focus();
 			return true;
-		} else {
-			consignee_name_english = consignee_name_english.trim();
-			$('#id_consignee_name_english').val(consignee_name_english);
 		}
-
-		if (consignee_name_chinese === '') {
-			$('#id_consignee_name_chinese').focus();
+		if (!numberFilter(size_width)) {
+			alert('Please type in a number for the width!');
+			$('#id_width').focus();
 			return true;
-		} else {
-			consignee_name_chinese = consignee_name_chinese.trim();
-			$('#id_consignee_name_chinese').val(consignee_name_chinese);
 		}
-
-		//consignee address
-		if (consignee_address_english === '') {
-			$('#id_consignee_address_english').focus();
+		if (!numberFilter(size_height)) {
+			alert('Please type in a number for the height!');
+			$('#id_height').focus();
 			return true;
-		} else {
-			consignee_address_english = consignee_address_english.trim();
-			$('#id_consignee_address_english').val(consignee_address_english);
 		}
-
-		if (consignee_address_chinese === '') {
-			$('#id_consignee_address_chinese').focus();
-			return true;
-		} else {
-			consignee_address_chinese = consignee_address_chinese.trim();
-			$('#id_consignee_address_chinese').val(consignee_address_chinese);
-		}
-
-		if (consignee_phone_number === '') {
-			$('#id_consignee_phone_number').focus();
-			return true;
-		} else {
-			consignee_phone_number = consignee_phone_number.trim();
-			$('#id_consignee_phone_number').val(consignee_phone_number);
-		}
-		//end
-
-		if (unit_price_fob_us_dollar === '') {
-			$('#id_unit_price_fob_us_dollar').focus();
-			return true;
-		} else {
-			unit_price_fob_us_dollar = unit_price_fob_us_dollar.trim();
-			$('#id_unit_price_fob_us_dollar').val(unit_price_fob_us_dollar);
-		}
-		if (note === '') {
-			$('#id_note').focus();
-			return true;
-		} else {
-			note = note.trim();
-			$('#id_note').val(note);
-		}
-		//end
-
-		if (ctn === '') {
-			$('#id_ctn').focus();
-			return true;
-		} else {
-			ctn = ctn.trim();
-			$('#id_ctn').val(ctn);
-		}
-		if (pcs === '') {
-			$('#id_pcs').focus();
-			return true;
-		} else {
-			pcs = pcs.trim();
-			$('#id_pcs').val(pcs);
-		}
-		if (!$.isNumeric(weight)) {
+		if (!numberFilter(weight)) {
 			alert('Please type in a number for the weight!');
 			$('#id_weight').focus();
 			return true;
 		}
-
 		// end of checking information
 
 		//check commodity detail
@@ -461,21 +548,31 @@
 			'display' : 'block'
 		});
 
-		$.ajax('/exshipper_spearnet_create_invoice_info_handler', {
+		$.ajax('/exshipper_invoice_info_handler', {
 			type : 'POST',
 			data : {
 				fmt : 'json',
 				valid_suda_tr_number : suda_tr_number,
 				valid_ref_number : reference_number,
+				valid_shipper_company : shipper_company,
+				valid_shipper_person : shipper_person,
+				valid_shipper_phone_number : shipper_phone_number,
+				valid_shipper_address_english : shipper_address_english,
+				valid_shipper_address_chinese : shipper_address_chinese,
 				valid_consignee_name_english : consignee_name_english,
 				valid_consignee_name_chinese : consignee_name_chinese,
 				valid_consignee_address_english : consignee_address_english,
 				valid_consignee_address_chinese : consignee_address_chinese,
 				valid_consignee_phone_number : consignee_phone_number,
 				valid_unit_price_fob_us_dollar : unit_price_fob_us_dollar,
+				valid_deliver_to : deliver_to,
 				valid_note : note,
 				valid_ctn : ctn,
 				valid_pcs : pcs,
+				valid_unit : unit,
+				valid_size_length : size_length,
+				valid_size_width : size_width,
+				valid_size_height : size_height,
 				valid_weight : weight,
 				valid_commodity_detail : commodity_detail_obj
 
@@ -513,7 +610,7 @@
 								+ reference_number
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
-								+ 'Spearnet'
+								+ shipper_company
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
 								+ consignee_name_english
@@ -538,16 +635,18 @@
 				.append(
 						'<form id="label_'
 							+ suda_tr_number
-							+ '" style="border: 1px solid; width: 340px; margin: 8px 7px; padding: 2px 2px; display:inline-block; text-align: left;">'
-								+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">Spearnet</p>'
-								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者: '
-								+ 'Spearnet'
+							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
+								+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者/公司: '
+								+ shipper_person
+								+ " / "
+								+ shipper_company
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
-								+ '1941 W Ave 140th, San Leandro, CA 94577'
+								+ shipper_address_english
 								+ '</p>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 電話: '
-								+ '510-351-8903'
+								+ shipper_phone_number
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 收件者: '
@@ -625,6 +724,9 @@
 				'display' : 'inline-block'
 			});
 		}
+
+		/* remove element */
+		// $(elem).remove();
 	}
 </script>
 

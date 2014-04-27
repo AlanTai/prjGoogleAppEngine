@@ -416,7 +416,7 @@
 			pcs = pcs.trim();
 			$('#id_pcs').val(pcs);
 		}
-		if (!$.isNumeric(weight)) {
+		if (!numberFilter(weight)) {
 			alert('Please type in a number for the weight!');
 			$('#id_weight').focus();
 			return true;

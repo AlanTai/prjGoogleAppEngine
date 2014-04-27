@@ -356,7 +356,9 @@
 				return false;
 			}
 
-			if (!isInfoValid) {
+			if (isInfoValid) {
+				alert('All information valid');
+			} else {
 				alert(blank_field);
 				return false;
 			}
