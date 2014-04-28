@@ -3,6 +3,7 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Packages Labels</p>
 	<input type="button" value="Show All Labels" onclick="showAllLabels()" > <input type="button" value="Remove All Labels" onclick="removeAllLabels()" >
+	<p id="amount_of_packages" style="color: #f00"></p>
 	<hr>
 </div>
 
@@ -38,6 +39,7 @@
 var spearnet_packages_info = "{{ spearnet_packages_info }}";
 var general_clients_packages_info = "{{ general_clients_packages_info }}";
 var suda_tracking_numbers_ary = new Array();
+var amount_of_packages = 0;
 		//append type-in info to html element
 		{% if spearnet_packages_info %}
 		{% for single_row_data in spearnet_packages_info %}
@@ -73,6 +75,7 @@ var suda_tracking_numbers_ary = new Array();
 								+ '</div>'
 								+ '<br></form>');
 		suda_tracking_numbers_ary.push('{{ single_row_data.hawb }}');
+		++amount_of_packages;
 		{% endfor %}
 		{% endif %}
 		
@@ -110,8 +113,11 @@ var suda_tracking_numbers_ary = new Array();
 								+ '</div>'
 								+ '<br></form>');
 		suda_tracking_numbers_ary.push('{{ single_row_data.hawb }}');
+		++amount_of_packages;
 		{% endfor %}
 		{% endif %}
+		
+		$('#amount_of_packages').text('Amount of Packages- ' + amount_of_packages);
 		// change color
 		$('#packages_info> form:even').css('background-color', '#dedede');
 		$('#packages_info> form:odd').css('background-color', '#f9f9f9');

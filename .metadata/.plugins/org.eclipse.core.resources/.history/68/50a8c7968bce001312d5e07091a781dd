@@ -37,7 +37,6 @@
 <script type="text/javascript">
 var spearnet_packages_info = "{{ spearnet_packages_info }}";
 var suda_tracking_numbers_ary = new Array();
-var amount_of_spearnet_packages = 0;
 		//append type-in info to html element
 		{% if spearnet_packages_info %}
 		{% for single_row_data in spearnet_packages_info %}
@@ -73,7 +72,6 @@ var amount_of_spearnet_packages = 0;
 								+ '<br></form>');
 		
 		suda_tracking_numbers_ary.push('{{ single_row_data.hawb }}');
-		++amount_of_spearnet_packages;
 		{% endfor %}
 		{% endif %}
 		
@@ -137,7 +135,6 @@ var amount_of_spearnet_packages = 0;
 		
 		{% endfor %}
 		{% endif %}
-		$('#amount_of_spearnet_packages').text('Amount of Spearnet Customers\' Packages- ' + amount_of_spearnet_packages);
 		
 	//
 	function selectOrRemove(elem) {

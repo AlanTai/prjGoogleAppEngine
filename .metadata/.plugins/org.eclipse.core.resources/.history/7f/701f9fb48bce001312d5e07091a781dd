@@ -137,7 +137,7 @@ var amount_of_spearnet_packages = 0;
 		
 		{% endfor %}
 		{% endif %}
-		$('#amount_of_spearnet_packages').text('Amount of Spearnet Customers\' Packages- ' + amount_of_spearnet_packages);
+		$('#amount_of_spearnet_packages').text('Amount of Spearnet Packages- ' + amount_of_spearnet_packages);
 		
 	//
 	function selectOrRemove(elem) {
