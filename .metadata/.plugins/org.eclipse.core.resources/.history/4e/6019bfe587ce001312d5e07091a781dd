@@ -46,7 +46,7 @@ var tw_custom_entry_numbers_ary = new Array();
 		$('#packages_info')
 				.append(
 						'<form name="'
-							+ "{{ single_row_data.barcode_number }}" + '"'
+							+ "{{ single_row_data.barcode_number }}"
 							+ ' id="package_info_' + "{{ single_row_data.barcode_number }}" + '"'
 							+ '>'
 								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'

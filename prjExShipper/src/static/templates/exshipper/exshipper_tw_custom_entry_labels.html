@@ -14,6 +14,10 @@
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
 		<div style="border: 1px thin; border-color: #666; display: block;">
 			<p>Packages Information</p>
+			<div>
+				<input id="tw_custom_entry_tracking_number" type="text" placeholder="TW Custom Entry Tracking Number" style="width: 250px ; text-align: center;"> <input id="search_package_info" type="button" value="Search">
+			</div>
+			<br>
 			<div id="packages_info"
 				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 			<br>
@@ -33,6 +37,7 @@
 </div>
 
 <script type="text/javascript">
+var tw_custom_entry_numbers_ary = new Array();
 
 		//append type-in info to html element
 		{% if tw_custom_entry_info %}
@@ -41,8 +46,9 @@
 		$('#packages_info')
 				.append(
 						'<form name="'
-							+ "{{ single_row_data.barcode_number }}"
-							+ '">'
+							+ "{{ single_row_data.barcode_number }}" + '"'
+							+ ' id="package_info_' + "{{ single_row_data.barcode_number }}" + '"'
+							+ '>'
 								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
 								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '
@@ -101,6 +107,9 @@
 					fontSize : 16
 				});
 		
+		//add tw custom entry tracking number into array for auto-complete function
+		tw_custom_entry_numbers_ary.push("{{single_row_data.barcode_number}}");
+		
 		{% endfor %}
 		{% endif %}
 		
@@ -132,6 +141,25 @@
     	})
 	});
 
-</script>
+	
+	//auot-scroll to searched item
+	$('#search_package_info').click(function() {
+		try{
+			var tw_custom_entry_tracking_number = $('#tw_custom_entry_tracking_number').val();
+			$('#packages_info').animate({
+				scrollTop : $("#package_info_" + tw_custom_entry_tracking_number).offset().top - 300
+			}, 800);
+		}
+		catch(err){
+			console.log('No such information in the TW Custom Entry tracking numbers\' array; Error Message: ' + err);
+		}
+		
+	});
 
+	//autocomplete
+	$("#tw_custom_entry_tracking_number").autocomplete({
+		source : tw_custom_entry_numbers_ary
+	});
+	//end
+</script>
 {% endblock %}
