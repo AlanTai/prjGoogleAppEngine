@@ -1,0 +1,310 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper Packages Labels</p>
+	<input type="button" value="Show All Labels" onclick="showAllLabels()" > <input type="button" value="Remove All Labels" onclick="removeAllLabels()" >
+	<hr>
+</div>
+
+
+<div id="package_labels_container"
+	style="position: absolute; top: 130px; text-align: center; width: 100%; z-index: 1;">
+	
+	
+	<div id="print_area" style="text-align: center; margin: 0px auto;">
+		<div style="border: 1px thin; border-color: #666; display: block;">
+			<p>Packages Information</p>
+			<div>
+				<input id="suda_tracking_number" type="text" placeholder="SUDA Tracking Number" style="text-align: center;"> <input id="search_package_info" type="button" value="Search">
+			</div>
+			<br>
+			<div id="packages_info"
+				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<br>
+		</div>
+
+		<div style="border-color: #666; display: block;">
+			<input id="print_label" type="button" value="Print Labels"
+				onclick="PrintElem('#packages_labels','Packages Labels')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="packages_labels"
+				style="width: 500px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+		</div>
+	</div>
+	<br>
+</div>
+
+<script type="text/javascript">
+var spearnet_packages_info = "{{ spearnet_packages_info }}";
+var general_clients_packages_info = "{{ general_clients_packages_info }}";
+var suda_tracking_numbers_ary = new Array();
+		//append type-in info to html element
+		{% if spearnet_packages_info %}
+		{% for single_row_data in spearnet_packages_info %}
+		$('#packages_info')
+				.append(
+						'<form name="'
+							+ "{{ single_row_data.hawb }}"
+							+ 'id="package_info_' + "{{ single_row_data.hawb }}"
+							+ '">'
+								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
+								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '
+								+ "{{ single_row_data.hawb }}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '
+								+ "{{ single_row_data.reference_number }}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
+								+ "{{single_row_data.shipper_company}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
+								+ "{{single_row_data.consignee_name_english}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '
+								+ "{{single_row_data.consignee_name_chinese}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Address: '
+								+ "{{single_row_data.consignee_address_english}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
+								+ "{{single_row_data.consignee_phone_number}}"
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+		suda_tracking_numbers_ary.push('{{ single_row_data.hawb }}');
+		{% endfor %}
+		{% endif %}
+		
+		{% if general_clients_packages_info %}
+		{% for single_row_data in general_clients_packages_info %}
+		$('#packages_info')
+				.append(
+						'<form name="'
+							+ "{{ single_row_data.hawb }}"
+							+ 'id="package_info_' + "{{ single_row_data.hawb }}"
+							+ '">'
+								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
+								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '
+								+ "{{ single_row_data.hawb }}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '
+								+ "{{ single_row_data.reference_number }}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
+								+ "{{single_row_data.shipper_company}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
+								+ "{{single_row_data.consignee_name_english}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '
+								+ "{{single_row_data.consignee_name_chinese}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Address: '
+								+ "{{single_row_data.consignee_address_english}}"
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
+								+ "{{single_row_data.consignee_phone_number}}"
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+		suda_tracking_numbers_ary.push('{{ single_row_data.hawb }}');
+		{% endfor %}
+		{% endif %}
+		// change color
+		$('#packages_info> form:even').css('background-color', '#dedede');
+		$('#packages_info> form:odd').css('background-color', '#f9f9f9');
+		// end change color
+
+		{% if spearnet_packages_info %}
+		{% for single_row_data in spearnet_packages_info %}
+		$('#packages_labels')
+				.append(
+						'<form id="label_'
+							+ "{{single_row_data.hawb}}"
+							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
+							+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
+							+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 寄件者: '
+								+ "{{single_row_data.shipper_company}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 地址: '
+								+ "{{single_row_data.shipper_address_english}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 電話: '
+								+ "{{single_row_data.shipper_tel}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 收件者: '
+								+ "{{single_row_data.consignee_name_chinese}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 地址: '
+								+ "{{single_row_data.consignee_address_chinese}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px; "> 電話: '
+								+ "{{single_row_data.consignee_tel}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">Ref. NO. '
+								+ "{{single_row_data.reference_number}}"
+								+ '</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">'
+								+ "{{single_row_data.weight_kg}}"
+								+ ' (kg)</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">易碎</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">配送方式: '
+								+ "{{single_row_data.note}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center; font-size: 13px;">追蹤碼(SUDA/統一速達)</div>'
+								+ '<div class="barcode" id="barcode_'
+							+ "{{single_row_data.hawb}}"
+							+ '" style="margin: 2px auto; text-align:center; display: block;"></div>'
+								+ '</form>');
+
+		$('#packages_labels> form[id="label_' + "{{single_row_data.hawb}}" + '"]').find(
+				'div#barcode_' + "{{single_row_data.hawb}}").barcode("{{single_row_data.hawb}}",
+				'code39', {
+					barWidth : 2,
+					barHeight : 45,
+					fontSize : 13
+				});
+		
+		{% endfor %}
+		{% endif %}
+		
+		{% if general_clients_packages_info %}
+		{% for single_row_data in general_clients_packages_info %}
+		$('#packages_labels')
+				.append(
+						'<form id="label_'
+							+ "{{single_row_data.hawb}}"
+							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
+							+ '<p style="width: 100%; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size: 20px; font-weight: bold;">ExShipper</p>'	
+							+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 寄件者: '
+								+ "{{single_row_data.shipper_company}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 地址: '
+								+ "{{single_row_data.shipper_address_english}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 電話: '
+								+ "{{single_row_data.shipper_tel}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 收件者: '
+								+ "{{single_row_data.consignee_name_chinese}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 地址: '
+								+ "{{single_row_data.consignee_address_chinese}}"
+								+ '</p>'
+								+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 電話: '
+								+ "{{single_row_data.consignee_tel}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">Ref. NO. '
+								+ "{{single_row_data.reference_number}}"
+								+ '</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">'
+								+ "{{single_row_data.weight_kg}}"
+								+ ' (kg)</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">易碎</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">配送方式: '
+								+ "{{single_row_data.note}}"
+								+ '</p>'
+								+ '<hr>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center; font-size: 12px; ">追蹤碼(SUDA/統一速達)</div>'
+								+ '<div class="barcode" id="barcode_'
+							+ "{{single_row_data.hawb}}"
+							+ '" style="margin: 2px auto; text-align:center;"></div>'
+								+ '</form>');
+
+		$('#packages_labels> form[id="label_' + "{{single_row_data.hawb}}" + '"]').find(
+				'div#barcode_' + "{{single_row_data.hawb}}").barcode("{{single_row_data.hawb}}",
+				'code39', {
+					barWidth : 2,
+					barHeight : 45,
+					fontSize : 16
+				});
+		
+		{% endfor %}
+		{% endif %}
+
+	//onclick
+	function selectOrRemove(elem) {
+		var select_status = $(elem).find('input').attr('value');
+		var elem_name = $(elem).attr('name');
+		if (select_status === 'Remove') {
+			$(elem).find('input').val('Select');
+			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'none'
+			});
+		} else {
+			$(elem).find('input').val('Remove');
+			$('#packages_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'inline-block'
+			});
+		}
+	}
+	
+	//remove labels
+	$(function(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Select');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'none'
+			});
+		});
+	});
+	
+	//show all labels
+	function showAllLabels(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Remove');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'inline-block',
+				'margin' : '8px 8px'
+			});
+		});
+	}
+	
+	//remove all labels
+	function removeAllLabels(){
+		$('#packages_info > form').find('input[type=button]').each(function(){
+			$(this).val('Select');
+		});
+		
+		$('#packages_labels > form').each(function(){
+			$(this).css({
+				'display' : 'none'
+			});
+		});
+	}
+	
+	//auot-scroll to searched item
+	$('#search_package_info').click(function() {
+		try{
+			var suda_tracking_number = $('#suda_tracking_number').val();
+			$("#package_info_" + suda_tracking_number).animate({
+				'':''
+			}, 800);
+		}
+		catch(err){
+			console.log('No such information in the SUDA tracking numbers\' array; Error Message: ' + err);
+		}
+		
+	});
+
+	//autocomplete
+	$("#suda_tracking_number").autocomplete({
+		source : suda_tracking_numbers_ary
+	});
+	//end
+</script>
+
+{% endblock %}

@@ -292,12 +292,6 @@
 					'background-color', '#f9f9f9');
 			// end of distinct row color
 
-			//autocomplete
-			$("#packages_suda_tracking_numbers").autocomplete({
-				source : packages_suda_tracking_numbers_ary
-			});
-			//end
-
 			//fields update mechanism
 			function updateClientSignature() {
 				var client_signature_id = $(
@@ -407,7 +401,7 @@
 				});
 			}
 			
-			
+			//auot-scroll to searched item
 			$('#search_suda_tracking_number').click(function() {
 				try{
 					var suda_tracking_number = $('#packages_suda_tracking_numbers').val();
@@ -420,7 +414,12 @@
 				}
 				
 			});
-			
+
+			//autocomplete
+			$("#packages_suda_tracking_numbers").autocomplete({
+				source : packages_suda_tracking_numbers_ary
+			});
+			//end
 		</script>
 	</div>
 
