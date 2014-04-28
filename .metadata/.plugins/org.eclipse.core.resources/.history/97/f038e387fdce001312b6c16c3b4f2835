@@ -16,7 +16,7 @@
 		<div style="border: 1px thin; border-color: #666; display: block;">
 			<p>Packages Information</p>
 			<div>
-				<input id="suda_tracking_number" type="text" placeholder="SUDA Tracking Number" style="text-align: center; width: 250px;"> <input id="search_package_info" type="button" value="Search">
+				<input id="suda_tracking_number" type="text" placeholder="SUDA Tracking Number" style="text-align: center;"> <input id="search_package_info" type="button" value="Search">
 			</div>
 			<br>
 			<div id="packages_info"
@@ -45,9 +45,8 @@ var amount_of_spearnet_packages = 0;
 		$('#packages_info')
 				.append(
 						'<form name="'
-							+ "{{ single_row_data.hawb }}" + '"'
-							+ 'id="package_info_' + "{{ single_row_data.hawb }}" + '"'
-							+ '>'
+							+ "{{ single_row_data.hawb }}"
+							+ '">'
 								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
 								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '

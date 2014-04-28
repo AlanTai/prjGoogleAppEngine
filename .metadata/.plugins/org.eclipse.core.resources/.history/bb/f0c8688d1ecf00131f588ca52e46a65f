@@ -14,7 +14,7 @@
 	<p style="font-size: 26px;">ExShipper TW Custom Entry Packages
 		Information Log</p>
 	<div style="display: block; text-align: center; width: 100%;">
-		<input type="button" value="Update Information"
+		<input type="button" value="Upload Update"
 			onclick="updatePackageStatus()" style="margin: 5px auto;">
 	</div>
 	<div style="display: block; margin: 5px auot;">

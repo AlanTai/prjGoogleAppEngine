@@ -46,7 +46,7 @@ var amount_of_spearnet_packages = 0;
 				.append(
 						'<form name="'
 							+ "{{ single_row_data.hawb }}" + '"'
-							+ 'id="package_info_' + "{{ single_row_data.hawb }}" + '"'
+							+ ' id="package_info_' + "{{ single_row_data.hawb }}" + '"'
 							+ '>'
 								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
 								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
