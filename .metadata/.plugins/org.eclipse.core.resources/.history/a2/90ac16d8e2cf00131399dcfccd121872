@@ -13,7 +13,6 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
-		<p id="packages_amount_summary" style="color: #f00;"></p>
 	<input type="button" value="Update Information"
 		onclick="updatePackageStatus()" style="margin: 5px 5px;">
 

@@ -13,13 +13,12 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
-		<p id="packages_amount_summary" style="color: #f00;"></p>
 	<input type="button" value="Update Information"
 		onclick="updatePackageStatus()" style="margin: 5px 5px;">
 
 	<!--  -->
 	<div style="display: block; margin: 5px auot;">
-		<br>
+<br>
 		<div style="display: inline-block;">
 			<select id="spearnet_customers_signature_fields_main_control">
 				<option value="NA">No Data</option>
@@ -40,13 +39,10 @@
 				onclick="updatePackageStatusField()">
 		</div>
 	</div>
-	<br /> <a id="xls_download" href="">Download Data in XLS Format</a> <br>
-	<br>
+	<br /> <a id="xls_download" href="">Download Data in XLS Format</a> <br><br>
 	<div>
-		<input id="packages_suda_tracking_numbers" style="width: 200px;"
-			placeholder="SUDA Tracking Number" /> <input
-			id="search_suda_tracking_number" type="button" value="Search"
-			onclick="" />
+		<input id="packages_suda_tracking_numbers" style="width: 200px;" placeholder="SUDA Tracking Number"/> <input id="search_suda_tracking_number"
+			type="button" value="Search" onclick="" />
 	</div>
 	<hr>
 </div>
@@ -59,7 +55,7 @@
 
 		<script type="text/javascript">
 			var packages_suda_tracking_numbers_ary = new Array();
-
+			
 			var tw_custom_entry_numbers = new Object();
 			var packages_status = new Object();
 			var clients_signature = new Object();
@@ -108,9 +104,8 @@
 		<form id="form_{{single_row_data.hawb}}" style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text"
 				value="{{ single_row_data.hawb }}" disabled>
-			</span> <span class="spearnet_customers_tw_custom_entry_number">TW
-				Custom Entry Barcode Number: <input id="{{ single_row_data.hawb }}"
-				type="text" value="{{ single_row_data.tw_custom_entry_number }}" />
+			</span> <span class="spearnet_customers_tw_custom_entry_number">TW Custom Entry Barcode Number: <input id="{{ single_row_data.hawb }}" type="text"
+				value="{{ single_row_data.tw_custom_entry_number }}" />
 			</span> <span class="spearnet_customers_package_status">Package
 				Status: <select id="{{ single_row_data.hawb }}"
 				class="package_status">
@@ -131,16 +126,16 @@
 			</select>
 			</span> <span class="spearnet_customers_notes">Note: <input
 				id="{{ single_row_data.hawb }}" class="note" type="text" />
-			</span> {% if single_row_data.pickup_date_time %} <span
-				class="spearnet_customers_datetime">Package Pickup DateTime:
-				<input id="{{ single_row_data.hawb }}"
-				value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}"
-				class="create_datetime" type="text" disabled="disabled" />
-			</span> {% else %} <span class="spearnet_customers_datetime">Package
-				Pickup DateTime: <input id="{{ single_row_data.hawb }}"
-				value="Not Pickup Yet" class="create_datetime" type="text"
-				disabled="disabled" />
-			</span> {% endif %}
+			</span>
+			{% if single_row_data.pickup_date_time %}
+			<span class="spearnet_customers_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}" value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% else %}
+			<span class="spearnet_customers_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}" value="Not Pickup Yet" class="create_datetime" type="text" disabled="disabled" />
+			</span>
+			{% endif %}
 
 		</form>
 
@@ -176,13 +171,12 @@
 						.val(note);
 
 				//update json obj when select value change
-				$(
-						'.spearnet_customers_tw_custom_entry_number > input[id={{ single_row_data.hawb }}]')
-						.on('input', function() {
-							var key = $(this).attr('id');
-							tw_custom_entry_numbers[key] = $(this).val();
-						});
-
+				$('.spearnet_customers_tw_custom_entry_number > input[id={{ single_row_data.hawb }}]').on('input', function(){
+					var key = $(this).attr('id');
+					tw_custom_entry_numbers[key] = $(this).val();
+				});
+				
+				
 				$(
 						'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
 						.change(function() {
@@ -336,14 +330,13 @@
 
 				if (confirm_result == true) {
 					var json_obj_update_data = new Object();
-
-					var tw_custom_entry_numbers_length = Object
-							.keys(tw_custom_entry_numbers).length;
+					
+					var tw_custom_entry_numbers_length = Object.keys(tw_custom_entry_numbers).length;
 					var package_status_length = Object.keys(packages_status).length;
 					var clients_signature_length = Object
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
-
+					
 					if (tw_custom_entry_numbers_length != 0) {
 						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
 					} else {
@@ -413,29 +406,21 @@
 					'display' : 'none'
 				});
 			}
-
-			$('#search_suda_tracking_number')
-					.click(
-							function() {
-								try {
-									var suda_tracking_number = $(
-											'#packages_suda_tracking_numbers')
-											.val();
-									$('html, body')
-											.animate(
-													{
-														scrollTop : $(
-																"#form_"
-																		+ suda_tracking_number)
-																.offset().top - 300
-													}, 800);
-								} catch (err) {
-									console
-											.log('No such information in the SUDA tracking numbers\' array; Error Message: '
-													+ err);
-								}
-
-							});
+			
+			
+			$('#search_suda_tracking_number').click(function() {
+				try{
+					var suda_tracking_number = $('#packages_suda_tracking_numbers').val();
+					$('html, body').animate({
+						scrollTop : $("#form_" + suda_tracking_number ).offset().top - 300
+					}, 800);
+				}
+				catch(err){
+					console.log('No such information in the SUDA tracking numbers\' array; Error Message: ' + err);
+				}
+				
+			});
+			
 		</script>
 	</div>
 
