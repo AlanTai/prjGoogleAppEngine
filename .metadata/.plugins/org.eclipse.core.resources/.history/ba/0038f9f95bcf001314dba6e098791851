@@ -23,15 +23,11 @@
 	</div>
 	<br>
 	<script type="text/javascript">
-	var tw_custom_entry_packages_set = "{{ tw_custom_entry_packages_set }}";
-	tw_custom_entry_packages_set = tw_custom_entry_packages_set.replace(/'/g, '"');
-	var json_tw_custom_entry_packages_set = jQuery.parseJSON( tw_custom_entry_packages_set );
-	
-	
 		var json_array = new Array();
+
 		//put keys into array
 		var obj_keys = new Object();
-		obj_keys['tw_custom_entry_tracking_number'] = 'tw_custom_entry_tracking_number';
+		obj_keys['tw_custom_entry_number'] = 'tw_custom_entry_tracking_number';
 
 		obj_keys['length'] = 'length';
 		obj_keys['width'] = 'width';
@@ -43,7 +39,6 @@
 		
 		obj_keys['weight_kg'] = 'weight_kg';
 		obj_keys['weight_lb'] = 'weight_lb';
-		obj_keys['suda_tracking_numbers'] = 'suda_tracking_numbers';
 
 		json_array.push(obj_keys);
 	</script>
@@ -55,7 +50,7 @@
 		<!--  -->
 		<script type="text/javascript">
 			var obj = new Object();
-			obj['tw_custom_entry_tracking_number'] = '{{ single_row_data.barcode_number }}';
+			obj_keys['tw_custom_entry_number'] = '{{ single_row_data.barcode_number }}';
 
 			var length;
 			if($.isNumeric('{{ single_row_data.size.length }}')){
@@ -73,17 +68,15 @@
 			if($.isNumeric('{{ single_row_data.weight_kg }}')){
 				weight_kg = Number('{{ single_row_data.weight_kg }}');
 			}
-			obj['length'] = length;
-			obj['width'] = width;
-			obj['height'] = height;
+			obj_keys['length'] = length;
+			obj_keys['width'] = width;
+			obj_keys['height'] = height;
 			
-			obj['size_accumulation_inch'] = ((length+width+height).toFixed(1));
-			obj['size_accumulation_cm'] = (((length+width+height)*2.54).toFixed(1));
+			obj_keys['size_accumulation_inch'] = (length+width+height).toFixed(1);
+			obj_keys['size_accumulation_cm'] = ((length+width+height)*2.54).toFixed(1);
 			
-			obj['weight_kg'] = weight_kg.toFixed(1);
-			obj['weight_lb'] = (weight_kg*2.2046).toFixed(1);
-			
-			obj['suda_tracking_numbers'] = json_tw_custom_entry_packages_set['{{ single_row_data.barcode_number }}'];
+			obj_keys['weight_kg'] = weight_kg;
+			obj_keys['weight_lb'] = weight_kg*2.2046;
 			
 			json_array.push(obj);
 		</script>
@@ -97,7 +90,7 @@
 			//that MS Excel will honor non-ASCII characters.
 			//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
 			var obj_types = new Object();
-			obj_types.tw_custom_entry_tracking_number = "String";
+			obj_types.tw_custom_entry_number = "String";
 			
 			obj_types.length = "String";
 			obj_types.width = "String";
@@ -108,8 +101,6 @@
 			
 			obj_types.weight_kg = "String";
 			obj_types.weight_lb = "String";
-			
-			obj_types.suda_tracking_numbers = "String";
 			
 			
 			testJson = json_array;

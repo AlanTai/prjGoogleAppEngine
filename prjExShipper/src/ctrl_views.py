@@ -1179,8 +1179,7 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
             
             onhand_manifest = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'apex',
                                                              TWCustomEntryInfo.package_status == 'sfo_airport',
-                                                             TWCustomEntryInfo.package_status == 'taiwan_taoyuan_airport',
-                                                             TWCustomEntryInfo.package_status == 'delivered'))
+                                                             TWCustomEntryInfo.package_status == 'taiwan_taoyuan_airport'))
             
             #get corresponding packages information 
             tw_custom_entry_packages_set = {}

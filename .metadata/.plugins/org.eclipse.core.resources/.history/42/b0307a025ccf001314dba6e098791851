@@ -267,7 +267,6 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page_title = my_dict.exshipper_tw_custom_entry_labels_page_title
             tw_custom_entry_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
             
-            #get corresponding packages information 
             tw_custom_entry_packages_set = {}
             for tw_custom_entry_entity in tw_custom_entry_info:
                 spearnet_package_query = SpearnetPackagesInfo.query(SpearnetPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
@@ -281,7 +280,9 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                         packages_suda_numbers_set.append(str(general_clients_package_entity.hawb))
                 tw_custom_entry_packages_set[str(tw_custom_entry_entity.barcode_number)] = packages_suda_numbers_set
                 
-            template_values['tw_custom_entry_packages_set'] = tw_custom_entry_packages_set
+            json_str_tw_custom_entry_packages_set = tw_custom_entry_packages_set
+            template_values['tw_custom_entry_packages_set'] = json_str_tw_custom_entry_packages_set
+            
             template_values.update({'tw_custom_entry_info':tw_custom_entry_info})
             
             
@@ -1181,21 +1182,6 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
                                                              TWCustomEntryInfo.package_status == 'sfo_airport',
                                                              TWCustomEntryInfo.package_status == 'taiwan_taoyuan_airport'))
             
-            #get corresponding packages information 
-            tw_custom_entry_packages_set = {}
-            for tw_custom_entry_entity in onhand_manifest:
-                spearnet_package_query = SpearnetPackagesInfo.query(SpearnetPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
-                general_client_package_query = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.tw_custom_entry_number == tw_custom_entry_entity.barcode_number)
-                packages_suda_numbers_set = []
-                if(spearnet_package_query is not None):
-                    for spearnet_package_entity in spearnet_package_query:
-                        packages_suda_numbers_set.append(str(spearnet_package_entity.hawb))
-                if(general_client_package_query is not None):
-                    for general_clients_package_entity in general_client_package_query:
-                        packages_suda_numbers_set.append(str(general_clients_package_entity.hawb))
-                tw_custom_entry_packages_set[str(tw_custom_entry_entity.barcode_number)] = packages_suda_numbers_set
-                
-            template_values['tw_custom_entry_packages_set'] = tw_custom_entry_packages_set
             template_values.update({'onhand_manifest':onhand_manifest})
 
 
