@@ -73,6 +73,9 @@ class Key_Value():
         self.exshipper_tw_custom_entry_suda_page = '/exshipper/exshipper_tw_custom_entry_suda_manifest.html'
         self.exshipper_tw_custom_entry_suda_page_title = 'Tw Custom Entry SUDA Manifest'
         
+        self.exshipper_tw_custom_entry_onhand_page = '/exshipper/exshipper_tw_custom_entry_onhand_manifest.html'
+        self.exshipper_tw_custom_entry_onhand_page_title = 'On-Hand Manifest'
+        
         #spearnet
         self.exshipper_spearnet_index_page = '/exshipper/exshipper_spearnet_index.html'
         self.exshipper_spearnet_index_page_title = 'ExShipper Spearnet Index Page'

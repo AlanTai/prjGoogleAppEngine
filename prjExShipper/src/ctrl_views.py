@@ -1173,6 +1173,17 @@ class ExShipperTWCustomEntryLoginHandler(webapp2.RequestHandler):
                                                                                                GeneralClientsPackagesInfo.package_status == 'sfo_airport',
                                                                                                GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
             template_values.update({'cargo_manifest_spearnet':spearnet_customers_package_info_cargo_manifest, 'cargo_manifest_general_clients':general_clients_package_info_cargo_manifest})
+            
+        elif(dispatch_token == 'exshipper_tw_custom_entry_onhand_manifest' and tw_custom_entry_account == 'alantai' and tw_custom_entry_password == '1014lct'):
+            html_page = my_dict.exshipper_tw_custom_entry_onhand_page
+            html_page_title = my_dict.exshipper_tw_custom_entry_onhand_page_title
+            
+            onhand_manifest = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'apex',
+                                                             TWCustomEntryInfo.package_status == 'sfo_airport',
+                                                             TWCustomEntryInfo.package_status == 'taiwan_taoyuan_airport'))
+            
+            template_values.update({'onhand_manifest':onhand_manifest})
+
 
         else:
             html_page = my_dict.exshipper_invalid_login_page

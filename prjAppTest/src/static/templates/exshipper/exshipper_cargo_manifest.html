@@ -23,7 +23,6 @@
 	</div>
 	<br>
 	<script type="text/javascript">
-		var packages_status = new Object();
 		var json_array = new Array();
 
 		//put keys into array
@@ -71,18 +70,6 @@
 		
 		<!--  -->
 		<script type="text/javascript">
-
-			$(function() {
-				//setup initial select values
-				$('#{{ single_row_data.hawb }}').val(
-						'{{ single_row_data.package_status }}');
-				//update json obj when select value change
-				$('#{{ single_row_data.hawb }}').change(function() {
-					var key = $(this).attr('id');
-					packages_status[key] = $(this).val();
-				});
-			});
-
 			var obj = new Object();
 			obj['reference_number'] = '{{ single_row_data.reference_number }}';
 			obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
@@ -141,20 +128,6 @@
 			
 			<!--  -->
 			<script type="text/javascript">
-				
-				$(function() {
-					//setup initial select values
-					$('#{{ single_row_data.hawb }}').val(
-							'{{ single_row_data.package_status }}');
-					//update json obj when select value change
-					$('#{{ single_row_data.hawb }}').change(function() {
-						var key = $(this).attr('id');
-						/* if (typeof packages_status[key] === 'undefined'){
-							packages_status[key] = $(this).val();
-						} */
-						packages_status[key] = $(this).val();
-					});
-				});
 
 				var obj = new Object();
 				obj['reference_number'] = '{{ single_row_data.reference_number }}';

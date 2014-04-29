@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="75" version="2.0">
+<workbench progressCount="32" version="2.0">
 <workbenchAdvisor/>
 <window height="342" maximized="true" width="1319" x="-7" y="394">
 <fastViewData fastViewLocation="1024"/>
@@ -20,7 +20,7 @@
 <coolItem id="org.eclipse.wst.ws.explorer.explorer" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="com.python.pydev.toolbars.evaluateActionSetterToolbar" itemType="typeToolBarContribution" x="38" y="22"/>
+<coolItem id="com.python.pydev.toolbars.evaluateActionSetterToolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
@@ -78,13 +78,13 @@
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static"/>
-<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/javascript"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/javascript/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static"/>
-<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/app_dict.py"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates"/>
+<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper/exshipper_tw_custom_entry_packages_information_log.html"/>
 </viewState>
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
@@ -265,7 +265,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.23128243" ratioLeft="312" ratioRight="1037" relationship="2" relative="topLeft"/>
+<info part="org.eclipse.ui.editorss" ratio="0.28984433" ratioLeft="391" ratioRight="958" relationship="2" relative="topLeft"/>
 <info folder="true" part="bottom" ratio="0.86612904" ratioLeft="537" ratioRight="83" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
@@ -301,6 +301,12 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_tw_custom_entry_packages_information_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_tw_custom_entry_packages_information_log.html">
+<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_tw_custom_entry_packages_information_log.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_tw_custom_entry_packages_information_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_packages_information_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_packages_information_log.html"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjAppTest/src/app_dict.py">
 <persistable path="/prjAppTest/src/app_dict.py"/>
 </file>
@@ -339,12 +345,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_create_invoice.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html">
 <persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_invoice.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_create_invoice.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_create_invoice.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_create_invoice.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
 </file>
 </mruList>
 </workbench>

@@ -55,7 +55,7 @@
 		</table>
 		{% for single_row_data in pre_alert %}
 		<script type="text/javascript">
-			if(numberFilter('{{ single_row_data.weight_kg }}')){
+			if($.isNumeric('{{ single_row_data.weight_kg }}')){
 				this.weight = Number('{{ single_row_data.weight_kg }}');
 			};
 			this.total_weight = this.total_weight + this.weight;
