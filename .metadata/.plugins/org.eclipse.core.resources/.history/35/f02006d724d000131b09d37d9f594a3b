@@ -325,7 +325,7 @@
 					var tw_custom_entry_tracking_number = $('.spearnet_customers_tw_custom_entry_number > #'+key).val();
 					var current_status = $(this).val();
 					
-					//filtering the packages without tw custom entry number 
+					//filtering
 					if(!((current_status === 'spearnet' || current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')){
 						$(this).val(package_status);
 						packages_status[key] = $(this).val();
