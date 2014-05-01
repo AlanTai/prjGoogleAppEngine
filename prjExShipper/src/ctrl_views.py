@@ -117,7 +117,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                                                                                    SpearnetPackagesInfo.package_status == 'exshipper'))
             # pass clients informations
             clients_info = ClientsInfo().query()
-            template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
+            template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
         
         #packages status are apex, sfo, taoyuan international airport, and suda
         elif(dispatch_token == 'exshipper_spearnet_customers_packages_info_log_processed' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
@@ -132,7 +132,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                                                                                    SpearnetPackagesInfo.package_status == 'suda'))
             # pass clients informations
             clients_info = ClientsInfo().query()
-            template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
+            template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
                   
         
         #packages status are apex, sfo, taoyuan international airport, and suda
@@ -145,7 +145,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'delivered'))
             # pass clients informations
             clients_info = ClientsInfo().query()
-            template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info})
+            template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
                   
             
               
