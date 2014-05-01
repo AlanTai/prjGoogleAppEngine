@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="32" version="2.0">
+<workbench progressCount="75" version="2.0">
 <workbenchAdvisor/>
 <window height="342" maximized="true" width="1319" x="-7" y="394">
 <fastViewData fastViewLocation="1024"/>
@@ -39,13 +39,18 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" partName="exshipper_spearnet_customer_package_info_log.html" path="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" title="exshipper_spearnet_customer_package_info_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" partName="exshipper_spearnet_customer_package_info_log.html" path="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" title="exshipper_spearnet_customer_package_info_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="514" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="63" selectionLength="18967" selectionOffset="0" selectionTopPixel="4569"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" partName="exshipper_spearnet_customer_package_info_log.html" path="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" title="exshipper_spearnet_customer_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="18967" selectionTopPixel="7729"/>
 </editor>
 </editors>
 <views>
@@ -78,16 +83,17 @@
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates"/>
-<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/css/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/javascript/exshipper"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates"/>
-<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
 </viewState>
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
@@ -288,9 +294,22 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
 </editors>
-<item active="true" historyLabel="exshipper_spearnet_customer_package_info_log.html" index="0">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="exshipper_spearnet_customer_package_info_log.html" index="0">
+<position info="not_deleted" x="514" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_package_info_log.html" index="0">
+<position info="not_deleted" x="12438" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_package_info_log.html" index="1">
+<position info="not_deleted" x="18967" y="0"/>
+</item>
+<item historyLabel="exshipper_spearnet_customer_package_info_log.html" index="0">
+<position info="not_deleted" x="0" y="18967"/>
+</item>
+<item active="true" historyLabel="exshipper_spearnet_customer_package_info_log.html" index="1">
+<position info="not_deleted" x="18967" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -311,6 +330,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
 <persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
 </file>
@@ -352,9 +374,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_pre_alert.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_pre_alert.html">
 <persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_pre_alert.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_pre_alert.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_pre_alert.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_pre_alert.html"/>
 </file>
 </mruList>
 </workbench>

@@ -52,7 +52,7 @@
 </div>
 
 <div
-	style="position: absolute; top: 280px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 230px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if spearnet_customer_package_info_log %}
 	<div id="spearnet_customers_packages_info"
 		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
@@ -306,7 +306,7 @@
 
 		<script type="text/javascript">
 			//add packages amount summary
-			$('#packages_amount_summary').text('Packages Amount(Spearnet): ' + packages_amount_at_spearnet + ' ; ' + 'Packages Amount(Pickup): ' + packages_amount_pickup + ' ; ' + 'Packages Amount(Exshipper): ' + packages_amount_at_exshipper );
+			$('#packages_amount_summary').text('Packages Amount(Spearnet): ' + packages_amount_at_spearnet + ' ; ' + 'Packages Amount(Pickup):' + packages_amount_pickup + ' ; ' + 'Packages Amount(Exshipper):' + packages_amount_at_exshipper );
 
 			// distinct row color
 			$('#spearnet_customers_packages_info> form:even').css(

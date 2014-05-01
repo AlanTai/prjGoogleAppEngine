@@ -13,7 +13,7 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
-	<p id="packages_amount_summary" style="color: #f00;"></p>
+		<p id="packages_amount_summary" style="color: #f00;"></p>
 	<input type="button" value="Update Information"
 		onclick="updatePackageStatus()" style="margin: 5px 5px;">
 
@@ -52,24 +52,19 @@
 </div>
 
 <div
-	style="position: absolute; top: 280px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 230px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if spearnet_customer_package_info_log %}
 	<div id="spearnet_customers_packages_info"
 		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
-			//
 			var packages_suda_tracking_numbers_ary = new Array();
+
 			var tw_custom_entry_numbers = new Object();
 			var packages_status = new Object();
 			var clients_signature = new Object();
 			var notes = new Object();
 			var json_array = new Array();
-
-			//calculate the packages amount
-			var packages_amount_at_spearnet = 0;
-			var packages_amount_pickup = 0;
-			var packages_amount_at_exshipper = 0;
 
 			//put keys into array
 			var obj_keys = new Object();
@@ -134,8 +129,6 @@
 				<select id="{{ single_row_data.hawb }}">
 					<option value="NA">No Data</option>
 			</select>
-			</span> <span class="spearnet_customers_weight_kg">Weight(kg): <input
-				id="{{ single_row_data.hawb }}" class="weight_kg" type="text" value="{{ single_row_data.weight_kg }}"/>
 			</span> <span class="spearnet_customers_notes">Note: <input
 				id="{{ single_row_data.hawb }}" class="note" type="text" />
 			</span> {% if single_row_data.pickup_date_time %} <span
@@ -148,17 +141,10 @@
 				value="Not Pickup Yet" class="create_datetime" type="text"
 				disabled="disabled" />
 			</span> {% endif %}
+
 		</form>
 
 		<script type="text/javascript">
-			var package_status = "{{ single_row_data.package_status }}";
-			package_status === 'spearnet' ? ++packages_amount_at_spearnet
-					: packages_amount_at_spearnet = packages_amount_at_spearnet + 0;
-			package_status === 'pickup' ? ++packages_amount_pickup
-					: packages_amount_pickup = packages_amount_pickup + 0;
-			package_status === 'exshipper' ? ++packages_amount_at_exshipper
-					: packages_amount_at_exshipper = packages_amount_at_exshipper + 0;
-
 			$(function() {
 				//setup initial select values
 				var package_status = '{{ single_row_data.package_status }}';
@@ -305,9 +291,6 @@
 		<!-- end of upload client signature information -->
 
 		<script type="text/javascript">
-			//add packages amount summary
-			$('#packages_amount_summary').text('Packages Amount(Spearnet): ' + packages_amount_at_spearnet + ' ; ' + 'Packages Amount(Pickup): ' + packages_amount_pickup + ' ; ' + 'Packages Amount(Exshipper): ' + packages_amount_at_exshipper );
-
 			// distinct row color
 			$('#spearnet_customers_packages_info> form:even').css(
 					'background-color', '#dedede');
@@ -335,25 +318,19 @@
 			}
 
 			function updatePackageStatusField() {
-				var package_status = $('#package_status_fields_main_control')
-						.val();
+				var package_status = $('#package_status_fields_main_control').val();
 
-				$('.package_status')
-						.each(
-								function() {
-									var key = $(this).attr('id');
-									var tw_custom_entry_tracking_number = $(
-											'.spearnet_customers_tw_custom_entry_number > #'
-													+ key).val();
-									var current_status = $(this).val();
-
-									//filtering the packages without tw custom entry number 
-									if (!((current_status === 'spearnet'
-											|| current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')) {
-										$(this).val(package_status);
-										packages_status[key] = $(this).val();
-									}
-								});
+				$('.package_status').each(function() {
+					var key = $(this).attr('id');
+					var tw_custom_entry_tracking_number = $('.spearnet_customers_tw_custom_entry_number > #'+key).val();
+					var current_status = $(this).val();
+					
+					//filtering the packages without tw custom entry number 
+					if(!((current_status === 'spearnet' || current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')){
+						$(this).val(package_status);
+						packages_status[key] = $(this).val();
+					}
+				});
 			}
 
 			//update information
