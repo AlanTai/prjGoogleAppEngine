@@ -13,9 +13,19 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
-	<p id="packages_amount_summary" style="color: #f00;"></p>
-	<input type="button" value="Update Information"
-		onclick="updatePackageStatus()" style="margin: 5px 5px;">
+	<p id="packages_amount_summary_usa"
+		style="color: #f00; font-size: 12px;"></p>
+	<p id="packages_amount_summary_tw"
+		style="color: #f00; font-size: 12px;"></p>
+	<a id="xls_download" href="">Download Log Data in XLS Format</a> <br>
+	<div>
+		<input type="button" value="Update Information"
+			onclick="updatePackageStatus()" style="margin: 5px 5px;"> <input
+			id="packages_suda_tracking_numbers" style="width: 200px;"
+			placeholder="SUDA Tracking Number" /> <input
+			id="search_suda_tracking_number" type="button" value="Search"
+			onclick="" />
+	</div>
 
 	<!--  -->
 	<div style="display: block; margin: 5px auot;">
@@ -28,8 +38,8 @@
 		</div>
 		<div style="display: inline-block;">
 			<select id="package_status_fields_main_control">
-					<option value="spearnet">Spearnet</option>
-					<option value="pickup">Pick Up</option>
+				<option value="spearnet">Spearnet</option>
+				<option value="pickup">Pick Up</option>
 				<option value="exshipper">ExShipper</option>
 				<option value="apex">Apex</option>
 				<option value="sfo_airport">SFO Airport</option>
@@ -42,19 +52,11 @@
 				onclick="updatePackageStatusField()">
 		</div>
 	</div>
-	<br /> <a id="xls_download" href="">Download Data in XLS Format</a> <br>
-	<br>
-	<div>
-		<input id="packages_suda_tracking_numbers" style="width: 200px;"
-			placeholder="SUDA Tracking Number" /> <input
-			id="search_suda_tracking_number" type="button" value="Search"
-			onclick="" />
-	</div>
 	<hr>
 </div>
 
 <div
-	style="position: absolute; top: 280px; width: 100%; text-align: center; margin: 10px auto;">
+	style="position: absolute; top: 250px; width: 100%; text-align: center; margin: 10px auto;">
 	<br> {% if spearnet_customer_package_info_log %}
 	<div id="spearnet_customers_packages_info"
 		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
@@ -72,8 +74,7 @@
 			var packages_amount_at_spearnet = 0;
 			var packages_amount_pickup = 0;
 			var packages_amount_at_exshipper = 0;
-			
-			
+
 			var packages_amount_at_apex = 0;
 			var packages_amount_at_sfo_aiprort = 0;
 			var packages_amount_taiwan_taoyuan_airport = 0;
@@ -143,7 +144,8 @@
 					<option value="NA">No Data</option>
 			</select>
 			</span> <span class="spearnet_customers_weight_kg">Weight(kg): <input
-				id="{{ single_row_data.hawb }}" class="weight_kg" type="text" value="{{ single_row_data.weight_kg }}"/>
+				id="{{ single_row_data.hawb }}" class="weight_kg" type="text"
+				value="{{ single_row_data.weight_kg }}" />
 			</span> <span class="spearnet_customers_notes">Note: <input
 				id="{{ single_row_data.hawb }}" class="note" type="text" />
 			</span> {% if single_row_data.pickup_date_time %} <span
@@ -166,8 +168,7 @@
 					: packages_amount_pickup = packages_amount_pickup + 0;
 			package_status === 'exshipper' ? ++packages_amount_at_exshipper
 					: packages_amount_at_exshipper = packages_amount_at_exshipper + 0;
-			
-			
+
 			package_status === 'apex' ? ++packages_amount_at_apex
 					: packages_amount_at_apex = packages_amount_at_apex + 0;
 			package_status === 'sfo_aiprort' ? ++packages_amount_at_sfo_aiprort
@@ -324,7 +325,23 @@
 
 		<script type="text/javascript">
 			//add packages amount summary
-			$('#packages_amount_summary').text('Packages Amount(Spearnet): ' + packages_amount_at_spearnet + ' ; ' + 'Packages Amount(Pickup): ' + packages_amount_pickup + ' ; ' + 'Packages Amount(Exshipper): ' + packages_amount_at_exshipper + ' Packages Amount(Apex): ' + packages_amount_at_apex + ' ; ' + ' Packages Amount(SFO): ' + packages_amount_at_sfo_aiprort + ' ; ' + ' Packages Amount(Taiwan Taoyuan Airport): ' + packages_amount_taiwan_taoyuan_airport + ' ; ' + ' Packages Amount(TW Custom Entry Company): ' + packages_amount_delivered );
+			var summary_packages_amount_usa = 'Packages Amount(Spearnet): '
+					+ packages_amount_at_spearnet + ' ; '
+					+ 'Packages Amount(Pickup): ' + packages_amount_pickup
+					+ ' ; ' + 'Packages Amount(Exshipper): '
+					+ packages_amount_at_exshipper
+			var summary_packages_amount_tw = 'Packages Amount(Apex): '
+					+ packages_amount_at_apex + ' ; '
+					+ ' Packages Amount(SFO): '
+					+ packages_amount_at_sfo_aiprort + ' ; '
+					+ ' Packages Amount(Taiwan Taoyuan Airport): '
+					+ packages_amount_taiwan_taoyuan_airport + ' ; '
+					+ ' Packages Amount(TW Custom Entry Company): '
+					+ packages_amount_delivered;
+					
+			$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
+			$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+			
 
 			// distinct row color
 			$('#spearnet_customers_packages_info> form:even').css(
