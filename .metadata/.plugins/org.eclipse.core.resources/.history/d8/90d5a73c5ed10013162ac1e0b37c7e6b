@@ -11,24 +11,25 @@
 
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">ExShipper General Clients Package
+	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
-		<p id="packages_amount_summary" style="color: #f00;"></p>
+	<p id="packages_amount_summary" style="color: #f00;"></p>
 	<input type="button" value="Update Information"
 		onclick="updatePackageStatus()" style="margin: 5px 5px;">
 
-	<!-- main control fileds -->
+	<!--  -->
 	<div style="display: block; margin: 5px auot;">
-
+		<br>
 		<div style="display: inline-block;">
-			<select id="general_clients_signature_fields_main_control">
+			<select id="spearnet_customers_signature_fields_main_control">
 				<option value="NA">No Data</option>
 			</select> <input type="button" value="Update Client Siganture"
 				onclick="updateClientSignature()">
 		</div>
 		<div style="display: inline-block;">
 			<select id="package_status_fields_main_control">
-				<option value="pickup">Pick Up</option>
+					<option value="spearnet">Spearnet</option>
+					<option value="pickup">Pick Up</option>
 				<option value="exshipper">ExShipper</option>
 				<option value="apex">Apex</option>
 				<option value="sfo_airport">SFO Airport</option>
@@ -41,22 +42,41 @@
 				onclick="updatePackageStatusField()">
 		</div>
 	</div>
-	<br /> <a id="xls_download" href="">Download Data in XLS Format</a>
-
+	<br /> <a id="xls_download" href="">Download Data in XLS Format</a> <br>
+	<br>
+	<div>
+		<input id="packages_suda_tracking_numbers" style="width: 200px;"
+			placeholder="SUDA Tracking Number" /> <input
+			id="search_suda_tracking_number" type="button" value="Search"
+			onclick="" />
+	</div>
 	<hr>
 </div>
 
 <div
-	style="position: absolute; top: 180px; width: 100%; text-align: center; margin: 10px auto;">
-	<br> {% if general_clients_packages_info_log %}
-	<div id="general_clients_packages_info"
+	style="position: absolute; top: 280px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if spearnet_customer_package_info_log %}
+	<div id="spearnet_customers_packages_info"
 		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
+			//
+			var packages_suda_tracking_numbers_ary = new Array();
+			var tw_custom_entry_numbers = new Object();
 			var packages_status = new Object();
 			var clients_signature = new Object();
 			var notes = new Object();
 			var json_array = new Array();
+
+			//calculate the packages amount for different package status
+			var packages_amount_at_spearnet = 0;
+			var packages_amount_pickup = 0;
+			var packages_amount_at_exshipper = 0;
+			
+			var packages_amount_at_apex = 0;
+			var packages_amount_at_sfo_aiprort = 0;
+			var packages_amount_taiwan_taoyuan_airport = 0;
+			var packages_amount_delivered = 0;
 
 			//put keys into array
 			var obj_keys = new Object();
@@ -96,14 +116,17 @@
 
 			json_array.push(obj_keys);
 		</script>
-		{% for single_row_data in general_clients_packages_info_log %}
-		<form style="padding: 5px 5px;">
+		{% for single_row_data in spearnet_customer_package_info_log %}
+		<form id="form_{{single_row_data.hawb}}" style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text"
 				value="{{ single_row_data.hawb }}" disabled>
-			</span> <span>TW Custom Entry Barcode Number: <input type="text"
-				value="{{ single_row_data.tw_custom_entry_number }}" />
-			</span> <span class="general_clients_package_status">Package Status:
-				<select id="{{ single_row_data.hawb }}" class="package_status">
+			</span> <span class="spearnet_customers_tw_custom_entry_number">TW
+				Custom Entry Barcode Number: <input id="{{ single_row_data.hawb }}"
+				type="text" value="{{ single_row_data.tw_custom_entry_number }}" />
+			</span> <span class="spearnet_customers_package_status">Package
+				Status: <select id="{{ single_row_data.hawb }}"
+				class="package_status">
+					<option value="spearnet">Spearnet</option>
 					<option value="pickup">Pick Up</option>
 					<option value="exshipper">ExShipper</option>
 					<option value="apex">Apex</option>
@@ -114,26 +137,35 @@
 					<option value="delivered">Delivered</option>
 					<option value="NA">No Data</option>
 			</select>
-			</span> <span class="general_clients_signature">Client Signature: <select
-				id="{{ single_row_data.hawb }}" class="client_signature">
+			</span> <span class="spearnet_customers_signature">Client Signature:
+				<select id="{{ single_row_data.hawb }}">
 					<option value="NA">No Data</option>
 			</select>
-			</span> <span class="general_clients_notes">Note: <input
+			</span> <span class="spearnet_customers_weight_kg">Weight(kg): <input
+				id="{{ single_row_data.hawb }}" class="weight_kg" type="text" value="{{ single_row_data.weight_kg }}"/>
+			</span> <span class="spearnet_customers_notes">Note: <input
 				id="{{ single_row_data.hawb }}" class="note" type="text" />
 			</span> {% if single_row_data.pickup_date_time %} <span
-				class="general_clients_datetime">Package Pickup DateTime: <input
-				id="{{ single_row_data.hawb }}"
+				class="spearnet_customers_datetime">Package Pickup DateTime:
+				<input id="{{ single_row_data.hawb }}"
 				value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}"
 				class="create_datetime" type="text" disabled="disabled" />
-			</span> {% else %} <span class="general_clients_datetime">Package
+			</span> {% else %} <span class="spearnet_customers_datetime">Package
 				Pickup DateTime: <input id="{{ single_row_data.hawb }}"
 				value="Not Pickup Yet" class="create_datetime" type="text"
 				disabled="disabled" />
 			</span> {% endif %}
-
 		</form>
 
 		<script type="text/javascript">
+			var package_status = "{{ single_row_data.package_status }}";
+			package_status === 'spearnet' ? ++packages_amount_at_spearnet
+					: packages_amount_at_spearnet = packages_amount_at_spearnet + 0;
+			package_status === 'pickup' ? ++packages_amount_pickup
+					: packages_amount_pickup = packages_amount_pickup + 0;
+			package_status === 'exshipper' ? ++packages_amount_at_exshipper
+					: packages_amount_at_exshipper = packages_amount_at_exshipper + 0;
+
 			$(function() {
 				//setup initial select values
 				var package_status = '{{ single_row_data.package_status }}';
@@ -154,20 +186,26 @@
 				}
 				;
 
-				//setup auto change mechanism for package status
 				$(
-						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
+						'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
 						.val(package_status);
 				$(
-						'.general_clients_signature > select[id={{ single_row_data.hawb }}]')
+						'.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]')
 						.val(signature_img_id);
 				$(
-						'.general_clients_notes > input[id={{ single_row_data.hawb }}]')
+						'.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]')
 						.val(note);
 
 				//update json obj when select value change
 				$(
-						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
+						'.spearnet_customers_tw_custom_entry_number > input[id={{ single_row_data.hawb }}]')
+						.on('input', function() {
+							var key = $(this).attr('id');
+							tw_custom_entry_numbers[key] = $(this).val();
+						});
+
+				$(
+						'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
 						.change(function() {
 							var key = $(this).attr('id');
 							packages_status[key] = $(this).val();
@@ -175,14 +213,15 @@
 
 				//setup auto change mechanism for client signature
 				$(
-						'.general_clients_signature > select[id={{ single_row_data.hawb }}]')
+						'.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]')
 						.change(function() {
 							var key = $(this).attr('id');
 							clients_signature[key] = $(this).val();
 						});
 
+				//setup auto change mechanism for notes
 				$(
-						'.general_clients_notes > input[id={{ single_row_data.hawb }}]')
+						'.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]')
 						.on('input', function() {
 							var key = $(this).attr('id');
 							notes[key] = $(this).val();
@@ -237,6 +276,8 @@
 			obj['note'] = "{{ single_row_data.note }}";
 
 			json_array.push(obj);
+			packages_suda_tracking_numbers_ary
+					.push('{{ single_row_data.hawb }}');
 		</script>
 		{% endfor %} {% else %}
 		<p>No Data Available</p>
@@ -259,7 +300,7 @@
 							clients_signatures,
 							function(key, value) {
 								$(
-										'.general_clients_signature > select, #general_clients_signature_fields_main_control')
+										'.spearnet_customers_signature > select, #spearnet_customers_signature_fields_main_control ')
 										.append($("<option/>", {
 											value : key,
 											text : value
@@ -271,20 +312,29 @@
 		<!-- end of upload client signature information -->
 
 		<script type="text/javascript">
+			//add packages amount summary
+			$('#packages_amount_summary').text('Packages Amount(Spearnet): ' + packages_amount_at_spearnet + ' ; ' + 'Packages Amount(Pickup): ' + packages_amount_pickup + ' ; ' + 'Packages Amount(Exshipper): ' + packages_amount_at_exshipper );
+
 			// distinct row color
-			$('#general_clients_packages_info> form:even').css(
+			$('#spearnet_customers_packages_info> form:even').css(
 					'background-color', '#dedede');
-			$('#general_clients_packages_info> form:odd').css(
+			$('#spearnet_customers_packages_info> form:odd').css(
 					'background-color', '#f9f9f9');
 			// end of distinct row color
+
+			//autocomplete
+			$("#packages_suda_tracking_numbers").autocomplete({
+				source : packages_suda_tracking_numbers_ary
+			});
+			//end
 
 			//fields update mechanism
 			function updateClientSignature() {
 				var client_signature_id = $(
-						'#general_clients_signature_fields_main_control').val()
-						.trim();
+						'#spearnet_customers_signature_fields_main_control')
+						.val().trim();
 
-				$('.general_clients_signature > select').each(function() {
+				$('.spearnet_customers_signature > select').each(function() {
 					$(this).val(client_signature_id);
 					var key = $(this).attr('id');
 					clients_signature[key] = $(this).val();
@@ -295,11 +345,22 @@
 				var package_status = $('#package_status_fields_main_control')
 						.val();
 
-				$('.package_status').each(function() {
-					$(this).val(package_status);
-					var key = $(this).attr('id');
-					packages_status[key] = $(this).val();
-				});
+				$('.package_status')
+						.each(
+								function() {
+									var key = $(this).attr('id');
+									var tw_custom_entry_tracking_number = $(
+											'.spearnet_customers_tw_custom_entry_number > #'
+													+ key).val();
+									var current_status = $(this).val();
+
+									//filtering the packages without tw custom entry number 
+									if (!((current_status === 'spearnet'
+											|| current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')) {
+										$(this).val(package_status);
+										packages_status[key] = $(this).val();
+									}
+								});
 			}
 
 			//update information
@@ -308,10 +369,19 @@
 
 				if (confirm_result == true) {
 					var json_obj_update_data = new Object();
+
+					var tw_custom_entry_numbers_length = Object
+							.keys(tw_custom_entry_numbers).length;
 					var package_status_length = Object.keys(packages_status).length;
 					var clients_signature_length = Object
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
+
+					if (tw_custom_entry_numbers_length != 0) {
+						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
+					} else {
+						json_obj_update_data['tw_custom_entry_numbers'] = 'NA';
+					}
 					if (package_status_length != 0) {
 						json_obj_update_data['packages_status'] = packages_status;
 					} else {
@@ -330,15 +400,17 @@
 
 					if (package_status_length != 0
 							|| clients_signature_length != 0
-							|| notes_length != 0) {
+							|| notes_length != 0
+							|| tw_custom_entry_numbers_length != 0) {
 						$('#upload_cover').css({
 							'display' : 'block'
 						});
+
 						var json_string = JSON.stringify(json_obj_update_data,
 								2, 2);
 						$
 								.ajax(
-										"/exshipper_general_clients_packages_info_update_handler",
+										"/exshipper_spearnet_customer_packages_info_update_handler",
 										{
 											type : 'POST',
 											data : {
@@ -364,6 +436,7 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
+					//ajax upload
 				}
 			}
 
@@ -373,13 +446,35 @@
 					'display' : 'none'
 				});
 			}
+
+			$('#search_suda_tracking_number')
+					.click(
+							function() {
+								try {
+									var suda_tracking_number = $(
+											'#packages_suda_tracking_numbers')
+											.val();
+									$('html, body')
+											.animate(
+													{
+														scrollTop : $(
+																"#form_"
+																		+ suda_tracking_number)
+																.offset().top - 300
+													}, 800);
+								} catch (err) {
+									console
+											.log('No such information in the SUDA tracking numbers\' array; Error Message: '
+													+ err);
+								}
+
+							});
 		</script>
 	</div>
 
 	<script type="text/javascript">
 		//Test script to generate a file from JavaScript such
-		//that MS Excel will honor non-ASCII characters.
-		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
+		//that MS Excel will honor non-ASCII characters.\
 
 		var obj_types = new Object();
 		obj_types.reference_number = "String";
@@ -418,32 +513,6 @@
 
 		testJson = json_array;
 		testTypes = obj_types;
-
-		/* testJson = [ {
-			"name" : "Tony Peña",
-			"city" : "希臘",
-			"country" : "United States",
-			"birthdate" : "1978-03-15",
-			"amount" : 42
-
-		}, {
-			"name" : "Ζαλώνης Thessaloniki",
-			"city" : "雅典",
-			"country" : "Greece",
-			"birthdate" : "1987-11-23",
-			"amount" : 42
-		} ]; */
-
-		//Simple type mapping; dates can be hard
-		//and I would prefer to simply use `datevalue`
-		//... you could even add the formula in here.
-		/* testTypes = {
-			"name" : "String",
-			"city" : "String",
-			"country" : "String",
-			"birthdate" : "String",
-			"amount" : "Number"
-		}; */
 
 		emitXmlHeader = function() {
 			return '<?xml version="1.0"?>\n'
@@ -495,7 +564,7 @@
 		};
 
 		var current_time = new Date();
-		var file_name = 'general_clients_package_info_'
+		var file_name = 'spearnet_customers_packages_info_'
 				+ current_time.getFullYear() + (current_time.getMonth() + 1)
 				+ current_time.getDate() + current_time.getHours()
 				+ current_time.getMinutes() + current_time.getSeconds()
