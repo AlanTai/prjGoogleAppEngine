@@ -45,8 +45,8 @@
 				</p>
 				<input type="text" id="id_reference_number" name="reference_number"
 					title="Reference Number"
-					style="display: inline-block; margin: 5px 1px;" size="50" disabled
-					required="required" />
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					disabled="disabled" required="required" />
 			</div>
 			<br>
 
@@ -77,7 +77,16 @@
 						<span style="display: block;">Shipper Phone Number:</span>
 					</p>
 					<input type="text" id="id_shipper_phone_number"
-						name="shipper_phone_number" title="Shipp Phone Number"
+						name="shipper_phone_number" title="Shipper Phone Number"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Email:</span>
+					</p>
+					<input type="text" id="id_shipper_email" name="shipper_email"
+						title="Shipper Email"
 						style="display: inline-block; margin: 5px 1px;" size="50"
 						required="required">
 				</div>
@@ -250,6 +259,8 @@
 	//test
 	var pcs = 0;
 	var unit_price_fob_us_dollar = 0;
+	var size_accumulation = 0;
+
 	function checkCommodityDetailAndGetCommodityDetailObj() {
 		var commodity_detail = new Object();
 		var commodity_ary = new Array();
@@ -406,6 +417,7 @@
 			invoice_obj['shipper_address_english'] = $(
 					'#id_shipper_address_english').val();
 			invoice_obj['shipper_address_chinese'] = 'NA';
+			invoice_obj['shipper_email'] = $('#id_shipper_email').val();
 
 			invoice_obj['consignee_name_english'] = $(
 					'#id_consignee_name_english').val();
@@ -438,6 +450,8 @@
 			return true;
 		} else {
 			invoice_obj['size_length'] = $('#id_length').val();
+			size_accumulation = size_accumulation
+					+ Number($('#id_length').val());
 			$('#id_length').css({
 				'border-color' : '#a2c1ff'
 			});
@@ -451,6 +465,8 @@
 			return true;
 		} else {
 			invoice_obj['size_width'] = $('#id_width').val();
+			size_accumulation = size_accumulation
+					+ Number($('#id_width').val());
 			$('#id_width').css({
 				'border-color' : '#a2c1ff'
 			});
@@ -464,6 +480,9 @@
 			return true;
 		} else {
 			invoice_obj['size_height'] = $('#id_height').val();
+			size_accumulation = size_accumulation
+					+ Number($('#id_height').val());
+			invoice_obj['size_accumulation'] = size_accumulation;
 			$('#id_height').css({
 				'border-color' : '#a2c1ff'
 			});
@@ -536,6 +555,7 @@
 								valid_shipper_phone_number : invoice_obj['shipper_phone_number'],
 								valid_shipper_address_english : invoice_obj['shipper_address_english'],
 								valid_shipper_address_chinese : invoice_obj['shipper_address_chinese'],
+								valid_shipper_email : invoice_obj['shipper_email'],
 								valid_consignee_name_english : invoice_obj['consignee_name_english'],
 								valid_consignee_name_chinese : invoice_obj['consignee_name_chinese'],
 								valid_consignee_address_english : invoice_obj['consignee_address_english'],
@@ -550,6 +570,7 @@
 								valid_size_length : invoice_obj['size_length'],
 								valid_size_width : invoice_obj['size_width'],
 								valid_size_height : invoice_obj['size_height'],
+								valid_size_accumulation : invoice_obj['size_accumulation'],
 								valid_weight : invoice_obj['weight'],
 								valid_commodity_detail : commodity_detail_obj
 
@@ -676,6 +697,7 @@
 
 			window['unit_price_fob_us_dollar'] = 0;
 			window['pcs'] = 0;
+			window['size_accumulation'] = 0;
 		} else {
 			alert('Fail to create new package information');
 			$('#upload_cover').css({
