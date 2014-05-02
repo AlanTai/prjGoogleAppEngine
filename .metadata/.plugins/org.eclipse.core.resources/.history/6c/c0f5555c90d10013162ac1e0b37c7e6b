@@ -1,0 +1,751 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script type="text/javascript">
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	}
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Create Invoice/Add New Package
+		Information (ExShipper)</p>
+	<hr>
+</div>
+
+
+<div id="invoice_container"
+	style="position: absolute; top: 80px; text-align: center; width: 100%; z-index: 1;">
+	<div id="keyin_info" style="text-align: center; margin: 0px auto;">
+		<form id="invoice_form">
+			<br>
+			<div>
+				<p style="display: inline-block; width: 300px; margin: 2px 1px;">
+					SUDA Tracking Number:</p>
+				<input type="text" id="id_suda_tr_number" name="suda_tr_number" title="SUDA Tracking Number"
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					placeholder="Click the button to get SUDA Number"
+					required="required" />
+				<div style="display: inline-block;">
+					<input type="button" value="Get SUDA Tracking Number"
+						onclick="getSUDATrackingNumber()" /> <select
+						id="suda_tracking_number_type">
+						<option value="regular">Regular</option>
+						<option value="formal">Formal</option>
+					</select>
+				</div>
+			</div>
+			<div>
+				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+					<span style="display: block;">Reference Number: </span>
+				</p>
+				<input type="text" id="id_reference_number" name="reference_number" title="Reference Number"
+					style="display: inline-block; margin: 5px 1px;" size="50" disabled
+					required="required" />
+			</div>
+			<br>
+
+
+			<!--  -->
+			<div style="padding: 5px; background-color: #efefef;">
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper (Company): (If
+							Shipper is Person, please key in NA)</span>
+					</p>
+					<input type="text" id="id_shipper_company" name="shipper_company" title="Shipper (Company)"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper (Person): (If Shipper
+							is Company, please key in NA)</span>
+					</p>
+					<input type="text" id="id_shipper_person" name="shipper_person" title="Shipper (Person)"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Address (English):</span>
+					</p>
+					<input type="text" id="id_shipper_address_english"
+						name="shipper_address_english" title="Shipper Address (English)"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Address (Chinese):</span>
+					</p>
+					<input type="text" id="id_shipper_address_chinese"
+						name="shipper_address_chinese" title="Shipper Address (Chinese)"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Shipper Phone Number:</span>
+					</p>
+					<input type="text" id="id_shipper_phone_number"
+						name="shipper_phone_number" title="Shipp Phone Number"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+			</div>
+			<!-- end -->
+
+			<br>
+			<div>
+				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+					<span style="display: block;">Consignee Name (English):</span>
+				</p>
+				<input type="text" id="id_consignee_name_english"
+					name="consignee_name_english" title="Consignee Name (English)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+					<span style="display: block;">Consignee Name (Chinese):</span>
+				</p>
+				<input type="text" id="id_consignee_name_chinese"
+					name="consignee_name_chinese" title="Consignee Name (Chinese)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+					<span style="display: block;">Consignee Address (English):</span>
+				</p>
+				<input type="text" id="id_consignee_address_english"
+					name="consignee_address_english" title="Consignee Address (English)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+					<span style="display: block;">Consignee Address (Chinese):</span>
+				</p>
+				<input type="text" id="id_consignee_address_chinese"
+					name="consignee_address_english" title="Consignee Address (English)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+					<span style="display: block;">Consignee Phone Number:</span>
+				</p>
+				<input type="text" id="id_consignee_phone_number"
+					name="consignee_phone_number" title="Consignee Phone Number"
+					style="display: inline-block; margin: 5px 1px;" size="50"
+					required="required">
+			</div>
+
+			<br>
+
+			<div style="padding: 5px; background-color: #efefef;">
+				
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Deliver To (Local Logistics
+							Company):</span>
+					</p>
+					<input type="text" id="id_deliver_to" name="deliver_to" title="Deliver To (Local Logistics Company)"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">CTN. (If you don't know, please key in "1")</span>
+					</p>
+					<input type="text" id="id_ctn" name="ctn" title="CTN. (If you don't know, please key in '1')"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">PCS.</span>
+					</p>
+					<input type="text" id="id_pcs" name="pcs" title="PCS."
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Unit</span>
+					</p>
+					<input type="text" id="id_unit" name="unit" title="Unit"
+						style="display: inline-block; margin: 5px 1px;" size="50"
+						required="required">
+				</div>
+
+			</div>
+			<!-- end -->
+
+			<div>
+				<p style="display: inline-block; width: 450px;">Size (inch):</p>
+				<input type="text" id="id_length" name="length" title="Length"
+					style="display: inline-block; width: 110px; text-align: center;"
+					size="10" min="0" placeholder="Length"> <input type="text"
+					id="id_width" name="width" title="Width"
+					style="display: inline-block; width: 110px; text-align: center;"
+					size="10" min="0" placeholder="Width" required="required">
+				<input type="text" id="id_height" name="height" title="Height"
+					style="display: inline-block; width: 110px; text-align: center;"
+					size="10" min="0" placeholder="Height" required="required">
+			</div>
+			<div>
+				<p style="display: inline-block; width: 450px;">Weight (kg):</p>
+				<input type="text" id="id_weight" name="weight" title="Weight"
+					style="display: inline-block; width: 330px; text-align: center;"
+					size="10" min="0" placeholder="Weight" required="required">
+			</div>
+
+			<div>
+				<div style="display: inline-block; width: 600px; margin: 2px 1px;">
+					<span style="display: block;">Commodity Detail:</span> <input
+						type="button" value="Add New Commodity"
+						onclick="addNewCommodity()">
+					<div id="id_commodity_detail"></div>
+				</div>
+			</div>
+
+			<div>
+				<p
+					style="display: inline-block; width: 450px; height: 50px; margin: 2px 1px;">
+					<span style="display: block;">Note:</span>
+					<textarea id="id_note" name="note" title="Note"
+						style="display: inline-block; margin: 5px 1px;" cols="40"></textarea>
+				</p>
+			</div>
+
+			<br> <input type="button" value="Submit Information"
+				onclick="Add()" style="width: 300px; height: 30px;">
+		</form>
+	</div>
+	<hr>
+	<br>
+
+	<div id="print_area" style="text-align: center; margin: 0px auto;">
+		<div style="border: 1px thin; border-color: #666; display: block;">
+			<p>Packages Information</p>
+			<div id="added_info"
+				style="max-width: 1200px; max-height: 200px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<br>
+		</div>
+
+		<div style="border: 1px dotted; border-color: #666; display: block;">
+			<p>Print Information</p>
+			<input id="print_label" type="button" value="Print Labels"
+				onclick="PrintElem('#added_labels','Labels')"
+				style="margin: 10px auto; width: 150px;">
+			<div id="added_labels"
+				style="width: 500px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
+			<div id="printed_labels"></div>
+
+		</div>
+	</div>
+	<br>
+</div>
+
+<script type="text/javascript">
+	//
+	$(get_reference_number());
+	function get_reference_number() {
+		$.ajax('/get_ref_number', {
+			type : 'POST',
+			data : {
+				key : 'get_package_reference_number'
+
+			},
+			success : update_reference_number,
+			statusCode : {
+				400 : function() {
+					alert('400 status code! user-side error');
+				},
+				500 : function() {
+					alert('500 status code! server-side error');
+				}
+			}
+		});
+	}
+
+	function update_reference_number(response) {
+		$('#id_reference_number').val(response.exshipper_package_number);
+	};
+
+	//
+	function addNewCommodity() {
+		$('#id_commodity_detail')
+				.append(
+						'<form>'
+								+ '<input type="button" value="Delete" onclick="deleteCommodity(this.form)"></input>'
+								+ '<input id="id_commodity_name" type="text" placeholder="Commodity Name"></input>'
+								+ '<input id="id_commodity_quantity" type="text" placeholder="Quantity"></input>'
+								+ '<input id="id_commodity_price" type="text" placeholder="Price"></input>'
+								+ '</form>');
+	}
+
+	function deleteCommodity(elem) {
+		$(elem).remove();
+	}
+
+	
+	//test
+	var unit_price_fob_us_dollar = 0;
+	function checkCommodityDetailAndGetCommodityDetailObj() {
+		var commodity_detail = new Object();
+		var commodity_ary = new Array();
+
+		if ($('#id_commodity_detail').is(':empty')) {
+			alert('Please Add Commodity Detail');
+			return true;
+		} else {
+			var isCommodityInvalid = $('#id_commodity_detail form')
+					.each(
+							function() {
+								var commodity_obj = new Object();
+								commodity_name = $(this).find(
+										'input#id_commodity_name').val();
+								commodity_quan = $(this).find(
+										'input#id_commodity_quantity').val();
+								commodity_price = $(this).find(
+										'input#id_commodity_price').val();
+								if (commodity_name === '') {
+									alert('Commodity name is unknown!');
+									$(this).find('input#id_commodity_name')
+											.focus();
+									return true;
+								} else if (commodity_quan === '') {
+									alert('Commodity quantity is unknown!');
+									$(this).find('input#id_commodity_quantity')
+											.focus();
+									return true;
+								} else if (commodity_price === '') {
+									alert('Commodity price is unknown!');
+									$(this).find('input#id_commodity_price')
+											.focus();
+									return true;
+								} else {
+									//add slash before single quote
+									commodity_obj.name = $(this).find(
+											'input#id_commodity_name').val();
+									commodity_obj.quan = $(this).find(
+											'input#id_commodity_quantity')
+											.val();
+									commodity_obj.price = $(this).find(
+											'input#id_commodity_price').val();
+									if($.isNumeric(commodity_obj.price) && $.isNumeric(commodity_obj.quan)){
+										window['unit_price_fob_us_dollar'] = unit_price_fob_us_dollar + (Math.round(Number(commodity_obj.price)*100)/100) * Math.round(Number(commodity_obj.price)*100)/100));
+									}
+
+									commodity_ary.push(commodity_obj);
+								}
+							});
+
+			if (isCommodityInvalid === true) {
+				return true;
+			} else {
+				commodity_detail.items = commodity_ary;
+				return commodity_detail;
+			}
+		}
+	}
+	//end commodity
+
+	//
+	function getSUDATrackingNumber() {
+		//
+		$('#upload_cover').css({
+			'display' : 'block'
+		});
+		var selected_suda_tracking_number_type = $('#suda_tracking_number_type')
+				.val();
+
+		//add the info to datastore
+		$.ajax('/exshipper_suda_tracking_number_download_handler', {
+			type : 'POST',
+			data : {
+				user_account : 'alantai', //need to be replaced
+				user_password : '1014lct', //need to be replaced
+				suda_tracking_number_type : selected_suda_tracking_number_type
+			},
+			success : updateSUDATrackingNumber,
+			statusCode : {
+				400 : function() {
+					alert('400 status code! user-side error');
+					$('#upload_cover').css({
+						'display' : 'none'
+					});
+				},
+				500 : function() {
+					alert('500 status code! server-side error');
+					$('#upload_cover').css({
+						'display' : 'none'
+					});
+				}
+			}
+		});
+		//end of add the info to datastore
+	}
+
+	function updateSUDATrackingNumber(response) {
+		if (response.suda_tracking_number != 'NA') {
+			$('#id_suda_tr_number').val(response.suda_tracking_number);
+		} else {
+			alert('NO SUDA Number Available to Dowonload!');
+		}
+		$('#upload_cover').css({
+			'display' : 'none'
+		});
+	}
+
+	/*end of get suda tracking number*/
+
+	/*add new package information*/
+	var info_array = [];
+	var invoice_obj = new Object();
+	function Add() {
+		var isInfoValid = true;
+		var blank_field = 'Blank Field(s):\n';
+		$('#invoice_form').find('input').each(function(){
+			if($(this).attr('type') === 'text' && $(this).val() === ''){
+				blank_field = blank_field + $(this).attr('title') + '\n';
+				isInfoValid = false;
+				$(this).css({
+					'border-color':'#f00'
+				});
+			}
+			else if($(this).attr('type') === 'text'){
+				$(this).css({
+					'border-color':'#a2c1ff'
+				});
+			}
+		});
+		$('#invoice_form').find('textarea').each(function(){
+			if($(this).val() === ''){
+				blank_field = blank_field + $(this).attr('title') + '\n';
+				isInfoValid = false;
+				$(this).css({
+					'border-color':'#f00'
+				});
+			}
+			else{
+				$(this).css({
+					'border-color':'#a2c1ff'
+				});
+			}
+		});
+		
+		if(isInfoValid){
+			invoice_obj['suda_tr_number'] = $('#id_suda_tr_number').val();
+			invoice_obj['reference_number'] = $('#id_reference_number').val();
+			invoice_obj['shipper_company'] = $('#id_shipper_company').val();
+			invoice_obj['shipper_person'] = $('#id_shipper_person').val();
+			invoice_obj['shipper_phone_number'] = $('#id_shipper_phone_number').val();
+			invoice_obj['shipper_address_english'] = $('#id_shipper_address_english').val();
+			invoice_obj['shipper_address_chinese'] = $('#id_shipper_address_chinese').val();
+
+			invoice_obj['consignee_name_english'] = $('#id_consignee_name_english').val();
+			invoice_obj['consignee_name_chinese'] = $('#id_consignee_name_chinese').val();
+			invoice_obj['consignee_address_english'] = $('#id_consignee_address_english')
+					.val();
+			invoice_obj['consignee_address_chinese'] = $('#id_consignee_address_chinese')
+					.val();
+			invoice_obj['consignee_phone_number'] = $('#id_consignee_phone_number').val()
+
+			invoice_obj['deliver_to'] = $('#id_deliver_to').val();
+			invoice_obj['note'] = $('#id_note').val();
+
+			invoice_obj['ctn'] = $('#id_ctn').val();
+			invoice_obj['pcs'] = $('#id_pcs').val();
+			invoice_obj['unit'] = $('#id_unit').val();
+		}
+		else{
+			alert(blank_field);
+			return false;
+		}
+
+		//check if numbers are valid
+		if (!$.isNumeric($('#id_length').val())) {
+			alert('Please type in a number for the length!');
+			$('#id_length').css({
+				'border-color':'#f00'
+			});
+			$('#id_length').focus();
+			return true;
+		}
+		else{
+			invoice_obj['size_length'] = $('#id_length').val();
+			$('#id_length').css({
+				'border-color':'#a2c1ff'
+			});
+		}
+		if (!$.isNumeric($('#id_width').val())) {
+			alert('Please type in a number for the width!');
+			$('#id_width').css({
+				'border-color':'#f00'
+			});
+			$('#id_width').focus();
+			return true;
+		}
+		else{
+			invoice_obj['size_width'] = $('#id_width').val();
+			$('#id_width').css({
+				'border-color':'#a2c1ff'
+			});
+		}
+		if (!$.isNumeric($('#id_height').val())) {
+			alert('Please type in a number for the height!');
+			$('#id_height').css({
+				'border-color':'#f00'
+			});
+			$('#id_height').focus();
+			return true;
+		}
+		else{
+			invoice_obj['size_height'] = $('#id_height').val();
+			$('#id_height').css({
+				'border-color':'#a2c1ff'
+			});
+		}
+		if (!$.isNumeric($('#id_weight').val())) {
+			alert('Please type in a number for the weight!');
+			$('#id_weight').css({
+				'border-color':'#f00'
+			});
+			$('#id_height').focus();
+			return true;
+		}
+		else{
+			invoice_obj['weight'] = $('#id_weight').val();
+		}
+		// end of checking information
+
+		//check commodity detail
+		var commodity_detail_obj = checkCommodityDetailAndGetCommodityDetailObj();
+		if (commodity_detail_obj === true) {
+			return true;
+		} else {
+			invoice_obj['unit_price_fob_us_dollar'] = window['unit_price_fob_us_dollar'];
+			console.log(invoice_obj['unit_price_fob_us_dollar']);
+			commodity_detail_obj = JSON.stringify(commodity_detail_obj);
+			commodity_detail_obj = commodity_detail_obj.replace(/'/g,
+					"\\\\u0027");
+		}
+		//end
+
+		// check suda tracking number
+		var i = info_array.length;
+		while (i > 0) {
+			if (info_array[i - 1].tr_number === invoice_obj['suda_tr_number']) {
+				alert('This SUDA Tracking Number Already Exist!');
+				$('#id_suda_tr_number').focus();
+				return true;
+			}
+			if (info_array[i - 1].ref_number === invoice_obj['reference_number']) {
+				alert('This Reference Number Already Exist!');
+				$('#id_reference_number').focus();
+				return true;
+			}
+			--i;
+		}
+		info_array.push({
+			'tr_number' : invoice_obj['suda_tr_number'],
+			'ref_number' : invoice_obj['reference_number']
+		});
+		// end of check suda tracking number
+
+		//add the info to datastore
+		$('#upload_cover').css({
+			'display' : 'block'
+		});
+
+		$.ajax('/exshipper_invoice_info_handler', {
+			type : 'POST',
+			data : {
+				fmt : 'json',
+				valid_suda_tr_number : invoice_obj['suda_tr_number'],
+				valid_ref_number : invoice_obj['reference_number'],
+				valid_shipper_company : invoice_obj['shipper_company'],
+				valid_shipper_person : invoice_obj['shipper_person'],
+				valid_shipper_phone_number : invoice_obj['shipper_phone_number'],
+				valid_shipper_address_english : invoice_obj['shipper_address_english'],
+				valid_shipper_address_chinese : invoice_obj['shipper_address_chinese'],
+				valid_consignee_name_english : invoice_obj['consignee_name_english'],
+				valid_consignee_name_chinese : invoice_obj['consignee_name_chinese'],
+				valid_consignee_address_english : invoice_obj['consignee_address_english'],
+				valid_consignee_address_chinese : invoice_obj['consignee_address_chinese'],
+				valid_consignee_phone_number : invoice_obj['consignee_phone_number'],
+				valid_unit_price_fob_us_dollar : invoice_obj['unit_price_fob_us_dollar'],
+				valid_deliver_to : invoice_obj['deliver_to'],
+				valid_note : invoice_obj['note'],
+				valid_ctn : invoice_obj['ctn'],
+				valid_pcs : invoice_obj['pcs'],
+				valid_unit : invoice_obj['unit'],
+				valid_size_length : invoice_obj['size_length'],
+				valid_size_width : invoice_obj['size_width'],
+				valid_size_height : invoice_obj['size_height'],
+				valid_weight : invoice_obj['weight'],
+				valid_commodity_detail : commodity_detail_obj
+
+			},
+			success : showReturnMsg,
+			statusCode : {
+				400 : function() {
+					alert('400 status code! user-side error');
+					$('#upload_cover').css({
+						'display' : 'none'
+					});
+				},
+				500 : function() {
+					alert('500 status code! server-side error');
+					$('#upload_cover').css({
+						'display' : 'none'
+					});
+				}
+			}
+		});
+		//end of add the info to datastore
+
+		//append type-in info to html element
+		$('#added_info')
+				.append(
+						'<form name="'
+							+ invoice_obj['suda_tr_number']
+							+ '">'
+								+ '<input type="button" value="Remove" onclick="selectOrRemove(this.form)" style="width: 90px; height: 40px; display: inline-block; margin: 20px; 5px;">'
+								+ '<div style="width: 1000px; display: inline-block; margin: auto 5px;">'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> SUDA Tracking Number: '
+								+ invoice_obj['suda_tr_number']
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Reference Number: '
+								+ invoice_obj['reference_number']
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Shipper: '
+								+ invoice_obj['shipper_company']
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (English): '
+								+ invoice_obj['consignee_name_english']
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Consignee (Chinese): '
+								+ invoice_obj['consignee_name_chinese']
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Address: '
+								+ invoice_obj['consignee_address_english']
+								+ '</p>'
+								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
+								+ invoice_obj['consignee_phone_number']
+								+ '</p>'
+								+ '</div>'
+								+ '<br></form>');
+		// change color
+		$('#added_info> form:even').css('background-color', '#dedede');
+		$('#added_info> form:odd').css('background-color', '#f9f9f9');
+		// end change color
+
+		$('#added_labels')
+				.append(
+						'<form id="label_'
+							+ invoice_obj['suda_tr_number']
+							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
+								+ '<p style="width: 100%; text-align: center; padding: 2px; margin: 2px; font-size: 15px; font-weight: bold;">ExShipper</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 寄件者/公司: '
+								+ invoice_obj['shipper_person']
+								+ " / "
+								+ invoice_obj['shipper_company']
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
+								+ invoice_obj['shipper_address_english']
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 電話: '
+								+ invoice_obj['shipper_phone_number']
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 收件者: '
+								+ invoice_obj['consignee_name_chinese']
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 地址: '
+								+ invoice_obj['consignee_address_chinese']
+								+ '</p>'
+								+ '<p style="display: block; margin: 2px 5px; font-size: 12px;"> 電話: '
+								+ invoice_obj['consignee_phone_number']
+								+ '</p>'
+								+ '<hr>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">Ref. NO. '
+								+ invoice_obj['reference_number']
+								+ '</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">'
+								+ invoice_obj['weight']
+								+ ' (kg)</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">易碎</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px;">註: '
+								+ invoice_obj['note']
+								+ '</p>'
+								+ '<hr>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center; font-size: 13px;">SUDA 追蹤碼</div>'
+								+ '<div class="barcode" id="barcode_'
+							+ invoice_obj['suda_tr_number']
+							+ '" style="margin: 2px auto; text-align:center; display: block;"></div>'
+								+ '</form>');
+
+		$('#added_labels> form[id="label_' + invoice_obj['suda_tr_number'] + '"]').find(
+				'div#barcode_' + invoice_obj['suda_tr_number']).barcode(invoice_obj['suda_tr_number'],
+				'code39', {
+					barWidth : 2,
+					barHeight : 45,
+					fontSize : 13
+				});
+
+	}
+
+	function showReturnMsg(response) {
+		if (response.submit_status === 'success') {
+			alert('Data saved into database');
+			$('form input[type=text]').val('');
+			$('form textarea').val('');
+			$('#upload_cover').css({
+				'display' : 'none'
+			});
+			$('#id_commodity_detail').empty();
+			get_reference_number();
+		} else {
+			alert('Fail to create new package information');
+			$('#upload_cover').css({
+				'display' : 'none'
+			});
+		}
+	}
+
+	function selectOrRemove(elem) {
+		var select_status = $(elem).find('input').attr('value');
+		var elem_name = $(elem).attr('name');
+		if (select_status === 'Remove') {
+			$(elem).find('input').val('Select');
+			$('#added_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'none'
+			});
+			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
+				'display' : 'none'
+			});
+		} else {
+			$(elem).find('input').val('Remove');
+			$('#added_labels> form[id="label_' + elem_name + '"]').css({
+				'display' : 'inline-block'
+			});
+			$('#check_list> form[id="check_list_' + elem_name + '"]').css({
+				'display' : 'inline-block'
+			});
+		}
+	}
+</script>
+
+{% endblock %}

@@ -394,6 +394,9 @@ class ExShipperCreateClientInfoHandler(webapp2.RequestHandler):
 class ExShipperValidateClientAccountNameEmail(webapp2.RequestHandler):
     def post(self):
         account_name = self.request.get('account_name')
+#         client_email = self.request.get('email')
+#         if(mail.is_email_valid(client_email)):
+#             mail.send_mail('rainman.tai@gmail.com', client_email, 'Email Verification', 'Verification ID: ' + Users_Info_Handler().generate_random_registration_id())
         ajax_data = {}
         response = ''
         status = 'valid'
