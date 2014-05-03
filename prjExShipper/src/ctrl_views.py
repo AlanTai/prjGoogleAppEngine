@@ -31,10 +31,15 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         my_dict = Key_Value()  # get key-value pair dictionary
         user_info = Users_Info_Handler().get_users_info(self, users)
         index_page = my_dict.exshipper_index_page
-        
-        
-        
         template_values = {'title':my_dict.exshipper_index_page_title}
+        
+        spearnet_customers_packages_info = SpearnetPackagesInfo.query()
+        general_clients_packages_info = GeneralClientsPackagesInfo.query()
+        tw_custom_entry_packages_info = TWCustomEntryInfo.query()
+        
+        template_values.update({'spearnet_customers_packages_info':spearnet_customers_packages_info})
+        template_values.update({'general_clients_packages_info':general_clients_packages_info})
+        template_values.update({'tw_custom_entry_packages_info':tw_custom_entry_packages_info})
         template_values.update(user_info)
         
         template = jinja_environment.get_template(index_page)
@@ -470,6 +475,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
             shipper_email = self.request.get('valid_shipper_email')
             if(mail.is_email_valid(shipper_email)):
                 mail.send_mail('winever.tw@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
+                mail.send_mail('winever.tw@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
             ajax_data['submit_status'] = 'success'
         except Exception, e:
             ajax_data['submit_status'] = 'fail to send email to shipper ; Error Message: %s' % e

@@ -34,8 +34,8 @@
 					<input type="button" value="Get SUDA Tracking Number"
 						onclick="getSUDATrackingNumber()" /> <select
 						id="suda_tracking_number_type">
-						<option value="regular">Regular</option>
-						<option value="formal">Formal</option>
+						<option value="regular">All Pre-paid</option>
+						<option value="formal">Freight Pre-paid ; Duty Collect</option>
 					</select>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 			<div style="padding: 5px; background-color: #efefef;">
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-						<span style="display: block;">Shipper (English/Chinese):</span>
+						<span style="display: block;">Shipper (English):</span>
 					</p>
 					<input type="text" id="id_shipper_person" name="shipper_person"
 						title="Shipper" style="display: inline-block; margin: 5px 1px;"
@@ -64,8 +64,7 @@
 
 				<div>
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
-						<span style="display: block;">Shipper Address
-							(English/Chinese):</span>
+						<span style="display: block;">Shipper Address (English):</span>
 					</p>
 					<input type="text" id="id_shipper_address_english"
 						name="shipper_address_english" title="Shipper Address (English)"
@@ -172,7 +171,18 @@
 					<span style="display: block;">Commodity Detail:</span> <input
 						type="button" value="Add New Commodity"
 						onclick="addNewCommodity()">
-					<div id="id_commodity_detail"></div>
+					<div id="id_commodity_detail">
+
+						<form>
+							<input type="button" value="Delete"
+								onclick="deleteCommodity(this.form)"></input> <input
+								id="id_commodity_name" type="text" placeholder="Commodity Name"></input>
+							<input id="id_commodity_quantity" type="text"
+								placeholder="Quantity"></input> <input id="id_commodity_price"
+								type="text" placeholder="Price"></input>
+						</form>
+
+					</div>
 				</div>
 			</div>
 
@@ -686,13 +696,16 @@
 
 	function showReturnMsg(response) {
 		if (response.submit_status === 'success') {
-			alert('Data saved into database');
+			alert('Data saved into database.'
+					+ '\n'
+					+ 'Thank you very much! Customer Service will contact you to schedule a pickup.');
 			$('form input[type=text]').val('');
 			$('form textarea').val('');
 			$('#upload_cover').css({
 				'display' : 'none'
 			});
 			$('#id_commodity_detail').empty();
+			addNewCommodity();
 			get_reference_number();
 
 			window['unit_price_fob_us_dollar'] = 0;

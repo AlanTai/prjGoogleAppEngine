@@ -13,8 +13,8 @@
 		<!-- Upload -->
 		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_suda_tracking_number_upload"
-			target="_blank">Upload SUDA Tracking Numbers (SUDA Regular/SUDA Formal/TW Custom Entry)</a> <br />
-		<a
+			target="_blank">Upload SUDA Tracking Numbers (SUDA Regular/SUDA
+			Formal/TW Custom Entry)</a> <br /> <a
 			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_number_upload"
 			target="_blank">Upload TW Custom Entry Numbers</a> <br /> <br />
 
@@ -38,7 +38,8 @@
 		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_processing"
 			target="_blank">Spearnet Customers Packages Information Log (For
-			Information Update ; Package Status- Spearnet/Pickup/ExShipper)</a><br /><a
+			Information Update ; Package Status- Spearnet/Pickup/ExShipper)</a><br />
+		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_processed"
 			target="_blank">Spearnet Customers Packages Information Log (For
 			Information Update; Package Status- Apex/SFO/Taoyuan International
@@ -47,6 +48,43 @@
 			target="_blank">Spearnet Customers Packages Information Log (For
 			Information Update; Package Status- Delivered)</a><br />
 
+
+		<script type="text/javascript">
+		//calculate the packages amount for different package status
+		var packages_amount_at_spearnet = 0;
+		var packages_amount_pickup = 0;
+		var packages_amount_at_exshipper = 0;
+
+		var packages_amount_at_apex = 0;
+		var packages_amount_at_sfo_aiprort = 0;
+		var packages_amount_taiwan_taoyuan_airport = 0;
+		
+		var packages_amount_delivered = 0;
+		
+		var spearnet_customers_packages_info = '{{spearnet_customers_packages_info}}';
+		{% if spearnet_customers_packages_info %}
+		
+		{% for spearnet_customer_package_info in spearnet_customers_packages_info %}
+			var package_status = "{{ spearnet_customer_package_info.package_status }}";
+			package_status === 'spearnet' ? ++packages_amount_at_spearnet
+					: packages_amount_at_spearnet = packages_amount_at_spearnet + 0;
+			package_status === 'pickup' ? ++packages_amount_pickup
+					: packages_amount_pickup = packages_amount_pickup + 0;
+			package_status === 'exshipper' ? ++packages_amount_at_exshipper
+					: packages_amount_at_exshipper = packages_amount_at_exshipper + 0;
+	
+			package_status === 'apex' ? ++packages_amount_at_apex
+					: packages_amount_at_apex = packages_amount_at_apex + 0;
+			package_status === 'sfo_aiprort' ? ++packages_amount_at_sfo_aiprort
+					: packages_amount_at_sfo_aiprort = packages_amount_at_sfo_aiprort + 0;
+			package_status === 'taiwan_taoyuan_airport' ? ++packages_amount_taiwan_taoyuan_airport
+					: packages_amount_taiwan_taoyuan_airport = packages_amount_taiwan_taoyuan_airport + 0;
+			package_status === 'delivered' ? ++packages_amount_delivered
+					: packages_amount_delivered = packages_amount_delivered + 0;
+		{% endfor %}
+		
+		{% endif %}
+		</script>
 
 
 		<p>General Clients Packages Information</p>
@@ -62,6 +100,18 @@
 			target="_blank">General Clients Packages Information Log (For
 			Information Update; Package Status- Delivered)</a><br />
 
+		<script type="text/javascript">
+		var general_clients_packages_info = '{{general_clients_packages_info}}';
+		{% if general_clients_packages_info %}
+		
+		{% for general_client_package_info in general_clients_packages_info %}
+			
+		{% endfor %}
+		
+		{% endif %}
+		</script>
+
+
 		<p>TW Custom Entry Packages Information</p>
 		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log_processing"
@@ -75,8 +125,20 @@
 			target="_blank">TW Custom Entry Packages Information Log (For
 			Information Update; Package Status- Delivered)</a> <br /> <br />
 
+		<script type="text/javascript">
+		var tw_custom_entry_packages_info = '{{tw_custom_entry_packages_info}}';
+		{% if tw_custom_entry_packages_info %}
+		
+		{% for tw_custom_entry_package_info in tw_custom_entry_packages_info %}
+			
+		{% endfor %}
+		
+		{% endif %}
+		</script>
+		
+		
 		<!-- Label -->
-		<p>Label Generator</p>
+		<p>Label Sections</p>
 		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_packages_labels"
 			target="_blank">ExShipper Packages Labels</a><br /> <a

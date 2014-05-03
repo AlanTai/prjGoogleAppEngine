@@ -470,6 +470,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
             shipper_email = self.request.get('valid_shipper_email')
             if(mail.is_email_valid(shipper_email)):
                 mail.send_mail('rainman.tai@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
+                mail.send_mail('rainman.tai@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
             ajax_data['submit_status'] = 'success'
         except Exception, e:
             ajax_data['submit_status'] = 'fail to send email to shipper ; Error Message: %s' % e
