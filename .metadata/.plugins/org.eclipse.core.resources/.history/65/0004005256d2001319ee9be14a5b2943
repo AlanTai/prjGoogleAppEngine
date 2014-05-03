@@ -320,9 +320,10 @@
 					+ packages_amount_taiwan_taoyuan_airport + ' ; '
 					+ ' Packages Amount(TW Custom Entry Company): '
 					+ packages_amount_delivered;
-
-			$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
-			$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+					
+					$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
+					$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+					
 
 			// distinct row color
 			$('#general_clients_packages_info> form:even').css(

@@ -47,8 +47,8 @@
 				<option value="delivered">Delivered (Leader Empire Wang
 					International Company)</option>
 				<option value="NA">NA</option>
-			</select><input type="button" value="Update Package Status Fields"
-				onclick="updatePackageStatusField()">
+			</select><input type="button" value="Update Client Siganture"
+				onclick="updateClientSignature()">
 		</div>
 	</div>
 	<hr>
@@ -320,9 +320,10 @@
 					+ packages_amount_taiwan_taoyuan_airport + ' ; '
 					+ ' Packages Amount(TW Custom Entry Company): '
 					+ packages_amount_delivered;
-
-			$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
-			$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+					
+					$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
+					$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+					
 
 			// distinct row color
 			$('#general_clients_packages_info> form:even').css(
@@ -472,31 +473,6 @@
 		testJson = json_array;
 		testTypes = obj_types;
 
-		/* testJson = [ {
-			"name" : "Tony Peña",
-			"city" : "希臘",
-			"country" : "United States",
-			"birthdate" : "1978-03-15",
-			"amount" : 42
-
-		}, {
-			"name" : "Ζαλώνης Thessaloniki",
-			"city" : "雅典",
-			"country" : "Greece",
-			"birthdate" : "1987-11-23",
-			"amount" : 42
-		} ]; */
-
-		//Simple type mapping; dates can be hard
-		//and I would prefer to simply use `datevalue`
-		//... you could even add the formula in here.
-		/* testTypes = {
-			"name" : "String",
-			"city" : "String",
-			"country" : "String",
-			"birthdate" : "String",
-			"amount" : "Number"
-		}; */
 
 		emitXmlHeader = function() {
 			return '<?xml version="1.0"?>\n'

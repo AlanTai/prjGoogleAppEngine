@@ -23,8 +23,7 @@
 			onclick="updatePackageStatus()" style="margin: 5px 5px;"> <input
 			id="packages_suda_tracking_numbers" style="width: 200px;"
 			placeholder="SUDA Tracking Number" /> <input
-			id="search_suda_tracking_number" type="button" value="Search"
-			onclick="" />
+			id="search_suda_tracking_number" type="button" value="Search" />
 	</div>
 
 	<!-- main control fileds -->
@@ -48,7 +47,8 @@
 				<option value="delivered">Delivered (Leader Empire Wang
 					International Company)</option>
 				<option value="NA">NA</option>
-			</select>
+			</select><input type="button" value="Update Package Status Fields"
+				onclick="updatePackageStatusField()">
 		</div>
 	</div>
 	<hr>
@@ -473,31 +473,6 @@
 		testJson = json_array;
 		testTypes = obj_types;
 
-		/* testJson = [ {
-			"name" : "Tony Peña",
-			"city" : "希臘",
-			"country" : "United States",
-			"birthdate" : "1978-03-15",
-			"amount" : 42
-
-		}, {
-			"name" : "Ζαλώνης Thessaloniki",
-			"city" : "雅典",
-			"country" : "Greece",
-			"birthdate" : "1987-11-23",
-			"amount" : 42
-		} ]; */
-
-		//Simple type mapping; dates can be hard
-		//and I would prefer to simply use `datevalue`
-		//... you could even add the formula in here.
-		/* testTypes = {
-			"name" : "String",
-			"city" : "String",
-			"country" : "String",
-			"birthdate" : "String",
-			"amount" : "Number"
-		}; */
 
 		emitXmlHeader = function() {
 			return '<?xml version="1.0"?>\n'

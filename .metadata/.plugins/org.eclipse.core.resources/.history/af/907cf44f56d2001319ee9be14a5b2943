@@ -23,7 +23,8 @@
 			onclick="updatePackageStatus()" style="margin: 5px 5px;"> <input
 			id="packages_suda_tracking_numbers" style="width: 200px;"
 			placeholder="SUDA Tracking Number" /> <input
-			id="search_suda_tracking_number" type="button" value="Search" />
+			id="search_suda_tracking_number" type="button" value="Search"
+			onclick="" />
 	</div>
 
 	<!-- main control fileds -->
@@ -47,8 +48,7 @@
 				<option value="delivered">Delivered (Leader Empire Wang
 					International Company)</option>
 				<option value="NA">NA</option>
-			</select><input type="button" value="Update Package Status Fields"
-				onclick="updatePackageStatusField()">
+			</select>
 		</div>
 	</div>
 	<hr>
@@ -320,9 +320,10 @@
 					+ packages_amount_taiwan_taoyuan_airport + ' ; '
 					+ ' Packages Amount(TW Custom Entry Company): '
 					+ packages_amount_delivered;
-
-			$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
-			$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+					
+					$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
+					$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+					
 
 			// distinct row color
 			$('#general_clients_packages_info> form:even').css(
