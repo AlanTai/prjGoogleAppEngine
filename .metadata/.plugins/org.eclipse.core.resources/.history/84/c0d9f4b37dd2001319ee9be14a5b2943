@@ -705,7 +705,6 @@
 				'display' : 'none'
 			});
 			$('#id_commodity_detail').empty();
-			addNewCommodity();
 			get_reference_number();
 
 			window['unit_price_fob_us_dollar'] = 0;
