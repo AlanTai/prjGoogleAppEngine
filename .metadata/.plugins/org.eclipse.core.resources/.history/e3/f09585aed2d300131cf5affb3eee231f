@@ -156,7 +156,7 @@
 				package_status_obj = {'spearnet':'Spearnet', 'pickup':'Pick Up', 'exshipper':'ExShipper'};
 			}
 			else{
-				package_status_obj = {'spearnet':'Spearnet', 'pickup':'Pick Up', 'exshipper':'ExShipper', 'apex':'Apex', 'sfo_airport':'SFO Airport', 'taiwan_taoyuan_airport':'Taiwan Taoyuan International Airport', 'suda':'SUDA', 'delivered':'Delivered'};
+				package_status_obj = {'spearnet':'Spearnet', 'pickup':'Pick Up', 'exshipper':'ExShipper', 'apex':'Apex', 'sfo_airport':'SFO Airport'};
 			}
 			$.each(package_status_obj, function(key,value){
 				$('.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]').append($("<option/>", {
