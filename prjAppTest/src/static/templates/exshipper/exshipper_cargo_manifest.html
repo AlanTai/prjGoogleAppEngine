@@ -81,7 +81,7 @@
 
 			//parse json object
 			var commodity_json = JSON
-					.parse('{{ single_row_data.commodity_detail }}');
+					.parse('{{ single_row_data.commodity_detail|safe }}');
 			var commodity_string = new String();
 			for ( var ith in commodity_json['items']) {
 				var data = commodity_json['items'][ith];
@@ -93,16 +93,16 @@
 			obj['pcs'] = "{{ single_row_data.pcs }}";
 			obj['unit'] = "{{ single_row_data.unit }}";
 
-			obj['original'] = "{{ single_row_data.original }}";
-			obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
+			obj['original'] = "{{ single_row_data.original|safe }}";
+			obj['deliver_to'] = "{{ single_row_data.deliver_to|safe }}";
 
 			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 
-			obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
-			obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
+			obj['shipper_company'] = "{{ single_row_data.shipper_company|safe }}";
+			obj['shipper_person'] = "{{ single_row_data.shipper_person|safe }}";
 			obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
-			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english }}";
-			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
+			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english|safe }}";
+			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese|safe }}";
 
 			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
 			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
