@@ -33,7 +33,6 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         index_page = my_dict.exshipper_index_page
         template_values = {'title':my_dict.exshipper_index_page_title}
         
-        #packages summary
         spearnet_customers_packages_info = SpearnetPackagesInfo.query()
         general_clients_packages_info = GeneralClientsPackagesInfo.query()
         tw_custom_entry_packages_info = TWCustomEntryInfo.query()
@@ -41,6 +40,7 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         template_values.update({'spearnet_customers_packages_info':spearnet_customers_packages_info})
         template_values.update({'general_clients_packages_info':general_clients_packages_info})
         template_values.update({'tw_custom_entry_packages_info':tw_custom_entry_packages_info})
+        
         template_values.update(user_info)
         
         template = jinja_environment.get_template(index_page)
@@ -475,8 +475,8 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
             # shipper email
             shipper_email = self.request.get('valid_shipper_email')
             if(mail.is_email_valid(shipper_email)):
-                mail.send_mail('winever.tw@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
-                mail.send_mail('winever.tw@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
+                mail.send_mail('rainman.tai@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
+                mail.send_mail('rainman.tai@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
             ajax_data['submit_status'] = 'success'
         except Exception, e:
             ajax_data['submit_status'] = 'fail to send email to shipper ; Error Message: %s' % e
@@ -627,10 +627,9 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         query_length = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').count()
         if(query_length < 50):
             Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA Tracking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
-        
         query_length = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').count()
         if(query_length < 20):
-            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Formal SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
+            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         # send the tracking number to users
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):

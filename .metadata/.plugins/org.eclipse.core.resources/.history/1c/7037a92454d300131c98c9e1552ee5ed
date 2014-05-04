@@ -153,7 +153,7 @@
 				value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}"
 				class="create_datetime" type="text" disabled="disabled" />
 			</span> {% else %} <span class="spearnet_customers_datetime">Package
-				Pickup DateTime: <input id="{{ single_row_data.hawb }}"
+				Pickup DateTime: <input id="{{ single_row_data.hawb|safe }}"
 				value="Not Pickup Yet" class="create_datetime" type="text"
 				disabled="disabled" />
 			</span> {% endif %}

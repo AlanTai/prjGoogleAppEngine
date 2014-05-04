@@ -61,7 +61,7 @@
 		
 		var packages_amount_delivered = 0;
 		
-		var spearnet_customers_packages_info = '{{spearnet_customers_packages_info}}';
+		var spearnet_customers_packages_info = "{{spearnet_customers_packages_info}}";
 		{% if spearnet_customers_packages_info %}
 		
 		{% for spearnet_customer_package_info in spearnet_customers_packages_info %}
@@ -101,7 +101,7 @@
 			Information Update; Package Status- Delivered)</a><br />
 
 		<script type="text/javascript">
-		var general_clients_packages_info = '{{general_clients_packages_info}}';
+		var general_clients_packages_info = "{{general_clients_packages_info}}";
 		{% if general_clients_packages_info %}
 		
 		{% for general_client_package_info in general_clients_packages_info %}

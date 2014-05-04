@@ -61,11 +61,11 @@
 		
 		var packages_amount_delivered = 0;
 		
-		var spearnet_customers_packages_info = '{{spearnet_customers_packages_info}}';
+		var spearnet_customers_packages_info = "{{spearnet_customers_packages_info}}";
 		{% if spearnet_customers_packages_info %}
 		
 		{% for spearnet_customer_package_info in spearnet_customers_packages_info %}
-			var package_status = "{{ spearnet_customer_package_info.package_status|safe }}";
+			var package_status = "{{ spearnet_customer_package_info.package_status }}";
 			package_status === 'spearnet' ? ++packages_amount_at_spearnet
 					: packages_amount_at_spearnet = packages_amount_at_spearnet + 0;
 			package_status === 'pickup' ? ++packages_amount_pickup

@@ -33,7 +33,6 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         index_page = my_dict.exshipper_index_page
         template_values = {'title':my_dict.exshipper_index_page_title}
         
-        #packages summary
         spearnet_customers_packages_info = SpearnetPackagesInfo.query()
         general_clients_packages_info = GeneralClientsPackagesInfo.query()
         tw_custom_entry_packages_info = TWCustomEntryInfo.query()
