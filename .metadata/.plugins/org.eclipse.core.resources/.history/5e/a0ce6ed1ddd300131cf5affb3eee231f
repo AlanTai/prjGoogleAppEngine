@@ -168,7 +168,7 @@
 							package_status_obj,
 							function(key, value) {
 								$(
-										'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
+										'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
 										.append($("<option/>", {
 											value : key,
 											text : value

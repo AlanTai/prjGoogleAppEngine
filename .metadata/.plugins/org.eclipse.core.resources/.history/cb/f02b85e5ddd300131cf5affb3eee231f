@@ -37,15 +37,6 @@
 		</div>
 		<div style="display: inline-block;">
 			<select id="package_status_fields_main_control">
-				<option value="client">Client</option>
-				<option value="pickup">Pick Up</option>
-				<option value="exshipper">ExShipper</option>
-				<option value="apex">Apex</option>
-				<option value="sfo_airport">SFO Airport</option>
-				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
-					International Airport</option>
-				<option value="delivered">Delivered (Leader Empire Wang
-					International Company)</option>
 				<option value="NA">NA</option>
 			</select><input type="button" value="Update Package Status Fields"
 				onclick="updatePackageStatusField()">
@@ -122,6 +113,15 @@
 				value="{{ single_row_data.tw_custom_entry_number }}" />
 			</span> <span class="general_clients_package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}" class="package_status">
+					<option value="client">Client</option>
+					<option value="pickup">Pick Up</option>
+					<option value="exshipper">ExShipper</option>
+					<option value="apex">Apex</option>
+					<option value="sfo_airport">SFO Airport</option>
+					<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+						International Airport</option>
+					<option value="suda">SUDA</option>
+					<option value="delivered">Delivered</option>
 					<option value="NA">No Data</option>
 			</select>
 			</span> <span class="general_clients_signature">Client Signature: <select
@@ -168,7 +168,7 @@
 							package_status_obj,
 							function(key, value) {
 								$(
-										'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
+										'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
 										.append($("<option/>", {
 											value : key,
 											text : value
@@ -495,6 +495,31 @@
 		testJson = json_array;
 		testTypes = obj_types;
 
+		/* testJson = [ {
+			"name" : "Tony Peña",
+			"city" : "希臘",
+			"country" : "United States",
+			"birthdate" : "1978-03-15",
+			"amount" : 42
+
+		}, {
+			"name" : "Ζαλώνης Thessaloniki",
+			"city" : "雅典",
+			"country" : "Greece",
+			"birthdate" : "1987-11-23",
+			"amount" : 42
+		} ]; */
+
+		//Simple type mapping; dates can be hard
+		//and I would prefer to simply use `datevalue`
+		//... you could even add the formula in here.
+		/* testTypes = {
+			"name" : "String",
+			"city" : "String",
+			"country" : "String",
+			"birthdate" : "String",
+			"amount" : "Number"
+		}; */
 
 		emitXmlHeader = function() {
 			return '<?xml version="1.0"?>\n'

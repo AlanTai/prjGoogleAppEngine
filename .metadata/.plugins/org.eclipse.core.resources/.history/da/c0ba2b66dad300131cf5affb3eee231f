@@ -81,7 +81,7 @@
 
 			//parse json object
 			var commodity_json = JSON
-					.parse('{{ single_row_data.commodity_detail|safe }}');
+					.parse('{{ single_row_data.commodity_detail }}');
 			var commodity_string = new String();
 			for ( var ith in commodity_json['items']) {
 				var data = commodity_json['items'][ith];
@@ -290,7 +290,7 @@
 			};
 
 			var current_time = new Date();
-			var file_name = 'exshipper_cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
+			var file_name = 'cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
 			download(jsonToSsXml(testJson), file_name,
 					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		</script>

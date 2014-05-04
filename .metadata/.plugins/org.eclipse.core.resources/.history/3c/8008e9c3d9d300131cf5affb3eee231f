@@ -140,7 +140,7 @@
 
 				//parse json object
 				var commodity_json = JSON
-						.parse('{{ single_row_data.commodity_detail|safe }}');
+						.parse('{{ single_row_data.commodity_detail }}');
 				var commodity_string = new String();
 				for ( var ith in commodity_json['items']) {
 					var data = commodity_json['items'][ith];
@@ -153,28 +153,28 @@
 				obj['pcs'] = "{{ single_row_data.pcs }}";
 				obj['unit'] = "{{ single_row_data.unit }}";
 
-				obj['original'] = "{{ single_row_data.original|safe }}";
-				obj['deliver_to'] = "{{ single_row_data.deliver_to|safe }}";
+				obj['original'] = "{{ single_row_data.original }}";
+				obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
 
 				obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 
-				obj['shipper_company'] = "{{ single_row_data.shipper_company|safe }}";
-				obj['shipper_person'] = "{{ single_row_data.shipper_person|safe }}";
+				obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
+				obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
 				obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
-				obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english|safe }}";
-				obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese|safe }}";
+				obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english }}";
+				obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
 
 				obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
-				obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english|safe }}";
-				obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese|safe }}";
-				obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english|safe }}";
-				obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese|safe }}";
+				obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
+				obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
+				obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
+				obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
 
 				obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
 				obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
 				obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
 				obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
-				obj['note'] = "{{ single_row_data.note|safe }}";
+				obj['note'] = "{{ single_row_data.note }}";
 
 				json_array.push(obj);
 			</script>
@@ -238,6 +238,32 @@
 			testJson = json_array;
 			testTypes = obj_types;
 
+			/* testJson = [ {
+				"name" : "Tony Peña",
+				"city" : "希臘",
+				"country" : "United States",
+				"birthdate" : "1978-03-15",
+				"amount" : 42
+
+			}, {
+				"name" : "Ζαλώνης Thessaloniki",
+				"city" : "雅典",
+				"country" : "Greece",
+				"birthdate" : "1987-11-23",
+				"amount" : 42
+			} ]; */
+
+			//Simple type mapping; dates can be hard
+			//and I would prefer to simply use `datevalue`
+			//... you could even add the formula in here.
+			/* testTypes = {
+				"name" : "String",
+				"city" : "String",
+				"country" : "String",
+				"birthdate" : "String",
+				"amount" : "Number"
+			}; */
+
 			emitXmlHeader = function() {
 				return '<?xml version="1.0"?>\n'
 						+ '<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
@@ -290,7 +316,7 @@
 			};
 
 			var current_time = new Date();
-			var file_name = 'exshipper_cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
+			var file_name = 'cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
 			download(jsonToSsXml(testJson), file_name,
 					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		</script>

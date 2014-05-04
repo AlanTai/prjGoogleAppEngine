@@ -238,6 +238,32 @@
 			testJson = json_array;
 			testTypes = obj_types;
 
+			/* testJson = [ {
+				"name" : "Tony Peña",
+				"city" : "希臘",
+				"country" : "United States",
+				"birthdate" : "1978-03-15",
+				"amount" : 42
+
+			}, {
+				"name" : "Ζαλώνης Thessaloniki",
+				"city" : "雅典",
+				"country" : "Greece",
+				"birthdate" : "1987-11-23",
+				"amount" : 42
+			} ]; */
+
+			//Simple type mapping; dates can be hard
+			//and I would prefer to simply use `datevalue`
+			//... you could even add the formula in here.
+			/* testTypes = {
+				"name" : "String",
+				"city" : "String",
+				"country" : "String",
+				"birthdate" : "String",
+				"amount" : "Number"
+			}; */
+
 			emitXmlHeader = function() {
 				return '<?xml version="1.0"?>\n'
 						+ '<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
@@ -290,7 +316,7 @@
 			};
 
 			var current_time = new Date();
-			var file_name = 'exshipper_cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
+			var file_name = 'cargo_manifest_' + current_time.getFullYear() + (current_time.getMonth()+1)  + current_time.getDate() + current_time.getHours() + current_time.getMinutes() + current_time.getSeconds() +'.xls'
 			download(jsonToSsXml(testJson), file_name,
 					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		</script>

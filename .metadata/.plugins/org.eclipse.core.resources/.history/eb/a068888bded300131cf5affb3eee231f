@@ -229,6 +229,7 @@
 						.change(function() {
 							var key = $(this).attr('id');
 							packages_status[key] = $(this).val();
+							alert(packages_status[key]);
 						});
 
 				//setup auto change mechanism for client signature
