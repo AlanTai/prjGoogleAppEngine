@@ -1,0 +1,178 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">{{title}}</p>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 100px; margin: 10px auto; width: 100%; text-align: center;">
+	<p>ExShipper Services for Internal Use</p>
+	<div>
+
+		<!-- Upload -->
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_suda_tracking_number_upload"
+			target="_blank">Upload SUDA Tracking Numbers (SUDA Regular/SUDA
+			Formal/TW Custom Entry)</a> <br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_number_upload"
+			target="_blank">Upload TW Custom Entry Numbers</a> <br /> <br />
+
+
+		<!-- Information Creator -->
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_create_employee_info"
+			target="_blank">Add New Employee Information</a> <br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_create_client_info"
+			target="_blank">Add New Client Information</a> <br /> <br />
+
+		<!-- Package Information -->
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_create_invoice"
+			target="_blank">Create Package Invoice</a><br /> <br />
+
+
+		<!-- Log Information -->
+
+		<p>Spearnet Packages Information</p>
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_processing"
+			target="_blank">Spearnet Customers Packages Information Log
+			(Processing ; Package Status- Spearnet/Pickup/ExShipper)</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_processed"
+			target="_blank">Spearnet Customers Packages Information Log
+			(Processed; Package Status- Apex/SFO/Taoyuan International Airport/TW
+			Custom Entry/TW Logistics)</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_delivered"
+			target="_blank">Spearnet Customers Packages Information Log
+			(Delivered; Package Status- Delivered)</a><br />
+
+
+		<script type="text/javascript">
+		//calculate the packages amount for different package status
+		var spearnet_customers_packages_info = "{{spearnet_customers_packages_info}}";
+		var spearnet_packages_amount_processing = 0;
+		var spearnet_packages_amount_processed = 0;
+		var spearnet_packages_amount_delivered = 0;
+		var spearnet_package_status;
+		
+		{% if spearnet_customers_packages_info %}
+		{% for spearnet_customer_package_info in spearnet_customers_packages_info %}
+			spearnet_package_status = "{{ spearnet_customer_package_info.package_status|safe }}";
+			
+			
+			if(spearnet_package_status === 'spearnet' || package_status === 'pickup' || package_status === 'exshipper'){
+				++spearnet_packages_amount_processing;
+			}
+			else if(spearnet_package_status === 'apex' || package_status === 'sfo_aiprort' || package_status === 'taiwan_taoyuan_airport' || package_status === 'tw_custom_entry' || package_status === 'tw_logistics'){
+				++spearnet_packages_amount_processed;
+			}
+			else if(spearnet_package_status === 'delivered'){
+				++spearnet_packages_amount_delivered;
+			}
+		{% endfor %}
+		{% endif %}
+		
+		$('#spearnet_packages_amount_processing').text('Processing Packages Amount: ' + (spearnet_packages_amount_processing + spearnet_packages_amount_processed + spearnet_packages_amount_delivered));
+		</script>
+
+
+		<p>General Clients Packages Information</p>
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_general_clients_packages_info_log_processing"
+			target="_blank">General Clients Packages Information Log
+			(Processing ; Package Status- Pickup/ExShipper)</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_general_clients_packages_info_log_processed"
+			target="_blank">General Clients Packages Information Log
+			(Processed ; Package Status- Apex/SFO/Taoyuan International
+			Airport/TW Custom Entry/TW Logistics)</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_general_clients_packages_info_log_delivered"
+			target="_blank">General Clients Packages Information Log
+			(Delivered ; Package Status- Delivered)</a><br />
+
+		<script type="text/javascript">
+		var general_clients_packages_info = "{{general_clients_packages_info}}";
+		var general_clients_packages_amount_processing = 0;
+		var general_clients_spearnet_packages_amount_processed = 0;
+		var general_clients_spearnet_packages_amount_delivered = 0;
+		var general_clients_package_status;
+		
+		{% if general_clients_packages_info %}
+		
+		{% for general_client_package_info in general_clients_packages_info %}
+		general_clients_package_status = "{{ spearnet_customer_package_info.package_status|safe }}";
+		
+		
+		if(general_clients_package_status === 'spearnet' || general_clients_package_status === 'pickup' || general_clients_package_status === 'exshipper'){
+			++spearnet_packages_amount_processing;
+		}
+		else if(general_clients_package_status === 'apex' || general_clients_package_status === 'sfo_aiprort' || general_clients_package_status === 'taiwan_taoyuan_airport' || general_clients_package_status === 'tw_custom_entry' || general_clients_package_status === 'tw_logistics'){
+			++spearnet_packages_amount_processed;
+		}
+		else if(general_clients_package_status === 'delivered'){
+			++spearnet_packages_amount_delivered;
+		}
+		{% endfor %}
+		
+		{% endif %}
+		</script>
+
+
+		<p>TW Custom Entry Packages Information</p>
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log_processing"
+			target="_blank">TW Custom Entry Packages Information Log
+			(Processing ; Package Status- Exshipper)</a> <br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log_processed"
+			target="_blank">TW Custom Entry Packages Information Log
+			(Processed ; Package Status- Apex/SFO/Taoyuan International Airport)</a>
+		<br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log_delivered"
+			target="_blank">TW Custom Entry Packages Information Log
+			(Delivered ; Package Status- Delivered)</a> <br /> <br />
+
+		<script type="text/javascript">
+		var tw_custom_entry_packages_info = "{{tw_custom_entry_packages_info}}";
+		{% if tw_custom_entry_packages_info %}
+		
+		{% for tw_custom_entry_package_info in tw_custom_entry_packages_info %}
+			
+		{% endfor %}
+		
+		{% endif %}
+		</script>
+
+
+		<!-- Label -->
+		<p>Label Sections</p>
+		<a
+			href="/exshipper_login_handler?dispatch_token=exshipper_packages_labels"
+			target="_blank">ExShipper Packages Labels</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_labels"
+			target="_blank">TW Custom Entry Labels</a> <br /> <br />
+
+		<p>Packages Information for Forwarding Company</p>
+		<!-- Log Information -->
+		<a href="/exshipper_login_handler?dispatch_token=exshipper_pre_alert"
+			target="_blank">Pre-Alert</a><br /> <a
+			href="/exshipper_login_handler?dispatch_token=exshipper_cargo_manifest"
+			target="_blank">Cargo Manifest</a><br />
+	</div>
+	<br>
+	<div>
+		<p>ExShipper Taiwan Custom Entry Service</p>
+		<a href="/exshipper_tw_custom_entry_index_page" target="_blank">Taiwan
+			Custom Entry Service</a>
+	</div>
+	<br>
+	<div>
+		<p>ExShipper Services for Clients</p>
+		<a href="/exshipper_spearnet_index_page" target="_blank">Spearnet</a>
+		<br /> <a href="/exshipper_general_clients_index_page"
+			target="_blank">General Clients</a>
+	</div>
+	<br>
+</div>
+
+
+{% endblock %}

@@ -13,8 +13,7 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper General Clients Package
 		Information Log</p>
-	<p id="packages_amount_summary"
-		style="color: #f00; font-size: 12px;"></p>
+	<p id="packages_amount_summary" style="color: #f00; font-size: 12px;"></p>
 	<a id="xls_download" href="">Download Log Data in XLS Format</a> <br>
 	<div>
 		<input type="button" value="Update Information"
@@ -61,6 +60,7 @@
 
 		<script type="text/javascript">
 			var packages_status = new Object();
+			var tw_custom_entry_numbers = new Object();
 			var clients_signature = new Object();
 			var notes = new Object();
 			var json_array = new Array();
@@ -119,7 +119,9 @@
 		<form style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text"
 				value="{{ single_row_data.hawb }}" disabled>
-			</span> <span>TW Custom Entry Barcode Number: <input type="text"
+			</span> <span class="general_clients_tw_custom_entry_number">TW
+				Custom Entry Barcode Number: <input type="text"
+				id="{{ single_row_data.hawb }}"
 				value="{{ single_row_data.tw_custom_entry_number }}" />
 			</span> <span class="general_clients_package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}" class="package_status">
@@ -160,7 +162,7 @@
 					'apex' : 'Apex',
 					'sfo_airport' : 'SFO Airport',
 					'taiwan_taoyuan_airport' : 'Taiwan Taoyuan International Airport',
-					'tw_custom_entry':'TW Custom Entry',
+					'tw_custom_entry' : 'TW Custom Entry',
 					'tw_logistics' : 'TW Logistics',
 					'delivered' : 'Delivered'
 				};
@@ -230,6 +232,13 @@
 						.val(note);
 
 				//update json obj when select value change
+				$(
+						'.general_clients_tw_custom_entry_number > input[id={{ single_row_data.hawb }}]')
+						.on('input', function() {
+							var key = $(this).attr('id');
+							tw_custom_entry_numbers[key] = $(this).val();
+						});
+
 				$(
 						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
 						.change(function() {
@@ -338,27 +347,27 @@
 			//add packages amount summary
 			var dispatch_token = '{{dispatch_token}}';
 			var summary_packages_amount;
-			
-			if(dispatch_token === 'exshipper_general_clients_packages_info_log_processing'){
+
+			if (dispatch_token === 'exshipper_general_clients_packages_info_log_processing') {
 				summary_packages_amount = 'Packages Amount(Client): '
-					+ packages_amount_at_client_place + ' ; '
-					+ 'Packages Amount(Pickup): ' + packages_amount_pickup
-					+ ' ; ' + 'Packages Amount(Exshipper): '
-					+ packages_amount_at_exshipper;
-			} else if( dispatch_token === 'exshipper_general_clients_packages_info_log_processed'){
+						+ packages_amount_at_client_place + ' ; '
+						+ 'Packages Amount(Pickup): ' + packages_amount_pickup
+						+ ' ; ' + 'Packages Amount(Exshipper): '
+						+ packages_amount_at_exshipper;
+			} else if (dispatch_token === 'exshipper_general_clients_packages_info_log_processed') {
 				summary_packages_amount = 'Packages Amount(Apex): '
-					+ packages_amount_at_apex + ' ; '
-					+ ' Packages Amount(SFO): '
-					+ packages_amount_at_sfo_aiprort + ' ; '
-					+ ' Packages Amount(Taiwan Taoyuan Airport): '
-					+ packages_amount_taiwan_taoyuan_airport + ' ; '
-					+ ' Packages Amount(TW Custom Entry): '
-					+ packages_amount_tw_custom_entry + ' ; '
-					+ ' Packages Amount(TW Logistics): '
-					+ packages_amount_tw_logistics;
-			} else if( dispatch_token === 'exshipper_general_clients_packages_info_log_delivered'){
+						+ packages_amount_at_apex + ' ; '
+						+ ' Packages Amount(SFO): '
+						+ packages_amount_at_sfo_aiprort + ' ; '
+						+ ' Packages Amount(Taiwan Taoyuan Airport): '
+						+ packages_amount_taiwan_taoyuan_airport + ' ; '
+						+ ' Packages Amount(TW Custom Entry): '
+						+ packages_amount_tw_custom_entry + ' ; '
+						+ ' Packages Amount(TW Logistics): '
+						+ packages_amount_tw_logistics;
+			} else if (dispatch_token === 'exshipper_general_clients_packages_info_log_delivered') {
 				summary_packages_amount = 'Packages Amount(Delivered): '
-					+ packages_amount_delivered;
+						+ packages_amount_delivered;
 			}
 
 			$('#packages_amount_summary').text(summary_packages_amount);
@@ -388,9 +397,18 @@
 						.val();
 
 				$('.package_status').each(function() {
-					$(this).val(package_status);
 					var key = $(this).attr('id');
-					packages_status[key] = $(this).val();
+					var tw_custom_entry_tracking_number = $(
+							'.general_clients_tw_custom_entry_number > #'
+									+ key).val();
+					var current_status = $(this).val();
+
+					//filtering the packages without tw custom entry number 
+					if (!((current_status === 'client'
+							|| current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')) {
+						$(this).val(package_status);
+						packages_status[key] = $(this).val();
+					}
 				});
 			}
 
@@ -399,11 +417,22 @@
 				var confirm_result = confirm('Do you want to update the packages\' status?');
 
 				if (confirm_result == true) {
+					//
 					var json_obj_update_data = new Object();
+					var tw_custom_entry_numbers_length = Object
+							.keys(tw_custom_entry_numbers).length;
+
 					var package_status_length = Object.keys(packages_status).length;
 					var clients_signature_length = Object
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
+					
+					//
+					if (tw_custom_entry_numbers_length != 0) {
+						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
+					} else {
+						json_obj_update_data['tw_custom_entry_numbers'] = 'NA';
+					}
 					if (package_status_length != 0) {
 						json_obj_update_data['packages_status'] = packages_status;
 					} else {
@@ -420,7 +449,8 @@
 						json_obj_update_data['notes'] = 'NA';
 					}
 
-					if (package_status_length != 0
+					if (tw_custom_entry_numbers_length != 0
+							|| package_status_length != 0
 							|| clients_signature_length != 0
 							|| notes_length != 0) {
 						$('#upload_cover').css({

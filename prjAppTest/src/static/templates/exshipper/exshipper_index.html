@@ -35,108 +35,128 @@
 		<!-- Log Information -->
 
 		<p>Spearnet Packages Information</p>
+		<p id="spearnet_packages_amount_summary" style="color: #f00; font-size: 12px;"></p>
 		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_processing"
-			target="_blank">Spearnet Customers Packages Information Log (For
-			Information Update ; Package Status- Spearnet/Pickup/ExShipper)</a><br />
-		<a
+			target="_blank">Spearnet Customers Packages Information Log
+			(Processing ; Package Status- Spearnet/Pickup/ExShipper)</a><br /> <a
 			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_processed"
-			target="_blank">Spearnet Customers Packages Information Log (For
-			Information Update; Package Status- Apex/SFO/Taoyuan International
-			Airport/SUDA)</a><br /> <a
+			target="_blank">Spearnet Customers Packages Information Log
+			(Processed; Package Status- Apex/SFO/Taoyuan International Airport/TW
+			Custom Entry/TW Logistics)</a><br /> <a
 			href="/exshipper_login_handler?dispatch_token=exshipper_spearnet_customers_packages_info_log_delivered"
-			target="_blank">Spearnet Customers Packages Information Log (For
-			Information Update; Package Status- Delivered)</a><br />
+			target="_blank">Spearnet Customers Packages Information Log
+			(Delivered; Package Status- Delivered)</a><br />
 
 
 		<script type="text/javascript">
 		//calculate the packages amount for different package status
-		var packages_amount_at_spearnet = 0;
-		var packages_amount_pickup = 0;
-		var packages_amount_at_exshipper = 0;
-
-		var packages_amount_at_apex = 0;
-		var packages_amount_at_sfo_aiprort = 0;
-		var packages_amount_taiwan_taoyuan_airport = 0;
-		
-		var packages_amount_delivered = 0;
-		
 		var spearnet_customers_packages_info = "{{spearnet_customers_packages_info}}";
+		var spearnet_packages_amount_processing = 0;
+		var spearnet_packages_amount_processed = 0;
+		var spearnet_packages_amount_delivered = 0;
+		var spearnet_package_status;
+		
 		{% if spearnet_customers_packages_info %}
-		
 		{% for spearnet_customer_package_info in spearnet_customers_packages_info %}
-			var package_status = "{{ spearnet_customer_package_info.package_status|safe }}";
-			package_status === 'spearnet' ? ++packages_amount_at_spearnet
-					: packages_amount_at_spearnet = packages_amount_at_spearnet + 0;
-			package_status === 'pickup' ? ++packages_amount_pickup
-					: packages_amount_pickup = packages_amount_pickup + 0;
-			package_status === 'exshipper' ? ++packages_amount_at_exshipper
-					: packages_amount_at_exshipper = packages_amount_at_exshipper + 0;
-	
-			package_status === 'apex' ? ++packages_amount_at_apex
-					: packages_amount_at_apex = packages_amount_at_apex + 0;
-			package_status === 'sfo_aiprort' ? ++packages_amount_at_sfo_aiprort
-					: packages_amount_at_sfo_aiprort = packages_amount_at_sfo_aiprort + 0;
-			package_status === 'taiwan_taoyuan_airport' ? ++packages_amount_taiwan_taoyuan_airport
-					: packages_amount_taiwan_taoyuan_airport = packages_amount_taiwan_taoyuan_airport + 0;
-			package_status === 'delivered' ? ++packages_amount_delivered
-					: packages_amount_delivered = packages_amount_delivered + 0;
+			spearnet_package_status = "{{ spearnet_customer_package_info.package_status|safe }}";
+			
+			
+			if(spearnet_package_status === 'spearnet' || spearnet_package_status === 'pickup' || spearnet_package_status === 'exshipper'){
+				++spearnet_packages_amount_processing;
+			}
+			else if(spearnet_package_status === 'apex' || spearnet_package_status === 'sfo_aiprort' || spearnet_package_status === 'taiwan_taoyuan_airport' || spearnet_package_status === 'tw_custom_entry' || spearnet_package_status === 'tw_logistics'){
+				++spearnet_packages_amount_processed;
+			}
+			else if(spearnet_package_status === 'delivered'){
+				++spearnet_packages_amount_delivered;
+			}
 		{% endfor %}
-		
+		$('#spearnet_packages_amount_summary').text('Spearnet Packages Amount Summary: ' + 'Processing-' + spearnet_packages_amount_processing + ' ; ' + 'Processed- ' + spearnet_packages_amount_processed + ' ; ' + 'Delivered- ' + spearnet_packages_amount_delivered);
 		{% endif %}
+		
 		</script>
 
 
 		<p>General Clients Packages Information</p>
+		<p id="general_client_packages_amount_summary" style="color: #f00; font-size: 12px;"></p>
 		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_general_clients_packages_info_log_processing"
-			target="_blank">General Clients Packages Information Log (For
-			Information Update; Package Status- Pickup/ExShipper)</a><br /> <a
+			target="_blank">General Clients Packages Information Log
+			(Processing ; Package Status- Pickup/ExShipper)</a><br /> <a
 			href="/exshipper_login_handler?dispatch_token=exshipper_general_clients_packages_info_log_processed"
-			target="_blank">General Clients Packages Information Log (For
-			Information Update; Package Status- Apex/SFO/Taoyuan International
-			Airport/SUDA)</a><br /> <a
+			target="_blank">General Clients Packages Information Log
+			(Processed ; Package Status- Apex/SFO/Taoyuan International
+			Airport/TW Custom Entry/TW Logistics)</a><br /> <a
 			href="/exshipper_login_handler?dispatch_token=exshipper_general_clients_packages_info_log_delivered"
-			target="_blank">General Clients Packages Information Log (For
-			Information Update; Package Status- Delivered)</a><br />
+			target="_blank">General Clients Packages Information Log
+			(Delivered ; Package Status- Delivered)</a><br />
 
 		<script type="text/javascript">
 		var general_clients_packages_info = "{{general_clients_packages_info}}";
+		var general_clients_packages_amount_processing = 0;
+		var general_clients_packages_amount_processed = 0;
+		var general_clients_packages_amount_delivered = 0;
+		var general_clients_package_status;
+		
 		{% if general_clients_packages_info %}
 		
 		{% for general_client_package_info in general_clients_packages_info %}
-			
+		general_clients_package_status = "{{ general_client_package_info.package_status|safe }}";
+		if(general_clients_package_status === 'spearnet' || general_clients_package_status === 'pickup' || general_clients_package_status === 'exshipper'){
+			++general_clients_packages_amount_processing;
+		}
+		else if(general_clients_package_status === 'apex' || general_clients_package_status === 'sfo_aiprort' || general_clients_package_status === 'taiwan_taoyuan_airport' || general_clients_package_status === 'tw_custom_entry' || general_clients_package_status === 'tw_logistics'){
+			++general_clients_packages_amount_processed;
+		}
+		else if(general_clients_package_status === 'delivered'){
+			++general_clients_packages_amount_delivered;
+		}
 		{% endfor %}
-		
+		$('#general_client_packages_amount_summary').text('General Clients Packages Amount Summary: ' + 'Processing- ' + general_clients_packages_amount_processing + ' ; ' + 'Processed- ' + general_clients_packages_amount_processed + ' ; ' + 'Delivered- ' + general_clients_packages_amount_delivered);
 		{% endif %}
 		</script>
 
 
 		<p>TW Custom Entry Packages Information</p>
+		<p id="tw_custom_entry_packages_amount_summary" style="color: #f00; font-size: 12px;"></p>
 		<a
 			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log_processing"
-			target="_blank">TW Custom Entry Packages Information Log (For
-			Information Update; Package Status- Exshipper)</a> <br /> <a
+			target="_blank">TW Custom Entry Packages Information Log
+			(Processing ; Package Status- Exshipper)</a> <br /> <a
 			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log_processed"
-			target="_blank">TW Custom Entry Packages Information Log (For
-			Information Update; Package Status- Apex/SFO/Taoyuan International
-			Airport)</a> <br /> <a
+			target="_blank">TW Custom Entry Packages Information Log
+			(Processed ; Package Status- Apex/SFO/Taoyuan International Airport)</a>
+		<br /> <a
 			href="/exshipper_login_handler?dispatch_token=exshipper_tw_custom_entry_packages_info_log_delivered"
-			target="_blank">TW Custom Entry Packages Information Log (For
-			Information Update; Package Status- Delivered)</a> <br /> <br />
+			target="_blank">TW Custom Entry Packages Information Log
+			(Delivered ; Package Status- Delivered)</a> <br /> <br />
 
 		<script type="text/javascript">
 		var tw_custom_entry_packages_info = "{{tw_custom_entry_packages_info}}";
+		var tw_custom_entry_packages_amount_processing = 0;
+		var tw_custom_entry_packages_amount_processed = 0;
+		var tw_custom_entry_packages_amount_delivered = 0;
+		var tw_custom_entry_package_status;
+		
 		{% if tw_custom_entry_packages_info %}
-		
 		{% for tw_custom_entry_package_info in tw_custom_entry_packages_info %}
-			
+		tw_custom_entry_package_status = "{{ tw_custom_entry_package_info.package_status|safe }}";
+			if(tw_custom_entry_package_status === 'spearnet' || tw_custom_entry_package_status === 'pickup' || tw_custom_entry_package_status === 'exshipper'){
+				++tw_custom_entry_packages_amount_processing;
+			}
+			else if(tw_custom_entry_package_status === 'apex' || tw_custom_entry_package_status === 'sfo_aiprort' || tw_custom_entry_package_status === 'taiwan_taoyuan_airport' || tw_custom_entry_package_status === 'tw_custom_entry' || tw_custom_entry_package_status === 'tw_logistics'){
+				++tw_custom_entry_packages_amount_processed;
+			}
+			else if(tw_custom_entry_package_status === 'delivered'){
+				++tw_custom_entry_packages_amount_delivered;
+			}
 		{% endfor %}
-		
+		$('#tw_custom_entry_packages_amount_summary').text('TW Custom Entry Packages Amount Summary: ' + 'Processing- ' + tw_custom_entry_packages_amount_processing + ' ; ' + 'Processed- ' + tw_custom_entry_packages_amount_processed + ' ; ' + 'Delivered- ' + tw_custom_entry_packages_amount_delivered);
 		{% endif %}
 		</script>
-		
-		
+
+
 		<!-- Label -->
 		<p>Label Sections</p>
 		<a
