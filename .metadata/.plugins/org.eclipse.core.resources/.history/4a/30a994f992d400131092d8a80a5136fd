@@ -1,0 +1,572 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+
+<script>
+	window.onload = function() {
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
+	};
+</script>
+
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">ExShipper General Clients Package
+		Information Log</p>
+	<p id="packages_amount_summary"
+		style="color: #f00; font-size: 12px;"></p>
+	<a id="xls_download" href="">Download Log Data in XLS Format</a> <br>
+	<div>
+		<input type="button" value="Update Information"
+			onclick="updatePackageStatus()" style="margin: 5px 5px;"> <input
+			id="packages_suda_tracking_numbers" style="width: 200px;"
+			placeholder="SUDA Tracking Number" /> <input
+			id="search_suda_tracking_number" type="button" value="Search" />
+	</div>
+
+	<!-- main control fileds -->
+	<div style="display: block; margin: 5px auot;">
+
+		<div style="display: inline-block;">
+			<select id="general_clients_signature_fields_main_control">
+				<option value="NA">NA</option>
+			</select> <input type="button" value="Update Client Siganture"
+				onclick="updateClientSignature()">
+		</div>
+		<div style="display: inline-block;">
+			<select id="package_status_fields_main_control">
+				<option value="client">Client</option>
+				<option value="pickup">Pick Up</option>
+				<option value="exshipper">ExShipper</option>
+				<option value="apex">Apex</option>
+				<option value="sfo_airport">SFO Airport</option>
+				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
+					International Airport</option>
+				<option value="tw_custom_entry">TW Custom Entry</option>
+				<option value="tw_logistics">TW Logistics</option>
+				<option value="delivered">Delivered</option>
+				<option value="NA">NA</option>
+			</select><input type="button" value="Update Package Status Fields"
+				onclick="updatePackageStatusField()">
+		</div>
+	</div>
+	<hr>
+</div>
+
+<div
+	style="position: absolute; top: 230px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if general_clients_packages_info_log %}
+	<div id="general_clients_packages_info"
+		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
+
+		<script type="text/javascript">
+			var packages_status = new Object();
+			var clients_signature = new Object();
+			var notes = new Object();
+			var json_array = new Array();
+
+			//calculate the packages amount for different package status
+			var packages_amount_at_client_place = 0;
+			var packages_amount_pickup = 0;
+			var packages_amount_at_exshipper = 0;
+
+			var packages_amount_at_apex = 0;
+			var packages_amount_at_sfo_aiprort = 0;
+			var packages_amount_taiwan_taoyuan_airport = 0;
+			var packages_amount_delivered = 0;
+
+			//put keys into array
+			var obj_keys = new Object();
+			obj_keys['reference_number'] = 'reference_number';
+			obj_keys['tw_custom_entry_number'] = 'tw_custom_entry_number';
+			obj_keys['hawb'] = 'hawb';
+
+			obj_keys['ctn'] = 'ctn';
+			obj_keys['weight_kg'] = 'g/w(kg)';
+			obj_keys['weight_lb'] = 'g/w(lb)';
+			obj_keys['commodity_detail'] = 'commodity_detail';
+			obj_keys['pcs'] = 'pcs';
+			obj_keys['unit'] = 'unit';
+
+			obj_keys['original'] = 'original';
+			obj_keys['deliver_to'] = 'deliver_to';
+
+			obj_keys['unit_price_fob_us_dollar'] = 'unit_price_fob_us_dollar';
+
+			obj_keys['shipper_company'] = 'shipper_company';
+			obj_keys['shipper_person'] = 'shipper_person';
+			obj_keys['shipper_tel'] = 'shipper_tel';
+			obj_keys['shipper_address_english'] = 'shipper_address_english';
+			obj_keys['shipper_address_chinese'] = 'shipper_address_chinese';
+
+			obj_keys['consignee_tel'] = 'consignee_tel';
+			obj_keys['consignee_name_english'] = 'consignee_name_english';
+			obj_keys['consignee_name_chinese'] = 'consignee_name_chinese';
+			obj_keys['consignee_address_english'] = 'consignee_address_english';
+			obj_keys['consignee_address_chinese'] = 'consignee_address_chinese';
+
+			obj_keys['company_id_or_person_id'] = 'company_id_or_person_id';
+			obj_keys['size_accumulation'] = 'size_accumulation';
+			obj_keys['declaration_need_or_not'] = 'declaration_need_or_not';
+			obj_keys['duty_paid_by'] = 'duty_paid_by';
+			obj_keys['note'] = 'note';
+
+			json_array.push(obj_keys);
+		</script>
+		{% for single_row_data in general_clients_packages_info_log %}
+		<form style="padding: 5px 5px;">
+			<span>SUDA Tracking Number: <input type="text"
+				value="{{ single_row_data.hawb }}" disabled>
+			</span> <span>TW Custom Entry Barcode Number: <input type="text"
+				value="{{ single_row_data.tw_custom_entry_number }}" />
+			</span> <span class="general_clients_package_status">Package Status:
+				<select id="{{ single_row_data.hawb }}" class="package_status">
+					<option value="NA">No Data</option>
+			</select>
+			</span> <span class="general_clients_signature">Client Signature: <select
+				id="{{ single_row_data.hawb }}" class="client_signature">
+					<option value="NA">No Data</option>
+			</select>
+			</span> <span class="general_clients_notes">Note: <input
+				id="{{ single_row_data.hawb }}" class="note" type="text" />
+			</span> {% if single_row_data.pickup_date_time %} <span
+				class="general_clients_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}"
+				value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}"
+				class="create_datetime" type="text" disabled="disabled" />
+			</span> {% else %} <span class="general_clients_datetime">Package
+				Pickup DateTime: <input id="{{ single_row_data.hawb }}"
+				value="Not Pickup Yet" class="create_datetime" type="text"
+				disabled="disabled" />
+			</span> {% endif %}
+		</form>
+
+		<script type="text/javascript">
+			var tw_custom_entry_tracking_number = "{{ single_row_data.tw_custom_entry_number }}";
+			var package_status_obj = new Object();
+			if (tw_custom_entry_tracking_number === 'NA') {
+				package_status_obj = {
+					'client' : 'Client',
+					'pickup' : 'Pick Up',
+					'exshipper' : 'ExShipper'
+				};
+			} else {
+				package_status_obj = {
+					'client' : 'Client',
+					'pickup' : 'Pick Up',
+					'exshipper' : 'ExShipper',
+					'apex' : 'Apex',
+					'sfo_airport' : 'SFO Airport',
+					'taiwan_taoyuan_airport' : 'Taiwan Taoyuan International Airport',
+					'tw_custom_entry':'TW Custom Entry',
+					'tw_logistics' : 'TW Logistics',
+					'delivered' : 'Delivered'
+				};
+			}
+			$
+					.each(
+							package_status_obj,
+							function(key, value) {
+								$(
+										'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
+										.append($("<option/>", {
+											value : key,
+											text : value
+										}));
+							});
+
+			var package_status = "{{ single_row_data.package_status }}";
+			if (package_status === 'client') {
+				++packages_amount_at_client_place;
+			} else if (package_status === 'pickup') {
+				++packages_amount_pickup;
+			} else if (package_status === 'exshipper') {
+				++packages_amount_at_exshipper;
+			} else if (package_status === 'apex') {
+				++packages_amount_at_apex;
+			} else if (package_status === 'sfo_aiprort') {
+				++packages_amount_at_sfo_aiprort;
+			} else if (package_status === 'taiwan_taoyuan_airport') {
+				++packages_amount_taiwan_taoyuan_airport;
+			} else if (package_status === 'tw_custom_entry') {
+				++packages_amount_tw_custom_entry;
+			} else if (package_status === 'tw_logistics') {
+				++packages_amount_tw_logistics;
+			} else if (package_status === 'delivered') {
+				++packages_amount_delivered;
+			}
+
+			$(function() {
+				//setup initial select values
+				var package_status = '{{ single_row_data.package_status }}';
+				if (package_status === 'None') {
+					package_status = 'NA';
+				}
+				;
+
+				var note = '{{ single_row_data.note }}';
+				if (note === 'None') {
+					note = 'NA';
+				}
+				;
+
+				var signature_img_id = '{{ single_row_data.signature_img_id }}';
+				if (signature_img_id === 'None') {
+					signature_img_id = 'NA';
+				}
+				;
+
+				//setup auto change mechanism for package status
+				$(
+						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
+						.val(package_status);
+				$(
+						'.general_clients_signature > select[id={{ single_row_data.hawb }}]')
+						.val(signature_img_id);
+				$(
+						'.general_clients_notes > input[id={{ single_row_data.hawb }}]')
+						.val(note);
+
+				//update json obj when select value change
+				$(
+						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
+						.change(function() {
+							var key = $(this).attr('id');
+							packages_status[key] = $(this).val();
+						});
+
+				//setup auto change mechanism for client signature
+				$(
+						'.general_clients_signature > select[id={{ single_row_data.hawb }}]')
+						.change(function() {
+							var key = $(this).attr('id');
+							clients_signature[key] = $(this).val();
+						});
+
+				$(
+						'.general_clients_notes > input[id={{ single_row_data.hawb }}]')
+						.on('input', function() {
+							var key = $(this).attr('id');
+							notes[key] = $(this).val();
+						});
+
+			});
+
+			var obj = new Object();
+			obj['reference_number'] = '{{ single_row_data.reference_number }}';
+			obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
+			obj['hawb'] = '{{ single_row_data.hawb }}';
+
+			obj['ctn'] = '{{ single_row_data.ctn }}';
+			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
+			obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
+
+			//parse json object
+			var commodity_json = JSON
+					.parse('{{ single_row_data.commodity_detail }}');
+			var commodity_string = new String();
+			for ( var ith in commodity_json['items']) {
+				var data = commodity_json['items'][ith];
+				commodity_string += " Item Name: " + data.name + " Quantity: "
+						+ data.quan + " Price: " + data.price + " ; ";
+			};
+
+			obj['commodity_detail'] = commodity_string;
+			obj['pcs'] = "{{ single_row_data.pcs }}";
+			obj['unit'] = "{{ single_row_data.unit }}";
+
+			obj['original'] = "{{ single_row_data.original }}";
+			obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
+
+			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
+
+			obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
+			obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
+			obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
+			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english }}";
+			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
+
+			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
+			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
+			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
+			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
+			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
+
+			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
+			obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
+			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
+			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
+			obj['note'] = "{{ single_row_data.note }}";
+
+			json_array.push(obj);
+		</script>
+		{% endfor %} {% else %}
+		<p>No Data Available</p>
+		{% endif %}
+
+		<!-- upload client signature information -->
+		{% if clients_info %} {% for client_info in clients_info %}
+		<script type="text/javascript">
+			var clients_signatures = new Object();
+			clients_signatures["{{client_info.key.urlsafe()}}"] = 'Account Name: '
+					+ "{{client_info.account_name}}"
+					+ ' ; '
+					+ 'Name: '
+					+ "{{client_info.first_name}} "
+					+ " {{client_info.last_name}}"
+					+ ' ; Phone: '
+					+ "{{client_info.phone_number}}";
+			$
+					.each(
+							clients_signatures,
+							function(key, value) {
+								$(
+										'.general_clients_signature > select, #general_clients_signature_fields_main_control')
+										.append($("<option/>", {
+											value : key,
+											text : value
+										}));
+							});
+		</script>
+		{% endfor %} {% endif %}
+
+		<!-- end of upload client signature information -->
+
+		<script type="text/javascript">
+			//add packages amount summary
+			var dispatch_token = '{{dispatch_token}}';
+			var summary_packages_amount;
+			
+			if(dispatch_token === 'exshipper_general_clients_packages_info_log_processing'){
+				summary_packages_amount = 'Packages Amount(Client): '
+					+ packages_amount_at_client_place + ' ; '
+					+ 'Packages Amount(Pickup): ' + packages_amount_pickup
+					+ ' ; ' + 'Packages Amount(Exshipper): '
+					+ packages_amount_at_exshipper;
+			} else if( dispatch_token === 'exshipper_general_clients_packages_info_log_processed'){
+				summary_packages_amount = 'Packages Amount(Apex): '
+					+ packages_amount_at_apex + ' ; '
+					+ ' Packages Amount(SFO): '
+					+ packages_amount_at_sfo_aiprort + ' ; '
+					+ ' Packages Amount(Taiwan Taoyuan Airport): '
+					+ packages_amount_taiwan_taoyuan_airport + ' ; '
+					+ ' Packages Amount(TW Custom Entry): '
+					+ packages_amount_tw_custom_entry + ' ; '
+					+ ' Packages Amount(TW Logistics): '
+					+ packages_amount_tw_logistics;
+			} else if( dispatch_token === 'exshipper_general_clients_packages_info_log_delivered'){
+				summary_packages_amount = 'Packages Amount(Delivered): '
+					+ packages_amount_delivered;
+			}
+
+			$('#packages_amount_summary').text(summary_packages_amount);
+
+			// distinct row color
+			$('#general_clients_packages_info> form:even').css(
+					'background-color', '#dedede');
+			$('#general_clients_packages_info> form:odd').css(
+					'background-color', '#f9f9f9');
+			// end of distinct row color
+
+			//fields update mechanism
+			function updateClientSignature() {
+				var client_signature_id = $(
+						'#general_clients_signature_fields_main_control').val()
+						.trim();
+
+				$('.general_clients_signature > select').each(function() {
+					$(this).val(client_signature_id);
+					var key = $(this).attr('id');
+					clients_signature[key] = $(this).val();
+				});
+			}
+
+			function updatePackageStatusField() {
+				var package_status = $('#package_status_fields_main_control')
+						.val();
+
+				$('.package_status').each(function() {
+					$(this).val(package_status);
+					var key = $(this).attr('id');
+					packages_status[key] = $(this).val();
+				});
+			}
+
+			//update information
+			function updatePackageStatus() {
+				var confirm_result = confirm('Do you want to update the packages\' status?');
+
+				if (confirm_result == true) {
+					var json_obj_update_data = new Object();
+					var package_status_length = Object.keys(packages_status).length;
+					var clients_signature_length = Object
+							.keys(clients_signature).length;
+					var notes_length = Object.keys(notes).length;
+					if (package_status_length != 0) {
+						json_obj_update_data['packages_status'] = packages_status;
+					} else {
+						json_obj_update_data['packages_status'] = 'NA';
+					}
+					if (clients_signature_length != 0) {
+						json_obj_update_data['clients_signature'] = clients_signature;
+					} else {
+						json_obj_update_data['clients_signature'] = 'NA';
+					}
+					if (notes_length != 0) {
+						json_obj_update_data['notes'] = notes;
+					} else {
+						json_obj_update_data['notes'] = 'NA';
+					}
+
+					if (package_status_length != 0
+							|| clients_signature_length != 0
+							|| notes_length != 0) {
+						$('#upload_cover').css({
+							'display' : 'block'
+						});
+						var json_string = JSON.stringify(json_obj_update_data,
+								2, 2);
+						$
+								.ajax(
+										"/exshipper_general_clients_packages_info_update_handler",
+										{
+											type : 'POST',
+											data : {
+												fmt : 'json',
+												update_packages_info : json_string
+											},
+											success : showMsg,
+											statusCode : {
+												400 : function() {
+													alert('400 status code! user-side error');
+													$('#upload_cover').css({
+														'display' : 'none'
+													});
+												},
+												500 : function() {
+													alert('500 status code! server-side error');
+													$('#upload_cover').css({
+														'display' : 'none'
+													});
+												}
+											}
+										});
+					} else {
+						alert('Nothing needs to be updated!');
+					}
+				}
+			}
+
+			function showMsg(return_msg) {
+				alert(return_msg.update_status);
+				$('#upload_cover').css({
+					'display' : 'none'
+				});
+			}
+		</script>
+	</div>
+
+	<script type="text/javascript">
+		//Test script to generate a file from JavaScript such
+		//that MS Excel will honor non-ASCII characters.
+		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
+
+		var obj_types = new Object();
+		obj_types.reference_number = "String";
+		obj_types.tw_custom_entry_number = "String";
+		obj_types.hawb = "String";
+
+		obj_types.ctn = "String";
+		obj_types.weight_kg = "String";
+		obj_types.weight_lb = "String";
+		obj_types.commodity_detail = "String";
+		obj_types.pcs = "String";
+		obj_types.unit = "String";
+
+		obj_types.original = "String";
+		obj_types.deliver_to = "String";
+
+		obj_types.unit_price_fob_us_dollar = "String";
+
+		obj_types.shipper_company = "String";
+		obj_types.shipper_person = "String";
+		obj_types.shipper_tel = "String";
+		obj_types.shipper_address_english = "String";
+		obj_types.shipper_address_chinese = "String";
+
+		obj_types.consignee_tel = "String";
+		obj_types.consignee_name_english = "String";
+		obj_types.consignee_name_chinese = "String";
+		obj_types.consignee_address_english = "String";
+		obj_types.consignee_address_chinese = "String";
+
+		obj_types.company_id_or_person_id = "String";
+		obj_types.size_accumulation = "String";
+		obj_types.declaration_need_or_not = "String";
+		obj_types.duty_paid_by = "String";
+		obj_types.note = "String";
+
+		testJson = json_array;
+		testTypes = obj_types;
+
+		emitXmlHeader = function() {
+			return '<?xml version="1.0"?>\n'
+					+ '<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n'
+					+ '<ss:Worksheet ss:Name="Sheet1">\n' + '<ss:Table>\n\n';
+		};
+
+		emitXmlFooter = function() {
+			return '\n</ss:Table>\n' + '</ss:Worksheet>\n' + '</ss:Workbook>\n';
+		};
+
+		jsonToSsXml = function(jsonObject) {
+			var row;
+			var col;
+			var xml;
+			var data = typeof jsonObject != "object" ? JSON.parse(jsonObject)
+					: jsonObject;
+
+			xml = emitXmlHeader();
+
+			for (row = 0; row < data.length; row++) {
+				xml += '<ss:Row>\n';
+
+				for (col in data[row]) {
+					xml += '  <ss:Cell>\n';
+					xml += '    <ss:Data ss:Type="' + testTypes[col]  + '">';
+					xml += data[row][col] + '</ss:Data>\n';
+					xml += '  </ss:Cell>\n';
+				}
+
+				xml += '</ss:Row>\n';
+			}
+
+			xml += emitXmlFooter();
+			return xml;
+		};
+
+		console.log(jsonToSsXml(testJson));
+
+		download = function(content, filename, contentType) {
+			if (!contentType)
+				contentType = 'application/octet-stream';
+			var a = document.getElementById('xls_download');
+			var blob = new Blob([ content ], {
+				'type' : contentType
+			});
+			a.href = window.URL.createObjectURL(blob);
+			a.download = filename;
+		};
+
+		var current_time = new Date();
+		var file_name = 'general_clients_package_info_'
+				+ current_time.getFullYear() + (current_time.getMonth() + 1)
+				+ current_time.getDate() + current_time.getHours()
+				+ current_time.getMinutes() + current_time.getSeconds()
+				+ '.xls'
+		download(jsonToSsXml(testJson), file_name,
+				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	</script>
+</div>
+
+{% endblock %}

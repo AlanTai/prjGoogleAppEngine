@@ -164,7 +164,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
                                                                                         GeneralClientsPackagesInfo.package_status == 'exshipper'))
             clients_info = ClientsInfo().query()
-            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
            
         elif(dispatch_token == 'exshipper_general_clients_packages_info_log_processed' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_general_clients_package_info_log_page
@@ -175,7 +175,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                                                                                         GeneralClientsPackagesInfo.package_status == 'sfo_airport',
                                                                                         GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
             clients_info = ClientsInfo().query()
-            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token': dispatch_token})
            
         elif(dispatch_token == 'exshipper_general_clients_packages_info_log_delivered' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_general_clients_package_info_log_page
@@ -184,7 +184,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             # query package information (packages' status == spearnet or exshipper)
             general_clients_packages_info_log = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.package_status == 'delivered')
             clients_info = ClientsInfo().query()
-            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token': dispatch_token})
               
            
         # page of handling tw custom entry packages information
@@ -906,7 +906,6 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         ajax_data['submit_status'] = 'success'
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
-        
         
         
 class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):

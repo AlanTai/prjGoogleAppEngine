@@ -41,7 +41,6 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         template_values.update({'spearnet_customers_packages_info':spearnet_customers_packages_info})
         template_values.update({'general_clients_packages_info':general_clients_packages_info})
         template_values.update({'tw_custom_entry_packages_info':tw_custom_entry_packages_info})
-        
         template_values.update(user_info)
         
         template = jinja_environment.get_template(index_page)
@@ -165,7 +164,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
                                                                                         GeneralClientsPackagesInfo.package_status == 'exshipper'))
             clients_info = ClientsInfo().query()
-            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
            
         elif(dispatch_token == 'exshipper_general_clients_packages_info_log_processed' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_general_clients_package_info_log_page
@@ -176,7 +175,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                                                                                         GeneralClientsPackagesInfo.package_status == 'sfo_airport',
                                                                                         GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
             clients_info = ClientsInfo().query()
-            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token': dispatch_token})
            
         elif(dispatch_token == 'exshipper_general_clients_packages_info_log_delivered' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_general_clients_package_info_log_page
@@ -185,7 +184,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             # query package information (packages' status == spearnet or exshipper)
             general_clients_packages_info_log = GeneralClientsPackagesInfo.query(GeneralClientsPackagesInfo.package_status == 'delivered')
             clients_info = ClientsInfo().query()
-            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info})
+            template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token': dispatch_token})
               
            
         # page of handling tw custom entry packages information
@@ -476,8 +475,8 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
             # shipper email
             shipper_email = self.request.get('valid_shipper_email')
             if(mail.is_email_valid(shipper_email)):
-                mail.send_mail('rainman.tai@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
-                mail.send_mail('rainman.tai@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
+                mail.send_mail('winever.tw@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
+                mail.send_mail('winever.tw@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
             ajax_data['submit_status'] = 'success'
         except Exception, e:
             ajax_data['submit_status'] = 'fail to send email to shipper ; Error Message: %s' % e
@@ -628,9 +627,10 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         query_length = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').count()
         if(query_length < 50):
             Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA Tracking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
+        
         query_length = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').count()
         if(query_length < 20):
-            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
+            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Formal SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         # send the tracking number to users
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):
@@ -906,7 +906,6 @@ class ExShipperSpearnetCreateInvoiceInfoHandler(webapp2.RequestHandler):
         ajax_data['submit_status'] = 'success'
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
-        
         
         
 class ExShipperSpearnetPackagesPickupHandler(webapp2.RequestHandler):
@@ -1568,6 +1567,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             package_entity.access_info = json.dumps(new_access_info)
                         
                         package_entity.put()
+                
                 
                 if(json_obj_package_status != 'NA'):
                     for key in json_obj_package_status:

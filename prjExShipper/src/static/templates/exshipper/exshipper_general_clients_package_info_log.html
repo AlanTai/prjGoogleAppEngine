@@ -13,9 +13,7 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper General Clients Package
 		Information Log</p>
-	<p id="packages_amount_summary_usa"
-		style="color: #f00; font-size: 12px;"></p>
-	<p id="packages_amount_summary_tw"
+	<p id="packages_amount_summary"
 		style="color: #f00; font-size: 12px;"></p>
 	<a id="xls_download" href="">Download Log Data in XLS Format</a> <br>
 	<div>
@@ -44,8 +42,8 @@
 				<option value="sfo_airport">SFO Airport</option>
 				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
 					International Airport</option>
-				<option value="tw_custom_entry_company">TW Custom Entry Company</option>
-				<option value="suda">SUDA</option>
+				<option value="tw_custom_entry">TW Custom Entry</option>
+				<option value="tw_logistics">TW Logistics</option>
 				<option value="delivered">Delivered</option>
 				<option value="NA">NA</option>
 			</select><input type="button" value="Update Package Status Fields"
@@ -75,6 +73,8 @@
 			var packages_amount_at_apex = 0;
 			var packages_amount_at_sfo_aiprort = 0;
 			var packages_amount_taiwan_taoyuan_airport = 0;
+			var packages_amount_tw_custom_entry = 0;
+			var packages_amount_tw_logistics = 0;
 			var packages_amount_delivered = 0;
 
 			//put keys into array
@@ -160,8 +160,8 @@
 					'apex' : 'Apex',
 					'sfo_airport' : 'SFO Airport',
 					'taiwan_taoyuan_airport' : 'Taiwan Taoyuan International Airport',
-					'tw_custom_entry_company':'TW Custom Entry Company',
-					'suda' : 'SUDA',
+					'tw_custom_entry':'TW Custom Entry',
+					'tw_logistics' : 'TW Logistics',
 					'delivered' : 'Delivered'
 				};
 			}
@@ -190,6 +190,10 @@
 				++packages_amount_at_sfo_aiprort;
 			} else if (package_status === 'taiwan_taoyuan_airport') {
 				++packages_amount_taiwan_taoyuan_airport;
+			} else if (package_status === 'tw_custom_entry') {
+				++packages_amount_tw_custom_entry;
+			} else if (package_status === 'tw_logistics') {
+				++packages_amount_tw_logistics;
 			} else if (package_status === 'delivered') {
 				++packages_amount_delivered;
 			}
@@ -332,22 +336,32 @@
 
 		<script type="text/javascript">
 			//add packages amount summary
-			var summary_packages_amount_usa = 'Packages Amount(Client): '
+			var dispatch_token = '{{dispatch_token}}';
+			var summary_packages_amount;
+			
+			if(dispatch_token === 'exshipper_general_clients_packages_info_log_processing'){
+				summary_packages_amount = 'Packages Amount(Client): '
 					+ packages_amount_at_client_place + ' ; '
 					+ 'Packages Amount(Pickup): ' + packages_amount_pickup
 					+ ' ; ' + 'Packages Amount(Exshipper): '
-					+ packages_amount_at_exshipper
-			var summary_packages_amount_tw = 'Packages Amount(Apex): '
+					+ packages_amount_at_exshipper;
+			} else if( dispatch_token === 'exshipper_general_clients_packages_info_log_processed'){
+				summary_packages_amount = 'Packages Amount(Apex): '
 					+ packages_amount_at_apex + ' ; '
 					+ ' Packages Amount(SFO): '
 					+ packages_amount_at_sfo_aiprort + ' ; '
 					+ ' Packages Amount(Taiwan Taoyuan Airport): '
 					+ packages_amount_taiwan_taoyuan_airport + ' ; '
-					+ ' Packages Amount(TW Custom Entry Company): '
+					+ ' Packages Amount(TW Custom Entry): '
+					+ packages_amount_tw_custom_entry + ' ; '
+					+ ' Packages Amount(TW Logistics): '
+					+ packages_amount_tw_logistics;
+			} else if( dispatch_token === 'exshipper_general_clients_packages_info_log_delivered'){
+				summary_packages_amount = 'Packages Amount(Delivered): '
 					+ packages_amount_delivered;
+			}
 
-			$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
-			$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
+			$('#packages_amount_summary').text(summary_packages_amount);
 
 			// distinct row color
 			$('#general_clients_packages_info> form:even').css(
