@@ -60,7 +60,6 @@
 		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
-			//
 			var packages_suda_tracking_numbers_ary = new Array();
 			var tw_custom_entry_numbers = new Object();
 			var packages_status = new Object();
@@ -152,6 +151,7 @@
 		<script type="text/javascript">
 			var tw_custom_entry_tracking_number = "{{ single_row_data.tw_custom_entry_number }}";
 			var package_status_obj = new Object();
+			
 			if(tw_custom_entry_tracking_number === 'NA'){
 				package_status_obj = {'spearnet':'Spearnet', 'pickup':'Pick Up', 'exshipper':'ExShipper'};
 			}

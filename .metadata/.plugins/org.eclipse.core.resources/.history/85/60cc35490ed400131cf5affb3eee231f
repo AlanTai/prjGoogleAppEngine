@@ -110,9 +110,7 @@
 		<form style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text"
 				value="{{ single_row_data.hawb }}" disabled>
-			</span> <span class="general_clients_tw_custom_entry_number">TW
-				Custom Entry Barcode Number: <input type="text"
-				id="{{ single_row_data.hawb }}"
+			</span> <span>TW Custom Entry Barcode Number: <input type="text"
 				value="{{ single_row_data.tw_custom_entry_number }}" />
 			</span> <span class="general_clients_package_status">Package Status:
 				<select id="{{ single_row_data.hawb }}" class="package_status">
@@ -224,7 +222,7 @@
 							var key = $(this).attr('id');
 							tw_custom_entry_numbers[key] = $(this).val();
 						});
-
+				
 				$(
 						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
 						.change(function() {
@@ -385,20 +383,10 @@
 
 				if (confirm_result == true) {
 					var json_obj_update_data = new Object();
-
-					var tw_custom_entry_numbers_length = Object
-							.keys(tw_custom_entry_numbers).length;
 					var package_status_length = Object.keys(packages_status).length;
 					var clients_signature_length = Object
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
-
-					if (tw_custom_entry_numbers_length != 0) {
-						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
-					} else {
-						json_obj_update_data['tw_custom_entry_numbers'] = 'NA';
-					}
-
 					if (package_status_length != 0) {
 						json_obj_update_data['packages_status'] = packages_status;
 					} else {
@@ -417,8 +405,7 @@
 
 					if (package_status_length != 0
 							|| clients_signature_length != 0
-							|| notes_length != 0
-							|| tw_custom_entry_numbers_length != 0) {
+							|| notes_length != 0) {
 						$('#upload_cover').css({
 							'display' : 'block'
 						});
@@ -506,6 +493,7 @@
 
 		testJson = json_array;
 		testTypes = obj_types;
+
 
 		emitXmlHeader = function() {
 			return '<?xml version="1.0"?>\n'

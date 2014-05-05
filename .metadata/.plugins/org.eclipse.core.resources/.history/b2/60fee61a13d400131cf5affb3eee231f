@@ -41,7 +41,6 @@ class ExShipperIndexHandler(webapp2.RequestHandler):
         template_values.update({'spearnet_customers_packages_info':spearnet_customers_packages_info})
         template_values.update({'general_clients_packages_info':general_clients_packages_info})
         template_values.update({'tw_custom_entry_packages_info':tw_custom_entry_packages_info})
-        
         template_values.update(user_info)
         
         template = jinja_environment.get_template(index_page)
@@ -476,8 +475,8 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
             # shipper email
             shipper_email = self.request.get('valid_shipper_email')
             if(mail.is_email_valid(shipper_email)):
-                mail.send_mail('rainman.tai@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
-                mail.send_mail('rainman.tai@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
+                mail.send_mail('winever.tw@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
+                mail.send_mail('winever.tw@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
             ajax_data['submit_status'] = 'success'
         except Exception, e:
             ajax_data['submit_status'] = 'fail to send email to shipper ; Error Message: %s' % e
@@ -628,9 +627,10 @@ class ExShipperSUDATrackingNumberDownloadHandler(webapp2.RequestHandler):
         query_length = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'FALSE').count()
         if(query_length < 50):
             Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA Tracking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers left.')
+        
         query_length = SUDATrackingNumber_FORMAL.query(SUDATrackingNumber_FORMAL.used_mark == 'FALSE').count()
         if(query_length < 20):
-            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Regular SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
+            Email_Handler().exshipper_send_email('winever.tw@gmail.com', 'koseioyama@gmail.com', 'Formal SUDA TRacking Numbers Shortage', 'There are/is just ' + query_length.__str__() + ' SUDA tracking numbers.')
                 
         # send the tracking number to users
         if(user_account == 'spearnet' and user_password == 'spearnet1941'):
@@ -1550,24 +1550,6 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                 json_obj_tw_custom_entry_number = json_obj['tw_custom_entry_numbers']
                 json_obj_clients_signature = json_obj['clients_signature']
                 json_obj_notes = json_obj['notes']
-                
-                if(json_obj_tw_custom_entry_number != 'NA'):
-                    for key in json_obj_tw_custom_entry_number:
-                        package_entity = GeneralClientsPackagesInfo.get_by_id(key)
-                        package_entity.tw_custom_entry_number = json_obj_tw_custom_entry_number[key]
-                        if(package_entity.access_info != None):
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            old_access_info = package_entity.access_info
-                            old_access_info_dict = json.loads(old_access_info)
-                            person = ''
-                            old_access_info_dict['access_info'].append({'person':'alantai', 'date_time':current_time})
-                            package_entity.access_info = json.dumps(old_access_info_dict)
-                        else:
-                            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
-                            package_entity.access_info = json.dumps(new_access_info)
-                        
-                        package_entity.put()
                 
                 if(json_obj_package_status != 'NA'):
                     for key in json_obj_package_status:
