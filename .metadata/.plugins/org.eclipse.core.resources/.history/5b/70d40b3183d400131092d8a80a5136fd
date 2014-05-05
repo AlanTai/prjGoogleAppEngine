@@ -167,7 +167,6 @@
 					'apex' : 'Apex',
 					'sfo_airport' : 'SFO Airport',
 					'taiwan_taoyuan_airport' : 'Taiwan Taoyuan International Airport',
-					'tw_custom_entry_company':'TW Custom Entry Company',
 					'suda' : 'SUDA',
 					'delivered' : 'Delivered'
 				};

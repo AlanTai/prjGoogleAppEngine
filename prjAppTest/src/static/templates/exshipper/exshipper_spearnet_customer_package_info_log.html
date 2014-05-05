@@ -13,8 +13,7 @@
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
 		Information Log</p>
-	<p id="packages_amount_summary"
-		style="color: #f00; font-size: 12px;"></p>
+	<p id="packages_amount_summary" style="color: #f00; font-size: 12px;"></p>
 	<a id="xls_download" href="">Download Log Data in XLS Format</a> <br>
 	<div>
 		<input type="button" value="Update Information"
@@ -126,11 +125,11 @@
 			</span> <span class="spearnet_customers_package_status">Package
 				Status: <select id="{{ single_row_data.hawb }}"
 				class="package_status">
-					<option value="NA">No Data</option>
+					<option value="NA">NA</option>
 			</select>
 			</span> <span class="spearnet_customers_signature">Client Signature:
 				<select id="{{ single_row_data.hawb }}">
-					<option value="NA">No Data</option>
+					<option value="NA">NA</option>
 			</select>
 			</span> <span class="spearnet_customers_weight_kg">Weight(kg): <input
 				id="{{ single_row_data.hawb }}" class="weight_kg" type="text"
@@ -152,39 +151,51 @@
 		<script type="text/javascript">
 			var tw_custom_entry_tracking_number = "{{ single_row_data.tw_custom_entry_number }}";
 			var package_status_obj = new Object();
-			if(tw_custom_entry_tracking_number === 'NA'){
-				package_status_obj = {'spearnet':'Spearnet', 'pickup':'Pick Up', 'exshipper':'ExShipper'};
+			if (tw_custom_entry_tracking_number === 'NA') {
+				package_status_obj = {
+					'spearnet' : 'Spearnet',
+					'pickup' : 'Pick Up',
+					'exshipper' : 'ExShipper'
+				};
+			} else {
+				package_status_obj = {
+					'spearnet' : 'Spearnet',
+					'pickup' : 'Pick Up',
+					'exshipper' : 'ExShipper',
+					'apex' : 'Apex',
+					'sfo_airport' : 'SFO Airport',
+					'taiwan_taoyuan_airport' : 'Taiwan Taoyuan International Airport',
+					'tw_custom_entry_company':'TW Custom Entry Company',
+					'suda' : 'SUDA',
+					'delivered' : 'Delivered'
+				};
 			}
-			else{
-				package_status_obj = {'spearnet':'Spearnet', 'pickup':'Pick Up', 'exshipper':'ExShipper', 'apex':'Apex', 'sfo_airport':'SFO Airport', 'taiwan_taoyuan_airport':'Taiwan Taoyuan International Airport', 'suda':'SUDA', 'delivered':'Delivered'};
-			}
-			$.each(package_status_obj, function(key,value){
-				$('.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]').append($("<option/>", {
-					value: key,
-					text: value
-				}));
-			});
-		
+			$
+					.each(
+							package_status_obj,
+							function(key, value) {
+								$(
+										'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
+										.append($("<option/>", {
+											value : key,
+											text : value
+										}));
+							});
+
 			var package_status = "{{ single_row_data.package_status|safe }}";
-			if(package_status === 'spearnet'){
+			if (package_status === 'spearnet') {
 				++packages_amount_at_spearnet;
-			}
-			else if(package_status === 'pickup'){
+			} else if (package_status === 'pickup') {
 				++packages_amount_pickup;
-			}
-			else if(package_status === 'exshipper'){
+			} else if (package_status === 'exshipper') {
 				++packages_amount_at_exshipper;
-			}
-			else if(package_status === 'apex'){
+			} else if (package_status === 'apex') {
 				++packages_amount_at_apex;
-			}
-			else if(package_status === 'sfo_airport'){
+			} else if (package_status === 'sfo_airport') {
 				++packages_amount_at_sfo_aiprort;
-			}
-			else if(package_status === 'taiwan_taoyuan_airport'){
+			} else if (package_status === 'taiwan_taoyuan_airport') {
 				++packages_amount_taiwan_taoyuan_airport;
-			}
-			else if(package_status === 'delivered'){
+			} else if (package_status === 'delivered') {
 				++packages_amount_delivered
 			}
 
@@ -352,9 +363,9 @@
 						+ packages_amount_taiwan_taoyuan_airport + ' ; '
 						+ ' Packages Amount(TW Custom Entry Company): '
 						+ packages_amount_delivered;
-			} else if(dispatch_token === 'exshipper_spearnet_customers_packages_info_log_delivered') {
-				summary_packages_amount =' Packages Amount(TW Custom Entry Company): '
-					+ packages_amount_delivered;
+			} else if (dispatch_token === 'exshipper_spearnet_customers_packages_info_log_delivered') {
+				summary_packages_amount = ' Packages Amount(TW Custom Entry Company): '
+						+ packages_amount_delivered;
 			}
 
 			$('#packages_amount_summary').text(summary_packages_amount);

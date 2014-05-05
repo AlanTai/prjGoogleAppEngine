@@ -11,24 +11,26 @@
 
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
-	<p style="font-size: 26px;">ExShipper Spearnet Customers Package
+	<p style="font-size: 26px;">ExShipper General Clients Package
 		Information Log</p>
-	<p id="packages_amount_summary" style="color: #f00; font-size: 12px;"></p>
+	<p id="packages_amount_summary_usa"
+		style="color: #f00; font-size: 12px;"></p>
+	<p id="packages_amount_summary_tw"
+		style="color: #f00; font-size: 12px;"></p>
 	<a id="xls_download" href="">Download Log Data in XLS Format</a> <br>
 	<div>
 		<input type="button" value="Update Information"
 			onclick="updatePackageStatus()" style="margin: 5px 5px;"> <input
 			id="packages_suda_tracking_numbers" style="width: 200px;"
 			placeholder="SUDA Tracking Number" /> <input
-			id="search_suda_tracking_number" type="button" value="Search"
-			onclick="" />
+			id="search_suda_tracking_number" type="button" value="Search" />
 	</div>
 
-	<!--  -->
+	<!-- main control fileds -->
 	<div style="display: block; margin: 5px auot;">
-		<br>
+
 		<div style="display: inline-block;">
-			<select id="spearnet_customers_signature_fields_main_control">
+			<select id="general_clients_signature_fields_main_control">
 				<option value="NA">No Data</option>
 			</select> <input type="button" value="Update Client Siganture"
 				onclick="updateClientSignature()">
@@ -42,12 +44,10 @@
 				<option value="sfo_airport">SFO Airport</option>
 				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
 					International Airport</option>
-				<option value="tw_custom_entry_company">TW Custom Entry
-					Company</option>
-				<option value="suda">SUDA</option>
-				<option value="delivered">Delivered</option>
+				<option value="delivered">Delivered (Leader Empire Wang
+					International Company)</option>
 				<option value="NA">NA</option>
-			</select> <input type="button" value="Update Package Status Fields"
+			</select><input type="button" value="Update Package Status Fields"
 				onclick="updatePackageStatusField()">
 		</div>
 	</div>
@@ -55,21 +55,19 @@
 </div>
 
 <div
-	style="position: absolute; top: 250px; width: 100%; text-align: center; margin: 10px auto;">
-	<br> {% if spearnet_customer_package_info_log %}
-	<div id="spearnet_customers_packages_info"
+	style="position: absolute; top: 230px; width: 100%; text-align: center; margin: 10px auto;">
+	<br> {% if general_clients_packages_info_log %}
+	<div id="general_clients_packages_info"
 		style="width: 100%; padding: 5px; overflow: auto; border: 1px dashed #333333;">
 
 		<script type="text/javascript">
-			var packages_suda_tracking_numbers_ary = new Array();
-			var tw_custom_entry_numbers = new Object();
 			var packages_status = new Object();
 			var clients_signature = new Object();
 			var notes = new Object();
 			var json_array = new Array();
 
 			//calculate the packages amount for different package status
-			var packages_amount_at_spearnet = 0;
+			var packages_amount_at_client_place = 0;
 			var packages_amount_pickup = 0;
 			var packages_amount_at_exshipper = 0;
 
@@ -116,33 +114,28 @@
 
 			json_array.push(obj_keys);
 		</script>
-		{% for single_row_data in spearnet_customer_package_info_log %}
-		<form id="form_{{single_row_data.hawb}}" style="padding: 5px 5px;">
+		{% for single_row_data in general_clients_packages_info_log %}
+		<form style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text"
 				value="{{ single_row_data.hawb }}" disabled>
-			</span> <span class="spearnet_customers_tw_custom_entry_number">TW
-				Custom Entry Barcode Number: <input id="{{ single_row_data.hawb }}"
-				type="text" value="{{ single_row_data.tw_custom_entry_number }}" />
-			</span> <span class="spearnet_customers_package_status">Package
-				Status: <select id="{{ single_row_data.hawb }}"
-				class="package_status">
-					<option value="NA">NA</option>
+			</span> <span>TW Custom Entry Barcode Number: <input type="text"
+				value="{{ single_row_data.tw_custom_entry_number }}" />
+			</span> <span class="general_clients_package_status">Package Status:
+				<select id="{{ single_row_data.hawb }}" class="package_status">
+					<option value="NA">No Data</option>
 			</select>
-			</span> <span class="spearnet_customers_signature">Client Signature:
-				<select id="{{ single_row_data.hawb }}">
-					<option value="NA">NA</option>
+			</span> <span class="general_clients_signature">Client Signature: <select
+				id="{{ single_row_data.hawb }}" class="client_signature">
+					<option value="NA">No Data</option>
 			</select>
-			</span> <span class="spearnet_customers_weight_kg">Weight(kg): <input
-				id="{{ single_row_data.hawb }}" class="weight_kg" type="text"
-				value="{{ single_row_data.weight_kg }}" />
-			</span> <span class="spearnet_customers_notes">Note: <input
+			</span> <span class="general_clients_notes">Note: <input
 				id="{{ single_row_data.hawb }}" class="note" type="text" />
 			</span> {% if single_row_data.pickup_date_time %} <span
-				class="spearnet_customers_datetime">Package Pickup DateTime:
-				<input id="{{ single_row_data.hawb }}"
+				class="general_clients_datetime">Package Pickup DateTime: <input
+				id="{{ single_row_data.hawb }}"
 				value="{{ single_row_data.pickup_date_time.strftime('%Y-%m-%d') }}"
 				class="create_datetime" type="text" disabled="disabled" />
-			</span> {% else %} <span class="spearnet_customers_datetime">Package
+			</span> {% else %} <span class="general_clients_datetime">Package
 				Pickup DateTime: <input id="{{ single_row_data.hawb }}"
 				value="Not Pickup Yet" class="create_datetime" type="text"
 				disabled="disabled" />
@@ -152,22 +145,20 @@
 		<script type="text/javascript">
 			var tw_custom_entry_tracking_number = "{{ single_row_data.tw_custom_entry_number }}";
 			var package_status_obj = new Object();
-
 			if (tw_custom_entry_tracking_number === 'NA') {
 				package_status_obj = {
-					'spearnet' : 'Spearnet',
+					'client' : 'Client',
 					'pickup' : 'Pick Up',
 					'exshipper' : 'ExShipper'
 				};
 			} else {
 				package_status_obj = {
-					'spearnet' : 'Spearnet',
+					'client' : 'Client',
 					'pickup' : 'Pick Up',
 					'exshipper' : 'ExShipper',
 					'apex' : 'Apex',
 					'sfo_airport' : 'SFO Airport',
 					'taiwan_taoyuan_airport' : 'Taiwan Taoyuan International Airport',
-					'tw_custom_entry_company':'TW Custom Entry Company',
 					'suda' : 'SUDA',
 					'delivered' : 'Delivered'
 				};
@@ -177,28 +168,28 @@
 							package_status_obj,
 							function(key, value) {
 								$(
-										'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
+										'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
 										.append($("<option/>", {
 											value : key,
 											text : value
 										}));
 							});
 
-			var package_status = "{{ single_row_data.package_status|safe }}";
-			if (package_status === 'spearnet') {
-				++packages_amount_at_spearnet;
+			var package_status = "{{ single_row_data.package_status }}";
+			if (package_status === 'client') {
+				++packages_amount_at_client_place;
 			} else if (package_status === 'pickup') {
 				++packages_amount_pickup;
 			} else if (package_status === 'exshipper') {
 				++packages_amount_at_exshipper;
 			} else if (package_status === 'apex') {
 				++packages_amount_at_apex;
-			} else if (package_status === 'sfo_airport') {
+			} else if (package_status === 'sfo_aiprort') {
 				++packages_amount_at_sfo_aiprort;
 			} else if (package_status === 'taiwan_taoyuan_airport') {
 				++packages_amount_taiwan_taoyuan_airport;
 			} else if (package_status === 'delivered') {
-				++packages_amount_delivered
+				++packages_amount_delivered;
 			}
 
 			$(function() {
@@ -221,26 +212,20 @@
 				}
 				;
 
+				//setup auto change mechanism for package status
 				$(
-						'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
+						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
 						.val(package_status);
 				$(
-						'.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]')
+						'.general_clients_signature > select[id={{ single_row_data.hawb }}]')
 						.val(signature_img_id);
 				$(
-						'.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]')
+						'.general_clients_notes > input[id={{ single_row_data.hawb }}]')
 						.val(note);
 
 				//update json obj when select value change
 				$(
-						'.spearnet_customers_tw_custom_entry_number > input[id={{ single_row_data.hawb }}]')
-						.on('input', function() {
-							var key = $(this).attr('id');
-							tw_custom_entry_numbers[key] = $(this).val();
-						});
-
-				$(
-						'.spearnet_customers_package_status > select[id={{ single_row_data.hawb }}]')
+						'.general_clients_package_status > select[id={{ single_row_data.hawb }}]')
 						.change(function() {
 							var key = $(this).attr('id');
 							packages_status[key] = $(this).val();
@@ -248,15 +233,14 @@
 
 				//setup auto change mechanism for client signature
 				$(
-						'.spearnet_customers_signature > select[id={{ single_row_data.hawb }}]')
+						'.general_clients_signature > select[id={{ single_row_data.hawb }}]')
 						.change(function() {
 							var key = $(this).attr('id');
 							clients_signature[key] = $(this).val();
 						});
 
-				//setup auto change mechanism for notes
 				$(
-						'.spearnet_customers_notes > input[id={{ single_row_data.hawb }}]')
+						'.general_clients_notes > input[id={{ single_row_data.hawb }}]')
 						.on('input', function() {
 							var key = $(this).attr('id');
 							notes[key] = $(this).val();
@@ -287,32 +271,30 @@
 			obj['pcs'] = "{{ single_row_data.pcs }}";
 			obj['unit'] = "{{ single_row_data.unit }}";
 
-			obj['original'] = "{{ single_row_data.original|safe }}";
-			obj['deliver_to'] = "{{ single_row_data.deliver_to|safe }}";
+			obj['original'] = "{{ single_row_data.original }}";
+			obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
 
 			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 
-			obj['shipper_company'] = "{{ single_row_data.shipper_company|safe }}";
-			obj['shipper_person'] = "{{ single_row_data.shipper_person|safe }}";
+			obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
+			obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
 			obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
-			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english|safe }}";
-			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese|safe }}";
+			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english }}";
+			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
 
 			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
-			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english|safe }}";
-			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese|safe }}";
-			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english|safe }}";
-			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese|safe }}";
+			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
+			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
+			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
+			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
 
 			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
 			obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
 			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
 			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
-			obj['note'] = "{{ single_row_data.note|safe }}";
+			obj['note'] = "{{ single_row_data.note }}";
 
 			json_array.push(obj);
-			packages_suda_tracking_numbers_ary
-					.push('{{ single_row_data.hawb }}');
 		</script>
 		{% endfor %} {% else %}
 		<p>No Data Available</p>
@@ -335,7 +317,7 @@
 							clients_signatures,
 							function(key, value) {
 								$(
-										'.spearnet_customers_signature > select, #spearnet_customers_signature_fields_main_control ')
+										'.general_clients_signature > select, #general_clients_signature_fields_main_control')
 										.append($("<option/>", {
 											value : key,
 											text : value
@@ -348,51 +330,37 @@
 
 		<script type="text/javascript">
 			//add packages amount summary
-			var dispatch_token = '{{dispatch_token}}';
-			var summary_packages_amount;
-			if (dispatch_token === 'exshipper_spearnet_customers_packages_info_log_processing') {
-				summary_packages_amount = 'Packages Amount(Spearnet): '
-						+ packages_amount_at_spearnet + ' ; '
-						+ 'Packages Amount(Pickup): ' + packages_amount_pickup
-						+ ' ; ' + 'Packages Amount(Exshipper): '
-						+ packages_amount_at_exshipper
-			} else if (dispatch_token === 'exshipper_spearnet_customers_packages_info_log_processed') {
-				summary_packages_amount = 'Packages Amount(Apex): '
-						+ packages_amount_at_apex + ' ; '
-						+ ' Packages Amount(SFO): '
-						+ packages_amount_at_sfo_aiprort + ' ; '
-						+ ' Packages Amount(Taiwan Taoyuan Airport): '
-						+ packages_amount_taiwan_taoyuan_airport + ' ; '
-						+ ' Packages Amount(TW Custom Entry Company): '
-						+ packages_amount_delivered;
-			} else if (dispatch_token === 'exshipper_spearnet_customers_packages_info_log_delivered') {
-				summary_packages_amount = ' Packages Amount(TW Custom Entry Company): '
-						+ packages_amount_delivered;
-			}
+			var summary_packages_amount_usa = 'Packages Amount(Client): '
+					+ packages_amount_at_client_place + ' ; '
+					+ 'Packages Amount(Pickup): ' + packages_amount_pickup
+					+ ' ; ' + 'Packages Amount(Exshipper): '
+					+ packages_amount_at_exshipper
+			var summary_packages_amount_tw = 'Packages Amount(Apex): '
+					+ packages_amount_at_apex + ' ; '
+					+ ' Packages Amount(SFO): '
+					+ packages_amount_at_sfo_aiprort + ' ; '
+					+ ' Packages Amount(Taiwan Taoyuan Airport): '
+					+ packages_amount_taiwan_taoyuan_airport + ' ; '
+					+ ' Packages Amount(TW Custom Entry Company): '
+					+ packages_amount_delivered;
 
-			$('#packages_amount_summary').text(summary_packages_amount);
-			//end
+			$('#packages_amount_summary_usa').text(summary_packages_amount_usa);
+			$('#packages_amount_summary_tw').text(summary_packages_amount_tw);
 
 			// distinct row color
-			$('#spearnet_customers_packages_info> form:even').css(
+			$('#general_clients_packages_info> form:even').css(
 					'background-color', '#dedede');
-			$('#spearnet_customers_packages_info> form:odd').css(
+			$('#general_clients_packages_info> form:odd').css(
 					'background-color', '#f9f9f9');
 			// end of distinct row color
-
-			//autocomplete
-			$("#packages_suda_tracking_numbers").autocomplete({
-				source : packages_suda_tracking_numbers_ary
-			});
-			//end
 
 			//fields update mechanism
 			function updateClientSignature() {
 				var client_signature_id = $(
-						'#spearnet_customers_signature_fields_main_control')
-						.val().trim();
+						'#general_clients_signature_fields_main_control').val()
+						.trim();
 
-				$('.spearnet_customers_signature > select').each(function() {
+				$('.general_clients_signature > select').each(function() {
 					$(this).val(client_signature_id);
 					var key = $(this).attr('id');
 					clients_signature[key] = $(this).val();
@@ -403,22 +371,11 @@
 				var package_status = $('#package_status_fields_main_control')
 						.val();
 
-				$('.package_status')
-						.each(
-								function() {
-									var key = $(this).attr('id');
-									var tw_custom_entry_tracking_number = $(
-											'.spearnet_customers_tw_custom_entry_number > #'
-													+ key).val();
-									var current_status = $(this).val();
-
-									//filtering the packages without tw custom entry number 
-									if (!((current_status === 'spearnet'
-											|| current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')) {
-										$(this).val(package_status);
-										packages_status[key] = $(this).val();
-									}
-								});
+				$('.package_status').each(function() {
+					$(this).val(package_status);
+					var key = $(this).attr('id');
+					packages_status[key] = $(this).val();
+				});
 			}
 
 			//update information
@@ -427,19 +384,10 @@
 
 				if (confirm_result == true) {
 					var json_obj_update_data = new Object();
-
-					var tw_custom_entry_numbers_length = Object
-							.keys(tw_custom_entry_numbers).length;
 					var package_status_length = Object.keys(packages_status).length;
 					var clients_signature_length = Object
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
-
-					if (tw_custom_entry_numbers_length != 0) {
-						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
-					} else {
-						json_obj_update_data['tw_custom_entry_numbers'] = 'NA';
-					}
 					if (package_status_length != 0) {
 						json_obj_update_data['packages_status'] = packages_status;
 					} else {
@@ -458,17 +406,15 @@
 
 					if (package_status_length != 0
 							|| clients_signature_length != 0
-							|| notes_length != 0
-							|| tw_custom_entry_numbers_length != 0) {
+							|| notes_length != 0) {
 						$('#upload_cover').css({
 							'display' : 'block'
 						});
-
 						var json_string = JSON.stringify(json_obj_update_data,
 								2, 2);
 						$
 								.ajax(
-										"/exshipper_spearnet_customer_packages_info_update_handler",
+										"/exshipper_general_clients_packages_info_update_handler",
 										{
 											type : 'POST',
 											data : {
@@ -494,7 +440,6 @@
 					} else {
 						alert('Nothing needs to be updated!');
 					}
-					//ajax upload
 				}
 			}
 
@@ -504,35 +449,13 @@
 					'display' : 'none'
 				});
 			}
-
-			$('#search_suda_tracking_number')
-					.click(
-							function() {
-								try {
-									var suda_tracking_number = $(
-											'#packages_suda_tracking_numbers')
-											.val();
-									$('html, body')
-											.animate(
-													{
-														scrollTop : $(
-																"#form_"
-																		+ suda_tracking_number)
-																.offset().top - 300
-													}, 800);
-								} catch (err) {
-									console
-											.log('No such information in the SUDA tracking numbers\' array; Error Message: '
-													+ err);
-								}
-
-							});
 		</script>
 	</div>
 
 	<script type="text/javascript">
 		//Test script to generate a file from JavaScript such
-		//that MS Excel will honor non-ASCII characters.\
+		//that MS Excel will honor non-ASCII characters.
+		//var packages_info_log = "{{ spearnet_customer_package_info_log }}";
 
 		var obj_types = new Object();
 		obj_types.reference_number = "String";
@@ -622,7 +545,7 @@
 		};
 
 		var current_time = new Date();
-		var file_name = 'spearnet_customers_packages_info_'
+		var file_name = 'general_clients_package_info_'
 				+ current_time.getFullYear() + (current_time.getMonth() + 1)
 				+ current_time.getDate() + current_time.getHours()
 				+ current_time.getMinutes() + current_time.getSeconds()

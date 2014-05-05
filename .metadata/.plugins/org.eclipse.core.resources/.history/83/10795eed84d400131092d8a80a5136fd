@@ -42,7 +42,8 @@
 				<option value="sfo_airport">SFO Airport</option>
 				<option value="taiwan_taoyuan_airport">Taiwan Taoyuan
 					International Airport</option>
-				<option value="delivered">Delivered (TW Custom Entry Company)</option>
+				<option value="delivered">Delivered (Leader Empire Wang
+					International Company)</option>
 				<option value="NA">NA</option>
 			</select> <input type="button" value="Update Package Status Fields"
 				onclick="updatePackageStatusField()">
