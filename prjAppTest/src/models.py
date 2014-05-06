@@ -153,4 +153,13 @@ class TWCustomEntryInfo(ndb.Model):
     create_date_time = ndb.DateProperty(auto_now_add = True)
     update_date_time = ndb.DateTimeProperty(auto_now = True)
     
-#end of channel
+class PackageStatusNotification(ndb.Model):
+    tracking_number = ndb.StringProperty()
+    package_status = ndb.StringProperty()
+    create_date_time = ndb.DateProperty(auto_now_add = True)
+    update_date_time = ndb.DateTimeProperty(auto_now = True)
+    
+class PackageStatusNotification_Email(PackageStatusNotification):
+    email = ndb.StringProperty()
+    receiver_name = ndb.StringProperty()
+    

@@ -17,7 +17,7 @@ from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber, \
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL, \
     TWCustomEntryInfo, EmployeeInfo, EmailVerification, SpearnetPackagesInfoLog, \
-    GeneralClientsPackagesInfoLog
+    GeneralClientsPackagesInfoLog, PackageStatusNotification_Email
 from general_handlers.users_info_handler import Users_Info_Handler
 from general_handlers.emails_handler import Email_Handler
 from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
@@ -135,7 +135,8 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'apex',
                                                                                    SpearnetPackagesInfo.package_status == 'sfo_airport',
                                                                                    SpearnetPackagesInfo.package_status == 'taiwan_taoyuan_airport',
-                                                                                   SpearnetPackagesInfo.package_status == 'suda'))
+                                                                                   SpearnetPackagesInfo.package_status == 'tw_custom_entry',
+                                                                                   SpearnetPackagesInfo.package_status == 'tw_logistics'))
             # pass clients informations
             clients_info = ClientsInfo().query()
             template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
@@ -161,7 +162,8 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page_title = my_dict.exshipper_general_clients_package_info_log_page_title
             
             # query package information (packages' status == spearnet or exshipper)
-            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'pickup',
+            general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'client',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'pickup',
                                                                                         GeneralClientsPackagesInfo.package_status == 'exshipper'))
             clients_info = ClientsInfo().query()
             template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
@@ -173,7 +175,9 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             # query package information (packages' status == spearnet or exshipper)
             general_clients_packages_info_log = GeneralClientsPackagesInfo.query(ndb.OR(GeneralClientsPackagesInfo.package_status == 'apex',
                                                                                         GeneralClientsPackagesInfo.package_status == 'sfo_airport',
-                                                                                        GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport'))
+                                                                                        GeneralClientsPackagesInfo.package_status == 'taiwan_taoyuan_airport',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'tw_custom_entry',
+                                                                                        GeneralClientsPackagesInfo.package_status == 'tw_logistics'))
             clients_info = ClientsInfo().query()
             template_values.update({'general_clients_packages_info_log':general_clients_packages_info_log, 'clients_info':clients_info, 'dispatch_token': dispatch_token})
            
@@ -463,7 +467,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
         new_package_info.size_accumulation = self.request.get('valid_size_accumulation')
         new_package_info.declaration_need_or_not = 'NLR-NO SED REQIRED NOEEI 30.37(A)'
         new_package_info.duty_paid_by = 'Shipper'
-        new_package_info.package_status = 'exshipper'
+        new_package_info.package_status = 'client'
         
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         new_access_info = {'access_info':[{'person':'alantai', 'date_time':current_time}]}
@@ -471,12 +475,22 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
         
         new_package_info.put()
         try:
-            email_body = 'Package SUDA Tracking Number: ' + self.request.get('valid_suda_tr_number') + '\n' + 'Package Reference Number: ' + self.request.get('valid_ref_number')
             # shipper email
             shipper_email = self.request.get('valid_shipper_email')
             if(mail.is_email_valid(shipper_email)):
-                mail.send_mail('winever.tw@gmail.com', shipper_email, 'Shipping Confirmation', email_body)
-                mail.send_mail('winever.tw@gmail.com', 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
+                # email customer shipping confirmation
+                email_body = 'Package SUDA Tracking Number: ' + self.request.get('valid_suda_tr_number') + '\n' + 'Package Reference Number: ' + self.request.get('valid_ref_number')
+                mail.send_mail(Key_Value().host_email, shipper_email, 'Shipping Confirmation', email_body)
+                mail.send_mail(Key_Value().host_email, 'exshipper@gmail.com', 'New Shipping Request', 'Shipper\'s Phone Number: ' + self.request.get('valid_shipper_phone_number'))
+                
+                #create notification entity
+                new_notification_email = PackageStatusNotification_Email(id=package_id)
+                new_notification_email.tracking_number = package_id
+                new_notification_email.package_status = 'client'
+                new_notification_email.receiver_name = self.request.get('valid_consignee_name_english') + '/' + self.request.get('valid_consignee_name_chinese')
+                new_notification_email.email = shipper_email
+                new_notification_email.put()
+                
             ajax_data['submit_status'] = 'success'
         except Exception, e:
             ajax_data['submit_status'] = 'fail to send email to shipper ; Error Message: %s' % e
@@ -1572,8 +1586,9 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                 if(json_obj_package_status != 'NA'):
                     for key in json_obj_package_status:
                         package_entity = GeneralClientsPackagesInfo.get_by_id(key)
-                        package_entity.package_status = json_obj_package_status[key]
                         
+                        #update package info
+                        package_entity.package_status = json_obj_package_status[key]
                         if(package_entity.access_info != None):
                             current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                             old_access_info = package_entity.access_info
@@ -1587,6 +1602,16 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             package_entity.access_info = json.dumps(new_access_info)
                             
                         package_entity.put()
+                        
+                        #email customer the notification of package status
+                        notification_email_entity = PackageStatusNotification_Email.get_by_id(key)
+                        if(notification_email_entity != None and mail.is_email_valid(notification_email_entity.email)):
+                            notification_email_entity.package_status = json_obj_package_status[key]
+                            notification_email_entity.put()
+                            
+                            #email customer the notification of package status
+                            email_content = 'Dear Customer, ' + notification_email_entity.receiver_name + ', your package- ' + notification_email_entity.tracking_number + ' is ' + Key_Value().package_status_dict[json_obj_package_status[key]]
+                            mail.send_mail(Key_Value().host_email, notification_email_entity.email , 'Notification of Package Status Update', email_content)
                           
                 if(json_obj_clients_signature != 'NA'):
                     for key in json_obj_clients_signature:

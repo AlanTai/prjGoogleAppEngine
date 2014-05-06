@@ -103,7 +103,7 @@
 		
 		{% for general_client_package_info in general_clients_packages_info %}
 		general_clients_package_status = "{{ general_client_package_info.package_status|safe }}";
-		if(general_clients_package_status === 'spearnet' || general_clients_package_status === 'pickup' || general_clients_package_status === 'exshipper'){
+		if(general_clients_package_status === 'client' || general_clients_package_status === 'pickup' || general_clients_package_status === 'exshipper'){
 			++general_clients_packages_amount_processing;
 		}
 		else if(general_clients_package_status === 'apex' || general_clients_package_status === 'sfo_aiprort' || general_clients_package_status === 'taiwan_taoyuan_airport' || general_clients_package_status === 'tw_custom_entry' || general_clients_package_status === 'tw_logistics'){
@@ -142,7 +142,7 @@
 		{% if tw_custom_entry_packages_info %}
 		{% for tw_custom_entry_package_info in tw_custom_entry_packages_info %}
 		tw_custom_entry_package_status = "{{ tw_custom_entry_package_info.package_status|safe }}";
-			if(tw_custom_entry_package_status === 'spearnet' || tw_custom_entry_package_status === 'pickup' || tw_custom_entry_package_status === 'exshipper'){
+			if(tw_custom_entry_package_status === 'exshipper'){
 				++tw_custom_entry_packages_amount_processing;
 			}
 			else if(tw_custom_entry_package_status === 'apex' || tw_custom_entry_package_status === 'sfo_aiprort' || tw_custom_entry_package_status === 'taiwan_taoyuan_airport' || tw_custom_entry_package_status === 'tw_custom_entry' || tw_custom_entry_package_status === 'tw_logistics'){
