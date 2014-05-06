@@ -397,9 +397,18 @@
 						.val();
 
 				$('.package_status').each(function() {
-					$(this).val(package_status);
 					var key = $(this).attr('id');
-					packages_status[key] = $(this).val();
+					var tw_custom_entry_tracking_number = $(
+							'.general_clients_tw_custom_entry_number > #'
+									+ key).val();
+					var current_status = $(this).val();
+
+					//filtering the packages without tw custom entry number 
+					if ( (package_status === 'client' || package_status === 'pickup' || package_status === 'exshipper') || !((current_status === 'client'
+							|| current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')) {
+						$(this).val(package_status);
+						packages_status[key] = $(this).val();
+					}
 				});
 			}
 
