@@ -35,7 +35,7 @@
 	<script type="text/javascript">
 		var img_id = '{{ single_row_data.signature_img_id }}';
 		var package_suda_number = '{{ single_row_data.hawb }}';
-		if (img_id !== 'None') {
+		if (img_id !== 'None' || img_id !== '') {
 
 			$('#spearnet_packages_invoice_log')
 					.append(
@@ -104,6 +104,7 @@
 		var img_id = '{{ single_row_data.signature_img_id }}';
 		var package_suda_number = '{{ single_row_data.hawb }}';
 		if (img_id !== 'None') {
+
 			$('#general_clients_packages_invoice_log')
 					.append(
 							'<form style="width:1000px; height: 1200px; margin: 10px auto; border: 1px solid; display:inline-block; text-align: center;">'

@@ -221,10 +221,8 @@
 </div>
 
 <script type="text/javascript">
-	//init get reference number via ajax
+	//
 	$(get_reference_number());
-	
-	//get reference number via ajax
 	function get_reference_number() {
 		$.ajax('/get_ref_number', {
 			type : 'POST',
@@ -243,14 +241,12 @@
 			}
 		});
 	}
-	//end of "get reference number via ajax"
 
-	//update reference number
 	function update_reference_number(response) {
 		$('#id_reference_number').val(response.exshipper_package_number);
 	};
 
-	//add new commodity row
+	//
 	function addNewCommodity() {
 		$('#id_commodity_detail')
 				.append(
@@ -262,17 +258,15 @@
 								+ '</section>');
 	}
 
-	//delete commodity row
 	function deleteCommodity(elem) {
 		$(elem).parent().remove();
 	}
 
-	//calculate the pcs, fob, and size accumulation
+	//test
 	var pcs = 0;
 	var unit_price_fob_us_dollar = 0;
 	var size_accumulation = 0;
 
-	//check if commodity detial is valid and return the obj or return true as invalid sign
 	function checkCommodityDetailAndGetCommodityDetailObj() {
 		var commodity_detail = new Object();
 		var commodity_ary = new Array();
@@ -323,8 +317,6 @@
 													.round(Number(commodity_obj.quan) * 100) / 100)
 											* (Math
 													.round(Number(commodity_obj.price) * 100) / 100);
-									
-									//store commodity obj into array
 									commodity_ary.push(commodity_obj);
 								}
 							});
@@ -339,9 +331,9 @@
 	}
 	//end commodity
 
-	//get tracking number
+	//
 	function getSUDATrackingNumber() {
-		//popup processing block
+		//
 		$('#upload_cover').css({
 			'display' : 'block'
 		});
@@ -385,7 +377,8 @@
 			'display' : 'none'
 		});
 	}
-	//end of getSUDATrackingNumber()
+
+	/*end of get suda tracking number*/
 
 	/*add new package information*/
 	var info_array = [];

@@ -323,8 +323,6 @@
 													.round(Number(commodity_obj.quan) * 100) / 100)
 											* (Math
 													.round(Number(commodity_obj.price) * 100) / 100);
-									
-									//store commodity obj into array
 									commodity_ary.push(commodity_obj);
 								}
 							});
@@ -341,7 +339,7 @@
 
 	//get tracking number
 	function getSUDATrackingNumber() {
-		//popup processing block
+		//
 		$('#upload_cover').css({
 			'display' : 'block'
 		});
@@ -385,7 +383,8 @@
 			'display' : 'none'
 		});
 	}
-	//end of getSUDATrackingNumber()
+
+	/*end of get suda tracking number*/
 
 	/*add new package information*/
 	var info_array = [];
