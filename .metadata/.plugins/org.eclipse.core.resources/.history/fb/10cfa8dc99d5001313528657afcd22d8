@@ -54,7 +54,7 @@
 									+ '<p>Address(Chinese) : {{ single_row_data.consignee_address_chinese|e }}</p>'
 									+ '<p>Name(English) : {{ single_row_data.consignee_name_english }}</p>'
 									+ '<p>Phone: {{ single_row_data.consignee_tel }}</p>'
-									+ '<p>Address(English) : {{ single_row_data.consignee_address_english|e }}</p>'
+									+ '<p>English Address: {{ single_row_data.consignee_address_english|e }}</p>'
 									+ '<p>Weight (kg): <input value="{{ single_row_data.weight_kg }}" style="color:#000; border:1px solid; text-align:center;" /></p>'
 									+ '<p>Shipping Date: {{ single_row_data.date }} (UTC)</p>'
 									+ '<p style="font-weight:bold; font-size:20px;">Detail</p>'
