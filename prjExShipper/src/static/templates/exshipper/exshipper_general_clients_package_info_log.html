@@ -188,7 +188,7 @@
 				++packages_amount_at_exshipper;
 			} else if (package_status === 'apex') {
 				++packages_amount_at_apex;
-			} else if (package_status === 'sfo_aiprort') {
+			} else if (package_status === 'sfo_airport') {
 				++packages_amount_at_sfo_aiprort;
 			} else if (package_status === 'taiwan_taoyuan_airport') {
 				++packages_amount_taiwan_taoyuan_airport;
@@ -298,16 +298,16 @@
 			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese }}";
 
 			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
-			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
-			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
-			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
-			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese }}";
+			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english|e }}";
+			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese|e }}";
+			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english|e }}";
+			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese|e }}";
 
 			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
 			obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
 			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
 			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
-			obj['note'] = "{{ single_row_data.note }}";
+			obj['note'] = "{{ single_row_data.note|e }}";
 
 			json_array.push(obj);
 		</script>
@@ -320,11 +320,11 @@
 		<script type="text/javascript">
 			var clients_signatures = new Object();
 			clients_signatures["{{client_info.key.urlsafe()}}"] = 'Account Name: '
-					+ "{{client_info.account_name}}"
+					+ "{{client_info.account_name|e}}"
 					+ ' ; '
 					+ 'Name: '
-					+ "{{client_info.first_name}} "
-					+ " {{client_info.last_name}}"
+					+ "{{client_info.first_name|e}}"
+					+ " {{client_info.last_name|e}}"
 					+ ' ; Phone: '
 					+ "{{client_info.phone_number}}";
 			$

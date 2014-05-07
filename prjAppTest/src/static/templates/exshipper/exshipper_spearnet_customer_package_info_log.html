@@ -198,7 +198,7 @@
 				++packages_amount_at_sfo_aiprort;
 			} else if (package_status === 'taiwan_taoyuan_airport') {
 				++packages_amount_taiwan_taoyuan_airport;
-			} else if (package_status === 'tw_custom_entry_company') {
+			} else if (package_status === 'tw_custom_entry') {
 				++packages_amount_tw_custom_entry;
 			} else if (package_status === 'tw_logistics') {
 				++packages_amount_tw_logistics;
@@ -292,28 +292,28 @@
 			obj['pcs'] = "{{ single_row_data.pcs }}";
 			obj['unit'] = "{{ single_row_data.unit }}";
 
-			obj['original'] = "{{ single_row_data.original|safe }}";
-			obj['deliver_to'] = "{{ single_row_data.deliver_to|safe }}";
+			obj['original'] = "{{ single_row_data.original|e }}";
+			obj['deliver_to'] = "{{ single_row_data.deliver_to|e }}";
 
 			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 
-			obj['shipper_company'] = "{{ single_row_data.shipper_company|safe }}";
-			obj['shipper_person'] = "{{ single_row_data.shipper_person|safe }}";
+			obj['shipper_company'] = "{{ single_row_data.shipper_company|e }}";
+			obj['shipper_person'] = "{{ single_row_data.shipper_person|e }}";
 			obj['shipper_tel'] = "{{ single_row_data.shipper_tel }}";
-			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english|safe }}";
-			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese|safe }}";
+			obj['shipper_address_english'] = "{{ single_row_data.shipper_address_english|e }}";
+			obj['shipper_address_chinese'] = "{{ single_row_data.shipper_address_chinese|e }}";
 
 			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
-			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english|safe }}";
-			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese|safe }}";
-			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english|safe }}";
-			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese|safe }}";
+			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english|e }}";
+			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese|e }}";
+			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english|e }}";
+			obj['consignee_address_chinese'] = "{{ single_row_data.consignee_address_chinese|e }}";
 
 			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
 			obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
 			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
 			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
-			obj['note'] = "{{ single_row_data.note|safe }}";
+			obj['note'] = "{{ single_row_data.note|e }}";
 
 			json_array.push(obj);
 			packages_suda_tracking_numbers_ary

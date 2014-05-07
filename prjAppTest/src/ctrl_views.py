@@ -192,7 +192,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
               
            
         # page of handling tw custom entry packages information
-        # tw custom entry package; package status exshipper
+        # tw custom entry packages; package status exshipper
         elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log_processing' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
             html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
@@ -200,7 +200,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
             template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
             
-        #
+        # tw custom entry packages; packages status at apex, sfo, tw international airport
         elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log_processed' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
             html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
@@ -210,7 +210,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                                                                                TWCustomEntryInfo.package_status == 'taiwan_taoyuan_airport'))
             template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
         
-        #    
+        # tw custom entry packages; packages status is delivered
         elif(dispatch_token == 'exshipper_tw_custom_entry_packages_info_log_delivered' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
             html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
             html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
@@ -226,6 +226,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             pre_alert_entity = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
             pre_alert = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
             
+            # check if the packages which will be shipped have different mawb, flight number, or flight date 
             if(pre_alert_entity != None and pre_alert != None):
                 # different flight numbers, flight dates, or mawb
                 mawb_response = 'Different MAWBs: '
@@ -487,7 +488,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
                 new_notification_email = PackageStatusNotification_Email(id=package_id)
                 new_notification_email.tracking_number = package_id
                 new_notification_email.package_status = 'client'
-                new_notification_email.receiver_name = self.request.get('valid_consignee_name_english') + '/' + self.request.get('valid_consignee_name_chinese')
+                new_notification_email.receiver_name = self.request.get('valid_shipper_person')
                 new_notification_email.email = shipper_email
                 new_notification_email.put()
                 

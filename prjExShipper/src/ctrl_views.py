@@ -488,7 +488,7 @@ class ExShipperGeneralClientsCreateInvoiceInfoHandler(webapp2.RequestHandler):
                 new_notification_email = PackageStatusNotification_Email(id=package_id)
                 new_notification_email.tracking_number = package_id
                 new_notification_email.package_status = 'client'
-                new_notification_email.receiver_name = self.request.get('valid_consignee_name_english') + '/' + self.request.get('valid_consignee_name_chinese')
+                new_notification_email.receiver_name = self.request.get('valid_shipper_person')
                 new_notification_email.email = shipper_email
                 new_notification_email.put()
                 
