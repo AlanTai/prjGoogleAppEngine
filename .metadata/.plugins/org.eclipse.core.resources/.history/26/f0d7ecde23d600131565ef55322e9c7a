@@ -98,6 +98,35 @@
 			</div>
 
 			<br>
+
+			<div style="padding: 5px; background-color: #efefef;">
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Unit Price FOB (US Dollar):</span>
+					</p>
+					<input type="text" id="id_unit_price_fob_us_dollar"
+						name="unit_price_fob_us_dollar"
+						placeholder="Unit Price FOB (US Dollar)"
+						style="display: inline-block; margin: 5px 1px; text-align: center;"
+						size="50" required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">CTN.</span>
+					</p>
+					<input type="text" id="id_ctn" name="ctn" placeholder="CTN."
+						style="display: inline-block; margin: 5px 1px; text-align: center;"
+						size="50" required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">PCS.</span>
+					</p>
+					<input type="text" id="id_pcs" name="pcs" placeholder="PCS"
+						style="display: inline-block; margin: 5px 1px; text-align: center;"
+						size="50" required="required">
+				</div>
+			</div>
 			<!-- end -->
 			<div>
 				<p style="display: inline-block; width: 450px;">Weight (kg):</p>
@@ -162,7 +191,7 @@
 </div>
 
 <script type="text/javascript">
-	//add new commodity detail row
+	//
 	function addNewCommodity() {
 		$('#id_commodity_detail')
 				.append(
@@ -174,17 +203,10 @@
 								+ '</section>');
 	}
 
-	//delete commodity row
 	function deleteCommodity(elem) {
 		$(elem).parent().remove();
 	}
-	
-	//calculate the pcs, fob, and size accumulation
-	var pcs = 0;
-	var unit_price_fob_us_dollar = 0;
-	var size_accumulation = 0;
 
-	//check if commodity detial is valid and return the obj or return true as invalid sign
 	function checkCommodityDetailAndGetCommodityDetailObj() {
 		var commodity_detail = new Object();
 		var commodity_ary = new Array();
@@ -227,12 +249,7 @@
 											.val();
 									commodity_obj.price = $(this).find(
 											'input#id_commodity_price').val();
-									
-									window['pcs'] = window['pcs'] + Number(commodity_obj.quan);
-									window['unit_price_fob_us_dollar'] = window['unit_price_fob_us_dollar'] 
-									+ (Math.round(Number(commodity_obj.quan) * 100) / 100) * (Math.round(Number(commodity_obj.price) * 100) / 100);
-									
-									//store commodity obj into array
+
 									commodity_ary.push(commodity_obj);
 								}
 							});
@@ -245,11 +262,12 @@
 			}
 		}
 	}
-	//end of checkCommodityDetailAndGetCommodityDetailObj()
 
-	//get suda tracking number
+	//end commodity
+
+	//
 	function getSUDATrackingNumber() {
-		//popup processing block
+		//
 		$('#upload_cover').css({
 			'display' : 'block'
 		});
@@ -280,9 +298,9 @@
 				}
 			}
 		});
+		//end of add the info to datastore
 	}
 
-	//get rsponse and update suda tracking number
 	function updateSUDATrackingNumber(response) {
 		if (response.suda_tracking_number != 'NA') {
 			$('#id_suda_tr_number').val(response.suda_tracking_number);
@@ -293,7 +311,8 @@
 			'display' : 'none'
 		});
 	}
-	//end of getSUDATrackingNumber()
+
+	/*end of get suda tracking number*/
 
 	/*add new package information*/
 	var info_array = [];
@@ -342,9 +361,14 @@
 			invoice_obj['consignee_address_chinese'] = $(
 					'#id_consignee_address_chinese').val();
 			invoice_obj['consignee_phone_number'] = $(
-					'#id_consignee_phone_number').val();
+					'#id_consignee_phone_number').val()
+
+			invoice_obj['unit_price_fob_us_dollar'] = $(
+					'#id_unit_price_fob_us_dollar').val();
 			invoice_obj['note'] = $('#id_note').val();
-			invoice_obj['ctn'] = '1';
+
+			invoice_obj['ctn'] = $('#id_ctn').val();
+			invoice_obj['pcs'] = $('#id_pcs').val();
 		} else {
 			alert(blank_field);
 			return false;
@@ -370,13 +394,9 @@
 		if (commodity_detail_obj === true) {
 			return true;
 		} else {
-			invoice_obj['unit_price_fob_us_dollar'] = window['unit_price_fob_us_dollar'];
-			invoice_obj['pcs'] = window['pcs'];
-			console.log('Total Price: '
-					+ invoice_obj['unit_price_fob_us_dollar'] + ' ; PCS:'
-					+ invoice_obj['pcs']);
 			commodity_detail_obj = JSON.stringify(commodity_detail_obj);
-			commodity_detail_obj = commodity_detail_obj.replace(/'/g,"\\\\u0027");
+			commodity_detail_obj = commodity_detail_obj.replace(/'/g,
+					"\\\\u0027");
 		}
 		//end
 

@@ -98,6 +98,35 @@
 			</div>
 
 			<br>
+
+			<div style="padding: 5px; background-color: #efefef;">
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">Unit Price FOB (US Dollar):</span>
+					</p>
+					<input type="text" id="id_unit_price_fob_us_dollar"
+						name="unit_price_fob_us_dollar"
+						placeholder="Unit Price FOB (US Dollar)"
+						style="display: inline-block; margin: 5px 1px; text-align: center;"
+						size="50" required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">CTN.</span>
+					</p>
+					<input type="text" id="id_ctn" name="ctn" placeholder="CTN."
+						style="display: inline-block; margin: 5px 1px; text-align: center;"
+						size="50" required="required">
+				</div>
+				<div>
+					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
+						<span style="display: block;">PCS.</span>
+					</p>
+					<input type="text" id="id_pcs" name="pcs" placeholder="PCS"
+						style="display: inline-block; margin: 5px 1px; text-align: center;"
+						size="50" required="required">
+				</div>
+			</div>
 			<!-- end -->
 			<div>
 				<p style="display: inline-block; width: 450px;">Weight (kg):</p>
@@ -342,8 +371,10 @@
 			invoice_obj['consignee_address_chinese'] = $(
 					'#id_consignee_address_chinese').val();
 			invoice_obj['consignee_phone_number'] = $(
-					'#id_consignee_phone_number').val();
+					'#id_consignee_phone_number').val()
+
 			invoice_obj['note'] = $('#id_note').val();
+
 			invoice_obj['ctn'] = '1';
 		} else {
 			alert(blank_field);
