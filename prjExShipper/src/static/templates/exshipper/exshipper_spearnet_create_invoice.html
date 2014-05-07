@@ -140,7 +140,16 @@
 					<span style="display: block;">Commodity Detail:</span> <input
 						type="button" value="Add New Commodity"
 						onclick="addNewCommodity()">
-					<div id="id_commodity_detail"></div>
+					<div id="id_commodity_detail">
+						<section>
+							<input type="button" value="Delete"
+								onclick="deleteCommodity(this)"></input> <input
+								id="id_commodity_name" type="text" placeholder="Commodity Name"></input>
+							<input id="id_commodity_quantity" type="text"
+								placeholder="Quantity"></input> <input id="id_commodity_price"
+								type="text" placeholder="Price"></input>
+						</section>
+					</div>
 				</div>
 			</div>
 
@@ -154,7 +163,7 @@
 			</div>
 
 			<br> <input type="button" value="Submit Information"
-				onclick="Add()"  style="width: 300px; height: 30px;">
+				onclick="Add()" style="width: 300px; height: 30px;">
 		</form>
 	</div>
 	<hr>
@@ -176,7 +185,6 @@
 			<div id="added_labels"
 				style="width: 680px; max-height: 620px; overflow: auto; margin: 2px auto; border: 1px dashed;"></div>
 			<div id="printed_labels"></div>
-
 		</div>
 	</div>
 	<br>
@@ -187,16 +195,16 @@
 	function addNewCommodity() {
 		$('#id_commodity_detail')
 				.append(
-						'<form>'
-								+ '<input type="button" value="Delete" onclick="deleteCommodity(this.form)"></input>'
+						'<section>'
+								+ '<input type="button" value="Delete" onclick="deleteCommodity(this)"></input>'
 								+ '<input id="id_commodity_name" type="text" placeholder="Commodity Name"></input>'
 								+ '<input id="id_commodity_quantity" type="text" placeholder="Quantity"></input>'
 								+ '<input id="id_commodity_price" type="text" placeholder="Price"></input>'
-								+ '</form>');
+								+ '</section>');
 	}
 
 	function deleteCommodity(elem) {
-		$(elem).remove();
+		$(elem).parent().remove();
 	}
 
 	function checkCommodityDetailAndGetCommodityDetailObj() {
@@ -207,7 +215,7 @@
 			alert('Please Add Commodity Detail');
 			return true;
 		} else {
-			var isCommodityInvalid = $('#id_commodity_detail form')
+			var isCommodityInvalid = $('#id_commodity_detail section')
 					.each(
 							function() {
 								var commodity_obj = new Object();
@@ -309,74 +317,74 @@
 	/*add new package information*/
 	var info_array = [];
 	var invoice_obj = new Object();
-	
+
 	function Add() {
 		var isInfoValid = true;
 		var blank_field = 'Blank Field(s):\n';
-		$('#spearnet_invoice_form').find('input').each(function(){
-			if($(this).attr('type') === 'text' && $(this).val()===''){
+		$('#spearnet_invoice_form').find('input').each(function() {
+			if ($(this).attr('type') === 'text' && $(this).val() === '') {
 				blank_field = blank_field + $(this).attr('id') + '\n';
 				isInfoValid = false;
 				$(this).css({
-					'border-color':'#f00'
+					'border-color' : '#f00'
 				});
-			}
-			else if($(this).attr('type') === 'text'){
+			} else if ($(this).attr('type') === 'text') {
 				$(this).css({
-					'border-color':'#a2c1ff'
+					'border-color' : '#a2c1ff'
 				});
 			}
 		});
-		$('#spearnet_invoice_form').find('textarea').each(function(){
-			if($(this).val() === ''){
+		$('#spearnet_invoice_form').find('textarea').each(function() {
+			if ($(this).val() === '') {
 				blank_field = blank_field + $(this).attr('id') + '\n';
 				isInfoValid = false;
 				$(this).css({
-					'border-color':'#f00'
+					'border-color' : '#f00'
 				});
-			}
-			else{
+			} else {
 				$(this).css({
-					'border-color':'#a2c1ff'
+					'border-color' : '#a2c1ff'
 				});
 			}
 		});
-		
-		if(isInfoValid){
+
+		if (isInfoValid) {
 			invoice_obj['suda_tr_number'] = $('#id_suda_tr_number').val();
 			invoice_obj['reference_number'] = $('#id_reference_number').val();
 
-			invoice_obj['consignee_name_english'] = $('#id_consignee_name_english').val();
-			invoice_obj['consignee_name_chinese'] = $('#id_consignee_name_chinese').val();
-			invoice_obj['consignee_address_english'] = $('#id_consignee_address_english')
-					.val();
-			invoice_obj['consignee_address_chinese'] = $('#id_consignee_address_chinese')
-					.val();
-			invoice_obj['consignee_phone_number'] = $('#id_consignee_phone_number').val()
+			invoice_obj['consignee_name_english'] = $(
+					'#id_consignee_name_english').val();
+			invoice_obj['consignee_name_chinese'] = $(
+					'#id_consignee_name_chinese').val();
+			invoice_obj['consignee_address_english'] = $(
+					'#id_consignee_address_english').val();
+			invoice_obj['consignee_address_chinese'] = $(
+					'#id_consignee_address_chinese').val();
+			invoice_obj['consignee_phone_number'] = $(
+					'#id_consignee_phone_number').val()
 
-			invoice_obj['unit_price_fob_us_dollar'] = $('#id_unit_price_fob_us_dollar').val();
+			invoice_obj['unit_price_fob_us_dollar'] = $(
+					'#id_unit_price_fob_us_dollar').val();
 			invoice_obj['note'] = $('#id_note').val();
 
 			invoice_obj['ctn'] = $('#id_ctn').val();
 			invoice_obj['pcs'] = $('#id_pcs').val();
-		}
-		else{
+		} else {
 			alert(blank_field);
 			return false;
 		}
-		
+
 		if (!$.isNumeric($('#id_weight').val())) {
 			alert('Please type in a number for the weight!');
 			$('#id_weight').css({
-				'border-color':'#f00'
+				'border-color' : '#f00'
 			});
 			$('#id_weight').focus();
 			return true;
-		}
-		else{
+		} else {
 			invoice_obj['weight'] = $('#id_weight').val();
 			$('#id_weight').css({
-				'border-color':'#a2c1ff'
+				'border-color' : '#a2c1ff'
 			});
 		}
 		// end of checking information
@@ -418,41 +426,44 @@
 			'display' : 'block'
 		});
 
-		$.ajax('/exshipper_spearnet_create_invoice_info_handler', {
-			type : 'POST',
-			data : {
-				fmt : 'json',
-				valid_suda_tr_number : invoice_obj['suda_tr_number'],
-				valid_ref_number : invoice_obj['reference_number'],
-				valid_consignee_name_english : invoice_obj['consignee_name_english'],
-				valid_consignee_name_chinese : invoice_obj['consignee_name_chinese'],
-				valid_consignee_address_english : invoice_obj['consignee_address_english'],
-				valid_consignee_address_chinese : invoice_obj['consignee_address_chinese'],
-				valid_consignee_phone_number : invoice_obj['consignee_phone_number'],
-				valid_unit_price_fob_us_dollar : invoice_obj['unit_price_fob_us_dollar'],
-				valid_note : invoice_obj['note'],
-				valid_ctn : invoice_obj['ctn'],
-				valid_pcs : invoice_obj['pcs'],
-				valid_weight : invoice_obj['weight'],
-				valid_commodity_detail : commodity_detail_obj
+		$
+				.ajax(
+						'/exshipper_spearnet_create_invoice_info_handler',
+						{
+							type : 'POST',
+							data : {
+								fmt : 'json',
+								valid_suda_tr_number : invoice_obj['suda_tr_number'],
+								valid_ref_number : invoice_obj['reference_number'],
+								valid_consignee_name_english : invoice_obj['consignee_name_english'],
+								valid_consignee_name_chinese : invoice_obj['consignee_name_chinese'],
+								valid_consignee_address_english : invoice_obj['consignee_address_english'],
+								valid_consignee_address_chinese : invoice_obj['consignee_address_chinese'],
+								valid_consignee_phone_number : invoice_obj['consignee_phone_number'],
+								valid_unit_price_fob_us_dollar : invoice_obj['unit_price_fob_us_dollar'],
+								valid_note : invoice_obj['note'],
+								valid_ctn : invoice_obj['ctn'],
+								valid_pcs : invoice_obj['pcs'],
+								valid_weight : invoice_obj['weight'],
+								valid_commodity_detail : commodity_detail_obj
 
-			},
-			success : showReturnMsg,
-			statusCode : {
-				400 : function() {
-					alert('400 status code! user-side error');
-					$('#upload_cover').css({
-						'display' : 'none'
-					});
-				},
-				500 : function() {
-					alert('500 status code! server-side error');
-					$('#upload_cover').css({
-						'display' : 'none'
-					});
-				}
-			}
-		});
+							},
+							success : showReturnMsg,
+							statusCode : {
+								400 : function() {
+									alert('400 status code! user-side error');
+									$('#upload_cover').css({
+										'display' : 'none'
+									});
+								},
+								500 : function() {
+									alert('500 status code! server-side error');
+									$('#upload_cover').css({
+										'display' : 'none'
+									});
+								}
+							}
+						});
 		//end of add the info to datastore
 
 		//append type-in info to html element
@@ -483,9 +494,7 @@
 								+ '</p>'
 								+ '<p style="display: inline-block; margin: 0px 5px;"> Phone Number: '
 								+ invoice_obj['consignee_phone_number']
-								+ '</p>'
-								+ '</div>'
-								+ '<br></form>');
+								+ '</p>' + '</div>' + '<br></form>');
 		// change color
 		$('#added_info> form:even').css('background-color', '#dedede');
 		$('#added_info> form:odd').css('background-color', '#f9f9f9');
@@ -534,9 +543,11 @@
 							+ '" style="margin: 2px auto; text-align:center; display: block;"></div>'
 								+ '</form>');
 
-		$('#added_labels> form[id="label_' + invoice_obj['suda_tr_number'] + '"]').find(
-				'div#barcode_' + invoice_obj['suda_tr_number'] ).barcode( invoice_obj['suda_tr_number'],
-				'code39', {
+		$(
+				'#added_labels> form[id="label_'
+						+ invoice_obj['suda_tr_number'] + '"]').find(
+				'div#barcode_' + invoice_obj['suda_tr_number']).barcode(
+				invoice_obj['suda_tr_number'], 'code39', {
 					barWidth : 2,
 					barHeight : 45,
 					fontSize : 13

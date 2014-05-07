@@ -62,7 +62,7 @@
 									+ '<div id="commodity_{{ single_row_data.hawb }}"></div>'
 									+ '</form>');
 
-			var items = JSON.parse('{{ single_row_data.commodity_detail }}')['items'];
+			var items = JSON.parse('{{ single_row_data.commodity_detail|e }}')['items'];
 			var total_quan = 0;
 			var total_price = 0;
 			$
@@ -114,7 +114,7 @@
 									+ '<img style="height: 100px;" src="/img?entity_id={{ single_row_data.signature_img_id }}"/>'
 									+ '<p>Company / Personal Name: {{single_row_data.shipper_company | title}} / {{single_row_data.shipper_person | title}}</p>'
 									+ '<p>Phone: {{ single_row_data.shipper_tel }}</p>'
-									+ '<p>Address: {{ single_row_data.shipper_address_english }}</p>'
+									+ '<p>Address: {{ single_row_data.shipper_address_english|e }}</p>'
 									+ '<p style="font-weight:bold; font-size:18px;">Consignee\'s Information</p>'
 									+ '<p>SUDA Tracking Number: {{ single_row_data.hawb }}</p>'
 									+ '<p>Ref. Number: {{ single_row_data.reference_number }}</p>'
@@ -122,7 +122,7 @@
 									+ '<p>Consignee Chinese Address: {{ single_row_data.consignee_address_chinese }}</p>'
 									+ '<p>English Name: {{ single_row_data.consignee_name_english }}</p>'
 									+ '<p>Phone: {{ single_row_data.consignee_tel }}</p>'
-									+ '<p>English Address: {{ single_row_data.consignee_address_english }}</p>'
+									+ '<p>English Address: {{ single_row_data.consignee_address_english|e }}</p>'
 									+ '<p>Weight (kg): <input value="{{ single_row_data.weight_kg }}" style="color:#000; border:1px solid; text-align:center;" /></p>'
 									+ '<p>Shipping Date: {{ single_row_data.date }} (UTC)</p>'
 									+ '<p style="font-weight:bold; font-size:20px;">Detail</p>'
