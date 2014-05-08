@@ -90,10 +90,10 @@ var tw_custom_entry_numbers_ary = new Array();
 								+ "{{single_row_data.flight_number}}"
 								+ '</p>'
 								+ '<hr>'
-								+ '<p style="margin: 10px 10px; font-size: 12px;"> 包裹速達追蹤碼(SUDA Tracking Numbers):</p>'
+								+ '<p style="margin: 10px 10px;font-size: 12px;"> 包裹速達追蹤碼(SUDA Tracking Numbers):</p>'
 								+ '<p id="suda_numbers_{{single_row_data.barcode_number}}" style="margin: 10px 10px; height: 90px;" ></p>'
 								+ '<hr>'
-								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center; font-size: 12px;">台灣報關行追蹤碼</div>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;font-size: 12px;">台灣報關行追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'
 							+ "{{single_row_data.barcode_number}}"
 							+ '" style="margin: 2px auto; text-align:center;"></div>'
@@ -137,7 +137,7 @@ var tw_custom_entry_numbers_ary = new Array();
 	var json_tw_custom_entry_packages_set = jQuery.parseJSON( tw_custom_entry_packages_set );
 	$.each(json_tw_custom_entry_packages_set, function(key, data){
 		$.each(data, function (index, data) {
-			$('#suda_numbers_' + key).append('<span style="display: inline-block; font-size: 12px;"> '+ data +' \/ </span>');
+			$('#suda_numbers_' + key).append('<span style="display: inline-block; font-size: 11px;"> '+ data +' \/ </span>');
     	})
 	});
 

@@ -83,17 +83,17 @@ var tw_custom_entry_numbers_ary = new Array();
 							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size:20px; font-weight: bold; width: 100%;">聯締 /泓倫 </p>'
 							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; width: 100%;">From SFO to Taoyuan International Airport</p>'
 							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; width: 100%;">(舊金山機場 至 桃園國際機場)</p>'
-								+ '<p style="display: block; margin: 10px 10px;font-size: 12px;"> MAWB/榮儲快遞艙:  '
+								+ '<p style="display: block; margin: 10px 10px;"> MAWB/榮儲快遞艙:  '
 								+ "{{single_row_data.mawb}}"
 								+ '</p>'
-								+ '<p style="display: block; margin: 10px 10px;font-size: 12px;"> Flight Number/班機號碼: '
+								+ '<p style="display: block; margin: 10px 10px;"> Flight Number/班機號碼: '
 								+ "{{single_row_data.flight_number}}"
 								+ '</p>'
 								+ '<hr>'
 								+ '<p style="margin: 10px 10px; font-size: 12px;"> 包裹速達追蹤碼(SUDA Tracking Numbers):</p>'
-								+ '<p id="suda_numbers_{{single_row_data.barcode_number}}" style="margin: 10px 10px; height: 90px;" ></p>'
+								+ '<p id="suda_numbers_{{single_row_data.barcode_number}}" style="margin: 10px 10px; height: 70px;" ></p>'
 								+ '<hr>'
-								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center; font-size: 12px;">台灣報關行追蹤碼</div>'
+								+ '<div class="barcode_title" style="display: block; margin: 2px auto; text-align:center;">台灣報關行追蹤碼</div>'
 								+ '<div class="barcode" id="barcode_'
 							+ "{{single_row_data.barcode_number}}"
 							+ '" style="margin: 2px auto; text-align:center;"></div>'
@@ -104,7 +104,7 @@ var tw_custom_entry_numbers_ary = new Array();
 				'code39', {
 					barWidth : 2,
 					barHeight : 45,
-					fontSize : 13
+					fontSize : 16
 				});
 		
 		//add tw custom entry tracking number into array for auto-complete function
@@ -137,7 +137,7 @@ var tw_custom_entry_numbers_ary = new Array();
 	var json_tw_custom_entry_packages_set = jQuery.parseJSON( tw_custom_entry_packages_set );
 	$.each(json_tw_custom_entry_packages_set, function(key, data){
 		$.each(data, function (index, data) {
-			$('#suda_numbers_' + key).append('<span style="display: inline-block; font-size: 12px;"> '+ data +' \/ </span>');
+			$('#suda_numbers_' + key).append('<span style="display: inline-block; font-size: 11px;"> '+ data +' \/ </span>');
     	})
 	});
 
