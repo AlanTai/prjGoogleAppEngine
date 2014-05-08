@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="50" version="2.0">
+<workbench progressCount="31" version="2.0">
 <workbenchAdvisor/>
 <window height="342" maximized="true" width="1319" x="-7" y="394">
 <fastViewData fastViewLocation="1024"/>
@@ -70,7 +70,6 @@
 <viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0">
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src"/>
-<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/general_handlers"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper"/>
@@ -83,7 +82,7 @@
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static"/>
-<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_invoice_log.html"/>
+<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
 </viewState>
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
@@ -264,7 +263,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.32987398" ratioLeft="445" ratioRight="904" relationship="2" relative="topLeft"/>
+<info part="org.eclipse.ui.editorss" ratio="0.26389918" ratioLeft="356" ratioRight="993" relationship="2" relative="topLeft"/>
 <info folder="true" part="bottom" ratio="0.86612904" ratioLeft="537" ratioRight="83" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
@@ -300,50 +299,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_tw_custom_entry_invoice_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_invoice_log.html">
-<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_invoice_log.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_create_invoice.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html">
+<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_tw_custom_entry_invoice_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_tw_custom_entry_invoice_log.html">
 <persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_tw_custom_entry_invoice_log.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_xlsx_parser.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_xlsx_parser.html">
-<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_xlsx_parser.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_xlsx_parser.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_xlsx_parser.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_xlsx_parser.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="models.py" tooltip="prjExShipper/src/models.py">
+<persistable path="/prjExShipper/src/models.py"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_create_invoice.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_tw_custom_entry_invoice_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_invoice_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_invoice_log.html"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_invoice.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_create_invoice.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_create_invoice.html"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
+<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_package_info_log.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html">
+<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" tooltip="prjAppTest/src/ctrl_views.py">
+<persistable path="/prjAppTest/src/ctrl_views.py"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_index.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_index.html">
+<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_index.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_index.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_index.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_index.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="app.yaml" tooltip="prjExShipper/src/app.yaml">
+<persistable path="/prjExShipper/src/app.yaml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" tooltip="prjExShipper/src/ctrl_views.py">
+<persistable path="/prjExShipper/src/ctrl_views.py"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_create_invoice.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html">
 <persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_create_invoice.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_create_invoice.html">
 <persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_create_invoice.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" tooltip="prjExShipper/src/ctrl_views.py">
-<persistable path="/prjExShipper/src/ctrl_views.py"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_tw_custom_entry_onhand_manifest.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_onhand_manifest.html">
-<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_tw_custom_entry_onhand_manifest.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
-<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_packages_labels.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_packages_labels.html">
-<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_packages_labels.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_packages_labels.html" tooltip="prjAppTest/src/static/templates/exshipper/exshipper_packages_labels.html">
-<persistable path="/prjAppTest/src/static/templates/exshipper/exshipper_packages_labels.html"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjExShipper/src/app_dict.py">
-<persistable path="/prjExShipper/src/app_dict.py"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="models.py" tooltip="prjExShipper/src/models.py">
-<persistable path="/prjExShipper/src/models.py"/>
 </file>
 </mruList>
 </workbench>

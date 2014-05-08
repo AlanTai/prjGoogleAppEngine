@@ -96,7 +96,7 @@
 					<span style="display: block;">Consignee Name (English):</span>
 				</p>
 				<input type="text" id="id_consignee_name_english"
-					name="consignee_name_english" title="Consignee Name (English)" placeholder="Consignee Name (English)"
+					name="consignee_name_english" title="Consignee Name (English)"
 					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
 					required="required">
 			</div>
@@ -105,7 +105,7 @@
 					<span style="display: block;">Consignee Name (Chinese):</span>
 				</p>
 				<input type="text" id="id_consignee_name_chinese"
-					name="consignee_name_chinese" title="Consignee Name (Chinese)" placeholder="Consignee Name (Chinese)"
+					name="consignee_name_chinese" title="Consignee Name (Chinese)"
 					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
 					required="required">
 			</div>
@@ -115,7 +115,7 @@
 				</p>
 				<input type="text" id="id_consignee_address_english"
 					name="consignee_address_english"
-					title="Consignee Address (English)" placeholder="Consignee Address (English)"
+					title="Consignee Address (English)" placeholder="Consignee Address"
 					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
 					required="required">
 			</div>
@@ -125,7 +125,7 @@
 				</p>
 				<input type="text" id="id_consignee_address_chinese"
 					name="consignee_address_english"
-					title="Consignee Address (English)" placeholder="Consignee Address (Chinese)"
+					title="Consignee Address (English)" placeholder="Consignee Address"
 					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
 					required="required">
 			</div>
@@ -134,8 +134,8 @@
 					<span style="display: block;">Consignee Phone Number:</span>
 				</p>
 				<input type="text" id="id_consignee_phone_number"
-					name="consignee_phone_number" title="Consignee Phone Number" placeholder="Consignee Phone Number"
-					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+					name="consignee_phone_number" title="Consignee Phone Number"
+					style="display: inline-block; margin: 5px 1px;" size="50"
 					required="required">
 			</div>
 
