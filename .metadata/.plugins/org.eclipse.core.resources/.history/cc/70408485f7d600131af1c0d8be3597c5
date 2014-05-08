@@ -187,8 +187,8 @@ var amount_of_packages = 0;
 							+ "{{single_row_data.hawb}}"
 							+ '" style="border: 1px solid; width: 340px; margin: 8px 8px; padding: 2px 2px; display:inline-block; text-align: left;">'
 							+ '<p style="width: 100%; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size: 20px; font-weight: bold;">ExShipper</p>'	
-							+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 寄件者/公司: '
-								+ "{{single_row_data.shipper_person}}" + " / " + "{{single_row_data.shipper_company}}"
+							+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 寄件者: '
+								+ "{{single_row_data.shipper_company}}"
 								+ '</p>'
 								+ '<p style="display: block; margin: 5px 10px; font-size: 12px; "> 地址: '
 								+ "{{single_row_data.shipper_address_english}}"
@@ -207,14 +207,14 @@ var amount_of_packages = 0;
 								+ "{{single_row_data.consignee_tel}}"
 								+ '</p>'
 								+ '<hr>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px; ">Ref. NO. '
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">Ref. NO. '
 								+ "{{single_row_data.reference_number}}"
 								+ '</p>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px; ">'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">'
 								+ "{{single_row_data.weight_kg}}"
 								+ ' (kg)</p>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px; ">易碎</p>'
-								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 10px; ">配送方式: '
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">易碎</p>'
+								+ '<p style="position: relative; top: 0px; left: 0px; border: 1px solid; text-align: center; padding: 2px 5px; margin: 2px 5px; display: inline-block; font-size: 12px; ">配送方式: '
 								+ "{{single_row_data.note}}"
 								+ '</p>'
 								+ '<hr>'

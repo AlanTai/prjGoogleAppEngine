@@ -367,7 +367,7 @@
 			} else {
 				return true;
 			}
-			//end of validation process
+			//end of validation
 
 		};
 	</script>

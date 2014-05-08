@@ -350,7 +350,7 @@
 				}
 			});
 
-			//check if the account name is valid, employee information is valid and profileimage is valid
+			//check if the account name is valid or
 			if (!availability_account_name) {
 				alert('Please check the availability of your account name and email!')
 				return false;
@@ -367,7 +367,6 @@
 			} else {
 				return true;
 			}
-			//end of validation process
 
 		};
 	</script>

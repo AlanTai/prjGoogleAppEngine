@@ -79,7 +79,7 @@ var tw_custom_entry_numbers_ary = new Array();
 				.append(
 						'<form id="label_'
 							+ "{{single_row_data.barcode_number}}"
-							+ '" style="border: 1px solid; width: 450px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
+							+ '" style="border: 1px solid; width: 400px; margin: 10px 10px; padding: 2px 5px; display:inline-block; text-align: left;">'
 							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; font-size:20px; font-weight: bold; width: 100%;">聯締 /泓倫 </p>'
 							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; width: 100%;">From SFO to Taoyuan International Airport</p>'
 							+ '<p style="position: relative; top: 0px; left: 0px; text-align: center; padding: 2px 5px; margin: 2px 5px; width: 100%;">(舊金山機場 至 桃園國際機場)</p>'
@@ -137,7 +137,7 @@ var tw_custom_entry_numbers_ary = new Array();
 	var json_tw_custom_entry_packages_set = jQuery.parseJSON( tw_custom_entry_packages_set );
 	$.each(json_tw_custom_entry_packages_set, function(key, data){
 		$.each(data, function (index, data) {
-			$('#suda_numbers_' + key).append('<span style="display: inline-block; "> '+ data +'\/ </span>');
+			$('#suda_numbers_' + key).append('<span style="display: inline-block; font-size: 10px;"> '+ data +' \/ </span>');
     	})
 	});
 
