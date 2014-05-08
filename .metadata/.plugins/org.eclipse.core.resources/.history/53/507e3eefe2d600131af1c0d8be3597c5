@@ -125,7 +125,7 @@
 				</p>
 				<input type="text" id="id_consignee_address_chinese"
 					name="consignee_address_english"
-					title="Consignee Address (English)" placeholder="Consignee Address (English)"
+					title="Consignee Address (English)" placeholder="Consignee Address (Chinese)"
 					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
 					required="required">
 			</div>

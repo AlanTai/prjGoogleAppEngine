@@ -44,7 +44,7 @@
 				</p>
 				<input type="text" id="id_reference_number" name="reference_number"
 					title="Reference Number" placeholder="Reference Number"
-					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50" required="required" />
+					style="display: inline-block; margin: 5px 1px;" size="50" required="required" />
 			</div>
 			<br>
 
@@ -56,7 +56,7 @@
 						<span style="display: block;">Shipper Name(English):</span>
 					</p>
 					<input type="text" id="id_shipper_person" name="shipper_person" placeholder="Shipper Name"
-						title="Shipper" style="display: inline-block; margin: 5px 1px; text-align: center;"
+						title="Shipper" style="display: inline-block; margin: 5px 1px;"
 						size="50" required="required">
 				</div>
 
@@ -64,9 +64,9 @@
 					<p style="display: inline-block; width: 450px; margin: 2px 1px;">
 						<span style="display: block;">Shipper Address (English):</span>
 					</p>
-					<input type="text" id="id_shipper_address_english" placeholder="Shipper Address"
-						name="shipper_address_english" title="Shipper Address (English)"
-						style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+					<input type="text" id="id_shipper_address_english"
+						name="shipper_address_english" title="Shipper Address (English)" placeholder="Shipper Address"
+						style="display: inline-block; margin: 5px 1px;" size="50"
 						required="required">
 				</div>
 				<div>
@@ -75,7 +75,7 @@
 					</p>
 					<input type="text" id="id_shipper_phone_number"
 						name="shipper_phone_number" title="Shipper Phone Number" placeholder="Shipper Phone Number"
-						style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+						style="display: inline-block; margin: 5px 1px;" size="50"
 						required="required">
 				</div>
 				<div>
@@ -83,8 +83,8 @@
 						<span style="display: block;">Shipper Email:</span>
 					</p>
 					<input type="text" id="id_shipper_email" name="shipper_email"
-						title="Shipper Email" placeholder="Shipper Email"
-						style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+						title="Shipper Email"
+						style="display: inline-block; margin: 5px 1px;" size="50"
 						required="required">
 				</div>
 			</div>
@@ -96,8 +96,8 @@
 					<span style="display: block;">Consignee Name (English):</span>
 				</p>
 				<input type="text" id="id_consignee_name_english"
-					name="consignee_name_english" title="Consignee Name (English)" placeholder="Consignee Name (English)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+					name="consignee_name_english" title="Consignee Name (English)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
 					required="required">
 			</div>
 			<div>
@@ -105,8 +105,8 @@
 					<span style="display: block;">Consignee Name (Chinese):</span>
 				</p>
 				<input type="text" id="id_consignee_name_chinese"
-					name="consignee_name_chinese" title="Consignee Name (Chinese)" placeholder="Consignee Name (Chinese)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+					name="consignee_name_chinese" title="Consignee Name (Chinese)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
 					required="required">
 			</div>
 			<div>
@@ -115,8 +115,8 @@
 				</p>
 				<input type="text" id="id_consignee_address_english"
 					name="consignee_address_english"
-					title="Consignee Address (English)" placeholder="Consignee Address (English)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+					title="Consignee Address (English)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
 					required="required">
 			</div>
 			<div>
@@ -125,8 +125,8 @@
 				</p>
 				<input type="text" id="id_consignee_address_chinese"
 					name="consignee_address_english"
-					title="Consignee Address (English)" placeholder="Consignee Address (English)"
-					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+					title="Consignee Address (English)"
+					style="display: inline-block; margin: 5px 1px;" size="50"
 					required="required">
 			</div>
 			<div>
@@ -134,8 +134,8 @@
 					<span style="display: block;">Consignee Phone Number:</span>
 				</p>
 				<input type="text" id="id_consignee_phone_number"
-					name="consignee_phone_number" title="Consignee Phone Number" placeholder="Consignee Phone Number"
-					style="display: inline-block; margin: 5px 1px; text-align: center;" size="50"
+					name="consignee_phone_number" title="Consignee Phone Number"
+					style="display: inline-block; margin: 5px 1px;" size="50"
 					required="required">
 			</div>
 
@@ -221,7 +221,7 @@
 </div>
 
 <script type="text/javascript">
-	//init get reference number via ajax
+	//init to get reference number
 	$(get_reference_number());
 	
 	//get reference number via ajax
@@ -243,14 +243,14 @@
 			}
 		});
 	}
-	//end of "get reference number via ajax"
 
 	//update reference number
 	function update_reference_number(response) {
 		$('#id_reference_number').val(response.exshipper_package_number);
 	};
+	//end of "get reference number via ajax"
 
-	//add new commodity row
+	//add new commodity detail
 	function addNewCommodity() {
 		$('#id_commodity_detail')
 				.append(
@@ -262,17 +262,16 @@
 								+ '</section>');
 	}
 
-	//delete commodity row
+	//delete commodity
 	function deleteCommodity(elem) {
 		$(elem).parent().remove();
 	}
 
-	//calculate the pcs, fob, and size accumulation
+	//calculate the pcs, fob and size
 	var pcs = 0;
 	var unit_price_fob_us_dollar = 0;
 	var size_accumulation = 0;
 
-	//check if commodity detial is valid and return the obj or return true as invalid sign
 	function checkCommodityDetailAndGetCommodityDetailObj() {
 		var commodity_detail = new Object();
 		var commodity_ary = new Array();
@@ -323,8 +322,6 @@
 													.round(Number(commodity_obj.quan) * 100) / 100)
 											* (Math
 													.round(Number(commodity_obj.price) * 100) / 100);
-									
-									//store commodity obj into array
 									commodity_ary.push(commodity_obj);
 								}
 							});
@@ -339,9 +336,9 @@
 	}
 	//end commodity
 
-	//get tracking number
+	//
 	function getSUDATrackingNumber() {
-		//popup processing block
+		//
 		$('#upload_cover').css({
 			'display' : 'block'
 		});
@@ -385,7 +382,8 @@
 			'display' : 'none'
 		});
 	}
-	//end of getSUDATrackingNumber()
+
+	/*end of get suda tracking number*/
 
 	/*add new package information*/
 	var info_array = [];
