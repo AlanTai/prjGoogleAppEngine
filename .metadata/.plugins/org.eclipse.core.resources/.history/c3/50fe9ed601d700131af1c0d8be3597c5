@@ -189,6 +189,7 @@
 
 	<!-- function for validating the client information -->
 	<script type="text/javascript">
+		/**/
 		var availability_account_name = false;
 		var availability_email = false;
 
