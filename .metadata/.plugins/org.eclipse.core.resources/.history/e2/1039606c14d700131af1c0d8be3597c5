@@ -1,0 +1,90 @@
+{% extends "/exshipper/exshipper_base.html"%} {% block main_content %}
+<div
+	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
+	<p style="font-size: 26px;">Track Package Status (ExShipper General
+		Clients)</p>
+	<hr>
+</div>
+
+<!--  -->
+<div
+	style="position: absolute; top: 100px; width: 100%; text-align: center; margin: 10px auto;">
+	<p>Package Status Tracking</p>
+	<form method="post" id="general_client_package_tracking_form">
+		<div>
+			<label style="width: 150px; display: inline-block;">Tracking
+				Number: </label> <input id="general_clients_tracking_number" type="text" />
+			<input type="button" value="Submit"
+				onclick="submitGeneralClientsTrackingNumber(this.form.general_clients_tracking_number.value)" />
+		</div>
+	</form>
+	<p id="id_customer_package_status" style="color: #f00;"></p>
+</div>
+<script type="text/javascript">
+	$('#general_client_package_tracking_form').keypress(function(e) {
+		var charCode = e.charCode || e.keyCode || e.which;
+		if (charCode == 13) {
+			return false;
+		}
+	});
+
+	//track general client package status
+	function submitGeneralClientsTrackingNumber(tracking_number) {
+		if (tracking_number === "") {
+			alert('Please key in tracking number');
+			return false;
+		} else {
+			tracking_number = tracking_number.trim();
+		}
+		$
+				.ajax(
+						'/exshipper_general_clients_packages_tracking_handler',
+						{
+							type : 'POST',
+							data : {
+								fmt : 'json',
+								customer_tracking_number : tracking_number
+							},
+							success : showMsg,
+							statusCode : {
+								400 : function() {
+									alert('400 status code! user-side error');
+								},
+								500 : function() {
+									alert('500 status code! server-side error; please contact ExShipper at 1-650-307-3834');
+								}
+							}
+						});
+	}
+
+	//get response
+	function showMsg(result) {
+		var msg;
+		var destination;
+		if (result.package_status === 'NA') {
+			msg = 'NA'
+		} else {
+			if (result.package_status === 'spearnet') {
+				destination = 'at Spearnet';
+			} else if (result.package_status === 'exshipper'
+					|| result.package_status === 'pickup') {
+				destination = 'at ExShipper';
+			} else if (result.package_status === 'sfo_airport'
+					|| result.package_status === 'apex') {
+				destination = 'at SFO Airport';
+			} else if (result.package_status === 'taiwan_taoyuan_airport') {
+				destination = 'at Taiwan Taoyuan International Airport';
+			} else if (result.package_status === 'suda') {
+				destination = 'at Taiwan SUDA';
+			} else if (result.package_status === 'delivered') {
+				destination = 'Delivered';
+			} else {
+				destination = 'unnkown destination'
+			}
+			msg = 'Your package is ' + destination
+		}
+		$('#id_customer_package_status').text(msg);
+	}
+	//end of submitGeneralClientsTrackingNumber(tracking_number)
+</script>
+{% endblock %}

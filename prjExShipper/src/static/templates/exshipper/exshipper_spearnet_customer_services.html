@@ -29,6 +29,7 @@
 </div>
 <script type="text/javascript">
 
+//disable enter button
 $('#spearnet_package_tracking_form').keypress(function (e) {     
     var charCode = e.charCode || e.keyCode || e.which;
     if (charCode  == 13) {
@@ -36,6 +37,7 @@ $('#spearnet_package_tracking_form').keypress(function (e) {
     }
 });
 
+//tracking package status via ajax
 function submitSpearnetCustomerTrackingNumber(tracking_number){
 	if(tracking_number === ""){
 		alert('Please key in tracking number');
@@ -62,6 +64,7 @@ function submitSpearnetCustomerTrackingNumber(tracking_number){
 	});
 }
 
+//get response and show message
 function showMsg(result){
 	var msg;
 	var destination;
@@ -94,5 +97,7 @@ function showMsg(result){
 	}
 	$('#id_customer_package_status').text(msg);
 }
+//end of submitSpearnetCustomerTrackingNumber(tracking_number)
+
 </script>
 {% endblock %}

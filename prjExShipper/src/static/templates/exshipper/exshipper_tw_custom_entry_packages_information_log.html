@@ -128,7 +128,7 @@
 					<option value="NA">NA</option>
 			</select>
 			</span>
-			{% if single_row_data.pickup_date_time %}
+			{% if single_row_data.create_date_time %}
 			<span class="tw_custom_entry_datetime">Creating DateTime: <input
 				id="{{ single_row_data.barcode_number }}" value="{{ single_row_data.create_date_time.strftime('%Y-%m-%d') }}" class="create_datetime" type="text" disabled="disabled" />
 			</span>
@@ -186,9 +186,6 @@
 						'.tw_custom_entry_flight_number > input[id={{ single_row_data.barcode_number }}]')
 						.on('input', function() {
 							var key = $(this).attr('id');
-							/* if (typeof packages_status[key] === 'undefined'){
-								packages_status[key] = $(this).val();
-							} */
 							flight_numbers[key] = $(this).val();
 						});
 
@@ -196,10 +193,6 @@
 						'.tw_custom_entry_flight_date > input[id=flight_date_{{ single_row_data.barcode_number }}]')
 						.on('input', function() {
 							var key = $(this).attr('id').substring(12);
-							/* if (typeof packages_status[key] === 'undefined'){
-								packages_status[key] = $(this).val();
-							} */
-
 							flight_dates[key] = $(this).val();
 						});
 				$(

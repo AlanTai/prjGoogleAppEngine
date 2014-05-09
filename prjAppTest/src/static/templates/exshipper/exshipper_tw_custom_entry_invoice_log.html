@@ -87,7 +87,7 @@
 							});
 			$('#commodity_{{ single_row_data.hawb }}').append(
 					'<p><span>Total Quantity: ' + total_quan
-							+ '</span> <span>Total Price: $' + total_price
+							+ '</span> <span>Total Price: $' + total_price.toFixed(2)
 							+ '</span> </p>');
 		}
 	</script>
@@ -154,7 +154,7 @@
 							});
 			$('#commodity_{{ single_row_data.hawb }}').append(
 					'<p><span>Total Quantity: ' + total_quan
-							+ '</span> <span>Total Price: $' + total_price
+							+ '</span> <span>Total Price: $' + total_price.toFixed(2)
 							+ '</span> </p>');
 		}
 	</script>

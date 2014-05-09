@@ -2,7 +2,9 @@
 <div
 	style="text-align: center; margin: 0px auto; position: fixed; width: 100%; background-color: #fff; z-index: 100;">
 	<p style="font-size: 26px;">ExShipper Packages Labels</p>
-	<input type="button" value="Show All Labels" onclick="showAllLabels()" > <input type="button" value="Remove All Labels" onclick="removeAllLabels()" >
+	<input type="button" value="Show All Labels" onclick="showAllLabels()">
+	<input type="button" value="Remove All Labels"
+		onclick="removeAllLabels()">
 	<p id="amount_of_packages" style="color: #f00"></p>
 	<hr>
 </div>
@@ -10,13 +12,13 @@
 
 <div id="package_labels_container"
 	style="position: absolute; top: 130px; text-align: center; width: 100%; z-index: 1;">
-	
-	
 	<div id="print_area" style="text-align: center; margin: 0px auto;">
 		<div style="border: 1px thin; border-color: #666; display: block;">
 			<p>Packages Information</p>
 			<div>
-				<input id="suda_tracking_number" type="text" placeholder="SUDA Tracking Number" style="text-align: center;"> <input id="search_package_info" type="button" value="Search">
+				<input id="suda_tracking_number" type="text"
+					placeholder="SUDA Tracking Number" style="text-align: center;">
+				<input id="search_package_info" type="button" value="Search">
 			</div>
 			<br>
 			<div id="packages_info"
@@ -36,11 +38,14 @@
 </div>
 
 <script type="text/javascript">
+//data set of spearnet and general clients packages information
 var spearnet_packages_info = "{{ spearnet_packages_info }}";
 var general_clients_packages_info = "{{ general_clients_packages_info }}";
 var suda_tracking_numbers_ary = new Array();
 var amount_of_packages = 0;
-		//append type-in info to html element
+
+		//list block
+		//spearnet customers packages information
 		{% if spearnet_packages_info %}
 		{% for single_row_data in spearnet_packages_info %}
 		$('#packages_info')
@@ -79,6 +84,7 @@ var amount_of_packages = 0;
 		{% endfor %}
 		{% endif %}
 		
+		//general clients packages information
 		{% if general_clients_packages_info %}
 		{% for single_row_data in general_clients_packages_info %}
 		$('#packages_info')
@@ -123,6 +129,8 @@ var amount_of_packages = 0;
 		$('#packages_info> form:odd').css('background-color', '#f9f9f9');
 		// end change color
 
+		/*labels section*/
+		//spearnet packages information
 		{% if spearnet_packages_info %}
 		{% for single_row_data in spearnet_packages_info %}
 		$('#packages_labels')
@@ -179,6 +187,7 @@ var amount_of_packages = 0;
 		{% endfor %}
 		{% endif %}
 		
+		//general clients packages information
 		{% if general_clients_packages_info %}
 		{% for single_row_data in general_clients_packages_info %}
 		$('#packages_labels')
@@ -229,7 +238,7 @@ var amount_of_packages = 0;
 				'code39', {
 					barWidth : 2,
 					barHeight : 45,
-					fontSize : 16
+					fontSize : 13
 				});
 		
 		{% endfor %}
