@@ -418,7 +418,7 @@
 				var confirm_result = confirm('Do you want to update the packages\' status?');
 
 				if (confirm_result == true) {
-					//obj length
+					//
 					var json_obj_update_data = new Object();
 					var tw_custom_entry_numbers_length = Object
 							.keys(tw_custom_entry_numbers).length;
@@ -428,7 +428,7 @@
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
 					
-					//check if information need to be updated
+					//check if there are 
 					if (tw_custom_entry_numbers_length != 0) {
 						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
 					} else {
@@ -490,7 +490,6 @@
 				}
 			}
 
-			//show reponse from ajax
 			function showMsg(return_msg) {
 				alert(return_msg.update_status);
 				$('#upload_cover').css({
