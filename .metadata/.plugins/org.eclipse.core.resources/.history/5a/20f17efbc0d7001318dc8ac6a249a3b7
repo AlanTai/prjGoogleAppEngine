@@ -15,7 +15,6 @@
 	<hr>
 </div>
 
-
 <div id="invoice_container"
 	style="position: absolute; top: 80px; text-align: center; width: 100%; z-index: 1;">
 	<div id="keyin_info" style="text-align: center; margin: 0px auto;">
@@ -544,7 +543,7 @@
 				'display' : 'none'
 			});
 			$('#id_commodity_detail').empty();
-			addNewCommodity();
+			get_reference_number();
 		} else {
 			alert('Fail to create new package information');
 			$('#upload_cover').css({

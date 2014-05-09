@@ -544,7 +544,7 @@
 				'display' : 'none'
 			});
 			$('#id_commodity_detail').empty();
-			addNewCommodity();
+			get_reference_number();
 		} else {
 			alert('Fail to create new package information');
 			$('#upload_cover').css({
