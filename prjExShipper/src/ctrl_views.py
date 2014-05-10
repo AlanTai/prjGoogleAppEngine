@@ -1344,7 +1344,7 @@ class ExshipperTWCustomEntryHandler(webapp2.RequestHandler):
                         
                         
                         tw_custom_entry_package.put()
-                        tw_custom_package = tw_custom_package + 'TW Custom Entry Package- ' + key + ' ; ' + response_result
+                        tw_custom_package = tw_custom_package + 'TW Custom Entry Package- ' + key + ';\n'
                 
                         tw_custom_entry_submit_result = tw_custom_package
                         tw_custom_entry_submit_response.update({'result':tw_custom_entry_submit_result})
