@@ -17,7 +17,8 @@ from app_dict import Key_Value
 from models import Size, SUDATrackingNumber_REGULAR, SpearnetPackagesInfo, TWCustomEntryTrackingNumber, \
     ClientsInfo, GeneralClientsPackagesInfo, SUDATrackingNumber_FORMAL, \
     TWCustomEntryInfo, EmployeeInfo, EmailVerification, SpearnetPackagesInfoLog, \
-    GeneralClientsPackagesInfoLog, PackageStatusNotification_Email
+    GeneralClientsPackagesInfoLog, PackageStatusNotification_Email,\
+    TWCustomEntryInfoLog
 from general_handlers.users_info_handler import Users_Info_Handler
 from general_handlers.emails_handler import Email_Handler
 from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
@@ -1807,6 +1808,29 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 
                 new_package_info_log.put()
                 package_info_entity.key.delete()
+                
+        tw_cusotm_entry_packages_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'delivered')
+        if(tw_cusotm_entry_packages_info.count() > 0):
+            for tw_custom_entry_package_info in tw_cusotm_entry_packages_info:
+                new_package_info_log = TWCustomEntryInfoLog(id=tw_custom_entry_package_info.barcode_number)
+                new_package_info_log.barcode_number = tw_custom_entry_package_info.barcode_number
+                new_package_info_log.mawb = tw_custom_entry_package_info.mawb
+                new_package_info_log.sender = tw_custom_entry_package_info.sender
+                new_package_info_log.receiver = tw_custom_entry_package_info.receiver
+                new_package_info_log.size = tw_custom_entry_package_info.size
+                new_package_info_log.weight_kg = tw_custom_entry_package_info.weight_kg
+                new_package_info_log.ctn = tw_custom_entry_package_info.ctn
+                new_package_info_log.note = tw_custom_entry_package_info.note
+                new_package_info_log.flight_number = tw_custom_entry_package_info.flight_number
+                new_package_info_log.flight_date = tw_custom_entry_package_info.flight_date
+                new_package_info_log.package_status = tw_custom_entry_package_info.package_status
+                new_package_info_log.access_info = tw_custom_entry_package_info.access_info
+                new_package_info_log.original_create_date_time = tw_custom_entry_package_info.create_date_time
+                new_package_info_log.original_update_date_time = tw_custom_entry_package_info.update_date_time
+                
+                new_package_info_log.put()
+                tw_custom_entry_package_info.key.delete()
+                
         
 class ExShipperTrackingNumbersDeletion(webapp2.RequestHandler):
     def get(self):
