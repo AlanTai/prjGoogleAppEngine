@@ -1661,7 +1661,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
         
-#general clients packages tracking handler
+        
 class ExShipperGeneralClientsPackageTrackingHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'package_status':'NA'}
