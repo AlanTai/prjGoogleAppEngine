@@ -4,6 +4,11 @@ cron:
   schedule: every sunday 01:00
   timezone: US/Pacific
 
+- description: email notification deletion three times a month
+  url: /exshipper_delete_tracking_numbers_handler
+  schedule: every saturday 01:00
+  timezone: US/Pacific
+
 - description: tracking numbers deletion three times a month
   url: /exshipper_delete_tracking_numbers_handler
   schedule: 1,10,19 of month 01:00

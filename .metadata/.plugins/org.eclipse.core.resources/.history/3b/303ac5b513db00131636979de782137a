@@ -1847,13 +1847,7 @@ class ExShipperTrackingNumbersDeletion(webapp2.RequestHandler):
         if(tracking_numbers != None):
             for tracking_number_entity in tracking_numbers:
                 tracking_number_entity.key.delete()
-                
-class ExshipperEmailNotificationDeletion(webapp2.RequestHandler):
-    def get(self):
-        email_notifications = PackageStatusNotification_Email.query(PackageStatusNotification_Email.package_status == 'delivered')
-        if(email_notifications != None):
-            for email_notification_entity in email_notifications:
-                email_notification_entity.key.delete()
+        
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
@@ -1888,5 +1882,4 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),
                                ('/exshipper_migrate_packages_information_handler', ExShipperPackagesInfoLogMigrationHandler),
-                               ('/exshipper_delete_tracking_numbers_handler', ExShipperTrackingNumbersDeletion),
-                               ('/exshipper_delete_email_notification_handler', ExshipperEmailNotificationDeletion)], debug=True)
+                               ('/exshipper_delete_tracking_numbers_handler', ExShipperTrackingNumbersDeletion)], debug=True)

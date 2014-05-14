@@ -1888,5 +1888,4 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/img', GetImage),
                                ('/get_ref_number', GetReferenceNumber),
                                ('/exshipper_migrate_packages_information_handler', ExShipperPackagesInfoLogMigrationHandler),
-                               ('/exshipper_delete_tracking_numbers_handler', ExShipperTrackingNumbersDeletion),
-                               ('/exshipper_delete_email_notification_handler', ExshipperEmailNotificationDeletion)], debug=True)
+                               ('/exshipper_delete_tracking_numbers_handler', ExShipperTrackingNumbersDeletion)], debug=True)
