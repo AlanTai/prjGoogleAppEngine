@@ -1612,9 +1612,32 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             notification_email_entity.put()
                             
                             #email customer the notification of package status
-                            email_content = 'Dear Customer, ' + notification_email_entity.receiver_name + ', your package- ' + notification_email_entity.tracking_number + ' is ' + Key_Value().package_status_dict[json_obj_package_status[key]]
-                            mail.send_mail(Key_Value().host_email, notification_email_entity.email , 'Notification of Package Status Update', email_content)
-                          
+                            # html format test
+                            email_package_status_notification = mail.EmailMessage(sender = ' ExShipper <winever.tw@gmail.com>', subject = 'HTML Format Test')
+                            email_package_status_notification.to = 'Customer <' + notification_email_entity.email + '>'
+                            
+                            email_package_status_notification.html = ''' <html><body>
+                            Dear %s,
+                            <br/>
+                            We really appreciate you choose our logistics service and we're always here to provide you the best logistics solution and service.
+                            <br/>
+                            <div>
+                            Package SUDA Tracking Number- %s ; Package status- your package is at %s
+                            </div>
+                            <br/>
+                            <br/>
+                            <hr>
+                            <p style="font-size: 20px; font-weight:bold;">Contact Information</p>
+                            <p>Phone Number: 1-650-307-3834</p>
+                            <p>Email: exshipper@gmail.com</p>
+                            <p>Address: 90 S Spruce Ave. South San Francisco, CA 94080</p>
+                            <img style="height:40px;" alt="exshipper_icon" src="https://winever-test.appspot.com/img/exshipper.png">
+                            </body></html>
+                            ''' % (notification_email_entity.receiver_name, notification_email_entity.tracking_number, Key_Value().package_status_dict[json_obj_package_status[key]])
+                            
+                            email_package_status_notification.send()
+                            
+                            
                 if(json_obj_clients_signature != 'NA'):
                     for key in json_obj_clients_signature:
                         package_entity = GeneralClientsPackagesInfo.get_by_id(key)
