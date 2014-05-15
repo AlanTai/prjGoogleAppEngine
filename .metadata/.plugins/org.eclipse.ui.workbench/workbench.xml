@@ -56,11 +56,11 @@
 </editor>
 <editor id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views (prjExShipper.src)" path="D:/prjGoogleAppEngine/prjExShipper/src/ctrl_views.py" title="ctrl_views (prjExShipper.src)" tooltip="prjExShipper/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjExShipper/src/ctrl_views.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="102416" selectionTopPixel="24199"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="101773" selectionTopPixel="24210"/>
 </editor>
 <editor activePart="true" focus="true" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views (prjAppTest.src)" path="D:/prjGoogleAppEngine/prjAppTest/src/ctrl_views.py" title="ctrl_views (prjAppTest.src)" tooltip="prjAppTest/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjAppTest/src/ctrl_views.py"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="102417" selectionTopPixel="24120"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="101774" selectionTopPixel="24030"/>
 </editor>
 </editors>
 <views>
@@ -93,6 +93,7 @@
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/images"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src"/>
@@ -319,13 +320,8 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjExShipper/src/ctrl_views.py"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_index.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjExShipper/src/ctrl_views.py"/>
 </editors>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="114922" y="0"/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="2">
-<position info="not_deleted" x="4209" y="14"/>
-</item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
 <position info="not_deleted" x="116340" y="0"/>
 </item>
@@ -467,8 +463,14 @@
 <item historyLabel="ctrl_views (prjExShipper.src)" index="10">
 <position info="not_deleted" x="102416" y="0"/>
 </item>
-<item active="true" historyLabel="ctrl_views (prjAppTest.src)" index="8">
+<item historyLabel="ctrl_views (prjAppTest.src)" index="8">
 <position info="not_deleted" x="101322" y="1822"/>
+</item>
+<item historyLabel="ctrl_views (prjExShipper.src)" index="12">
+<position info="not_deleted" x="101773" y="0"/>
+</item>
+<item active="true" historyLabel="ctrl_views (prjAppTest.src)" index="8">
+<position info="not_deleted" x="101774" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -476,12 +478,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="topLeft"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="bottom"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>

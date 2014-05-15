@@ -1612,7 +1612,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             notification_email_entity.put()
                             
                             #email customer the notification of package status
-                            #html format test
+                            # html format test
                             email_package_status_notification = mail.EmailMessage(sender = ' ExShipper <winever.tw@gmail.com>', subject = 'HTML Format Test')
                             email_package_status_notification.to = 'Customer <' + notification_email_entity.email + '>'
                             
