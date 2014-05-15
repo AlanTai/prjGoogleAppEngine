@@ -1616,6 +1616,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             email_package_status_notification = mail.EmailMessage(sender = ' ExShipper <rainman.tai@gmail.com>', subject = 'HTML Format Test')
                             email_package_status_notification.to = 'Customer <' + notification_email_entity.email + '>'
                             
+                            #html content
                             email_package_status_notification.html = ''' <html><body>
                             Dear %s,
                             <br/>

@@ -1613,10 +1613,9 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             
                             #email customer the notification of package status
                             # html format test
-                            email_package_status_notification = mail.EmailMessage(sender = ' ExShipper <winever.tw@gmail.com>', subject = 'HTML Format Test')
+                            email_package_status_notification = mail.EmailMessage(sender = ' ExShipper <rainman.tai@gmail.com>', subject = 'HTML Format Test')
                             email_package_status_notification.to = 'Customer <' + notification_email_entity.email + '>'
                             
-                            #html content
                             email_package_status_notification.html = ''' <html><body>
                             Dear %s,
                             <br/>
@@ -1637,8 +1636,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             ''' % (notification_email_entity.receiver_name, notification_email_entity.tracking_number, Key_Value().package_status_dict[json_obj_package_status[key]])
                             
                             email_package_status_notification.send()
-                            
-                            
+
                 if(json_obj_clients_signature != 'NA'):
                     for key in json_obj_clients_signature:
                         package_entity = GeneralClientsPackagesInfo.get_by_id(key)
@@ -1685,7 +1683,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
         
-#general clients packages tracking handler
+        
 class ExShipperGeneralClientsPackageTrackingHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'package_status':'NA'}
@@ -1833,7 +1831,6 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 new_package_info_log.put()
                 package_info_entity.key.delete()
                 
-        #tw custom entry packages info migration
         tw_cusotm_entry_packages_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'delivered')
         if(tw_cusotm_entry_packages_info.count() > 0):
             for tw_custom_entry_package_info in tw_cusotm_entry_packages_info:
@@ -1855,8 +1852,8 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 
                 new_package_info_log.put()
                 tw_custom_entry_package_info.key.delete()
+                
         
-#tracking number deletion
 class ExShipperTrackingNumbersDeletion(webapp2.RequestHandler):
     def get(self):
         tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'TRUE')
@@ -1878,6 +1875,7 @@ class ExshipperEmailNotificationDeletion(webapp2.RequestHandler):
         if(email_notifications != None):
             for email_notification_entity in email_notifications:
                 email_notification_entity.key.delete()
+        
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
