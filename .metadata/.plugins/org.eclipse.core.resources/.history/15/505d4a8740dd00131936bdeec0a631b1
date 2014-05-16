@@ -14,7 +14,7 @@ class Key_Value():
         self.unknown_user = 'unknown_user'
         
         #package status
-        self.package_status_dict = {'client':' at client\'s place.', 'pickup':' picked up by ExShipper.', 'exshipper':' at ExShipper.', 'apex':' at Apex', 'sfo_airport':' at SFO Airport.', 'taiwan_taoyuan_airport':' at Taiwan Taoyuan Airport.', 'tw_custom_entry':' at the custom entry company.', 'tw_logistics':' at the local logistics company (SUDA).', 'delivered':' delivered.'}
+        self.package_status_dict = {'client':' at client\'s place.', 'pickup':' picked up by ExShipper.', 'exshipper':' at ExShipper.', 'apex':' at Apex', 'sfo_airport':' at SFO Airport.', 'taiwan_taoyuan_airport':' at Taiwan Taoyuan Airport.', 'tw_custom_entry':' at the custom entry company.', 'tw_logistics':' at the local logistics company (SUDA).'}
         
         #email
         self.email_delivery_status_success = 'success'
