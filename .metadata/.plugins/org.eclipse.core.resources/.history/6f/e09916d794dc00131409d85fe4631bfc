@@ -813,7 +813,7 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                     else:
                         is_hawb_blank = False
                     query_result = SpearnetPackagesInfo.get_by_id(package['hawb'])
-                    if(query_result != None):
+                    if(query_result):
                         duplication = True;
                         ajax_data['spearnet_packages_info_upload_status'] = 'You have a duplicated tracking number and please replace it with a new tracking number- %s.' % query_result.hawb
                         ajax_data['print_action'] = 'off'
