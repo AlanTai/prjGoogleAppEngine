@@ -224,15 +224,15 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_pre_alert_page
             html_page_title = my_dict.exshipper_pre_alert_page_title
             
-            pre_alert_package_entity = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
+            pre_alert_entity = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
                                                               TWCustomEntryInfo.mawb != None,
                                                               TWCustomEntryInfo.flight_date != None)).get()
-            pre_alert_packages_list = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
+            pre_alert = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
                                                               TWCustomEntryInfo.mawb != None,
                                                               TWCustomEntryInfo.flight_date != None))
             
             # check if the packages which will be shipped have different mawb, flight number, or flight date 
-            if(pre_alert_package_entity != None and pre_alert_packages_list != None):
+            if(pre_alert_entity != None and pre_alert != None):
                 # different flight numbers, flight dates, or mawb
                 mawb_response = 'Different MAWBs: '
                 flight_number_response = 'Different Flight Numbers: '
@@ -240,14 +240,14 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 has_inconsistent_data = 'no'
                 
                 # build the array of package information
-                for package_info in pre_alert_packages_list:
-                    if(pre_alert_package_entity.mawb != package_info.mawb):
+                for package_info in pre_alert:
+                    if(pre_alert_entity.mawb != package_info.mawb):
                         mawb_response = mawb_response + package_info.mawb
                         has_inconsistent_data = 'yes'
-                    if(pre_alert_package_entity.flight_number != package_info.flight_number):
+                    if(pre_alert_entity.flight_number != package_info.flight_number):
                         flight_number_response = flight_number_response + package_info.flight_number
                         has_inconsistent_data = 'yes'
-                    if(pre_alert_package_entity.flight_date != package_info.flight_date):
+                    if(pre_alert_entity.flight_date != package_info.flight_date):
                         flight_date_response = flight_date_response + package_info.flight_date
                         has_inconsistent_data = 'yes'
                         
@@ -255,14 +255,14 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 template_values.update({'has_inconsistent_data':has_inconsistent_data, 'inconsistent_data_response':inconsistent_data_response})
                 # end of different flight numbers, flight dates, or mawb
                 
-                flight_number = pre_alert_package_entity.flight_number
-                flight_date = pre_alert_package_entity.flight_date
-                mawb = pre_alert_package_entity.mawb
-                sender = pre_alert_package_entity.sender
-                receiver = pre_alert_package_entity.receiver
+                flight_number = pre_alert_entity.flight_number
+                flight_date = pre_alert_entity.flight_date
+                mawb = pre_alert_entity.mawb
+                sender = pre_alert_entity.sender
+                receiver = pre_alert_entity.receiver
                 template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb, 'sender':sender, 'receiver':receiver})
                 
-            template_values.update({'pre_alert_packages_list':pre_alert_packages_list})
+            template_values.update({'pre_alert':pre_alert})
             
         # page of rendering labels
         elif(dispatch_token == 'exshipper_packages_labels' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):

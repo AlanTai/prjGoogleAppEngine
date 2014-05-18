@@ -227,12 +227,12 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             pre_alert_package_entity = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
                                                               TWCustomEntryInfo.mawb != None,
                                                               TWCustomEntryInfo.flight_date != None)).get()
-            pre_alert_packages_list = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
+            pre_alert = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
                                                               TWCustomEntryInfo.mawb != None,
                                                               TWCustomEntryInfo.flight_date != None))
             
             # check if the packages which will be shipped have different mawb, flight number, or flight date 
-            if(pre_alert_package_entity != None and pre_alert_packages_list != None):
+            if(pre_alert_package_entity != None and pre_alert != None):
                 # different flight numbers, flight dates, or mawb
                 mawb_response = 'Different MAWBs: '
                 flight_number_response = 'Different Flight Numbers: '
@@ -240,7 +240,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 has_inconsistent_data = 'no'
                 
                 # build the array of package information
-                for package_info in pre_alert_packages_list:
+                for package_info in pre_alert:
                     if(pre_alert_package_entity.mawb != package_info.mawb):
                         mawb_response = mawb_response + package_info.mawb
                         has_inconsistent_data = 'yes'
@@ -262,7 +262,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                 receiver = pre_alert_package_entity.receiver
                 template_values.update({'flight_number':flight_number, 'flight_date':flight_date, 'mawb':mawb, 'sender':sender, 'receiver':receiver})
                 
-            template_values.update({'pre_alert_packages_list':pre_alert_packages_list})
+            template_values.update({'pre_alert':pre_alert})
             
         # page of rendering labels
         elif(dispatch_token == 'exshipper_packages_labels' and exshipper_account == 'alantai' and exshipper_password == '1014lct'):
@@ -817,7 +817,7 @@ class ExShipperSpearnetDataExchangeHandler(webapp2.RequestHandler):
                     else:
                         is_hawb_blank = False
                     query_result = SpearnetPackagesInfo.get_by_id(package['hawb'])
-                    if(query_result != None):
+                    if(query_result):
                         duplication = True;
                         ajax_data['spearnet_packages_info_upload_status'] = 'You have a duplicated tracking number and please replace it with a new tracking number- %s.' % query_result.hawb
                         ajax_data['print_action'] = 'off'
@@ -1616,8 +1616,8 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             notification_email_entity.put()
                             
                             #email customer the notification of package status
-                            #html format test
-                            email_package_status_notification = mail.EmailMessage(sender = ' ExShipper <winever.tw@gmail.com>', subject = 'Packages Status Notification')
+                            # html format test
+                            email_package_status_notification = mail.EmailMessage(sender = ' ExShipper <rainman.tai@gmail.com>', subject = 'HTML Format Test')
                             email_package_status_notification.to = 'Customer <' + notification_email_entity.email + '>'
                             
                             #html content
@@ -1641,8 +1641,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
                             ''' % (notification_email_entity.receiver_name, notification_email_entity.tracking_number, Key_Value().package_status_dict[json_obj_package_status[key]])
                             
                             email_package_status_notification.send()
-                            
-                            
+
                 if(json_obj_clients_signature != 'NA'):
                     for key in json_obj_clients_signature:
                         package_entity = GeneralClientsPackagesInfo.get_by_id(key)
@@ -1689,7 +1688,7 @@ class ExShipperGeneralClientsPackageInfoUpdateHandler(webapp2.RequestHandler):
         self.response.out.headers['Content-Type'] = 'text/json'
         self.response.out.write(json.dumps(ajax_data))
         
-#general clients packages tracking handler
+        
 class ExShipperGeneralClientsPackageTrackingHandler(webapp2.RequestHandler):
     def post(self):
         ajax_data = {'package_status':'NA'}
@@ -1837,7 +1836,6 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 new_package_info_log.put()
                 package_info_entity.key.delete()
                 
-        #tw custom entry packages info migration
         tw_cusotm_entry_packages_info = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'delivered')
         if(tw_cusotm_entry_packages_info.count() > 0):
             for tw_custom_entry_package_info in tw_cusotm_entry_packages_info:
@@ -1859,8 +1857,8 @@ class ExShipperPackagesInfoLogMigrationHandler(webapp2.RequestHandler):
                 
                 new_package_info_log.put()
                 tw_custom_entry_package_info.key.delete()
+                
         
-#tracking number deletion
 class ExShipperTrackingNumbersDeletion(webapp2.RequestHandler):
     def get(self):
         tracking_numbers = SUDATrackingNumber_REGULAR.query(SUDATrackingNumber_REGULAR.used_mark == 'TRUE')
@@ -1882,6 +1880,7 @@ class ExshipperEmailNotificationDeletion(webapp2.RequestHandler):
         if(email_notifications != None):
             for email_notification_entity in email_notifications:
                 email_notification_entity.key.delete()
+        
 # set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),

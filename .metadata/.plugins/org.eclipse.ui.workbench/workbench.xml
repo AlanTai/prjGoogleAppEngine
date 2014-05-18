@@ -56,11 +56,11 @@
 </editor>
 <editor activePart="true" focus="true" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" partName="ctrl_views" path="D:/prjGoogleAppEngine/prjExShipper/src/ctrl_views.py" title="ctrl_views" tooltip="prjExShipper/src/ctrl_views.py" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjExShipper/src/ctrl_views.py"/>
-<editorState selectionHorizontalPixel="26" selectionLength="0" selectionOffset="51673" selectionTopPixel="12499"/>
+<editorState selectionHorizontalPixel="239" selectionLength="0" selectionOffset="101596" selectionTopPixel="24120"/>
 </editor>
-<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" partName="exshipper_spearnet_customer_package_info_log.html" path="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" title="exshipper_spearnet_customer_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="7310"/>
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_package_info_log.html" partName="exshipper_general_clients_package_info_log.html" path="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html" title="exshipper_general_clients_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="6189"/>
 </editor>
 </editors>
 <views>
@@ -91,21 +91,25 @@
 <viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0">
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/images"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/css"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/css/exshipper"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/javascript"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/javascript/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/app_dict.py"/>
+<expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static"/>
 <expanded IMemento.internal.id="D:/prjGoogleAppEngine/prjWINEVER/src/static/templates"/>
-<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+<selected IMemento.internal.id="D:/prjGoogleAppEngine/prjAppTest/src/app_dict.py"/>
 </viewState>
 </view>
 <view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
@@ -321,31 +325,10 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjAppTest/src/static/templates/exshipper/exshipper_spearnet_create_invoice.html"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjExShipper/src/ctrl_views.py"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjExShipper/src/app_dict.py"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" path="/prjAppTest/src/app_dict.py"/>
 </editors>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="116340" y="0"/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="2">
-<position info="not_deleted" x="4326" y="8"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="116340" y="0"/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="2">
-<position info="not_deleted" x="4422" y="9"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="116322" y="0"/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="2">
-<position info="not_deleted" x="4460" y="3"/>
-</item>
-<item historyLabel="ctrl_views (prjAppTest.src)" index="0">
-<position info="not_deleted" x="116322" y="0"/>
-</item>
-<item historyLabel="models (prjAppTest.src)" index="2">
-<position info="not_deleted" x="4654" y="11"/>
-</item>
 <item historyLabel="ctrl_views (prjAppTest.src)" index="0">
 <position info="not_deleted" x="115882" y="0"/>
 </item>
@@ -469,8 +452,32 @@
 <item historyLabel="exshipper_spearnet_customer_package_info_log.html" index="15">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item active="true" historyLabel="ctrl_views" index="14">
+<item historyLabel="ctrl_views" index="14">
 <position info="not_deleted" x="51673" y="0"/>
+</item>
+<item historyLabel="exshipper_general_clients_package_info_log.html" index="16">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="14">
+<position info="not_deleted" x="97486" y="47"/>
+</item>
+<item historyLabel="exshipper_general_clients_package_info_log.html" index="16">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ctrl_views" index="14">
+<position info="not_deleted" x="97486" y="47"/>
+</item>
+<item historyLabel="app_dict (prjExShipper.src)" index="17">
+<position info="not_deleted" x="664" y="27"/>
+</item>
+<item historyLabel="app_dict" index="18">
+<position info="not_deleted" x="702" y="0"/>
+</item>
+<item historyLabel="app_dict (prjExShipper.src)" index="17">
+<position info="not_deleted" x="664" y="27"/>
+</item>
+<item active="true" historyLabel="ctrl_views" index="14">
+<position info="not_deleted" x="97486" y="47"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -491,6 +498,15 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjAppTest/src/app_dict.py">
+<persistable path="/prjAppTest/src/app_dict.py"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjExShipper/src/app_dict.py">
+<persistable path="/prjExShipper/src/app_dict.py"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_general_clients_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html">
+<persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_general_clients_package_info_log.html"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="exshipper_spearnet_customer_package_info_log.html" tooltip="prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html">
 <persistable path="/prjExShipper/src/static/templates/exshipper/exshipper_spearnet_customer_package_info_log.html"/>
 </file>
@@ -526,15 +542,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="models.py" tooltip="prjExShipper/src/models.py">
 <persistable path="/prjExShipper/src/models.py"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="ctrl_views.py" tooltip="prjExShipper/src/ctrl_views.py">
-<persistable path="/prjExShipper/src/ctrl_views.py"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="app_dict.py" tooltip="prjExShipper/src/app_dict.py">
-<persistable path="/prjExShipper/src/app_dict.py"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.python.pydev.editor.PythonEditor" name="models.py" tooltip="prjAppTest/src/models.py">
-<persistable path="/prjAppTest/src/models.py"/>
 </file>
 </mruList>
 </workbench>
