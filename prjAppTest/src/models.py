@@ -154,7 +154,7 @@ class TWCustomEntryInfo(ndb.Model):
     update_date_time = ndb.DateTimeProperty(auto_now = True)
     
 class TWCustomEntryInfoLog(TWCustomEntryInfo):
-    original_create_date_time = ndb.DateTimeProperty()
+    original_create_date_time = ndb.DateProperty()
     original_update_date_time = ndb.DateTimeProperty()
     
 class PackageStatusNotification(ndb.Model):

@@ -119,6 +119,9 @@
 		<form style="padding: 5px 5px;">
 			<span>SUDA Tracking Number: <input type="text"
 				value="{{ single_row_data.hawb }}" disabled>
+			</span> <span>Shipper/Company: <input type="text"
+				value="{{ single_row_data.shipper_person }} / {{ single_row_data.shipper_company }}"
+				disabled>
 			</span> <span class="general_clients_tw_custom_entry_number">TW
 				Custom Entry Barcode Number: <input type="text"
 				id="{{ single_row_data.hawb }}"
@@ -397,20 +400,24 @@
 				var package_status = $('#package_status_fields_main_control')
 						.val();
 
-				$('.package_status').each(function() {
-					var key = $(this).attr('id');
-					var tw_custom_entry_tracking_number = $(
-							'.general_clients_tw_custom_entry_number > #'
-									+ key).val();
-					var current_status = $(this).val();
+				$('.package_status')
+						.each(
+								function() {
+									var key = $(this).attr('id');
+									var tw_custom_entry_tracking_number = $(
+											'.general_clients_tw_custom_entry_number > #'
+													+ key).val();
+									var current_status = $(this).val();
 
-					//filtering the packages without tw custom entry number 
-					if ( (package_status === 'client' || package_status === 'pickup' || package_status === 'exshipper') || !((current_status === 'client'
-							|| current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')) {
-						$(this).val(package_status);
-						packages_status[key] = $(this).val();
-					}
-				});
+									//filtering the packages without tw custom entry number 
+									if ((package_status === 'client'
+											|| package_status === 'pickup' || package_status === 'exshipper')
+											|| !((current_status === 'client'
+													|| current_status === 'pickup' || current_status === 'exshipper') && tw_custom_entry_tracking_number === 'NA')) {
+										$(this).val(package_status);
+										packages_status[key] = $(this).val();
+									}
+								});
 			}
 
 			//update information
@@ -427,7 +434,7 @@
 					var clients_signature_length = Object
 							.keys(clients_signature).length;
 					var notes_length = Object.keys(notes).length;
-					
+
 					//check if information need to be updated
 					if (tw_custom_entry_numbers_length != 0) {
 						json_obj_update_data['tw_custom_entry_numbers'] = tw_custom_entry_numbers;
