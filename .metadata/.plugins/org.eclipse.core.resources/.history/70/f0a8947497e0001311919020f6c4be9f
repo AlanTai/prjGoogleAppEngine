@@ -45,6 +45,7 @@
 				<option value="tw_custom_entry">TW Custom Entry</option>
 				<option value="tw_logistics">TW Logistics</option>
 				<option value="delivered">Delivered</option>
+				<option value="NA">NA</option>
 			</select> <input type="button" value="Update Package Status Fields"
 				onclick="updatePackageStatusField()">
 		</div>
