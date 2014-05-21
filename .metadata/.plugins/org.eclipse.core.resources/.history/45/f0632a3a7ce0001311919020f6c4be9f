@@ -38,7 +38,7 @@
 	<p id="id_total_weight"></p>
 	<br>
 	<div style="margin: 10px auto; text-align: center;">
-		{% if pre_alert_packages_list %}
+		{% if pre_alert %}
 		<script type="text/javascript">
 			var total_weight = 0;
 			var weight = 0;
@@ -53,7 +53,7 @@
 				<td style="border: 1px #333 solid; padding: 5px; margin: 5px 5px;">Note</td>
 			</tr>
 		</table>
-		{% for single_row_data in pre_alert_packages_list %}
+		{% for single_row_data in pre_alert %}
 		<script type="text/javascript">
 			if($.isNumeric('{{ single_row_data.weight_kg }}')){
 				this.weight = Number('{{ single_row_data.weight_kg }}');
@@ -81,7 +81,7 @@
 		
 		
 		<script type="text/javascript">
-		var has_inconsistent_data = '{{has_inconsistent_data}}';
+		var has_inconsistent_data = {{has_inconsistent_data}};
 		if(has_inconsistent_data === 'yes'){
 			alert(has_inconsistent_data);
 			$('#inconsistent_data').val(has_inconsistent_data);

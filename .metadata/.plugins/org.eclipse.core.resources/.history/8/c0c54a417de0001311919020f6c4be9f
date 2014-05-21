@@ -225,8 +225,12 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_pre_alert_page
             html_page_title = my_dict.exshipper_pre_alert_page_title
             
-            pre_alert_package_entity = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
-            pre_alert_packages_list = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+            pre_alert_package_entity = TWCustomEntryInfo.query(ndb.AND(TWCustomEntryInfo.package_status == 'exshipper',
+                                                              TWCustomEntryInfo.mawb != None,
+                                                              TWCustomEntryInfo.flight_date != None)).get()
+            pre_alert_packages_list = TWCustomEntryInfo.query(ndb.AND(TWCustomEntryInfo.package_status == 'exshipper',
+                                                              TWCustomEntryInfo.mawb != None,
+                                                              TWCustomEntryInfo.flight_date != None))
             
             # check if the packages which will be shipped have different mawb, flight number, or flight date 
             if(pre_alert_package_entity != None and pre_alert_packages_list != None):

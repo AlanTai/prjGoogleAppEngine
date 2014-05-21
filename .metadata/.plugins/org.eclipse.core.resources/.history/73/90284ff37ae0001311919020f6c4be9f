@@ -198,7 +198,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_tw_custom_entry_packages_info_log_page
             html_page_title = my_dict.exshipper_tw_custom_entry_packages_info_log_page_title
             
-            tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'NA',
+            tw_custom_entry_packages_info_log = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'na',
                                                                                TWCustomEntryInfo.package_status == 'exshipper'))
             template_values.update({'tw_custom_entry_packages_info_log':tw_custom_entry_packages_info_log})
             
@@ -225,8 +225,12 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             html_page = my_dict.exshipper_pre_alert_page
             html_page_title = my_dict.exshipper_pre_alert_page_title
             
-            pre_alert_package_entity = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper').get()
-            pre_alert_packages_list = TWCustomEntryInfo.query(TWCustomEntryInfo.package_status == 'exshipper')
+            pre_alert_package_entity = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
+                                                              TWCustomEntryInfo.mawb != None,
+                                                              TWCustomEntryInfo.flight_date != None)).get()
+            pre_alert_packages_list = TWCustomEntryInfo.query(ndb.OR(TWCustomEntryInfo.package_status == 'exshipper',
+                                                              TWCustomEntryInfo.mawb != None,
+                                                              TWCustomEntryInfo.flight_date != None))
             
             # check if the packages which will be shipped have different mawb, flight number, or flight date 
             if(pre_alert_package_entity != None and pre_alert_packages_list != None):
@@ -245,7 +249,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
                         flight_number_response = flight_number_response + package_info.flight_number
                         has_inconsistent_data = 'yes'
                     if(pre_alert_package_entity.flight_date != package_info.flight_date):
-                        flight_date_response = flight_date_response + package_info.flight_date.strftime("%Y-%m-%d")
+                        flight_date_response = flight_date_response + package_info.flight_date
                         has_inconsistent_data = 'yes'
                         
                 inconsistent_data_response = mawb_response + '\n' + flight_number_response + '\n' + flight_date_response
