@@ -150,7 +150,7 @@ class ExShipperLoginHandler(webapp2.RequestHandler):
             
 
             # query package information (packages' status == spearnet or exshipper)
-            spearnet_customer_package_info_log = SpearnetPackagesInfo.query(SpearnetPackagesInfo.package_status == 'delivered')
+            spearnet_customer_package_info_log = SpearnetPackagesInfo.query(ndb.OR(SpearnetPackagesInfo.package_status == 'delivered'))
             # pass clients informations
             clients_info = ClientsInfo().query()
             template_values.update({'spearnet_customer_package_info_log': spearnet_customer_package_info_log, 'clients_info':clients_info, 'dispatch_token':dispatch_token})
