@@ -3,25 +3,22 @@
 Created on Oct 1, 2013
 
 @author: Alan Tai
-
-@Description:
-Dictionary of key-value pairs
 '''
 class Key_Value():
     def __init__(self):
+        
         #host info
-        self.host_email = 'winever.tw@gmail.com'
+        self.host_email = 'rainman.tai@gmail.com'
         
         #login information
         self.unknown_user = 'unknown_user'
         
-        #package statuss dict
+        #package status
         self.package_status_dict = {'client':' at client\'s place.', 'pickup':' picked up by ExShipper.', 'exshipper':' at ExShipper.', 'apex':' at Apex', 'sfo_airport':' at SFO Airport.', 'taiwan_taoyuan_airport':' at Taiwan Taoyuan Airport.', 'tw_custom_entry':' at the custom entry company.', 'tw_logistics':' at the local logistics company (SUDA).', 'delivered':' delivered.'}
         
-        #email handler
+        #email
         self.email_delivery_status_success = 'success'
         self.email_delivery_status_fail = 'fail'
-        
         #exshipper specific terms
         self.exshipper_index_page = '/exshipper/exshipper_index.html'
         self.exshipper_index_page_title = 'ExShipper Index Page'
@@ -37,6 +34,8 @@ class Key_Value():
         
         self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info.html'
         self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
+        #end
+        
         
         #path of handling invoice information
         self.exshipper_invoice_creating_page = '/exshipper/exshipper_create_invoice.html'

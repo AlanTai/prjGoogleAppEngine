@@ -4,7 +4,7 @@ Created on Oct 1, 2013
 
 @author: Alan Tai
 
-@Description:
+Description:
 Dictionary of key-value pairs
 '''
 class Key_Value():
@@ -37,6 +37,8 @@ class Key_Value():
         
         self.exshipper_create_client_info_handler = '/exshipper/exshipper_create_client_info.html'
         self.exshipper_create_client_info_handler_title = 'ExShipper Create Client Information Handler'
+        #end
+        
         
         #path of handling invoice information
         self.exshipper_invoice_creating_page = '/exshipper/exshipper_create_invoice.html'

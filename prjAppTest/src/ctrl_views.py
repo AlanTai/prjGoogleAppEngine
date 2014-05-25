@@ -24,6 +24,7 @@ from general_handlers.emails_handler import Email_Handler
 from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
 # from app_handlers.cron_tasks_handler import Cron_Tasks_Handler
 
+#append templates directory
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))  # append templates' path
 
 # exshipper main index handler
