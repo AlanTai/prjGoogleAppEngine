@@ -3,9 +3,6 @@
 Created on Oct 1, 2013
 
 @author: Alan Tai
-
-@Description:
-ExShipper project is to integrate Google Cloud Technology to improve global logistics services
 '''
 __author__ = 'Alan Tai'
 from google.appengine.ext.key_range import ndb
@@ -27,7 +24,7 @@ from general_handlers.emails_handler import Email_Handler
 from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
 # from app_handlers.cron_tasks_handler import Cron_Tasks_Handler
 
-#append templates directory
+# append templates directory
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))  # append templates' path
 
 # exshipper main index handler
