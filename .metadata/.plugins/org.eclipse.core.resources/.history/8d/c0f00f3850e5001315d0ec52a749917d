@@ -27,7 +27,7 @@ from general_handlers.emails_handler import Email_Handler
 from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
 # from app_handlers.cron_tasks_handler import Cron_Tasks_Handler
 
-# append templates directory
+#append templates directory
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))  # append templates' path
 
 # exshipper main index handler
@@ -1876,16 +1876,15 @@ class ExShipperTrackingNumbersDeletion(webapp2.RequestHandler):
         if(tracking_numbers != None):
             for tracking_number_entity in tracking_numbers:
                 tracking_number_entity.key.delete()
-              
-#delete email notification once the package is delivered  
+                
+#delete email notification once the package is delivered
 class ExshipperEmailNotificationDeletion(webapp2.RequestHandler):
     def get(self):
         email_notifications = PackageStatusNotification_Email.query(PackageStatusNotification_Email.package_status == 'delivered')
         if(email_notifications != None):
             for email_notification_entity in email_notifications:
                 email_notification_entity.key.delete()
-
-#url dispatcher
+# set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),

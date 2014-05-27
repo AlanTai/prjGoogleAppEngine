@@ -1884,8 +1884,7 @@ class ExshipperEmailNotificationDeletion(webapp2.RequestHandler):
         if(email_notifications != None):
             for email_notification_entity in email_notifications:
                 email_notification_entity.key.delete()
-
-#url dispatcher
+# set url
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
