@@ -65,14 +65,15 @@
 		
 		<!--  -->
 		<script type="text/javascript">
+			var obj = new Object();
+			
+
 			//parse json object and insert data based on the items of commodity
 			var commodity_json = JSON
 					.parse('{{ single_row_data.commodity_detail }}');
 			var commodity_string = new String();
 			for ( var ith in commodity_json['items']) {
 				var data = commodity_json['items'][ith];
-				var obj = new Object();
-				
 				//old format
 				/* commodity_string += " Item Name: " + data.name + " Quantity: "
 						+ data.quan + " Price: " + data.price + " ; "; */

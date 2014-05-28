@@ -65,19 +65,59 @@
 		
 		<!--  -->
 		<script type="text/javascript">
+			var obj = new Object();
+			obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
+			obj['hawb'] = '{{ single_row_data.hawb }}';
+
+			obj['ctn'] = '{{ single_row_data.ctn }}';
+			obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
+			obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
+
 			//parse json object and insert data based on the items of commodity
 			var commodity_json = JSON
 					.parse('{{ single_row_data.commodity_detail }}');
 			var commodity_string = new String();
 			for ( var ith in commodity_json['items']) {
 				var data = commodity_json['items'][ith];
+				commodity_string += " Item Name: " + data.name + " Quantity: "
+						+ data.quan + " Price: " + data.price + " ; ";
+			};
+
+			obj['commodity_detail'] = commodity_string;
+			obj['pcs'] = "{{ single_row_data.pcs }}";
+			obj['unit'] = "{{ single_row_data.unit }}";
+
+			obj['original'] = "{{ single_row_data.original }}";
+			obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
+			obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
+
+			obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
+			obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
+
+			obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
+			obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
+			obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
+			obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
+			
+
+			obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
+			obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
+			obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
+			obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
+
+			json_array.push(obj);
+		</script>
+		{% endfor %}
+		{% endif %}
+		<!-- end spearnet cargo manifest -->
+
+		<!-- general clients cargo manifest -->
+		{% if cargo_manifest_general_clients %} <br>
+			{% for single_row_data in cargo_manifest_general_clients %}
+			
+			<!--  -->
+			<script type="text/javascript">
 				var obj = new Object();
-				
-				//old format
-				/* commodity_string += " Item Name: " + data.name + " Quantity: "
-						+ data.quan + " Price: " + data.price + " ; "; */
-						
-				//new format
 				obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
 				obj['hawb'] = '{{ single_row_data.hawb }}';
 
@@ -85,14 +125,22 @@
 				obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
 				obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
 
-				obj['commodity_detail'] = data.name;
-				//obj['pcs'] = "{{ single_row_data.pcs }}";
-				obj['pcs'] = data.quan;
-				
+				//parse json object
+				var commodity_json = JSON
+						.parse('{{ single_row_data.commodity_detail }}');
+				var commodity_string = new String();
+				for ( var ith in commodity_json['items']) {
+					var data = commodity_json['items'][ith];
+					commodity_string += " Item Name: " + data.name + " Quantity: "
+							+ data.quan + " Price: " + data.price + " ; ";
+				};
+
+				obj['commodity_detail'] = commodity_string;
+				obj['pcs'] = "{{ single_row_data.pcs }}";
 				obj['unit'] = "{{ single_row_data.unit }}";
+
 				obj['original'] = "{{ single_row_data.original }}";
-				//obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
-				obj['unit_price_fob_us_dollar'] = data.price;
+				obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 				obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
 
 				obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
@@ -108,66 +156,8 @@
 				obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
 				obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
 				obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
-				
-				//add new data into array
+
 				json_array.push(obj);
-			};
-		</script>
-		{% endfor %}
-		{% endif %}
-		<!-- end spearnet cargo manifest -->
-
-		<!-- general clients cargo manifest -->
-		{% if cargo_manifest_general_clients %} <br>
-			{% for single_row_data in cargo_manifest_general_clients %}
-			
-			<!--  -->
-			<script type="text/javascript">
-				//parse json object and insert data based on the items of commodity
-				var commodity_json = JSON
-						.parse('{{ single_row_data.commodity_detail }}');
-				var commodity_string = new String();
-				for ( var ith in commodity_json['items']) {
-					var data = commodity_json['items'][ith];
-					var obj = new Object();
-					//old format
-					/* commodity_string += " Item Name: " + data.name + " Quantity: "
-							+ data.quan + " Price: " + data.price + " ; "; */
-							
-					//new format
-					obj['tw_custom_entry_number'] = '{{ single_row_data.tw_custom_entry_number }}';
-					obj['hawb'] = '{{ single_row_data.hawb }}';
-
-					obj['ctn'] = '{{ single_row_data.ctn }}';
-					obj['weight_kg'] = '{{ single_row_data.weight_kg }}';
-					obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
-					obj['commodity_detail'] = data.name;
-					//obj['pcs'] = "{{ single_row_data.pcs }}";
-					obj['pcs'] = data.quan;
-					
-					obj['unit'] = "{{ single_row_data.unit }}";
-					obj['original'] = "{{ single_row_data.original }}";
-					//obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
-					obj['unit_price_fob_us_dollar'] = data.price;
-					obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
-
-					obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
-					obj['shipper_person'] = "{{ single_row_data.shipper_person }}";
-
-					obj['consignee_name_english'] = "{{ single_row_data.consignee_name_english }}";
-					obj['consignee_name_chinese'] = "{{ single_row_data.consignee_name_chinese }}";
-					obj['consignee_tel'] = "{{ single_row_data.consignee_tel }}";
-					obj['consignee_address_english'] = "{{ single_row_data.consignee_address_english }}";
-					
-
-					obj['company_id_or_person_id'] = "{{ single_row_data.company_id_or_personal_id }}";
-					obj['size_accumulation'] = "{{ single_row_data.size_accumulation }}";
-					obj['declaration_need_or_not'] = "{{ single_row_data.declaration_need_or_not }}";
-					obj['duty_paid_by'] = "{{ single_row_data.duty_paid_by }}";
-
-					json_array.push(obj);
-				};
-
 			</script>
 			{% endfor %}
 			{% endif %}

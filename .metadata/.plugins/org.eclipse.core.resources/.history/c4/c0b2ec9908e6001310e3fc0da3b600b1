@@ -65,14 +65,15 @@
 		
 		<!--  -->
 		<script type="text/javascript">
+			var obj = new Object();
+			
+
 			//parse json object and insert data based on the items of commodity
 			var commodity_json = JSON
 					.parse('{{ single_row_data.commodity_detail }}');
 			var commodity_string = new String();
 			for ( var ith in commodity_json['items']) {
 				var data = commodity_json['items'][ith];
-				var obj = new Object();
-				
 				//old format
 				/* commodity_string += " Item Name: " + data.name + " Quantity: "
 						+ data.quan + " Price: " + data.price + " ; "; */
@@ -86,13 +87,11 @@
 				obj['weight_lb'] = '{{ single_row_data.weight_lb }}';
 
 				obj['commodity_detail'] = data.name;
-				//obj['pcs'] = "{{ single_row_data.pcs }}";
-				obj['pcs'] = data.quan;
-				
+				obj['pcs'] = "{{ single_row_data.pcs }}";
 				obj['unit'] = "{{ single_row_data.unit }}";
+
 				obj['original'] = "{{ single_row_data.original }}";
-				//obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
-				obj['unit_price_fob_us_dollar'] = data.price;
+				obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 				obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
 
 				obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
@@ -147,8 +146,7 @@
 					
 					obj['unit'] = "{{ single_row_data.unit }}";
 					obj['original'] = "{{ single_row_data.original }}";
-					//obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
-					obj['unit_price_fob_us_dollar'] = data.price;
+					obj['unit_price_fob_us_dollar'] = "{{ single_row_data.unit_price_fob_us_dollar }}";
 					obj['deliver_to'] = "{{ single_row_data.deliver_to }}";
 
 					obj['shipper_company'] = "{{ single_row_data.shipper_company }}";
