@@ -1884,6 +1884,15 @@ class ExshipperEmailNotificationDeletion(webapp2.RequestHandler):
         if(email_notifications != None):
             for email_notification_entity in email_notifications:
                 email_notification_entity.key.delete()
+                
+                
+                
+#coding puzzle section
+class CodingPuzzleHandler(webapp2.RequestHandler):
+    def get(self):
+        template_values = {}
+        template = jinja_environment.get_template('/test/coding_puzzle.html')
+        self.response.out.write(template.render(template_values))
 
 #url dispatcher
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
@@ -1920,4 +1929,5 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/get_ref_number', GetReferenceNumber),
                                ('/exshipper_migrate_packages_information_handler', ExShipperPackagesInfoLogMigrationHandler),
                                ('/exshipper_delete_tracking_numbers_handler', ExShipperTrackingNumbersDeletion),
-                               ('/exshipper_delete_email_notification_handler', ExshipperEmailNotificationDeletion)], debug=True)
+                               ('/exshipper_delete_email_notification_handler', ExshipperEmailNotificationDeletion),
+                               ('/coding_puzzle', CodingPuzzleHandler)], debug=True)

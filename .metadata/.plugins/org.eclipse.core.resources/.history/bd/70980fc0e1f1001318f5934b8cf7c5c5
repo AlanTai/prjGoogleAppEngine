@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Coding Puzzle</title>
+
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+
+</head>
+<body>
+	<div>
+		<p style="margin: 5px auto;">Coding Puzzle Test Page</p>
+		<section style="display: inline-block;">
+			<span>Letters: </span> <input id="input_letters" type="text" maxlength="25">
+		</section>
+		<section style="display: inline-block;">
+			<input type="button" value="Count">
+			<p></p>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		var input_val;
+		var letters_list;
+		input_val = $('#input_letters').val();
+		letters_list = $('#input_letters').change(function(){
+			$(this).val();
+		});
+	</script>
+</body>
+</html>

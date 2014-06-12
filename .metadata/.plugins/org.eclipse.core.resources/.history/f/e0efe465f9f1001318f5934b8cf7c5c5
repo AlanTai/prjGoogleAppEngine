@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Coding Puzzle</title>
+
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+
+</head>
+<body>
+	<div>
+		<p style="margin: 5px auto;">Coding Puzzle Test Page</p>
+		<section style="display: inline-block;">
+			<span>Letters: </span> <input id="input_letters" type="text"
+				maxlength="25">
+		</section>
+		<section style="display: inline-block;">
+			<input id="btn_count" type="button" value="Count">
+			<p id="count_result"></p>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		$('#input_letters').keypress(function(key) {
+			if((key.charCode > 97 || key.charCode < 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45)) return false;
+			});
+	
+	
+		//
+		var temp_char;
+		var letters_list;
+		letters_list = $('#input_letters').change(function(){
+				letters_list = $(this).val().split('');
+		});
+		
+		
+		$('#btn_count').click(function(){
+			//alert(letters_list[0]<letters_list[1]);
+			while(i=1; i<letters_list.size(); i++){
+				
+			}
+		});
+	</script>
+</body>
+</html>

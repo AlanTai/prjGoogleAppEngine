@@ -31,7 +31,7 @@ from general_handlers.cron_tasks_handler import Cron_Tasks_Handler
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/static/templates'))  # append templates' path
 
 # exshipper main index handler
-class ExShipperIndexHandler(webapp2.RequestHandler):
+class ExShipperServicesHandler(webapp2.RequestHandler):
     def get(self):
         my_dict = Key_Value()  # get key-value pair dictionary
         user_info = Users_Info_Handler().get_users_info(self, users)
@@ -1886,7 +1886,7 @@ class ExshipperEmailNotificationDeletion(webapp2.RequestHandler):
                 email_notification_entity.key.delete()
 
 #url dispatcher
-app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
+app = webapp2.WSGIApplication([('/exshipper_services_handler', ExShipperServicesHandler),
                                ('/exshipper_login_handler', ExShipperLoginHandler),
                                ('/exshipper_invoice_info_handler', ExShipperGeneralClientsCreateInvoiceInfoHandler),
                                ('/exshipper_create_employee_info_handler', ExShipperCreateEmployeeInfoHandler),
