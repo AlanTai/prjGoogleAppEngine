@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Coding Puzzle</title>
+
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+
+</head>
+<body>
+	<div>
+		<p style="margin: 5px auto;">Coding Puzzle Test Page</p>
+		<section style="display: inline-block;">
+			<span>Letters: </span> <input id="input_letters" type="text"
+				maxlength="25">
+		</section>
+		<section style="display: inline-block;">
+			<input id="btn_count" type="button" value="Count">
+			<p id="count_result" style="display: inline-block;"></p>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		//set key listener
+		$('#input_letters').keypress(function(key) {
+			if((key.charCode > 97 || key.charCode < 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45)) return false;
+			});
+	
+	
+		//variables
+		var temp_char;
+		var original_letters_list, sorted_letters_list;
+		var obj_letter_amount;
+		var start_time, end_time;
+		var millisSec;
+		//click listener
+		$('#btn_count').click(function(){
+			
+			//start time
+			millisSec = new Date();
+			start_time = millisSec.getTime();
+			
+			//trim word and sort letters list
+			original_letters_list = $('#input_letters').val().split('');
+			sorted_letters_list = $('#input_letters').val().split('');
+			
+			//sort letters list(bubble sorting)
+			var swapped, temp_char;
+			do{
+				swapped = false;
+				for (var ith=0; ith < sorted_letters_list.length-1; ith++){
+					if(sorted_letters_list[ith] > sorted_letters_list[ith+1]){
+						temp_char = sorted_letters_list[ith];
+						sorted_letters_list[ith] = sorted_letters_list[ith+1];
+						sorted_letters_list[ith+1] = temp_char;
+						swapped = true;
+					}
+				}
+			} while(swapped);
+			
+			//establish letters info structure; ex: {"A":{"order":0, "amount":2}, "C":{"order":1, "amount":1}}
+			var obj_letters_info=new Object();
+			var letter_order = 0;
+			for (var ith = 0; ith < sorted_letters_list.length; ith++){
+				if(sorted_letters_list[ith] in obj_letters_info){
+					++obj_letters_info[sorted_letters_list[ith]]['amount'];
+				}
+				else{
+					var new_letter_info = new Object();
+					new_letter_info['order'] = letter_order;
+					new_letter_info['amount'] = 1;
+					obj_letters_info[sorted_letters_list[ith]] = new_letter_info;
+					++letter_order;
+				}
+			};
+			
+			//calculate the rank
+			calculate_rank(original_letters_list, obj_letters_info);
+			
+		});
+		
+		//main algorithm
+		function calculate_rank(arg_original_letters_list, arg_obj_letters_info){
+			//var declaration
+			var ith = 0, result = 0;
+			var current_letter, letter_order, current_amount, sorted_unduplicated_letters, temp_obj_letters_info, amount_check;
+			var sum_of_letters_amount, permutation_denominator, permutation_nominator, selected_letter_amount;
+			
+			//start algorithm
+			do{
+				//pre-set or reset var values
+				current_letter = arg_original_letters_list[ith];
+				letter_order = arg_obj_letters_info[current_letter]['order'];
+				current_amount = arg_obj_letters_info[current_letter]['amount'];
+				sorted_unduplicated_letters = Object.keys(arg_obj_letters_info);
+				temp_obj_letters_info = arg_obj_letters_info;
+				amount_check = 0;
+				
+				//calculate the permutation
+				for(var jth = 0; jth < letter_order; ++jth){
+					
+					//pre-set or reset the var values
+					sum_of_letters_amount = 0, permutation_denominator = 1, permutation_nominator = 1, selected_letter_amount = 0;
+					
+					if(temp_obj_letters_info[sorted_unduplicated_letters[jth]]['amount'] > 0){
+						--temp_obj_letters_info[sorted_unduplicated_letters[jth]]['amount'];
+						selected_letter_amount = temp_obj_letters_info[sorted_unduplicated_letters[jth]]['amount'];
+						
+						for(var kth in sorted_unduplicated_letters){
+							if(temp_obj_letters_info[sorted_unduplicated_letters[kth]]['amount'] > 0){
+								sum_of_letters_amount = sum_of_letters_amount + temp_obj_letters_info[sorted_unduplicated_letters[kth]]['amount'];
+								permutation_denominator = permutation_denominator * calculate_continued_product(temp_obj_letters_info[sorted_unduplicated_letters[kth]]['amount']);
+							}
+						}
+						if(sum_of_letters_amount > 0){
+							permutation_nominator = calculate_continued_product(sum_of_letters_amount);
+							result = result + (permutation_nominator/permutation_denominator);
+						}
+						else{
+							++result;
+						}
+						
+						//add the amount back
+						++temp_obj_letters_info[sorted_unduplicated_letters[jth]]['amount'];
+					}
+				}
+
+				//add the deleted letter amount back
+				temp_obj_letters_info = arg_obj_letters_info;
+				
+				//substract the current letter amount by 1
+				if(arg_obj_letters_info[current_letter]['amount'] > 0){
+					--arg_obj_letters_info[current_letter]['amount'];
+				}
+				
+				//move to the next letter
+				++ith;
+			}while(ith < arg_original_letters_list.length -1);
+			++result;
+			
+			//get end time
+			millisSec = new Date();
+			end_time = millisSec.getTime();
+			
+			//show rank result and start time and end time
+			$('#count_result').text('Rank Result: ' + result + ' ; Start Time(millis second): ' + start_time + ' ; End-Time(millis second): ' + end_time);
+		}
+		
+		//calculate the continued product
+		function calculate_continued_product(arg_number){
+			if(arg_number>=0){
+				var result = 1;
+				while(arg_number>=0){
+					if(arg_number == 0){
+						result = result * 1;
+					}
+					else{
+						result = result * arg_number;
+					}
+					--arg_number;
+				}
+				return result;
+			}
+			else{
+				alert('Invalid Number');
+				return NaN;
+			}
+		}
+	</script>
+</body>
+</html>
