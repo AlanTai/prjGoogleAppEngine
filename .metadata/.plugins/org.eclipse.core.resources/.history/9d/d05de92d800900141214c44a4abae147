@@ -398,6 +398,14 @@
 		});
 	}
 
+	function updateSUDATrackingNumber(response) {
+		if (response.suda_tracking_number != 'NA') {
+			$('#id_suda_tr_number').val(response.suda_tracking_number);
+		} else {
+			alert('NO SUDA Number Available to Dowonload!');
+		}
+	}
+	//end of getSUDATrackingNumber()
 
 	/*add new package information*/
 	var info_array = [];

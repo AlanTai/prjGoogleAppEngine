@@ -367,37 +367,39 @@
 				suda_tracking_number_type : selected_suda_tracking_number_type
 			},
 			success : success_callback,
-			error : fail_callback
+			error : function(xhr, textStatus, error) {
+				console.log(xhr.statusText);
+				console.log(textStatus);
+				console.log(error);
+			}
 		});
 		//end of add the info to datastore
 	}
 	
 	//success callback
-	function success_callback(response){
-		if (response.suda_tracking_number != 'NA') {
-			$('#id_suda_tr_number').val(response.suda_tracking_number);
-		} else {
-			alert('NO SUDA Number Available to Dowonload!');
-		}
+	function success_callback(){
+
 		$('#upload_cover').css({
 			'display' : 'none'
 		});
 	}
 	
 	//fail callback
-	function fail_callback(xhr, textStatus, error){
-		alert('Status Message: '+ xhr.statusText + ' ; Error: ' + error);
-		
-		//log
-		console.log(xhr.statusText);
-		console.log(textStatus);
-		console.log(error);
-		
+	function fail_callback(){
+
 		$('#upload_cover').css({
 			'display' : 'none'
 		});
 	}
 
+	function updateSUDATrackingNumber(response) {
+		if (response.suda_tracking_number != 'NA') {
+			$('#id_suda_tr_number').val(response.suda_tracking_number);
+		} else {
+			alert('NO SUDA Number Available to Dowonload!');
+		}
+	}
+	//end of getSUDATrackingNumber()
 
 	/*add new package information*/
 	var info_array = [];
