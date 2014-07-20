@@ -1893,6 +1893,12 @@ class CodingPuzzleHandler(webapp2.RequestHandler):
         template_values = {}
         template = jinja_environment.get_template('/test/coding_puzzle.html')
         self.response.out.write(template.render(template_values))
+        
+class MathQuestionsHandler(webapp2.RequestHandler):
+    def get(self):
+        template_values = {}
+        template = jinja_environment.get_template('/test/math_questions_1.html')
+        self.response.out.write(template.render(template_values))
 
 #url dispatcher
 app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
@@ -1930,4 +1936,5 @@ app = webapp2.WSGIApplication([('/exshipper_index', ExShipperIndexHandler),
                                ('/exshipper_migrate_packages_information_handler', ExShipperPackagesInfoLogMigrationHandler),
                                ('/exshipper_delete_tracking_numbers_handler', ExShipperTrackingNumbersDeletion),
                                ('/exshipper_delete_email_notification_handler', ExshipperEmailNotificationDeletion),
-                               ('/coding_puzzle', CodingPuzzleHandler)], debug=True)
+                               ('/coding_puzzle', CodingPuzzleHandler),
+                               ('/math_questions', MathQuestionsHandler)], debug=True)

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Alan Tai (Li-Chou Tai)">
+<title>Coding Puzzle</title>
+
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/exshipper/jszip.js"></script>
+<script src="/js/exshipper/xlsx.js"></script>
+<script src="/js/exshipper/shim.js"></script>
+
+</head>
+<body>
+	<div>
+		<p style="margin: 5px auto;">Math Questions Page</p>
+		<section id="triangle_points" style="display: inline-block;">
+			<div style="display: block;">
+				<span>Point-X1: </span> <input id="point_x1" type="text"> <span>Point-Y1:
+				</span> <input id="point_y1" type="text">
+			</div>
+
+			<div style="display: block;">
+				<span>Point-X2: </span> <input id="point_x2" type="text"> <span>Point-Y2:
+				</span> <input id="point_y2" type="text">
+			</div>
+
+			<div style="display: block;">
+				<span>Point-X3: </span> <input id="point_x3" type="text"> <span>Point-Y3:
+				</span> <input id="point_y3" type="text">
+			</div>
+
+		</section>
+		<section style="display: inline-block;">
+			<input id="btn_calculate" type="button" value="Calculate" onclick="is_origin_in_given_triangle()">
+			<p id="result" style="display: inline-block;"></p>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		var triangle_points;
+		var is_points_valid = false;
+		function is_origin_in_given_triangle(){
+			triangle_points = new Object();
+			$('#triangle_points input').each(function(){
+				var key = $(this).attr('id');
+				var value = $(this).val();
+				
+				if(!isNaN(value)){
+					triangle_points[key] = value;
+				}
+			});
+			
+			if(Object.keys(triangle_points).length !== 6){
+				alert('invalid given points\' data!');
+			}
+			alert(JSON.stringify(triangle_points, 2, 2));
+		}
+		
+		
+		function cross_product_2d(arg_first_vector, arg_second_vector){
+			var keys = Object.keys(arg_first_vector);
+		}
+		
+	</script>
+</body>
+</html>
