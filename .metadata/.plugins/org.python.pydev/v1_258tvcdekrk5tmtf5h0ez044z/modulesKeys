@@ -1589,6 +1589,9 @@ ftplib|C:\Python27\lib\ftplib.py
 functools|C:\Python27\lib\functools.py
 future_builtins
 gc
+gcm.__init__|C:\Python27\lib\site-packages\gcm\__init__.py
+gcm.gcm|C:\Python27\lib\site-packages\gcm\gcm.py
+gcm.test|C:\Python27\lib\site-packages\gcm\test.py
 genericpath|C:\Python27\lib\genericpath.py
 getopt|C:\Python27\lib\getopt.py
 getpass|C:\Python27\lib\getpass.py
