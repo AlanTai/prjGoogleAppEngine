@@ -41,10 +41,6 @@ ctrl_views|D:\prjGoogleAppEngine\prjWINEVER\src\ctrl_views.py
 dev_appserver|C:\Program Files (x86)\Google\google_appengine\dev_appserver.py
 download_appstats|C:\Program Files (x86)\Google\google_appengine\download_appstats.py
 endpointscfg|C:\Program Files (x86)\Google\google_appengine\endpointscfg.py
-enum.__init__|C:\Program Files (x86)\Google\google_appengine\lib\enum\enum\__init__.py
-enum.test.__init__|C:\Program Files (x86)\Google\google_appengine\lib\enum\enum\test\__init__.py
-enum.test.test_enum|C:\Program Files (x86)\Google\google_appengine\lib\enum\enum\test\test_enum.py
-enum.test.tools|C:\Program Files (x86)\Google\google_appengine\lib\enum\enum\test\tools.py
 fancy_urllib.__init__|C:\Program Files (x86)\Google\google_appengine\lib\fancy_urllib\fancy_urllib\__init__.py
 flags_modules_for_testing.__init__|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\__init__.py
 flags_modules_for_testing.module_bar|C:\Program Files (x86)\Google\google_appengine\lib\python-gflags\tests\flags_modules_for_testing\module_bar.py
@@ -352,6 +348,7 @@ google.appengine.api.search.QueryLexer|C:\Program Files (x86)\Google\google_appe
 google.appengine.api.search.QueryParser|C:\Program Files (x86)\Google\google_appengine\google\appengine\api\search\QueryParser.py
 google.appengine.api.search.__init__|C:\Program Files (x86)\Google\google_appengine\google\appengine\api\search\__init__.py
 google.appengine.api.search.expression_parser|C:\Program Files (x86)\Google\google_appengine\google\appengine\api\search\expression_parser.py
+google.appengine.api.search.geo_util|C:\Program Files (x86)\Google\google_appengine\google\appengine\api\search\geo_util.py
 google.appengine.api.search.query_parser|C:\Program Files (x86)\Google\google_appengine\google\appengine\api\search\query_parser.py
 google.appengine.api.search.search|C:\Program Files (x86)\Google\google_appengine\google\appengine\api\search\search.py
 google.appengine.api.search.search_service_pb|C:\Program Files (x86)\Google\google_appengine\google\appengine\api\search\search_service_pb.py
@@ -504,11 +501,14 @@ google.appengine.ext.key_range.__init__|C:\Program Files (x86)\Google\google_app
 google.appengine.ext.mapreduce.__init__|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\__init__.py
 google.appengine.ext.mapreduce.api.__init__|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\__init__.py
 google.appengine.ext.mapreduce.api.map_job.__init__|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\__init__.py
+google.appengine.ext.mapreduce.api.map_job.abstract_datastore_input_reader|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\abstract_datastore_input_reader.py
+google.appengine.ext.mapreduce.api.map_job.datastore_input_reader|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\datastore_input_reader.py
 google.appengine.ext.mapreduce.api.map_job.input_reader|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\input_reader.py
 google.appengine.ext.mapreduce.api.map_job.map_job_config|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\map_job_config.py
 google.appengine.ext.mapreduce.api.map_job.map_job_context|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\map_job_context.py
 google.appengine.ext.mapreduce.api.map_job.map_job_control|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\map_job_control.py
 google.appengine.ext.mapreduce.api.map_job.mapper|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\mapper.py
+google.appengine.ext.mapreduce.api.map_job.model_datastore_input_reader|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\model_datastore_input_reader.py
 google.appengine.ext.mapreduce.api.map_job.output_writer|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\output_writer.py
 google.appengine.ext.mapreduce.api.map_job.sample_input_reader|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\sample_input_reader.py
 google.appengine.ext.mapreduce.api.map_job.shard_life_cycle|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\api\map_job\shard_life_cycle.py
@@ -525,6 +525,9 @@ google.appengine.ext.mapreduce.hooks|C:\Program Files (x86)\Google\google_appeng
 google.appengine.ext.mapreduce.input_readers|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\input_readers.py
 google.appengine.ext.mapreduce.json_util|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\json_util.py
 google.appengine.ext.mapreduce.key_ranges|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\key_ranges.py
+google.appengine.ext.mapreduce.lib.__init__|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\lib\__init__.py
+google.appengine.ext.mapreduce.lib.input_reader.__init__|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\lib\input_reader\__init__.py
+google.appengine.ext.mapreduce.lib.input_reader._gcs|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\lib\input_reader\_gcs.py
 google.appengine.ext.mapreduce.main|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\main.py
 google.appengine.ext.mapreduce.mapper_pipeline|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\mapper_pipeline.py
 google.appengine.ext.mapreduce.mapreduce_pipeline|C:\Program Files (x86)\Google\google_appengine\google\appengine\ext\mapreduce\mapreduce_pipeline.py
@@ -598,6 +601,7 @@ google.appengine.tools.appcfg|C:\Program Files (x86)\Google\google_appengine\goo
 google.appengine.tools.appcfg_java|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\appcfg_java.py
 google.appengine.tools.appengine_rpc|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\appengine_rpc.py
 google.appengine.tools.appengine_rpc_httplib2|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\appengine_rpc_httplib2.py
+google.appengine.tools.augment_mimetypes|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\augment_mimetypes.py
 google.appengine.tools.backends_conversion|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\backends_conversion.py
 google.appengine.tools.backends_xml_parser|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\backends_xml_parser.py
 google.appengine.tools.boolean_action|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\boolean_action.py
@@ -682,6 +686,7 @@ google.appengine.tools.devappserver2.environ_utils|C:\Program Files (x86)\Google
 google.appengine.tools.devappserver2.environ_utils_test|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\environ_utils_test.py
 google.appengine.tools.devappserver2.errors|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\errors.py
 google.appengine.tools.devappserver2.file_watcher|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\file_watcher.py
+google.appengine.tools.devappserver2.gcd_application|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\gcd_application.py
 google.appengine.tools.devappserver2.gcs_server|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\gcs_server.py
 google.appengine.tools.devappserver2.gcs_server_test|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\gcs_server_test.py
 google.appengine.tools.devappserver2.go_application|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\go_application.py
@@ -740,7 +745,10 @@ google.appengine.tools.devappserver2.url_handler|C:\Program Files (x86)\Google\g
 google.appengine.tools.devappserver2.url_handler_test|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\url_handler_test.py
 google.appengine.tools.devappserver2.util|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\util.py
 google.appengine.tools.devappserver2.util_test|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\util_test.py
+google.appengine.tools.devappserver2.vm_runtime_factory|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\vm_runtime_factory.py
 google.appengine.tools.devappserver2.vm_runtime_proxy|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\vm_runtime_proxy.py
+google.appengine.tools.devappserver2.vm_runtime_proxy_dart|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\vm_runtime_proxy_dart.py
+google.appengine.tools.devappserver2.vm_runtime_proxy_go|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\vm_runtime_proxy_go.py
 google.appengine.tools.devappserver2.watcher_common|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\watcher_common.py
 google.appengine.tools.devappserver2.win32_file_watcher|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\win32_file_watcher.py
 google.appengine.tools.devappserver2.win32_file_watcher_test|C:\Program Files (x86)\Google\google_appengine\google\appengine\tools\devappserver2\win32_file_watcher_test.py
@@ -794,6 +802,8 @@ google.net.proto2.python.internal.wire_format|C:\Program Files (x86)\Google\goog
 google.net.proto2.python.public.__init__|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\__init__.py
 google.net.proto2.python.public.basic_descriptor_pool|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\basic_descriptor_pool.py
 google.net.proto2.python.public.descriptor|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\descriptor.py
+google.net.proto2.python.public.descriptor_database|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\descriptor_database.py
+google.net.proto2.python.public.descriptor_pool|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\descriptor_pool.py
 google.net.proto2.python.public.message|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\message.py
 google.net.proto2.python.public.reflection|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\reflection.py
 google.net.proto2.python.public.service|C:\Program Files (x86)\Google\google_appengine\google\net\proto2\python\public\service.py
@@ -1031,7 +1041,6 @@ sqlcmd.__init__|C:\Program Files (x86)\Google\google_appengine\lib\sqlcmd\sqlcmd
 sqlcmd.config|C:\Program Files (x86)\Google\google_appengine\lib\sqlcmd\sqlcmd\config.py
 sqlcmd.ecmd|C:\Program Files (x86)\Google\google_appengine\lib\sqlcmd\sqlcmd\ecmd.py
 sqlcmd.exception|C:\Program Files (x86)\Google\google_appengine\lib\sqlcmd\sqlcmd\exception.py
-sqlcmd.sqlcmd_test|C:\Program Files (x86)\Google\google_appengine\lib\sqlcmd\sqlcmd\sqlcmd_test.py
 uritemplate.__init__|C:\Program Files (x86)\Google\google_appengine\lib\google-api-python-client\uritemplate\__init__.py
 wrapper_util|C:\Program Files (x86)\Google\google_appengine\wrapper_util.py
 yaml.__init__|C:\Program Files (x86)\Google\google_appengine\lib\yaml\lib\yaml\__init__.py
